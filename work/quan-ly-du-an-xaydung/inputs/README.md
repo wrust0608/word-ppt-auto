@@ -5,4 +5,4 @@ Thư mục này dùng để lưu trữ các tài liệu ban đầu do tác giả
 - Các biểu mẫu, văn bản quy định của Khoa/Trường ĐH Giao thông Vận tải Hà Nội.
 - Hồ sơ dự án mẫu hoặc tài liệu tham khảo bổ sung.
 
-*Hiện tại: Dự án đang khai thác và đối chiếu dữ liệu trực tiếp từ Google NotebookLM notebook `767c069e-9f17-4e80-83eb-c02a790966c5`.*
+*Hiện tại: Dự án đang khai thác và đối chiếu dữ liệu trực tiếp từ Google NotebookLM notebook được chỉ định trong cấu hình cục bộ; ID không được lưu trong Git.*

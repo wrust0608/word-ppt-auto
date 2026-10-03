@@ -35,7 +35,7 @@
 
 ## Nguồn lực
 
-- Notebook URL/ID: https://notebooklm.google.com/notebook/767c069e-9f17-4e80-83eb-c02a790966c5
+- Notebook URL/ID: `[CẤU HÌNH CỤC BỘ — KHÔNG LƯU TRONG GIT]`
 - Dữ liệu hiện có: Khai thác từ NotebookLM và hệ thống văn bản quy phạm pháp luật về xây dựng Việt Nam.
 - Tài liệu bắt buộc:
   - Luật Xây dựng số 50/2014/QH13 và Luật sửa đổi số 62/2020/QH14.

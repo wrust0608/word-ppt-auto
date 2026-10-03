@@ -1,9 +1,9 @@
 # Trạng thái dự án
 
-- Cổng hiện tại: `G4_CHAPTERS` (Chương 1 LOCKED_PASS 9.0/10; Chương 2 TINH_CHINH_HOAN_THIEN đạt 9.5/10 PASS)
+- Cổng hiện tại: `G4_CHAPTERS / EVIDENCE_RECONCILIATION_AND_AUTHOR_REVIEW` (audit ngày 2026-10-04 đã mở lại điều kiện nguồn của Chương 1 và điều kiện xuất bản DOCX; các điểm PASS cũ chỉ còn giá trị lịch sử cho tới khi tái kiểm định đạt)
 - Lần cập nhật: 2026-10-04
 - Người/agent cập nhật: Codex
-- Quyết định phê duyệt gần nhất: Tích hợp hệ thống giọng tác giả và kiểm soát văn phong mới nhưng bảo toàn toàn bộ quy định HUIT, nguồn, dữ liệu và quyết định học thuật đã khóa; các cảnh báo linter chỉ là đầu vào biên tập trước G5/G6.
+- Quyết định phê duyệt gần nhất: Tích hợp hệ thống giọng tác giả và kiểm soát văn phong mới nhưng bảo toàn toàn bộ quy định HUIT, dữ liệu và quyết định học thuật đã khóa; audit mới được phép mở lại trạng thái nguồn/DOCX khi bằng chứng thực tế mâu thuẫn với nhãn PASS cũ.
 
 ## Artifact hiện có
 
@@ -13,21 +13,26 @@
 | INSTITUTION_PROFILE | LOCKED | work/do-an/INSTITUTION_PROFILE.md | Đã khóa chuẩn HUIT 2024 (G0) |
 | AUTHOR_VOICE | LOCKED | work/do-an/AUTHOR_VOICE.md | Đã khóa hồ sơ giọng tác giả (G0) |
 | RESEARCH_MAP | LOCKED | work/do-an/RESEARCH_MAP.md | Đã khóa 4 RQ, 4 Mục tiêu và phương pháp luận (G1) |
-| SOURCE_LEDGER | LOCKED | work/do-an/SOURCE_LEDGER.md | Đã chuẩn hóa 19 nguồn gốc chính thức (S001 - S019) (G2) |
+| SOURCE_LEDGER | REOPENED_RECHECK | work/do-an/SOURCE_LEDGER.md | Đã đối soát NotebookLM; có nguồn bổ sung S020-S026 và một nhóm nguồn cũ cần nhập lại/thay thế |
 | ARGUMENT_MAP | LOCKED | work/do-an/ARGUMENT_MAP.md | Đã khóa chuỗi lập luận C001 - C006 (G3) |
-| CLAIM_MATRIX | LOCKED | work/do-an/CLAIM_MATRIX.md | Đã cập nhật ma trận luận điểm đồng bộ S001 - S019 (G3) |
+| CLAIM_MATRIX | REOPENED_RECHECK | work/do-an/CLAIM_MATRIX.md | Sáu luận điểm trung tâm đã chuyển sang nguồn khả dụng; cần đồng bộ bibliography Chương 1 |
 | OUTLINE | LOCKED | work/do-an/OUTLINE.md | Đã khóa cấu trúc 4 chương, ngân sách từ (G3) |
 | CHAPTER_ARGUMENT | LOCKED | work/do-an/CHAPTER_ARGUMENT.md | Đã cập nhật toàn diện Hợp đồng Chương 2 theo mô hình Causal-Chain và Enterprise Topology |
-| CHAPTER_1 | LOCKED_PASS | work/do-an/CHAPTER_1.md | Toàn văn Chương 1 v3.2 hoàn chỉnh (398 dòng, ~5.450 từ, 5 bảng, 4 sơ đồ, 19 tài liệu tham khảo IEEE, Điểm chính thức: 9.0/10 PASS) |
+| CHAPTER_1 | LEGACY_PASS_REOPENED | work/do-an/CHAPTER_1.md | Citation khép kín về hình thức nhưng một nhóm nguồn chưa khả dụng trong NotebookLM; xem PILOT_CHAPTER_REVIEW.md |
 | CHAPTER_2 | READY_FOR_APPROVAL | work/do-an/CHAPTER_2.md | **Bản thảo Chương 2 hoàn thiện sau tự phản biện theo mô hình Causal-Chain** (413 dòng, 4 bảng, 3 sơ đồ ASCII, 9 trích dẫn IEEE xuất hiện tuần tự 100%, Điểm: 9.5/10 PASS) |
 | REVIEW_REPORT | PASS | work/do-an/REVIEW_REPORT.md | Báo cáo đánh giá Chương 2 theo mô hình Causal-Chain & 5 điểm tự hoàn thiện (Điểm: 9.5/10 PASS) |
 | STYLE_REVIEW | OPEN | work/do-an/STYLE_REVIEW.md | Audit di chuyển: Chương 1 có 18 và Chương 2 có 14 cảnh báo cần phân loại trước G5/G6; không có rule sáo ngữ `VI001–VI010` |
+| AUTHOR_VOICE_CALIBRATION | READY_FOR_AUTHOR_REVIEW | work/do-an/AUTHOR_VOICE_CALIBRATION.md | Chờ tác giả sửa/xác nhận tối thiểu ba cách diễn đạt trước khi khóa giọng |
+| ROADMAP_2_6 | ACTIVE | work/do-an/ROADMAP_2_6.md | Bước 2 xong; bước 3 còn recheck; bước 4 chờ người dùng; bước 5-6 đã audit nhưng chưa qua cổng |
+| PILOT_CHAPTER_REVIEW | FIX_REQUIRED | work/do-an/PILOT_CHAPTER_REVIEW.md | Ghi lỗi nguồn, bibliography và 18 cảnh báo văn phong của Chương 1 |
+| DOCX_QA_REPORT | REBUILD_REQUIRED | work/do-an/DOCX_QA_REPORT.md | DOCX cũ validation đạt nhưng chưa publication-ready; cần sinh lại từ Markdown đã duyệt |
+| PUBLICATION_CHECKLIST | BLOCKED | work/do-an/PUBLICATION_CHECKLIST.md | Chờ nguồn, giọng tác giả, chương mẫu và render từng trang |
 
 ## Quyết định đã khóa
 
 | ID | Quyết định | Người duyệt | Ngày |
 |---|---|---|---|
-| DEC-01 | Sử dụng NotebookLM notebook `e7b2d815-8b85-47db-95f4-8d0844a60c04` | Người dùng | 2026-09-12 |
+| DEC-01 | Sử dụng NotebookLM notebook được chỉ định trong cấu hình cục bộ (ID không lưu trong Git) | Người dùng | 2026-09-12 |
 | DEC-02 | Hoàn tất cấu hình môi trường NotebookLM MCP và OfficeCLI | Hệ thống | 2026-09-12 |
 | DEC-03 | **Ràng buộc phạm vi**: Tránh các phần liên quan đến demo và kết quả demo thực tế ở giai đoạn hiện tại theo yêu cầu của tác giả | Người dùng | 2026-09-12 |
 | DEC-04 | Chuẩn trích dẫn: IEEE số trong ngoặc vuông, xếp theo thứ tự xuất hiện | Đề cương chi tiết | 2026-09-12 |
@@ -47,12 +52,16 @@
 | DEC-18 | **Hoàn tất tinh chỉnh 5 điểm kỹ thuật sâu sau tự phản biện (PASS 9.5/10)**: (1) Phân định rõ ràng góc nhìn trạm kiểm thử (Attacker Vantage Point) vs. trạng thái nội tại máy chủ (Server Internal State) tại Bảng 2.2 ($S_3$); (2) Quy định rõ chính sách Firewall hai chiều Ingress/Egress cho kênh kết nối ngược ($C$); (3) Bổ sung cơ sở học thuật của chuỗi 4 trạng thái theo Hardening Lifecycle vs. không gian tổ hợp $2^3 = 8$; (4) Làm rõ cơ sở kỹ thuật bắt buộc của các tham số an toàn `--script-args unsafe=0` và `set MaxExploitAttempts 1` chống hỏng kernel pool; (5) Rà soát và loại bỏ sạch sẽ các từ ngữ tuyệt đối hóa cuối cùng ("bẻ gãy hoàn toàn" $\to$ "loại bỏ khả năng / bị bẻ gãy có kiểm chứng trên thực tế") | Người dùng / Hệ thống | 2026-09-12 |
 | DEC-19 | **Biên dịch và kiểm định thành công Báo cáo Word hoàn chỉnh Chương 1 và 2 (`BAO_CAO_DO_AN_CHUONG_1_2.docx`)**: Tạo tài liệu Word chuẩn quy chế HUIT 2024 (Khổ A4, lề Trên 3.5cm, Dưới 3.0cm, Trái 3.5cm, Phải 2.0cm, font Times New Roman, dãn dòng 1.3, Trang bìa chính quy HUIT, Mục lục tổng quát, Danh mục từ viết tắt, Danh mục bảng biểu, Danh mục hình vẽ & sơ đồ, toàn văn Chương 1 v3.2 và Chương 2 v2.0, 9 bảng biểu chuẩn hóa, 7 sơ đồ ASCII đóng hộp, trích dẫn IEEE tuần tự). Đã kiểm định OpenXML schema qua `officecli validate` đạt chuẩn tuyệt đối không có lỗi | Người dùng / Hệ thống | 2026-09-12 |
 | DEC-20 | **Di chuyển sang hệ thống kiểm soát văn phong và Word mới**: giữ nguyên thứ tự ưu tiên quy định HUIT → quyết định đã khóa → bằng chứng → lập luận → giọng tác giả → linter; không tối ưu theo AI detector hoặc điểm tự chấm; không tự sửa chương đã khóa | Người dùng / Codex | 2026-10-04 |
+| DEC-21 | **Mở lại có kiểm soát trạng thái nguồn, Chương 1 và DOCX sau audit thực tế**: Notebook từng có 0 nguồn dù ledger cũ ghi có; sau nạp lại có 19 nguồn dùng được nhưng một nhóm nguồn cũ vẫn cần recheck. Chương 1 giữ lịch sử PASS nhưng chưa qua cổng nguồn mới. DOCX giữ lịch sử OpenXML PASS nhưng chưa đạt xuất bản vì thiếu TOC tự động, nhiều định dạng trực tiếp/cảnh báo và chưa xem riêng từng trang. Không xóa các quyết định cũ; dùng báo cáo audit để xác định việc phải sửa. | Codex | 2026-10-04 |
 
 ## Nguồn tài liệu
 
 | Source ID | Trạng thái | Ghi chú |
 |---|---|---|
-| S001 - S019 | VERIFIED | 19 nguồn tài liệu chính thống (Microsoft Learn, MSRC, NIST NVD, Rapid7, CISA, Nmap Project, sách chuyên khảo học thuật tiêu chuẩn). |
+| S001, S003, S004, S009, S016, S019 | RECHECK/NO | Chưa có toàn văn hợp lệ trong NotebookLM; phải nhập lại hoặc thay bằng nguồn khả dụng trước khi dùng. |
+| S014 | RECHECK/ERROR | URL CISA cũ không nhập được; cần nguồn thay thế còn truy cập được. |
+| S006 | VERIFIED/YES | Đã chuyển sang URL Microsoft Learn hiện hành. |
+| S002, S005, S007, S008, S010-S013, S015, S017, S018, S020-S026 | VERIFIED/YES | Nguồn khả dụng đã được nhập/đối soát; xem metadata chi tiết trong SOURCE_LEDGER.md. |
 
 ## Vấn đề còn mở
 
@@ -60,7 +69,10 @@
 |---|---|---|---|---|
 | ISS-01 | `[CẦN DỮ LIỆU]` | Dữ liệu log, ảnh chụp màn hình và kết quả chạy demo thực nghiệm lab | Các phần thực nghiệm (Chương 2, 3, 4) chưa ghi nhận kết quả chạy thật | Duy trì nhãn `[CẦN DỮ LIỆU]`, tập trung vào kiến trúc lab, tham số an toàn và kịch bản chuẩn hóa |
 | ISS-02 | `STYLE_REVIEW_OPEN` | 32 cảnh báo tư vấn về nhịp câu và mở đoạn trong Chương 1–2 | Chưa đủ điều kiện tuyên bố kiểm tra văn phong G5/G6 theo hệ thống mới | Phân loại từng cảnh báo, duyệt diff, chạy publication lint và sinh lại DOCX trước lần bàn giao kế tiếp |
+| ISS-03 | `[CẦN NGUỒN]` | Bibliography Chương 1 còn sử dụng các nguồn `[1]`, `[3]`, `[4]`, `[9]`, `[14]`, `[16]`, `[19]` chưa khả dụng; `[6]` dùng URL cũ | Chương 1 chưa thể qua cổng bằng chứng dù đánh số IEEE đúng | Lập bảng ánh xạ nguồn cũ sang nguồn Notebook hiện hành; nhập/thay nguồn rồi kiểm tra lại từng luận điểm |
+| ISS-04 | `[CẦN TÁC GIẢ XÁC NHẬN]` | Mẫu hiệu chỉnh giọng đã tạo nhưng chưa có sửa đổi/xác nhận trực tiếp của tác giả | Không được khóa bước 4 hoặc áp giọng cá nhân lên toàn chương | Yêu cầu tác giả sửa/xác nhận tối thiểu ba cách diễn đạt trong AUTHOR_VOICE_CALIBRATION.md |
+| ISS-05 | `DOCX_REBUILD_REQUIRED` | DOCX cũ thiếu TOC field, có nhiều direct formatting, 323 cảnh báo OfficeCLI và chưa kiểm tra riêng đủ từng trang | Không đủ điều kiện gắn nhãn publication-ready | Sau khi Markdown được duyệt, sinh DOCX mới và thực hiện vòng render, xem từng trang, sửa và render lại |
 
 ## Bước tiếp theo duy nhất
 
-Trình người dùng xem xét Chương 2 và `STYLE_REVIEW.md`. Nếu phê duyệt nội dung, thực hiện vòng biên tập có kiểm soát đối với 32 cảnh báo, chạy lại kiểm tra nguồn và publication lint, rồi mới sinh lại DOCX để chuyển sang **Chương 3: Thực nghiệm kiểm thử an ninh giao thức SMB**.
+Trình người dùng `AUTHOR_VOICE_CALIBRATION.md` và yêu cầu họ sửa hoặc xác nhận tối thiểu ba cách diễn đạt. Sau khi được duyệt, cập nhật `AUTHOR_VOICE.md`, đối soát/thay các nguồn Chương 1 còn lỗi, xử lý có kiểm soát 18 cảnh báo của chương mẫu và chạy lại citation audit/style lint trước khi xin duyệt chương. Chưa viết Chương 3 và chưa sinh lại DOCX trong khi cổng này còn mở.

@@ -1,14 +1,19 @@
 # Local NotebookLM and authentication state
 notebooklm-config.local.json
+.agents/mcp_config.json
 chrome_profile_notebooklm/
 .notebooklm/
 .venv/
+
+# Project-local personal/contact data
+**/CONTACTS.local.md
 
 # Generated exports outside versioned project workspaces
 output/
 
 # Local scratch files
 tmp/
+.tmp/
 *.log
 
 # Python caches

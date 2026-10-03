@@ -34,7 +34,7 @@
 
 ## Nguồn lực
 
-- Notebook URL/ID: https://notebooklm.google.com/notebook/e7b2d815-8b85-47db-95f4-8d0844a60c04
+- Notebook URL/ID: `[CẤU HÌNH CỤC BỘ — KHÔNG LƯU TRONG GIT]`
 - Dữ liệu hiện có:
   - `work/do-an/inputs/ATTT_DACN_01_DeCuongChiTiet.docx` (Đề cương chi tiết đã duyệt)
   - `work/do-an/inputs/đề mục tham khảo.docx` (Đề mục tham khảo và bản nháp phần 1.1)

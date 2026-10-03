@@ -6,6 +6,7 @@ Hệ thống hỗ trợ Antigravity nghiên cứu và soạn luận văn có ki�
 
 1. Mở thư mục này bằng Antigravity.
 2. Làm theo [hướng dẫn cài đặt](docs/SETUP.md) để kết nối NotebookLM MCP và OfficeCLI.
+3. Khi tiếp quản dự án đang làm, đọc [HANDOFF.md](HANDOFF.md) và dùng [prompt tiếp quản](prompts/CONTINUE_DO_AN_PROMPT.md); không suy đoán trạng thái từ lịch sử chat.
 3. Sao chép các mẫu trong `templates/` vào một thư mục dự án mới dưới `work/<project-slug>/`.
 4. Điền `PROJECT_PROFILE.md` và chọn hồ sơ quy định phù hợp. Hồ sơ HUIT tham khảo có tại `profiles/HUIT_2024.md`.
 5. Mở [ANTIGRAVITY_MASTER_PROMPT.md](prompts/ANTIGRAVITY_MASTER_PROMPT.md), thay các giá trị trong phần `THÔNG TIN DỰ ÁN`, rồi gửi toàn bộ prompt cho Antigravity.
@@ -21,7 +22,7 @@ Các tài liệu nguồn, bản trích xuất và render kiểm tra đã dùng t
 ## Thành phần chính
 
 - `.agents/skills/thesis-research-and-writing/`: năng lực nghiên cứu, lập luận, viết, kiểm chứng và xuất bản.
-- `.agents/mcp_config.json`: cấu hình NotebookLM MCP ở trạng thái tắt an toàn cho tới khi hoàn thành đăng nhập.
+- `.agents/mcp_config.example.json`: cấu hình mẫu an toàn; sao chép cục bộ thành `.agents/mcp_config.json` sau khi đăng nhập. File cấu hình thật không được Git theo dõi.
 - `templates/`: hợp đồng dữ liệu Markdown cho mỗi dự án.
 - `profiles/`: quy định theo trường hoặc chương trình đào tạo.
 - `prompts/`: prompt hoàn chỉnh để giao việc cho Antigravity.

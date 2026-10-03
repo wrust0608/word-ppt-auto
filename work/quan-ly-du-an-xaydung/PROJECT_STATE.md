@@ -23,7 +23,7 @@
 | ID | Quyết định | Người duyệt | Ngày |
 |---|---|---|---|
 | DEC-01 | Tên môn học / đề tài: "Quản lý dự án đầu tư xây dựng công trình" | Người dùng | 2026-09-15 |
-| DEC-02 | NotebookLM ID: `767c069e-9f17-4e80-83eb-c02a790966c5` | Người dùng | 2026-09-15 |
+| DEC-02 | Dùng NotebookLM notebook được chỉ định trong cấu hình cục bộ; không lưu ID trong Git | Người dùng | 2026-09-15 |
 | DEC-03 | Cơ sở đào tạo: Trường Đại học Giao thông Vận tải Hà Nội (UTC) | Người dùng | 2026-09-15 |
 | DEC-04 | Tập trung chuyên sâu tối đa cho Câu 4 (Mất đồng bộ Thiết kế - Thi công - Cung ứng) và Câu 5 (Quyết định Ban QLDA làm chậm 3 nhà thầu) | Người dùng | 2026-09-15 |
 | DEC-05 | Áp dụng quy trình Phản biện đa tầng 4 cấp độ để tối ưu hóa bài làm đạt điểm tuyệt đối (10/10) | Người dùng | 2026-09-15 |
@@ -33,7 +33,7 @@
 
 | Source ID | Trạng thái | Ghi chú |
 |---|---|---|
-| NBLM-01 | CONNECTED | NotebookLM notebook `767c069e-9f17-4e80-83eb-c02a790966c5` |
+| NBLM-01 | CONNECTED | NotebookLM notebook trong cấu hình cục bộ |
 | S002 - S007 | VERIFIED | Hệ thống Luật Xây dựng, Đấu thầu, Đầu tư công và các NĐ 15, 10, 06/2021/NĐ-CP |
 
 ## Vấn đề còn mở
