@@ -23,9 +23,13 @@
 - [ ] Danh mục hình/bảng được tạo khi tài liệu có yêu cầu.
 - [ ] Font tiếng Việt hiển thị đúng trên toàn bộ tài liệu.
 - [ ] Không còn định dạng trực tiếp gây sai lệch diện rộng.
-- [ ] Toàn bộ trang đã được render và kiểm tra trực quan ở tỷ lệ 100%.
+- [x] Bản hiện có đã render và xem riêng đủ 53 trang ở kích thước ảnh gốc; phải kiểm tra lại toàn bộ bản dựng mới.
 - [ ] Không có lỗi tràn lề, ngắt trang, hàng cô độc hoặc trang trắng ngoài ý muốn.
 
 ## Điều kiện mở khóa
 
 Checklist chỉ được chuyển sang `PASS` sau khi hoàn thành lần lượt: duyệt giọng tác giả → sửa và duyệt chương mẫu → ghép Markdown → sinh lại DOCX → render và kiểm tra từng trang.
+
+## Kết quả audit tiếp nối
+
+Audit bản cũ hoàn tất nhưng checklist vẫn BLOCKED. Xem DOCX_QA_REPORT.md để biết lỗi từng trang và đính chính font. Không dùng kiểm tra bản cũ để nghiệm thu DOCX dựng lại.

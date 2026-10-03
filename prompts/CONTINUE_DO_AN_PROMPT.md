@@ -29,7 +29,7 @@ Tiếp tục tuần tự roadmap bước 2–6 của hệ thống soạn luận 
 - Bước 3 `COMPLETE_WITH_RECHECK`: có 19 nguồn dùng được, nhưng `S001`, `S003`, `S004`, `S009`, `S016`, `S019` chưa có toàn văn hợp lệ trong notebook; `S014` có URL lỗi. `S006` đã có URL Microsoft hiện hành; nguồn bổ sung nằm ở `S020`–`S026`.
 - Bước 4 `READY_FOR_AUTHOR_REVIEW`: đã có đoạn hiệu chỉnh, chưa có xác nhận/sửa trực tiếp của tác giả.
 - Bước 5 `REVIEW_COMPLETE_FIX_REQUIRED`: Chương 1 đạt cấu trúc IEEE về hình thức nhưng chưa đạt điều kiện nguồn; còn 18 cảnh báo văn phong.
-- Bước 6 `AUDIT_INCOMPLETE_REBUILD_REQUIRED`: DOCX cũ validation đạt nhưng chưa publication-ready; không có TOC field, có nhiều định dạng trực tiếp và 323 cảnh báo OfficeCLI. Render riêng từng trang chưa hoàn thành.
+- Bước 6 `AUDIT_COMPLETE_REBUILD_REQUIRED`: DOCX cũ validation đạt nhưng chưa publication-ready; không có TOC field, có nhiều định dạng trực tiếp và 323 cảnh báo OfficeCLI. Render và xem riêng đủ 53 trang đã hoàn thành; cần dựng lại sau duyệt Markdown.
 
 ## Cách ra quyết định
 

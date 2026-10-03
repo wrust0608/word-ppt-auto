@@ -33,7 +33,7 @@ Nếu nội dung trong file mâu thuẫn với `PROJECT_STATE.md`, phải báo m
 | 3. Nạp/đối soát nguồn | `COMPLETE_WITH_RECHECK` | Có 19 nguồn sử dụng được, nhưng một nhóm nguồn trong bibliography cũ chưa có toàn văn hoặc URL lỗi. |
 | 4. Hiệu chỉnh giọng tác giả | `READY_FOR_AUTHOR_REVIEW` | Đã có đoạn mẫu; phải chờ chính tác giả sửa/xác nhận trước khi khóa. |
 | 5. Chương thí điểm | `REVIEW_COMPLETE_FIX_REQUIRED` | Cấu trúc và số trích dẫn đạt về hình thức; điều kiện nguồn và văn phong chưa đạt. |
-| 6. DOCX | `AUDIT_INCOMPLETE_REBUILD_REQUIRED` | Đã kiểm tra cấu trúc và render contact sheet; vòng xem riêng từng trang bị dừng để bàn giao. DOCX phải sinh lại từ Markdown đã duyệt. |
+| 6. DOCX | `AUDIT_COMPLETE_REBUILD_REQUIRED` | Đã kiểm tra cấu trúc, render và xem riêng đủ 53 trang; lỗi theo trang nằm trong DOCX_QA_REPORT.md. DOCX phải sinh lại từ Markdown đã duyệt. |
 
 ## 4. Kết quả đã kiểm chứng
 
@@ -62,7 +62,7 @@ Nếu nội dung trong file mâu thuẫn với `PROJECT_STATE.md`, phải báo m
 - Không phát hiện trường `TOC`; mục lục hiện tại không được coi là mục lục tự động.
 - Có nhiều direct formatting; kết quả kiểm tra font giữa các công cụ chưa hoàn toàn đồng nhất nên phải xác minh bằng render và style audit, không kết luận chỉ từ một thống kê.
 - Contact sheet: `.tmp/docx-qa/do-an/officecli-render/contact-sheet.png` (artifact tạm, có thể không được commit).
-- Vòng render riêng 53 trang đã bị dừng theo yêu cầu bàn giao; OfficeCLI resident đã được đóng an toàn. Có thể tồn tại một số `page-XX.png` sinh dở.
+- Đã hoàn tất render native và xem riêng đủ 53 trang. Ảnh QA được giữ cục bộ và ignore; báo cáo lỗi theo trang đã lưu trong DOCX_QA_REPORT.md.
 
 ## 5. Quy tắc không được vi phạm
 

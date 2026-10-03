@@ -10,7 +10,7 @@
 | 3 | Nạp và khóa kho nguồn khả dụng | Nguồn trung tâm có metadata, vị trí và trạng thái Notebook; nguồn không có toàn văn bị hạ trạng thái | `SOURCE_LEDGER.md`, `CLAIM_MATRIX.md` | `COMPLETE_WITH_RECHECK` |
 | 4 | Hiệu chỉnh giọng tác giả | Có mẫu gốc, đoạn thử 250–400 từ và sửa đổi thật của tác giả | `AUTHOR_VOICE.md`, `AUTHOR_VOICE_CALIBRATION.md` | `READY_FOR_AUTHOR_REVIEW` |
 | 5 | Thực hiện một chương thí điểm | Review claim–source, citation, logic, giọng, linter; mọi cảnh báo có quyết định; tác giả duyệt | `CHAPTER_1.md`, `PILOT_CHAPTER_REVIEW.md` | `REVIEW_COMPLETE_FIX_REQUIRED` |
-| 6 | Kiểm tra vòng xuất Word | Publication lint, audit DOCX, render toàn bộ trang, ghi lỗi và kiểm tra lại sau sửa | `PUBLICATION_CHECKLIST.md`, `DOCX_QA_REPORT.md` | `AUDIT_INCOMPLETE_REBUILD_REQUIRED` |
+| 6 | Kiểm tra vòng xuất Word | Publication lint, audit DOCX, render toàn bộ trang, ghi lỗi và kiểm tra lại sau sửa | `PUBLICATION_CHECKLIST.md`, `DOCX_QA_REPORT.md` | `AUDIT_COMPLETE_REBUILD_REQUIRED` |
 
 ## Kết quả bước 2
 

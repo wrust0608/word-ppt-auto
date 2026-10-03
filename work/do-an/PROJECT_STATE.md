@@ -71,8 +71,21 @@
 | ISS-02 | `STYLE_REVIEW_OPEN` | 32 cảnh báo tư vấn về nhịp câu và mở đoạn trong Chương 1–2 | Chưa đủ điều kiện tuyên bố kiểm tra văn phong G5/G6 theo hệ thống mới | Phân loại từng cảnh báo, duyệt diff, chạy publication lint và sinh lại DOCX trước lần bàn giao kế tiếp |
 | ISS-03 | `[CẦN NGUỒN]` | Bibliography Chương 1 còn sử dụng các nguồn `[1]`, `[3]`, `[4]`, `[9]`, `[14]`, `[16]`, `[19]` chưa khả dụng; `[6]` dùng URL cũ | Chương 1 chưa thể qua cổng bằng chứng dù đánh số IEEE đúng | Lập bảng ánh xạ nguồn cũ sang nguồn Notebook hiện hành; nhập/thay nguồn rồi kiểm tra lại từng luận điểm |
 | ISS-04 | `[CẦN TÁC GIẢ XÁC NHẬN]` | Mẫu hiệu chỉnh giọng đã tạo nhưng chưa có sửa đổi/xác nhận trực tiếp của tác giả | Không được khóa bước 4 hoặc áp giọng cá nhân lên toàn chương | Yêu cầu tác giả sửa/xác nhận tối thiểu ba cách diễn đạt trong AUTHOR_VOICE_CALIBRATION.md |
-| ISS-05 | `DOCX_REBUILD_REQUIRED` | DOCX cũ thiếu TOC field, có nhiều direct formatting, 323 cảnh báo OfficeCLI và chưa kiểm tra riêng đủ từng trang | Không đủ điều kiện gắn nhãn publication-ready | Sau khi Markdown được duyệt, sinh DOCX mới và thực hiện vòng render, xem từng trang, sửa và render lại |
+| ISS-05 | `DOCX_REBUILD_REQUIRED` | DOCX cũ thiếu TOC field, có nhiều direct formatting, 323 cảnh báo OfficeCLI; đã render/xem đủ 53 trang và phát hiện lỗi công thức, bảng/sơ đồ, mục lục | Không đủ điều kiện gắn nhãn publication-ready | Sau khi Markdown được duyệt, sinh DOCX mới và thực hiện vòng render, xem từng trang, sửa và render lại |
 
 ## Bước tiếp theo duy nhất
 
 Trình người dùng `AUTHOR_VOICE_CALIBRATION.md` và yêu cầu họ sửa hoặc xác nhận tối thiểu ba cách diễn đạt. Sau khi được duyệt, cập nhật `AUTHOR_VOICE.md`, đối soát/thay các nguồn Chương 1 còn lỗi, xử lý có kiểm soát 18 cảnh báo của chương mẫu và chạy lại citation audit/style lint trước khi xin duyệt chương. Chưa viết Chương 3 và chưa sinh lại DOCX trong khi cổng này còn mở.
+
+
+## Hoàn tất audit tiếp quản 2026-10-04
+
+- Đã đồng bộ commit bàn giao b81dae1; không sửa nội dung chương hoặc DOCX.
+- Bước 6: `AUDIT_COMPLETE_REBUILD_REQUIRED`. Đã render native và xem riêng đủ 53 trang, lưu lỗi theo trang trong DOCX_QA_REPORT.md. Đây là hoàn tất audit bản cũ, không phải hoàn tất G6.
+- Đính chính font: TNR chiếm phần lớn khi tính kế thừa style (82.879 ký tự), Consolas 13.892, Cambria Math 1.618; giữ ghi nhận lỗi phương pháp thống kê trước để truy vết.
+- `FORMAT_CONFLICT`: institutional profile ghi 1,5 dòng, DEC-19 mô tả 1,3; nhiều đoạn DOCX thực tế 1,15. Đối chiếu mẫu gốc trước dựng lại, không đổi quyết định LOCKED.
+- ISS-01–ISS-05 còn mở. Bước 2 COMPLETE, bước 3 COMPLETE_WITH_RECHECK, bước 4 READY_FOR_AUTHOR_REVIEW, bước 5 REVIEW_COMPLETE_FIX_REQUIRED.
+- QA và scratch NotebookLM được giữ cục bộ, nằm trong .tmp đã ignore; cấu hình thật và CONTACTS.local.md không đưa vào Git.
+- Bước tiếp theo vẫn là tác giả duyệt/sửa tối thiểu ba vị trí trong AUTHOR_VOICE_CALIBRATION.md. Chưa chuyển G5/G6.
+
+- Kiểm tra tiếp quản: validate_project PASS; unittest 7/7 PASS; pytest 7/7 PASS; citation audit Chương 1 PASS về hình thức. Publication lint FAIL: 32 warning, 1 error VI015 do nhãn dữ liệu Chương 2. Quét patterns bí mật trên các file thay đổi không phát hiện match; stage chỉ các báo cáo Markdown được liệt kê.

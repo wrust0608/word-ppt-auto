@@ -1,42 +1,54 @@
 # Báo cáo kiểm định bản Word
 
-**Tài liệu:** `BAO_CAO_DO_AN_CHUONG_1_2.docx`  
-**Ngày kiểm định:** 2026-10-04  
-**Trạng thái:** `FAIL_REBUILD_FROM_APPROVED_MARKDOWN`
+- Tài liệu: `BAO_CAO_DO_AN_CHUONG_1_2.docx`.
+- Ngày: 2026-10-04.
+- Trạng thái: `FAIL_REBUILD_FROM_APPROVED_MARKDOWN`.
+- Phạm vi: audit bản hiện có; không sửa DOCX hoặc chương chưa được tái duyệt.
 
-## 1. Kết luận ngắn
+## Kết quả kiểm tra
 
-Bản Word mở và đọc được, có phân cấp heading và khổ trang phù hợp với quy định đã thu thập. Tuy nhiên, đây chưa phải bản đủ điều kiện nộp. Hai lỗi trọng yếu là font thân bài bị lệch mạnh sang Consolas và tài liệu không có trường mục lục tự động. Bản Word cũng được tạo trước khi hoàn tất đối soát nguồn của chương mẫu, vì vậy không được dùng làm nguồn chuẩn để sửa nội dung.
+Đã hoàn tất render native bằng OfficeCLI và xem riêng đủ 53 trang trong lượt tiếp quản trước. Mỗi ảnh trang có kích thước 794 × 1122; trang 17–53 được tách từ bản render liên tục 794 × 41.514. 53 ảnh trang và contact sheet giữ cục bộ tại `.tmp/docx-qa/do-an/officecli-render/`, được gitignore. Không dùng contact sheet thay cho việc xem từng trang. Lượt này lưu kết quả đã kiểm tra, không tuyên bố bản mới đã nghiệm thu.
 
-## 2. Kết quả kiểm định cấu trúc
+OpenXML validation trước đạt; OfficeCLI ghi 475 đoạn ngoài bảng, 15.446 từ. XML có 883 đoạn kể cả trong bảng. Audit cũ ghi 2.007 run và 855 đoạn có định dạng trực tiếp, 323 issues OfficeCLI, 22 cảnh báo accessibility mức trung bình.
 
-| Hạng mục | Kết quả | Bằng chứng kiểm tra |
-|---|---|---|
-| Khổ giấy | Đạt | Hai section đều A4, hướng dọc. |
-| Lề trang | Đạt | Trái khoảng 3,5 cm; phải 2 cm; trên 3,5 cm; dưới 3 cm. |
-| Phân cấp heading | Có cấu trúc | 6 Heading 1, 13 Heading 2, 37 Heading 3, 3 Heading 4. |
-| Font | Không đạt | Kiểm tra run cho thấy Consolas chiếm phần lớn ký tự; Times New Roman chỉ chiếm phần nhỏ. |
-| Mục lục tự động | Không đạt | Chỉ phát hiện trường `PAGE`; không có trường `TOC`. Mục “Mục lục tổng quát” hiện có nhiều khả năng là nội dung tĩnh. |
-| Khả năng bảo trì style | Không đạt | Có 2.007 run và 855 đoạn dùng định dạng trực tiếp, làm tăng nguy cơ lệch kiểu khi sửa hoặc xuất lại. |
-| Hình/đồ họa | Cần rà lại | Không phát hiện đối tượng ảnh inline/anchored; các sơ đồ có thể đang là ký tự hoặc đối tượng không được quản lý như hình chuẩn. |
-| Khả năng tiếp cận | Cần sửa | Không có lỗi mức cao; có 22 cảnh báo mức trung bình. |
-| Render trực quan | Chưa xác nhận | Trình render chuẩn chưa chạy được vì chưa tìm thấy LibreOffice trong môi trường thực thi. Không được xem kiểm tra cấu trúc là thay thế cho kiểm tra từng trang. |
+**Đính chính font:** thống kê cũ bỏ sót font kế thừa từ style nên kết luận Consolas chiếm phần lớn là sai. Kiểm tra có tính kế thừa trên document.xml cho thấy Times New Roman 82.879 ký tự, Consolas 13.892, Cambria Math 1.618. TNR chiếm phần lớn; Consolas dùng nhiều trong code/sơ đồ. Vẫn cần kiểm tra cỡ chữ/font theo chức năng khi dựng lại.
 
-## 3. Nguyên tắc sửa
+| Hạng mục | Kết quả |
+|---|---|
+| A4 và lề | Audit cấu trúc trước đạt: trái 3,5; phải 2; trên 3,5; dưới 3 cm |
+| Heading | Có 6 Heading 1, 13 Heading 2, 37 Heading 3, 3 Heading 4 |
+| TOC | Không có trường TOC; mục lục tĩnh sai số trang |
+| Số trang | Thân bài bắt đầu ở trang 6 và in số 6, chưa khởi động lại từ 1 theo institutional profile |
+| Giãn dòng | Có 382 spacing line=276 (1,15), 75 line=288 (1,2). Institutional profile ghi 1,5; DEC-19 mô tả 1,3. Đối chiếu mẫu gốc trước dựng lại, giữ lịch sử quyết định |
+| Trang trắng/glyph | Không phát hiện trang trắng hoàn toàn hoặc mất glyph tiếng Việt rõ ràng trong lượt xem |
+| Nghiệm thu | FAIL: còn lỗi công thức, ngắt trang, mục lục và nhãn dữ liệu |
 
-Không sửa tay tiếp trên bản Word hiện tại. Markdown đã duyệt phải là nguồn chuẩn. Sau khi chương mẫu qua cổng nguồn và giọng tác giả, hệ thống cần sinh lại DOCX, áp style tập trung rồi mới cập nhật mục lục và kiểm tra trang.
+## Lỗi trực quan theo trang
 
-## 4. Vòng xuất bản bắt buộc
+Số dưới đây là trang vật lý, trùng số in phần thân của bản hiện có. Đã xem toàn bộ trang 1–53; các nhóm dưới đây ghi những lỗi quan sát được, không chỉ trang mẫu.
 
-1. Chốt Markdown đã được duyệt và danh mục nguồn hợp lệ.
-2. Sinh DOCX mới từ Markdown.
-3. Áp style thân bài Times New Roman theo đúng cỡ chữ/giãn dòng của quy định trường; loại bỏ font Consolas khỏi nội dung thông thường.
-4. Tạo heading bằng style Word, không giả heading bằng chữ in đậm hoặc định dạng trực tiếp.
-5. Chèn trường mục lục tự động, số trang và danh mục hình/bảng khi có.
-6. Chuẩn hóa chú thích hình, bảng, công thức và tham chiếu chéo.
-7. Render toàn bộ tài liệu; xem từng trang ở tỷ lệ 100%; sửa lỗi tràn, ngắt trang, hàng cô độc, bảng/hình và font tiếng Việt.
-8. Chạy lại kiểm tra cấu trúc, style, mục lục, trích dẫn và khả năng tiếp cận.
+| Trang | Lỗi cần xử lý khi dựng lại |
+|---|---|
+| 1; 6–53 | Màu xanh, trang trí bìa, header chữ nghiêng: đối chiếu mẫu HUIT và bỏ phần không được mẫu cho phép |
+| 2–5 | Mục lục/danh mục tĩnh, nhãn trang xuống dòng. Mục lục ghi Chương 2 trang 20, heading thật ở trang 29 |
+| 7–8 | Sơ đồ 1.1 chia qua trang, caption tách khỏi phần lớn hình |
+| 9–10 | Bảng so sánh qua trang nhưng thiếu header lặp |
+| 14 | Các ô bản dựng/KB hiện nguyên `<br>` |
+| 21–22 | Bảng 1.4 bị ngắt giữa hàng header |
+| 22–23 | Hàng Bảng 1.5 bị chia trang, thiếu header lặp |
+| 24–25; 39–40 | Tiêu đề mục danh sách ở cuối trang, nội dung ở trang kế |
+| 26–28 | Danh mục nối ngay sau tổng kết; một mục tách giữa trang 27–28; cần đối chiếu ngắt trang và hanging indent |
+| 30–47; 50; 52 | Công thức hiện nguyên lệnh LaTeX, dollar/underscore: cần chuyển OMML hoặc biểu thức đúng, bảo toàn nghĩa |
+| 33–34 | Sơ đồ topology chia qua hai trang |
+| 34–35 | Bảng IP cột quá hẹp, từ/subnet bị bẻ; hàng Target-Win7 chia trang |
+| 38–39 | Bảng trạng thái quá hẹp, ký hiệu chưa chuyển đúng, chú giải kéo sang trang sau |
+| 45–46 | Khối cấu hình chia qua hai trang |
+| 48 | Bảng kỹ thuật có tiêu đề cột bị bẻ nhỏ, lệnh/mã trạng thái chia khó đọc |
+| 48–49 | Sơ đồ 2.2 tách dòng cuối/caption sang trang sau |
+| 49 | Ma trận 10 cột quá chật và còn `[CẦN DỮ LIỆU]`; giữ nhãn tới khi có bằng chứng hoặc ngoại lệ tác giả duyệt |
+| 50–51 | Sơ đồ rollback chia trang |
+| 52–53 | Bibliography đánh số lại theo chương; phải kiểm tra IEEE xuyên tài liệu khi ghép, không suy từ audit từng chương |
 
-## 5. Điều kiện đạt
+## Điều kiện dựng lại
 
-Bản Word chỉ được gắn nhãn `PUBLICATION_READY` khi không còn lỗi font, có TOC tự động, mọi trang đã được render và xem, không có lỗi bố cục nghiêm trọng, và nội dung xuất ra trùng với Markdown đã duyệt.
+Markdown được tác giả duyệt là nguồn chuẩn. Chờ calibration, đối soát nguồn và review chương trước khi sinh DOCX mới. Áp style tập trung, TOC tự động, công thức đúng, bảng/sơ đồ không chia bất hợp lý. Sau dựng lại phải render và xem mọi trang của phiên bản mới. Không gắn `PUBLICATION_READY` cho bản hiện có.
