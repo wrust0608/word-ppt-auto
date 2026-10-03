@@ -2,6 +2,10 @@
 
 Hồ sơ này chỉ được lập từ văn bản thật và câu trả lời do tác giả xác nhận. Không suy đoán tính cách hoặc sáng tác trải nghiệm để lấp chỗ trống.
 
+- Trạng thái: `PROVISIONAL`, `CALIBRATING`, `LOCKED`
+- Ngành/nhóm ngữ vực:
+- Loại công trình:
+
 ## Nguồn nhận diện giọng
 
 - Mẫu văn bản do tác giả viết:
@@ -17,6 +21,10 @@ Hồ sơ này chỉ được lập từ văn bản thật và câu trả lời d
 - Cách chuyển ý thường dùng:
 - Mật độ thuật ngữ phù hợp:
 - Cách giải thích khái niệm:
+- Mức sử dụng câu bị động theo loại phần:
+- Mức sử dụng ngôi thứ nhất theo quy định trường:
+- Cách thể hiện bất định/hedging:
+- Cách signposting được chấp nhận:
 - Thuật ngữ tác giả ưu tiên:
 - Cụm từ tác giả không muốn dùng:
 
@@ -41,4 +49,12 @@ Hồ sơ này chỉ được lập từ văn bản thật và câu trả lời d
 | Đoạn thử | Điểm khớp giọng | Điểm còn máy móc/khuôn mẫu | Điều chỉnh đã duyệt |
 |---|---|---|---|
 |  |  |  |  |
+
+## Mẫu sửa của tác giả
+
+| Bản agent | Bản tác giả sửa | Quy tắc rút ra | Phạm vi áp dụng |
+|---|---|---|---|
+|  |  |  |  |
+
+Không biến một lần sửa cục bộ thành quy tắc toàn luận văn nếu chưa được tác giả xác nhận.
 

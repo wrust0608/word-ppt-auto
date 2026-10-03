@@ -26,6 +26,8 @@ Các tài liệu nguồn, bản trích xuất và render kiểm tra đã dùng t
 - `profiles/`: quy định theo trường hoặc chương trình đào tạo.
 - `prompts/`: prompt hoàn chỉnh để giao việc cho Antigravity.
 - `examples/`: ca kiểm thử; không phải quy tắc mặc định của hệ thống.
+- `AGENTS.md`: quy tắc bàn giao và thứ tự ưu tiên cho agent khác.
+- `.agents/skills/.../scripts/lint_vi_academic.py`: linter học thuật tiếng Việt có vị trí dòng, không phải AI detector.
 
 ## Nguyên tắc cốt lõi
 
@@ -34,11 +36,15 @@ Các tài liệu nguồn, bản trích xuất và render kiểm tra đã dùng t
 - Mọi luận điểm quan trọng phải truy ngược được tới bằng chứng.
 - Mỗi chương phải trả lời một phần câu hỏi nghiên cứu, không trở thành bản tổng hợp kiến thức chung.
 - Nếu thiếu nguồn hoặc dữ liệu, dùng nhãn trạng thái thay vì suy đoán.
+- Quy định trường, quyết định đã khóa và bằng chứng luôn ưu tiên hơn rule phong cách.
+- Lớp giọng tác giả chỉ hoạt động sau review nguồn/logic và không sáng tác trải nghiệm cá nhân.
 
 ## Tài liệu
 
 - [Kiến trúc hệ thống](docs/SYSTEM.md)
 - [Cài đặt Antigravity và NotebookLM](docs/SETUP.md)
 - [Hướng dẫn vận hành](docs/OPERATING_GUIDE.md)
+- [Hệ thống chất lượng văn phong](docs/STYLE_SYSTEM.md)
+- [Tiêu chuẩn chất lượng bản Word](docs/WORD_QUALITY_STANDARD.md)
 - [Các dự án tham khảo và phạm vi sử dụng](docs/REFERENCES.md)
 - [Bộ kiểm thử nghiệm thu](tests/ACCEPTANCE.md)

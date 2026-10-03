@@ -1,5 +1,10 @@
 # Hồ sơ giọng tác giả
 
+- Trạng thái: `LOCKED`
+- Ngày hiệu chỉnh theo hệ thống văn phong mới: 2026-10-04
+- Phạm vi khóa: quy ước diễn đạt và dấu ấn của công trình; mọi khẳng định kỹ thuật vẫn phải được kiểm chứng bằng nguồn.
+- Nguyên tắc bảo toàn: hồ sơ này không được phép ghi đè quy định HUIT, quyết định dự án, dữ liệu thực nghiệm hoặc metadata nguồn.
+
 Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác giả cung cấp trong `work/do-an/inputs/đề mục tham khảo.docx` (phần 1.1) và các quy định đào tạo ngành An toàn thông tin tại HUIT.
 
 ## Nguồn nhận diện giọng
@@ -7,7 +12,7 @@ Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác gi
 - Mẫu văn bản do tác giả viết: `work/do-an/inputs/đề mục tham khảo.docx`
 - Phần/trang đã phân tích: Mục 1.1 (1.1.1 đến 1.1.7, gồm 128 dòng văn bản kỹ thuật về SMB)
 - Nội dung của mẫu không nên bắt chước: Các lỗi chính tả nhỏ (nếu có), các câu lặp từ hoặc câu bị khuyết dấu câu.
-- Ngày tác giả xác nhận hồ sơ: 2026-09-12 (Dự thảo chờ xác nhận)
+- Ngày khóa hồ sơ trong trạng thái dự án: 2026-09-12. Hệ thống mới giữ nguyên trạng thái này, đồng thời yêu cầu tái xác nhận nếu thay đổi ngôi viết hoặc mức độ thể hiện quan điểm.
 
 ## Quy ước diễn đạt
 
@@ -18,7 +23,23 @@ Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác gi
 - Mật độ thuật ngữ phù hợp: Mật độ cao; giữ nguyên các thuật ngữ tiếng Anh chuẩn của giao thức mạng và hệ điều hành: `Named Pipes`, `Session Setup`, `Tree Connect`, `Dialect`, `Negotiate Protocol`, `Direct-hosted SMB`, `Kernel-mode driver`, `srv.sys`, `srv2.sys`.
 - Cách giải thích khái niệm: Định nghĩa khái niệm bằng tầng mạng, vai trò, thành phần chịu trách nhiệm và cổng kết nối; sau đó liệt kê các trường hợp/chức năng cụ thể bằng gạch đầu dòng ngắn gọn.
 - Thuật ngữ tác giả ưu tiên: Giao thức SMB, thương lượng dialect, thiết lập phiên làm việc, kết nối tài nguyên, driver cấp nhân, lùi cổng (fallback).
-- Cụm từ tác giả không muốn dùng: Tránh tuyệt đối các sáo ngữ: "trong bối cảnh hiện nay", "thời đại công nghệ 4.0", "vô cùng quan trọng", "không chỉ... mà còn...", "có thể thấy rằng", "một cách toàn diện và tối ưu".
+- Cụm từ tác giả không muốn dùng: Không dùng các sáo ngữ như "trong bối cảnh hiện nay", "thời đại công nghệ 4.0", "vô cùng quan trọng", "không chỉ... mà còn...", "có thể thấy rằng", "một cách toàn diện và tối ưu" nếu chúng không mang thêm thông tin kiểm chứng được.
+
+## Hiệu chỉnh theo loại mục
+
+- Mở đầu chương: nêu thẳng vấn đề, phạm vi và vai trò của chương đối với câu hỏi nghiên cứu; không mở bằng nhận định thời đại hoặc lời khẳng định tầm quan trọng chung chung.
+- Tổng quan và cơ sở lý thuyết: tổ chức theo vấn đề kỹ thuật, điểm đồng thuận và giới hạn của nguồn; không lần lượt tóm tắt từng tài liệu.
+- Phương pháp và thiết kế lab: ưu tiên câu chủ động khi cần xác định chủ thể ra quyết định; dùng câu bị động khi quy trình hoặc đối tượng quan sát quan trọng hơn người thực hiện.
+- Kết quả: tách dữ liệu quan sát khỏi diễn giải; chỉ dùng con số, log và ảnh đã thu thập thật.
+- Thảo luận: cho phép dùng cấu trúc thận trọng như "kết quả này cho thấy trong phạm vi mô hình..."; không mở rộng kết luận ra ngoài điều kiện thử nghiệm.
+- Kết luận: trả lời trực tiếp câu hỏi nghiên cứu, nêu giới hạn và hướng tiếp theo; không tự xếp hạng công trình.
+
+## Mức độ biểu đạt
+
+- Ngôi thứ nhất: không dùng mặc định. Chỉ dùng khi quy định trường cho phép và cần làm rõ lựa chọn do tác giả trực tiếp thực hiện.
+- Câu bị động: dùng có chọn lọc trong mô tả quy trình, không dùng để che khuất chủ thể chịu trách nhiệm.
+- Hedge: gắn với mức bằng chứng; ưu tiên "trong mô hình thử nghiệm", "dữ liệu hiện có cho thấy", "chưa đủ cơ sở để" thay cho lối nói mơ hồ.
+- Signposting: chỉ dùng khi giúp người đọc nhận ra quan hệ lập luận; không đặt câu chuyển đoạn công thức ở mọi mục.
 
 ## Dấu ấn riêng của công trình
 
@@ -41,6 +62,8 @@ Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác gi
 
 ## Mẫu hiệu chỉnh (Calibration Sample - 310 từ)
 
+> **Lưu ý kiểm chứng:** đoạn dưới đây được giữ làm mẫu nhịp và cách triển khai ý, không phải nguồn bằng chứng. Các khẳng định về cơ chế lựa chọn cổng, thứ tự gói tin và hành vi fallback phải được ánh xạ tới `SOURCE_LEDGER.md` trước khi đưa vào luận văn.
+
 > **Đoạn thử nghiệm hiệu chỉnh văn phong kỹ thuật (về cơ chế lựa chọn cổng dịch vụ SMB):**
 >
 > "Để thiết lập kênh truyền thông giữa Client và Server, dịch vụ Server Message Block (SMB) trên hệ điều hành Windows sử dụng hai cổng mạng tiêu chuẩn: TCP 139 và TCP 445. Cổng TCP 139 vận hành trên nền tảng NetBIOS over TCP/IP (NBT), đóng vai trò lớp bao bọc trung gian đòi hỏi hai máy trạm phải hoàn tất phiên NetBIOS Session Service và phân giải tên máy tính qua giao thức NetBIOS trước khi truyền tải các bản tin SMB. Ngược lại, cổng TCP 445 được tích hợp từ phiên bản Windows 2000 cho phép triển khai cơ chế Direct-hosted SMB, truyền trực tiếp các gói tin SMB trên nền TCP/IP mà không phụ thuộc vào tiêu đề NetBIOS, qua đó giảm độ trễ đóng gói dữ liệu và hỗ trợ phân giải địa chỉ thông qua hệ thống phân giải tên miền (DNS).
@@ -49,4 +72,4 @@ Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác gi
 
 | Đoạn thử | Điểm khớp giọng | Điểm còn máy móc/khuôn mẫu | Điều chỉnh đã duyệt |
 |---|---|---|---|
-| Đoạn mẫu trên | Đúng cấu trúc logic, từ ngữ kỹ thuật chính xác, không dùng câu mào đầu sáo rỗng, giải thích rõ nguyên nhân - kết quả và cơ chế mạng | Không có sáo ngữ AI; nhịp câu tự nhiên, chặt chẽ | Chờ tác giả xác nhận / góp ý hiệu chỉnh |
+| Đoạn mẫu trên | Có trật tự cơ chế → điều kiện → hệ quả; dùng thuật ngữ nhất quán; không mở đầu bằng bối cảnh chung | Câu dài và dày mệnh đề; một số chi tiết kỹ thuật đang được khẳng định chắc chắn nhưng chưa thể hiện nguồn ngay tại đoạn | Giữ làm mẫu nhịp có điều kiện; không tái sử dụng khẳng định kỹ thuật nếu chưa truy vết nguồn |

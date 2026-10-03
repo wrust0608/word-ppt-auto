@@ -48,6 +48,22 @@ Chỉ duyệt một chương khi:
 - Nêu giới hạn hoặc điều kiện áp dụng.
 - Không có trích dẫn giả hoặc tài liệu tham khảo mồ côi.
 - Không còn đoạn không phục vụ mục tiêu chương.
+- Ngữ vực đúng chức năng của phần viết và phù hợp `AUTHOR_VOICE.md`.
+- Linter đã chạy sau review logic; mọi cảnh báo quan trọng có quyết định và lý do.
+
+Chạy linter:
+
+```powershell
+uv run python .agents/skills/thesis-research-and-writing/scripts/lint_vi_academic.py work/<project-slug>/CHAPTER_DRAFT.md
+```
+
+Trước xuất bản:
+
+```powershell
+uv run python .agents/skills/thesis-research-and-writing/scripts/lint_vi_academic.py work/<project-slug>/THESIS.md --publication --fail-on-error
+```
+
+Không chỉnh phong cách trực tiếp trên DOCX. Mọi thay đổi nội dung phải quay lại Markdown chuẩn.
 
 ## Tiếp tục sau gián đoạn
 
@@ -64,4 +80,5 @@ Hãy đọc PROJECT_STATE.md và các artifact được liên kết. Tóm tắt 
 - Hai nguồn mâu thuẫn: thêm `[MÂU THUẪN NGUỒN]`, trình bày điều kiện của từng nguồn.
 - Thiếu dữ liệu thực nghiệm: thêm `[CẦN DỮ LIỆU]`; không tạo số liệu mẫu trong bản nháp chính.
 - Quy định trường mâu thuẫn: ghi cả hai quy định, chọn tài liệu có thẩm quyền hoặc ngày mới hơn và yêu cầu xác nhận trước G6.
+- Linter báo false positive: giữ câu, ghi `FALSE_POSITIVE` và lý do; không viết lại chỉ để đạt số cảnh báo thấp.
 

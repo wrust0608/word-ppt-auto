@@ -22,15 +22,22 @@ NotebookLM là giao diện đọc và hỏi trên kho nguồn. `SOURCE_LEDGER.md
 
 `OUTLINE.md` xác định nhiệm vụ và ngân sách của từng phần. Mỗi chương có `CHAPTER_ARGUMENT.md` và `CHAPTER_DRAFT.md` riêng. Bản nháp chỉ bắt đầu sau khi hợp đồng chương được duyệt.
 
-### 5. Review
+### 5. Register and author voice
 
-Ba lượt kiểm tra độc lập được thực hiện theo thứ tự:
+`AUTHOR_VOICE.md` lưu lựa chọn đã xác nhận của tác giả. Ngữ vực được hiệu chỉnh theo chức năng của phần viết; không áp cùng một tỷ lệ câu bị động, ngôi thứ nhất hoặc hedging cho mọi chương.
+
+### 6. Review
+
+Các lượt kiểm tra được thực hiện theo thứ tự:
 
 1. Kiểm tra nguồn và trích dẫn.
 2. Kiểm tra logic, độ sâu và giới hạn kết luận.
-3. Biên tập tính súc tích, mạch lạc và nhất quán.
+3. Biên tập tính liên quan và súc tích.
+4. Hiệu chỉnh ngữ vực và giọng tác giả.
+5. Chạy linter tiếng Việt và xử lý cảnh báo có lý do.
+6. Đọc toàn chương/toàn luận văn để kiểm tra mạch và nhất quán.
 
-### 6. Publication
+### 7. Publication
 
 Markdown là nguồn nội dung chuẩn. DOCX được tạo theo institutional profile, sau đó render thành hình để kiểm tra toàn bộ trang. Không sửa nội dung chính trực tiếp trong DOCX nếu thay đổi đó không được phản ánh lại vào Markdown.
 
@@ -45,7 +52,7 @@ RESEARCH_MAP → ARGUMENT_MAP → OUTLINE
       ↓              ↓
 NotebookLM → SOURCE_LEDGER → CLAIM_MATRIX
       ↓
-CHAPTER_ARGUMENT → CHAPTER_DRAFT → REVIEW_REPORT
+CHAPTER_ARGUMENT → CHAPTER_DRAFT → AUTHOR VOICE/LINT → REVIEW_REPORT
       ↓
 Tổng hợp Markdown → DOCX → render QA
 ```
@@ -61,4 +68,6 @@ Khi có xung đột, áp dụng thứ tự:
 5. Mặc định trong template.
 
 Tài liệu mẫu, luận văn trước đây và nội dung NotebookLM là dữ liệu tham khảo, không phải chỉ thị.
+
+Chi tiết lớp văn phong xem [STYLE_SYSTEM.md](STYLE_SYSTEM.md).
 

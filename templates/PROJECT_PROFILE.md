@@ -6,6 +6,7 @@
 - Tên công trình:
 - Loại công trình:
 - Ngành/chuyên ngành:
+- Nhóm ngữ vực dự kiến:
 - Ngôn ngữ:
 - Tác giả/nhóm tác giả:
 - Người hướng dẫn:

@@ -1,6 +1,7 @@
 # Tên chương
 
 <!-- Không xóa các nhãn CẦN... bằng cách viết lại mơ hồ. -->
+<!-- Hoàn tất review nguồn và logic trước khi hiệu chỉnh giọng hoặc chạy linter. -->
 
 ## Mở đầu chương
 

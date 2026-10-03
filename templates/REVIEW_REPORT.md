@@ -36,6 +36,15 @@
 - Trải nghiệm hoặc quan sát có dấu hiệu bị sáng tác:
 - Câu cần tác giả viết lại hoặc hiệu chỉnh:
 
+## Lint văn phong tiếng Việt
+
+- Lệnh đã chạy:
+- Tổng hợp `ERROR/WARNING/INFO`:
+
+| Rule | Dòng | Quyết định (`FIX`, `KEEP_WITH_REASON`, `FALSE_POSITIVE`) | Lý do/thay đổi |
+|---|---:|---|---|
+|  |  |  |  |
+
 ## Tính nhất quán
 
 - Thuật ngữ:

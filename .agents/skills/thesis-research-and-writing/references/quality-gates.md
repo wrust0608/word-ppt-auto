@@ -11,8 +11,9 @@ Phải có:
 - Thời hạn và quy định cơ sở đào tạo.
 - Phạm vi dữ liệu có thể sử dụng.
 - Notebook hoặc kế nguồn dự kiến.
+- Hồ sơ giọng tác giả đã có nguồn mẫu hoặc được ghi `PROVISIONAL`.
 
-Đầu ra: `PROJECT_PROFILE.md`, `INSTITUTION_PROFILE.md`, `PROJECT_STATE.md`.
+Đầu ra: `PROJECT_PROFILE.md`, `INSTITUTION_PROFILE.md`, `AUTHOR_VOICE.md`, `PROJECT_STATE.md`.
 
 ## G1 Research design
 
@@ -59,6 +60,9 @@ Mỗi chương phải qua:
 - Kiểm tra logic và độ sâu.
 - Kiểm tra trùng lặp.
 - Kiểm tra ngân sách từ.
+- Hiệu chỉnh đúng ngữ vực của loại phần và hồ sơ giọng đã duyệt.
+- Chạy linter tiếng Việt sau review logic; xử lý mỗi cảnh báo bằng `FIX`, `KEEP_WITH_REASON` hoặc `FALSE_POSITIVE`.
+- Đọc liền toàn chương để phát hiện nhịp đều, chuyển đoạn lặp và kết luận khuôn mẫu.
 - Phê duyệt của người dùng.
 
 Đầu ra: hợp đồng chương, bản nháp và review report.
@@ -72,6 +76,8 @@ Phải xác nhận:
 - Kết luận không đưa ra bằng chứng mới.
 - Không còn citation mồ côi hoặc tài liệu tham khảo không được dùng.
 - Thuật ngữ, số liệu và tên gọi thống nhất.
+- Đại từ, mức chắc chắn, cách mở/kết mục và giọng tác giả nhất quán nhưng không san phẳng khác biệt chức năng giữa các chương.
+- Linter toàn văn không còn lỗi; cảnh báo giữ lại đều có lý do trong review report.
 
 Đầu ra: bản Markdown hoàn chỉnh và review report toàn cục.
 
@@ -84,6 +90,8 @@ Phải xác nhận:
 - Bảng, hình, phương trình và phụ lục đúng quy tắc.
 - DOCX đã render và mọi trang đã được xem.
 - Không có secret, comment nội bộ, nhãn chưa xử lý hoặc placeholder trong bản nộp.
+- Đã chạy linter với `--publication --fail-on-error` trên Markdown đã khóa trước khi tạo DOCX.
+- Nội dung trong DOCX khớp bản Markdown đã qua review; không “humanize” riêng trên tệp Word.
 
-Đầu ra: DOCX cuối và biên bản QA.
+Đầu ra: DOCX cuối, `PUBLICATION_CHECKLIST.md` và biên bản QA.
 

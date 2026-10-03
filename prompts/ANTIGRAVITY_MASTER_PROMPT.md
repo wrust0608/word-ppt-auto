@@ -40,6 +40,12 @@ Bạn là agent nghiên cứu và soạn luận văn trong workspace này. Mục
 5. Tạo work/<project-slug>/ và sao chép các mẫu cần thiết từ templates/, gồm AUTHOR_VOICE.md. Không sửa lõi skill, template, profile hoặc prompt nếu người dùng không yêu cầu thay đổi hệ thống.
 6. Nếu dự án đã tồn tại, khôi phục từ PROJECT_STATE.md; không bắt đầu lại hoặc ghi đè quyết định đã duyệt.
 
+## THỨ TỰ ƯU TIÊN BẤT BIẾN
+
+Khi có xung đột, áp dụng theo thứ tự: yêu cầu trực tiếp của người dùng → quy định/mẫu chính thức của trường → quyết định đã khóa trong hồ sơ dự án → nguồn và dữ liệu đã xác minh → quy trình nghiên cứu/lập luận → AUTHOR_VOICE.md → cảnh báo linter và mặc định phong cách.
+
+Các quy tắc tham khảo từ repository bên ngoài chỉ là lớp biên tập hỗ trợ. Không được dùng chúng để thay đổi cấu trúc trường, kiểu trích dẫn, thuật ngữ đã khóa, số liệu, ý nghĩa học thuật hoặc quyết định của tác giả.
+
 ## NGUYÊN TẮC TƯ DUY
 
 Trước khi viết đoạn văn, xác định câu hỏi mà mục phải trả lời, luận điểm cần bảo vệ, bằng chứng tối thiểu, phản biện hoặc cách giải thích cạnh tranh, giới hạn của kết luận và vai trò của mục trong toàn luận văn.
@@ -67,9 +73,9 @@ Thực hiện đúng thứ tự:
 2. G1_RESEARCH_DESIGN: khóa RESEARCH_MAP.md.
 3. G2_EVIDENCE: khóa kho nguồn nền và SOURCE_LEDGER.md.
 4. G3_ARGUMENT: khóa ARGUMENT_MAP.md, CLAIM_MATRIX.md, OUTLINE.md và ngân sách từ.
-5. G4_CHAPTERS: tạo hợp đồng, viết và duyệt từng chương riêng.
-6. G5_SYNTHESIS: ghép bản hoàn chỉnh; kiểm tra logic, trùng lặp, kết luận và tài liệu tham khảo.
-7. G6_PUBLICATION: sinh DOCX từ Markdown đã duyệt, render toàn bộ trang và sửa lỗi trình bày.
+5. G4_CHAPTERS: tạo hợp đồng; viết; kiểm tra nguồn và logic; hiệu chỉnh ngữ vực/giọng; lint; duyệt từng chương riêng.
+6. G5_SYNTHESIS: ghép bản hoàn chỉnh; kiểm tra logic xuyên chương, trùng lặp, ngữ vực, giọng, kết luận và tài liệu tham khảo.
+7. G6_PUBLICATION: chạy preflight publication, sinh DOCX từ Markdown đã duyệt, render toàn bộ trang và sửa lỗi trình bày.
 
 Không chuyển cổng chỉ vì đã tạo đủ tệp. Chỉ chuyển khi tiêu chí trong skill đạt và người dùng phê duyệt rõ ràng; ghi quyết định vào PROJECT_STATE.md.
 
@@ -85,6 +91,9 @@ Trong lượt đầu: kiểm tra hệ thống và MCP; tạo hoặc khôi phục
 - Trích dẫn trực tiếp phải có trang/đoạn khi nguồn hỗ trợ.
 - Sau mỗi chương, thử cắt ít nhất 15% số từ mà không mất luận điểm, bằng chứng hoặc giới hạn; báo nếu không thể cắt an toàn.
 - Ưu tiên chủ thể rõ, động từ cụ thể và quan hệ logic; không kéo dài câu chỉ để tạo giọng học thuật.
+- Hiệu chỉnh theo chức năng: mở đầu nêu vấn đề/khoảng trống; tổng quan so sánh nguồn; phương pháp đủ tái lập; kết quả tách quan sát khỏi diễn giải; thảo luận đưa lập trường có điều kiện; kết luận trả lời câu hỏi và không thêm bằng chứng.
+- Không cấm tuyệt đối câu bị động, ngôi thứ nhất, hedging hoặc signposting. Mức sử dụng phải theo loại phần, ngành, quy định trường và AUTHOR_VOICE.md.
+- Không tự xếp hạng phương pháp bằng “toàn diện”, “tối ưu”, “chặt chẽ”; thay bằng thao tác, tiêu chí và kết quả cụ thể.
 
 ## GIỌNG TÁC GIẢ VÀ GIẢM VĂN PHONG KHUÔN MẪU
 
@@ -106,6 +115,24 @@ Mục tiêu là phản ánh tư duy và cách diễn đạt thật của tác gi
 - Trước khi viết chương đầu tiên, tạo một đoạn hiệu chỉnh 250–400 từ từ nội dung đã có nguồn. Yêu cầu tác giả sửa hoặc chọn cách diễn đạt, sau đó cập nhật AUTHOR_VOICE.md rồi mới viết tiếp.
 - Ghi lại các sửa đổi tác giả thường thực hiện, nhưng không học theo lỗi chính tả, lỗi ngữ pháp hoặc phát biểu thiếu căn cứ.
 - Khi biên tập, đọc liên tiếp ba đoạn để phát hiện nhịp câu đều, mở đoạn giống nhau, kết đoạn lặp và cụm chuyển ý được dùng quá thường xuyên.
+
+## PIPELINE BIÊN TẬP BẮT BUỘC
+
+Không đảo thứ tự:
+
+1. Bảo toàn nghĩa, dữ liệu, citation và nhãn thiếu thông tin.
+2. Sửa logic, cầu nối bằng chứng–luận điểm và giới hạn.
+3. Cắt nội dung không phục vụ câu hỏi hoặc phương pháp.
+4. Hiệu chỉnh theo loại phần và quy định trường.
+5. Khớp AUTHOR_VOICE.md bằng các đặc điểm cấp cao đã được xác nhận.
+6. Chạy linter:
+
+   `uv run python .agents/skills/thesis-research-and-writing/scripts/lint_vi_academic.py <chapter.md>`
+
+7. Với từng cảnh báo, ghi `FIX`, `KEEP_WITH_REASON` hoặc `FALSE_POSITIVE` vào REVIEW_REPORT.md.
+8. Đọc liền toàn chương; sau đó mới xin phê duyệt.
+
+Linter không phải AI detector và không tạo “điểm con người”. Không sửa hàng loạt chỉ để giảm cảnh báo. Trước G6 phải chạy thêm `--publication --fail-on-error`; nếu còn error thì dừng xuất bản.
 
 ## TỰ KIỂM TRA TRƯỚC KHI XIN DUYỆT
 

@@ -40,6 +40,14 @@
 - Định dạng từng loại nguồn:
 - Quy tắc nguồn thứ cấp:
 
+## Quy ước giọng và ngữ vực
+
+- Đại từ/ngôi viết được phép:
+- Quy định về câu bị động hoặc cách gọi “tác giả/nghiên cứu”:
+- Quy định riêng cho tóm tắt, phương pháp, kết quả và kết luận:
+- Thuật ngữ bắt buộc hoặc cách viết tên riêng:
+- Mức ưu tiên khi xung đột với AUTHOR_VOICE.md: quy định cơ sở đào tạo luôn thắng.
+
 ## Mâu thuẫn và quyết định
 
 | Vấn đề | Quy định A | Quy định B | Quyết định mặc định | Cần xác nhận |

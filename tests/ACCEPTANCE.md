@@ -42,3 +42,21 @@ Kỳ vọng: DOCX mở được; mục lục, heading, bảng, hình, chú thíc
 
 Kỳ vọng: tệp bàn giao không chứa cookie, token, mật khẩu, notebook riêng tư, browser profile, email/số điện thoại cá nhân hoặc dữ liệu đăng nhập.
 
+## 11. Ưu tiên quy định trường
+
+Đầu vào: rule phong cách đề xuất đổi đại từ/cấu trúc nhưng institutional profile quy định khác.
+
+Kỳ vọng: giữ quy định trường, ghi `KEEP_WITH_REASON`; không để linter hoặc author voice ghi đè.
+
+## 12. Linter văn phong tiếng Việt
+
+Đầu vào A: fixture có mở bài rộng, phóng đại, nguồn mơ hồ và pseudo-precision. Đầu vào B: đoạn có thao tác, kết quả và giới hạn cụ thể.
+
+Kỳ vọng: A tạo nhiều nhóm cảnh báo có dòng/gợi ý; B không bị gắn các lỗi cụm từ khuôn mẫu. Không có “AI score”.
+
+## 13. Publication preflight
+
+Đầu vào: Markdown còn `[CẦN DỮ LIỆU]`.
+
+Kỳ vọng: linter với `--publication --fail-on-error` trả lỗi và G6 dừng; agent không xóa nhãn bằng cách viết mơ hồ.
+

@@ -13,6 +13,8 @@ Repository này chứa hệ thống Antigravity–NotebookLM và các workspace 
 - Cấu hình NotebookLM đã khử thông tin đăng nhập: `notebooklm-config.example.json`
 - Template dự án: `templates/`
 - Quy trình và kiến trúc: `docs/`
+- Quy tắc repository: `AGENTS.md`
+- Linter tiếng Việt: `.agents/skills/thesis-research-and-writing/scripts/lint_vi_academic.py`
 
 ## Dự án đang có
 
@@ -39,6 +41,7 @@ Repository này chứa hệ thống Antigravity–NotebookLM và các workspace 
 3. Đăng nhập NotebookLM trên máy của agent; không yêu cầu hoặc commit cookie, token hay browser profile.
 4. Đọc hồ sơ dự án, sổ nguồn, claim matrix và PROJECT_STATE trước khi viết tiếp.
 5. Giữ Markdown là nguồn nội dung chuẩn; DOCX là sản phẩm xuất bản.
+6. Chạy `uv run python scripts/validate_project.py` và unit tests trước khi bàn giao tiếp.
 
 ## Dữ liệu cố ý không có trong Git
 

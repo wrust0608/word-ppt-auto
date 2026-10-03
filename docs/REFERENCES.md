@@ -50,6 +50,36 @@ Nguồn: https://github.com/emcie-co/parlant
 
 Áp dụng guideline có điều kiện, cổng quyết định, ranh giới gọi công cụ và truy vết quyết định; không dùng Parlant làm dependency.
 
+### Writing Skills
+
+Nguồn: https://github.com/msimchowitz/writing-skills
+
+Áp dụng cách tách lượt viết, academic voice, cadence, paper writing và whole-document pass. Hệ thống hiện tại vẫn dùng một skill lõi với progressive disclosure, không cài runtime của repo này.
+
+### Academic Writing Skill
+
+Nguồn: https://github.com/felixschrimpff/academic-writing-skill
+
+Áp dụng nguyên tắc hiệu chỉnh theo ngành/loại phần và dùng khoảng phù hợp thay cho lệnh cấm tuyệt đối. Các con số/corpus của repo không được sao chép thành chuẩn cho luận văn tiếng Việt khi chưa có kiểm chứng riêng.
+
+### Humanize rule catalogs
+
+Nguồn: https://github.com/kimhons/humanize và https://github.com/keez97/humanizer
+
+Áp dụng ý tưởng phát hiện citation laundering, phóng đại ý nghĩa, pseudo-precision, cấu trúc ba vế và nhịp văn bản đều. Không dùng điểm “human”, không tối ưu AI detector và không chèn lỗi có chủ ý.
+
+### Vale
+
+Nguồn: https://github.com/vale-cli/vale và https://github.com/vale-cli/agent-tools
+
+Áp dụng mô hình prose lint có rule giải thích được, vị trí dòng, test fixture và tích hợp CI. Phiên bản hiện tại dùng linter Python tiếng Việt tự chứa; Vale không phải dependency bắt buộc.
+
+### STORM và PaperQA
+
+Nguồn: https://github.com/stanford-oval/storm và https://github.com/Future-House/paper-qa
+
+STORM chỉ gợi ý cách đặt câu hỏi đa góc nhìn trước khi lập đề cương. PaperQA gợi ý cách truy vết claim–evidence. NotebookLM và source ledger vẫn là hợp đồng bằng chứng chính thức của hệ thống.
+
 ## Nguyên tắc thay thế
 
 Một tích hợp có thể được thay khi vẫn bảo toàn hợp đồng của hệ thống:

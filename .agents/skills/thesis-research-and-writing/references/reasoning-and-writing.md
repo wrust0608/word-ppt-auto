@@ -83,3 +83,5 @@ Thực hiện theo thứ tự:
 
 Không cắt nguồn, điều kiện hoặc giới hạn chỉ để đạt tỷ lệ giảm từ.
 
+Sau lượt này mới hiệu chỉnh ngữ vực và giọng tác giả. Không dùng biến thiên câu ngẫu nhiên, từ đồng nghĩa hiếm hoặc cấu trúc cầu kỳ để tạo vẻ “con người”; mọi thay đổi phải làm rõ nghĩa, mức chắc chắn hoặc vai trò lập luận.
+
