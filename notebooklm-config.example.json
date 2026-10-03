@@ -1,0 +1,12 @@
+{
+  "headless": true,
+  "debug": false,
+  "timeout": 60,
+  "default_notebook_id": "<SET_LOCALLY>",
+  "base_url": "https://notebooklm.google.com",
+  "server_name": "notebooklm-mcp",
+  "stdio_mode": true,
+  "streaming_timeout": 60,
+  "response_stability_checks": 3,
+  "retry_attempts": 3
+}

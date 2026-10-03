@@ -3,17 +3,13 @@ notebooklm-config.local.json
 chrome_profile_notebooklm/
 .notebooklm/
 .venv/
-.agents/mcp_config.json
-**/CONTACTS.local.md
 
 # Generated exports outside versioned project workspaces
 output/
 
-# Local QA and scratch files
-.tmp/
+# Local scratch files
 tmp/
 *.log
-test_*.docx
 
 # Python caches
 **/__pycache__/

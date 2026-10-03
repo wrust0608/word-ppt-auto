@@ -9,6 +9,8 @@ Repository này chứa hệ thống Antigravity–NotebookLM và các workspace 
 - Skill: `.agents/skills/thesis-research-and-writing/SKILL.md`
 - Master prompt: `prompts/ANTIGRAVITY_MASTER_PROMPT.md`
 - Cấu hình MCP mẫu: `.agents/mcp_config.example.json`
+- Cấu hình MCP workspace: `.agents/mcp_config.json`
+- Cấu hình NotebookLM đã khử thông tin đăng nhập: `notebooklm-config.example.json`
 - Template dự án: `templates/`
 - Quy trình và kiến trúc: `docs/`
 
@@ -41,14 +43,12 @@ Repository này chứa hệ thống Antigravity–NotebookLM và các workspace 
 ## Dữ liệu cố ý không có trong Git
 
 - `notebooklm-config.local.json`
-- `.agents/mcp_config.json`
 - `chrome_profile_notebooklm/`
 - `.notebooklm/`
 - `.venv/`
-- `**/CONTACTS.local.md`
-- `.tmp/`, cache Python, log và tệp QA cục bộ
+- cache Python và log
 
-Những thành phần trên phải được tái tạo ở từng thiết bị. Không vô hiệu hóa quy tắc ignore để chia sẻ thông tin đăng nhập hoặc thông tin liên hệ cá nhân.
+Những thành phần trên phải được tái tạo ở từng thiết bị. Không vô hiệu hóa quy tắc ignore để chia sẻ cookie, token hoặc phiên đăng nhập.
 
 ## Quy tắc tiếp tục
 

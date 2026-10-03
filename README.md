@@ -14,7 +14,9 @@ Antigravity sẽ tự phát hiện skill tại `.agents/skills/thesis-research-a
 
 ## Tiếp tục công việc trên thiết bị khác
 
-Đọc [HANDOFF.md](HANDOFF.md), sau đó mở `PROJECT_STATE.md` trong đúng thư mục dưới `work/`. Các tệp trạng thái và artifact dự án được version hóa; thông tin đăng nhập NotebookLM, môi trường ảo, cache và tệp tạm không được đưa vào Git.
+Đọc [HANDOFF.md](HANDOFF.md), sau đó mở `PROJECT_STATE.md` trong đúng thư mục dưới `work/`. Các tệp trạng thái và artifact dự án được version hóa; thông tin đăng nhập NotebookLM, môi trường ảo, cache và log không được đưa vào Git.
+
+Các tài liệu nguồn, bản trích xuất và render kiểm tra đã dùng trong quá trình xây dựng hệ thống được lưu trong `.tmp/reference-docs/` để agent kế tiếp có thể kiểm chứng lại. Thư mục này được giữ nguyên tên nhằm phản ánh đúng lịch sử làm việc, nhưng hiện đã được version hóa.
 
 ## Thành phần chính
 
