@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "notebooklm": {
+      "command": "uv",
+      "args": [
+        "run",
+        "notebooklm-mcp",
+        "-c",
+        "notebooklm-config.local.json",
+        "server"
+      ],
+      "disabled": true
+    }
+  }
+}
+
