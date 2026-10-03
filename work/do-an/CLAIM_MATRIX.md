@@ -19,4 +19,4 @@ Mức hỗ trợ: `STRONG`, `MODERATE`, `WEAK`, `CONTRADICTED`, `MISSING`.
 
 ## Mâu thuẫn cần giải quyết
 
-- Không còn mâu thuẫn nguồn. Toàn bộ 19 tài liệu tham khảo đều là nguồn gốc chính thức (Microsoft Learn, MSRC, CISA, NIST NVD, Rapid7, Nmap Project, sách chuyên khảo học thuật tiêu chuẩn).
+- Bibliography cũ chưa đồng bộ ledger: 7 nguồn còn RECHECK, dù sáu luận điểm trung tâm đã có tuyến nguồn khả dụng. Không coi đủ 19 nguồn đã xác minh. Xem SOURCE_RECONCILIATION_PLAN.md; mỗi phát biểu phải kiểm tra đoạn gốc trước thay citation.

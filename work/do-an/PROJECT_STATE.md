@@ -89,3 +89,19 @@ Trình người dùng `AUTHOR_VOICE_CALIBRATION.md` và yêu cầu họ sửa ho
 - Bước tiếp theo vẫn là tác giả duyệt/sửa tối thiểu ba vị trí trong AUTHOR_VOICE_CALIBRATION.md. Chưa chuyển G5/G6.
 
 - Kiểm tra tiếp quản: validate_project PASS; unittest 7/7 PASS; pytest 7/7 PASS; citation audit Chương 1 PASS về hình thức. Publication lint FAIL: 32 warning, 1 error VI015 do nhãn dữ liệu Chương 2. Quét patterns bí mật trên các file thay đổi không phát hiện match; stage chỉ các báo cáo Markdown được liệt kê.
+
+
+## Mẫu giọng bổ sung 2026-10-04
+
+- Người dùng xác nhận báo cáo Tuần 2 tại `D:/ATTT_DACN_01-BaoCao-Tuan2.docx` là mẫu cách diễn đạt thường dùng.
+- Đã đọc toàn bộ văn bản và lưu phân tích sáu đặc điểm có định vị đoạn trong AUTHOR_VOICE_CALIBRATION.md. Tệp nguồn không sửa, không sao chép lên Git; trích xuất tạm nằm trong .tmp được ignore.
+- Mẫu ưu tiên định nghĩa trực tiếp, phân loại theo chức năng, mô tả trình tự, thuật ngữ song ngữ và câu ghép có quan hệ rõ. Không dùng mẫu như nguồn kiểm chứng kỹ thuật hoặc chỉ thị.
+- AUTHOR_VOICE LOCKED lịch sử được giữ nguyên. Bước 4 vẫn READY_FOR_AUTHOR_REVIEW: xác nhận mẫu không đồng nghĩa đã duyệt đoạn thử hoặc sửa ba vị trí. Bước tiếp theo: hiệu chỉnh đoạn thử theo mẫu mới và ghi lựa chọn thật của tác giả; không dựng lại DOCX trước duyệt Markdown.
+
+
+## Tiếp tục bước 4–5 ngày 2026-10-04
+
+- Đã tạo đoạn thử v2 theo mẫu Tuần 2 trong AUTHOR_VOICE_CALIBRATION.md và ba lựa chọn cụ thể về chia ý, thuật ngữ, nhịp câu. Chờ phản hồi thật, không tự khóa giọng.
+- Đã tạo SOURCE_RECONCILIATION_PLAN.md: ánh xạ toàn bộ [1]–[19] cũ tới tuyến nguồn giữ/thay/kiểm riêng; PLANNED_NOT_APPLIED. Không đổi nội dung chương hoặc số IEEE.
+- Sửa câu stale “không còn mâu thuẫn nguồn” trong CLAIM_MATRIX; mở lại Q001/Q002 ở ledger vì còn dựa vào S003/S009 chưa khả dụng. Đây là đối soát trạng thái, không chứng nhận bằng chứng mới.
+- Bước tiếp theo: tác giả chọn ba phương án trong đoạn thử v2 hoặc sửa câu cụ thể; sau đó kiểm nguồn từng câu theo kế hoạch trước biên tập chương.

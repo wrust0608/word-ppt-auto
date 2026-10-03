@@ -50,5 +50,5 @@ Trạng thái hợp lệ: `CANDIDATE`, `INGESTED`, `VERIFIED`, `REJECTED`, `RECH
 
 | ID | Thông tin cần tìm | Luận điểm liên quan | Mức ưu tiên | Trạng thái |
 |---|---|---|---|---|
-| Q001 | Chi tiết mã lỗi buffer overflow/heap grooming trong srv.sys cho CVE-2017-0144 | Cơ chế lỗ hổng mức nhân của MS17-010 | Cao | CLOSED (Đã chuẩn hóa cơ chế FEA qua S013, S003, S005) |
-| Q002 | Khuyến nghị hardening SMB từ CIS Benchmark và Microsoft Security Baseline | Khuyến nghị phòng thủ đa tầng | Trung bình | CLOSED (Đã tích hợp 6 nguyên tắc phòng thủ qua S007, S008, S009) |
+| Q001 | Chi tiết mã lỗi buffer overflow/heap grooming trong srv.sys cho CVE-2017-0144 | Cơ chế lỗ hổng mức nhân của MS17-010 | Cao | REOPENED_RECHECK (S003 chưa khả dụng; kiểm tra chi tiết từ S013/S005, không dùng bulletin làm nguồn cho toàn bộ root cause) |
+| Q002 | Khuyến nghị hardening SMB từ CIS Benchmark và Microsoft Security Baseline | Khuyến nghị phòng thủ đa tầng | Trung bình | REOPENED_RECHECK (S009 chưa khả dụng; Microsoft/NIST không tự đáp ứng yêu cầu CIS Benchmark/Security Baseline; kiểm lại phạm vi hoặc ghi chưa đủ nguồn) |

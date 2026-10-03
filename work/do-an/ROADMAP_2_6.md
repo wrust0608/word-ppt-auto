@@ -36,3 +36,7 @@ Bước 4 chỉ hoàn thành sau khi tác giả sửa hoặc xác nhận đoạn
 ## Điểm tiếp quản
 
 Mọi agent mới bắt đầu tại `HANDOFF.md`, sau đó dùng prompt `prompts/CONTINUE_DO_AN_PROMPT.md`. Không tiếp tục từ nhãn PASS lịch sử nếu chưa đọc các báo cáo audit ngày 2026-10-04.
+
+## Tiến độ hiệu chỉnh sau mẫu Tuần 2
+
+Đoạn thử v2 và ba lựa chọn diễn đạt đã sẵn sàng trong AUTHOR_VOICE_CALIBRATION.md. SOURCE_RECONCILIATION_PLAN.md đã lập tuyến kiểm tra [1]–[19], chưa áp dụng vào chương. Bước 4 vẫn chờ tác giả chọn; bước 5 chưa qua cổng nguồn.

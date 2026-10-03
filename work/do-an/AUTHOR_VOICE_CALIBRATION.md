@@ -14,13 +14,29 @@
 - Mẫu gốc có xu hướng khẳng định chắc một số chi tiết mà chưa đặt citation ngay tại câu; hệ thống mới không được bắt chước điểm này.
 - Không thấy cơ sở để tự thêm trải nghiệm cá nhân, cảm xúc hoặc quan sát doanh nghiệp ngoài nội dung tác giả đã cung cấp.
 
-## Đoạn thử 300 từ
+## Đoạn thử v2 theo mẫu Tuần 2 (chờ tác giả duyệt)
 
-Trong quy trình đánh giá dịch vụ SMB, trạng thái `open` của cổng TCP 445 chỉ xác nhận rằng máy đích đang chấp nhận kết nối trên cổng thường dùng cho Direct-hosted SMB. Kết quả này chưa cho biết dialect nào được máy chủ hỗ trợ, SMBv1 đã bị vô hiệu hóa hay hệ điều hành đã cài bản vá MS17-010. Việc suy diễn trực tiếp từ cổng mở sang kết luận “có lỗ hổng” vì vậy làm mất ranh giới giữa khả năng tiếp cận dịch vụ và trạng thái an toàn của thành phần xử lý SMB. Nhận định về cổng 445 được đối chiếu với tài liệu Direct host SMB của Microsoft trong S002.
+**Phạm vi đánh giá:** Trạng thái cổng, phiên bản giao thức và dấu hiệu lỗ hổng là ba loại thông tin khác nhau trong quá trình kiểm tra SMB. Cổng TCP 445 là cổng thường dùng cho SMB truyền trực tiếp trên TCP/IP (Direct-hosted SMB), nhưng việc cổng này ở trạng thái `open` chưa cho biết máy chủ hỗ trợ phiên bản SMB nào hoặc đã cài bản vá MS17-010 hay chưa. Nhận định về cổng được đối chiếu với S002; cách phân tầng đánh giá là khung của đề tài trong C003.
 
-Sau bước quét cổng, phép kiểm tra cần chuyển sang tầng giao thức. Client gửi bản tin thương lượng để xác định dialect mà server chấp nhận; chỉ khi máy chủ đồng ý SMBv1 mới có cơ sở tiếp tục kiểm tra dấu hiệu liên quan đến MS17-010. Kịch bản `smb-vuln-ms17-010.nse` sử dụng một yêu cầu SMB cụ thể và đối chiếu mã trạng thái phản hồi, thay vì coi tên dịch vụ hoặc banner là bằng chứng đủ. Mã nguồn kịch bản trong S018 cho phép truy vết logic kiểm tra, nhưng kết quả `VULNERABLE` của NSE vẫn không thay thế bằng chứng khai thác thành công.
+**Quy trình kiểm tra:**
 
-Đề tài vì vậy duy trì bốn mức đánh giá tách biệt: cổng có thể tiếp cận, dialect SMBv1 được chấp nhận, phản hồi phù hợp với hệ thống chưa vá và khả năng thực thi mã trong lab. Cách phân tầng này giúp người đọc nhận ra chính xác bằng chứng nào đã có ở từng bước, đồng thời giới hạn kết luận khi dữ liệu chưa đủ. Hoạt động ở mức khai thác chỉ được thực hiện trong mạng ảo cô lập, có snapshot và điều kiện dừng, phù hợp với nguyên tắc lập kế hoạch kiểm thử của NIST SP 800-115 trong S024. Nếu chưa có log hoặc kết quả chạy thật, báo cáo giữ nhãn `[CẦN DỮ LIỆU]` thay vì mô tả một phiên khai thác giả định như kết quả đã quan sát.
+1. **Khảo sát khả năng tiếp cận:** Công cụ quét ghi nhận trạng thái cổng TCP 445 của máy đích. Kết quả cổng mở được dùng để xác định bước kiểm tra tiếp theo, chưa dùng để kết luận hệ thống có lỗ hổng.
+2. **Thương lượng giao thức (Dialect Negotiation):** Client gửi yêu cầu thương lượng để xác định các phiên bản SMB mà Server chấp nhận. Kết quả này giúp phân biệt khả năng tiếp cận cổng với việc máy chủ hỗ trợ SMBv1; cơ chế giao thức cần đối chiếu S021 và S022.
+3. **Kiểm tra dấu hiệu chưa vá:** Kịch bản `smb-vuln-ms17-010.nse` gửi yêu cầu SMB và đối chiếu mã trạng thái phản hồi theo logic trong S018. Kết luận `VULNERABLE` được ghi nhận ở mức dấu hiệu của phép thăm dò, chưa phải bằng chứng khai thác thành công.
+
+**Giới hạn kết luận:** Đề tài phân biệt bốn mức: cổng có thể tiếp cận, SMBv1 được chấp nhận, phản hồi phù hợp với hệ thống chưa vá và khả năng thực thi mã trong lab. Mỗi mức cần bằng chứng tương ứng; kết quả ở mức trước không tự xác nhận mức sau. Quy trình kiểm thử phải xác định phạm vi, được ủy quyền và kiểm soát tác động theo S024. Snapshot và điều kiện dừng là biện pháp của thiết kế lab trong C004. Khi chưa có log hoặc kết quả chạy thật, phần thực nghiệm giữ nhãn `[CẦN DỮ LIỆU]`.
+
+Đoạn này phục vụ hiệu chỉnh giọng, chưa thay thế nội dung Chương 1. Source ID là chú giải làm việc; số IEEE chỉ được gán lại sau khi đối soát nguồn.
+
+### Ba lựa chọn diễn đạt cần tác giả xác nhận
+
+| Vị trí | Phương án A — theo mẫu Tuần 2 | Phương án B |
+|---|---|---|
+| 1. Cách chia ý | Giữ nhãn “Phạm vi đánh giá”, “Quy trình kiểm tra”, “Giới hạn kết luận” | Viết thành các đoạn liên tục, ít nhãn phụ |
+| 2. Thuật ngữ | Giữ “Client”, “Server”; giải thích tiếng Việt kèm thuật ngữ trong ngoặc ở lần đầu | Dùng “máy khách”, “máy chủ” xuyên suốt, chỉ giữ tên bản tin tiếng Anh |
+| 3. Nhịp câu | Giữ câu ghép cơ chế → hệ quả khi rõ quan hệ, như đoạn mở | Ưu tiên tách thành câu ngắn hơn, mỗi câu một ý |
+
+Tác giả có thể xác nhận “1A, 2A, 3A” hoặc sửa cụ thể. Mỗi lựa chọn sẽ được ghi thành quy tắc; không tự coi các phương án A là đã được duyệt. Ba lựa chọn này thay cho yêu cầu sửa tay ba chỗ nếu tác giả chọn trực tiếp, phù hợp quy trình “sửa hoặc chọn phương án” của reference academic-register-and-author-voice.md.
 
 ## Nội dung cần tác giả xác nhận
 
@@ -32,3 +48,23 @@ Sau bước quét cổng, phép kiểm tra cần chuyển sang tầng giao thứ
 ## Điều kiện khóa
 
 Không chuyển phiếu này sang `LOCKED` cho tới khi có phản hồi thật của tác giả. Trong thời gian chờ, agent được dùng các đặc điểm đã quan sát từ mẫu gốc nhưng không được sáng tác dấu ấn cá nhân mới.
+
+
+## Mẫu bổ sung do tác giả xác nhận ngày 2026-10-04
+
+Tác giả cung cấp `D:/ATTT_DACN_01-BaoCao-Tuan2.docx` và nói: “tôi thường diễn đạt theo cách này”. Đây là xác nhận mẫu đại diện cho cách diễn đạt; không phải xác nhận tính đúng của mọi nội dung kỹ thuật hoặc phê duyệt đoạn thử cũ. Tệp gốc được giữ nguyên, không sao chép vào Git. SHA256: `d38d411924507ea6c2256e3788e79d8f0eb9b8a65bfd98ffc6c3e300daf30899`.
+
+Đã đọc toàn bộ văn bản body, gồm mục 1.1.1–1.1.7 và đề mục 2.1. Các định vị P dưới đây là thứ tự paragraph trong XML, kể cả ô bảng; không phải số trang.
+
+| Đặc điểm | Vị trí trong mẫu | Cách áp dụng |
+|---|---|---|
+| Nêu khái niệm trực tiếp rồi giải thích chức năng | P4–P6, P92 | Mở bằng chủ thể kỹ thuật và động từ như “là”, “cung cấp”, “vận hành” |
+| Chia nội dung bằng nhãn chức năng | P7–P11, P13–P20 | Dùng mục như vai trò, thành phần, quy trình khi nội dung thực sự cần phân loại |
+| Mô tả thao tác theo trình tự | P22–P26, P114–P115, P125–P127 | Chủ thể → thao tác → phản hồi; đánh số bước khi trình tự có ý nghĩa |
+| Ghép tiếng Việt với thuật ngữ tiếng Anh | P4, P18–P25, P109–P110 | Giải thích tiếng Việt trước, thêm thuật ngữ trong ngoặc; giữ Client/Server khi đã xác định |
+| Câu ghép phục vụ cơ chế/hệ quả | P18–P19, P39–P40, P119 | Không ép tất cả về câu ngắn; tách khi một câu chứa nhiều quan hệ độc lập |
+| Giọng mô tả khách quan | P14–P16, P100–P101 | Gọi chủ thể cụ thể; mẫu không đủ để suy ra lựa chọn “chúng tôi” trong phần phương pháp |
+
+Các lỗi chính tả như “hhệ”, khẳng định tuyệt đối hoặc chi tiết giao thức chưa có nguồn không được đưa thành quy tắc giọng. Mẫu không tự thay đổi topology, nguồn, số liệu hoặc quyết định LOCKED.
+
+Đây là bằng chứng mới để hiệu chỉnh, chưa ghi nhận tác giả đã sửa ba vị trí hoặc duyệt đoạn thử. Bước 4 giữ READY_FOR_AUTHOR_REVIEW; lượt hiệu chỉnh tiếp theo phải thể hiện ba lựa chọn cụ thể dựa trên mẫu và ghi phản hồi thật của tác giả.
