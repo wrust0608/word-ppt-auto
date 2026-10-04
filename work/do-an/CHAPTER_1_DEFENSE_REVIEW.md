@@ -38,7 +38,7 @@ Mục 1.1 được bảo toàn nguyên vẹn; không sửa đổi các quyết �
 | **DR-C1-04** | Chuỗi công cụ kiểm thử | method/design decision | PASS | FAIL | NO_TEXT_CHANGE | `AUTHOR_CONFIRM` |
 | **DR-C1-05** | Tính độc lập giữa NSE & MSF | interpretation / conclusion | PASS | NOT_APPLICABLE | NO_TEXT_CHANGE | `READY` |
 | **DR-C1-06** | Đối chiếu Black-box vs White-box | interpretation / method | PASS | FAIL | NO_TEXT_CHANGE | `AUTHOR_CONFIRM` |
-| **DR-C1-07** | Mức độ làm chủ cơ chế FEA | source fact / interpretation | PASS | FAIL | SIMPLIFY | `AUTHOR_CONFIRM` |
+| **DR-C1-07** | Mức độ làm chủ cơ chế FEA | source fact / interpretation | PASS | FAIL | NO_TEXT_CHANGE | `AUTHOR_CONFIRM` |
 | **DR-C1-08** | Mức 4 và giới hạn kết luận | conclusion / method | PASS | FAIL | NO_TEXT_CHANGE | `AUTHOR_CONFIRM` |
 
 ---
@@ -183,17 +183,17 @@ Mục 1.1 được bảo toàn nguyên vẹn; không sửa đổi các quyết �
 |---|---|
 | Section / Claim ID | §1.2.3; C002; RQ2/O2 |
 | Claim type | source fact; interpretation |
-| Claim | Nguyên nhân gốc rễ của CVE-2017-0144 là sự sai lệch kích thước giữa `SrvOs2FeaListSizeToNt` và `SrvOs2FeaToNt`, dẫn đến Kernel Pool Overflow; giữ tên hai hàm làm mốc kỹ thuật, lược bỏ chi tiết reverse engineering mã khai thác. |
+| Claim | Nguyên nhân kỹ thuật của CVE-2017-0144 là sự sai lệch kích thước trong quá trình chuyển đổi cấu trúc FEA sang định dạng NT trong SMBv1, dẫn đến cấp phát bộ nhớ đệm nhân không đủ và gây Kernel Pool Overflow; trình bày ở mức nguyên lý nhân quả mà không phụ thuộc vào tên hàm cụ thể hoặc chi tiết reverse engineering mã khai thác. |
 | Evidence / Data | S013 (Rapid7 Exploit Analysis), S005 (Microsoft MS17-010); CLAIM_MATRIX (C002); DEC-09, DEC-12, DEC-13. |
 | Evidence boundary | Đồ án giải thích nguyên lý nhân quả (kích thước cấp phát vs. ghi thực tế), không tự nhận đã dịch ngược mã máy của driver `srv.sys`. |
 | Evidence key | PASS |
-| Author ownership evidence | Chưa có văn bản tác giả tự xác nhận mức độ làm chủ và cách giải thích hai hàm này trước câu hỏi hội đồng. |
+| Author ownership evidence | Chưa có văn bản tác giả tự xác nhận mức độ làm chủ và cách giải thích chuỗi nhân quả FEA này trước câu hỏi hội đồng. |
 | Ownership key | FAIL |
 | Why needed | Trả lời RQ2 về cơ chế phát sinh lỗi bộ nhớ ở mức nguyên lý, tránh bị chất vấn sâu vào chi tiết khai thác ngoài tầm đề tài đại học. |
-| Author must explain | Giải thích chuỗi nhân quả: tính sai kích thước $\to$ cấp phát thiếu $\to$ ghi vượt bộ đệm $\to$ tràn bộ nhớ nhân $\to$ nguy cơ mất ổn định/thực thi mã. |
+| Author must explain | Giải thích chuỗi nhân quả: dữ liệu FEA $\to$ tính/chuyển đổi kích thước $\to$ vùng nhớ cấp phát không phù hợp $\to$ ghi vượt giới hạn bộ đệm $\to$ Kernel Pool Overflow $\to$ nguy cơ mất ổn định hoặc tạo điều kiện cho thực thi mã. |
 | Author response | [CHƯA CÓ PHẢN HỒI TÁC GIẢ] |
-| Likely defense question | Nếu bỏ tên hai hàm xử lý FEA, nhóm có còn giải thích được cơ chế lỗi và điều kiện tác động không; vì sao cần giữ tên hàm? |
-| Text action | SIMPLIFY |
+| Likely defense question | Nhóm có thể giải thích chuỗi nhân quả từ cấu trúc FEA đến lỗi tràn bộ nhớ nhân mà không cần phụ thuộc vào mã khai thác chi tiết không? |
+| Text action | NO_TEXT_CHANGE |
 | Status | AUTHOR_CONFIRM |
 | Review trace | Antigravity / 2026-10-04 / DEFENSE_READINESS.md pilot review |
 
@@ -223,10 +223,11 @@ Mục 1.1 được bảo toàn nguyên vẹn; không sửa đổi các quyết �
 
 ## 5. Những Nội Dung Đã SIMPLIFY và Lược Bỏ
 
-1. **Lược bỏ hoàn toàn chi tiết Reverse Engineering mã khai thác trong 1.2.3:**
+1. **Lược bỏ chi tiết Reverse Engineering mã khai thác và tên hàm nội bộ trong 1.2.3:**
    - Xóa bỏ việc giải thích phép tràn số 16-bit dạng `0x10040 -> 0x0040`.
    - Xóa bỏ con số cụ thể "64 byte" hay cơ chế sắp xếp vùng nhớ `srvnet.sys` chi tiết.
    - Xóa bỏ mô tả ghi đè con trỏ hàm (`function pointer`) và điều hướng CPU.
+   - Lược bỏ tên các hàm xử lý nội bộ (`SrvOs2FeaListSizeToNt`, `SrvOs2FeaToNt`) theo yêu cầu SIMPLIFY của DR-C1-07, rút về nguyên lý chuỗi nhân quả chuyển đổi FEA để giảm bề mặt chất vấn không cần thiết.
    - *Lý do:* Không phục vụ trực tiếp cho RQ2 và O2; khiến sinh viên dễ bị chất vấn vượt quá phạm vi đề tài đồ án đại học.
 2. **Sửa sai lệch kỹ thuật về tính "độc lập" của Nmap NSE và Metasploit Scanner trong 1.3.4 và 1.3.5:**
    - Xóa bỏ nhận định "quét độc lập" và "tăng độ tin cậy của chỉ báo".
@@ -245,8 +246,8 @@ Mục 1.1 được bảo toàn nguyên vẹn; không sửa đổi các quyết �
 
 1. **Bảng 6 CVE trong 1.2.2:**
    - *Lý do giữ:* Bắt buộc để người đọc và hội đồng thấy rõ MS17-010 là một gói cập nhật xử lý nhiều lỗ hổng, giải thích cơ sở chọn CVE-2017-0144 làm trọng tâm mà không đánh đồng toàn bộ bulletin vào một lỗi duy nhất.
-2. **Tên hai hàm `SrvOs2FeaListSizeToNt` và `SrvOs2FeaToNt` trong 1.2.3:**
-   - *Lý do giữ:* Làm mốc kỹ thuật cụ thể phân biệt giữa bước tính toán kích thước vùng đệm và bước sao chép dữ liệu, giải thích rõ nguyên nhân trực tiếp phát sinh lỗi tràn bộ nhớ nhân mà không cần đi sâu vào mã máy.
+2. **Nguyên lý chuỗi nhân quả FEA trong 1.2.3:**
+   - *Lý do giữ:* Giữ trọn vẹn chuỗi nhân quả kỹ thuật (dữ liệu FEA $\to$ tính/chuyển đổi kích thước $\to$ cấp phát bộ đệm không tương ứng $\to$ ghi vượt biên $\to$ Kernel Pool Overflow) để giải thích cơ sở phát sinh lỗi bộ nhớ phục vụ RQ2/O2 mà không đưa vào tên hàm nội bộ hay mã khai thác chi tiết.
 3. **Mã trạng thái NT Status `0xC0000205` và `0xC0000022` trong 1.3.3 và 1.4.3:**
    - *Lý do giữ:* Đây là cơ sở cốt lõi để script NSE và Metasploit scanner phân nhánh kết luận; giúp sinh viên bảo vệ được câu hỏi "dựa vào đâu mà công cụ biết máy chủ chưa vá hay đã chặn truy cập?".
 4. **Mô hình cấu trúc 3 phần tại mỗi mức ở 1.4 (Dấu hiệu quan sát – Ý nghĩa kỹ thuật – Ranh giới kết luận):**
@@ -276,5 +277,5 @@ Mục 1.1 được bảo toàn nguyên vẹn; không sửa đổi các quyết �
    - **Tác giả cần giải thích:** Không. Hai công cụ này sử dụng cùng một logic kỹ thuật thăm dò (gửi yêu cầu giao dịch qua `IPC$` và bắt mã lỗi trả về). Việc chạy cả hai công cụ chỉ giúp loại trừ lỗi phần mềm của trạm kiểm thử, không phải là hai nguồn bằng chứng độc lập về an ninh của máy chủ.
    - **Phản hồi của tác giả:** [CHƯA CÓ PHẢN HỒI TÁC GIẢ]
 5. **Hỏi:** *Hiện tượng màn hình xanh (BSOD) khi chạy kiểm chứng có được coi là khai thác thành công không?*
-   - **Tác giả cần giải thích:** Không. BSOD chỉ chứng minh lỗi quản lý bộ nhớ nhân đã bị kích hoạt làm hỏng vùng nhớ và hệ điều hành buộc phải dừng để tự bảo vệ (ảnh hưởng tính sẵn sàng). Xác minh thực thi mã thành công đòi hỏi phải chuyển hướng luồng thực thi và xác lập được quyền tương tác có kiểm soát trên mục tiêu mà không làm sập hệ thống.
+   - **Tác giả cần giải thích:** Không. Hiện tượng màn hình xanh (BSOD) chỉ phản ánh máy chủ mất ổn định trong quá trình kiểm chứng, là bằng chứng tác động tiêu cực đến tính sẵn sàng của hệ thống trong lượt thử nghiệm; hiện tượng này không chứng minh được thực thi mã từ xa thành công và không đủ cơ sở để tự kết luận nguyên nhân gốc rễ cụ thể nếu thiếu công cụ giám sát trực tiếp trên nhân. Xác minh thực thi mã thành công đòi hỏi phải xác lập được phiên tương tác có kiểm soát trên mục tiêu mà không làm sập hệ thống.
    - **Phản hồi của tác giả:** [CHƯA CÓ PHẢN HỒI TÁC GIẢ]
