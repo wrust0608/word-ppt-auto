@@ -1,6 +1,8 @@
+> **STATUS OVERRIDE 2026-10-05:** Tài liệu này hiện **KHÔNG ĐƯỢC THỰC THI**. Theo yêu cầu người dùng, phải hoàn thành và audit `ROADMAP_BLUEPRINT_2026_10_05.md` trước. Chỉ sau khi blueprint đạt tiêu chí coverage/logic/evidence/HUIT và không còn BLOCKER mới được tái cấu trúc tài liệu này thành roadmap thực thi.
+
 # ROADMAP MASTER ĐỀ XUẤT — ĐỒ ÁN SMB/NMAP/NSE–MS17-010
 
-Trạng thái: `PROPOSED_FOR_REVIEW`  
+Trạng thái: `SUPERSEDED_PENDING_BLUEPRINT_AUDIT / NOT_EXECUTABLE`  
 Ngày đánh giá: 2026-10-05  
 Mục đích: thay thế vai trò “master roadmap” mà `ROADMAP_2_6.md` hiện không đảm nhiệm; **không ghi đè ROADMAP_2_6.md**. Roadmap cũ được giữ như sub-roadmap phục hồi chất lượng nguồn/giọng/DOCX.
 
