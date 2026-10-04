@@ -55,3 +55,15 @@ Các dòng và kết quả phía trên là lịch sử. Bản hiện hành có b
 | CHAPTER_2.md:51, 91, 245, 264, 326 | VI012 | KEEP_WITH_REASON | Dẫn chiếu và caption giúp nối diễn giải với sơ đồ tương ứng |
 
 Linter chạy sau review cơ chế và nguồn. Citation cấu trúc, độ rõ lập luận và tính đúng của nguồn được đánh giá riêng trong DEPTH_REVIEW_2026_10_04.md. Không dùng kết quả này làm điểm chất lượng học thuật hoặc chứng nhận Word cuối.
+
+## Hồ sơ author_voice sau DEC-23
+
+Phạm vi: AUTHOR_VOICE.md của dự án và templates/AUTHOR_VOICE.md. Đây là kiểm tra hồ sơ hướng dẫn, chưa phải review lại các chương. Mẫu hồ sơ không có cảnh báo; hồ sơ dự án có ba cảnh báo ở nội dung cũ:
+
+| Tệp / dòng | Rule | Quyết định | Lý do |
+|---|---|---|---|
+| AUTHOR_VOICE.md:46 | VI001 | FALSE_POSITIVE | Cụm bị cảnh báo nằm trong danh sách sáo ngữ cần tránh, không dùng để mở đoạn học thuật |
+| AUTHOR_VOICE.md:46 | VI003 | FALSE_POSITIVE | “có thể thấy rằng” là ví dụ trong hướng dẫn tránh cụm dẫn rỗng |
+| AUTHOR_VOICE.md:89 | VI011 | KEEP_WITH_REASON | Trích đoạn hiệu chỉnh lịch sử được giữ để truy vết; đã ghi không dùng làm mẫu hiện hành hoặc bằng chứng kỹ thuật. Không sửa trích đoạn lịch sử chỉ để giảm cảnh báo |
+
+Mục tiêu và 13 nguyên tắc mới được giữ nguyên văn theo yêu cầu tác giả. Không thêm biến thiên câu ngẫu nhiên, không áp định mức hoặc tối ưu theo AI detector.

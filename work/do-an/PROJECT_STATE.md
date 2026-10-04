@@ -151,3 +151,12 @@
 - Bước 4 COMPLETE_AUTHOR_APPROVED; bước 5 là review bản có nội dung viết lại, chưa duyệt; bước 6 AUDIT_COMPLETE_REBUILD_REQUIRED. Không tự chuyển cổng hoặc xem phản hồi về giọng là duyệt chương.
 
 - Kiểm tra cuối lượt tăng chiều sâu: validate_project.py đạt, unittest 7/7, citation audit riêng chương đạt (78/22 và 20/10), git diff --check đạt. Linter còn ba VI012 đã phân loại trong STYLE_REVIEW. Chưa có kiểm tra Word mới hoặc thực nghiệm.
+
+## DEC-23 — Nguyên tắc author_voice do tác giả bổ sung trực tiếp
+
+- Ngày: 2026-10-04. Người duyệt: tác giả, qua yêu cầu trực tiếp trong chat.
+- Đã đưa nguyên văn mục tiêu và 13 nguyên tắc vào AUTHOR_VOICE.md; đồng bộ templates/AUTHOR_VOICE.md để hồ sơ mới dùng cùng nguyên tắc. Trạng thái hồ sơ dự án vẫn LOCKED theo xác nhận tác giả.
+- Đã sửa quy ước câu 20–35 từ và mẫu định nghĩa rồi liệt kê thành hướng dẫn phụ thuộc nội dung. Các mô tả từ mẫu không còn được hiểu là cấu trúc bắt buộc. Giữ Client/Server, thuật ngữ đã chọn, đoạn liên tục và câu ghép có quan hệ rõ.
+- Không suy ra trải nghiệm hoặc đóng góp từ giọng viết; dữ liệu, marker và điều kiện bằng chứng vẫn giữ. Nguyên tắc này được áp dụng trong các lượt viết/review tiếp theo, không mặc nhiên chứng nhận hai chương hiện hành đã được kiểm lại theo toàn bộ nguyên tắc mới.
+- Không sửa các chương, dữ liệu lab, quyết định thiết kế hoặc bản Chương 1 đối chiếu của agent khác trong lượt này. Cổng vẫn G4; bước tiếp theo là đối chiếu bản viết và review nội dung theo hồ sơ giọng mới.
+- Kiểm tra cập nhật hồ sơ: validate_project.py đạt; unittest 7/7 đạt; git diff --check đạt. Lint hồ sơ có ba cảnh báo ở nội dung lịch sử, đã phân loại trong STYLE_REVIEW; mẫu hồ sơ không có cảnh báo.

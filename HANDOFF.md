@@ -2,6 +2,8 @@
 
 > Cập nhật mới nhất 2026-10-04: sau phản hồi bản báo cáo thiếu chiều sâu, đã viết lại cơ chế và lập luận trong CHAPTER_1/2; chi tiết và ánh xạ citation ở work/do-an/DEPTH_REVIEW_2026_10_04.md. Thống kê các lượt trước phía dưới là lịch sử; PROJECT_STATE.md có trạng thái hiện hành. Giọng đã chốt, không yêu cầu duyệt lại. Chương sửa chưa duyệt, Word chưa dựng lại.
 
+> Giọng tác giả: DEC-23 bổ sung mục tiêu và 13 nguyên tắc về cách tư duy, lựa chọn kỹ thuật, dữ liệu cụ thể và diễn đạt theo nội dung; đã đồng bộ AUTHOR_VOICE.md và mẫu hồ sơ. Không ép khuôn đoạn, độ dài hoặc nhịp câu.
+
 > Đây là điểm bắt đầu bắt buộc cho mọi agent tiếp quản repository. Không dựa vào lịch sử chat để suy đoán trạng thái.
 
 ## 1. Mục tiêu đang thực hiện

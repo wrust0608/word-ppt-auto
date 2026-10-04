@@ -7,6 +7,26 @@
 
 Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác giả cung cấp trong `work/do-an/inputs/đề mục tham khảo.docx` (phần 1.1) và các quy định đào tạo ngành An toàn thông tin tại HUIT.
 
+## Mục tiêu và nguyên tắc tác giả xác nhận ngày 2026-10-04
+
+Mục tiêu của author_voice là hỗ trợ tạo văn bản phản ánh cách tư duy, lựa chọn kỹ thuật và cách diễn đạt thực tế của tác giả; không tối ưu theo AI detector và không cố tạo lỗi để giả lập văn bản con người.
+
+- Không chuẩn hóa mọi đoạn thành cùng một cấu trúc mở ý → giải thích → hệ quả → kết luận.
+- Không bắt buộc câu hoặc đoạn có độ dài đồng đều; độ dài phụ thuộc lượng thông tin cần truyền đạt.
+- Không tự thêm câu tổng kết khi nội dung của đoạn đã hoàn tất.
+- Không lạm dụng các liên từ “qua đó”, “do đó”, “đồng thời”, “từ đó”, “như vậy”; chỉ dùng khi quan hệ logic cần được biểu thị rõ.
+- Ưu tiên câu trực tiếp khi nội dung đơn giản. Không kéo dài câu để tăng cảm giác học thuật.
+- Không thay một quan sát thực nghiệm cụ thể bằng nhận định khái quát nếu log, ảnh hoặc kết quả lệnh đã cung cấp thông tin chính xác hơn.
+- Không tự tạo trải nghiệm, khó khăn, quyết định, động cơ hoặc nhận định cá nhân chưa được tác giả xác nhận.
+- Khi một lựa chọn phương pháp do tác giả trực tiếp đưa ra đã được xác nhận, ưu tiên thể hiện lý do kỹ thuật của lựa chọn đó thay vì thay bằng mô tả chung.
+- Sau lần giải thích đầu tiên, giữ cách gọi thuật ngữ mà tác giả thực tế sử dụng nếu không gây mơ hồ; không thay đổi từ đồng nghĩa chỉ để tránh lặp.
+- Không tự tạo “đóng góp”, “ý nghĩa”, “tính mới”, “hiệu quả” hoặc “ưu điểm” nếu chưa được chứng minh bởi thiết kế, dữ liệu hoặc nguồn.
+- Không viết lại một câu chỉ nhằm làm câu nghe “hay hơn” nếu phiên bản ngắn hơn đã chính xác.
+- Khi thiếu nguồn, dữ liệu hoặc xác nhận của tác giả, giữ nguyên marker tương ứng thay vì điền bằng suy luận.
+- Bản nháp cuối phải có biến thiên tự nhiên về nhịp câu, độ dài đoạn và mức độ chi tiết; sự biến thiên phải xuất phát từ nội dung, không phải được tạo ngẫu nhiên để giả lập con người.
+
+Các nguyên tắc này điều chỉnh cách áp dụng hồ sơ: đặc điểm từ mẫu là mô tả, không phải khuôn bắt buộc cho mọi đoạn. Giữ các lựa chọn đã duyệt về Client/Server, thuật ngữ, đoạn liên tục và câu ghép khi quan hệ rõ. Mẫu hiệu chỉnh lịch sử không thay thế lựa chọn mới hoặc bằng chứng.
+
 ## Nguồn nhận diện giọng
 
 - Mẫu văn bản do tác giả viết: `work/do-an/inputs/đề mục tham khảo.docx`
@@ -18,10 +38,10 @@ Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác gi
 
 - Đại từ/cách xưng hô: Sử dụng ngôi thứ ba khách quan, trung tính; khi cần đề cập đến chủ thể hành động thì dùng "đề tài" hoặc "nhóm thực hiện" (tránh lạm dụng "chúng tôi" hoặc "tôi" trong các phân tích kỹ thuật).
 - Mức độ trang trọng: Trang trọng, học thuật kỹ thuật cao, cô đọng, đi thẳng vào bản chất công nghệ.
-- Độ dài câu điển hình: Câu ghép từ 20 - 35 từ, có cấu trúc logic rõ ràng (chủ ngữ - vị ngữ - thành phần bổ nghĩa chỉ quan hệ nhân quả, điều kiện tiên quyết).
+- Độ dài câu: phụ thuộc lượng thông tin và quan hệ cần diễn đạt. Dùng câu trực tiếp cho ý đơn giản; giữ câu ghép khi quan hệ cơ chế, điều kiện hoặc hệ quả cần đi cùng nhau. Khoảng 20–35 từ từng ghi trong mẫu là mô tả lịch sử, không phải định mức khi viết.
 - Cách chuyển ý thường dùng: Chuyển ý qua quan hệ chức năng và phân tầng kỹ thuật (Từ kiến trúc tổng thể → Thành phần cấp nhân → Quá trình trao đổi dữ liệu → Tham số an ninh); không dùng các câu mào đầu vô nghĩa.
 - Mật độ thuật ngữ phù hợp: Mật độ cao; giữ nguyên các thuật ngữ tiếng Anh chuẩn của giao thức mạng và hệ điều hành: `Named Pipes`, `Session Setup`, `Tree Connect`, `Dialect`, `Negotiate Protocol`, `Direct-hosted SMB`, `Kernel-mode driver`, `srv.sys`, `srv2.sys`.
-- Cách giải thích khái niệm: Định nghĩa khái niệm bằng tầng mạng, vai trò, thành phần chịu trách nhiệm và cổng kết nối; sau đó liệt kê các trường hợp/chức năng cụ thể bằng gạch đầu dòng ngắn gọn.
+- Cách giải thích khái niệm: chọn thông tin về vai trò, cơ chế, thành phần hoặc cổng kết nối theo vấn đề đang giải thích. Dùng đoạn liên tục; chỉ dùng danh sách khi cần phân loại hay mô tả trình tự, không bắt mọi khái niệm theo một cấu trúc chung.
 - Thuật ngữ tác giả ưu tiên: Giao thức SMB, thương lượng dialect, thiết lập phiên làm việc, kết nối tài nguyên, driver cấp nhân, lùi cổng (fallback).
 - Cụm từ tác giả không muốn dùng: Không dùng các sáo ngữ như "trong bối cảnh hiện nay", "thời đại công nghệ 4.0", "vô cùng quan trọng", "không chỉ... mà còn...", "có thể thấy rằng", "một cách toàn diện và tối ưu" nếu chúng không mang thêm thông tin kiểm chứng được.
 
