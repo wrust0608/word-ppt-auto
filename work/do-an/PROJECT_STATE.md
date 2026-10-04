@@ -198,3 +198,18 @@
 - Đã thêm cross-reference và bước con vào ROADMAP_2_6.md, cập nhật tối thiểu prompts/CONTINUE_DO_AN_PROMPT.md. Không sửa AUTHOR_VOICE/core skill/templates/citation policy/source policy/data policy; cổng dự án vẫn giữ nguyên.
 - Bước tiếp theo khi được giao review chương: xử lý gap qua evidence/logic và thu bản giải thích thực theo thẻ; cập nhật trạng thái có căn cứ rồi tiếp tục trim/giọng/lint và xin duyệt. Hoàn tất tích hợp không xác nhận toàn dự án đạt.
 - Kiểm tra tích hợp: validate_project.py đạt; unittest 7/7 đạt; git diff --check đạt. Kiểm phạm vi chỉ có DEFENSE_READINESS.md, PROJECT_STATE.md, ROADMAP_2_6.md và prompts/CONTINUE_DO_AN_PROMPT.md; SHA256 của 50 tệp được bảo vệ giữ nguyên so với HEAD khởi đầu, gồm core skill/templates, nguồn, hồ sơ LOCKED, hai chương, AUTHOR_VOICE và DOCX. Đã kiểm đủ trường/trạng thái của tám thẻ. Không dùng kết quả này để PASS chương, tác giả hoặc toàn dự án.
+
+## DEC_ID_COLLISION_HISTORICAL — Định danh quyết định lịch sử
+
+- Ghi nhận theo yêu cầu trực tiếp của người dùng ngày 2026-10-04: DEC-22 và DEC-23 đang được dùng cho nhiều quyết định lịch sử. Giữ nguyên các ID và nội dung lịch sử; không tự renumber.
+- Khi Defense Card dẫn DEC-22 hoặc DEC-23, bắt buộc ghi ID, tên quyết định và ngày. Do các quyết định dưới đây cùng ngày, ghi thêm vị trí trong PROJECT_STATE để truy đúng mục; không suy ra danh tính chỉ từ ID hoặc ngày.
+
+| ID lịch sử | Tên quyết định | Ngày | Vị trí trong PROJECT_STATE |
+|---|---|---|---|
+| DEC-22 | Hoàn thiện các mục 1.2, 1.3, 1.4 của Chương 1 trên branch riêng | 2026-10-04 | Dòng DEC-22 trong bảng quyết định |
+| DEC-22 | Phê duyệt ba lựa chọn giọng 1B, 2A, 3A | 2026-10-04 | Mục “Quyết định mới: phê duyệt giọng ngày 2026-10-04” |
+| DEC-23 | Hoàn thành Revision Round 1 cho Chương 1 (mục 1.2, 1.3, 1.4) | 2026-10-04 | Dòng DEC-23 trong bảng quyết định |
+| DEC-23 | Nguyên tắc author_voice do tác giả bổ sung trực tiếp | 2026-10-04 | Mục “DEC-23 — Nguyên tắc author_voice do tác giả bổ sung trực tiếp” |
+
+- Tám Defense Card hiện tại chưa dẫn DEC-22/DEC-23; không bổ sung dẫn chiếu nếu claim không cần chúng. Quy tắc đã được đưa vào DEFENSE_READINESS và prompt tiếp quản để áp dụng cho các lượt review sau. Va chạm ID lịch sử vẫn tồn tại; bảng này hỗ trợ phân biệt, không tạo ID thay thế hoặc sửa quyết định đã khóa.
+- Kiểm tra cập nhật: validate_project.py đạt; unittest 7/7 đạt; git diff --check đạt. Đối chiếu tên/ngày với bốn mục lịch sử; 50 tệp được bảo vệ giữ nguyên SHA256 so với HEAD khởi đầu của lượt tích hợp. Không sửa chương, DOCX hoặc core rules.

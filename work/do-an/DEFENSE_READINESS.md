@@ -69,6 +69,8 @@ Không dùng điểm số AI/human hoặc điểm số làm chủ. Khi tác gi�
 
 Trong Evidence / Data ghi nguồn/artifact/DEC và vị trí hỗ trợ; nếu có xác nhận tác giả, ghi vị trí phản hồi, ngày và reviewer. Evidence boundary giữ phần chưa biết và phạm vi không được suy ra. Why needed là vai trò nội dung đối với nghiên cứu, không tự gán động cơ cá nhân. Author must explain nêu yêu cầu giải thích, không dựng câu trả lời mẫu thành lời tác giả.
 
+`DEC_ID_COLLISION_HISTORICAL`: PROJECT_STATE có nhiều quyết định lịch sử cùng mang ID DEC-22 hoặc DEC-23. Khi Defense Card dẫn một trong hai ID này, phải ghi **ID + tên quyết định + ngày**, kèm vị trí trong PROJECT_STATE để phân biệt các mục cùng ngày. Không chỉ dẫn ID, không tự renumber và không chọn quyết định theo thứ tự xuất hiện. Đối chiếu bảng định danh lịch sử trong PROJECT_STATE; nếu chưa xác định được quyết định nào hỗ trợ claim, giữ marker tương ứng và ghi rõ phần chưa xác định.
+
 ## 7. Quy tắc bảo toàn
 
 - Không sửa claim boundary để tác giả dễ trả lời hơn; không xóa nguồn, dữ liệu, marker hoặc điều kiện bất định.

@@ -40,6 +40,7 @@ Nếu `PROJECT_STATE.md` còn câu nào tuyên bố nguồn, Chương 1 hoặc D
 ### Defense Readiness project-local — DEC-24
 
 - Khi task là viết/review chương, đọc `work/do-an/DEFENSE_READINESS.md` và các thẻ liên quan.
+- `DEC_ID_COLLISION_HISTORICAL`: không tự renumber DEC-22/DEC-23. Defense Card dẫn các ID này phải kèm tên quyết định, ngày và vị trí trong PROJECT_STATE; đối chiếu bảng định danh lịch sử, không chỉ dẫn ID.
 - Chèn Defense Readiness sau evidence + logic, trước trim/simplify, academic register/Author Voice và linter; đây là bước con của workflow hiện có, không đổi precedence hoặc G0–G6.
 - Không tự PASS author mastery; nguồn đúng, quyết định LOCKED hoặc thẻ READY không thay user approval. Không tự điền lý do/quan điểm chưa được tác giả xác nhận.
 - Không dùng lớp này để xóa evidence, marker, claim boundary hoặc yêu cầu institution. Giữ nội dung bắt buộc; AUTHOR_CONFIRM/EVIDENCE_GAP phải được xử lý có căn cứ trước khi coi đã đóng.
