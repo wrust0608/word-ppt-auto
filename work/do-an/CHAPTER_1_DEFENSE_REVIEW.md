@@ -258,24 +258,40 @@ Mục 1.1 được bảo toàn nguyên vẹn; không sửa đổi các quyết �
 ## 7. Các Điểm Cần Tác Giả Lưu Ý và Chuẩn Bị Khi Bảo Vệ
 
 1. **Về số liệu thực nghiệm:** Toàn bộ Chương 1 chỉ dừng ở mức cơ sở lý thuyết và tiêu chí phương pháp luận. Tác giả không tự nhận đã có số liệu đo đạc thực tế trong lab ở chương này (các kết quả lab thuộc Chương 2, 3 và hiện đang giữ nhãn `[CẦN DỮ LIỆU]` theo đúng quyết định DEC-03).
-2. **Về việc lựa chọn CVE-2017-0144:** Tác giả cần nắm vững: Đồ án tập trung vào CVE-2017-0144 vì đây là lỗ hổng thực thi mã từ xa không cần chứng thực tác động vào dịch vụ SMBv1, có bề mặt tấn công mở rộng nhất trên cổng 445 và có công cụ kiểm thử chuẩn hóa; các CVE khác như CVE-2017-0145 đòi hỏi chứng thực hoặc các gói tin đặc thù khác.
+2. **Về việc lựa chọn CVE-2017-0144:** Lý do trực tiếp của tác giả cho việc chọn CVE-2017-0144 thay vì các CVE khác chưa được xác nhận. Giữ DR-C1-01 = AUTHOR_CONFIRM.
 
 ---
 
 ## 8. Các Câu Hỏi Bảo Vệ Quan Trọng Nhất Dự Kiến
 
 1. **Hỏi:** *Tại sao cổng TCP 445 mở không đồng nghĩa với việc hệ thống có lỗ hổng MS17-010?*
-   - **Tác giả cần giải thích:** Cổng 445 chỉ là cổng tiếp nhận kết nối ở tầng giao vận của dịch vụ Direct-hosted SMB. Một máy chủ Windows hiện đại hoặc máy đã cài bản vá vẫn mở cổng 445 để chia sẻ tệp hợp lệ. Chỉ khi hệ thống đồng thời hỗ trợ SMBv1 và chưa cập nhật bản vá khắc phục lỗi trong `srv.sys` thì lỗ hổng mới tồn tại.
+   - **Tác giả cần làm chủ (Author must explain):**
+     - Khả năng tiếp cận ở tầng giao vận (Transport reachability);
+     - Phiên bản giao thức SMB được hỗ trợ (SMB dialect);
+     - Trạng thái bản vá và lỗ hổng nội tại của hệ thống (Patch / vulnerability state);
+     - Ranh giới giữa khả năng tiếp cận và khả năng khai thác (Exploitability boundary).
    - **Phản hồi của tác giả:** [CHƯA CÓ PHẢN HỒI TÁC GIẢ]
 2. **Hỏi:** *Nếu Nmap NSE báo `State: VULNERABLE`, điều đó đã chứng minh kẻ tấn công chắc chắn chiếm được quyền điều khiển máy chủ chưa?*
-   - **Tác giả cần giải thích:** Chưa. Script NSE chỉ gửi gói tin thăm dò và quan sát phản hồi lỗi `0xC0000205` để suy đoán hệ thống đang chạy nhánh mã chưa vá. Để thực thi mã thành công trên thực tế còn phụ thuộc vào kiến trúc hệ điều hành, bố cục bộ nhớ nhân tại thời điểm đó và việc vượt qua các cơ chế bảo vệ mà không làm sập máy chủ.
+   - **Tác giả cần làm chủ (Author must explain):**
+     - Kịch bản kiểm tra sử dụng mã phản hồi làm chỉ báo nghi ngờ (Script uses response code as indicator);
+     - Chỉ báo qua mạng không đồng nghĩa với quan sát trực tiếp bộ nhớ nhân (Indicator != direct kernel observation);
+     - Chỉ báo lỗ hổng không đồng nghĩa với việc khai thác thành công (Indicator != exploit success).
    - **Phản hồi của tác giả:** [CHƯA CÓ PHẢN HỒI TÁC GIẢ]
 3. **Hỏi:** *Khi kịch bản kiểm tra trả về mã lỗi `STATUS_ACCESS_DENIED` (`0xC0000022`), ta có được kết luận máy chủ đã được vá an toàn hay không?*
-   - **Tác giả cần giải thích:** Không được kết luận máy chủ đã vá. Mã lỗi từ chối truy cập thường xuất hiện khi máy chủ áp dụng chính sách chặn kết nối nặc danh (Null Session) vào `IPC$`. Khi đó, gói tin thăm dò bị chặn trước khi chạm đến nhánh mã kiểm tra, dẫn đến tình huống âm tính giả dù hệ điều hành có thể chưa hề được cập nhật bản vá.
+   - **Tác giả cần làm chủ (Author must explain):**
+     - Kết quả phản hồi có thể phụ thuộc vào chính sách hoặc cấu hình kiểm soát truy cập (Result may depend on access policy/configuration);
+     - Phản hồi từ chối truy cập không phải là bằng chứng máy chủ đã được vá an toàn (Denial != proof of patch/safety).
    - **Phản hồi của tác giả:** [CHƯA CÓ PHẢN HỒI TÁC GIẢ]
 4. **Hỏi:** *Công cụ quét của Metasploit (`smb_ms17_010`) và kịch bản Nmap NSE có phải là hai bằng chứng độc lập không?*
-   - **Tác giả cần giải thích:** Không. Hai công cụ này sử dụng cùng một logic kỹ thuật thăm dò (gửi yêu cầu giao dịch qua `IPC$` và bắt mã lỗi trả về). Việc chạy cả hai công cụ chỉ giúp loại trừ lỗi phần mềm của trạm kiểm thử, không phải là hai nguồn bằng chứng độc lập về an ninh của máy chủ.
+   - **Tác giả cần làm chủ (Author must explain):**
+     - Hai bản cài đặt phần mềm khác nhau (Two implementations);
+     - Cùng chia sẻ một tín hiệu logic và giả định kỹ thuật thăm dò (Shared signal / assumption);
+     - Việc đối chiếu chéo công cụ không tạo ra bằng chứng an ninh độc lập mới (Comparison != independent evidence).
    - **Phản hồi của tác giả:** [CHƯA CÓ PHẢN HỒI TÁC GIẢ]
 5. **Hỏi:** *Hiện tượng màn hình xanh (BSOD) khi chạy kiểm chứng có được coi là khai thác thành công không?*
-   - **Tác giả cần giải thích:** Không. Hiện tượng màn hình xanh (BSOD) chỉ phản ánh máy chủ mất ổn định trong quá trình kiểm chứng, là bằng chứng tác động tiêu cực đến tính sẵn sàng của hệ thống trong lượt thử nghiệm; hiện tượng này không chứng minh được thực thi mã từ xa thành công và không đủ cơ sở để tự kết luận nguyên nhân gốc rễ cụ thể nếu thiếu công cụ giám sát trực tiếp trên nhân. Xác minh thực thi mã thành công đòi hỏi phải xác lập được phiên tương tác có kiểm soát trên mục tiêu mà không làm sập hệ thống.
+   - **Tác giả cần làm chủ (Author must explain):**
+     - Hiện tượng phản ánh sự mất ổn định và tác động đến tính sẵn sàng của hệ thống (Instability / availability impact);
+     - Lỗi dừng / crash không phải là bằng chứng thực thi mã thành công (Crash != proof of RCE);
+     - Lỗi dừng / crash không đủ cơ sở để tự kết luận nguyên nhân gốc rễ cụ thể (Crash != proof of exact root cause);
+     - Xác minh thực thi mã thành công đòi hỏi bằng chứng trực tiếp về thực thi mã có kiểm soát theo thiết kế thực nghiệm.
    - **Phản hồi của tác giả:** [CHƯA CÓ PHẢN HỒI TÁC GIẢ]
