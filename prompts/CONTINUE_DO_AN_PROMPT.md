@@ -51,6 +51,7 @@ Nếu `PROJECT_STATE.md` còn câu nào tuyên bố nguồn, Chương 1 hoặc D
 - **Trường Text action tách rời Status:** (`KEEP`, `REWRITE`, `SIMPLIFY`, `REMOVE_PROPOSED`, `NO_TEXT_CHANGE`). Sửa câu chữ không đồng nghĩa đóng gap.
 - **Counter-Review bắt buộc cho mọi thẻ READY:** Rà soát qua 6 câu hỏi chất vấn ngược; nếu có nghi ngờ hợp lý phải downgrade ngay lập tức.
 - `DEC_ID_COLLISION_HISTORICAL`: không tự renumber DEC-22/DEC-23. Defense Card dẫn các ID này phải kèm tên quyết định, ngày và vị trí trong PROJECT_STATE; đối chiếu bảng định danh lịch sử.
+- **Machine Validation Bắt Buộc:** Mọi artifact Defense Review (`DEFENSE_READINESS.md`, `*_DEFENSE_REVIEW.md`) bắt buộc phải chạy và đạt kiểm tra máy tự động qua `uv run python scripts/validate_defense_readiness.py <file.md>` (được tích hợp trong `scripts/validate_project.py`). Bất kỳ vi phạm nào đều làm task fail theo nguyên tắc fail-closed.
 - Chèn Defense Readiness sau evidence + logic, trước trim/simplify, academic register/Author Voice và linter; đây là bước con của workflow hiện có, không đổi precedence hoặc G0–G6. Không tự PASS author mastery hay tuyên bố chapter/gate PASS.
 
 ## Ràng buộc học thuật
@@ -82,6 +83,7 @@ Markdown là nguồn chuẩn. Không sửa nội dung học thuật trực tiế
 ## Kiểm tra bắt buộc
 
 ```powershell
+uv run python scripts/validate_defense_readiness.py work/do-an/CHAPTER_1_DEFENSE_REVIEW.md
 uv run python scripts/validate_project.py
 uv run python -m unittest discover -s tests -p "test_*.py"
 uv run python scripts/audit_ieee_citations.py work/do-an/CHAPTER_1.md --fail-on-error

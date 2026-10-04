@@ -80,6 +80,34 @@ def validate_links(errors: list[str]) -> None:
                 errors.append(f"Broken link: {path.relative_to(ROOT)} -> {target}")
 
 
+def validate_defense_readiness_artifacts(errors: list[str]) -> None:
+    # Only validate when Defense Readiness artifacts exist in work/
+    defense_artifacts: list[Path] = []
+    work_dir = ROOT / "work"
+    if work_dir.is_dir():
+        defense_artifacts.extend(work_dir.glob("**/*DEFENSE_REVIEW*.md"))
+        defense_readiness = work_dir / "do-an" / "DEFENSE_READINESS.md"
+        if defense_readiness.is_file() and defense_readiness not in defense_artifacts:
+            defense_artifacts.append(defense_readiness)
+
+    if not defense_artifacts:
+        return
+
+    scripts_dir = ROOT / "scripts"
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+
+    try:
+        from validate_defense_readiness import validate_file
+
+        for path in defense_artifacts:
+            file_errors = validate_file(path)
+            for err in file_errors:
+                errors.append(f"Defense Readiness ({path.relative_to(ROOT)}): {err}")
+    except Exception as exc:
+        errors.append(f"Defense Readiness validation runner failed: {exc}")
+
+
 def main() -> int:
     errors: list[str] = []
     validate_required(errors)
@@ -87,6 +115,7 @@ def main() -> int:
         validate_skill(errors)
     validate_json(errors)
     validate_links(errors)
+    validate_defense_readiness_artifacts(errors)
     if errors:
         print("Project validation failed:")
         for error in errors:

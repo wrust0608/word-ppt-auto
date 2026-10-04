@@ -269,8 +269,8 @@ Hệ thống Defense Readiness sau khi hoàn thiện bắt buộc phải xử l�
   - Tình huống: Dự án đã khóa phạm vi chọn CVE-2017-0144 (qua DEC-06/DEC-09), nhưng chưa có ghi nhận trực tiếp lời giải thích của tác giả về lý do chọn CVE này thay vì các CVE khác.
   - Xử lý: `Evidence key = PASS`, `Ownership key = FAIL` $\to$ **Status bắt buộc: `AUTHOR_CONFIRM`**. Cấm chuyển `READY` chỉ dựa vào `RESEARCH_MAP` hoặc quyết định `LOCKED`.
 - **TEST B (Author ownership confirmed):**
-  - Tình huống: Tác giả đã trực tiếp xác nhận lý do sử dụng khung 4 mức để tránh false positive, tránh crash kernel pool và bảo toàn tương thích mạng trong `AUTHOR_VOICE.md` (dòng 67–71).
-  - Xử lý: `Evidence key = PASS`, `Ownership key = PASS` $\to$ **Status: `READY`** kèm `Review trace` cụ thể trỏ về dòng văn bản trong `AUTHOR_VOICE.md`.
+  - Tình huống: Tác giả đã trực tiếp xác nhận lý do sử dụng khung 4 mức để tránh false positive, tránh crash kernel pool và bảo toàn tương thích mạng trong `AUTHOR_VOICE.md` (dòng 67–71; được phê duyệt tại DEC-05 và DEC-22 — Phê duyệt ba lựa chọn giọng 1B, 2A, 3A, ngày 2026-10-04, vị trí: mục “Quyết định mới: phê duyệt giọng ngày 2026-10-04” trong PROJECT_STATE.md).
+  - Xử lý: `Evidence key = PASS`, `Ownership key = PASS` $\to$ **Status: `READY`** kèm `Review trace` cụ thể: Antigravity / 2026-10-04 / AUTHOR_VOICE.md dòng 67–71 (DEC-05 / DEC-22 — Phê duyệt ba lựa chọn giọng 1B, 2A, 3A, ngày 2026-10-04, mục "Quyết định mới: phê duyệt giọng ngày 2026-10-04" trong PROJECT_STATE.md).
 - **TEST C (Công cụ dùng chung tín hiệu kỹ thuật):**
   - Tình huống: Nmap NSE (`smb-vuln-ms17-010.nse`) và Metasploit scanner (`smb_ms17_010`) cùng gửi gói tin thăm dò `IPC$` và cùng bắt mã lỗi `0xC0000205`.
   - Xử lý: Không được gọi đây là hai nguồn bằng chứng độc lập. Đối với claim hẹp khẳng định "hai công cụ là hai bản cài đặt khác nhau của cùng một logic thăm dò, không độc lập về tín hiệu": `Evidence key = PASS`, `Ownership key = NOT_APPLICABLE` $\to$ **Status: `READY`**.
@@ -322,7 +322,7 @@ Rà soát 8 thẻ pilot đối với các mục 1.2, 1.3, 1.4 của `work/do-an/
 | Evidence / Data | CLAIM_MATRIX (C003); DEC-12, DEC-17, DEC-18; S017, S018, S022, S029, S030, S013. |
 | Evidence boundary | Khung là phương pháp tổ chức dữ liệu do nhóm xây dựng cho đề tài, không phải tiêu chuẩn quốc tế độc lập. Nguồn cho từng phép đo không tự chứng minh tính độc lập giữa các mức. |
 | Evidence key | PASS |
-| Author ownership evidence | Tác giả đã trực tiếp xác nhận lý do lựa chọn khung 4 mức tại `AUTHOR_VOICE.md` (mục "Dấu ấn riêng của công trình", dòng 67–71; phê duyệt tại DEC-05 / DEC-22): "Phân định rạch ròi 4 cấp độ... Lý do thật: Tránh dương tính giả; ngăn chặn nguy cơ crash hệ thống (BSOD) do corrupt kernel pool khi chạy module khai thác; và đảm bảo không phá vỡ tính tương thích của hệ thống mạng." |
+| Author ownership evidence | Tác giả đã trực tiếp xác nhận lý do lựa chọn khung 4 mức tại `AUTHOR_VOICE.md` (mục "Dấu ấn riêng của công trình", dòng 67–71; phê duyệt tại DEC-05 và DEC-22 — Phê duyệt ba lựa chọn giọng 1B, 2A, 3A, ngày 2026-10-04, vị trí: mục “Quyết định mới: phê duyệt giọng ngày 2026-10-04” trong PROJECT_STATE.md): "Phân định rạch ròi 4 cấp độ... Lý do thật: Tránh dương tính giả; ngăn chặn nguy cơ crash hệ thống (BSOD) do corrupt kernel pool khi chạy module khai thác; và đảm bảo không phá vỡ tính tương thích của hệ thống mạng." |
 | Ownership key | PASS |
 | Why needed | Nối dữ liệu công cụ với tiêu chí và kịch bản ở các chương sau; ngăn ngừa chẩn đoán sai và rủi ro sập hệ thống lab. |
 | Author must explain | Nêu câu hỏi riêng của từng mức, lý do không gộp thành một nhãn nhị phân và cách xử lý khi chưa đủ dữ liệu quan sát. |
@@ -330,7 +330,7 @@ Rà soát 8 thẻ pilot đối với các mục 1.2, 1.3, 1.4 của `work/do-an/
 | Likely defense question | Bốn mức giải quyết vấn đề kỹ thuật gì mà một nhãn 'vulnerable' thông thường không thể giải quyết? |
 | Text action | NO_TEXT_CHANGE |
 | Status | READY |
-| Review trace | Antigravity / 2026-10-04 / AUTHOR_VOICE.md dòng 67–71 (DEC-05 / DEC-22) |
+| Review trace | Antigravity / 2026-10-04 / AUTHOR_VOICE.md dòng 67–71 (DEC-05 / DEC-22 — Phê duyệt ba lựa chọn giọng 1B, 2A, 3A, ngày 2026-10-04, mục "Quyết định mới: phê duyệt giọng ngày 2026-10-04" trong PROJECT_STATE.md) |
 
 ---
 
