@@ -68,6 +68,23 @@ Mục đích: dựng đầy đủ cấu trúc công việc của đồ án trư�
 ### A6.9. DOCX layout regression
 ### A6.10. Defense/demo failure
 
+## A7. Change & Decision Control
+### A7.1. Change request
+### A7.2. Impact analysis
+### A7.3. Approval authority
+### A7.4. Decision log
+### A7.5. Reopen artifact LOCKED
+### A7.6. Rollback quyết định
+### A7.7. Quy tắc cấm agent tự đổi scope
+
+## A8. Team Responsibility Matrix
+### A8.1. Writing ownership
+### A8.2. Technical ownership
+### A8.3. Evidence ownership
+### A8.4. Cross-review ownership
+### A8.5. Demo role
+### A8.6. Defense role
+
 # B. ĐỐI SOÁT QUY ĐỊNH, MỤC TIÊU VÀ PHẠM VI
 
 ## B1. Quy định HUIT
@@ -101,6 +118,14 @@ Mục đích: dựng đầy đủ cấu trúc công việc của đồ án trư�
 ### B4.2. Nội dung ngoài phạm vi
 ### B4.3. Nội dung chỉ được đề xuất, không được nhận là đã thực nghiệm
 ### B4.4. Ranh giới an toàn/đạo đức
+
+## B5. Rubric Traceability Matrix
+### B5.1. CLO/rubric criterion
+### B5.2. Section báo cáo chịu trách nhiệm
+### B5.3. Evidence/deliverable hỗ trợ
+### B5.4. Acceptance criterion
+### B5.5. Completion status
+### B5.6. Gap/remediation action
 
 # C. QUẢN TRỊ NGUỒN VÀ LIÊM CHÍNH HỌC THUẬT
 
@@ -215,6 +240,24 @@ Mục đích: dựng đầy đủ cấu trúc công việc của đồ án trư�
 ### D8.4. Conflict report
 ### D8.5. SHA-256 canonical manifest
 ### D8.6. Secret/privacy scan
+
+## D9. Evidence Storage & Provenance Boundary
+### D9.1. Evidence nằm trong repo
+### D9.2. Evidence nằm external/local
+### D9.3. Stable Evidence ID
+### D9.4. Canonical path
+### D9.5. Hash/checksum
+### D9.6. Transfer/archive rule
+### D9.7. Quy tắc khi agent không truy cập được evidence gốc
+
+## D10. Negative / Inconclusive Result Policy
+### D10.1. UNKNOWN
+### D10.2. NO OUTPUT
+### D10.3. FILTERED
+### D10.4. Tool failure
+### D10.5. Conflicting evidence
+### D10.6. Retest policy
+### D10.7. Cấm chuyển negative/inconclusive thành positive/negative verdict không có bằng chứng
 
 # E. THIẾT KẾ NGHIÊN CỨU VÀ LẬP LUẬN TOÀN CÔNG TRÌNH
 
@@ -354,6 +397,13 @@ Mục đích: dựng đầy đủ cấu trúc công việc của đồ án trư�
 
 # G. HỢP ĐỒNG VÀ EVIDENCE MAP CHO TỪNG CHƯƠNG
 
+## G0. Freeze Governance
+### G0.1. WBS_FREEZE
+### G0.2. REPORT_OUTLINE_FREEZE
+### G0.3. Điều kiện đủ để tạo chapter contract
+### G0.4. Điều kiện reopen outline
+### G0.5. User/reviewer approval record
+
 ## G1. Chapter 1 contract
 ## G2. Chapter 2 contract
 ## G3. Chapter 3 contract
@@ -428,6 +478,14 @@ Mục đích: dựng đầy đủ cấu trúc công việc của đồ án trư�
 
 # M. HÌNH, BẢNG VÀ PHỤ LỤC
 
+## M0. Figure & Table Budget
+### M0.1. Tiêu chí hình trong thân bài
+### M0.2. Tiêu chí chuyển phụ lục
+### M0.3. Redundant screenshot policy
+### M0.4. Minimum readability/resolution
+### M0.5. Evidence ID/source note
+### M0.6. Figure/table count review
+
 ## M1. Topology figure
 ## M2. Experimental flow figure
 ## M3. Scenario comparison table
@@ -476,6 +534,16 @@ Mục đích: dựng đầy đủ cấu trúc công việc của đồ án trư�
 ## O17. Failure-mode plan
 ## O18. Member role allocation
 
+## O19. Reproducibility Checklist
+### O19.1. Environment state
+### O19.2. Network state
+### O19.3. Target state
+### O19.4. Commands/options
+### O19.5. Expected observation
+### O19.6. Actual observation
+### O19.7. Evidence ID
+### O19.8. Rollback state
+
 # P. BÀN GIAO VÀ LƯU TRỮ
 
 ## P1. Final report package
@@ -523,13 +591,21 @@ Sau khi A–P được xác nhận là đầy đủ, reviewer phải audit bluep
 - Word formatting không lấn át workstream học thuật.
 - Có defense preparation.
 
-## Q6. Roadmap score
+## Q6. Governance audit
+- Change-control đầy đủ.
+- Mọi reopening của artifact LOCKED có approval.
+- Rubric traceability đầy đủ.
+- Evidence storage/provenance không phụ thuộc đường dẫn mơ hồ.
+- Responsibility matrix rõ ràng.
+
+## Q7. Roadmap score
 Chỉ kích hoạt roadmap nếu đạt:
 - Coverage >= 95/100
 - Logic/dependencies >= 90/100
 - Demo/evidence control >= 95/100
 - Academic integrity >= 95/100
 - HUIT compliance >= 95/100
+- Governance/change control >= 90/100
 - Không có BLOCKER.
 
 Nếu chưa đạt: sửa blueprint và audit lại. Không bắt đầu execution.
