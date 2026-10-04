@@ -233,3 +233,12 @@
 - **Kết quả pilot 8 thẻ Chương 1:** 2 `READY` (DR-C1-02, DR-C1-05), 6 `AUTHOR_CONFIRM` (DR-C1-01, DR-C1-03, DR-C1-04, DR-C1-06, DR-C1-07, DR-C1-08), 0 `EVIDENCE_GAP`, 0 `SIMPLIFY`, 0 `REMOVE_CANDIDATE`.
 - **Giới hạn quyết định:** Quyết định này hoàn thiện cơ chế review, KHÔNG tuyên bố Chương 1 đạt PASS, KHÔNG phê duyệt cổng G4 hay G5, KHÔNG sửa nội dung Chương 1, Chương 2, DOCX hay core skill.
 - **Machine Validation Bắt Buộc:** Mọi artifact Defense Review (`DEFENSE_READINESS.md`, `*_DEFENSE_REVIEW.md`) bắt buộc phải vượt qua kiểm tra máy tự động qua `scripts/validate_defense_readiness.py` (được tích hợp trực tiếp vào `scripts/validate_project.py` và bộ unit test `tests/test_defense_readiness.py`). Bất kỳ vi phạm nào về closed enum, thiếu trường, sai bảng suy diễn Two-Key, chứa heading bị cấm hoặc sửa placeholder đều làm fail quá trình kiểm định.
+
+## DEC-27 — Bổ sung Machine Enforcement cho READY Text Action, DEC Collision và Single Source of Truth
+
+- Ngày: 2026-10-04. Người duyệt: Người dùng, qua yêu cầu trực tiếp.
+- Artifacts: `scripts/validate_defense_readiness.py`, `tests/test_defense_readiness.py`, `work/do-an/DEFENSE_READINESS.md`, `work/do-an/CHAPTER_1_DEFENSE_REVIEW.md`.
+- **READY / Text Action Consistency:** `Status = READY` bắt buộc `Text action` chỉ được `KEEP` hoặc `NO_TEXT_CHANGE`. Mọi trường hợp `READY + SIMPLIFY`, `READY + REMOVE_PROPOSED`, `READY + REWRITE` bị validator từ chối (exit 1).
+- **DEC Collision Machine Enforcement:** Cấm dẫn chiếu ID trần `DEC-22` hoặc `DEC-23` trong các trường bằng chứng, sở hữu hoặc review trace. Bắt buộc có đủ ID + tên quyết định + ngày (YYYY-MM-DD) + vị trí trong `PROJECT_STATE.md` theo quy ước định danh lịch sử.
+- **Single Source of Truth:** Trạng thái hoạt động hiện hành (Active State) của các Defense Cards được quản lý độc quyền tại `work/do-an/*_DEFENSE_REVIEW.md` (hiện hành: `CHAPTER_1_DEFENSE_REVIEW.md`). Tài liệu `work/do-an/DEFENSE_READINESS.md` đóng vai trò là rule/template/hard test document; phần thẻ pilot được gắn nhãn `HISTORICAL_EXAMPLE_ONLY` và không dùng để xác định active state. Validator mặc định chỉ quét `*_DEFENSE_REVIEW*.md`.
+- **Tình trạng kiểm thử:** Bộ unit test mở rộng đạt 33/33 tests (trong đó 26 tests chuyên biệt cho Defense Readiness bao gồm đầy đủ các negative tests cho Rule D placeholder, thiếu ownership evidence, READY text action mâu thuẫn, và DEC collision).

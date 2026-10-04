@@ -48,10 +48,11 @@ Nếu `PROJECT_STATE.md` còn câu nào tuyên bố nguồn, Chương 1 hoặc D
 - **Cấm tự viết câu trả lời thay tác giả:** Reviewer được tạo `Likely defense question` và `Author must explain`. CẤM TẠO "Gợi ý bảo vệ", "Câu trả lời mẫu", "Sinh viên nên trả lời rằng...". Khi chưa có phản hồi thực từ tác giả, trường `Author response` BẮT BUỘC ghi `[CHƯA CÓ PHẢN HỒI TÁC GIẢ]`.
 - **Phân biệt 3 loại bằng chứng:** Không trộn Source evidence (fact kỹ thuật), Project decision (phạm vi/phương pháp đã duyệt), và Author ownership evidence (tác giả xác nhận).
 - **Status là Closed Enum 5 giá trị:** Chỉ dùng `READY`, `SIMPLIFY`, `AUTHOR_CONFIRM`, `EVIDENCE_GAP`, `REMOVE_CANDIDATE`. Cấm tạo trạng thái ngoài schema (`CLOSED`, `FIXED`, `RESOLVED`, `KHÉP GAP`, `ĐÃ SỬA NỘI DUNG`).
-- **Trường Text action tách rời Status:** (`KEEP`, `REWRITE`, `SIMPLIFY`, `REMOVE_PROPOSED`, `NO_TEXT_CHANGE`). Sửa câu chữ không đồng nghĩa đóng gap.
+- **Trường Text action tách rời Status:** (`KEEP`, `REWRITE`, `SIMPLIFY`, `REMOVE_PROPOSED`, `NO_TEXT_CHANGE`). Sửa câu chữ không đồng nghĩa đóng gap. `Status = READY` bắt buộc `Text action` là `KEEP` hoặc `NO_TEXT_CHANGE` (DEC-27; cấm `READY + SIMPLIFY/REMOVE_PROPOSED/REWRITE`).
 - **Counter-Review bắt buộc cho mọi thẻ READY:** Rà soát qua 6 câu hỏi chất vấn ngược; nếu có nghi ngờ hợp lý phải downgrade ngay lập tức.
-- `DEC_ID_COLLISION_HISTORICAL`: không tự renumber DEC-22/DEC-23. Defense Card dẫn các ID này phải kèm tên quyết định, ngày và vị trí trong PROJECT_STATE; đối chiếu bảng định danh lịch sử.
-- **Machine Validation Bắt Buộc:** Mọi artifact Defense Review (`DEFENSE_READINESS.md`, `*_DEFENSE_REVIEW.md`) bắt buộc phải chạy và đạt kiểm tra máy tự động qua `uv run python scripts/validate_defense_readiness.py <file.md>` (được tích hợp trong `scripts/validate_project.py`). Bất kỳ vi phạm nào đều làm task fail theo nguyên tắc fail-closed.
+- `DEC_ID_COLLISION_HISTORICAL`: không tự renumber DEC-22/DEC-23. Cấm dẫn chiếu ID trần trong Defense Card; bắt buộc ghi đủ ID + tên quyết định + ngày + vị trí trong PROJECT_STATE (DEC-27).
+- **Single Source of Truth (DEC-27):** Trạng thái hoạt động hiện hành của Defense Cards được quản lý độc quyền tại `*_DEFENSE_REVIEW.md` (cụ thể `CHAPTER_1_DEFENSE_REVIEW.md`). Tài liệu `DEFENSE_READINESS.md` là tài liệu quy tắc/template/hard test; pilot cards là `HISTORICAL_EXAMPLE_ONLY` và không dùng làm active state.
+- **Machine Validation Bắt Buộc:** Mọi artifact Defense Review bắt buộc phải chạy và đạt kiểm tra máy tự động qua `uv run python scripts/validate_defense_readiness.py <file.md>` (được tích hợp trong `scripts/validate_project.py`). Bất kỳ vi phạm nào đều làm task fail theo nguyên tắc fail-closed.
 - Chèn Defense Readiness sau evidence + logic, trước trim/simplify, academic register/Author Voice và linter; đây là bước con của workflow hiện có, không đổi precedence hoặc G0–G6. Không tự PASS author mastery hay tuyên bố chapter/gate PASS.
 
 ## Ràng buộc học thuật

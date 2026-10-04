@@ -270,6 +270,105 @@ class DefenseReadinessValidationTests(unittest.TestCase):
         errors = MODULE.validate_defense_readiness_text(doc, "test.md")
         self.assertTrue(any("Text action 'DO_NOTHING' không thuộc tập hợp hợp lệ" in e for e in errors))
 
+    # --- RULE D TESTS ---
+
+    def test_rule_d_ownership_pass_with_placeholder_response(self) -> None:
+        """FAIL: Ownership key = PASS but Author response is placeholder."""
+        doc = make_card_markdown(
+            card_id="DR-FAIL-D01",
+            evidence_key="PASS",
+            ownership_key="PASS",
+            ownership_evidence="AUTHOR_VOICE.md dòng 67-71",
+            author_response="[CHƯA CÓ PHẢN HỒI TÁC GIẢ]",
+            status="READY",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertTrue(any("Rule D vi phạm" in e for e in errors))
+
+    def test_rule_d_ownership_pass_with_empty_ownership_evidence(self) -> None:
+        """FAIL: Ownership key = PASS but Author ownership evidence is empty."""
+        doc = make_card_markdown(
+            card_id="DR-FAIL-D02",
+            evidence_key="PASS",
+            ownership_key="PASS",
+            ownership_evidence="",
+            author_response="Phản hồi thực của tác giả",
+            status="READY",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertTrue(any("Author ownership evidence" in e for e in errors))
+
+    # --- READY / TEXT ACTION CONSISTENCY TESTS ---
+
+    def test_fail_ready_with_simplify_text_action(self) -> None:
+        """FAIL: Status = READY but Text action = SIMPLIFY violates consistency rule."""
+        doc = make_card_markdown(
+            card_id="DR-FAIL-TA01",
+            status="READY",
+            text_action="SIMPLIFY",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertTrue(any("Status = READY bắt buộc Text action phải là KEEP hoặc NO_TEXT_CHANGE" in e for e in errors))
+
+    def test_fail_ready_with_remove_proposed_text_action(self) -> None:
+        """FAIL: Status = READY but Text action = REMOVE_PROPOSED violates consistency rule."""
+        doc = make_card_markdown(
+            card_id="DR-FAIL-TA02",
+            status="READY",
+            text_action="REMOVE_PROPOSED",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertTrue(any("Status = READY bắt buộc Text action phải là KEEP hoặc NO_TEXT_CHANGE" in e for e in errors))
+
+    def test_fail_ready_with_rewrite_text_action(self) -> None:
+        """FAIL: Status = READY but Text action = REWRITE violates consistency rule."""
+        doc = make_card_markdown(
+            card_id="DR-FAIL-TA03",
+            status="READY",
+            text_action="REWRITE",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertTrue(any("Status = READY bắt buộc Text action phải là KEEP hoặc NO_TEXT_CHANGE" in e for e in errors))
+
+    # --- DEC COLLISION TESTS ---
+
+    def test_dec22_collision_unqualified(self) -> None:
+        """FAIL: Bare DEC-22 reference without full qualification."""
+        doc = make_card_markdown(
+            card_id="DR-FAIL-DEC01",
+            evidence_data="Căn cứ theo DEC-22 và S005",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertTrue(any("DEC_ID_COLLISION_HISTORICAL" in e and "DEC-22" in e for e in errors))
+
+    def test_dec23_collision_unqualified(self) -> None:
+        """FAIL: Bare DEC-23 reference without full qualification."""
+        doc = make_card_markdown(
+            card_id="DR-FAIL-DEC02",
+            review_trace="Reviewer / 2026-10-04 / DEC-23",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertTrue(any("DEC_ID_COLLISION_HISTORICAL" in e and "DEC-23" in e for e in errors))
+
+    def test_dec22_collision_qualified(self) -> None:
+        """PASS: Properly qualified DEC-22 reference."""
+        doc = make_card_markdown(
+            card_id="DR-PASS-DEC01",
+            ownership_evidence="Tác giả phê duyệt tại DEC-22 — Phê duyệt ba lựa chọn giọng 1B, 2A, 3A — 2026-10-04 — PROJECT_STATE: mục 'Quyết định mới'",
+            review_trace="Reviewer / 2026-10-04 / DEC-22 — Phê duyệt ba lựa chọn giọng 1B, 2A, 3A — 2026-10-04 — PROJECT_STATE: mục 'Quyết định mới'",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertEqual([], errors)
+
+    def test_dec23_collision_qualified(self) -> None:
+        """PASS: Properly qualified DEC-23 reference."""
+        doc = make_card_markdown(
+            card_id="DR-PASS-DEC02",
+            evidence_data="Căn cứ theo DEC-23 — Cấu hình môi trường lab — 2026-10-04 — PROJECT_STATE: bảng quyết định",
+        )
+        errors = MODULE.validate_defense_readiness_text(doc, "test.md")
+        self.assertEqual([], errors)
+
 
 if __name__ == "__main__":
     unittest.main()

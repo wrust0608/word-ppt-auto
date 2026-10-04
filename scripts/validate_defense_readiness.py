@@ -8,10 +8,14 @@ Machine Rules Enforced:
 4. Derivation Rule A: Evidence key = FAIL => Status MUST equal EVIDENCE_GAP.
 5. Derivation Rule B: Evidence key = PASS and Ownership key = FAIL => Status MUST equal AUTHOR_CONFIRM.
 6. Derivation Rule C: Status = READY => Evidence key = PASS and Ownership key in (PASS, NOT_APPLICABLE) and Review trace not empty.
-7. Derivation Rule D: Ownership key = PASS => Author ownership evidence not empty and Author response is not placeholder.
+7. Derivation Rule D: Ownership key = PASS => Author ownership evidence not empty and Author response is real response (not placeholder).
 8. Placeholder Integrity: If not confirmed, Author response must be exactly '[CHƯA CÓ PHẢN HỒI TÁC GIẢ]' (no extra text).
-9. Banned status keywords: CLOSED, FIXED, RESOLVED, GAP CLOSED, KHÉP GAP, ĐÃ SỬA NỘI DUNG, ACCEPTED.
-10. Banned headings/fields in Defense Review: 'Gợi ý bảo vệ', 'Câu trả lời mẫu', 'Sinh viên nên trả lời', 'Suggested defense answer', 'Model answer'.
+9. Ownership key = FAIL => Author response must be exactly placeholder.
+10. Banned status keywords: CLOSED, FIXED, RESOLVED, GAP CLOSED, KHÉP GAP, ĐÃ SỬA NỘI DUNG, ACCEPTED.
+11. Banned headings/fields in Defense Review: 'Gợi ý bảo vệ', 'Câu trả lời mẫu', 'Sinh viên nên trả lời', 'Suggested defense answer', 'Model answer'.
+12. READY / Text Action Consistency: Status = READY requires Text action in ('KEEP', 'NO_TEXT_CHANGE').
+13. DEC Collision Enforcement (DEC-22, DEC-23): cấm ID trần, bắt buộc có ID + tên quyết định + YYYY-MM-DD + PROJECT_STATE location.
+14. Single Source of Truth: Active cards được lưu độc quyền tại *_DEFENSE_REVIEW.md; DEFENSE_READINESS.md là rule/template doc với pilot cards là HISTORICAL_EXAMPLE_ONLY.
 """
 
 from __future__ import annotations
@@ -257,7 +261,7 @@ def validate_defense_card(card: DefenseCard) -> list[str]:
             )
         if author_response == CANONICAL_PLACEHOLDER or not author_response:
             errors.append(
-                f"[{card_id}] Rule D vi phạm: Ownership key = PASS bắt buộc Author response phải có phản hồi thực của tác giả, không được dùng placeholder"
+                f"[{card_id}] Rule D vi phạm: Ownership key = PASS bắt buộc Author response phải có phản hồi thực của tác giả, không được dùng placeholder '{CANONICAL_PLACEHOLDER}'"
             )
 
     # 12. Ownership key = FAIL requirement: author response MUST be placeholder
@@ -266,6 +270,37 @@ def validate_defense_card(card: DefenseCard) -> list[str]:
             errors.append(
                 f"[{card_id}] Ownership key = FAIL bắt buộc Author response phải là placeholder '{CANONICAL_PLACEHOLDER}', không được tự điền câu trả lời: '{author_response}'"
             )
+
+    # 13. READY / Text Action Consistency Rule: Status = READY requires KEEP or NO_TEXT_CHANGE
+    if status_upper == "READY":
+        if text_action not in ("KEEP", "NO_TEXT_CHANGE"):
+            errors.append(
+                f"[{card_id}] Status = READY bắt buộc Text action phải là KEEP hoặc NO_TEXT_CHANGE (hiện tại: '{text_action}'). "
+                f"READY nghĩa là card không còn vấn đề nội dung phải xử lý."
+            )
+
+    # 14. DEC Collision Enforcement (DEC-22, DEC-23): must have ID + name + date + PROJECT_STATE
+    fields_to_check_collision = [
+        ("Evidence / Data", fields.get("evidence_data", "")),
+        ("Author ownership evidence", fields.get("author_ownership_evidence", "")),
+        ("Review trace", fields.get("review_trace", "")),
+    ]
+    for fname, fval in fields_to_check_collision:
+        for match in re.finditer(r"\b(DEC-(?:22|23))\b", fval):
+            dec_id = match.group(1)
+            sub = fval[match.start():match.start() + 300].split("\n")[0]
+            next_dec = sub.find("DEC-", 4)
+            if next_dec != -1:
+                sub = sub[:next_dec]
+            has_sep = bool(re.match(r"^DEC-(?:22|23)\s*(?:—|-|:)", sub))
+            has_date = bool(re.search(r"\b\d{4}-\d{2}-\d{2}\b", sub))
+            has_ps = "PROJECT_STATE" in sub
+            if not (has_sep and has_date and has_ps):
+                errors.append(
+                    f"[{card_id}] Trường '{fname}' vi phạm DEC_ID_COLLISION_HISTORICAL ({dec_id}): "
+                    f"cấm dẫn chiếu ID trần. Bắt buộc ghi đủ ID + tên quyết định + ngày (YYYY-MM-DD) + vị trí trong PROJECT_STATE "
+                    f"(ví dụ: '{dec_id} — <tên quyết định> — YYYY-MM-DD — PROJECT_STATE:<vị trí>')."
+                )
 
     return errors
 
@@ -321,11 +356,8 @@ def main(argv: list[str] | None = None) -> int:
     root = Path(__file__).resolve().parents[1]
     target_files = args.files
     if not target_files:
-        # Default: discover defense review artifacts in work/
+        # Default: discover live defense review artifacts in work/ (Single Source of Truth)
         target_files = sorted(root.glob("work/**/*DEFENSE_REVIEW*.md"))
-        defense_readiness = root / "work" / "do-an" / "DEFENSE_READINESS.md"
-        if defense_readiness.is_file() and defense_readiness not in target_files:
-            target_files.append(defense_readiness)
 
     if not target_files:
         print("No Defense Readiness artifacts found to validate.")

@@ -2,7 +2,7 @@
 
 - Phạm vi: lớp review **project-local**, chỉ áp dụng cho `work/do-an`.
 - Quyết định: DEC-24 (tích hợp ban đầu) và DEC-26 (hardening fail-closed), người dùng yêu cầu trực tiếp ngày 2026-10-04.
-- Trạng thái artifact: `ACTIVE_PROJECT_REVIEW_LAYER`. Không phải trạng thái đạt của chương hoặc của tác giả.
+- Trạng thái artifact: `RULE / TEMPLATE / HARD TEST SPECIFICATION`. Không lưu trạng thái hoạt động hiện hành (Active State) của các thẻ; Active State của DR-C1-01 ... DR-C1-08 được lưu độc quyền tại `work/do-an/CHAPTER_1_DEFENSE_REVIEW.md` (Single Source of Truth).
 - Nguyên tắc cốt lõi: **FAIL-CLOSED — UNRESOLVED IS VALID**.
 
 ---
@@ -286,9 +286,13 @@ Hệ thống Defense Readiness sau khi hoàn thiện bắt buộc phải xử l�
 
 ---
 
-## 13. Pilot Chương 1 Cập Nhật Theo Quy Tắc Mới
+## 13. Historical Pilot Examples (HISTORICAL_EXAMPLE_ONLY)
 
-Rà soát 8 thẻ pilot đối với các mục 1.2, 1.3, 1.4 của `work/do-an/CHAPTER_1.md` theo quy tắc Two-Key, template 15 trường và closed enum.
+> **LƯU Ý LỊCH SỬ (HISTORICAL_EXAMPLE_ONLY):**
+> Phần này lưu lại các thẻ pilot từ đợt chạy thử nghiệm ban đầu nhằm phục vụ việc kiểm thử mẫu template 15 trường và quy tắc Two-Key.
+> **Đây KHÔNG phải là trạng thái hoạt động hiện hành (Active State)**.
+> Single Source of Truth cho trạng thái hoạt động hiện hành của các thẻ DR-C1-01 đến DR-C1-08 được lưu trữ và theo dõi độc quyền tại [`work/do-an/CHAPTER_1_DEFENSE_REVIEW.md`](file:///e:/word_ppt-auto/work/do-an/CHAPTER_1_DEFENSE_REVIEW.md).
+> Mọi cập nhật trạng thái chỉ được thực hiện trên artifact Defense Review chuyên biệt, không cập nhật song song vào tài liệu quy tắc này.
 
 ### DR-C1-01 — Trọng tâm CVE-2017-0144
 
@@ -466,9 +470,9 @@ Rà soát 8 thẻ pilot đối với các mục 1.2, 1.3, 1.4 của `work/do-an/
 
 ---
 
-## 14. Tổng Hợp Pilot và Theo Dõi
+## 14. Tổng Hợp Pilot Lịch Sử (Historical Baseline Only)
 
-Kết quả rà soát 8 thẻ pilot theo đúng quy tắc Fail-Closed và Two-Key:
+> **GHI CHÚ:** Bảng tổng hợp dưới đây là số liệu lịch sử tại thời điểm hoàn thành đợt chạy thử ban đầu, phục vụ đối soát hồi quy. Tiến độ và trạng thái hiện hành được quản lý độc quyền tại [`work/do-an/CHAPTER_1_DEFENSE_REVIEW.md`](file:///e:/word_ppt-auto/work/do-an/CHAPTER_1_DEFENSE_REVIEW.md).
 - **Tổng số thẻ:** 8 thẻ
 - **Phân bổ trạng thái:**
   - `READY`: **2 thẻ** (DR-C1-02, DR-C1-05) — cả hai đều có căn cứ xác nhận cụ thể và vượt qua counter-review.
