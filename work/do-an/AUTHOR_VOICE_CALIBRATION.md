@@ -1,6 +1,6 @@
 # Phiếu hiệu chỉnh giọng tác giả
 
-- Trạng thái: `READY_FOR_AUTHOR_REVIEW`
+- Trạng thái: `APPROVED_CHOICES_RECORDED`
 - Ngày lập: 2026-10-04
 - Mẫu gốc đã đọc: `inputs/đề mục tham khảo.docx`, 153 đoạn có nội dung; trọng tâm mục 1.1.
 - Mục đích: kiểm tra lại hồ sơ giọng trước khi biên tập Chương 1 theo hệ thống mới.
@@ -68,3 +68,24 @@ Tác giả cung cấp `D:/ATTT_DACN_01-BaoCao-Tuan2.docx` và nói: “tôi thư
 Các lỗi chính tả như “hhệ”, khẳng định tuyệt đối hoặc chi tiết giao thức chưa có nguồn không được đưa thành quy tắc giọng. Mẫu không tự thay đổi topology, nguồn, số liệu hoặc quyết định LOCKED.
 
 Đây là bằng chứng mới để hiệu chỉnh, chưa ghi nhận tác giả đã sửa ba vị trí hoặc duyệt đoạn thử. Bước 4 giữ READY_FOR_AUTHOR_REVIEW; lượt hiệu chỉnh tiếp theo phải thể hiện ba lựa chọn cụ thể dựa trên mẫu và ghi phản hồi thật của tác giả.
+
+
+## Phê duyệt ba lựa chọn của tác giả
+
+Ngày 2026-10-04, tác giả chọn rõ: **1B, 2A, 3A**.
+
+1. Viết thành các đoạn liên tục, ít nhãn phụ.
+2. Giữ Client/Server; giải thích tiếng Việt kèm thuật ngữ trong ngoặc ở lần đầu.
+3. Giữ câu ghép cơ chế → hệ quả khi quan hệ rõ, như đoạn mở.
+
+Ba lựa chọn được ghi thành quy tắc giọng, hoàn tất cổng hiệu chỉnh bước 4. Đây không phải phê duyệt nội dung kỹ thuật, chương hoặc DOCX. Các đoạn “chờ duyệt” phía trên là lịch sử trước phản hồi này.
+
+### Đoạn thử v3 áp dụng các lựa chọn
+
+Trạng thái cổng, phiên bản giao thức và dấu hiệu lỗ hổng là các thông tin khác nhau trong quá trình kiểm tra SMB. Cổng TCP 445 thường dùng cho SMB truyền trực tiếp trên TCP/IP (Direct-hosted SMB), nhưng việc cổng này ở trạng thái `open` chưa cho biết Server hỗ trợ phiên bản SMB nào hoặc đã cài bản vá MS17-010 hay chưa. Kết quả quét cổng vì vậy được dùng để xác định bước kiểm tra tiếp theo, chưa dùng để kết luận hệ thống có lỗ hổng. Cơ sở về cổng được đối chiếu S002; cách phân tầng là khung của đề tài trong C003.
+
+Sau khi xác định khả năng tiếp cận dịch vụ, phép kiểm tra chuyển sang thương lượng giao thức (Dialect Negotiation). Client gửi yêu cầu thương lượng để xác định các phiên bản SMB mà Server chấp nhận; kết quả này giúp phân biệt trạng thái cổng với việc máy chủ hỗ trợ SMBv1. Cơ chế cần đối chiếu S021 và S022. Kịch bản `smb-vuln-ms17-010.nse` tiếp tục gửi yêu cầu SMB và đối chiếu mã trạng thái phản hồi theo logic trong S018. Kết luận `VULNERABLE` được ghi nhận ở mức dấu hiệu của phép thăm dò, chưa phải bằng chứng khai thác thành công.
+
+Đề tài phân biệt bốn mức: cổng có thể tiếp cận, SMBv1 được chấp nhận, phản hồi phù hợp với hệ thống chưa vá và khả năng thực thi mã trong lab. Mỗi mức cần bằng chứng tương ứng; kết quả ở mức trước không tự xác nhận mức sau. Quy trình kiểm thử phải xác định phạm vi, được ủy quyền và kiểm soát tác động theo S024. Snapshot và điều kiện dừng là biện pháp của thiết kế lab trong C004. Khi chưa có log hoặc kết quả chạy thật, phần thực nghiệm giữ nhãn `[CẦN DỮ LIỆU]`.
+
+Source ID là chú giải đối soát, chưa gán lại số IEEE cho chương. V3 là áp dụng lựa chọn diễn đạt đã duyệt, không ghi tác giả đã tự viết hoặc duyệt từng khẳng định trong đoạn này.

@@ -31,7 +31,7 @@ Nếu nội dung trong file mâu thuẫn với `PROJECT_STATE.md`, phải báo m
 |---|---|---|
 | 2. Kết nối NotebookLM | `COMPLETE` | Health check và câu hỏi smoke test đã đạt. |
 | 3. Nạp/đối soát nguồn | `COMPLETE_WITH_RECHECK` | Có 19 nguồn sử dụng được, nhưng một nhóm nguồn trong bibliography cũ chưa có toàn văn hoặc URL lỗi. |
-| 4. Hiệu chỉnh giọng tác giả | `READY_FOR_AUTHOR_REVIEW` | Đã có đoạn mẫu; phải chờ chính tác giả sửa/xác nhận trước khi khóa. |
+| 4. Hiệu chỉnh giọng tác giả | `COMPLETE_AUTHOR_APPROVED` | Tác giả chọn 1B, 2A, 3A; giọng đã chốt, chuyển đối soát nguồn Chương 1. |
 | 5. Chương thí điểm | `REVIEW_COMPLETE_FIX_REQUIRED` | Cấu trúc và số trích dẫn đạt về hình thức; điều kiện nguồn và văn phong chưa đạt. |
 | 6. DOCX | `AUDIT_COMPLETE_REBUILD_REQUIRED` | Đã kiểm tra cấu trúc, render và xem riêng đủ 53 trang; lỗi theo trang nằm trong DOCX_QA_REPORT.md. DOCX phải sinh lại từ Markdown đã duyệt. |
 
@@ -100,3 +100,7 @@ Trước G6, chạy linter với `--publication --fail-on-error` theo hướng d
 ## 8. Câu hỏi duy nhất cần người dùng trả lời tiếp
 
 Yêu cầu người dùng mở `work/do-an/AUTHOR_VOICE_CALIBRATION.md`, sửa hoặc xác nhận tối thiểu ba cách diễn đạt và cho biết mẫu đó đã đúng giọng của họ chưa. Không tự vượt qua cổng này.
+
+## Cập nhật mới nhất: giọng đã duyệt
+
+Tác giả chọn 1B, 2A, 3A; bước 4 hoàn tất. Các yêu cầu xin duyệt giọng phía trên đã được đáp ứng, không hỏi lại. Tiếp tục kiểm nguồn và biên tập Chương 1 theo DEC-22, không tự duyệt chương hoặc dựng DOCX.

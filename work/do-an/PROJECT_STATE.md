@@ -105,3 +105,14 @@ Trình người dùng `AUTHOR_VOICE_CALIBRATION.md` và yêu cầu họ sửa ho
 - Đã tạo SOURCE_RECONCILIATION_PLAN.md: ánh xạ toàn bộ [1]–[19] cũ tới tuyến nguồn giữ/thay/kiểm riêng; PLANNED_NOT_APPLIED. Không đổi nội dung chương hoặc số IEEE.
 - Sửa câu stale “không còn mâu thuẫn nguồn” trong CLAIM_MATRIX; mở lại Q001/Q002 ở ledger vì còn dựa vào S003/S009 chưa khả dụng. Đây là đối soát trạng thái, không chứng nhận bằng chứng mới.
 - Bước tiếp theo: tác giả chọn ba phương án trong đoạn thử v2 hoặc sửa câu cụ thể; sau đó kiểm nguồn từng câu theo kế hoạch trước biên tập chương.
+
+
+## Quyết định mới: phê duyệt giọng ngày 2026-10-04
+
+- DEC-22 (Người dùng): phê duyệt ba lựa chọn 1B, 2A, 3A — đoạn liên tục/ít nhãn phụ; giữ Client/Server và giải thích song ngữ lần đầu; giữ câu ghép cơ chế → hệ quả khi rõ quan hệ.
+- Bước 4 COMPLETE_AUTHOR_APPROVED; ISS-04 về lựa chọn hiệu chỉnh được giải quyết. Các trạng thái chờ duyệt trước đoạn này là lịch sử, không phải trạng thái hiện hành.
+- Đã cập nhật AUTHOR_VOICE bằng lựa chọn thật và tạo đoạn thử v3 áp dụng chúng. Không coi phản hồi này là duyệt nội dung chương, nguồn hoặc DOCX.
+- Tiếp tục bước 5 theo SOURCE_RECONCILIATION_PLAN: kiểm đoạn gốc trước thay citation. NotebookLM MCP chưa có tool trực tiếp trong phiên này; không tuyên bố đã recheck notebook. Có thể đọc nguồn gốc tương đương và ghi vị trí, giữ nhãn thiếu nguồn cho phần chưa xác minh.
+- Bước tiếp theo hiện hành: hoàn tất đối soát nguồn từng phát biểu Chương 1, sau đó biên tập theo giọng đã chốt và trình tác giả duyệt chương; chưa dựng DOCX.
+
+- Đã đọc nguồn gốc S006/S020, sửa năm trong ledger theo ngày cập nhật hiển thị; ghi vị trí/giới hạn hỗ trợ trong SOURCE_RECONCILIATION_PLAN.md. Phát biểu về unsafe=0 ở Chương 2 cần đối chiếu code và thư viện trước giữ/sửa. Chưa áp dụng thay nguồn vào chương.

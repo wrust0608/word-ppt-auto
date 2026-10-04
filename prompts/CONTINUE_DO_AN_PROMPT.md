@@ -86,3 +86,7 @@ Chỉ trả về:
 Không viết thêm chương và không sửa DOCX trong lượt đầu tiên.
 
 ---
+
+## Cập nhật có hiệu lực sau DEC-22
+
+Bước 4 COMPLETE_AUTHOR_APPROVED. Người dùng chọn 1B, 2A, 3A, đã ghi trong AUTHOR_VOICE và calibration. Yêu cầu xin lựa chọn giọng phía trên là lịch sử đã hoàn thành; không hỏi lại. Tiếp tục đối soát từng câu theo SOURCE_RECONCILIATION_PLAN.md, đọc vị trí gốc trước biên tập; còn phải xin duyệt chương sau review, chưa sinh DOCX.

@@ -73,3 +73,14 @@ Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác gi
 | Đoạn thử | Điểm khớp giọng | Điểm còn máy móc/khuôn mẫu | Điều chỉnh đã duyệt |
 |---|---|---|---|
 | Đoạn mẫu trên | Có trật tự cơ chế → điều kiện → hệ quả; dùng thuật ngữ nhất quán; không mở đầu bằng bối cảnh chung | Câu dài và dày mệnh đề; một số chi tiết kỹ thuật đang được khẳng định chắc chắn nhưng chưa thể hiện nguồn ngay tại đoạn | Giữ làm mẫu nhịp có điều kiện; không tái sử dụng khẳng định kỹ thuật nếu chưa truy vết nguồn |
+
+
+## Hiệu chỉnh đã được tác giả duyệt ngày 2026-10-04
+
+Căn cứ mẫu báo cáo Tuần 2 được tác giả xác nhận và phản hồi trực tiếp 1B, 2A, 3A trong AUTHOR_VOICE_CALIBRATION.md:
+
+- Ưu tiên các đoạn liên tục, ít nhãn phụ. Danh sách/bước vẫn dùng khi cần phân loại hoặc mô tả trình tự; không tạo nhãn cho mọi đoạn.
+- Giữ Client và Server. Lần đầu của thuật ngữ khác dùng phần giải thích tiếng Việt kèm tên tiếng Anh trong ngoặc, sau đó dùng cách gọi ổn định.
+- Giữ câu ghép thể hiện cơ chế → hệ quả khi quan hệ rõ; tách khi một câu chứa nhiều quan hệ độc lập. Khoảng 20–35 từ ở hồ sơ cũ là tham khảo, không phải giới hạn cứng.
+
+Lựa chọn mới này thay ưu tiên nhãn chức năng trong đoạn thử v2; không sửa quy định HUIT, ngôi viết đã khóa, nguồn, dữ liệu hoặc quyết định thiết kế. Không tự suy ra trải nghiệm cá nhân từ mẫu.

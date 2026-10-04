@@ -32,3 +32,14 @@
 ## Mâu thuẫn hồ sơ cần xử lý
 
 Claim matrix cũ vẫn có câu “Không còn mâu thuẫn nguồn / toàn bộ 19 tài liệu”; ledger có 7 nguồn RECHECK. Các truy vấn Q001/Q002 từng CLOSED còn dựa vào S003/S009 chưa khả dụng. Các trạng thái này cần mở lại, không dùng làm chứng cứ đã hoàn tất.
+
+
+## Đọc nguồn gốc đầu tiên ngày 2026-10-04
+
+Đọc trực tiếp nguồn gốc qua web; không phải tái kiểm tra nguồn trong NotebookLM.
+
+- S020: trang Microsoft hiện có tiêu đề “What is Microsoft SMB Protocol and CIFS Protocol?”, Last updated 2025-07-10. Các mục Overview hỗ trợ chức năng file sharing, printing, authentication, locking, named pipes và mô hình request/response Client–Server. Không đủ để chứng minh chi tiết driver nội bộ Windows. URL: https://learn.microsoft.com/en-us/windows/win32/fileio/microsoft-smb-protocol-and-cifs-protocol-overview
+- S006: Last updated 2025-11-27. Đã đọc mục giới thiệu, SMB components và SMB dialects; hỗ trợ vai trò Client/Server, UNC, read/create/update file và bảng phiên bản. Không dùng overview này để chứng minh kiến trúc user/kernel. URL: https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview
+- S018: mở mã nguồn hiện hành; tìm chuỗi `unsafe` không thấy. Đây là dấu hiệu cần kiểm tra lại phát biểu Chương 2 về `--script-args unsafe=0`, chưa kết luận rằng tất cả thư viện/phiên bản Nmap không có cơ chế liên quan. Cần đọc code và thư viện phụ thuộc trước sửa quyết định kỹ thuật. URL: https://svn.nmap.org/nmap/scripts/smb-vuln-ms17-010.nse
+
+Năm 2026 trong ledger của S006/S020 trước đây là sai lệch với ngày cập nhật hiển thị, đã đổi sang 2025 và ghi ngày truy cập riêng. Chưa áp dụng citation vào chương.

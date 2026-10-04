@@ -8,7 +8,7 @@
 |---|---|---|---|---|
 | 2 | Kiểm tra kết nối NotebookLM thật | MCP khởi động, xác thực, đúng notebook, có nguồn, câu hỏi biết trước trả lời đúng và nêu giới hạn | Health check, smoke test, `SOURCE_LEDGER.md` | `COMPLETE` |
 | 3 | Nạp và khóa kho nguồn khả dụng | Nguồn trung tâm có metadata, vị trí và trạng thái Notebook; nguồn không có toàn văn bị hạ trạng thái | `SOURCE_LEDGER.md`, `CLAIM_MATRIX.md` | `COMPLETE_WITH_RECHECK` |
-| 4 | Hiệu chỉnh giọng tác giả | Có mẫu gốc, đoạn thử 250–400 từ và sửa đổi thật của tác giả | `AUTHOR_VOICE.md`, `AUTHOR_VOICE_CALIBRATION.md` | `READY_FOR_AUTHOR_REVIEW` |
+| 4 | Hiệu chỉnh giọng tác giả | Có mẫu gốc, đoạn thử 250–400 từ và sửa đổi thật của tác giả | `AUTHOR_VOICE.md`, `AUTHOR_VOICE_CALIBRATION.md` | `COMPLETE_AUTHOR_APPROVED` |
 | 5 | Thực hiện một chương thí điểm | Review claim–source, citation, logic, giọng, linter; mọi cảnh báo có quyết định; tác giả duyệt | `CHAPTER_1.md`, `PILOT_CHAPTER_REVIEW.md` | `REVIEW_COMPLETE_FIX_REQUIRED` |
 | 6 | Kiểm tra vòng xuất Word | Publication lint, audit DOCX, render toàn bộ trang, ghi lỗi và kiểm tra lại sau sửa | `PUBLICATION_CHECKLIST.md`, `DOCX_QA_REPORT.md` | `AUDIT_COMPLETE_REBUILD_REQUIRED` |
 
@@ -40,3 +40,7 @@ Mọi agent mới bắt đầu tại `HANDOFF.md`, sau đó dùng prompt `prompt
 ## Tiến độ hiệu chỉnh sau mẫu Tuần 2
 
 Đoạn thử v2 và ba lựa chọn diễn đạt đã sẵn sàng trong AUTHOR_VOICE_CALIBRATION.md. SOURCE_RECONCILIATION_PLAN.md đã lập tuyến kiểm tra [1]–[19], chưa áp dụng vào chương. Bước 4 vẫn chờ tác giả chọn; bước 5 chưa qua cổng nguồn.
+
+## Phê duyệt bước 4
+
+Tác giả đã chọn 1B, 2A, 3A ngày 2026-10-04; ghi lựa chọn cụ thể trong calibration và AUTHOR_VOICE. Bước 4 hoàn tất hiệu chỉnh. Các ghi nhận chờ duyệt phía trên là lịch sử. Tiếp tục bước 5: kiểm nguồn trước biên tập và xin duyệt chương.
