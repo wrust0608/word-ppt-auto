@@ -1,5 +1,7 @@
 # Biên tập nguồn, lập luận và giọng viết Chương 1–2
 
+> Lượt biên tập trước phản hồi về chiều sâu. Bản hiện hành và ánh xạ citation mới ở DEPTH_REVIEW_2026_10_04.md; các thống kê dưới đây là lịch sử.
+
 Trạng thái: REVISED_REVIEW_PENDING. Đây là báo cáo thay đổi của bản thảo Markdown, không phải phê duyệt chương hoặc bản Word cuối. Người dùng xác nhận không còn yêu cầu chỉnh giọng; không yêu cầu duyệt lại AUTHOR_VOICE.
 
 ## Thay đổi đã áp dụng

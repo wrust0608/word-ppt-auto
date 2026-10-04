@@ -48,3 +48,7 @@ Tác giả đã chọn 1B, 2A, 3A ngày 2026-10-04; ghi lựa chọn cụ thể 
 ## Lượt biên tập sau xác nhận thuật ngữ
 
 Đã áp dụng giọng và sửa nguồn/logic ở hai chương; xem REVISION_PASS_2026_10_04.md. Nhóm sách/CISA chưa khả dụng không còn được dẫn trong bản hiện hành. Citation cấu trúc riêng từng chương đạt; ba cảnh báo lặp đã phân loại. Bước 5 chưa được nâng thành COMPLETE vì chương sửa chưa được duyệt và artifact LOCKED còn drift. Không dựng DOCX hoặc xóa nhãn dữ liệu để vượt cổng.
+
+## Lượt tăng chiều sâu theo phản hồi tác giả
+
+CHAPTER_1/2 đã được viết lại ở phần cơ chế và diễn giải phương pháp; xem DEPTH_REVIEW_2026_10_04.md. Đây là bản hiện hành thay lượt biên tập ngắn trước đó: 22/10 mục nguồn, vẫn giữ dữ liệu lab chưa có. Bước 5 chưa COMPLETE vì tác giả chưa duyệt nội dung mới; bước 6 chưa dựng Word. Không yêu cầu duyệt lại giọng tác giả.

@@ -1,6 +1,6 @@
 # Bàn giao dự án luận văn
 
-> Cập nhật mới nhất 2026-10-04: đã biên tập CHAPTER_1/2 theo giọng được tác giả xác nhận, thay nguồn chưa khả dụng hoặc thu hẹp phát biểu; chi tiết và ánh xạ citation ở work/do-an/REVISION_PASS_2026_10_04.md. Thống kê trước biên tập phía dưới là lịch sử; PROJECT_STATE.md có trạng thái hiện hành. Không yêu cầu người dùng duyệt lại giọng. Chương sửa chưa duyệt, Word chưa dựng lại.
+> Cập nhật mới nhất 2026-10-04: sau phản hồi bản báo cáo thiếu chiều sâu, đã viết lại cơ chế và lập luận trong CHAPTER_1/2; chi tiết và ánh xạ citation ở work/do-an/DEPTH_REVIEW_2026_10_04.md. Thống kê các lượt trước phía dưới là lịch sử; PROJECT_STATE.md có trạng thái hiện hành. Giọng đã chốt, không yêu cầu duyệt lại. Chương sửa chưa duyệt, Word chưa dựng lại.
 
 > Đây là điểm bắt đầu bắt buộc cho mọi agent tiếp quản repository. Không dựa vào lịch sử chat để suy đoán trạng thái.
 

@@ -43,3 +43,15 @@ Các số liệu ở bảng đầu là kết quả trước biên tập. Bản h
 | CHAPTER_2.md:206, 219, 232 | VI012 | KEEP_WITH_REASON | Các dòng Input của kỹ thuật 1–3 cần cùng cấu trúc để đối chiếu lệnh và tiền điều kiện; hợp đồng chương quy định mười trường mô tả kỹ thuật |
 
 FIX đã thực hiện: tách các quan hệ độc lập trong câu; thu hẹp câu vượt nguồn, bỏ mô tả nội bộ chưa kiểm chứng; gộp phần tổng kết thành đoạn liên tục. Giữ các quan hệ cơ chế → hệ quả rõ theo lựa chọn tác giả. Việc bỏ tuyên bố tối ưu AES không có nguồn được ghi trong REVISION_PASS_2026_10_04.md; không biến một nhãn thiếu nguồn thành câu mơ hồ.
+
+## Kết quả sau lượt tăng chiều sâu
+
+Các dòng và kết quả phía trên là lịch sử. Bản hiện hành có ba cảnh báo VI012, không còn VI011. Câu 71 đơn vị trong phần FEA đã được FIX: tách chuỗi ba hệ quả, giữ mạch cơ chế và điều kiện. Không cắt các đoạn giải thích để giảm số cảnh báo.
+
+| Tệp / dòng hiện hành | Rule | Quyết định | Lý do |
+|---|---|---|---|
+| CHAPTER_1.md:22, 77, 147, 232 | VI012 | FALSE_POSITIVE | Caption sơ đồ có tiền tố và số chương theo chức năng đánh số |
+| CHAPTER_1.md:129, 213, 274 | VI012 | KEEP_WITH_REASON | Cả ba ví dụ cần nêu rõ giả định để phân biệt minh họa với dữ liệu lab; không đổi nhãn chỉ nhằm tránh lặp |
+| CHAPTER_2.md:51, 91, 245, 264, 326 | VI012 | KEEP_WITH_REASON | Dẫn chiếu và caption giúp nối diễn giải với sơ đồ tương ứng |
+
+Linter chạy sau review cơ chế và nguồn. Citation cấu trúc, độ rõ lập luận và tính đúng của nguồn được đánh giá riêng trong DEPTH_REVIEW_2026_10_04.md. Không dùng kết quả này làm điểm chất lượng học thuật hoặc chứng nhận Word cuối.

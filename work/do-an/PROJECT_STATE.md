@@ -18,8 +18,8 @@
 | CLAIM_MATRIX | REOPENED_RECHECK | work/do-an/CLAIM_MATRIX.md | Sáu luận điểm trung tâm đã chuyển sang nguồn khả dụng; cần đồng bộ bibliography Chương 1 |
 | OUTLINE | LOCKED | work/do-an/OUTLINE.md | Đã khóa cấu trúc 4 chương, ngân sách từ (G3) |
 | CHAPTER_ARGUMENT | LOCKED | work/do-an/CHAPTER_ARGUMENT.md | Đã cập nhật toàn diện Hợp đồng Chương 2 theo mô hình Causal-Chain và Enterprise Topology |
-| CHAPTER_1 | REVISED_REVIEW_PENDING | work/do-an/CHAPTER_1.md | Đã biên tập nguồn và giọng; 18 mục/88 lượt dẫn, citation cấu trúc đạt; chưa duyệt nội dung |
-| CHAPTER_2 | REVISED_REVIEW_PENDING | work/do-an/CHAPTER_2.md | Sửa ranh giới thiết kế–kết quả, suy luận tích lũy và thuật ngữ; 8 mục/32 lượt dẫn; nhãn dữ liệu giữ nguyên |
+| CHAPTER_1 | DEPTH_REVISED_REVIEW_PENDING | work/do-an/CHAPTER_1.md | Đã viết lại cơ chế và phân tích; 22 mục/78 lượt dẫn; xem DEPTH_REVIEW_2026_10_04.md |
+| CHAPTER_2 | DEPTH_REVISED_REVIEW_PENDING | work/do-an/CHAPTER_2.md | Làm rõ lý do thiết kế, đối chứng và suy luận kết quả; 10 mục/20 lượt dẫn; dữ liệu lab còn mở |
 | REVIEW_REPORT | HISTORICAL_REOPENED | work/do-an/REVIEW_REPORT.md | Điểm PASS cũ không chứng nhận bản hiện hành; dùng REVISION_PASS_2026_10_04.md |
 | STYLE_REVIEW | REVIEWED_ADVISORY | work/do-an/STYLE_REVIEW.md | Không còn VI011; ba VI012 đã phân loại; không thay kiểm định nội dung hoặc xuất bản |
 | AUTHOR_VOICE_CALIBRATION | APPROVED_CHOICES_RECORDED | work/do-an/AUTHOR_VOICE_CALIBRATION.md | 1B, 2A, 3A và điều chỉnh thuật ngữ đã được tác giả xác nhận; không yêu cầu duyệt lại giọng |
@@ -73,9 +73,9 @@
 | ISS-04 | `[CẦN TÁC GIẢ XÁC NHẬN]` | Mẫu hiệu chỉnh giọng đã tạo nhưng chưa có sửa đổi/xác nhận trực tiếp của tác giả | Không được khóa bước 4 hoặc áp giọng cá nhân lên toàn chương | Yêu cầu tác giả sửa/xác nhận tối thiểu ba cách diễn đạt trong AUTHOR_VOICE_CALIBRATION.md |
 | ISS-05 | `DOCX_REBUILD_REQUIRED` | DOCX cũ thiếu TOC field, có nhiều direct formatting, 323 cảnh báo OfficeCLI; đã render/xem đủ 53 trang và phát hiện lỗi công thức, bảng/sơ đồ, mục lục | Không đủ điều kiện gắn nhãn publication-ready | Sau khi Markdown được duyệt, sinh DOCX mới và thực hiện vòng render, xem từng trang, sửa và render lại |
 
-## Bước tiếp theo duy nhất
+## Bước tiếp theo hiện hành
 
-Trình người dùng `AUTHOR_VOICE_CALIBRATION.md` và yêu cầu họ sửa hoặc xác nhận tối thiểu ba cách diễn đạt. Sau khi được duyệt, cập nhật `AUTHOR_VOICE.md`, đối soát/thay các nguồn Chương 1 còn lỗi, xử lý có kiểm soát 18 cảnh báo của chương mẫu và chạy lại citation audit/style lint trước khi xin duyệt chương. Chưa viết Chương 3 và chưa sinh lại DOCX trong khi cổng này còn mở.
+Đọc và phản hồi nội dung hai chương sau lượt tăng chiều sâu, theo DEPTH_REVIEW_2026_10_04.md. Giọng đã được xác nhận, không yêu cầu duyệt lại. Các đoạn trạng thái cũ dưới đây là lịch sử; chưa dựng DOCX từ bản chương chưa duyệt.
 
 
 ## Hoàn tất audit tiếp quản 2026-10-04
@@ -140,3 +140,14 @@ Trình người dùng `AUTHOR_VOICE_CALIBRATION.md` và yêu cầu họ sửa ho
 - Nguồn gốc được xác minh tương đương theo vị trí ghi trong báo cáo; công cụ NotebookLM không có ở phiên này. Không tuyên bố đã nhập S027/S028 hoặc tái kiểm notebook.
 - Bước 5 giữ REVIEW_COMPLETE_FIX_REQUIRED ở cấp roadmap, bản đã sửa REVISED_REVIEW_PENDING; cần đọc/duyệt chương và xử lý drift đề cương theo quyết định hợp lệ. Bước 6 chưa sinh DOCX: bản Word cũ không phản ánh Markdown mới và chưa được phép coi là bản cuối.
 - Kiểm tra hoàn tất lượt: validate_project.py đạt, unittest 7/7, citation riêng hai chương đạt, git diff --check không có lỗi whitespace. Không chạy thực nghiệm hoặc kiểm định bản Word mới.
+
+## Sửa chiều sâu sau phản hồi bản báo cáo chưa giải thích rõ
+
+- Đã viết lại các phần cơ chế, phân tích dấu hiệu và phòng thủ ở Chương 1; thêm minh họa giả định, không thêm kết quả thực nghiệm. Chương 2 làm rõ lý do ba VLAN, kết nối mới/đáp ứng phiên, chuỗi tích lũy, đối chứng và dữ liệu cùng lượt.
+- Giữ mười trường kỹ thuật nhưng chuyển phần lặp vào bảng ngắn và thêm diễn giải trước bảng. Sửa tiền điều kiện khảo sát R, cấu trúc thăm dò phiên bản, phân loại mất phản hồi, suy luận C từ chặn chiều vào, và thông tin cổng nhận trên Kali. Chi tiết ở DEPTH_REVIEW_2026_10_04.md.
+- Sổ nguồn thêm S029/S030/S031, Notebook NO; đọc trực tiếp tương đương. Chỉnh metadata S007/S023 theo ngày hiển thị. Giữ RECHECK cho nguồn lịch sử chưa khả dụng; không xác nhận notebook đã đồng bộ phiên bản trang mới.
+- ISS-01 còn mở: chưa có dữ liệu lab. ISS-02 được xử lý cho bản sửa này theo STYLE_REVIEW, không chứng nhận xuất bản. ISS-03 về nguồn sách/CISA trong bibliography cũ đã xử lý ở bản hiện hành; recheck nguồn lịch sử và các yêu cầu CIS riêng vẫn còn. ISS-04 đã giải quyết theo DEC-22. ISS-05 còn mở: Word cần dựng và QA sau duyệt Markdown.
+- CONFLICT_LOCKED vẫn mở: OUTLINE Host-only/3.000–3.500 khác hợp đồng ba VLAN/3.500–4.500; hợp đồng còn công thức iff vòng tròn và giá trị chưa đo. Không đổi LOCKED; chương giữ thiết kế mới hơn nhưng giới hạn kết luận theo bằng chứng. Chương 2 được biên tập trong biên 15% của trần hợp đồng; cách đếm ghi ở báo cáo.
+- Bước 4 COMPLETE_AUTHOR_APPROVED; bước 5 là review bản có nội dung viết lại, chưa duyệt; bước 6 AUDIT_COMPLETE_REBUILD_REQUIRED. Không tự chuyển cổng hoặc xem phản hồi về giọng là duyệt chương.
+
+- Kiểm tra cuối lượt tăng chiều sâu: validate_project.py đạt, unittest 7/7, citation audit riêng chương đạt (78/22 và 20/10), git diff --check đạt. Linter còn ba VI012 đã phân loại trong STYLE_REVIEW. Chưa có kiểm tra Word mới hoặc thực nghiệm.

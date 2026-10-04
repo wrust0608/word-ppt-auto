@@ -8,7 +8,7 @@ Mức hỗ trợ: `STRONG`, `MODERATE`, `WEAK`, `CONTRADICTED`, `MISSING`.
 |---|---|---|---|---|---|---|---|---|
 | C001 | SMB là giao thức chia sẻ tài nguyên mạng; các vai trò client/server, dialect SMBv1–v3 và cơ chế bảo mật phải được phân định theo đặc tả tương ứng | SOURCE_FACT | S002, S006, S007, S008, S020, S021, S022, S023 | Direct-host SMB; SMB overview; SMB security; [MS-SMB]; [MS-SMB2]; SMB signing | STRONG | Không khái quát mọi xử lý SMB đều nằm trong cùng một driver hoặc cùng chế độ thực thi; đối chiếu theo phiên bản Windows và dialect | Chương 1 (Mục 1.1) | VERIFIED |
 | C002 | MS17-010 là bulletin chứa nhiều CVE; CVE-2017-0144 liên quan xử lý gói SMBv1 và có thể dẫn tới thực thi mã từ xa | SOURCE_FACT | S005, S010, S011, S012, S013, S015 | MS17-010; MSRC; NVD; Rapid7; Microsoft Threat Intelligence | STRONG | Không đồng nhất toàn bộ bulletin với một root cause; S014 đang `RECHECK` và không được dùng tới khi khôi phục nguồn | Chương 1 (Mục 1.2) | VERIFIED |
-| C003 | Khung đánh giá an ninh SMB phân định 4 cấp độ độc lập: cổng mở, dialect/dịch vụ, dấu hiệu chưa vá qua NSE và khả năng khai thác | INTERPRETATION | S013, S017, S018, S021, S022 | Rapid7 module; Nmap Guide; mã nguồn NSE; đặc tả MS-SMB/MS-SMB2 | STRONG | Phản hồi NSE ở Cấp độ 3 không tương đương với khai thác thành công ở Cấp độ 4 | Chương 1 (Mục 1.3, 1.4) | VERIFIED |
+| C003 | Khung đánh giá phân biệt bốn mức bằng chứng: cổng, phiên bản SMB, dấu hiệu chưa vá và tác động khai thác | INTERPRETATION | S013, S017, S018, S021, S022, S029, S030 | Rapid7 module; Nmap Guide; mã nguồn NSE/scanner; đặc tả MS-SMB/MS-SMB2 | STRONG | Không gọi các mức là độc lập; phản hồi NSE ở Cấp độ 3 không tương đương khai thác thành công ở Cấp độ 4 | Chương 1 (Mục 1.3, 1.4) | VERIFIED |
 | C004 | Kiểm thử SMB phải có ủy quyền, phạm vi cô lập, snapshot/khôi phục và giới hạn số lần thử để kiểm soát tác động | PROPOSAL | S013, S024 | Rapid7 module; NIST SP 800-115 | STRONG | Pool grooming có thể làm sập hệ điều hành; không thực hiện ngoài lab được cấp phép | Chương 1 (Mục 1.3.3, 1.4.2), Chương 2 | VERIFIED |
 | C005 | Vá hệ thống và vô hiệu hóa SMBv1 là kiểm soát chính; chính sách tường lửa và phân đoạn giảm khả năng tiếp cận dịch vụ nhưng không thay thế hardening máy chủ | PROPOSAL | S005, S007, S008, S023, S025 | MS17-010; Microsoft Learn; SMB signing; NIST SP 800-41 Rev.1 | STRONG | Cổng 445 vẫn cần cho SMBv2/v3 hợp lệ; luật tường lửa phải bám nhu cầu nghiệp vụ và được kiểm thử | Chương 1 (Mục 1.4.3), Chương 2 | VERIFIED |
 | C006 | Phòng thủ SMB phải đánh giá tương thích thiết bị cũ và retest độc lập để xác minh hiệu lực cấu hình | INTERPRETATION | S008, S017, S023, S024, S025 | Microsoft Learn; Nmap Guide; NIST SP 800-115; NIST SP 800-41 Rev.1 | STRONG | Gỡ SMBv1 hoặc siết signing có thể ảnh hưởng thiết bị cũ; mọi ngoại lệ phải được ghi và giới hạn | Chương 1 (Mục 1.4.3), Chương 2 | VERIFIED |
@@ -20,3 +20,15 @@ Mức hỗ trợ: `STRONG`, `MODERATE`, `WEAK`, `CONTRADICTED`, `MISSING`.
 ## Mâu thuẫn cần giải quyết
 
 - Bibliography cũ chưa đồng bộ ledger: 7 nguồn còn RECHECK, dù sáu luận điểm trung tâm đã có tuyến nguồn khả dụng. Không coi đủ 19 nguồn đã xác minh. Xem SOURCE_RECONCILIATION_PLAN.md; mỗi phát biểu phải kiểm tra đoạn gốc trước thay citation.
+
+## Diễn giải bổ sung sau phản hồi về chiều sâu
+
+| Phần sử dụng | Loại | Quan hệ cần giải thích | Bằng chứng / giới hạn |
+|---|---|---|---|
+| Chương 1, 1.1.3–1.1.5 | SOURCE_FACT + INTERPRETATION | Tính năng được hỗ trợ khác với tính năng dùng trong phiên; thương lượng khác xác thực và quyền tài nguyên | S006/S007/S022/S023/S028/S031; ví dụ truy cập dùng để diễn giải, chưa đo hiệu năng |
+| Chương 1, 1.2.3 | SOURCE_FACT + INTERPRETATION | Sai lệch kích thước → ghi ngoài bộ đệm → nguy cơ sự cố hoặc thực thi | S013 cho cơ chế; L_alloc/L_write và 64/80 byte là mô hình minh họa, không phải kích thước khai thác |
+| Chương 1, 1.3.2–1.4.2 | SOURCE_FACT + INTERPRETATION | Phản hồi cổng, phản hồi giao thức và phản hồi thăm dò trả lời các câu hỏi khác nhau | S017/S018/S029/S030; không có output chưa bằng đã vá |
+| Chương 1, 1.4.3; Chương 2, 2.2–2.3 | PROPOSAL + INTERPRETATION | Vá, tắt SMBv1 và phân đoạn tác động vào các điều kiện khác nhau | S005/S008/S025; giữ nguyên mô hình ba VLAN và bốn trạng thái tích lũy |
+| Chương 2, 2.4–2.5 | PROPOSAL | Ghép tiêu chí và dữ liệu cùng lượt để giải thích thất bại, kiểm tra dịch vụ sau khôi phục | Hồ sơ thu thập dự kiến; các kết quả lab còn thiếu dữ liệu theo DEC-03 |
+
+Không dùng các ví dụ hoặc tiêu chí dự kiến làm AUTHOR_DATA. Các mô tả SOURCE_FACT phải quay về vị trí nguồn trong SOURCE_LEDGER và DEPTH_REVIEW_2026_10_04.md.
