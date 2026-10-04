@@ -27,6 +27,7 @@
 | PILOT_CHAPTER_REVIEW | FIX_REQUIRED | work/do-an/PILOT_CHAPTER_REVIEW.md | Ghi lỗi nguồn, bibliography và 18 cảnh báo văn phong của Chương 1 |
 | DOCX_QA_REPORT | REBUILD_REQUIRED | work/do-an/DOCX_QA_REPORT.md | DOCX cũ validation đạt nhưng chưa publication-ready; cần sinh lại từ Markdown đã duyệt |
 | PUBLICATION_CHECKLIST | BLOCKED | work/do-an/PUBLICATION_CHECKLIST.md | Chờ nguồn, giọng tác giả, chương mẫu và render từng trang |
+| EXPERIMENTAL_TRUTH_MATRIX | CANONICAL_FOR_CHAPTERS_2_3_4 | work/do-an/EXPERIMENTAL_TRUTH_MATRIX.md | Khóa fact/observation/inference cho evidence canonical 2026-10-04; báo cáo thực nghiệm cũ chỉ là historical reference |
 
 ## Quyết định đã khóa
 
@@ -160,3 +161,19 @@
 - Không suy ra trải nghiệm hoặc đóng góp từ giọng viết; dữ liệu, marker và điều kiện bằng chứng vẫn giữ. Nguyên tắc này được áp dụng trong các lượt viết/review tiếp theo, không mặc nhiên chứng nhận hai chương hiện hành đã được kiểm lại theo toàn bộ nguyên tắc mới.
 - Không sửa các chương, dữ liệu lab, quyết định thiết kế hoặc bản Chương 1 đối chiếu của agent khác trong lượt này. Cổng vẫn G4; bước tiếp theo là đối chiếu bản viết và review nội dung theo hồ sơ giọng mới.
 - Kiểm tra cập nhật hồ sơ: validate_project.py đạt; unittest 7/7 đạt; git diff --check đạt. Lint hồ sơ có ba cảnh báo ở nội dung lịch sử, đã phân loại trong STYLE_REVIEW; mẫu hồ sơ không có cảnh báo.
+
+
+## DEC-24 — Khóa ma trận sự thật thực nghiệm cho Chương 2–4
+
+- Ngày: 2026-10-05. Người duyệt: người dùng yêu cầu trực tiếp hệ thống hóa báo cáo thực nghiệm và evidence trước khi soạn bản chính thức.
+- Đã tạo `work/do-an/EXPERIMENTAL_TRUTH_MATRIX.md` và khóa làm nguồn kiểm soát sự thật thực nghiệm cho Chương 2–3–4.
+- Thứ tự bằng chứng: raw output/local state -> canonical manifest/summary -> canonical screenshot -> kịch bản/tài liệu kỹ thuật -> báo cáo thực nghiệm cũ.
+- Baseline canonical: Windows Server 2012 R2 Build 9600; Kali 192.168.56.10; Windows 192.168.56.20; Host-Only; Nmap 7.99; snapshot `Before Demo`; SMB1/SMB2 enabled; MS17-010 patch ground truth = UNPATCHED.
+- Scenario 2 canonical: `smb-vuln-ms17-010` không sinh usable script verdict; khóa classification `UNKNOWN`. Không được tái sử dụng kết quả lịch sử `VULNERABLE / STATUS_INSUFF_SERVER_RESOURCES` như fact của lượt canonical.
+- Case B canonical: disable SMBv1 làm `NT LM 0.12` biến mất khỏi retest, SMB2/3 còn đáp ứng; patch state vẫn UNPATCHED; NSE-MS17-010 vẫn UNKNOWN.
+- Case C canonical: pfSense Transparent Bridge làm TCP 139/445 từ Kali chuyển OPEN -> FILTERED; firewall log quy thuộc trực tiếp SYN bị chặn bởi rule Case C; host phía sau vẫn UNPATCHED và local SMB1=True.
+- Case A patch trong báo cáo cũ chưa có canonical evidence trong bộ hiện hành; chỉ được dùng như lý thuyết/khuyến nghị cho tới khi evidence riêng được audit.
+- Báo cáo `BAO_CAO_DEMO_KICH_BAN_NSE_SMB_MS17_010.docx` được hạ xuống `HISTORICAL_REFERENCE`: giữ ý tưởng phân tầng/differential testing, không dùng làm ground truth.
+- Agent không được viết prose toàn văn Chương 2–3–4 trước khi lập outline + evidence map theo ma trận và được duyệt.
+- ISS-01 được thu hẹp: evidence canonical hiện đã có cho Scenario 1, Scenario 2, Case B và Case C; các claim ngoài ma trận vẫn mang nhãn thiếu dữ liệu. Không coi ISS-01 đã đóng hoàn toàn vì Case A và các phép đo không có artifact vẫn mở.
+- Bước tiếp theo: agent lập lại OUTLINE Chương 2–3–4 và evidence map chi tiết theo `EXPERIMENTAL_TRUTH_MATRIX.md`, không dựng DOCX và không viết dài trước duyệt.
