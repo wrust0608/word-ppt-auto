@@ -31,3 +31,15 @@
 ## Điều kiện kết thúc
 
 Báo cáo này chưa phải xác nhận G5 hoặc G6. Trạng thái chỉ chuyển sang đạt khi mọi sửa đổi có diff được duyệt, không còn lỗi xuất bản và DOCX mới đã qua vòng render–review.
+
+## Kết quả sau biên tập nguồn và giọng ngày 2026-10-04
+
+Các số liệu ở bảng đầu là kết quả trước biên tập. Bản hiện hành không còn cảnh báo VI011; còn ba cảnh báo VI012 dưới đây. Nội dung kỹ thuật không được chứng nhận đúng chỉ bằng kết quả lint.
+
+| Tệp / dòng hiện hành | Rule | Quyết định | Lý do |
+|---|---|---|---|
+| CHAPTER_1.md:22, 79, 151, 233 | VI012 | FALSE_POSITIVE | Cả bốn là caption sơ đồ, cùng tiền tố do quy tắc đánh số hình, không phải đoạn mở lập luận lặp máy móc |
+| CHAPTER_2.md:70, 110, 298, 317, 378 | VI012 | KEEP_WITH_REASON | Có cả dẫn chiếu và caption; dùng mã sơ đồ để người đọc tìm đúng hình trong mô tả phương pháp, không thêm câu chuyển ý chỉ để né lint |
+| CHAPTER_2.md:206, 219, 232 | VI012 | KEEP_WITH_REASON | Các dòng Input của kỹ thuật 1–3 cần cùng cấu trúc để đối chiếu lệnh và tiền điều kiện; hợp đồng chương quy định mười trường mô tả kỹ thuật |
+
+FIX đã thực hiện: tách các quan hệ độc lập trong câu; thu hẹp câu vượt nguồn, bỏ mô tả nội bộ chưa kiểm chứng; gộp phần tổng kết thành đoạn liên tục. Giữ các quan hệ cơ chế → hệ quả rõ theo lựa chọn tác giả. Việc bỏ tuyên bố tối ưu AES không có nguồn được ghi trong REVISION_PASS_2026_10_04.md; không biến một nhãn thiếu nguồn thành câu mơ hồ.

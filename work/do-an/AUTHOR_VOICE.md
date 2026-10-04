@@ -19,7 +19,7 @@ Hồ sơ này được lập dựa trên mẫu văn bản thực tế do tác gi
 - Đại từ/cách xưng hô: Sử dụng ngôi thứ ba khách quan, trung tính; khi cần đề cập đến chủ thể hành động thì dùng "đề tài" hoặc "nhóm thực hiện" (tránh lạm dụng "chúng tôi" hoặc "tôi" trong các phân tích kỹ thuật).
 - Mức độ trang trọng: Trang trọng, học thuật kỹ thuật cao, cô đọng, đi thẳng vào bản chất công nghệ.
 - Độ dài câu điển hình: Câu ghép từ 20 - 35 từ, có cấu trúc logic rõ ràng (chủ ngữ - vị ngữ - thành phần bổ nghĩa chỉ quan hệ nhân quả, điều kiện tiên quyết).
-- Cách chuyển ý thường dùng: Chuyển ý qua quan hệ chức năng và phân tầng kỹ thuật (Từ kiến trúc tổng thể → Thành phần cấp nhân → Luồng bản tin → Tham số an ninh); không dùng các câu mào đầu vô nghĩa.
+- Cách chuyển ý thường dùng: Chuyển ý qua quan hệ chức năng và phân tầng kỹ thuật (Từ kiến trúc tổng thể → Thành phần cấp nhân → Quá trình trao đổi dữ liệu → Tham số an ninh); không dùng các câu mào đầu vô nghĩa.
 - Mật độ thuật ngữ phù hợp: Mật độ cao; giữ nguyên các thuật ngữ tiếng Anh chuẩn của giao thức mạng và hệ điều hành: `Named Pipes`, `Session Setup`, `Tree Connect`, `Dialect`, `Negotiate Protocol`, `Direct-hosted SMB`, `Kernel-mode driver`, `srv.sys`, `srv2.sys`.
 - Cách giải thích khái niệm: Định nghĩa khái niệm bằng tầng mạng, vai trò, thành phần chịu trách nhiệm và cổng kết nối; sau đó liệt kê các trường hợp/chức năng cụ thể bằng gạch đầu dòng ngắn gọn.
 - Thuật ngữ tác giả ưu tiên: Giao thức SMB, thương lượng dialect, thiết lập phiên làm việc, kết nối tài nguyên, driver cấp nhân, lùi cổng (fallback).
@@ -84,3 +84,14 @@ Căn cứ mẫu báo cáo Tuần 2 được tác giả xác nhận và phản h�
 - Giữ câu ghép thể hiện cơ chế → hệ quả khi quan hệ rõ; tách khi một câu chứa nhiều quan hệ độc lập. Khoảng 20–35 từ ở hồ sơ cũ là tham khảo, không phải giới hạn cứng.
 
 Lựa chọn mới này thay ưu tiên nhãn chức năng trong đoạn thử v2; không sửa quy định HUIT, ngôi viết đã khóa, nguồn, dữ liệu hoặc quyết định thiết kế. Không tự suy ra trải nghiệm cá nhân từ mẫu.
+
+## Hiệu chỉnh cách dùng từ theo phản hồi trực tiếp ngày 2026-10-04
+
+Tác giả nhận xét các cách gọi như “bản tin”, “ngăn xếp mạng” mang nghĩa thô và không phù hợp với giọng viết mong muốn. Quy tắc này bổ sung DEC-22 và có ưu tiên cao hơn cách gọi trong đoạn mẫu cũ.
+
+- Ưu tiên từ tự nhiên, gọi đúng đối tượng và hành động; không dịch sát từng từ tiếng Anh khi cách dịch làm câu khó hiểu.
+- Không dùng “bản tin” làm tên gọi chung cho mọi dữ liệu giao thức. Với TCP dùng “gói tin TCP”; với thao tác SMB dùng “yêu cầu thương lượng”, “yêu cầu SMB” hoặc “phản hồi của Server”; chỉ dùng “thông điệp SMB” khi cần nói tới cấu trúc thông điệp giao thức. Không thay tất cả bằng “gói tin”, vì thông điệp ở tầng ứng dụng và gói tin ở tầng truyền tải không đồng nhất.
+- Tránh “ngăn xếp mạng” trong phần mô tả kết nối thông thường. Gọi chủ thể hoặc cơ chế cụ thể: “Windows gửi…”, “Client thiết lập kết nối…” hoặc “cơ chế kết nối của Windows”. Nếu nội dung thực sự phân tích kiến trúc nhiều tầng của network stack thì giải thích khái niệm theo ngữ cảnh, không thay bằng “cơ chế kết nối” khiến mất nghĩa.
+- Khi biên tập các thuật ngữ khác, kiểm tra đối tượng được nói tới, nghĩa kỹ thuật và sự tự nhiên trong toàn câu; giữ thuật ngữ gốc trong ngoặc khi cần phân biệt. Không tự suy ra danh sách từ tác giả cấm ngoài phản hồi đã có.
+
+Đoạn hiệu chỉnh cũ phía trên được giữ để truy vết; những cách gọi tác giả vừa phản đối không tiếp tục dùng làm mẫu giọng. Việc sửa từ không tự xác nhận các phát biểu kỹ thuật trong đoạn đó.

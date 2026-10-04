@@ -18,12 +18,12 @@
 | CLAIM_MATRIX | REOPENED_RECHECK | work/do-an/CLAIM_MATRIX.md | Sáu luận điểm trung tâm đã chuyển sang nguồn khả dụng; cần đồng bộ bibliography Chương 1 |
 | OUTLINE | LOCKED | work/do-an/OUTLINE.md | Đã khóa cấu trúc 4 chương, ngân sách từ (G3) |
 | CHAPTER_ARGUMENT | LOCKED | work/do-an/CHAPTER_ARGUMENT.md | Đã cập nhật toàn diện Hợp đồng Chương 2 theo mô hình Causal-Chain và Enterprise Topology |
-| CHAPTER_1 | LEGACY_PASS_REOPENED | work/do-an/CHAPTER_1.md | Citation khép kín về hình thức nhưng một nhóm nguồn chưa khả dụng trong NotebookLM; xem PILOT_CHAPTER_REVIEW.md |
-| CHAPTER_2 | READY_FOR_APPROVAL | work/do-an/CHAPTER_2.md | **Bản thảo Chương 2 hoàn thiện sau tự phản biện theo mô hình Causal-Chain** (413 dòng, 4 bảng, 3 sơ đồ ASCII, 9 trích dẫn IEEE xuất hiện tuần tự 100%, Điểm: 9.5/10 PASS) |
-| REVIEW_REPORT | PASS | work/do-an/REVIEW_REPORT.md | Báo cáo đánh giá Chương 2 theo mô hình Causal-Chain & 5 điểm tự hoàn thiện (Điểm: 9.5/10 PASS) |
-| STYLE_REVIEW | OPEN | work/do-an/STYLE_REVIEW.md | Audit di chuyển: Chương 1 có 18 và Chương 2 có 14 cảnh báo cần phân loại trước G5/G6; không có rule sáo ngữ `VI001–VI010` |
-| AUTHOR_VOICE_CALIBRATION | READY_FOR_AUTHOR_REVIEW | work/do-an/AUTHOR_VOICE_CALIBRATION.md | Chờ tác giả sửa/xác nhận tối thiểu ba cách diễn đạt trước khi khóa giọng |
-| ROADMAP_2_6 | ACTIVE | work/do-an/ROADMAP_2_6.md | Bước 2 xong; bước 3 còn recheck; bước 4 chờ người dùng; bước 5-6 đã audit nhưng chưa qua cổng |
+| CHAPTER_1 | REVISED_REVIEW_PENDING | work/do-an/CHAPTER_1.md | Đã biên tập nguồn và giọng; 18 mục/88 lượt dẫn, citation cấu trúc đạt; chưa duyệt nội dung |
+| CHAPTER_2 | REVISED_REVIEW_PENDING | work/do-an/CHAPTER_2.md | Sửa ranh giới thiết kế–kết quả, suy luận tích lũy và thuật ngữ; 8 mục/32 lượt dẫn; nhãn dữ liệu giữ nguyên |
+| REVIEW_REPORT | HISTORICAL_REOPENED | work/do-an/REVIEW_REPORT.md | Điểm PASS cũ không chứng nhận bản hiện hành; dùng REVISION_PASS_2026_10_04.md |
+| STYLE_REVIEW | REVIEWED_ADVISORY | work/do-an/STYLE_REVIEW.md | Không còn VI011; ba VI012 đã phân loại; không thay kiểm định nội dung hoặc xuất bản |
+| AUTHOR_VOICE_CALIBRATION | APPROVED_CHOICES_RECORDED | work/do-an/AUTHOR_VOICE_CALIBRATION.md | 1B, 2A, 3A và điều chỉnh thuật ngữ đã được tác giả xác nhận; không yêu cầu duyệt lại giọng |
+| ROADMAP_2_6 | ACTIVE | work/do-an/ROADMAP_2_6.md | Bước 4 hoàn tất; bước 5 đã biên tập, chờ review/duyệt chương; bước 6 cần dựng Word sau duyệt |
 | PILOT_CHAPTER_REVIEW | FIX_REQUIRED | work/do-an/PILOT_CHAPTER_REVIEW.md | Ghi lỗi nguồn, bibliography và 18 cảnh báo văn phong của Chương 1 |
 | DOCX_QA_REPORT | REBUILD_REQUIRED | work/do-an/DOCX_QA_REPORT.md | DOCX cũ validation đạt nhưng chưa publication-ready; cần sinh lại từ Markdown đã duyệt |
 | PUBLICATION_CHECKLIST | BLOCKED | work/do-an/PUBLICATION_CHECKLIST.md | Chờ nguồn, giọng tác giả, chương mẫu và render từng trang |
@@ -116,3 +116,27 @@ Trình người dùng `AUTHOR_VOICE_CALIBRATION.md` và yêu cầu họ sửa ho
 - Bước tiếp theo hiện hành: hoàn tất đối soát nguồn từng phát biểu Chương 1, sau đó biên tập theo giọng đã chốt và trình tác giả duyệt chương; chưa dựng DOCX.
 
 - Đã đọc nguồn gốc S006/S020, sửa năm trong ledger theo ngày cập nhật hiển thị; ghi vị trí/giới hạn hỗ trợ trong SOURCE_RECONCILIATION_PLAN.md. Phát biểu về unsafe=0 ở Chương 2 cần đối chiếu code và thư viện trước giữ/sửa. Chưa áp dụng thay nguồn vào chương.
+
+## Đối chiếu tài liệu tại Việt Nam ngày 2026-10-04
+
+- Hoàn tất VIETNAM_BENCHMARK_REVIEW.md: đọc các phần liên quan trong hai luận văn toàn văn (HUTECH 2015 cùng lĩnh vực, GUST 2023 khác lĩnh vực để so sánh tổ chức bằng chứng), hướng dẫn HCMUTE 2019 và danh mục biểu mẫu UIT. Ghi URL, vị trí đọc, phạm vi truy cập và giới hạn; không coi đây là mẫu đại diện toàn quốc. Chưa đủ báo cáo đồ án đại học cùng đề tài SMB toàn văn để kết luận riêng về nhóm này.
+- Phát hiện ưu tiên: câu Chương 2 trình bày kết quả chưa có dữ liệu (Client đọc/ghi, quan sát gói SYN, rollback dưới 10 giây); mô hình khi-và-chỉ-khi cần giới hạn và tách False/Unknown; nguồn còn recheck; OUTLINE Host-only lệch hợp đồng/bản thảo ba VLAN. Các vấn đề nguồn và dữ liệu vẫn mở, không xóa nhãn.
+- Đề xuất làm rõ đóng góp, cơ sở chọn phương pháp, hồ sơ tái lập, kết luận theo RQ và sửa Word theo QA. Không thay LOCKED, không sửa nội dung chương, không thêm thực nghiệm hoặc bibliography SMB trong lượt này.
+- Sửa trạng thái giọng lỗi thời trong PILOT_CHAPTER_REVIEW theo DEC-22. Bước 4 COMPLETE_AUTHOR_APPROVED; bước 5 REVIEW_COMPLETE_FIX_REQUIRED; bước 6 AUDIT_COMPLETE_REBUILD_REQUIRED.
+- Bước tiếp theo: đối soát nguồn từng phát biểu, sửa các câu vượt bằng chứng theo phạm vi DEC-03, rồi biên tập giọng đã duyệt. Đồng bộ artifact LOCKED chỉ theo quyết định đã được duyệt hoặc có phê duyệt trực tiếp mới.
+- Kiểm tra sau cập nhật: validate_project.py đạt; unittest đạt 7/7. Chương Markdown không thay đổi trong lượt rà soát này, nên chưa phát sinh kết quả citation/style lint mới cho chương.
+
+## Hiệu chỉnh thuật ngữ theo phản hồi tác giả ngày 2026-10-04
+
+- Tác giả trực tiếp nhận xét “bản tin”, “ngăn xếp mạng” thô và không phù hợp. Đã bổ sung AUTHOR_VOICE: ưu tiên tên đối tượng/hành động cụ thể, dùng yêu cầu/phản hồi SMB hoặc gói tin TCP đúng tầng; tránh dịch sát chữ. Đây là bổ sung được người dùng trực tiếp cho phép, không thay quyết định thiết kế.
+- Đã rà các vị trí trong hai chương và hồ sơ giọng. Chương 2 có cả yêu cầu SMB và gói tin TCP nên không thay hàng loạt bằng một từ. Các vị trí được xử lý trong lượt biên tập nguồn → logic → giọng; chưa đổi nghĩa kỹ thuật hoặc dựng DOCX.
+
+## Tiếp tục sau xác nhận giọng cuối ngày 2026-10-04
+
+- Người dùng xác nhận điều chỉnh thuật ngữ hợp lý, không còn yêu cầu chỉnh giọng và yêu cầu tiếp tục. Giọng hiện hành đã được áp dụng; không coi đây là duyệt trước mọi nội dung chương sửa sau đó.
+- Đã biên tập hai chương Markdown; thay nhóm nguồn chưa khả dụng bằng nguồn công khai đã đọc hoặc bỏ/thu hẹp phần không được hỗ trợ. Sổ nguồn thêm S027/S028, chỉnh metadata S002/S026; các sách/CISA cũ vẫn RECHECK nhưng không còn được dẫn trong bản hiện hành. Bảng ánh xạ cũ → mới ở REVISION_PASS_2026_10_04.md.
+- Đã sửa kết quả chưa đo, mô hình khi-và-chỉ-khi, False/Unknown, kết luận độc lập từ chuỗi tích lũy, unsafe=0, suy diễn quyền SYSTEM và rollback dưới 10 giây. Không chạy kiểm thử lab; dữ liệu thực nghiệm vẫn mở. Không đổi OUTLINE/CHAPTER_ARGUMENT LOCKED.
+- Citation riêng chương đạt: Chương 1 88 lượt/18 mục; Chương 2 32 lượt/8 mục. Lint tư vấn còn ba VI012 đã phân loại, không còn VI011. Chưa có citation toàn cục cho bản ghép.
+- Nguồn gốc được xác minh tương đương theo vị trí ghi trong báo cáo; công cụ NotebookLM không có ở phiên này. Không tuyên bố đã nhập S027/S028 hoặc tái kiểm notebook.
+- Bước 5 giữ REVIEW_COMPLETE_FIX_REQUIRED ở cấp roadmap, bản đã sửa REVISED_REVIEW_PENDING; cần đọc/duyệt chương và xử lý drift đề cương theo quyết định hợp lệ. Bước 6 chưa sinh DOCX: bản Word cũ không phản ánh Markdown mới và chưa được phép coi là bản cuối.
+- Kiểm tra hoàn tất lượt: validate_project.py đạt, unittest 7/7, citation riêng hai chương đạt, git diff --check không có lỗi whitespace. Không chạy thực nghiệm hoặc kiểm định bản Word mới.

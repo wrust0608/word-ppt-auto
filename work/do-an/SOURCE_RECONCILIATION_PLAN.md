@@ -1,8 +1,8 @@
 # Kế hoạch đối soát bibliography Chương 1
 
 - Ngày: 2026-10-04.
-- Trạng thái: `PLANNED_NOT_APPLIED`.
-- Không đổi số IEEE hoặc nội dung chương trong lượt này.
+- Trạng thái hiện hành: `APPLIED_REVIEW_PENDING`; xem REVISION_PASS_2026_10_04.md.
+- Bảng tuyến ban đầu dưới đây được giữ để truy vết. Số IEEE và nội dung chương đã được đồng bộ trong lượt biên tập tiếp theo; dùng ánh xạ trong báo cáo mới.
 - Bảng dưới là tuyến kiểm tra dựa trên ledger hiện hành, chưa xác nhận mọi phát biểu có thể thay nguồn nguyên trạng. Chỉ gán số mới theo lần xuất hiện sau khi sửa được duyệt.
 
 | Số cũ / nguồn | Tuyến xử lý | Giới hạn cần kiểm chứng |

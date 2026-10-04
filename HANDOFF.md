@@ -1,5 +1,7 @@
 # Bàn giao dự án luận văn
 
+> Cập nhật mới nhất 2026-10-04: đã biên tập CHAPTER_1/2 theo giọng được tác giả xác nhận, thay nguồn chưa khả dụng hoặc thu hẹp phát biểu; chi tiết và ánh xạ citation ở work/do-an/REVISION_PASS_2026_10_04.md. Thống kê trước biên tập phía dưới là lịch sử; PROJECT_STATE.md có trạng thái hiện hành. Không yêu cầu người dùng duyệt lại giọng. Chương sửa chưa duyệt, Word chưa dựng lại.
+
 > Đây là điểm bắt đầu bắt buộc cho mọi agent tiếp quản repository. Không dựa vào lịch sử chat để suy đoán trạng thái.
 
 ## 1. Mục tiêu đang thực hiện
@@ -79,7 +81,7 @@ Nếu nội dung trong file mâu thuẫn với `PROJECT_STATE.md`, phải báo m
 
 1. Chạy `git status`; kiểm tra file tạm và quét bí mật trước khi stage.
 2. Đối chiếu `SOURCE_LEDGER.md`, bibliography Chương 1 và nguồn thực có trong NotebookLM. Không đổi số IEEE hàng loạt khi chưa lập bảng ánh xạ cũ → mới.
-3. Trình `AUTHOR_VOICE_CALIBRATION.md` cho người dùng; yêu cầu họ sửa/xác nhận tối thiểu ba vị trí. Sau phê duyệt mới cập nhật và khóa `AUTHOR_VOICE.md`.
+3. Dùng `AUTHOR_VOICE.md` với lựa chọn 1B, 2A, 3A và điều chỉnh thuật ngữ đã được xác nhận. Không yêu cầu duyệt lại giọng khi tác giả đã chốt.
 4. Sửa Chương 1 theo `PILOT_CHAPTER_REVIEW.md`: nguồn trước, logic sau, văn phong cuối; chạy citation audit và style lint lại.
 5. Xin người dùng duyệt chương thí điểm. Chỉ sau đó mới chuyển sang ghép hoặc viết tiếp chương.
 6. Sinh lại DOCX từ Markdown đã duyệt; tạo TOC tự động và style tập trung; không vá tiếp bản Word cũ.

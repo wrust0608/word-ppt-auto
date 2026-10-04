@@ -44,3 +44,7 @@ Mọi agent mới bắt đầu tại `HANDOFF.md`, sau đó dùng prompt `prompt
 ## Phê duyệt bước 4
 
 Tác giả đã chọn 1B, 2A, 3A ngày 2026-10-04; ghi lựa chọn cụ thể trong calibration và AUTHOR_VOICE. Bước 4 hoàn tất hiệu chỉnh. Các ghi nhận chờ duyệt phía trên là lịch sử. Tiếp tục bước 5: kiểm nguồn trước biên tập và xin duyệt chương.
+
+## Lượt biên tập sau xác nhận thuật ngữ
+
+Đã áp dụng giọng và sửa nguồn/logic ở hai chương; xem REVISION_PASS_2026_10_04.md. Nhóm sách/CISA chưa khả dụng không còn được dẫn trong bản hiện hành. Citation cấu trúc riêng từng chương đạt; ba cảnh báo lặp đã phân loại. Bước 5 chưa được nâng thành COMPLETE vì chương sửa chưa được duyệt và artifact LOCKED còn drift. Không dựng DOCX hoặc xóa nhãn dữ liệu để vượt cổng.
