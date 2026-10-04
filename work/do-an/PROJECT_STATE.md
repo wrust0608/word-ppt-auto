@@ -3,7 +3,7 @@
 - Cổng hiện tại: `G4_CHAPTERS / EVIDENCE_RECONCILIATION_AND_AUTHOR_REVIEW` (audit ngày 2026-10-04 đã mở lại điều kiện nguồn của Chương 1 và điều kiện xuất bản DOCX; các điểm PASS cũ chỉ còn giá trị lịch sử cho tới khi tái kiểm định đạt)
 - Lần cập nhật: 2026-10-04
 - Người/agent cập nhật: Codex
-- Quyết định phê duyệt gần nhất: Tích hợp hệ thống giọng tác giả và kiểm soát văn phong mới nhưng bảo toàn toàn bộ quy định HUIT, dữ liệu và quyết định học thuật đã khóa; audit mới được phép mở lại trạng thái nguồn/DOCX khi bằng chứng thực tế mâu thuẫn với nhãn PASS cũ.
+- Quyết định phê duyệt gần nhất: DEC-24 — người dùng yêu cầu tích hợp Defense Readiness riêng trong work/do-an, bên trong quy trình nghiên cứu và lập luận; giữ precedence và G0–G6, không sửa core skill, bằng chứng, HUIT, giọng hoặc nội dung chương. Quyết định này không phê duyệt chương/cổng hay xác nhận tác giả đã làm chủ nội dung.
 
 ## Artifact hiện có
 
@@ -12,6 +12,7 @@
 | PROJECT_PROFILE | LOCKED | work/do-an/PROJECT_PROFILE.md | Đã khóa toàn diện (G0) |
 | INSTITUTION_PROFILE | LOCKED | work/do-an/INSTITUTION_PROFILE.md | Đã khóa chuẩn HUIT 2024 (G0) |
 | AUTHOR_VOICE | LOCKED | work/do-an/AUTHOR_VOICE.md | Đã khóa hồ sơ giọng tác giả (G0) |
+| DEFENSE_READINESS | ACTIVE_PROJECT_REVIEW_LAYER | work/do-an/DEFENSE_READINESS.md | Review sau evidence/logic, trước trim/giọng/lint; 8 thẻ pilot Chương 1, không chứng nhận author mastery |
 | RESEARCH_MAP | LOCKED | work/do-an/RESEARCH_MAP.md | Đã khóa 4 RQ, 4 Mục tiêu và phương pháp luận (G1) |
 | SOURCE_LEDGER | REOPENED_RECHECK | work/do-an/SOURCE_LEDGER.md | Đã đối soát NotebookLM; có nguồn bổ sung S020-S026 và một nhóm nguồn cũ cần nhập lại/thay thế |
 | ARGUMENT_MAP | LOCKED | work/do-an/ARGUMENT_MAP.md | Đã khóa chuỗi lập luận C001 - C006 (G3) |
@@ -184,3 +185,16 @@
 - Nhãn READY trong lượt dựng trước mâu thuẫn với điều kiện trên: báo cáo thừa nhận dùng [1]–[6] riêng, trong khi MS17-010 là [7] ở Chương 1 và [5] ở Chương 2. Đã sửa trạng thái hiện hành trong INTRODUCTION_REVIEW.md thành NEEDS_REVISION; giữ báo cáo cũ làm lịch sử, không xóa kết quả đã ghi hoặc nhận đã xác minh lại Word/render.
 - Không sửa DOCX, nguồn Mở đầu, hai chương hoặc artifact LOCKED trong lượt tái đối chiếu. Con số không có luận điểm thiếu hỗ trợ của báo cáo trước chưa được chứng nhận độc lập. Citation cấu trúc PASS không thay thế kiểm nguồn và ánh xạ chung.
 - `[CẦN TÁC GIẢ XÁC NHẬN]` Đã yêu cầu bảng IEEE chung đã duyệt hoặc cho phép lập bảng chung theo thứ tự xuất hiện từ Mở đầu, giữ nguyên hai chương và ghi bảng chuyển đổi để ghép. Sau khi có quyết định, tiếp tục review nguồn/nội dung/giọng, dựng Word và xem từng trang; không merge hoặc tag.
+
+## DEC-24 — Tích hợp Defense Readiness project-local
+
+- Ngày: 2026-10-04. Người duyệt phạm vi tích hợp: người dùng, qua yêu cầu trực tiếp. Artifact: DEFENSE_READINESS.md, trạng thái ACTIVE_PROJECT_REVIEW_LAYER.
+- Defense Readiness là lớp review trong research and argument workflow, chỉ kiểm mức cần thiết, claim ownership và khả năng bảo vệ luận điểm/diễn giải/quyết định quan trọng. Không thay precedence; không thêm cổng hoặc thay cấu trúc G0–G6.
+- Không thay evidence, nguồn/dữ liệu/claim boundary, quy định institution, quyết định đã khóa hoặc author voice. Không tối ưu detector, không bịa rationale; agent không tự xác nhận tác giả làm chủ một quyết định nếu chưa có bằng chứng xác nhận. READY không phải user approval hoặc project PASS.
+- Workflow G4: Evidence → Logic → Defense Readiness → Trim/Simplify → Academic register / Author Voice → Linter → User approval. G5 đối chiếu quyết định xuyên chương, giới hạn kết luận, vai trò chi tiết sâu và việc xử lý thẻ trọng tâm; không tạo gate mới.
+- Pilot chỉ phân tích CHAPTER_1.md tại HEAD khởi đầu f30be66ebb7bfd949f36908d451991caf4420737. Đã tạo 8 thẻ: DR-C1-01–08; 5 AUTHOR_CONFIRM, 3 EVIDENCE_GAP, 0 READY. Không sửa chương hoặc DOCX.
+- `[CẦN TÁC GIẢ XÁC NHẬN]` DR-C1-01/02/04/06/07: lý do chọn trọng tâm CVE, giải thích khung bốn mức, chuỗi công cụ, đối chiếu hộp đen/nội tại và mức FEA cần làm chủ. Phạm vi/quyết định đã khóa được dẫn lại; chỉ thu phản hồi phần còn thiếu, không yêu cầu duyệt lại chúng.
+- EVIDENCE_GAP DR-C1-03/05/08: suy luận vượt từng mức quan sát; gọi đối chiếu công cụ là độc lập; đồng nhất bằng chứng phiên/đặc quyền với thực thi trong nhân giữa các chương. Dẫn về hồ sơ evidence/CONFLICT_LOCKED hiện có để review, không tự sửa CLAIM_MATRIX, SOURCE_LEDGER hoặc CHAPTER_ARGUMENT.
+- Đã thêm cross-reference và bước con vào ROADMAP_2_6.md, cập nhật tối thiểu prompts/CONTINUE_DO_AN_PROMPT.md. Không sửa AUTHOR_VOICE/core skill/templates/citation policy/source policy/data policy; cổng dự án vẫn giữ nguyên.
+- Bước tiếp theo khi được giao review chương: xử lý gap qua evidence/logic và thu bản giải thích thực theo thẻ; cập nhật trạng thái có căn cứ rồi tiếp tục trim/giọng/lint và xin duyệt. Hoàn tất tích hợp không xác nhận toàn dự án đạt.
+- Kiểm tra tích hợp: validate_project.py đạt; unittest 7/7 đạt; git diff --check đạt. Kiểm phạm vi chỉ có DEFENSE_READINESS.md, PROJECT_STATE.md, ROADMAP_2_6.md và prompts/CONTINUE_DO_AN_PROMPT.md; SHA256 của 50 tệp được bảo vệ giữ nguyên so với HEAD khởi đầu, gồm core skill/templates, nguồn, hồ sơ LOCKED, hai chương, AUTHOR_VOICE và DOCX. Đã kiểm đủ trường/trạng thái của tám thẻ. Không dùng kết quả này để PASS chương, tác giả hoặc toàn dự án.

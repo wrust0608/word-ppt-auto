@@ -37,6 +37,13 @@ Tiếp tục tuần tự roadmap bước 2–6 của hệ thống soạn luận 
 
 Nếu `PROJECT_STATE.md` còn câu nào tuyên bố nguồn, Chương 1 hoặc DOCX đã khóa hoàn toàn nhưng mâu thuẫn với audit ngày 2026-10-04, giữ lịch sử quyết định cũ và dùng quyết định tái kiểm định mới để mở lại artifact. Báo mâu thuẫn; không xóa im lặng.
 
+### Defense Readiness project-local — DEC-24
+
+- Khi task là viết/review chương, đọc `work/do-an/DEFENSE_READINESS.md` và các thẻ liên quan.
+- Chèn Defense Readiness sau evidence + logic, trước trim/simplify, academic register/Author Voice và linter; đây là bước con của workflow hiện có, không đổi precedence hoặc G0–G6.
+- Không tự PASS author mastery; nguồn đúng, quyết định LOCKED hoặc thẻ READY không thay user approval. Không tự điền lý do/quan điểm chưa được tác giả xác nhận.
+- Không dùng lớp này để xóa evidence, marker, claim boundary hoặc yêu cầu institution. Giữ nội dung bắt buộc; AUTHOR_CONFIRM/EVIDENCE_GAP phải được xử lý có căn cứ trước khi coi đã đóng.
+
 ## Ràng buộc học thuật
 
 - NotebookLM là kho bằng chứng, không phải nguồn để trích dẫn.
