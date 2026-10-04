@@ -4,6 +4,9 @@ Trạng thái: WAITING_FOR_SUBMISSION
 
 File này do hội đồng phản biện cập nhật sau khi agent nộp bài. Agent không tự sửa điểm.
 
+## Nguyên tắc chấm
+**Chuẩn của repo là chuẩn chính.** `EXTERNAL_BENCHMARK_REVIEW_2026_10_05.md` và `VIETNAM_BENCHMARK_REVIEW.md` chỉ dùng để hiệu chuẩn kỳ vọng, gợi ý câu hỏi phản biện và học kinh nghiệm từ luận văn/bài báo ATTT; không được dùng để ghi đè quy định HUIT, quyết định dự án, nguồn hoặc dữ liệu thật.
+
 ## Rubric 100 điểm
 
 | Tiêu chí | Điểm tối đa | Cách chấm |
