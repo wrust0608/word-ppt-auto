@@ -247,21 +247,21 @@ Cần nhấn mạnh rằng NSE chỉ phân tích mã lỗi logic từ một gói
 
 ### 1.3.4. Metasploit Framework
 
-Metasploit Framework được nhóm em sử dụng như một công cụ đối chiếu và xác minh sâu hơn trong phạm vi thực nghiệm:
+Metasploit Framework được nhóm em sử dụng như một công cụ đối chiếu triển khai và xác minh sâu hơn trong phạm vi thực nghiệm:
 
-- **Mô-đun phụ trợ (Auxiliary Module):** Mô-đun `auxiliary/scanner/smb/smb_ms17_010` thực hiện quét độc lập, cung cấp dữ liệu đối chiếu chéo với kịch bản NSE nhằm tăng độ tin cậy của chỉ báo lỗ hổng.
+- **Mô-đun phụ trợ (Auxiliary Module):** Mô-đun `auxiliary/scanner/smb/smb_ms17_010` thực thi cùng phương pháp thăm dò logic như kịch bản NSE, qua đó giúp đối chiếu chéo khâu phân tích cú pháp và phản hồi giữa hai phần mềm kiểm thử khác nhau. Cần lưu ý rằng hai công cụ này cùng dựa trên một cơ chế tín hiệu mạng qua tài nguyên `IPC$` nên không tạo thành hai nguồn bằng chứng độc lập về trạng thái của máy chủ.
 - **Mô-đun khai thác có kiểm soát (Exploit Module):** Mô-đun `exploit/windows/smb/ms17_010_eternalblue` thuộc bước xác minh tác động ở mức sâu hơn, phục vụ việc đánh giá khả năng thực thi mã trên máy chủ mục tiêu.
 
-Khác với các công cụ quét thụ động, mô-đun khai thác tác động trực tiếp vào luồng xử lý bộ nhớ của hệ thống. Kết quả thu được dù thành công, thất bại hay gây mất ổn định dịch vụ đều phải được diễn giải thận trọng cùng với phiên bản hệ điều hành, cấu hình dịch vụ và các điều kiện kỹ thuật đi kèm.
+Khác với các công cụ thăm dò logic, mô-đun khai thác can thiệp trực tiếp vào việc sắp xếp vùng nhớ của hệ điều hành. Kết quả thu được dù thành công, thất bại hay gây mất ổn định dịch vụ đều phải được diễn giải thận trọng cùng với phiên bản hệ điều hành, cấu hình dịch vụ và các điều kiện kỹ thuật đi kèm.
 
 ### 1.3.5. Vai trò của các công cụ trong quy trình kiểm thử
 
 Các công cụ được nhóm em phối hợp theo một chuỗi quy trình có thứ tự logic:
 
 - **Trạm kiểm thử Kali Linux:** Cung cấp môi trường điều hành để thực thi đồng bộ các công cụ và ghi nhận dữ liệu.
-- **Nmap:** Xác định khả năng tiếp cận dịch vụ qua việc phát hiện các cổng mạng đang mở.
-- **Nmap Scripting Engine:** Tương tác ở tầng ứng dụng để nhận diện việc hỗ trợ SMBv1 và thu thập dấu hiệu của MS17-010.
-- **Metasploit Framework:** Đóng vai trò đối chiếu độc lập và thực hiện bước xác minh sâu hơn khi các dấu hiệu trước đó đã được xác lập.
+- **Nmap:** Xác định khả năng tiếp cận dịch vụ qua việc phát hiện các cổng mạng đang mở ở tầng giao vận.
+- **Nmap Scripting Engine:** Tương tác ở tầng ứng dụng để nhận diện việc hỗ trợ SMBv1 và thu thập dấu hiệu nghi ngờ về MS17-010.
+- **Metasploit Framework:** Đóng vai trò đối chiếu triển khai với kịch bản quét và thực hiện bước xác minh sâu hơn khi các dấu hiệu trước đó đã được xác lập.
 
 Sự liên kết này bảo đảm quá trình kiểm tra diễn ra từ diện rộng đến chuyên sâu, giúp người kiểm thử hiểu rõ bản chất từng lớp thông tin trước khi đưa ra nhận định về an ninh của hệ thống. Đây là cơ sở trực tiếp để xây dựng khung tiêu chí phân loại trạng thái trong mục tiếp theo.
 
@@ -274,36 +274,36 @@ Sự liên kết này bảo đảm quá trình kiểm tra diễn ra từ diện 
 Mức 1 xác định sự hiện diện của dịch vụ SMB trên đường truyền mạng giữa trạm kiểm thử và máy chủ mục tiêu:
 
 - **Dấu hiệu quan sát:** Trạm kiểm thử gửi gói tin TCP SYN tới cổng TCP 445 hoặc TCP 139. Trạng thái cổng được ghi nhận là `Open` khi máy chủ phản hồi gói tin TCP SYN-ACK.
-- **Ý nghĩa:** Chứng minh máy chủ đang vận hành một dịch vụ mạng sẵn sàng tiếp nhận kết nối SMB từ bên ngoài.
-- **Ranh giới kết luận:** Trạng thái mở cổng 445 hoặc 139 chỉ phản ánh khả năng kết nối ở tầng giao vận, hoàn toàn không đồng nghĩa với việc hệ thống có lỗ hổng. Mọi máy chủ Windows đang chia sẻ tệp tin hoặc máy in hợp lệ đều mở các cổng này.
+- **Ý nghĩa kỹ thuật:** Chứng minh cổng mạng của máy chủ đang có tiến trình lắng nghe và tiếp nhận kết nối ở tầng giao vận.
+- **Ranh giới kết luận:** Trạng thái mở cổng 445 hoặc 139 chỉ phản ánh khả năng tiếp cận ở tầng giao vận, chưa chứng minh dịch vụ SMB ở tầng ứng dụng hoạt động bình thường và hoàn toàn không đồng nghĩa với việc hệ thống có lỗ hổng. Mọi máy chủ Windows đang chia sẻ tệp tin hoặc máy in hợp lệ đều mở các cổng này.
 
 ### 1.4.2. Nhận diện SMBv1
 
 Mức 2 kiểm tra xem dịch vụ SMB của máy chủ có chấp thuận giao tiếp bằng phiên bản cũ SMBv1 hay không:
 
 - **Tiêu chí giao thức:** Trạm kiểm thử gửi gói tin `Negotiate Protocol Request` chứa danh sách các dialect. Hệ thống được xác nhận có hỗ trợ SMBv1 khi phản hồi bằng gói tin lựa chọn dialect `NT LM 0.12`.
-- **Ý nghĩa:** Khẳng định máy chủ duy trì giao thức legacy và nạp driver `srv.sys` để xử lý các gói tin này.
-- **Ranh giới kết luận:** Hỗ trợ SMBv1 là điều kiện cần về giao thức, nhưng chưa đủ cơ sở để khẳng định hệ thống tồn tại lỗ hổng MS17-010. Một máy chủ Windows đã cập nhật bản vá vẫn có thể bật SMBv1 để phục vụ tương thích nghiệp vụ mà vẫn an toàn trước lỗi xử lý bộ nhớ.
+- **Ý nghĩa kỹ thuật:** Khẳng định máy chủ chấp thuận giao tiếp bằng giao thức cũ SMBv1 và sẵn sàng xử lý các gói tin này.
+- **Ranh giới kết luận:** Hỗ trợ SMBv1 là điều kiện cần về giao thức, nhưng không quan sát trực tiếp được trạng thái nội tại của driver nhân và chưa đủ cơ sở để khẳng định hệ thống tồn tại lỗ hổng MS17-010. Một máy chủ Windows đã cập nhật bản vá vẫn có thể bật SMBv1 để phục vụ tương thích nghiệp vụ mà vẫn an toàn trước lỗi xử lý bộ nhớ.
 
 ### 1.4.3. Xác định dấu hiệu lỗ hổng
 
 Mức 3 thu thập các phản hồi kỹ thuật để nhận diện dấu hiệu driver `srv.sys` chưa được cập nhật bản vá an ninh:
 
-- **Phản hồi dịch vụ:** Trạm kiểm thử gửi gói tin giao dịch thăm dò an toàn qua giao diện SMB:
+- **Phản hồi dịch vụ:** Trạm kiểm thử gửi gói tin giao dịch thăm dò an toàn qua giao diện SMB (`IPC$`):
   - *Dấu hiệu chưa vá:* Máy chủ phản hồi mã trạng thái `STATUS_INSUFF_SERVER_RESOURCES` (`0xC0000205`), phản ánh việc nhánh mã xử lý cũ đang vận hành.
   - *Dấu hiệu không bộc lộ lỗ hổng:* Máy chủ phản hồi mã lỗi `STATUS_ACCESS_DENIED` (`0xC0000022`) hoặc từ chối xử lý yêu cầu thăm dò.
-- **Ý nghĩa:** Cung cấp chỉ báo kỹ thuật về khả năng hệ thống đang thiếu bản cập nhật an ninh tương ứng.
-- **Ranh giới kết luận:** Dấu hiệu ở Mức 3 mới dừng ở mức suy đoán có căn cứ từ một yêu cầu thăm dò, không phải là bằng chứng khẳng định việc khai thác chắc chắn thành công. Kết quả này còn chịu ảnh hưởng bởi cấu hình kiểm soát truy cập của máy chủ.
+- **Ý nghĩa kỹ thuật:** Cung cấp chỉ báo về sự sai lệch logic phản hồi của hệ thống trước một yêu cầu giao dịch bất thường.
+- **Ranh giới kết luận:** Dấu hiệu ở Mức 3 chỉ dừng lại ở chỉ báo logic từ một gói tin thăm dò, không phải bằng chứng khẳng định việc khai thác chắc chắn thành công. Phản hồi từ chối cũng không chứng minh hệ thống đã vá an toàn vì kết quả còn chịu ảnh hưởng của chính sách kiểm soát truy cập nặc danh.
 
 ### 1.4.4. Xác minh lỗ hổng
 
 Mức 4 đại diện cho bước kiểm chứng sâu hơn về khả năng tác động thực tế của lỗ hổng trong phạm vi thử nghiệm được kiểm soát:
 
 - **Phương pháp kiểm chứng:** Kích hoạt mô-đun kiểm chứng để đánh giá phản ứng thực tế của máy chủ mục tiêu trước yêu cầu can thiệp. Kết quả được phân định theo ba trạng thái:
-  - *Xác minh thành công:* Thiết lập được quyền điều khiển tương tác trên máy chủ mục tiêu, chứng minh lỗ hổng có thể bị lợi dụng để thực thi mã từ xa.
-  - *Không xác minh được:* Quá trình can thiệp bị từ chối, kết nối bị đóng hoặc hệ thống không phản hồi, cho thấy điều kiện mục tiêu không phù hợp để thực hiện tác động.
-  - *Hệ thống mất ổn định:* Máy chủ bị treo hoặc phát sinh lỗi màn hình xanh (BSOD). Hiện tượng này chứng minh hệ thống bị ảnh hưởng về tính sẵn sàng, nhưng không được coi là xác minh thực thi mã thành công.
-- **Ý nghĩa:** Cung cấp cơ sở thực nghiệm rõ ràng nhất để phân biệt giữa việc chỉ tồn tại dấu hiệu và khả năng tác động thực tế.
+  - *Xác minh thành công:* Thiết lập được quyền điều khiển tương tác trên máy chủ mục tiêu, chứng minh lỗ hổng có thể bị lợi dụng để thực thi mã từ xa với đặc quyền cao. Kết quả này ghi nhận quyền thực thi của phiên ở tầng hệ điều hành, không đồng nhất với việc quan sát trực tiếp bộ nhớ nhân từ xa.
+  - *Không xác minh được:* Quá trình can thiệp bị từ chối, kết nối bị đóng hoặc hệ thống không phản hồi. Hiện tượng này chỉ cho thấy kỹ thuật kiểm chứng hiện tại không phù hợp với mục tiêu, không tự động chứng minh máy chủ miễn nhiễm hoặc không có lỗ hổng.
+  - *Hệ thống mất ổn định:* Máy chủ bị treo hoặc phát sinh lỗi màn hình xanh (BSOD). Hiện tượng này chứng minh lỗi quản lý bộ nhớ nhân đã bị kích hoạt làm ảnh hưởng đến tính sẵn sàng, nhưng không được coi là xác minh thực thi mã thành công.
+- **Ý nghĩa kỹ thuật:** Cung cấp cơ sở thực nghiệm rõ ràng nhất để phân biệt giữa việc chỉ tồn tại dấu hiệu và khả năng tác động thực tế.
 - **Ranh giới kết luận:** Thao tác ở Mức 4 có tính xâm nhập cao, chỉ được triển khai trong phạm vi môi trường thử nghiệm có kiểm soát chặt chẽ.
 
 ### 1.4.5. Giới hạn của phương pháp xác minh
