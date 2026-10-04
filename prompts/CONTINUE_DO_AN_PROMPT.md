@@ -37,13 +37,21 @@ Tiếp tục tuần tự roadmap bước 2–6 của hệ thống soạn luận 
 
 Nếu `PROJECT_STATE.md` còn câu nào tuyên bố nguồn, Chương 1 hoặc DOCX đã khóa hoàn toàn nhưng mâu thuẫn với audit ngày 2026-10-04, giữ lịch sử quyết định cũ và dùng quyết định tái kiểm định mới để mở lại artifact. Báo mâu thuẫn; không xóa im lặng.
 
-### Defense Readiness project-local — DEC-24
+### Defense Readiness project-local — DEC-24 & DEC-26 (Fail-Closed Hardening)
 
-- Khi task là viết/review chương, đọc `work/do-an/DEFENSE_READINESS.md` và các thẻ liên quan.
-- `DEC_ID_COLLISION_HISTORICAL`: không tự renumber DEC-22/DEC-23. Defense Card dẫn các ID này phải kèm tên quyết định, ngày và vị trí trong PROJECT_STATE; đối chiếu bảng định danh lịch sử, không chỉ dẫn ID.
-- Chèn Defense Readiness sau evidence + logic, trước trim/simplify, academic register/Author Voice và linter; đây là bước con của workflow hiện có, không đổi precedence hoặc G0–G6.
-- Không tự PASS author mastery; nguồn đúng, quyết định LOCKED hoặc thẻ READY không thay user approval. Không tự điền lý do/quan điểm chưa được tác giả xác nhận.
-- Không dùng lớp này để xóa evidence, marker, claim boundary hoặc yêu cầu institution. Giữ nội dung bắt buộc; AUTHOR_CONFIRM/EVIDENCE_GAP phải được xử lý có căn cứ trước khi coi đã đóng.
+- **Pre-flight Rule Version Check:** Trước mọi task dùng Defense Readiness, đọc `PROJECT_STATE.md` và `DEFENSE_READINESS.md`, xác định commit/review gần nhất của rule. Nếu branch hiện tại thiếu bất kỳ patch/quy tắc nào đã được ghi nhận trong independent review: STOP ngay lập tức và báo `DEFENSE_RULE_VERSION_MISMATCH` kèm danh sách phần thiếu; KHÔNG tiếp tục sửa chapter với rule stale.
+- **Fail-Closed Principle (UNRESOLVED IS VALID):** Một review hoàn thành tốt dù còn `AUTHOR_CONFIRM`, `EVIDENCE_GAP`, `SIMPLIFY`, `REMOVE_CANDIDATE`. Agent TUYỆT ĐỐI KHÔNG coi số lượng READY là KPI, không viết hoặc suy luận theo mục tiêu "đóng tất cả card" hay "khép toàn bộ gap".
+- **Two-Key Rule cho READY:** Mỗi thẻ phải kiểm tra độc lập:
+  - *Evidence Key (`PASS` / `FAIL`):* Nguồn/dữ liệu hỗ trợ đúng claim, không phát biểu mạnh hơn nguồn, không dựa vào artifact stale/conflict, evidence boundary rõ ràng.
+  - *Ownership Key (`PASS` / `FAIL` / `NOT_APPLICABLE`):* Chỉ PASS khi có phản hồi/xác nhận thật của tác giả đã được ghi nhận trong lịch sử dự án (`AUTHOR_VOICE.md`, chat decisions) hoặc do người dùng cung cấp. Quyết định `LOCKED` chỉ chứng minh phạm vi được duyệt, KHÔNG làm Ownership Key = PASS.
+- **Bảng Derivation Rule bắt buộc:** Evidence FAIL $\to$ `EVIDENCE_GAP`; Evidence PASS nhưng Ownership FAIL $\to$ `AUTHOR_CONFIRM`; chi tiết vượt nhu cầu $\to$ `SIMPLIFY`; không cần thiết $\to$ `REMOVE_CANDIDATE`; chỉ khi Evidence PASS + Ownership (PASS hoặc NOT_APPLICABLE) + không cần simplify/remove $\to$ `READY`. Cấm override bảng này.
+- **Cấm tự viết câu trả lời thay tác giả:** Reviewer được tạo `Likely defense question` và `Author must explain`. CẤM TẠO "Gợi ý bảo vệ", "Câu trả lời mẫu", "Sinh viên nên trả lời rằng...". Khi chưa có phản hồi thực từ tác giả, trường `Author response` BẮT BUỘC ghi `[CHƯA CÓ PHẢN HỒI TÁC GIẢ]`.
+- **Phân biệt 3 loại bằng chứng:** Không trộn Source evidence (fact kỹ thuật), Project decision (phạm vi/phương pháp đã duyệt), và Author ownership evidence (tác giả xác nhận).
+- **Status là Closed Enum 5 giá trị:** Chỉ dùng `READY`, `SIMPLIFY`, `AUTHOR_CONFIRM`, `EVIDENCE_GAP`, `REMOVE_CANDIDATE`. Cấm tạo trạng thái ngoài schema (`CLOSED`, `FIXED`, `RESOLVED`, `KHÉP GAP`, `ĐÃ SỬA NỘI DUNG`).
+- **Trường Text action tách rời Status:** (`KEEP`, `REWRITE`, `SIMPLIFY`, `REMOVE_PROPOSED`, `NO_TEXT_CHANGE`). Sửa câu chữ không đồng nghĩa đóng gap.
+- **Counter-Review bắt buộc cho mọi thẻ READY:** Rà soát qua 6 câu hỏi chất vấn ngược; nếu có nghi ngờ hợp lý phải downgrade ngay lập tức.
+- `DEC_ID_COLLISION_HISTORICAL`: không tự renumber DEC-22/DEC-23. Defense Card dẫn các ID này phải kèm tên quyết định, ngày và vị trí trong PROJECT_STATE; đối chiếu bảng định danh lịch sử.
+- Chèn Defense Readiness sau evidence + logic, trước trim/simplify, academic register/Author Voice và linter; đây là bước con của workflow hiện có, không đổi precedence hoặc G0–G6. Không tự PASS author mastery hay tuyên bố chapter/gate PASS.
 
 ## Ràng buộc học thuật
 

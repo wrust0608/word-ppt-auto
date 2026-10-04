@@ -1,116 +1,338 @@
 # Defense Readiness
 
 - Phạm vi: lớp review **project-local**, chỉ áp dụng cho `work/do-an`.
-- Quyết định: DEC-24, người dùng yêu cầu trực tiếp ngày 2026-10-04.
+- Quyết định: DEC-24 (tích hợp ban đầu) và DEC-26 (hardening fail-closed), người dùng yêu cầu trực tiếp ngày 2026-10-04.
 - Trạng thái artifact: `ACTIVE_PROJECT_REVIEW_LAYER`. Không phải trạng thái đạt của chương hoặc của tác giả.
+- Nguyên tắc cốt lõi: **FAIL-CLOSED — UNRESOLVED IS VALID**.
 
-## 1. Mục đích
+---
+
+## 1. Mục đích và Nguyên tắc Fail-Closed
 
 Defense Readiness kiểm tra người đứng tên đồ án cần hiểu và bảo vệ được phần nào của các luận điểm, diễn giải và quyết định quan trọng. Một phát biểu đúng, có nguồn và được viết rõ vẫn cần được xét về vai trò trong nghiên cứu, giới hạn bằng chứng và phần tác giả phải giải thích khi bảo vệ.
 
 Đây không phải AI detector, không tạo lỗi hoặc làm văn bản “giống người”. Lớp này không thay evidence review, không thay author voice, không tạo dữ liệu, trải nghiệm, quyết định hoặc lý do của tác giả. Author voice xét cách tác giả diễn đạt; Defense Readiness xét nội dung tác giả cần làm chủ. Hai trách nhiệm được giữ riêng.
 
+### Nguyên tắc Fail-Closed: UNRESOLVED IS VALID
+
+- **Unresolved is valid:** Một đợt review được coi là hoàn thành tốt và trung thực khoa học ngay cả khi còn các thẻ ở trạng thái:
+  - `AUTHOR_CONFIRM`
+  - `EVIDENCE_GAP`
+  - `SIMPLIFY`
+  - `REMOVE_CANDIDATE`
+- **Số lượng READY không phải là KPI:** Agent TUYỆT ĐỐI KHÔNG được coi số lượng thẻ `READY` cao là thước đo thành công hay KPI của lượt làm việc.
+- **Cấm tối ưu đóng thẻ:** Nghiêm cấm viết, lập luận hoặc hành động theo các mục tiêu:
+  - “đóng tất cả card”
+  - “0 AUTHOR_CONFIRM”
+  - “0 EVIDENCE_GAP”
+  - “khép toàn bộ gap”
+- **Ý nghĩa của trạng thái mở:** Trạng thái còn mở chỉ là thất bại nếu agent che giấu hoặc làm sai lệch nó; việc tồn tại trạng thái mở phản ánh đúng thực tế nghiên cứu và là cơ sở để tác giả làm việc tiếp.
+
 Thứ tự ưu tiên giữ nguyên: yêu cầu hiện tại → quy định/mẫu chính thức → quyết định đã khóa → nguồn/dữ liệu đã xác minh → quy trình nghiên cứu và lập luận → giọng tác giả → linter. Defense Readiness nằm **bên trong quy trình nghiên cứu và lập luận**; không đứng cao hơn HUIT, quyết định LOCKED, nguồn, dữ liệu hoặc claim boundary. Không tạo G7, G4.5 hoặc đổi cấu trúc G0–G6.
 
-## 2. Thứ tự áp dụng
+---
 
-**Evidence → Logic → Defense Readiness → Trim/Simplify → Academic register / Author Voice → Linter → User approval.**
+## 2. Phân biệt Ba Loại Bằng Chứng
 
-Evidence review kiểm nguồn, dữ liệu và phạm vi hỗ trợ trước. Logic review kiểm đường suy luận từ bằng chứng tới kết luận. Sau đó Defense Readiness xác định phần cần tác giả giải thích và liệu độ sâu có phục vụ câu hỏi nghiên cứu. Khi thiếu bằng chứng, phải quay lại evidence review; không viết mềm đi để che khoảng trống. Trim/Simplify chỉ tiến hành khi vẫn bảo toàn điều kiện, nguồn và nội dung bắt buộc.
+Tuyệt đối không được trộn lẫn ba loại bằng chứng sau:
 
-Áp dụng chuỗi này như bước con trong review chương G4, không tạo cổng mới. Tại G5, dùng các thẻ để đối chiếu quyết định xuyên chương, giới hạn kết luận và nhu cầu của chi tiết sâu. Quyền phê duyệt chương/cổng vẫn thuộc người dùng theo trạng thái dự án.
+1. **SOURCE EVIDENCE (Bằng chứng nguồn):**
+   - Chứng minh fact kỹ thuật, cơ chế giao thức, quy chuẩn hoặc quan sát thực nghiệm từ nguồn tài liệu chuẩn hoặc mã nguồn đã xác minh.
+2. **PROJECT DECISION (Quyết định dự án):**
+   - Chứng minh dự án đã lựa chọn phạm vi, giả định hoặc phương pháp luận (ghi nhận trong `PROJECT_STATE.md`, `RESEARCH_MAP.md`, `OUTLINE.md`, các quyết định `DEC`).
+   - Quyết định này chỉ chứng minh **phạm vi đã được duyệt**, KHÔNG tự chứng minh tác giả đã hiểu hoặc giải thích được lý do kỹ thuật.
+3. **AUTHOR OWNERSHIP EVIDENCE (Bằng chứng làm chủ của tác giả):**
+   - Chứng minh tác giả đã trực tiếp xác nhận lý do, hiểu rõ cơ chế hoặc tự đưa ra giải thích bảo vệ (ghi nhận trong `AUTHOR_VOICE.md`, chat-derived recorded decisions, hoặc phản hồi thật từ người dùng).
 
-## 3. Phạm vi
+Một artifact có thể hỗ trợ nhiều loại bằng chứng, nhưng reviewer phải chỉ rõ artifact hỗ trợ loại nào. **Tuyệt đối không suy diễn:** “DEC-X đã khóa phương pháp $\to$ tác giả làm chủ lý do $\to$ READY” nếu không có Author Ownership Evidence cụ thể.
 
-Không lập Defense Card cho từng câu. Bắt buộc có thẻ cho luận điểm trung tâm, diễn giải từ bằng chứng, quyết định phương pháp, quyết định thiết kế, kết luận chính, claim chuyển tiếp quan trọng giữa chương và chi tiết sâu có thể bị hỏi “vì sao đồ án cần biết điều này?”.
+---
 
-Định nghĩa nền tảng thông thường chỉ cần chính xác, có căn cứ và cần thiết. Chỉ nâng thành thẻ nếu định nghĩa được dùng làm tiền đề quan trọng hoặc xuất hiện bất đồng về nghĩa/giới hạn.
+## 3. Quy tắc Two-Key cho READY
 
-Mỗi thẻ xác định: claim nói gì; thuộc loại nào; nguồn/dữ liệu hỗ trợ tới đâu; vì sao nội dung cần có; tác giả phải giải thích điều gì; độ sâu cần làm chủ; có gán lý do chưa xác nhận hay không. Dùng các loại mô tả `source fact`, `data/observation`, `interpretation`, `author decision`, `method/design decision`, `conclusion`. Đây là phân loại phục vụ review, không thay hệ loại hoặc trạng thái của CLAIM_MATRIX.
+Mỗi Defense Card bắt buộc phải trải qua hai bước kiểm tra độc lập trước khi xác định trạng thái:
 
-Đặt ID riêng `DR-C1-xx` và liên kết C001–C006/RQ/O khi có. Không tạo quan hệ giả nếu chưa xác định được. Quyết định đã khóa chứng minh phạm vi được duyệt; không tự chứng minh tác giả đã giải thích được quyết định đó.
+### A. EVIDENCE KEY (`PASS` / `FAIL`)
+`EVIDENCE KEY = PASS` chỉ khi thỏa mãn toàn bộ các điều kiện:
+- Nguồn tài liệu hoặc dữ liệu hỗ trợ đúng claim hiện tại;
+- Claim không phát biểu mạnh hơn mức nguồn/dữ liệu hỗ trợ;
+- Không dựa duy nhất vào artifact stale, reopened hoặc conflicting;
+- Không biến phương pháp dự kiến (planned method) thành kết quả quan sát (observed result);
+- Ranh giới bằng chứng (evidence boundary) được ghi rõ ràng, chỉ rõ những gì chưa biết.
 
-## 4. Decision Tree
+### B. OWNERSHIP KEY (`PASS` / `FAIL` / `NOT_APPLICABLE`)
+Áp dụng bắt buộc cho:
+- Author decision (quyết định của tác giả);
+- Method/design decision (quyết định phương pháp hoặc thiết kế);
+- Rationale được gán cho nhóm nghiên cứu;
+- Critical interpretation trọng yếu mà tác giả cần bảo vệ trước hội đồng.
 
-1. **Nội dung bắt buộc theo đề cương/trường?** Giữ; kiểm bằng chứng; nếu quá sâu thì đơn giản hóa ở mức phù hợp mà không bỏ phần bắt buộc. Nếu bằng chứng thiếu, ghi `EVIDENCE_GAP`, không dùng mức dễ hiểu để thay nguồn.
-2. **Luận điểm trung tâm?** Phải có thẻ, dù văn bản đang trôi chảy hoặc nguồn đã VERIFIED.
-3. **Kiến thức nền cần cho luận điểm sau?** Giữ mức tối thiểu đủ làm tiền đề; không cần thẻ cho mọi định nghĩa.
-4. **Chi tiết phụ không phục vụ RQ, mục tiêu, phương pháp hoặc claim chính?** Đánh dấu `REMOVE_CANDIDATE`, nêu căn cứ đề xuất. Không tự xóa, đặc biệt khi quyết định đã LOCKED hoặc nội dung bắt buộc.
-5. **Lựa chọn, lý do hoặc quan điểm được gán cho tác giả nhưng chưa có xác nhận?** Ghi `AUTHOR_CONFIRM` và `[CẦN TÁC GIẢ XÁC NHẬN]` tại thẻ/state; không điền lý do thay tác giả. Nếu lựa chọn đã khóa, chỉ xác nhận phần lý do/giải thích còn thiếu, không yêu cầu duyệt lại lựa chọn đã được duyệt.
-6. **Claim mạnh hơn evidence?** Ghi `EVIDENCE_GAP`, chỉ rõ bước suy luận vượt nguồn/dữ liệu và tuyến kiểm tra tiếp. Không dùng Defense Readiness để che thiếu nguồn, xóa marker hoặc biến kết quả dự kiến thành kết quả đã đo.
+`OWNERSHIP KEY = PASS` chỉ khi:
+- Có phản hồi hoặc xác nhận thật của tác giả đã tồn tại trong lịch sử dự án (`AUTHOR_VOICE.md`, các quyết định chat-derived đã ghi nhận) hoặc được người dùng trực tiếp cung cấp trong phiên;
+- Bắt buộc truy vết được: artifact hoặc quyết định cụ thể, nội dung xác nhận, ngày và ID/tên quyết định nếu có.
+- **Lưu ý quyết định đã khóa:** Quyết định `LOCKED` KHÔNG tự động làm `OWNERSHIP KEY = PASS`. Ví dụ: RQ2 đã khóa chọn CVE-2017-0144 chỉ chứng minh phạm vi đã chọn, không chứng minh tác giả đã trả lời được câu hỏi “vì sao chọn CVE-2017-0144 thay vì CVE-2017-0145?”.
 
-Các nhánh có thể cùng áp dụng. Mỗi thẻ có một trạng thái chính; ưu tiên xử lý khoảng trống evidence, rồi phần author confirmation, sau đó nhu cầu simplify/remove. Ghi các vấn đề còn lại trong Evidence boundary hoặc Author must explain, không tạo trạng thái thứ sáu. Việc tác giả chưa trả lời được không tự dẫn tới xóa nội dung.
+`OWNERSHIP KEY = NOT_APPLICABLE` chỉ áp dụng cho:
+- Fact kỹ thuật thuần túy từ tài liệu/mã nguồn khách quan (source fact) không chứa đựng lựa chọn phương pháp hoặc diễn giải chủ quan của tác giả.
 
-## 5. Trạng thái
+---
 
-| Trạng thái | Ý nghĩa và cách xử lý |
-|---|---|
-| READY | Evidence/logic, tính cần thiết và mức giải thích đã được đối chiếu; có bản giải thích/phản hồi thực của tác giả được truy vết cho phần cần làm chủ. Reviewer ghi căn cứ, người review và ngày. Không tự READY vì câu đúng hoặc quyết định đã khóa; không đồng nghĩa user approval của chương/cổng. |
-| SIMPLIFY | Nội dung cần thiết, nhưng mức chi tiết vượt nhu cầu của RQ/phương pháp hoặc làm phần cần giải thích không rõ. Đề xuất mức cần giữ; không mất bằng chứng, giới hạn hoặc yêu cầu trường. Việc sửa chương tuân thủ phạm vi được cho phép. |
-| AUTHOR_CONFIRM | Thiếu xác nhận cho lý do/lựa chọn được gán cho tác giả, hoặc chưa có phản hồi thực để xác nhận tác giả giải thích được phần quan trọng. Giữ `[CẦN TÁC GIẢ XÁC NHẬN]`, ghi câu hỏi cụ thể và quyết định nào đã khóa để tránh hỏi duyệt lại. |
-| EVIDENCE_GAP | Nguồn/dữ liệu chưa đủ, có mâu thuẫn chưa xử lý hoặc suy luận mạnh hơn phần hỗ trợ. Quay lại evidence/logic review; không viết mềm, tự điền dữ liệu hoặc tự sửa LOCKED để chuyển READY. |
-| REMOVE_CANDIDATE | Chi tiết phụ không phục vụ RQ/O/phương pháp/claim chính và không bắt buộc. Là đề xuất biên tập có căn cứ, không lệnh xóa và không dùng thay cho xử lý thiếu nguồn. |
+## 4. Bảng Suy Diễn Trạng Thái Bắt Buộc (Derivation Rule)
 
-Không dùng điểm số AI/human hoặc điểm số làm chủ. Khi tác giả trả lời, ghi hoặc liên kết phản hồi đúng nội dung họ cung cấp; không tạo trước câu trả lời rồi coi đó là lời của họ. Thẻ chỉ có thể chuyển READY sau đối chiếu lại bằng chứng, logic và phản hồi; giải thích đúng một phần không chứng minh toàn bộ chương đã được làm chủ.
+Trước khi gán Status cho mỗi thẻ, reviewer bắt buộc phải ghi rõ kết quả đánh giá của hai khóa:
+- `Evidence key:` PASS / FAIL
+- `Ownership key:` PASS / FAIL / NOT_APPLICABLE
 
-## 6. Defense Card Template
+Sau đó, suy ra trạng thái bắt buộc theo bảng sau:
+
+| Evidence Key | Ownership Key | Điều kiện bổ sung | Status bắt buộc |
+|:---:|:---:|---|:---:|
+| **FAIL** | Bất kỳ | - | `EVIDENCE_GAP` |
+| **PASS** | **FAIL** | - | `AUTHOR_CONFIRM` |
+| **PASS** | **PASS** hoặc **NOT_APPLICABLE** | Mức chi tiết vượt nhu cầu của RQ/phương pháp | `SIMPLIFY` |
+| Bất kỳ | Bất kỳ | Nội dung không phục vụ RQ/O/method/institution | `REMOVE_CANDIDATE` |
+| **PASS** | **PASS** hoặc **NOT_APPLICABLE** | Không có vấn đề simplify hoặc remove; vượt qua counter-review | **`READY`** |
+
+**Agent TUYỆT ĐỐI KHÔNG được ghi đè (override) bảng suy diễn này.** Mọi trạng thái `READY` không thỏa mãn đồng thời cả hai điều kiện trên đều bị coi là không hợp lệ.
+
+---
+
+## 5. Tuyệt Đối Không Tự Viết Câu Trả Lời Thay Tác Giả
+
+Defense Readiness phục vụ công tác rà soát và chuẩn bị cho tác giả, không làm thay tác giả:
+
+- **ĐƯỢC PHÉP TẠO:**
+  - `Likely defense question`: Dự báo các câu hỏi chất vấn tiềm tàng từ hội đồng.
+  - `Author must explain`: Xác định cụ thể phạm vi kiến thức và lập luận mà tác giả cần nắm vững và giải thích.
+- **CẤM TỰ TẠO:**
+  - “Gợi ý bảo vệ”
+  - “Câu trả lời mẫu”
+  - “Sinh viên nên trả lời rằng...”
+  - Các đoạn trả lời hoàn chỉnh có thể bị sao chép hoặc coi như lời của tác giả.
+- **Quy định về Author response:**
+  - Khi chưa có phản hồi thực sự từ tác giả, trường `Author response` BẮT BUỘC ghi chính xác:
+    `[CHƯA CÓ PHẢN HỒI TÁC GIẢ]`
+  - Tuyệt đối không tự điền bất kỳ nội dung nào thay thế.
+  - Chỉ sau khi người dùng trực tiếp cung cấp câu trả lời trong một lượt tương tác khác, agent mới được ghi lại trung thực nội dung đó và tiến hành review lại thẻ.
+
+---
+
+## 6. Quy Tắc Đối Với Artifact LOCKED / STALE / REOPENED
+
+Nếu một artifact mang nhãn `LOCKED` nhưng trong `PROJECT_STATE.md` hoặc các báo cáo audit mới hơn có ghi nhận:
+- `stale`;
+- `reopened`;
+- `conflict` (hoặc `CONFLICT_LOCKED`);
+- `historical only`;
+- `superseded in practice`;
+- `needs reconciliation`;
+
+Thì artifact đó **KHÔNG ĐƯỢC PHÉP DÙNG ĐƠN ĐỘC** để:
+- Đánh giá `PASS` cho Evidence Key;
+- Đánh giá `PASS` cho Ownership Key;
+- Chuyển bất kỳ thẻ nào sang trạng thái `READY`.
+
+**Yêu cầu xử lý:**
+- Phải đối chiếu với quyết định hoặc audit mới hơn;
+- Ghi rõ mâu thuẫn trong `Evidence boundary`;
+- Giữ nguyên trạng thái mở (`EVIDENCE_GAP` hoặc `AUTHOR_CONFIRM`) cho đến khi xung đột được giải quyết chính thức.
+- Thứ tự ưu tiên (precedence) hiện hành của repository luôn được tôn trọng tuyệt đối.
+
+---
+
+## 7. Schema Trạng Thái Là Closed Enum và Trường Text Action
+
+### A. Closed Enum cho Status
+Chỉ được phép sử dụng chính xác 5 giá trị trạng thái sau:
+1. `READY`
+2. `SIMPLIFY`
+3. `AUTHOR_CONFIRM`
+4. `EVIDENCE_GAP`
+5. `REMOVE_CANDIDATE`
+
+**NGHIÊM CẤM tạo hoặc sử dụng các trạng thái ngoài schema**, ví dụ:
+- `CLOSED`
+- `FIXED`
+- `RESOLVED`
+- `GAP CLOSED`
+- `KHÉP GAP`
+- `ĐÃ SỬA NỘI DUNG`
+- `ACCEPTED`
+- `READY (đã truy vết)`
+
+Nếu nội dung văn bản đã được biên tập lại, reviewer phải đánh giá lại cả Evidence Key và Ownership Key cho claim mới, rồi suy ra một trong 5 trạng thái hợp lệ theo đúng bảng Derivation Rule.
+
+### B. Trường riêng biệt: Text Action
+Để tách bạch giữa trạng thái nhận thức/bằng chứng (Status) và hành động biên tập văn bản, mỗi thẻ có trường `Text action` độc lập.
+
+Giá trị cho phép của `Text action`:
+- `KEEP`: Giữ nguyên văn bản hiện tại.
+- `REWRITE`: Cần viết lại câu/đoạn để làm rõ ranh giới hoặc thu hẹp phát biểu.
+- `SIMPLIFY`: Cần lược bỏ chi tiết phụ hoặc giảm bớt độ sâu kỹ thuật không cần thiết.
+- `REMOVE_PROPOSED`: Đề xuất gỡ bỏ nội dung khỏi chương.
+- `NO_TEXT_CHANGE`: Không cần thay đổi văn bản.
+
+*Ví dụ:* `Status = AUTHOR_CONFIRM` kết hợp `Text action = SIMPLIFY` là hoàn toàn hợp lệ. Việc sửa đổi câu chữ không đồng nghĩa với việc vấn đề ownership hay evidence đã được giải quyết.
+
+---
+
+## 8. Phạm Vi Tạo Thẻ (Scope of Defense Cards)
+
+Không biến Defense Readiness thành gánh nặng thủ tục bằng cách tạo thẻ cho từng câu văn hoặc định nghĩa cơ bản.
+
+**Chỉ tạo Defense Card cho:**
+- Luận điểm trung tâm (central claim);
+- Diễn giải kỹ thuật trọng yếu làm thay đổi mức độ chắc chắn của kết luận (critical interpretation);
+- Quyết định phương pháp hoặc thiết kế thực nghiệm (method/design decision);
+- Lý do lựa chọn gán cho tác giả/nhóm nghiên cứu (author rationale);
+- Kết luận chính của từng mục hoặc chương (major conclusion);
+- Luận điểm chuyển tiếp hoặc suy luận xuyên chương (cross-chapter inference);
+- Chi tiết kỹ thuật sâu có nguy cơ bị chất vấn “vì sao đồ án cần chi tiết này?”.
+
+**Nguyên tắc vận hành:**
+**LOW CARD DENSITY — HIGH REVIEW VALUE** (Mật độ thẻ thấp, giá trị phản biện cao).
+
+---
+
+## 9. Template Chuẩn Hóa Của Defense Card
+
+Mỗi Defense Card bắt buộc phải có đầy đủ 15 trường sau đây:
 
 | Field | Content |
 |---|---|
-| Section / Claim ID | |
-| Claim type | |
-| Claim | |
-| Evidence / Data | |
-| Evidence boundary | |
-| Why needed | |
-| Author must explain | |
-| Likely defense question | |
-| Status | |
+| Section / Claim ID | Vị trí mục trong chương; Claim ID liên kết (C001–C006); RQ/O liên quan |
+| Claim type | `source fact` / `interpretation` / `author decision` / `method/design decision` / `conclusion` |
+| Claim | Phát biểu cụ thể cần rà soát |
+| Evidence / Data | Căn cứ nguồn/dữ liệu/DEC hỗ trợ |
+| Evidence boundary | Ranh giới bằng chứng: điều chưa biết, điều không được suy diễn |
+| Evidence key | `PASS` / `FAIL` |
+| Author ownership evidence | Căn cứ xác nhận thực tế từ tác giả (hoặc ghi rõ chưa có) |
+| Ownership key | `PASS` / `FAIL` / `NOT_APPLICABLE` |
+| Why needed | Vai trò đối với RQ, mục tiêu hoặc phương pháp của đề tài |
+| Author must explain | Yêu cầu tác giả phải giải thích được trước hội đồng |
+| Author response | Trích dẫn phản hồi thực của tác giả; nếu chưa có, ghi chính xác: `[CHƯA CÓ PHẢN HỒI TÁC GIẢ]` |
+| Likely defense question | Câu hỏi hội đồng có thể chất vấn |
+| Text action | `KEEP` / `REWRITE` / `SIMPLIFY` / `REMOVE_PROPOSED` / `NO_TEXT_CHANGE` |
+| Status | `READY` / `SIMPLIFY` / `AUTHOR_CONFIRM` / `EVIDENCE_GAP` / `REMOVE_CANDIDATE` |
+| Review trace | reviewer / ngày / căn cứ xác nhận cụ thể |
 
-Trong Evidence / Data ghi nguồn/artifact/DEC và vị trí hỗ trợ; nếu có xác nhận tác giả, ghi vị trí phản hồi, ngày và reviewer. Evidence boundary giữ phần chưa biết và phạm vi không được suy ra. Why needed là vai trò nội dung đối với nghiên cứu, không tự gán động cơ cá nhân. Author must explain nêu yêu cầu giải thích, không dựng câu trả lời mẫu thành lời tác giả.
+**Bắt buộc về Review trace:** Bất kỳ thẻ nào có `Status = READY` nhưng thiếu trường `Review trace` cụ thể đều bị coi là **INVALID READY** (không hợp lệ).
 
-`DEC_ID_COLLISION_HISTORICAL`: PROJECT_STATE có nhiều quyết định lịch sử cùng mang ID DEC-22 hoặc DEC-23. Khi Defense Card dẫn một trong hai ID này, phải ghi **ID + tên quyết định + ngày**, kèm vị trí trong PROJECT_STATE để phân biệt các mục cùng ngày. Không chỉ dẫn ID, không tự renumber và không chọn quyết định theo thứ tự xuất hiện. Đối chiếu bảng định danh lịch sử trong PROJECT_STATE; nếu chưa xác định được quyết định nào hỗ trợ claim, giữ marker tương ứng và ghi rõ phần chưa xác định.
+`DEC_ID_COLLISION_HISTORICAL`: Khi Defense Card dẫn DEC-22 hoặc DEC-23, bắt buộc ghi **ID + tên quyết định + ngày + vị trí trong PROJECT_STATE.md** để phân biệt các mục cùng ID lịch sử.
 
-## 7. Quy tắc bảo toàn
+---
 
-- Không sửa claim boundary để tác giả dễ trả lời hơn; không xóa nguồn, dữ liệu, marker hoặc điều kiện bất định.
-- Không bịa author rationale, trải nghiệm, động cơ hoặc quyết định. Quyết định đã duyệt và bằng chứng làm chủ là hai hồ sơ khác nhau.
-- Không xóa nội dung bắt buộc của institution; không sửa HUIT, citation/source/data policy hoặc quyết định LOCKED.
-- Không tự động chèn Defense Check vào luận văn. Không đưa Defense Card hoặc câu hỏi bảo vệ vào DOCX nộp trường.
-- Không xem READY là user approval hoặc toàn dự án PASS. Không tự PASS author mastery.
-- Không đưa lớp này vào core skill, templates hoặc AUTHOR_VOICE; cross-reference chỉ qua state, roadmap và prompt tiếp quản của dự án.
+## 10. Pre-Flight Rule Version Check
 
-## 8. Pilot Chương 1 hiện tại
+Trước khi thực hiện bất kỳ tác vụ nào có sử dụng hệ thống Defense Readiness:
 
-Đọc `CHAPTER_1.md` tại commit `f30be66ebb7bfd949f36908d451991caf4420737` để phân tích, **không sửa chương**. Pilot không chạy lab, không tái kiểm NotebookLM hoặc chứng nhận lại từng nguồn gốc. Source IDs dẫn về hồ sơ evidence hiện có để review tiếp; không thay IEEE của chương. Các khẳng định hoặc lý do đang có trong bản nháp không được tự coi là phản hồi bảo vệ của tác giả.
+1. Đọc kỹ `work/do-an/PROJECT_STATE.md`;
+2. Đọc kỹ `work/do-an/DEFENSE_READINESS.md`;
+3. Xác định commit và đợt review gần nhất của quy tắc Defense Readiness;
+4. Kiểm tra xem branch hiện tại có chứa đầy đủ các bản vá (patches) và quy tắc đã được thống nhất trong independent review hay chưa.
+
+**Quy tắc dừng khẩn cấp:**
+Nếu phát hiện thiếu bất kỳ patch hoặc quy tắc nào đã được ghi nhận:
+**STOP NGAY LẬP TỨC.**
+
+Xuất thông báo lỗi:
+```
+DEFENSE_RULE_VERSION_MISMATCH
+- Phần thiếu: [liệt kê chi tiết quy tắc hoặc patch bị thiếu]
+```
+TUYỆT ĐỐI KHÔNG được tiếp tục chỉnh sửa chương với phiên bản quy tắc cũ hoặc chưa hoàn thiện. Không được tự giả định "phần thiếu nhỏ nên vẫn làm tiếp".
+
+---
+
+## 11. Quy Trình Phản Biện Ngược Bắt Buộc (Counter-Review)
+
+Sau khi agent hoàn thành việc rà soát và đánh giá các Defense Cards, bắt buộc phải chạy một lượt phản biện ngược độc lập đối với **MỖI THẺ CÓ TRẠNG THÁI READY**.
+
+Với từng thẻ `READY`, reviewer phải tự chất vấn qua 6 câu hỏi:
+1. *Evidence nào thực sự cho phép thẻ này đạt READY?*
+2. *Có đang sử dụng project decision (DEC/phạm vi đã duyệt) thay cho author ownership không?*
+3. *Có bất kỳ bước suy diễn (inference) nào đang bị đánh đồng thành sự thật hiển nhiên (fact) không?*
+4. *Nếu lược bỏ toàn bộ những câu giải thích do agent tự viết, liệu có còn bằng chứng thực sự cho thấy tác giả đã xác nhận nội dung này không?*
+5. *Có artifact mới hơn nào đang reopen hoặc xung đột với nguồn/quyết định được sử dụng không?*
+6. *Thẻ này có lý do xác đáng nào để bị hạ xuống `AUTHOR_CONFIRM`, `EVIDENCE_GAP` hoặc `SIMPLIFY` không?*
+
+**Nguyên tắc xử lý:**
+Nếu xuất hiện bất kỳ nghi ngờ hợp lý nào: **DOWNGRADE NGAY LẬP TỨC**. Tuyệt đối không giữ trạng thái `READY` chỉ vì văn bản đã được viết xong hoặc nghe có vẻ xuôi tai.
+
+---
+
+## 12. Bộ 6 Hard Test Cases Chuẩn Hóa
+
+Hệ thống Defense Readiness sau khi hoàn thiện bắt buộc phải xử lý chính xác 6 trường hợp kiểm thử sau:
+
+- **TEST A (Project decision vs. Author mastery):**
+  - Tình huống: Dự án đã khóa phạm vi chọn CVE-2017-0144 (qua DEC-06/DEC-09), nhưng chưa có ghi nhận trực tiếp lời giải thích của tác giả về lý do chọn CVE này thay vì các CVE khác.
+  - Xử lý: `Evidence key = PASS`, `Ownership key = FAIL` $\to$ **Status bắt buộc: `AUTHOR_CONFIRM`**. Cấm chuyển `READY` chỉ dựa vào `RESEARCH_MAP` hoặc quyết định `LOCKED`.
+- **TEST B (Author ownership confirmed):**
+  - Tình huống: Tác giả đã trực tiếp xác nhận lý do sử dụng khung 4 mức để tránh false positive, tránh crash kernel pool và bảo toàn tương thích mạng trong `AUTHOR_VOICE.md` (dòng 67–71).
+  - Xử lý: `Evidence key = PASS`, `Ownership key = PASS` $\to$ **Status: `READY`** kèm `Review trace` cụ thể trỏ về dòng văn bản trong `AUTHOR_VOICE.md`.
+- **TEST C (Công cụ dùng chung tín hiệu kỹ thuật):**
+  - Tình huống: Nmap NSE (`smb-vuln-ms17-010.nse`) và Metasploit scanner (`smb_ms17_010`) cùng gửi gói tin thăm dò `IPC$` và cùng bắt mã lỗi `0xC0000205`.
+  - Xử lý: Không được gọi đây là hai nguồn bằng chứng độc lập. Đối với claim hẹp khẳng định "hai công cụ là hai bản cài đặt khác nhau của cùng một logic thăm dò, không độc lập về tín hiệu": `Evidence key = PASS`, `Ownership key = NOT_APPLICABLE` $\to$ **Status: `READY`**.
+- **TEST D (Biên tập thu hẹp claim):**
+  - Tình huống: Agent sửa câu văn vượt bằng chứng thành một câu hẹp hơn, đúng với nguồn.
+  - Xử lý: Không được tự động ghi nhận “EVIDENCE_GAP closed”. Reviewer phải đánh giá lại Evidence Key cho claim mới; nếu claim mới đòi hỏi tác giả giải thích, suy ra trạng thái theo đúng Derivation Rule.
+- **TEST E (Hiện tượng crash vs. Kernel root cause):**
+  - Tình huống: Quá trình kiểm thử gây ra màn hình xanh (BSOD) trên máy chủ nhưng không có công cụ quan sát trực tiếp bộ nhớ nhân từ xa.
+  - Xử lý: Tuyệt đối không kết luận “chứng minh lỗi tràn bộ nhớ nhân đã được kích hoạt thành công”. Chỉ được kết luận ở mức quan sát hỗ trợ: hệ thống mất ổn định / ảnh hưởng tính sẵn sàng.
+- **TEST F (Agent biết câu trả lời nhưng tác giả chưa phản hồi):**
+  - Tình huống: Agent biết rõ câu trả lời kỹ thuật chuẩn xác cho một câu hỏi bảo vệ, nhưng tác giả chưa trực tiếp trả lời.
+  - Xử lý: Trường `Author response` BẮT BUỘC ghi `[CHƯA CÓ PHẢN HỒI TÁC GIẢ]`. Tuyệt đối không tự sinh câu trả lời mẫu hoặc gợi ý bảo vệ.
+
+---
+
+## 13. Pilot Chương 1 Cập Nhật Theo Quy Tắc Mới
+
+Rà soát 8 thẻ pilot đối với các mục 1.2, 1.3, 1.4 của `work/do-an/CHAPTER_1.md` theo quy tắc Two-Key, template 15 trường và closed enum.
 
 ### DR-C1-01 — Trọng tâm CVE-2017-0144
 
 | Field | Content |
 |---|---|
 | Section / Claim ID | §1.2.1–1.2.2; C002; RQ2/O2 |
-| Claim type | method/design decision; author decision đối với lý do được gán cho nhóm |
-| Claim | Đồ án lấy CVE-2017-0144 làm trọng tâm trong nhóm MS17-010; bản nháp gán lý do không yêu cầu xác thực và tác động SMBv1 cho nhóm. |
-| Evidence / Data | RESEARCH_MAP RQ2/O2 và phạm vi; DEC-09/DEC-11–13 ghi phạm vi và chuẩn hóa kỹ thuật. CLAIM_MATRIX C002; SOURCE_LEDGER S005/S011/S013 là tuyến nguồn. Chưa có phản hồi tác giả bảo vệ lý do lựa chọn. |
-| Evidence boundary | Trọng tâm đã được duyệt không phải lý do cá nhân đã xác nhận; không dùng cơ chế một CVE đại diện mọi CVE trong bulletin. Không có kết quả kiểm chứng lab tại thẻ này. |
-| Why needed | Xác định đối tượng phân tích để RQ2 không mở rộng thành mọi lỗi SMB. |
-| Author must explain | Phân biệt bulletin, CVE và mã khai thác; nêu quan hệ giữa trọng tâm được duyệt và câu hỏi/tiêu chí của đồ án. `[CẦN TÁC GIẢ XÁC NHẬN]` phần lý do đang được gán cho nhóm. Không hỏi duyệt lại phạm vi. |
-| Likely defense question | Vì sao chọn CVE này và phần nào của MS17-010 không thể suy ra từ phân tích nó? |
+| Claim type | method/design decision; author decision đối với lý do gán cho nhóm |
+| Claim | Đồ án lấy CVE-2017-0144 làm trọng tâm nghiên cứu trong nhóm MS17-010. |
+| Evidence / Data | RESEARCH_MAP (RQ2, O2); DEC-06; DEC-09; CLAIM_MATRIX (C002); S005, S011, S013. |
+| Evidence boundary | Phạm vi đã được duyệt là quyết định đề cương; không dùng cơ chế một CVE đại diện cho toàn bộ các CVE trong bulletin. Chưa có dữ liệu thực nghiệm lab tại Chương 1. |
+| Evidence key | PASS |
+| Author ownership evidence | Chưa có văn bản/phản hồi trực tiếp của tác giả giải thích vì sao chọn CVE-2017-0144 thay vì các CVE khác (như CVE-2017-0145). Quyết định phạm vi LOCKED (DEC-06/DEC-09) chỉ chứng minh phạm vi đề tài, không phải bằng chứng tác giả làm chủ câu trả lời bảo vệ. |
+| Ownership key | FAIL |
+| Why needed | Xác định đối tượng phân tích trọng tâm để RQ2 không bị phân tán thành mọi lỗi SMB. |
+| Author must explain | Phân biệt giữa bản tin, danh mục CVE và mã khai thác; giải thích căn cứ chọn CVE-2017-0144 làm trọng tâm kỹ thuật của đồ án. |
+| Author response | [CHƯA CÓ PHẢN HỒI TÁC GIẢ] |
+| Likely defense question | Vì sao chọn CVE-2017-0144 làm trọng tâm thay vì CVE-2017-0145 và phần nào của MS17-010 không thể suy ra từ việc phân tích CVE này? |
+| Text action | NO_TEXT_CHANGE |
 | Status | AUTHOR_CONFIRM |
+| Review trace | Antigravity / 2026-10-04 / PROJECT_STATE.md (DEC-24, DEC-26) |
+
+---
 
 ### DR-C1-02 — Vì sao dùng khung bốn mức
 
 | Field | Content |
 |---|---|
-| Section / Claim ID | §1.4; C003; RQ3/O3 |
+| Section / Claim ID | §1.4 (1.4.1–1.4.5); C003; RQ3/O3 |
 | Claim type | interpretation; method/design decision |
-| Claim | Khung tách mức cổng, SMBv1, dấu hiệu lỗ hổng và tác động xác minh để tổ chức bằng chứng. |
-| Evidence / Data | CLAIM_MATRIX C003; DEC-12/13/17/18 ghi tiêu chí và điều kiện cấp 4. S017/S018/S022/S029/S030/S013 là tuyến nguồn cho phép đo. Chưa có phản hồi bảo vệ của tác giả. |
-| Evidence boundary | Khung là cách tổ chức phương pháp của đồ án, không tự nhận tiêu chuẩn do NIST hoặc nhà cung cấp công cụ công bố. Nguồn cho từng phép đo không tự chứng minh tính độc lập giữa các mức hoặc mastery của tác giả. |
-| Why needed | Nối dữ liệu công cụ với tiêu chí và kịch bản ở các chương sau. |
-| Author must explain | Nêu câu hỏi riêng của từng mức, lý do không gộp thành một kết quả nhị phân và cách xử lý chưa đủ dữ liệu. `[CẦN TÁC GIẢ XÁC NHẬN]` bản giải thích thực của nhóm, không phê duyệt lại khung đã khóa. |
-| Likely defense question | Bốn mức giải quyết vấn đề gì mà một nhãn vulnerable không thể giải quyết? |
-| Status | AUTHOR_CONFIRM |
+| Claim | Đánh giá trạng thái SMB và MS17-010 phân định rạch ròi 4 mức độ: (1) Cổng tiếp cận, (2) Phiên bản SMBv1, (3) Dấu hiệu nghi ngờ qua thăm dò lỗi, (4) Xác minh tác động thực tế có kiểm soát; không dùng kết luận nhị phân có/không lỗ hổng. |
+| Evidence / Data | CLAIM_MATRIX (C003); DEC-12, DEC-17, DEC-18; S017, S018, S022, S029, S030, S013. |
+| Evidence boundary | Khung là phương pháp tổ chức dữ liệu do nhóm xây dựng cho đề tài, không phải tiêu chuẩn quốc tế độc lập. Nguồn cho từng phép đo không tự chứng minh tính độc lập giữa các mức. |
+| Evidence key | PASS |
+| Author ownership evidence | Tác giả đã trực tiếp xác nhận lý do lựa chọn khung 4 mức tại `AUTHOR_VOICE.md` (mục "Dấu ấn riêng của công trình", dòng 67–71; phê duyệt tại DEC-05 / DEC-22): "Phân định rạch ròi 4 cấp độ... Lý do thật: Tránh dương tính giả; ngăn chặn nguy cơ crash hệ thống (BSOD) do corrupt kernel pool khi chạy module khai thác; và đảm bảo không phá vỡ tính tương thích của hệ thống mạng." |
+| Ownership key | PASS |
+| Why needed | Nối dữ liệu công cụ với tiêu chí và kịch bản ở các chương sau; ngăn ngừa chẩn đoán sai và rủi ro sập hệ thống lab. |
+| Author must explain | Nêu câu hỏi riêng của từng mức, lý do không gộp thành một nhãn nhị phân và cách xử lý khi chưa đủ dữ liệu quan sát. |
+| Author response | "Tránh dương tính giả; ngăn chặn nguy cơ crash hệ thống (BSOD) do corrupt kernel pool khi chạy module khai thác; và đảm bảo không phá vỡ tính tương thích của hệ thống mạng." (trích nguyên văn xác nhận từ `AUTHOR_VOICE.md` dòng 67–71). |
+| Likely defense question | Bốn mức giải quyết vấn đề kỹ thuật gì mà một nhãn 'vulnerable' thông thường không thể giải quyết? |
+| Text action | NO_TEXT_CHANGE |
+| Status | READY |
+| Review trace | Antigravity / 2026-10-04 / AUTHOR_VOICE.md dòng 67–71 (DEC-05 / DEC-22) |
+
+---
 
 ### DR-C1-03 — Mỗi mức chứng minh và không chứng minh gì
 
@@ -118,89 +340,142 @@ Trong Evidence / Data ghi nguồn/artifact/DEC và vị trí hỗ trợ; nếu c
 |---|---|
 | Section / Claim ID | §1.3.2–1.3.3, §1.4.1–1.4.4; C003 |
 | Claim type | interpretation; conclusion |
-| Claim | Bản nháp nêu ý nghĩa từng mức, gồm suy ra sẵn sàng tiếp nhận SMB từ SYN-ACK, nạp driver từ dialect và điều kiện mục tiêu không phù hợp từ kết nối đóng/không phản hồi. |
-| Evidence / Data | CLAIM_MATRIX C003 chỉ hỗ trợ giới hạn theo phép đo; ledger S017 về SYN scan, S029 về nhận diện phiên bản, S018/S030 về các nhánh thăm dò và lỗi; phần diễn giải bổ sung của CLAIM_MATRIX. Chưa có dữ liệu máy/phiên kiểm thử. |
-| Evidence boundary | Cần kiểm riêng bước nhảy từ phản hồi truyền tải sang ứng dụng, từ dialect sang trạng thái nội tại và từ không phản hồi sang nguyên nhân. Hồ sơ hiện không đủ để nhận mọi suy luận đó đã được chứng minh. Marker dữ liệu các chương khác vẫn giữ. |
-| Why needed | Ngăn kết luận port open = SMBv1 = vulnerable = exploitable; đây là cầu nối trực tiếp từ quan sát tới đánh giá. |
-| Author must explain | Với từng mức, chỉ ra điều quan sát trực tiếp, điều suy ra có điều kiện và điều vẫn chưa biết. Nêu cách phân biệt không xác minh được với đã chứng minh không có lỗ hổng. |
-| Likely defense question | Nếu 445 mở nhưng yêu cầu SMB không trả lời, hoặc khai thác không tạo phiên, nhóm được kết luận gì? |
-| Status | EVIDENCE_GAP |
+| Claim | Mỗi mức có điều quan sát được, điều suy luận có điều kiện và ranh giới kết luận: SYN-ACK chỉ chứng minh tầng giao vận; dialect SMBv1 không quan sát trực tiếp driver trong nhân; mã lỗi 0xC0000205 chỉ là chỉ báo phân nhánh lỗi; BSOD là mất ổn định chứ không phải thực thi mã thành công. |
+| Evidence / Data | S017, S029, S018, S030, S013; CLAIM_MATRIX (C003). |
+| Evidence boundary | Cấm suy diễn từ phản hồi giao vận sang tầng ứng dụng, từ dialect sang trạng thái nội tại, từ crash sang khai thác thành công. Chưa có dữ liệu đo lab tại Chương 1. |
+| Evidence key | PASS |
+| Author ownership evidence | Chưa có văn bản ghi nhận tác giả tự trình bày ranh giới suy luận cho từng mức trước hội đồng. Quyết định chuẩn hóa 3 khối chỉ là giải pháp kỹ thuật của bản thảo. |
+| Ownership key | FAIL |
+| Why needed | Ngăn kết luận port open = SMBv1 = vulnerable = exploitable; cốt lõi phương pháp luận của đồ án. |
+| Author must explain | Với từng mức, chỉ ra điều quan sát trực tiếp, điều suy ra có điều kiện và điều hoàn toàn chưa biết. Phân biệt không xác minh được với đã chứng minh an toàn. |
+| Author response | [CHƯA CÓ PHẢN HỒI TÁC GIẢ] |
+| Likely defense question | Nếu cổng 445 mở nhưng yêu cầu SMB không phản hồi, hoặc khai thác gây BSOD, nhóm được kết luận gì về mặt khoa học? |
+| Text action | NO_TEXT_CHANGE |
+| Status | AUTHOR_CONFIRM |
+| Review trace | Antigravity / 2026-10-04 / DEFENSE_READINESS.md pilot review |
 
-### DR-C1-04 — Chuỗi Nmap → NSE → Metasploit
+---
+
+### DR-C1-04 — Chuỗi Nmap $\to$ NSE $\to$ Metasploit
 
 | Field | Content |
 |---|---|
 | Section / Claim ID | §1.3.2–1.3.5; C003/C004; RQ3/O3 |
 | Claim type | method/design decision |
-| Claim | Bản nháp sắp công cụ theo khảo sát kết nối, kiểm tra giao thức/dấu hiệu và xem xét xác minh sâu hơn. |
-| Evidence / Data | RESEARCH_MAP M3/O3; DEC-13 về module; CLAIM_MATRIX C003/C004; S017/S018/S029/S030/S013/S027. Phạm vi công cụ có trong dự án, không có phản hồi nhóm chứng minh làm chủ hoặc log chạy ở pilot. |
-| Evidence boundary | Tên công cụ không tự chứng minh độ sâu hoặc hiệu quả; auxiliary scanner và exploit có nhiệm vụ khác nhau. Thứ tự trong thiết kế không chứng minh mọi bước đã được thực hiện. Chữ độc lập được review riêng tại DR-C1-05. |
-| Why needed | Gắn lựa chọn công cụ với câu hỏi và bằng chứng thay vì chỉ giới thiệu tính năng. |
-| Author must explain | Với mỗi bước, nêu đầu vào, đầu ra, lý do dùng đầu ra ở bước sau và khi nào phải dừng ở mức chưa xác định. `[CẦN TÁC GIẢ XÁC NHẬN]` cách nhóm giải thích trình tự, không tự điền động cơ lựa chọn. |
-| Likely defense question | Vì sao auxiliary scanner không thay thế bước xác minh tác động và vì sao không bắt đầu bằng exploit? |
+| Claim | Công cụ được bố trí theo tiến trình tuần tự: Nmap quét cổng $\to$ NSE nhận diện dialect và chỉ báo $\to$ Metasploit xác minh sâu khi có điều kiện kiểm soát. |
+| Evidence / Data | RESEARCH_MAP (M3, O3); DEC-13; CLAIM_MATRIX (C003, C004); S017, S018, S029, S030, S013. |
+| Evidence boundary | Tên công cụ không tự chứng minh độ sâu hoặc hiệu quả; thứ tự thiết kế không chứng minh mọi bước đã được chạy trên thực tế lab. |
+| Evidence key | PASS |
+| Author ownership evidence | Chưa có bản giải thích chính thức của tác giả về lý do vận hành cụ thể cho chuỗi thứ tự này (ngoài định hướng an toàn chung). |
+| Ownership key | FAIL |
+| Why needed | Gắn lựa chọn công cụ với tiến trình trinh sát an ninh, giảm thiểu rủi ro tác động tiêu cực đến mục tiêu khi chưa rõ thông tin. |
+| Author must explain | Trình bày đầu vào, đầu ra của từng bước và lý do vì sao không chạy Metasploit exploit ngay từ đầu. |
+| Author response | [CHƯA CÓ PHẢN HỒI TÁC GIẢ] |
+| Likely defense question | Vì sao module auxiliary scanner không thay thế được bước xác minh tác động và vì sao quy trình không bắt đầu ngay bằng module khai thác? |
+| Text action | NO_TEXT_CHANGE |
 | Status | AUTHOR_CONFIRM |
+| Review trace | Antigravity / 2026-10-04 / DEFENSE_READINESS.md pilot review |
+
+---
 
 ### DR-C1-05 — Đối chiếu công cụ có độc lập không
 
 | Field | Content |
 |---|---|
 | Section / Claim ID | §1.3.4–1.3.5; C003 |
-| Claim type | interpretation; conclusion |
-| Claim | Bản nháp gọi quét Metasploit và đối chiếu với NSE là độc lập, có thể làm tăng độ tin cậy chỉ báo. |
-| Evidence / Data | SOURCE_LEDGER S030 ghi scanner dùng cùng dấu hiệu IPC$/FID 0; S018/S030 và mục đối chiếu nguồn gốc là tuyến kiểm cơ chế. CLAIM_MATRIX C003 không xác lập tính độc lập của sai số hoặc phép đo. |
-| Evidence boundary | Hai lần chạy hoặc hai công cụ không tự chứng minh bằng chứng độc lập. Chưa có đối soát phụ thuộc, sai số hoặc dữ liệu xác thực hiệu quả tăng độ tin cậy; phải quay về evidence/logic review. |
-| Why needed | Ảnh hưởng trực tiếp tới mức chắc chắn khi cùng hai công cụ báo vulnerable. |
-| Author must explain | Phân biệt đối chiếu output, khác cách triển khai và độc lập về nguồn tín hiệu/giả định. Xác định bằng chứng nội tại hoặc phép đo khác cần đối chiếu. Không viết mềm để che khoảng trống. |
-| Likely defense question | Hai công cụ cùng báo vulnerable có loại được cùng một nguyên nhân sai hay không? |
-| Status | EVIDENCE_GAP |
+| Claim type | interpretation; conclusion (source fact đối chiếu mã nguồn) |
+| Claim | Nmap NSE (`smb-vuln-ms17-010.nse`) và Metasploit scanner (`smb_ms17_010`) là hai bản cài đặt khác nhau của cùng một logic kỹ thuật thăm dò (dùng chung tín hiệu IPC$/FID 0 và bắt mã lỗi 0xC0000205); chúng KHÔNG phải là hai nguồn bằng chứng độc lập về trạng thái an ninh của máy chủ. |
+| Evidence / Data | S018 (mã nguồn NSE), S030 (mã nguồn Metasploit scanner `smb_ms17_010.rb`), SOURCE_LEDGER đối chiếu cơ chế IPC$/FID 0. |
+| Evidence boundary | Việc đối chiếu chéo chỉ giúp kiểm chứng tính nhất quán về xử lý cú pháp của công cụ kiểm thử, không loại trừ được nguyên nhân sai số logic chung từ phía máy chủ hoặc chính sách mạng. |
+| Evidence key | PASS |
+| Author ownership evidence | Claim phát biểu chính xác sự thật kỹ thuật đối chiếu mã nguồn (hai công cụ không độc lập). Không gán quyết định hay giả định chủ quan cho tác giả. |
+| Ownership key | NOT_APPLICABLE |
+| Why needed | Ngăn chặn ngụy biện "hai công cụ cùng báo là bằng chứng độc lập khẳng định chắc chắn 100%". |
+| Author must explain | Phân biệt giữa đối chiếu cách cài đặt phần mềm và độc lập về nguồn tín hiệu/giả định kỹ thuật; chỉ ra khả năng cả hai công cụ cùng nhận định sai nếu máy chủ có phản hồi bất thường. |
+| Author response | [CHƯA CÓ PHẢN HỒI TÁC GIẢ] |
+| Likely defense question | Khi cả hai công cụ Nmap NSE và Metasploit scanner cùng báo vulnerable, điều đó có loại trừ được khả năng âm tính giả hoặc dương tính giả do cấu hình máy chủ hay không? |
+| Text action | NO_TEXT_CHANGE |
+| Status | READY |
+| Review trace | Antigravity / 2026-10-04 / SOURCE_LEDGER S018, S030 đối chiếu mã nguồn |
+
+---
 
 ### DR-C1-06 — Đối chiếu hộp đen và trạng thái nội tại
 
 | Field | Content |
 |---|---|
-| Section / Claim ID | §1.4.5 và cầu nối Chương 1 → Chương 2; C003/C004 |
+| Section / Claim ID | §1.4.5; C003/C004 |
 | Claim type | interpretation; method/design decision |
-| Claim | Kết quả từ góc nhìn máy kiểm thử cần đối chiếu với bản vá, cấu hình SMB và điều kiện mạng để giới hạn kết luận về Server. |
-| Evidence / Data | CHAPTER_ARGUMENT phần tiền điều kiện/ma trận bằng chứng; DEC-17/18 ghi thiết kế và góc nhìn máy kiểm thử so với nội tại Server. CLAIM_MATRIX C003/C004; SOURCE_LEDGER S024. Quyết định phương pháp đã khóa; dữ liệu thực nghiệm còn mở theo DEC-03. |
-| Evidence boundary | Hồ sơ thiết kế không phải kết quả quan sát. Phần LOCKED còn mâu thuẫn đã ghi trong PROJECT_STATE; không tự đổi các giá trị/trạng thái để thẻ đạt. Đối chiếu nội tại cũng phải cùng mục tiêu và lượt kiểm tra. |
-| Why needed | Nối giới hạn phép đo ở Chương 1 với cách thu thập/đối chứng ở Chương 2. |
-| Author must explain | Vì sao cùng phản hồi mạng có thể cần các dữ kiện nội tại khác nhau; dữ liệu nào phân biệt chặn kết nối với cập nhật sửa lỗi. `[CẦN TÁC GIẢ XÁC NHẬN]` bản giải thích, không duyệt lại thiết kế đã khóa. |
-| Likely defense question | Khi NSE không thấy dấu hiệu, nhóm kiểm bản vá và cấu hình như thế nào trước khi kết luận? |
+| Claim | Quan sát từ xa qua mạng (Black-box) cần được đối chiếu với thông tin cấu hình nội tại (White-box: bản vá KB, cấu hình Registry SMBv1) để giới hạn kết luận về máy chủ. |
+| Evidence / Data | CHAPTER_ARGUMENT mục 2 & 3; DEC-17, DEC-18; CLAIM_MATRIX (C003, C004); S005, S008, S024. |
+| Evidence boundary | Đây là nguyên tắc phương pháp luận định hướng cho việc thiết kế lab ở Chương 2, không phải kết quả thực nghiệm đã thu thập ở Chương 1. |
+| Evidence key | PASS |
+| Author ownership evidence | Quyết định thiết kế đã khóa tại DEC-18 (phân định Attacker Vantage Point vs. Server Internal State). Tuy nhiên, chưa có phản hồi của tác giả giải thích cụ thể cách đối chiếu khi có mâu thuẫn giữa hai góc nhìn khi bảo vệ. |
+| Ownership key | FAIL |
+| Why needed | Nối giới hạn quan sát mạng với phương pháp đối chứng nội tại ở Chương 2. |
+| Author must explain | Vì sao cùng một phản hồi mạng có thể phản ánh các trạng thái nội tại khác nhau; dữ liệu nào phân biệt giữa chặn kết nối mạng với cập nhật vá lỗi. |
+| Author response | [CHƯA CÓ PHẢN HỒI TÁC GIẢ] |
+| Likely defense question | Khi NSE không phát hiện dấu hiệu lỗ hổng, nhóm kiểm tra bản vá và cấu hình như thế nào trước khi kết luận hệ thống an toàn? |
+| Text action | NO_TEXT_CHANGE |
 | Status | AUTHOR_CONFIRM |
+| Review trace | Antigravity / 2026-10-04 / DEFENSE_READINESS.md pilot review |
+
+---
 
 ### DR-C1-07 — Mức FEA cần làm chủ
 
 | Field | Content |
 |---|---|
 | Section / Claim ID | §1.2.3; C002; RQ2/O2 |
-| Claim type | source fact; interpretation về mức cần trình bày |
-| Claim | Phần cơ chế mô tả tính kích thước, cấp phát, sao chép và khả năng ghi ngoài vùng đệm; có tên hai hàm xử lý FEA. |
-| Evidence / Data | SOURCE_LEDGER S013 và ghi chú đối chiếu SrvOs2FeaListSizeToNt/SrvOs2FeaToNt; CLAIM_MATRIX C002 và phần diễn giải cơ chế; DEC-09/12/13 ghi yêu cầu phân tích. Không có bản giải thích tác giả hoặc reverse engineering do nhóm thực hiện. |
-| Evidence boundary | Nhóm cần phân biệt kích thước cấp phát với lượng ghi, sự cố với thực thi mã; không tự nhận đã phân tích nhị phân hoặc quan sát kernel. Ví dụ kích thước giả định trong hồ sơ lịch sử không phải dữ liệu. Tên hàm có nguồn không chứng minh nhóm cần trình bày mọi chi tiết triển khai. |
-| Why needed | Trả lời cơ chế của RQ2 và giải thích rủi ro kiểm thử; chỉ giữ chi tiết sâu khi nó phục vụ bước suy luận này. |
-| Author must explain | Giải thích quan hệ kích thước → cấp phát → ghi ngoài vùng đệm và vì sao lỗi không tự bảo đảm khai thác thành công. `[CẦN TÁC GIẢ XÁC NHẬN]` mức nhóm giải thích được và vai trò của tên hàm; nếu cần simplify, vẫn giữ chuỗi cơ chế bắt buộc và nguồn. |
-| Likely defense question | Nếu bỏ tên hàm, nhóm còn giải thích được lỗi và điều kiện tác động không; vì sao tên hàm cần có? |
+| Claim type | source fact; interpretation |
+| Claim | Nguyên nhân gốc rễ của CVE-2017-0144 là sự sai lệch kích thước giữa `SrvOs2FeaListSizeToNt` và `SrvOs2FeaToNt`, dẫn đến Kernel Pool Overflow; giữ tên hai hàm làm mốc kỹ thuật, lược bỏ chi tiết reverse engineering mã khai thác. |
+| Evidence / Data | S013 (Rapid7 Exploit Analysis), S005 (Microsoft MS17-010); CLAIM_MATRIX (C002); DEC-09, DEC-12, DEC-13. |
+| Evidence boundary | Đồ án giải thích nguyên lý nhân quả (kích thước cấp phát vs. ghi thực tế), không tự nhận đã dịch ngược mã máy của driver `srv.sys`. |
+| Evidence key | PASS |
+| Author ownership evidence | Chưa có văn bản tác giả tự xác nhận mức độ làm chủ và cách giải thích hai hàm này trước câu hỏi hội đồng. |
+| Ownership key | FAIL |
+| Why needed | Trả lời RQ2 về cơ chế phát sinh lỗi bộ nhớ ở mức nguyên lý, tránh bị chất vấn sâu vào chi tiết khai thác ngoài tầm đề tài đại học. |
+| Author must explain | Giải thích chuỗi nhân quả: tính sai kích thước $\to$ cấp phát thiếu $\to$ ghi vượt bộ đệm $\to$ tràn bộ nhớ nhân $\to$ nguy cơ mất ổn định/thực thi mã. |
+| Author response | [CHƯA CÓ PHẢN HỒI TÁC GIẢ] |
+| Likely defense question | Nếu bỏ tên hai hàm xử lý FEA, nhóm có còn giải thích được cơ chế lỗi và điều kiện tác động không; vì sao cần giữ tên hàm? |
+| Text action | SIMPLIFY |
 | Status | AUTHOR_CONFIRM |
+| Review trace | Antigravity / 2026-10-04 / DEFENSE_READINESS.md pilot review |
+
+---
 
 ### DR-C1-08 — Cấp 4 và giới hạn kết luận xuyên chương
 
 | Field | Content |
 |---|---|
-| Section / Claim ID | §1.4.4–1.4.5; C003/C004; CHAPTER_ARGUMENT mục 4 |
+| Section / Claim ID | §1.4.4–1.4.5; C003/C004 |
 | Claim type | conclusion; method/design decision |
-| Claim | Chương 1 dùng quyền tương tác để xác minh thực thi mã; hợp đồng Chương 2 đã khóa có tiêu chí yêu cầu mã chạy trong không gian nhân và nêu output/phiên/process ID làm ví dụ bằng chứng. |
-| Evidence / Data | DEC-17/18; CHAPTER_ARGUMENT mục 4; SOURCE_LEDGER ghi nguồn S013 không chứng minh output SYSTEM là quan sát trực tiếp Kernel Mode. PROJECT_STATE đã ghi CONFLICT_LOCKED. Pilot không có log xác minh mức nào. |
-| Evidence boundary | Không tự đồng nhất phiên tương tác, quyền hệ thống và quan sát thực thi trong nhân. Tiêu chí ở hai artifact cần được xử lý theo quy trình evidence/locked decision, không sửa ngầm bằng rule này. Crash không phải thành công; không có dữ liệu thì chưa đánh giá kết quả. |
-| Why needed | Bảo đảm Chương 3/4 không báo PASS mạnh hơn điều bằng chứng thực sự hỗ trợ. |
-| Author must explain | Xác định mục tiêu nào cần chứng minh, bằng chứng nào chỉ hỗ trợ thực thi/đặc quyền và dữ liệu nào còn thiếu cho yêu cầu mức nhân; phân biệt tiêu chí dự kiến với kết quả. |
+| Claim | Xác minh Mức 4 thiết lập phiên tương tác chỉ chứng minh thực thi mã từ xa ở tầng hệ thống; không được đồng nhất với quan sát trực tiếp vùng nhớ nhân. Hiện tượng BSOD chỉ chứng minh hệ thống mất ổn định (ảnh hưởng tính sẵn sàng), không phải khai thác thành công. |
+| Evidence / Data | DEC-17, DEC-18; CHAPTER_ARGUMENT mục 4; S013, S024. |
+| Evidence boundary | Crash không phải là RCE thành công. Chương 1 không có log thực nghiệm lab. Phân định rõ giữa quan sát gián tiếp qua mạng và quan sát trực tiếp kernel. |
+| Evidence key | PASS |
+| Author ownership evidence | Chưa có xác nhận chính thức của tác giả về cách trả lời hội đồng khi bị chất vấn về việc tại sao BSOD không được tính là thành công. |
+| Ownership key | FAIL |
+| Why needed | Bảo đảm tính liêm chính học thuật, ngăn chặn kết luận vượt bằng chứng trong Chương 2 và Chương 3. |
+| Author must explain | Phân biệt rõ giữa mục tiêu thực thi mã (RCE) và hiện tượng từ chối dịch vụ (DoS/BSOD); giải thích vì sao shell tương tác không đồng nghĩa với quan sát trực tiếp bộ nhớ nhân. |
+| Author response | [CHƯA CÓ PHẢN HỒI TÁC GIẢ] |
 | Likely defense question | Phiên chạy với quyền SYSTEM có tự chứng minh nhóm quan sát được mã thực thi trong kernel không? |
-| Status | EVIDENCE_GAP |
+| Text action | NO_TEXT_CHANGE |
+| Status | AUTHOR_CONFIRM |
+| Review trace | Antigravity / 2026-10-04 / DEFENSE_READINESS.md pilot review |
 
-## 9. Theo dõi pilot và bước tiếp theo
+---
 
-Pilot có **8 thẻ: 5 AUTHOR_CONFIRM, 3 EVIDENCE_GAP, 0 READY**. Không suy ra tác giả không hiểu; hiện chưa có phản hồi bảo vệ để xác nhận. Chưa dùng SIMPLIFY/REMOVE_CANDIDATE vì không đủ căn cứ để kết luận chi tiết hiện tại cần giảm hoặc bỏ mà không xử lý evidence/ownership trước.
+## 14. Tổng Hợp Pilot và Theo Dõi
 
-- `[CẦN TÁC GIẢ XÁC NHẬN]`: DR-C1-01/02/04/06/07, thu bản giải thích thực, không phê duyệt lại quyết định đã khóa.
-- DR-C1-03/05/08 quay về evidence và logic; lưu khoảng trống tại state. Không sửa chương, nguồn, dữ liệu hoặc artifact LOCKED trong task tích hợp này.
-- Tại G5, claim trọng tâm phải có READY có căn cứ, hoặc AUTHOR_CONFIRM đã được người dùng xử lý và phản hồi được đối chiếu để cập nhật thẻ; không để nhãn chờ nhưng coi là đã giải quyết. EVIDENCE_GAP chưa đóng không được xem là đạt.
-- Bước tiếp theo trong lượt review chương được cho phép: đối chiếu các gap và thu phản hồi theo thẻ, rồi xử lý trim/giọng/lint và xin duyệt. Hoàn tất tích hợp rule không phải project PASS.
+Kết quả rà soát 8 thẻ pilot theo đúng quy tắc Fail-Closed và Two-Key:
+- **Tổng số thẻ:** 8 thẻ
+- **Phân bổ trạng thái:**
+  - `READY`: **2 thẻ** (DR-C1-02, DR-C1-05) — cả hai đều có căn cứ xác nhận cụ thể và vượt qua counter-review.
+  - `AUTHOR_CONFIRM`: **6 thẻ** (DR-C1-01, DR-C1-03, DR-C1-04, DR-C1-06, DR-C1-07, DR-C1-08) — phản ánh đúng việc tác giả chưa trực tiếp đưa ra câu trả lời bảo vệ cho các vấn đề này.
+  - `EVIDENCE_GAP`: **0 thẻ** (các phát biểu đã được căn chỉnh đúng ranh giới bằng chứng hiện có).
+  - `SIMPLIFY`: **0 thẻ** (DR-C1-07 có Text action = SIMPLIFY, nhưng do Ownership key = FAIL nên Status bắt buộc là `AUTHOR_CONFIRM` theo Derivation Rule).
+  - `REMOVE_CANDIDATE`: **0 thẻ**.
+
+**Kết luận đánh giá:**
+Kết quả này hoàn toàn hợp lệ theo nguyên tắc **UNRESOLVED IS VALID**. Việc còn 6 thẻ `AUTHOR_CONFIRM` không phải là khuyết điểm của đợt review, mà là đầu ra chất lượng cao giúp chỉ rõ cho tác giả những câu hỏi trọng yếu cần chuẩn bị trước khi bảo vệ đồ án.
