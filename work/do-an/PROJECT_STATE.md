@@ -18,7 +18,7 @@
 | CLAIM_MATRIX | REOPENED_RECHECK | work/do-an/CLAIM_MATRIX.md | Sáu luận điểm trung tâm đã chuyển sang nguồn khả dụng; cần đồng bộ bibliography Chương 1 |
 | OUTLINE | LOCKED | work/do-an/OUTLINE.md | Đã khóa cấu trúc 4 chương, ngân sách từ (G3) |
 | CHAPTER_ARGUMENT | LOCKED | work/do-an/CHAPTER_ARGUMENT.md | Đã cập nhật toàn diện Hợp đồng Chương 2 theo mô hình Causal-Chain và Enterprise Topology |
-| CHAPTER_1 | DEPTH_REVISED_REVIEW_PENDING | work/do-an/CHAPTER_1.md | Đã viết lại cơ chế và phân tích; 22 mục/78 lượt dẫn; xem DEPTH_REVIEW_2026_10_04.md |
+| CHAPTER_1 | SECTIONS_1_2_TO_1_4_COMPLETED_REVIEW_PENDING | work/do-an/CHAPTER_1.md | Hoàn thiện các mục 1.2, 1.3, 1.4 theo baseline đề mục tham khảo.docx; bảo toàn 1.1; DOCX review tại outputs/CHUONG_1_REVIEW.docx |
 | CHAPTER_2 | DEPTH_REVISED_REVIEW_PENDING | work/do-an/CHAPTER_2.md | Làm rõ lý do thiết kế, đối chứng và suy luận kết quả; 10 mục/20 lượt dẫn; dữ liệu lab còn mở |
 | REVIEW_REPORT | HISTORICAL_REOPENED | work/do-an/REVIEW_REPORT.md | Điểm PASS cũ không chứng nhận bản hiện hành; dùng REVISION_PASS_2026_10_04.md |
 | STYLE_REVIEW | REVIEWED_ADVISORY | work/do-an/STYLE_REVIEW.md | Không còn VI011; ba VI012 đã phân loại; không thay kiểm định nội dung hoặc xuất bản |
@@ -53,6 +53,7 @@
 | DEC-19 | **Biên dịch và kiểm định thành công Báo cáo Word hoàn chỉnh Chương 1 và 2 (`BAO_CAO_DO_AN_CHUONG_1_2.docx`)**: Tạo tài liệu Word chuẩn quy chế HUIT 2024 (Khổ A4, lề Trên 3.5cm, Dưới 3.0cm, Trái 3.5cm, Phải 2.0cm, font Times New Roman, dãn dòng 1.3, Trang bìa chính quy HUIT, Mục lục tổng quát, Danh mục từ viết tắt, Danh mục bảng biểu, Danh mục hình vẽ & sơ đồ, toàn văn Chương 1 v3.2 và Chương 2 v2.0, 9 bảng biểu chuẩn hóa, 7 sơ đồ ASCII đóng hộp, trích dẫn IEEE tuần tự). Đã kiểm định OpenXML schema qua `officecli validate` đạt chuẩn tuyệt đối không có lỗi | Người dùng / Hệ thống | 2026-09-12 |
 | DEC-20 | **Di chuyển sang hệ thống kiểm soát văn phong và Word mới**: giữ nguyên thứ tự ưu tiên quy định HUIT → quyết định đã khóa → bằng chứng → lập luận → giọng tác giả → linter; không tối ưu theo AI detector hoặc điểm tự chấm; không tự sửa chương đã khóa | Người dùng / Codex | 2026-10-04 |
 | DEC-21 | **Mở lại có kiểm soát trạng thái nguồn, Chương 1 và DOCX sau audit thực tế**: Notebook từng có 0 nguồn dù ledger cũ ghi có; sau nạp lại có 19 nguồn dùng được nhưng một nhóm nguồn cũ vẫn cần recheck. Chương 1 giữ lịch sử PASS nhưng chưa qua cổng nguồn mới. DOCX giữ lịch sử OpenXML PASS nhưng chưa đạt xuất bản vì thiếu TOC tự động, nhiều định dạng trực tiếp/cảnh báo và chưa xem riêng từng trang. Không xóa các quyết định cũ; dùng báo cáo audit để xác định việc phải sửa. | Codex | 2026-10-04 |
+| DEC-22 | **Hoàn thiện các mục 1.2, 1.3, 1.4 của Chương 1 trên branch riêng**: Tiếp thu cấu trúc baseline từ `đề mục tham khảo.docx`; bảo toàn 1.1; viết hoàn chỉnh 1.2 (MS17-010/CVEs/FEA root cause), 1.3 (Kali/Nmap/NSE/Metasploit và quy trình 4 giai đoạn), 1.4 (Khung 4 mức xác minh và giới hạn); không chèn citation IEEE inline; dùng giọng "nhóm em" đúng đối tượng; biên dịch và kiểm định DOCX `CHUONG_1_REVIEW.docx` đạt chuẩn OpenXML; không merge và chờ phản biện độc lập. | Người dùng / Antigravity | 2026-10-04 |
 
 ## Nguồn tài liệu
 
@@ -175,3 +176,10 @@
 - Tuân thủ nghiêm ngặt chuẩn HUIT 2024: khổ A4, lề chuẩn (trên 3.5cm, dưới 3.0cm, trái 3.5cm, phải 2.0cm), Times New Roman 13pt, giãn dòng 1.5 lines, thụt lề 1.25cm, căn đều hai bên.
 - Đã thẩm định OpenXML schema qua `officecli validate` (0 lỗi). Đã kết xuất hình ảnh 12/12 trang bằng Word gốc (`--render native`) và thẩm định trực quan độc lập từng trang, xử lý triệt để viền kẻ Title, heading/intro mồ côi và phân trang danh mục tài liệu tham khảo.
 - Đã tạo báo cáo kiểm thử và thẩm định toàn diện tại `work/do-an/INTRODUCTION_REVIEW.md`. Trạng thái: `READY_FOR_INDEPENDENT_REVIEW`.
+
+## Tái đối chiếu yêu cầu Mở đầu sau commit 632bfe4 — 2026-10-04
+
+- Yêu cầu mới trong attachment 62425323 trùng nội dung yêu cầu trước; mục 3.6 vẫn buộc dừng khi chưa có ánh xạ IEEE chung đáng tin cậy. Không có quyết định người dùng mới cho phép danh mục riêng của Mở đầu.
+- Nhãn READY trong lượt dựng trước mâu thuẫn với điều kiện trên: báo cáo thừa nhận dùng [1]–[6] riêng, trong khi MS17-010 là [7] ở Chương 1 và [5] ở Chương 2. Đã sửa trạng thái hiện hành trong INTRODUCTION_REVIEW.md thành NEEDS_REVISION; giữ báo cáo cũ làm lịch sử, không xóa kết quả đã ghi hoặc nhận đã xác minh lại Word/render.
+- Không sửa DOCX, nguồn Mở đầu, hai chương hoặc artifact LOCKED trong lượt tái đối chiếu. Con số không có luận điểm thiếu hỗ trợ của báo cáo trước chưa được chứng nhận độc lập. Citation cấu trúc PASS không thay thế kiểm nguồn và ánh xạ chung.
+- `[CẦN TÁC GIẢ XÁC NHẬN]` Đã yêu cầu bảng IEEE chung đã duyệt hoặc cho phép lập bảng chung theo thứ tự xuất hiện từ Mở đầu, giữ nguyên hai chương và ghi bảng chuyển đổi để ghép. Sau khi có quyết định, tiếp tục review nguồn/nội dung/giọng, dựng Word và xem từng trang; không merge hoặc tag.

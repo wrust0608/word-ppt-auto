@@ -2,340 +2,325 @@
 
 ## 1.1. Tổng quan về giao thức SMB
 
-### 1.1.1. Khái niệm và vai trò của SMB trong hệ điều hành Windows
+### 1.1.1. Khái niệm và vai trò của SMB
 
-Giao thức chia sẻ tài nguyên qua mạng (Server Message Block – SMB) cho phép Client gửi yêu cầu truy cập tệp và các tài nguyên do Server cung cấp. Ngoài chia sẻ tệp, SMB còn hỗ trợ in qua mạng, xác thực truy cập, khóa tệp và trao đổi dữ liệu qua đường ống định danh (Named Pipes) [1]. Trong phạm vi đề tài, các chức năng này được xem xét theo quan hệ yêu cầu – phản hồi giữa Client và Server.
+Server Message Block (SMB) là giao thức mạng hoạt động ở tầng ứng dụng (Application Layer), cung cấp cơ chế chia sẻ tệp tin, thư mục, máy in và hỗ trợ giao tiếp liên tiến trình (Inter-Process Communication - IPC) giữa các máy tính qua mạng.
 
-Trên Windows, SMB có thể truyền trực tiếp qua TCP 445 hoặc, với phiên bản và cấu hình hỗ trợ, qua dịch vụ phiên NetBIOS trên TCP 139 [2]. Việc nhận diện cổng là bước đầu để xác định đường kết nối; các bước tiếp theo cần kiểm tra phiên bản SMB được chấp nhận và phản hồi của dịch vụ.
+Trên hệ điều hành Windows, SMB là giao thức truyền thông mặc định cho các dịch vụ mạng nội bộ, hoạt động trực tiếp trên nền giao thức TCP qua cổng 445 hoặc kết hợp với tầng NetBIOS over TCP/IP qua cổng 139.
 
-### 1.1.2. Mô hình Client – Server
+Giao thức vận hành theo mô hình Client - Server, trong đó bên yêu cầu tài nguyên đóng vai trò SMB Client và bên tiếp nhận, kiểm soát, chia sẻ tài nguyên đóng vai trò SMB Server.
 
-Client là thành phần gửi yêu cầu truy cập tài nguyên từ xa; Server là thành phần cung cấp tài nguyên và xử lý các yêu cầu đó. Khi ứng dụng truy cập đường dẫn chia sẻ (Universal Naming Convention – UNC), chẳng hạn `\\Server\Share`, Client khởi tạo kết nối tới Server [3]. Hai tên gọi chỉ vai trò trong giao tiếp SMB, không đồng nhất với tên phiên bản Windows: một máy có thể vừa cung cấp thư mục chia sẻ, vừa truy cập tài nguyên trên máy khác.
+**Vai trò trong hệ thống:**
 
-Trong kiểm thử, cần phân biệt việc kết nối được tới Server với việc được phép sử dụng một tài nguyên. Phản hồi của dịch vụ, kết quả thiết lập phiên và quyền truy cập tài nguyên là những thông tin khác nhau; đề tài ghi nhận chúng theo bước kiểm tra tương ứng.
+- **Chia sẻ dữ liệu và quản lý tệp tin từ xa:** Cung cấp phương thức cho người dùng và ứng dụng thực hiện các thao tác đọc, ghi, tạo mới, khóa tệp và chỉnh sửa dữ liệu trực tiếp trên các thư mục dùng chung (Network Shares) trong mạng nội bộ.
+- **Chia sẻ tài nguyên thiết bị ngoại vi:** Đóng vai trò làm giao thức trung gian điều phối lệnh in ấn và quản lý hàng đợi tài liệu đối với các máy in được chia sẻ chung trong hệ thống mạng.
+- **Hỗ trợ giao tiếp liên tiến trình (IPC) và quản trị từ xa:** Cung cấp cơ chế Named Pipes để truyền tải các lệnh gọi thủ tục từ xa (Remote Procedure Call - RPC), phục vụ công tác xác thực tập trung và quản trị hệ thống Windows từ xa.
+- **Xác thực và kiểm soát truy cập an toàn:** Tích hợp với các cơ chế xác thực của Windows (NTLM, Kerberos) để định danh người dùng, đàm phán cấp độ bảo mật (dialect negotiation), thiết lập phiên làm việc (Session Setup) và kiểm tra quyền hạn (Access Control List - ACL) trước khi cấp quyền truy cập tài nguyên.
 
-```text
-Client                         Server
-   |---- Yêu cầu truy cập ------->|
-   |<--- Phản hồi xử lý -----------|
-   |       Tài nguyên chia sẻ      |
-```
-*Sơ đồ 1.1: Quan hệ yêu cầu – phản hồi giữa Client và Server trong SMB.*
+### 1.1.2. Mô hình Client – Server trên Windows
 
-### 1.1.3. Phân biệt SMBv1, SMBv2 và SMBv3
+**Kiến trúc tổng thể:**
 
-Sự khác biệt giữa SMBv1, SMBv2 và SMBv3 cần được xem xét ở hai phương diện: cách tổ chức thao tác truy cập tài nguyên và cơ chế bảo vệ dữ liệu trao đổi. Một phiên bản mới có thể bổ sung cả hai, nhưng khả năng được giao thức hỗ trợ chưa đồng nghĩa với tính năng đã được sử dụng trong một kết nối cụ thể. Vì vậy, việc đánh giá phải dựa vào phiên bản được thương lượng và chính sách của hai đầu kết nối, thay vì chỉ dựa vào tên hệ điều hành [3], [4].
+- Dịch vụ SMB trên Windows được thiết kế và vận hành theo mô hình Client - Server, phân định rõ vai trò giữa bên khởi tạo yêu cầu và bên tiếp nhận, xử lý yêu cầu.
+- Phía SMB Client chịu trách nhiệm gửi các yêu cầu kết nối, xác thực và truy cập tệp tin hoặc thiết bị từ xa qua môi trường mạng.
+- Phía SMB Server chịu trách nhiệm quản lý, công bố các tài nguyên chia sẻ (Shares), tiếp nhận và phản hồi các yêu cầu từ Client theo quyền hạn đã được cấp phát.
 
-Ở SMBv1, nhiều thao tác truy cập tệp cần các lượt yêu cầu và phản hồi riêng. Khi Client phải chờ phản hồi trước khi gửi thao tác tiếp theo, độ trễ mạng được cộng vào thời gian hoàn thành công việc. SMBv2 bổ sung khả năng gộp lệnh (Compounding), cho phép đưa nhiều thao tác liên quan vào cùng một lần trao đổi [3]. Chẳng hạn, với một tác vụ gồm mở, đọc và đóng tệp, việc giảm số lượt trao đổi có thể giảm thời gian chờ giữa các thao tác. Đây là giải thích về cơ chế; đề tài chưa đo mức cải thiện hiệu năng trong lab.
+**Các thành phần cốt lõi trên hệ điều hành Windows:**
 
-Cơ chế ký dữ liệu SMB (SMB Signing) và mã hóa dữ liệu SMB (SMB Encryption) giải quyết những vấn đề khác nhau. Signing cho bên nhận kiểm tra tính toàn vẹn của nội dung bằng chữ ký được tính từ dữ liệu và khóa của phiên; khi nội dung bị sửa trên đường truyền, việc kiểm tra chữ ký có thể phát hiện sai lệch. Signing không có mục đích che giấu nội dung với bên có thể quan sát lưu lượng. Các thuật toán ký thay đổi từ MD5 ở SMBv1, HMAC-SHA256 ở SMB 2.0.2 đến AES-CMAC ở SMB 3.0; AES-128-GMAC được bổ sung trên Windows Server 2022 và Windows 11 [5]. Không áp đặc tính của các hệ thống mới này cho máy Windows 7 trong lab.
+- **SMB Client (Workstation Service):** Dịch vụ chạy nền trên Windows, phối hợp với trình chuyển hướng mạng (Network Redirector) để điều hướng các thao tác I/O trên tệp tin từ xa qua mạng thay vì hệ thống tệp cục bộ.
+- **SMB Server (Server Service):** Dịch vụ tiếp nhận các kết nối mạng đến cổng 139 hoặc 445, chuyển tiếp các yêu cầu xử lý gói tin cho trình điều khiển cấp nhân (Kernel-mode driver như `srv.sys` đối với SMBv1 hoặc `srv2.sys` đối với SMBv2/SMBv3).
 
-SMBv3 bổ sung Encryption để bảo vệ nội dung khi truyền qua mạng; Client và Server đều phải hỗ trợ SMB 3.x và có cấu hình tương ứng. Microsoft cho phép áp dụng mã hóa ở mức thư mục chia sẻ hoặc toàn Server. Cơ chế này bảo vệ dữ liệu trên đường truyền, khác với mã hóa dữ liệu lưu trên đĩa bằng EFS hoặc BitLocker [4]. Do đó, khi kiểm tra một hệ thống có SMBv3, cần xác định kết nối có thực sự dùng mã hóa hay không; chỉ nhìn thấy một phiên bản SMB 3.x chưa trả lời được câu hỏi này.
+**Quy trình tương tác giữa Client và Server:**
 
-SMB 3.1.1 còn có cơ chế bảo vệ tính toàn vẹn trước xác thực (Pre-authentication Integrity), sử dụng SHA-512 trên chuỗi trao đổi thương lượng và thiết lập phiên. Giá trị băm được đưa vào quá trình tạo khóa phiên, nên thay đổi nội dung trao đổi có thể khiến các bên không kiểm tra được chữ ký bằng khóa tương ứng. Tài liệu Microsoft cũng giới hạn cơ chế này đối với phiên guest và nặc danh, vì không có khóa được suy xuất [6]. Theo phạm vi Microsoft mô tả, cơ chế này bảo vệ trước việc hạ cấp từ SMB 3.1.1 xuống SMB 2.x, nhưng không bảo vệ một kết nối bị hạ xuống SMB 1.0 [4]. Vì vậy, vẫn phải xem việc loại bỏ SMBv1 là một cấu hình cần kiểm tra riêng.
+- **Bước 1 - Thiết lập kết nối truyền tải:** Client mở kết nối TCP tới cổng 445 (hoặc NetBIOS qua cổng 139) của Server.
+- **Bước 2 - Thương lượng giao thức (Negotiate Protocol):** Client gửi danh sách các dialect (phiên bản SMB) hỗ trợ; Server phản hồi để chọn dialect cao nhất mà hai bên cùng tương thích.
+- **Bước 3 - Xác thực và thiết lập phiên (Session Setup):** Hai bên trao đổi thông tin định danh (sử dụng cơ chế NTLM hoặc Kerberos) để xác thực người dùng và cấp phát định danh phiên (Session ID).
+- **Bước 4 - Kết nối tài nguyên chia sẻ (Tree Connect):** Client gửi yêu cầu kết nối tới một thư mục chia sẻ cụ thể (như `C$`, `IPC$`, hoặc thư mục được chia sẻ công khai) và nhận về một mã định danh kết nối (Tree ID).
+- **Bước 5 - Thao tác dữ liệu:** Client thực hiện các lệnh đọc, ghi, tạo mới hoặc đóng tệp tin trên Server dựa trên quyền hạn đã được kiểm tra.
 
-Với đề tài này, thay đổi có ý nghĩa trực tiếp là Server còn tiếp nhận SMBv1 hay không. MS17-010 sửa các lỗi trong xử lý SMBv1; vá hệ thống làm thay đổi phần triển khai bị lỗi, còn vô hiệu hóa SMBv1 làm mất đường giao tiếp tới phần xử lý đó [7], [8]. Hai biện pháp tác động ở những vị trí khác nhau, nên Chương 2 dùng phép kiểm tra bản vá và phép thương lượng giao thức để phân biệt chúng. Việc kiểm tra Client hợp lệ tiếp tục sử dụng SMBv2 cũng giúp xác định tác động lên chức năng chia sẻ tệp.
+**Đặc điểm vận hành trên Windows:**
 
-*Bảng 1.1: So sánh đặc tính kỹ thuật cơ bản giữa SMBv1, SMBv2 và SMBv3 [3], [4], [5], [8], [6].*
+- **Tính linh hoạt vai trò:** Một máy tính chạy Windows có thể đồng thời đóng vai trò SMB Client khi truy xuất tài nguyên của máy khác và làm SMB Server khi chia sẻ thư mục của chính nó ra mạng nội bộ.
+- **Hoạt động ở Kernel-mode:** Trình điều khiển phía Server chạy trực tiếp trong không gian hệ điều hành nhằm đảm bảo hiệu năng I/O cao, khiến bất kỳ lỗi xử lý gói tin nào tại thành phần này đều có nguy cơ ảnh hưởng trực tiếp đến độ ổn định và an toàn của toàn bộ hệ thống.
 
-| Đặc tính kỹ thuật | SMBv1 (CIFS) | SMBv2 (2.0.2 / 2.1) | SMBv3 (3.0 / 3.0.2 / 3.1.1) |
-|---|---|---|---|
-| **Hệ điều hành đại diện** | Windows XP / Windows 7 khi bật SMBv1 | Windows Vista / Server 2008 | Windows 8 / Server 2012 trở lên, tùy dialect |
-| **Cơ chế xử lý lệnh** | Tuần tự từng bước | Hỗ trợ gộp lệnh (Compounding) | Gộp lệnh tối ưu |
-| **Cổng mạng kết nối** | TCP 139 và TCP 445 | TCP 445 | TCP 445 |
-| **Ký số (SMB Signing)** | MD5-based | HMAC-SHA256 | AES-CMAC (3.0 / 3.0.2); GMAC trên một số hệ thống mới hỗ trợ SMB 3.1.1 |
-| **Mã hóa dữ liệu** | Không có SMB Encryption tích hợp | Không hỗ trợ | AES-128-CCM (3.0); AES-128-GCM (3.1.1) |
-| **Bảo vệ tiền xác thực** | Không hỗ trợ | Không hỗ trợ | Chỉ SMB 3.1.1: Pre-authentication Integrity dùng SHA-512 |
-| **Cơ chế bảo vệ nổi bật** | Giao thức legacy, không có encryption tích hợp | Ký số HMAC-SHA256, hỗ trợ gộp lệnh | Mã hóa khối AES và bảo vệ toàn vẹn tùy dialect |
+### 1.1.3. SMBv1, SMBv2 và SMBv3
 
-### 1.1.4. Phân tích cổng mạng TCP 139 và TCP 445
+Giao thức Server Message Block trên Windows được phân loại thành ba phiên bản chính với sự khác biệt về cấu trúc lệnh, tốc độ truyền tải và tính an toàn:
 
-SMB có thể sử dụng TCP 139 qua dịch vụ phiên NetBIOS (NetBIOS Session Service), hoặc TCP 445 khi truyền trực tiếp trên TCP/IP (Direct-hosted SMB). Microsoft mô tả SMB 1.0 và CIFS có thể dùng NetBIOS, trong khi SMB 2.0.2 từ Windows Vista và Windows Server 2008 sử dụng TCP 445 [2]. Hai cổng vì vậy cần được phân biệt theo phiên bản và cấu hình, không xem là hai đường kết nối tương đương cho mọi phiên bản SMB.
+**Phiên bản SMBv1 (CIFS):**
 
-Với TCP 445, dữ liệu SMB có tiêu đề bốn byte chỉ độ dài. Khi cả Direct-hosted SMB và NetBIOS đều được bật, Windows thử hai phương thức đồng thời và sử dụng phương thức phản hồi trước [2]. Do đường truyền được chọn còn phụ thuộc vào cấu hình hai đầu, kết quả quan sát trên một cổng phải được đọc cùng với phương thức kết nối được sử dụng trong lượt kiểm tra.
+- SMBv1 vận hành với hơn 100 mã lệnh và sử dụng cơ chế trao đổi dữ liệu tuần tự từng bước. Cách thức này tạo ra nhiều lượt truyền nhận qua lại không cần thiết, làm đường truyền mạng bị trễ và giảm hiệu năng rõ rệt.
+- Về mặt bảo mật, SMBv1 không hỗ trợ mã hóa luồng dữ liệu và chỉ dùng thuật toán MD5 cũ để kiểm tra gói tin. Đặc biệt, driver hệ thống `srv.sys` của Windows khi xử lý các gói tin SMBv1 gặp lỗi quản lý bộ nhớ nghiêm trọng, dẫn đến nhóm lỗ hổng thực thi mã từ xa MS17-010 (EternalBlue) cho phép kẻ tấn công chiếm quyền điều khiển máy tính mà không cần tài khoản đăng nhập.
 
-Trong đề tài, kết quả cổng 445 ở trạng thái `open` chỉ xác nhận khả năng tiếp cận một dịch vụ đang lắng nghe; cần kiểm tra tiếp để nhận diện SMB và phiên bản được chấp nhận. Khi thiết kế phòng thủ, cổng 139 cũng phải được xem xét nếu cấu hình còn cho phép SMB qua NetBIOS. Việc đóng một cổng không tự chứng minh hệ thống đã được vá MS17-010.
+**Phiên bản SMBv2:**
 
-### 1.1.5. Quy trình trao đổi yêu cầu và phản hồi
+- Được Microsoft đưa vào từ Windows Vista và Windows Server 2008 nhằm thay thế hoàn toàn SMBv1. Điểm cải tiến lớn nhất là bộ mã lệnh được rút gọn từ hơn 100 lệnh xuống còn 19 lệnh tiêu chuẩn, đồng thời bổ sung tính năng gộp nhiều yêu cầu vào một gói tin duy nhất để tiết kiệm băng thông và giảm thời gian phản hồi.
+- SMBv2 tổ chức lại việc quản lý phiên làm việc và kết nối tài nguyên rõ ràng hơn, đồng thời nâng cấp cơ chế chống sửa đổi gói tin lên chuẩn HMAC-SHA256, giúp bảo vệ dữ liệu trao đổi không bị can thiệp trái phép trên đường truyền.
 
-Có thể theo dõi quá trình truy cập `\\Server\Share` qua ba câu hỏi: hai bên dùng phiên bản nào, phiên được thiết lập với danh tính nào và phiên đó kết nối tới tài nguyên nào. Đặc tả SMB2 minh họa các bước tương ứng là `NEGOTIATE`, `SESSION_SETUP` và `TREE_CONNECT` [9]. Phân biệt ba bước giúp xác định một lỗi xảy ra ở khâu tương thích giao thức, xác thực hay kết nối tài nguyên.
+**Phiên bản SMBv3:**
 
-Trong bước thương lượng (Negotiate), Client đưa ra các phiên bản có thể sử dụng và Server trả lại lựa chọn phù hợp. Kết quả này xác định cách hai bên diễn giải những yêu cầu tiếp theo. Trong bước thiết lập phiên (Session Setup), hai bên trao đổi dữ liệu xác thực; bước này có thể cần nhiều lượt trao đổi, nên một phản hồi `STATUS_MORE_PROCESSING_REQUIRED` chưa phải là xác thực thất bại [9]. Sau khi phiên được thiết lập, Client mới yêu cầu kết nối tới một tài nguyên chia sẻ. Việc xác thực danh tính và quyền sử dụng tài nguyên là hai lớp kiểm soát khác nhau: Server còn xét quyền truy cập của người dùng đối với tài nguyên [5].
+- Được phát triển từ Windows 8 và Windows Server 2012, kế thừa nền tảng của SMBv2 và bổ sung các cơ chế bảo mật mạnh mẽ cho hệ thống mạng hiện đại:
+  - **Mã hóa dữ liệu đầu cuối (SMB Encryption):** Dùng thuật toán chuẩn AES (AES-CCM, AES-GCM) trực tiếp ở tầng ứng dụng, giúp chống nghe lén và đánh cắp thông tin mà không cần thiết lập thêm hạ tầng IPsec phức tạp.
+  - **Chống sửa đổi gói tin (SMB Signing):** Sử dụng các thuật toán AES-CMAC và AES-GMAC để xác thực nguồn gốc và đảm bảo gói tin gửi đi không bị chèn ép hay chỉnh sửa.
+  - **Tối ưu tốc độ và dự phòng mạng:** Hỗ trợ SMB Multichannel để gộp băng thông và dự phòng lỗi qua nhiều card mạng cùng lúc; hỗ trợ SMB Direct qua công nghệ RDMA giúp truyền tệp tốc độ cao mà không làm quá tải CPU máy chủ.
 
-Các định danh trong phản hồi giúp gắn yêu cầu tiếp theo với đúng ngữ cảnh. SMBv1/CIFS dùng mã định danh người dùng của phiên (User ID – UID) và mã định danh kết nối tài nguyên (Tree ID – TID); SMBv2/v3 dùng `SessionId` và `TreeId` [9], [10]. Khi phân tích lưu lượng, cần đọc định danh cùng loại lệnh và mã trạng thái, vì phản hồi thương lượng thành công không thể thay cho bằng chứng kết nối tới một tài nguyên cụ thể.
+### 1.1.4. Quy trình thỏa thuận phiên bản kết nối SMB
 
-Trong lab, phép kiểm tra phiên bản dừng ở câu hỏi Server có chấp nhận SMBv1 hay không. Phép thăm dò MS17-010 đi xa hơn, cần thiết lập phiên và kết nối `IPC$` trước khi gửi yêu cầu kiểm tra. Nếu thất bại ở bước kết nối `IPC$`, người kiểm thử chưa quan sát được phản hồi của phép thăm dò; vì vậy, không được lấy việc bị từ chối tài nguyên làm bằng chứng rằng Server đã vá. Ngược lại, một phiên được thiết lập hợp lệ chỉ cho thấy bước xác thực hoàn tất, chưa chứng minh phần xử lý SMBv1 không có lỗi.
+**Khái niệm về SMB Dialect:**
 
-```text
-Client                                 Server
-   |---------- Thương lượng ------------->|
-   |<--------- Phiên bản được chọn --------|
-   |---------- Thiết lập phiên ------------>|
-   |<--------- Kết quả và định danh phiên --|
-   |---------- Kết nối tài nguyên --------->|
-   |<--------- Kết quả và định danh kết nối-|
-```
-*Sơ đồ 1.2: Các bước thiết lập giao tiếp SMB trước khi sử dụng tài nguyên.*
+Trong giao thức SMB, Dialect là thuật ngữ dùng để chỉ phiên bản cụ thể hoặc tập hợp quy chuẩn giao tiếp mà Client và Server sử dụng để hiểu nhau. Mỗi thế hệ Windows được phát triển đều hỗ trợ thêm các dialect mới, đồng thời duy trì khả năng tương thích ngược với các dialect cũ hơn. Ví dụ:
+
+- **SMBv1:** Sử dụng các chuỗi định danh dạng văn bản, tiêu biểu là `NT LM 0.12` (chuẩn SMBv1 phổ biến nhất trên Windows NT/2000/XP/7).
+- **SMBv2:** Sử dụng mã số hiệu, gồm SMB 2.0.2 (Windows Vista), SMB 2.1 (Windows 7 / Server 2008 R2).
+- **SMBv3:** Gồm SMB 3.0 (Windows 8 / Server 2012), SMB 3.0.2 (Windows 8.1) và SMB 3.1.1 (Windows 10 / Server 2016 trở lên).
+
+**Mục đích của quá trình thương lượng (Negotiate Protocol):**
+
+Thương lượng dialect là bước giao tiếp bắt buộc đầu tiên ngay sau khi hai máy tính thiết lập thành công kết nối TCP (qua cổng 445 hoặc 139). Quá trình này giúp hai bên thống nhất phiên bản giao thức cao nhất mà cả hai cùng hỗ trợ, đồng thời thiết lập các tham số vận hành ban đầu như: kích thước bộ nhớ đệm tối đa, cơ chế xác thực hỗ trợ, yêu cầu bật/tắt tính năng chống sửa đổi gói tin (SMB Signing) và khóa mã hóa.
+
+**Quy trình đàm phán giữa Client và Server:**
+
+Quá trình này diễn ra qua hai bản tin trao đổi cơ bản:
+
+- **Gói tin yêu cầu thương lượng (Negotiate Request):** Client gửi đến Server một danh sách chứa tất cả các dialect mà nó có thể hỗ trợ, sắp xếp theo thứ tự từ phiên bản mới nhất đến các phiên bản cũ hơn.
+- **Gói tin phản hồi thương lượng (Negotiate Response):** Server tiếp nhận danh sách, đối chiếu với các dialect mà nó đã kích hoạt và chọn ra phiên bản cao nhất chung giữa hai hệ thống để phản hồi lại Client. Nếu hai bên không tìm được phiên bản tương thích chung, kết nối mạng sẽ bị hủy bỏ ngay lập tức.
+
+### 1.1.5. Xác thực và thiết lập phiên
+
+**Mục đích của việc thiết lập phiên:**
+
+Sau khi hoàn tất thỏa thuận phiên bản giao thức, Client và Server phải thực hiện quy trình xác thực và thiết lập phiên làm việc (Session Setup). Mục đích của quá trình này là kiểm tra danh tính người dùng hoặc máy tính yêu cầu kết nối, gán quyền hạn tương ứng và cấp một mã định danh phiên (Session ID đối với SMBv2/v3 hoặc UID đối với SMBv1) để duy trì kênh giao tiếp an toàn cho các yêu cầu kế tiếp.
+
+**Các cơ chế xác thực phổ biến:**
+
+- **Xác thực NTLM (NTLMv1/NTLMv2):** Hoạt động theo cơ chế hỏi - đáp (Challenge - Response), thường được sử dụng trong mô hình mạng ngang hàng (Workgroup) hoặc dùng để tương thích ngược khi hệ thống chưa có hạ tầng quản lý người dùng tập trung.
+- **Xác thực Kerberos:** Là cơ chế mặc định và có tính an toàn cao trong môi trường quản lý tập trung (Active Directory Domain Services), dựa trên việc cấp và kiểm tra các vé chứng thực (Tickets) để tránh truyền dữ liệu nhạy cảm qua mạng.
+- **Kết nối ẩn danh (Anonymous / Null Session):** Cho phép Client gửi yêu cầu kết nối mà không cần tài khoản hay mật khẩu, thường dùng để truy vấn sơ bộ thông tin máy chủ hoặc kết nối tới tài nguyên chia sẻ ngầm định `IPC$`.
+
+**Quy trình trao đổi bản tin:**
+
+Quá trình xác thực và khởi tạo phiên làm việc diễn ra qua các bước tuần tự:
+
+- **Gửi gói yêu cầu thiết lập phiên (Session Setup Request):** Client gửi gói tin chứa thông tin định danh người dùng hoặc dữ liệu xác thực (NTLM token hoặc Kerberos ticket) tới Server.
+- **Xác minh và phản hồi kết quả (Session Setup Response):** Server kiểm tra tính hợp lệ của tài khoản trong cơ sở dữ liệu cục bộ hoặc gửi sang máy chủ quản lý miền (Domain Controller). Khi thông tin chính xác, Server cấp phát mã Session ID và gửi trả về Client. Kể từ thời điểm này, mọi thao tác truy cập dữ liệu của Client đều phải đính kèm mã định danh phiên này để Server kiểm soát quyền hạn.
+
+### 1.1.6. Chia sẻ và truy cập tài nguyên
+
+**Mục đích của việc kết nối tài nguyên (Tree Connect):**
+
+Sau khi hoàn tất bước xác thực và nhận được mã phiên (Session ID), Client cần kết nối trực tiếp đến một vùng tài nguyên cụ thể do Server cung cấp để bắt đầu làm việc. Quá trình này được gọi là gắn kết tài nguyên (Tree Connect). Máy chủ sẽ kiểm tra quyền hạn của tài khoản trên tài nguyên đó và phản hồi một mã định danh kết nối (Tree ID - TID) để theo dõi xuyên suốt quá trình thao tác.
+
+**Các loại tài nguyên chia sẻ trên hệ điều hành Windows:**
+
+- **Thư mục chia sẻ thông thường:** Các thư mục dữ liệu do người dùng hoặc quản trị viên tạo ra để phục vụ nhu cầu trao đổi tệp tin trong mạng nội bộ, được kiểm soát quyền hạn bằng danh sách truy cập (Share Permissions và NTFS Permissions).
+- **Tài nguyên chia sẻ quản trị (Administrative Shares):** Các vùng chia sẻ ngầm định có ký tự `$` ở cuối tên (như `C$`, `D$`, `ADMIN$`), phục vụ mục đích quản trị hệ thống từ xa và chỉ cho phép các tài khoản thuộc nhóm Quản trị viên (Administrators) truy cập.
+- **Tài nguyên chia sẻ đặc biệt (IPC$ - Inter-Process Communication):** Đây là vùng chia sẻ không chứa tệp tin thực tế, mà đóng vai trò làm kênh truyền dữ liệu trung gian (Named Pipes) phục vụ giao tiếp giữa các tiến trình và hỗ trợ các lệnh gọi từ xa (RPC) giữa các máy tính Windows.
+
+**Quy trình kết nối:**
+
+- **Gửi yêu cầu kết nối (Tree Connect Request):** Client gửi gói tin chứa đường dẫn tài nguyên cần truy cập kèm theo mã Session ID đã được cấp trước đó.
+- **Phản hồi cấp quyền (Tree Connect Response):** Server đối chiếu quyền hạn truy cập của tài khoản với tài nguyên yêu cầu nếu hợp lệ, Server trả về mã định danh Tree ID (TID).
+- **Thực thi lệnh đọc/ghi dữ liệu:** Mọi thao tác tệp tin kế tiếp (như tạo mới, đọc, ghi hoặc xóa tệp) đều phải sử dụng đồng thời bộ đôi mã Session ID và Tree ID để Server xác thực tính hợp lệ trước khi cho phép thực thi.
+
+### 1.1.7. Cổng mạng TCP 139 và TCP 445 trong kết nối SMB
+
+Để truyền tải dữ liệu giữa Client và Server, giao thức SMB sử dụng hai cổng dịch vụ mạng chính với cơ chế hoạt động khác nhau tùy thuộc vào phiên bản hệ điều hành:
+
+- **Cổng TCP 139 (Kết nối qua NetBIOS):** Được sử dụng chủ yếu trên các phiên bản Windows đời cũ (Windows 95, 98, NT). Ở phương thức này, dữ liệu SMB không truyền trực tiếp qua giao thức TCP mà phải bọc trong một lớp trung gian là NetBIOS qua TCP/IP (NBT). Trước khi gửi các lệnh SMB, hai máy tính phải hoàn tất bước thiết lập phiên NetBIOS (NetBIOS Session Service). Quá trình tìm kiếm máy tính và phân giải địa chỉ phụ thuộc vào tên máy NetBIOS thay vì dùng hệ thống tên miền DNS.
+- **Cổng TCP 445 (Kết nối trực tiếp qua TCP):** Được Microsoft bổ sung từ phiên bản Windows 2000 trở về sau, cho phép giao thức SMB chạy trực tiếp trên nền TCP/IP mà không cần lớp trung gian NetBIOS (Direct Hosted SMB). Cơ chế này loại bỏ phần tiêu đề NetBIOS dư thừa, giúp cấu trúc gói tin đơn giản hơn và tăng tốc độ truyền dữ liệu. Hệ thống phân giải tên máy tính trực tiếp bằng DNS hoặc kết nối thẳng bằng địa chỉ IP, phù hợp với tiêu chuẩn mạng Internet hiện đại.
+
+**Cơ chế tự động lựa chọn cổng kết nối:**
+
+Khi người dùng thực hiện truy cập đến một thư mục chia sẻ, hệ điều hành Windows sẽ tự động gửi đồng thời hai gói tin bắt tay TCP đến cả cổng 445 và cổng 139 của máy đích:
+- Nếu cổng 445 phản hồi trước, kết nối SMB trực tiếp sẽ được thiết lập và gói tin kết nối đến cổng 139 bị hủy bỏ.
+- Nếu cổng 445 bị chặn hoặc máy đích không hỗ trợ, kết nối sẽ tự động lùi về (fallback) sử dụng cổng 139 qua NetBIOS.
 
 ---
 
 ## 1.2. Lỗ hổng bảo mật MS17-010
 
-### 1.2.1. Tổng quan về thông báo bảo mật MS17-010
+### 1.2.1. Tổng quan về MS17-010
 
-Vào tháng 03 năm 2017, Microsoft phát hành thông báo bảo mật định kỳ mang mã hiệu **MS17-010** nhằm khắc phục các lỗ hổng nghiêm trọng trong việc xử lý gói tin của dịch vụ SMBv1 trên hệ điều hành Windows [7]. Nhóm lỗ hổng này ảnh hưởng tới hầu hết các phiên bản Windows lưu hành tại thời điểm đó, bao gồm Windows Vista, Windows 7, Windows 8.1, Windows 10, cùng các dòng máy chủ Windows Server 2008, 2012 và 2016. Do tính chất nghiêm trọng, Microsoft sau đó đã phát hành thêm bản vá cho các hệ điều hành đã dừng hỗ trợ như Windows XP và Windows Server 2003 [7].
+Vào tháng 03 năm 2017, Microsoft phát hành bản tin an ninh định kỳ MS17-010 nhằm xử lý một nhóm gồm 6 lỗ hổng bảo mật nghiêm trọng trong driver xử lý giao thức SMBv1 (`srv.sys`) của hệ điều hành Windows. Đây là bản tin an ninh tổng hợp bao trùm nhiều lỗ hổng khác nhau, chứ không đại diện cho một lỗi kỹ thuật đơn lẻ.
 
-Các lỗ hổng thực thi mã từ xa trong thông báo MS17-010 cho phép kẻ tấn công gửi các thông điệp SMBv1 được chế tạo đặc biệt tới máy chủ mục tiêu. Trong nhiều trường hợp, việc khai thác có thể được thực hiện từ xa mà không cần thông tin xác thực hợp lệ [7]. Trong phạm vi đề tài, CVE-2017-0144 / EternalBlue được lựa chọn làm trường hợp kiểm thử chính.
+Bản chất của các lỗ hổng trong MS17-010 bắt nguồn từ việc giao thức SMBv1 được thiết kế từ giai đoạn đầu của mạng máy tính cá nhân, khi các yêu cầu kiểm soát biên dữ liệu và xác thực chặt chẽ chưa được đặt ra đầy đủ. Do driver `srv.sys` vận hành trực tiếp trong không gian nhân (Kernel Mode) nhằm tối ưu tốc độ xử lý I/O mạng, bất kỳ sai sót nào trong việc cấp phát và quản lý bộ nhớ đệm tại đây cũng tạo ra nguy cơ đe dọa trực tiếp đến toàn bộ hệ điều hành.
 
-### 1.2.2. Phân loại các mã CVE và danh mục bản vá theo hệ điều hành
+Phạm vi ảnh hưởng của MS17-010 bao phủ hầu hết các thế hệ Windows lưu hành tại thời điểm công bố, bao gồm Windows Vista, Windows 7, Windows 8.1, Windows 10 (các bản dựng đầu) cùng các hệ điều hành máy chủ Windows Server 2008, 2012 và 2016. Do mức độ nguy hiểm đặc biệt cao, Microsoft thậm chí đã phải phát hành bản vá ngoại lệ cho cả những phiên bản đã kết thúc vòng đời hỗ trợ chính thức như Windows XP và Windows Server 2003.
 
-Thông báo bảo mật MS17-010 xử lý một nhóm gồm 6 mã định danh lỗ hổng phổ biến (CVE) được Microsoft liệt kê trong thông báo [7]. Không đồng nhất mọi CVE với cơ chế lỗi FEA của EternalBlue. Để trình bày rõ ràng, nội dung được phân tách thành hai bảng: Bảng 1.2 mô tả đặc tính kỹ thuật từng CVE và Bảng 1.3 liệt kê danh mục mã bản vá KB chính thức theo từng phiên bản hệ điều hành.
+Trong phạm vi đồ án, nhóm em tập trung nghiên cứu lỗ hổng thực thi mã từ xa không cần xác thực trong nhóm này để làm rõ bản chất rủi ro của dịch vụ SMBv1, đồng thời xây dựng quy trình kiểm thử và đối chứng phòng thủ có kiểm soát.
 
-*Bảng 1.2: Phân loại các mã CVE trong thông báo bảo mật Microsoft MS17-010 [7], [11], [12], [13].*
+### 1.2.2. Các CVE liên quan
 
-| Mã CVE | Liên hệ exploit | Phân loại theo nguồn chính thức | Tác động | Vai trò trong đồ án |
-|---|---|---|---|---|
-| **CVE-2017-0143** | **EternalSynergy** [11] | SMBv1 Remote Code Execution Vulnerability | RCE | Tham chiếu trong nhóm MS17-010 |
-| **CVE-2017-0144** | **EternalBlue** [12] | SMBv1 Remote Code Execution Vulnerability; EternalBlue khai thác lỗi xử lý FEA trong `srv.sys` | RCE | **Mục tiêu thực nghiệm chính** |
-| **CVE-2017-0145** | **EternalRomance** [13] | SMBv1 Remote Code Execution Vulnerability | RCE | Tham chiếu lịch sử / đối chiếu |
-| **CVE-2017-0146** | Không gắn nickname | SMBv1 Remote Code Execution Vulnerability | RCE | Thuộc phạm vi MS17-010 |
-| **CVE-2017-0147** | Không gắn nickname | SMBv1 Information Disclosure Vulnerability | Information Disclosure | Thuộc phạm vi MS17-010 |
-| **CVE-2017-0148** | Không gắn nickname | SMBv1 Remote Code Execution Vulnerability | RCE | Thuộc phạm vi MS17-010 |
+Bản tin bảo mật MS17-010 khắc phục 6 mã định danh lỗ hổng an ninh (Common Vulnerabilities and Exposures - CVE), gồm 5 lỗ hổng thực thi mã từ xa (Remote Code Execution - RCE) và 1 lỗ hổng làm lộ thông tin (Information Disclosure):
 
-Sau Bảng 1.2, đề tài chỉ phân tích sâu cơ chế của CVE-2017-0144, vì đây là mục tiêu thực nghiệm trung tâm của kịch bản lab.
+- **CVE-2017-0143 (RCE):** Lỗ hổng phát sinh từ việc xử lý sai các thông điệp giao dịch phụ (Transaction2) trong SMBv1, liên quan trực tiếp đến các công cụ khai thác mang tên EternalSynergy và EternalRomance.
+- **CVE-2017-0144 (RCE):** Lỗi tràn vùng đệm bộ nhớ nhân trong quá trình chuyển đổi danh sách thuộc tính tệp mở rộng (FEA) của SMBv1. Đây là lỗ hổng cốt lõi bị vũ khí hóa bởi mã khai thác EternalBlue.
+- **CVE-2017-0145 (RCE):** Lỗi trong cách SMBv1 xử lý tham số bộ nhớ khi nhận các yêu cầu giao dịch bất thường, liên quan đến mã khai thác EternalRomance.
+- **CVE-2017-0146 (RCE):** Lỗi giải phóng và tái sử dụng con trỏ bộ nhớ không an toàn trong driver `srv.sys`, liên quan đến công cụ EternalChampion.
+- **CVE-2017-0147 (Information Disclosure):** Lỗ hổng cho phép rò rỉ dữ liệu từ không gian bộ nhớ nhân về phía client thông qua các thông điệp phản hồi SMBv1 không được xóa trắng dữ liệu trước khi gửi.
+- **CVE-2017-0148 (RCE):** Lỗi kiểm tra tính hợp lệ của tham số trong các gói tin giao dịch SMB liên tiếp, cho phép can thiệp vào luồng xử lý của hệ thống.
 
-*Bảng 1.3: Danh mục mã bản vá KB chính thức của Microsoft theo hệ điều hành Windows [7].*
+Việc phân biệt các mã CVE giúp làm rõ rằng MS17-010 không đồng nhất hoàn toàn với chỉ một lỗ hổng. Trong số này, CVE-2017-0144 là lỗ hổng nguy hiểm nhất do có khả năng bị khai thác từ xa qua mạng mà không đòi hỏi tài khoản người dùng, đồng thời là đối tượng trung tâm được nhóm em phân tích kỹ thuật và thẩm định trong môi trường thực nghiệm.
 
-| Hệ điều hành | Phiên bản / Kiến trúc | Bản vá Security Only | Bản vá Monthly Rollup / Cumulative | Ghi chú triển khai lab |
-|---|---|---|---|---|
-| **Windows 7 SP1** | x86 và x64 | **KB4012212** | **KB4012215** | Môi trường mục tiêu chính để kiểm tra trước và sau khi vá |
-| **Windows Server 2008 R2 SP1** | x64 | **KB4012212** | **KB4012215** | Tương đồng mã bản vá với Windows 7 SP1 |
-| **Windows 8.1** | x86 và x64 | **KB4012213** | **KB4012216** | Mục tiêu đối sánh trên thế hệ Windows mới hơn |
-| **Windows Server 2012 R2** | x64 | **KB4012213** | **KB4012216** | Bản vá tương ứng Windows 8.1 |
-| **Windows Server 2012** | x64 | **KB4012214** | **KB4012217** | Phiên bản máy chủ thế hệ Windows 8 |
-| **Windows 10** | Bản dựng 1507 (RTM)<br>Bản dựng 1511<br>Bản dựng 1607 | Không áp dụng (chỉ có bản tích lũy) | **KB4012606** (1507)<br>**KB4013198** (1511)<br>**KB4013429** (1607) | Windows 10 sử dụng mô hình cập nhật tích lũy Cumulative Update |
-| **Windows Server 2016** | Bản dựng 1607 | Không áp dụng | **KB4013429** | Tương đồng bản vá với Windows 10 Version 1607 |
-| **Windows Vista SP2 / Server 2008 SP2** | x86 và x64 | **KB4012598** | Không áp dụng | Bản cập nhật an ninh độc lập |
-| **Windows XP SP3 / Server 2003 SP2** | x86 và x64 | **KB4012598** | Không áp dụng | Bản vá khẩn cấp phát hành ngoài chu kỳ hỗ trợ |
+### 1.2.3. Cơ chế xử lý yêu cầu SMBv1 dẫn đến lỗ hổng
 
-### 1.2.3. Cơ chế kỹ thuật của lỗ hổng CVE-2017-0144 và mã khai thác EternalBlue
+Lỗ hổng CVE-2017-0144 phát sinh trong quá trình driver `srv.sys` xử lý các thuộc tính tệp mở rộng (Full Extended Attributes - FEA). Đây là cấu trúc dữ liệu được SMBv1 hỗ trợ nhằm duy trì tính tương thích ngược với hệ điều hành OS/2 cũ.
 
-CVE-2017-0144 liên quan đến việc xử lý danh sách thuộc tính mở rộng của tệp (File Extended Attributes – FEA) trong phần triển khai SMBv1. Rapid7 mô tả phép tính kích thước ở `SrvOs2FeaListSizeToNt` có sai lệch giữa giá trị DWORD và WORD; quá trình chuyển đổi ở `SrvOs2FeaToNt` sau đó có thể tràn bộ đệm trong thao tác sao chép `memmove` [14]. Điểm cần giải thích là mối quan hệ giữa kích thước dùng để cấp phát và lượng dữ liệu thực sự được ghi, vì gửi một yêu cầu khác thường chưa tự tạo ra thực thi mã.
+Khi client gửi một gói tin yêu cầu thuộc nhóm giao dịch (cụ thể là lệnh `SMB_COM_TRANSACTION2` với hàm phụ `SMB2_TRANS2_SET_PATH_INFORMATION`), gói tin này mang theo một danh sách các thuộc tính FEA định dạng OS/2 (gọi là `FEA_LIST`). Để Windows hiểu và áp dụng được các thuộc tính này lên hệ thống tệp NTFS, driver `srv.sys` phải chuyển đổi danh sách trên sang định dạng nội bộ của Windows NT (`FILE_FULL_EA_INFORMATION`). Quá trình này diễn ra qua hai hàm nội bộ liên tiếp trong nhân hệ điều hành:
 
-Để diễn giải quan hệ này, gọi $L_{alloc}$ là kích thước vùng nhớ được cấp phát và $L_{write}$ là lượng dữ liệu được ghi trong quá trình chuyển đổi. Đây là hai đại lượng khái niệm phục vụ phân tích, không phải số đo của lab. Một thao tác ghi trong phạm vi hợp lệ cần bảo đảm $L_{write} \leq L_{alloc}$. Khi khâu tính kích thước và khâu chuyển đổi không nhất quán, có thể xuất hiện $L_{write} > L_{alloc}$; phần ghi vượt giới hạn khi đó tác động vào vùng nhớ nằm ngoài bộ đệm dự kiến. Sai lệch không chỉ nằm ở dữ liệu của tệp, mà có thể làm thay đổi dữ liệu đang được hệ điều hành sử dụng để xử lý các kết nối.
+- **Khâu tính toán kích thước vùng đệm (`SrvOs2FeaListSizeToNt`):** Hàm này duyệt qua từng phần tử trong danh sách `FEA_LIST` để tính toán tổng số byte cần thiết nhằm cấp phát một vùng nhớ trong bộ nhớ nhân không phân trang (Non-Paged Pool). Tuy nhiên, biến lưu trữ kích thước đầu ra của hàm này được khai báo bằng kiểu số nguyên không dấu 16-bit (WORD / `unsigned short`), có giá trị tối đa là 65.535 byte (0xFFFF). Khi kẻ tấn công gửi một danh sách FEA được cố tình chế tạo với kích thước thực tế lớn hơn 65.535 byte, hiện tượng cắt ngắn số nguyên (Integer Truncation) sẽ xảy ra. Ví dụ, một danh sách có tổng kích thước thực tế là 0x10040 byte (65.600 byte) khi bị ép kiểu về 16-bit sẽ chỉ còn lại giá trị 0x0040 (64 byte).
+- **Khâu cấp phát và sao chép dữ liệu (`SrvOs2FeaToNt`):** Dựa trên kết quả tính toán sai lệch của bước trước, hệ điều hành chỉ cấp phát một vùng đệm nhỏ có kích thước 64 byte trong Non-Paged Pool. Sau đó, hàm `SrvOs2FeaToNt` thực hiện sao chép nội dung từng thuộc tính FEA vào vùng đệm này. Trong quá trình duyệt và sao chép dữ liệu, hàm lại sử dụng kích thước thực tế của từng phần tử FEA mà không kiểm tra lại biên tổng của vùng đệm đã cấp phát. Do đó, dữ liệu sao chép bị tràn ra ngoài phạm vi 64 byte được chỉ định, gây ra hiện tượng tràn vùng đệm nhân (Kernel Pool Overflow).
 
-Tràn bộ nhớ và thực thi mã là hai bước khác nhau. Ghi ngoài giới hạn có thể làm hỏng một vùng dữ liệu không phù hợp và khiến hệ điều hành dừng, thay vì tạo ra quyền thực thi cho bên gửi yêu cầu. EternalBlue kết hợp lỗi này với việc bố trí vùng nhớ (Pool Grooming) để tác động tới cấu trúc thích hợp; Rapid7 xác định việc chuyển hướng thực thi diễn ra về sau tại `srvnet!SrvNetWskReceiveComplete` [14]. Vì vậy, trạng thái bộ nhớ và cấu hình mục tiêu có ý nghĩa đối với kết quả của một lượt thử, còn nhãn chưa vá chỉ phản ánh một điều kiện của đường tấn công.
+Dữ liệu tràn sẽ ghi đè lên các cấu trúc điều khiển bộ nhớ liền kề trong Non-Paged Pool. Trong các công cụ khai thác vũ khí hóa như EternalBlue, kẻ tấn công kết hợp lỗi này với kỹ thuật dàn xếp bộ nhớ nhân (Kernel Pool Grooming). Bằng cách gửi liên tục các gói tin mạng để sắp đặt vị trí các khối bộ đệm của driver mạng `srvnet.sys` nằm ngay phía sau vùng đệm bị tràn, mã khai thác có thể ghi đè chính xác lên các con trỏ hàm tiếp nhận dữ liệu. Khi driver mạng gọi con trỏ hàm này để xử lý gói tin tiếp theo, luồng thực thi của CPU sẽ bị điều hướng sang đoạn mã tùy ý chạy dưới đặc quyền tối cao của nhân hệ điều hành (`NT AUTHORITY\SYSTEM`).
 
-Ví dụ giả định để minh họa, một vùng nhớ được cấp phát 64 byte nhưng thao tác ghi sử dụng 80 byte sẽ có 16 byte vượt giới hạn. Các con số này không phải kích thước FEA hay dữ liệu của EternalBlue. Chúng cho thấy việc kiểm tra đúng kích thước yêu cầu ở một bước chưa đủ nếu bước chuyển đổi sau đó sử dụng một kích thước khác.
+Do lỗi xảy ra trực tiếp trong vùng nhớ Non-Paged Pool của nhân, nếu quá trình dàn xếp bộ nhớ gặp sai lệch, hệ điều hành sẽ phát sinh lỗi dừng và sập màn hình xanh (BSOD). Điều này giải thích vì sao các thao tác can thiệp vào lỗ hổng luôn đi kèm rủi ro lớn đối với tính sẵn sàng của máy chủ.
 
-Sai lệch tính kích thước làm phát sinh nguy cơ ghi ngoài bộ đệm, từ đó dữ liệu ngoài bộ đệm có thể bị thay đổi. Hệ quả có thể là mất ổn định hoặc chuyển hướng thực thi, tùy vùng nhớ bị tác động và cách khai thác sử dụng lỗi. Vì vậy, một lượt thử không tạo được phiên chưa đủ để phủ nhận lỗ hổng, đồng thời một lần BSOD cũng chưa chứng minh thực thi mã thành công.
+### 1.2.4. Điều kiện ảnh hưởng và điều kiện khai thác
 
-Trong đề tài, quan sát từ xa được đối chiếu với bản dựng Windows, bản vá, trạng thái SMBv1 và dữ liệu của lượt thử. Bằng chứng lệnh chạy với quyền `SYSTEM` cho biết quyền của phiên quan sát được; `SYSTEM` là danh tính bảo mật của Windows, không đồng nhất với chế độ thực thi trong nhân (Kernel Mode). Muốn khẳng định chi tiết thao tác trong nhân cần bằng chứng tương ứng, còn output của phiên tương tác chỉ hỗ trợ kết luận về tác động đã xác nhận. Cách phân định này được dùng làm tiêu chí đánh giá ở Chương 2.
+Trong đánh giá an ninh, việc phân định rạch ròi giữa điều kiện để một hệ thống tồn tại lỗ hổng và điều kiện để lỗ hổng đó có thể bị khai thác thực tế là yêu cầu bắt buộc:
 
-```text
-Sai lệch tính kích thước FEA
-             |
-             v
-Lượng dữ liệu ghi vượt vùng nhớ được cấp phát
-             |
-             v
-Dữ liệu ngoài bộ đệm bị thay đổi
-             |
-             +----> Mất ổn định / dừng hệ thống
-             |
-             +----> Có thể chuyển hướng thực thi khi đủ điều kiện
-```
-*Sơ đồ 1.3: Quan hệ giữa lỗi kích thước FEA, ghi ngoài bộ đệm và các hệ quả có thể xảy ra.*
+**Điều kiện ảnh hưởng (Hệ thống có tồn tại lỗ hổng hay không):**
 
-### 1.2.4. Điều kiện hệ thống có nguy cơ bị khai thác
+- Hệ điều hành đang chạy là phiên bản Windows nằm trong diện bị lỗi (chẳng hạn Windows 7 SP1 x64, Windows Server 2008 R2...).
+- Tính năng SMBv1 đang được bật và driver `srv.sys` đang nạp trong nhân để xử lý các yêu cầu mạng.
+- Hệ điều hành chưa được cài đặt bản cập nhật an ninh MS17-010 (ví dụ gói cập nhật KB4012212 hoặc KB4012215 đối với Windows 7).
 
-Để một hệ thống Windows nằm trong phạm vi có thể bị khai thác CVE-2017-0144, cần xem xét các điều kiện kỹ thuật sau [7], [12], [14]:
-1. **Hệ điều hành:** Đang sử dụng phiên bản Windows thuộc danh mục bị ảnh hưởng (từ Windows XP đến Windows 10 các bản dựng đầu, hoặc Windows Server 2003 đến 2016) [7]. Trong phạm vi thực nghiệm, đề tài lựa chọn Windows 7 SP1 x64 làm máy mục tiêu do thuộc nhóm hệ điều hành bị ảnh hưởng và được module Metasploit hỗ trợ trong kịch bản kiểm thử của đề tài [14].
-2. **Tính năng SMBv1 đang được kích hoạt:** Driver xử lý `srv.sys` đang hoạt động và tiếp nhận các yêu cầu giao dịch SMBv1 [8].
-3. **Cổng dịch vụ mạng có thể tiếp cận được:** Cổng TCP 445 (hoặc TCP 139) ở trạng thái mở và không bị chặn bởi tường lửa mạng hoặc tường lửa cục bộ [15].
-4. **Chưa cài đặt bản vá an ninh MS17-010:** Hệ điều hành chưa được cập nhật gói vá bảo mật tương ứng theo danh mục ở Bảng 1.3 [7].
-5. **Đặc điểm xác thực:** CVE-2017-0144 có thể được khai thác từ xa mà không yêu cầu tài khoản xác thực hợp lệ khi dịch vụ SMBv1 mục tiêu có thể tiếp cận [7], [12]. Việc sử dụng `IPC$` trong đề tài chủ yếu xuất hiện ở cơ chế thăm dò của kịch bản Nmap và được phân tích chi tiết tại Mục 1.3.3.
+**Điều kiện khai thác (Cuộc tấn công có thể thực hiện thành công hay không):**
 
-**Nguyên tắc đánh giá:** Cần phân biệt giữa việc "hệ thống mở cổng 445" hoặc "hệ thống đang bật SMBv1" với việc "hệ thống có lỗ hổng MS17-010". Một máy tính đã cài đặt bản vá bảo mật vẫn mở cổng 445 để phục vụ chia sẻ tệp bình thường, nhưng driver `srv.sys` đã được bổ sung đoạn mã kiểm tra tính hợp lệ của tham số, do đó không còn bị ảnh hưởng bởi lỗi tràn bộ nhớ này [7], [8].
+- Kẻ tấn công có đường truyền mạng thông suốt tới cổng dịch vụ SMB (cổng TCP 445 hoặc TCP 139) của máy chủ mục tiêu.
+- Tường lửa mạng hoặc tường lửa cục bộ Windows Firewall không chặn các cổng này và không lọc các gói tin giao dịch SMB bất thường.
+- Máy chủ mục tiêu chấp nhận thương lượng dialect SMBv1 (`NT LM 0.12`).
+- Máy chủ cho phép thiết lập phiên làm việc (kể cả phiên nặc danh Null Session) để kết nối tới tài nguyên chia sẻ quản trị liên tiến trình `IPC$`.
+- Trạng thái phân bổ bộ nhớ nhân của máy chủ đủ ổn định để kỹ thuật dàn xếp Non-Paged Pool hoàn tất mà không kích hoạt lỗi màn hình xanh BSOD.
 
-### 1.2.5. Tác động an toàn thông tin
+Từ sự phân định trên, có thể thấy trạng thái mở cổng TCP 445 và bật SMBv1 chỉ là điều kiện cần về mặt kết nối dịch vụ. Một máy tính dù đang mở cổng 445 và bật SMBv1 nhưng đã được cập nhật bản vá KB tương ứng thì driver `srv.sys` đã được sửa đổi để kiểm tra chặt chẽ kích thước FEA, do đó hoàn toàn không thể bị khai thác. Ngược lại, một máy tính tồn tại lỗ hổng nhưng đặt sau tường lửa chặn cổng 445 thì kẻ tấn công từ bên ngoài phân vùng mạng cũng không thể tiếp cận để khai thác.
 
-Tác động của CVE-2017-0144 cần được đánh giá theo tính bí mật, toàn vẹn và sẵn sàng của tài nguyên. NVD phân loại đây là lỗ hổng có thể dẫn tới thực thi mã từ xa [12]. Tuy nhiên, từ khả năng thực thi mã tới từng hậu quả cụ thể còn có những bước cần kiểm chứng: mã chạy với quyền nào, có thể tiếp cận dữ liệu nào và đã thực hiện thao tác gì.
+### 1.2.5. Tác động của lỗ hổng
 
-Về tính bí mật, nguy cơ phát sinh khi phiên thực thi có quyền đọc dữ liệu mà bên khởi tạo không được phép truy cập qua chức năng chia sẻ tệp thông thường. Về tính toàn vẹn, nguy cơ phát sinh khi quyền thực thi cho phép sửa nội dung hoặc cấu hình ngoài phạm vi được cấp cho người dùng. Hai nguy cơ có thể cùng xuất hiện, nhưng bằng chứng đọc được một tệp không tự chứng minh đã sửa được tệp đó. Trong lab, dữ liệu thử nghiệm và tác vụ xác minh phải được xác định trước, để kết luận gắn với tài nguyên và thao tác đã quan sát.
+Tác động của lỗ hổng CVE-2017-0144 thuộc nhóm MS17-010 được xem xét toàn diện qua ba yếu tố bảo đảm an toàn thông tin:
 
-Về tính sẵn sàng, Rapid7 ghi nhận khả năng mất ổn định, BSOD hoặc khởi động lại khi sử dụng module [14]. Đề tài do đó đánh giá riêng việc máy mục tiêu còn hoạt động và Client còn đọc, ghi được tài nguyên sau phép kiểm tra. Nếu mục tiêu dừng hệ thống mà không có bằng chứng thực thi lệnh, kết quả là sự cố làm gián đoạn dịch vụ. Nếu phiên thử nghiệm hoạt động và Client vẫn truy cập được, điều đó cũng chưa chứng minh tính bí mật hoặc toàn vẹn được bảo vệ. Việc ghi riêng các tác động giúp tránh gom mọi kết quả vào một nhãn thành công hoặc thất bại.
+- **Tính bảo mật (Confidentiality):** Mức độ ảnh hưởng là tối đa. Khi mã khai thác thực thi trong không gian nhân với quyền `SYSTEM`, kẻ tấn công có thể đọc toàn bộ dữ liệu lưu trữ trên các ổ đĩa, truy cập trực tiếp vào bộ nhớ của tiến trình xác thực `lsass.exe` để trích xuất mật khẩu dạng văn bản rõ hoặc mã băm NTLM của các tài khoản đăng nhập trên máy.
+- **Tính toàn vẹn (Integrity):** Bị can thiệp tuyệt đối. Kẻ tấn công có toàn quyền sửa đổi, xóa bỏ tệp tin hệ thống, thay đổi chính sách bảo mật, cài đặt các phần mềm độc hại hoặc cấy cửa sau (backdoor) chạy ngầm để duy trì quyền kiểm soát lâu dài.
+- **Tính sẵn sàng (Availability):** Bị đe dọa nghiêm trọng. Quá trình khai thác bộ nhớ nhân rất dễ dẫn đến lỗi làm sập hệ thống (BSOD) khiến dịch vụ bị gián đoạn tức thì. Ngoài ra, kẻ tấn công có thể cố tình tắt máy, khóa dịch vụ hoặc mã hóa toàn bộ dữ liệu máy chủ để tống tiền.
 
-### 1.2.6. Khái quát các chiến dịch tấn công thực tế liên quan
+Đặc điểm khiến CVE-2017-0144 trở nên đặc biệt nguy hiểm là lỗ hổng này không đòi hỏi bất kỳ sự tương tác nào từ phía người dùng (Zero-click) và không yêu cầu cung cấp tài khoản hay mật khẩu hợp lệ trước đó. Đây là đặc tính kỹ thuật biến lỗ hổng thành cửa ngõ lý tưởng cho các cuộc tấn công tự động trên quy mô lớn.
 
-Sự kết hợp giữa lỗ hổng MS17-010 và mã khai thác EternalBlue đã được ghi nhận trong các sự cố an ninh mạng diện rộng trên thế giới [13], [16]:
+### 1.2.6. Mối liên hệ với các cuộc tấn công thực tế
 
-- **WannaCry (tháng 05/2017):** Microsoft ghi nhận mã độc có khả năng lây sang các máy Windows chưa vá trong mạng nội bộ và quét địa chỉ Internet. Hướng dẫn phòng vệ nhấn mạnh cập nhật MS17-010, tắt SMBv1 và hạn chế kết nối SMB từ các nguồn không được phép [16].
-- **Mã độc NotPetya (Tháng 06/2017):** NotPetya sử dụng mã khai thác liên quan đến MS17-010 (bao gồm EternalBlue và EternalRomance) để lây lan qua mạng nội bộ. Mục tiêu chính của NotPetya là phá hoại cấu trúc hệ thống tệp và bản ghi khởi động (MBR), khiến hệ thống không thể khôi phục, gây thiệt hại cho nhiều tập đoàn vận tải và hạ tầng quốc tế [13].
+Nguy cơ kỹ thuật của MS17-010 đã được minh chứng cụ thể thông qua các sự cố an ninh mạng chấn động thế giới xuất hiện vào năm 2017:
 
-Các sự cố này cho thấy việc kiểm tra, xác minh và áp dụng các biện pháp phòng thủ cho dịch vụ SMB là nhiệm vụ kỹ thuật có ý nghĩa thực tiễn trong quản trị hệ thống.
+- **Chiến dịch mã độc tống tiền WannaCry (Tháng 05/2017):** Mã khai thác EternalBlue bị nhóm tin tặc Shadow Brokers làm rò rỉ vào tháng 04/2017. Chỉ một tháng sau, tác giả của WannaCry đã tích hợp mã khai thác này vào một sâu mạng (worm) tự động. WannaCry quét liên tục các cổng TCP 445 trên Internet và mạng nội bộ, tự động xâm nhập các máy Windows chưa vá và mã hóa toàn bộ dữ liệu để đòi tiền chuộc. Vụ tấn công đã lây nhiễm hàng trăm nghìn máy tính tại hơn 150 quốc gia, làm tê liệt hệ thống của nhiều bệnh viện, ngân hàng và cơ quan công quyền.
+- **Chiến dịch mã độc NotPetya (Tháng 06/2017):** NotPetya tiếp tục sử dụng các mã khai thác trong nhóm MS17-010 (kết hợp giữa EternalBlue và EternalRomance) để lây lan với tốc độ cao trong mạng nội bộ của các tập đoàn đa quốc gia. Khác với WannaCry, NotPetya ngụy trang dưới dạng mã độc tống tiền nhưng mục tiêu thực chất là phá hoại: mã độc cố tình ghi đè Master Boot Record (MBR) của ổ cứng, khiến dữ liệu không thể phục hồi và gây thiệt hại kinh tế ước tính hàng tỷ USD.
+
+Các chiến dịch thực tế này phản ánh bài học quản trị sâu sắc: lỗ hổng giao thức kết hợp với sự chậm trễ cập nhật bản vá và việc duy trì SMBv1 có thể biến mạng nội bộ thành môi trường lây nhiễm diện rộng. Nhận thức rõ điều này, nhóm em xác định việc xây dựng phương pháp kiểm tra an toàn và có kiểm soát là yêu cầu cấp thiết để nhận diện và phòng vệ dịch vụ SMB.
 
 ---
 
 ## 1.3. Công cụ phục vụ kiểm thử
 
-### 1.3.1. Hệ điều hành kiểm thử Kali Linux
+### 1.3.1. Kali Linux
 
-Kali Linux là bản phân phối Linux mã nguồn mở dựa trên Debian, phục vụ kiểm thử xâm nhập và đánh giá an toàn thông tin [17]. Đề tài lựa chọn Kali làm trạm kiểm thử để tổ chức các công cụ khảo sát và thu thập dữ liệu trong cùng một môi trường. Việc dùng Kali không tự tạo tính cô lập; điều đó phụ thuộc vào cấu hình mạng ảo và phạm vi kết nối của lab.
+Trong đồ án này, Kali Linux được nhóm em sử dụng làm trạm kiểm thử (Testing Workstation) chuyên dụng. Hệ điều hành cung cấp nền tảng dòng lệnh tập trung, cho phép thực thi đồng bộ các công cụ mạng, quản lý cấu hình giao tiếp và ghi nhận nhật ký (log) chi tiết trong suốt quá trình thử nghiệm.
 
-Trước khi kiểm thử, cần ghi phiên bản Kali, phiên bản công cụ và các thành phần đã cài đặt. Hồ sơ này giúp đối chiếu kết quả giữa các lượt chạy, thay vì giả định mọi bản Kali đều có cùng công cụ và hành vi.
+Tuy nhiên, bản thân Kali Linux chỉ là môi trường vận hành chứ không tự động phát hiện hay phân tích lỗ hổng của mục tiêu. Độ chính xác và tính an toàn của quá trình đánh giá phụ thuộc hoàn toàn vào cách thiết lập từng công cụ cụ thể. Nhóm em cấu hình card mạng ảo của trạm kiểm thử ở chế độ nội bộ cô lập (Host-only Network hoặc Internal Network) nhằm ngăn chặn triệt để nguy cơ các gói tin thăm dò thoát ra hạ tầng mạng bên ngoài.
 
-### 1.3.2. Công cụ quét mạng Nmap
+Với vai trò điểm xuất phát trong chuỗi kiểm tra, Kali Linux là nơi khởi tạo mọi kết nối trinh sát và phân tích lưu lượng đến máy chủ Windows mục tiêu.
 
-Nmap (Network Mapper) được dùng trước hết để khảo sát trạng thái cổng và nhận diện dịch vụ. Với quét TCP SYN (`-sS`), phản hồi `SYN-ACK` được diễn giải là `open`, phản hồi `RST` là `closed`; không nhận được phản hồi sau các lần thử lại hoặc nhận một số mã ICMP unreachable được diễn giải là `filtered` [18]. Nhãn `filtered` vì vậy mô tả giới hạn quan sát từ trạm quét, chưa chỉ ra thiết bị nào đã chặn hoặc liệu máy đích có đang hoạt động.
+### 1.3.2. Nmap
 
-Sau bước quét cổng, nhận diện dịch vụ (`-sV`) dùng các yêu cầu thăm dò và đối chiếu phản hồi để nhận diện dịch vụ lắng nghe [18]. Việc thấy tên `microsoft-ds` giúp định hướng phép kiểm tra SMB, nhưng tên này chưa cho biết Server chấp nhận SMBv1 hay đã cài bản vá MS17-010. Hai câu hỏi đó cần phép kiểm tra giao thức và trạng thái mục tiêu riêng.
+Nhóm em sử dụng Nmap (Network Mapper) cho bước trinh sát mạng ban đầu nhằm xác định các máy chủ đang hoạt động và kiểm tra trạng thái của hai cổng dịch vụ TCP 139 và TCP 445.
 
-Trong mô hình của đề tài, cổng 445 mở là bằng chứng để chuyển sang kiểm tra phản hồi SMB. Nếu cổng đóng hoặc bị lọc, người kiểm thử cần xác định lý do trước khi diễn giải các bước sau. Chẳng hạn, không có kết quả của script do đường truyền bị chặn khác với nhận được một phản hồi SMB cho thấy không còn dấu hiệu chưa vá. Sự khác biệt này quyết định việc ghi trạng thái là `False` hay `Unknown` trong Chương 2.
+Dữ liệu thu được từ Nmap phản ánh khả năng tiếp cận dịch vụ ở tầng giao vận:
+- `Open`: Cổng mạng đang có tiến trình lắng nghe và phản hồi gói tin TCP SYN-ACK trước yêu cầu SYN từ trạm kiểm thử.
+- `Closed`: Cổng mạng phản hồi gói tin RST, cho thấy không có dịch vụ nào đang tiếp nhận kết nối.
+- `Filtered`: Gói tin thăm dò bị hủy bỏ hoặc nhận thông báo ICMP Unreachable do tường lửa ngăn chặn.
 
-### 1.3.3. Tự động hóa kiểm tra an toàn với Nmap Scripting Engine (NSE)
+Bên cạnh đó, tùy chọn `-sV` giúp định danh sơ bộ tên dịch vụ ứng dụng như `microsoft-ds` hoặc `netbios-ssn`.
 
-Nmap Scripting Engine (NSE) cho phép thực thi các tập kịch bản viết bằng ngôn ngữ Lua để tự động hóa các tác vụ kiểm tra an toàn nâng cao [18], [19]. Đối với dịch vụ SMB và lỗ hổng MS17-010:
-- **Script `smb-protocols.nse`:** Nhận diện danh sách phiên bản được Server chấp nhận, trong đó `NT LM 0.12` biểu thị SMBv1 [20].
-- **Script `smb-vuln-ms17-010.nse`:** Nmap xếp kịch bản này vào nhóm `safe` và `vuln`; kịch bản dùng phản hồi SMB để nhận biết dấu hiệu chưa vá MS17-010 [19]. Phân loại `safe` không phải bảo đảm mọi cấu hình mục tiêu đều không chịu tác động.
+Mặc dù vậy, kết quả từ Nmap chỉ dừng lại ở việc xác nhận cổng dịch vụ có mở hay không từ góc nhìn mạng. Trạng thái cổng 445 `Open` không đồng nghĩa với việc máy chủ hỗ trợ SMBv1 hay tồn tại lỗ hổng MS17-010. Do đó, Nmap đảm nhiệm vai trò sàng lọc ở Mức 1, làm tiền đề để lựa chọn mục tiêu cho các bước phân tích sâu hơn.
 
-Phép thăm dò này sử dụng khác biệt trong phản hồi dịch vụ làm dấu hiệu nhận diện; nó không thực hiện chuỗi khai thác FEA và không tìm cách tạo phiên thực thi mã. Để diễn giải một kết quả, cần theo dõi phép kiểm tra đã đi tới đâu trong chuỗi sau:
-1. Script dùng thư viện SMB để thiết lập kết nối và thương lượng SMBv1. Sau bước Session Setup theo thông tin xác thực được cấu hình, script gửi Tree Connect tới tài nguyên chia sẻ `\\Target\IPC$` (mặc định tham số `sharename` là `IPC$`) [19].
-2. Khi phiên làm việc với `IPC$` được thiết lập, script gửi một yêu cầu giao dịch `SMB_COM_TRANSACTION` (opcode `0x25`) với lệnh `PeekNamedPipe` (mã `0x2300`) trên đường ống định danh `\PIPE\` với các tham số độ dài bộ đệm tối đa (`Max Parameter Count = 0xFFFF`, `Max Data Count = 0xFFFF`) [19].
-3. **Phân tích mã trạng thái phản hồi NT Status theo mã nguồn Nmap:**
-   - *Dấu hiệu phù hợp hệ thống chưa vá (VULNERABLE):* Nếu máy chủ phản hồi mã lỗi NT Status `STATUS_INSUFF_SERVER_RESOURCES` (`0xC0000205`), phản hồi phù hợp với dấu hiệu mà kịch bản dùng để nhận diện hệ thống chưa vá. Script ghi nhận dấu hiệu này và xuất kết luận `State: VULNERABLE` [19].
-   - *Dấu hiệu phù hợp hệ thống đã vá:* Nếu máy chủ phản hồi mã lỗi `STATUS_ACCESS_DENIED` (`0xC0000022`) hoặc `STATUS_INVALID_HANDLE` (`0xC0000008`), kịch bản diễn giải đây là dấu hiệu phù hợp với hệ thống đã vá và ghi thông báo `This system is patched` [19]. Cần đối chiếu thêm trạng thái bản vá trên mục tiêu; một thông báo của công cụ không chứng minh hệ thống không còn mọi lỗ hổng.
+### 1.3.3. Nmap Scripting Engine
 
-Khi không kết nối được tới `IPC$`, không đọc được phản hồi hoặc nhận mã trạng thái ngoài các nhánh được nhận diện, phép kiểm tra chưa cung cấp đủ cơ sở để xác định trạng thái bản vá. Mã nguồn vẫn có thể gán `NOT_VULN` trong nhánh không phát hiện dấu hiệu; đề tài phải đọc kèm lỗi và kết quả kiểm tra, thay vì coi nhãn này là bằng chứng máy đã vá [19].
+Nmap Scripting Engine (NSE) mở rộng khả năng tương tác của Nmap lên tầng ứng dụng thông qua các kịch bản viết bằng ngôn ngữ Lua. Trong đồ án, hai kịch bản chuyên biệt được nhóm em sử dụng gồm:
 
-Điểm dễ nhầm là nhãn báo cáo và việc hoàn tất phép kiểm tra. Trong mã nguồn, cả nhánh nhận dấu hiệu phù hợp đã vá và nhánh gặp lỗi kết nối đều có thể đi tới trạng thái `NOT_VULN`; nguyên nhân được lưu riêng trong kết quả kiểm tra [19]. Vì vậy, đề tài giữ cả output và lỗi, rồi đối chiếu với lưu lượng và cấu hình mục tiêu. Nếu không xác định được phép thăm dò đã nhận phản hồi hợp lệ, trạng thái bản vá phải được ghi là chưa xác định.
+- **Kịch bản `smb-protocols.nse`:** Gửi gói tin `Negotiate Protocol Request` mang danh sách các dialect SMB để phân tích gói tin phản hồi từ máy chủ, qua đó nhận diện việc hệ thống có chấp thuận giao thức SMBv1 (`NT LM 0.12`) hay không.
+- **Kịch bản `smb-vuln-ms17-010.nse`:** Thăm dò an toàn dấu hiệu của bản tin MS17-010 bằng cách kết nối vào tài nguyên chia sẻ quản trị `IPC$` và gửi yêu cầu kiểm tra qua Named Pipe (sử dụng lệnh `SMB_COM_TRANSACTION2` với hàm `PeekNamedPipe`).
 
-Ví dụ giả định, một Server cho phép kết nối TCP nhưng từ chối phiên cần để truy cập `IPC$`. Người kiểm thử biết được đường mạng có phản hồi, nhưng chưa quan sát được mã trạng thái của yêu cầu `PeekNamedPipe`. Cài bản vá và thay đổi chính sách xác thực đều có thể làm kết quả công cụ khác đi, song chúng tác động vào những khâu khác nhau. Muốn phân biệt cần kiểm tra bước bị từ chối và danh sách bản vá, thay vì lấy việc không xuất hiện `VULNERABLE` làm bằng chứng duy nhất.
+Kịch bản đưa ra đánh giá dựa trên mã trạng thái NT Status trả về từ nhân hệ điều hành:
+- Nếu nhận mã lỗi bộ nhớ `STATUS_INSUFF_SERVER_RESOURCES` (`0xC0000205`), hệ thống bộc lộ dấu hiệu chưa được cài đặt bản vá MS17-010 và kịch bản xuất kết luận `State: VULNERABLE`.
+- Nếu nhận mã lỗi truy cập `STATUS_ACCESS_DENIED` (`0xC0000022`) hoặc yêu cầu bị từ chối, hệ thống có dấu hiệu đã được cập nhật an toàn.
 
-### 1.3.4. Nền tảng kiểm thử Metasploit Framework
+Điểm cần lưu ý là kịch bản NSE chỉ phân tích mã lỗi logic từ một gói tin thăm dò chứ không tiến hành khai thác bộ nhớ. Kết quả này có thể phát sinh âm tính giả nếu máy chủ chặn kết nối nặc danh vào `IPC$`. Vì vậy, NSE đóng vai trò cầu nối ở Mức 2 và Mức 3, cung cấp các chỉ báo kỹ thuật quan trọng trước khi quyết định thực hiện các bước xác minh sâu hơn.
 
-Metasploit Framework là nền tảng kiểm tra xâm nhập mô-đun hóa, hỗ trợ chuẩn hóa quy trình thẩm định an toàn thông tin [14], [21]. Trong phạm vi đề tài, Metasploit được phân bổ hai vai trò rõ ràng:
-- **Mô-đun phụ trợ (Auxiliary Module):** Sử dụng mô-đun `auxiliary/scanner/smb/smb_ms17_010` để kiểm tra dấu hiệu MS17-010 trong phạm vi đã xác định [22]. Cần lưu ý mô-đun này và script NSE của Nmap là hai implementation khác nhau dùng để tham chiếu chéo về mặt phản ứng dịch vụ. Các đối chứng thực sự khác loại bao gồm: bản dựng Windows (build), danh sách Hotfix/KB đã cài đặt, lưu lượng gói tin (packet capture) và trạng thái tính năng SMBv1 trên máy mục tiêu.
-- **Mô-đun khai thác có kiểm soát (Exploit Module):** Sử dụng mô-đun `exploit/windows/smb/ms17_010_eternalblue` trong môi trường phòng thí nghiệm cô lập nhằm thẩm định khả năng thực thi của lỗ hổng CVE-2017-0144 [14]. Payload được giới hạn ở các thao tác xác nhận quyền thực thi; bản thân quá trình khai thác kernel vẫn có nguy cơ gây mất ổn định hoặc phát sinh lỗi màn hình xanh (BSOD), vì vậy thực nghiệm chỉ tiến hành trên máy ảo đã tạo điểm sao lưu phục hồi (snapshot) [14].
+### 1.3.4. Metasploit Framework
 
-```
-[ Pha 1: Quét cổng ] ──> Nmap (-p 139,445 -sS) ──> Xác định cổng TCP mở
-           │
-           ▼
-[ Pha 2: Định danh ] ──> Nmap (-sV) ─────────────> Nhận diện dịch vụ microsoft-ds
-           │
-           ▼
-[ Pha 3: Dấu hiệu ]  ──> Nmap NSE / MSF Aux ─────> Kiểm tra dấu hiệu chưa vá MS17-010
-           │
-           ▼
-[ Pha 4: Thẩm định ] ──> Metasploit (Lab cô lập) ─> Xác minh khả năng thực thi trong lab
-```
-*Sơ đồ 1.4: Quy trình 4 giai đoạn phối hợp công cụ trong kiểm thử đánh giá an ninh SMB.*
+Metasploit Framework được nhóm em sử dụng trong phạm vi lab cô lập nhằm thực hiện các tác vụ quét đối chiếu và khai thác kiểm chứng. Khung công cụ này được áp dụng theo hai hướng:
 
-### 1.3.5. Bảng liên kết kiến thức lý thuyết và các bước thực nghiệm lab
+- **Mô-đun phụ trợ (Auxiliary Module):** Sử dụng `auxiliary/scanner/smb/smb_ms17_010` để rà quét độc lập, tạo nguồn dữ liệu đối chiếu chéo với kịch bản NSE nhằm nâng cao độ tin cậy của chỉ báo lỗ hổng.
+- **Mô-đun khai thác có kiểm soát (Exploit Module):** Sử dụng `exploit/windows/smb/ms17_010_eternalblue` để xác minh trực tiếp khả năng thực thi mã lệnh của CVE-2017-0144 trên máy ảo mục tiêu.
 
-Để tạo cầu nối giữa cơ sở lý thuyết và các thao tác trong mô hình thực nghiệm, Bảng 1.4 đối chiếu từng thành phần kiến thức với mục tiêu quan sát và công cụ tương ứng được triển khai trong lab.
+Khác với các công cụ quét thụ động, Metasploit cung cấp bằng chứng trực tiếp về mức độ ảnh hưởng. Việc mở thành công phiên tương tác với đặc quyền `NT AUTHORITY\SYSTEM` khẳng định lỗ hổng có thể bị lợi dụng để chiếm quyền kiểm soát máy chủ hoàn toàn. Ngược lại, nếu quá trình can thiệp thất bại, công cụ cũng ghi nhận các phản ứng bất thường của hệ thống.
 
-*Bảng 1.4: Đối chiếu kiến thức lý thuyết và các bước thực nghiệm trong lab.*
+Do việc can thiệp vào bộ nhớ Non-Paged Pool tiềm ẩn rủi ro gây sập hệ điều hành (BSOD), mô-đun khai thác chỉ được nhóm em vận hành trên các máy ảo đã lưu ảnh chụp trạng thái (snapshot) và tuân thủ nghiêm ngặt nguyên tắc an toàn lab. Trong chuỗi đánh giá, Metasploit giữ vai trò công cụ thẩm định ở Mức 4.
 
-| Khái niệm lý thuyết | Vấn đề kỹ thuật cần làm rõ | Bước quan sát / Thao tác trong lab | Công cụ sử dụng |
-|---|---|---|---|
-| **Cổng mạng TCP 445 / 139** | Cổng dịch vụ có đang lắng nghe kết nối từ mạng hay không | Quét cổng TCP trên máy mục tiêu để kiểm tra trạng thái `open` | Nmap (`-sS -p 139,445`) |
-| **Phiên bản Dialect SMB** | Máy mục tiêu có chấp nhận đàm phán qua SMBv1 không | Gửi gói đàm phán dialect để ghi nhận phiên bản giao thức | Nmap (`--script smb-protocols`) |
-| **Dấu hiệu MS17-010** | Driver `srv.sys` có phản hồi mã lỗi đặc trưng của bản chưa vá | Gửi gói tin thăm dò an toàn vào `IPC$` để kiểm tra trạng thái | Nmap (`--script smb-vuln-ms17-010`), MSF Auxiliary |
-| **Trạng thái bản vá Windows** | Xác nhận máy chủ đã cài đặt gói cập nhật an ninh hay chưa | Kiểm tra lịch sử cập nhật và danh sách bản vá (Hotfix/KB) | Lệnh `systeminfo` / PowerShell trên Windows |
-| **Khả năng khai thác thực tế** | Lỗ hổng CVE-2017-0144 có thể bị lợi dụng để thực thi mã không | Thực nghiệm kiểm tra trong mạng lab cô lập có sao lưu snapshot | Metasploit Framework (`ms17_010_eternalblue`) |
-| **Nguyên tắc phòng thủ** | Áp dụng bản vá, tắt SMBv1 hoặc cấu hình chặn cổng bằng firewall | Thực hiện cấu hình phòng thủ trên Windows Target | Windows Update, PowerShell, Windows Firewall |
-| **Xác minh lại (Retest)** | Biện pháp phòng thủ có loại bỏ dấu hiệu lỗ hổng hay không | Chạy lại bộ kiểm thử để so sánh kết quả trước và sau | Nmap, NSE script, Metasploit scanner |
+### 1.3.5. Vai trò của các công cụ trong quy trình kiểm thử
+
+Các công cụ nêu trên không hoạt động rời rạc mà được nhóm em phối hợp thành một chuỗi quy trình 4 giai đoạn nối tiếp nhau một cách chặt chẽ:
+
+- **Giai đoạn 1 - Khởi tạo và thiết lập:** Hệ điều hành Kali Linux cung cấp môi trường thực nghiệm an toàn, cô lập với mạng ngoài, định tuyến kết nối tới dải mạng máy ảo mục tiêu.
+- **Giai đoạn 2 - Quét mạng và xác định cổng:** Nmap thực hiện quét cổng TCP 139 và 445 để xác định máy chủ mục tiêu có mở dịch vụ SMB hay không. Nếu cổng đóng hoặc bị lọc, quy trình dừng lại để ghi nhận trạng thái mạng.
+- **Giai đoạn 3 - Nhận diện dialect và thăm dò dấu hiệu:** Nmap NSE (kịch bản `smb-protocols` và `smb-vuln-ms17-010`) cùng Metasploit Auxiliary kiểm tra xem máy chủ có hỗ trợ SMBv1 và có phản hồi mã lỗi đặc trưng của bản tin MS17-010 hay không.
+- **Giai đoạn 4 - Thẩm định có kiểm soát:** Khi các dấu hiệu kỹ thuật ở Giai đoạn 3 trùng khớp, Metasploit Exploit được kích hoạt trên môi trường lab đã lưu snapshot để xác minh khả năng thực thi mã thực tế.
+
+Cách tiếp cận đa tầng này giúp quy trình kiểm thử của nhóm em tránh được sai lầm phổ biến là vội vàng kích hoạt mã khai thác khi chưa hiểu rõ trạng thái dịch vụ. Đồng thời, phương pháp này bảo đảm mỗi kết luận an ninh đều có căn cứ kỹ thuật rõ ràng tương ứng với từng lớp công cụ.
 
 ---
 
-## 1.4. Cơ sở đánh giá trạng thái và nguyên tắc phòng thủ
+## 1.4. Tiêu chí xác minh trạng thái SMB và MS17-010
 
-### 1.4.1. Nguyên tắc phân định các cấp độ trạng thái dịch vụ và lỗ hổng
+### 1.4.1. Phát hiện dịch vụ SMB
 
-Một thiếu sót phổ biến trong đánh giá an ninh là việc suy diễn từ trạng thái mở cổng sang kết luận có lỗ hổng. Để đảm bảo tính khoa học và chính xác, đề tài phân định 4 cấp độ trạng thái kỹ thuật tăng dần theo Bảng 1.5.
+Tiêu chí Mức 1 tập trung xác định sự hiện diện của dịch vụ SMB trên đường truyền mạng giữa trạm kiểm thử và máy chủ mục tiêu.
 
-*Bảng 1.5: Khung phân định 4 cấp độ trạng thái dịch vụ và lỗ hổng SMB.*
+- **Dấu hiệu kỹ thuật:** Trạm kiểm thử gửi các gói tin TCP SYN tới cổng TCP 445 (Direct-hosted SMB) hoặc TCP 139 (NetBIOS Session Service). Trạng thái cổng được xác nhận là `Open` khi máy chủ phản hồi gói tin TCP SYN-ACK.
+- **Ý nghĩa an ninh:** Kết quả này chứng minh máy chủ đang vận hành một dịch vụ lắng nghe trên cổng SMB và trạm kiểm thử có thể tiếp cận được dịch vụ đó qua mạng.
+- **Ranh giới đánh giá:** Việc mở cổng 445 hoặc 139 **hoàn toàn không đồng nghĩa với việc hệ thống có lỗ hổng**. Bất kỳ máy chủ Windows nào có chia sẻ dữ liệu hoặc tham gia quản trị nội bộ đều mở các cổng này. Đây là điều kiện cần về khả năng tiếp cận mạng trước khi tiến hành các bước kiểm tra tiếp theo.
 
-| Cấp độ | Tên gọi kỹ thuật | Dấu hiệu quan sát thực tế | Ý nghĩa an ninh kỹ thuật | Giới hạn kết luận |
-|---|---|---|---|---|
-| **Cấp độ 1** | Khả năng tiếp cận dịch vụ SMB | Cổng TCP 445 hoặc TCP 139 ở trạng thái `open` qua quét TCP SYN | Cổng mạng đang có dịch vụ lắng nghe; cần thực hiện nhận diện dịch vụ để xác nhận | **Chưa thể kết luận lỗ hổng.** Đây là trạng thái mở cổng mạng, chưa khẳng định cấu hình dịch vụ |
-| **Cấp độ 2** | Xác nhận máy chủ chấp nhận SMBv1 | Server chấp thuận dialect `"NT LM 0.12"` khi đàm phán Negotiate | Tính năng SMBv1 chưa bị vô hiệu hóa; bề mặt phơi nhiễm của SMBv1 đang mở | **Chưa đủ cơ sở khẳng định có lỗ hổng.** Máy tính có thể đã được cài bản vá nhưng chưa tắt SMBv1 |
-| **Cấp độ 3** | Dấu hiệu phù hợp với hệ thống chưa vá MS17-010 | Server phản hồi mã NT Status `STATUS_INSUFF_SERVER_RESOURCES` (`0xC0000205`) trước gói probe `SMB_COM_TRANSACTION` | Driver `srv.sys` có nhánh xử lý logic trùng khớp với mẫu hành vi chưa được cập nhật bản vá | **Chưa chứng minh khai thác thành công.** Kết quả chỉ cho thấy phản hồi phù hợp với mẫu hành vi chưa vá; nếu truy cập nặc danh bị chặn và không có thông tin xác thực thì script không xác định được trạng thái |
-| **Cấp độ 4** | Bằng chứng thực nghiệm cho thấy cấu hình có thể bị khai thác | Phiên kiểm thử có kiểm soát hoàn tất việc thực thi mã thử nghiệm trong lab | Cấu hình máy mục tiêu tồn tại lỗ hổng CVE-2017-0144 và có thể bị khai thác từ xa | Chỉ thực hiện trong mạng lab cô lập; dừng kiểm thử nếu phát sinh tác động ngoài dự kiến |
+### 1.4.2. Nhận diện SMBv1
 
-### 1.4.2. Giới hạn kỹ thuật và phòng ngừa kết quả sai lệch
+Sau khi xác định cổng dịch vụ mở, Mức 2 kiểm tra xem dịch vụ SMB của máy chủ có chấp thuận giao tiếp bằng giao thức cũ SMBv1 hay không.
 
-Sai lệch đánh giá có thể phát sinh ở khâu thu thập dữ liệu hoặc khâu diễn giải. Ở khâu thu thập, phép kiểm tra có thể không tới được dịch vụ, không thiết lập được phiên, hoặc không nhận phản hồi hợp lệ. Khi đó, kết quả thiếu thông tin về trạng thái cần đánh giá. Ở khâu diễn giải, người kiểm thử có thể nhầm dấu hiệu chưa vá với bằng chứng khai thác, hoặc nhầm việc không có phản hồi với việc lỗ hổng đã được khắc phục. Mục 1.3.3 đã phân tích sự khác biệt giữa hai nhánh có thể cùng đi tới nhãn `NOT_VULN` trong mã nguồn NSE [19].
+- **Tiêu chí giao thức:** Trạm kiểm thử gửi gói tin `Negotiate Protocol Request` chứa danh sách các dialect SMB, bao gồm chuỗi định danh `NT LM 0.12`. Nếu máy chủ phản hồi bằng gói tin `Negotiate Protocol Response` lựa chọn dialect này, hệ thống được ghi nhận là có hỗ trợ SMBv1.
+- **Bản chất rủi ro:** Kết quả này khẳng định máy chủ đang duy trì giao thức legacy với cơ chế bảo mật yếu, đồng thời driver `srv.sys` đang được nạp trong bộ nhớ nhân để xử lý các gói tin này.
+- **Ranh giới kết luận:** Máy chủ chấp thuận SMBv1 **chưa đủ cơ sở để khẳng định hệ thống tồn tại lỗ hổng MS17-010**. Nhiều hệ thống Windows đã được cập nhật bản vá an ninh nhưng vẫn bật SMBv1 để duy trì tương thích với thiết bị mạng cũ. Khi đó, mã nguồn xử lý trong `srv.sys` đã được Microsoft sửa đổi an toàn.
 
-Để giảm sai lệch, đề tài đối chiếu hai loại bằng chứng: phản hồi quan sát từ mạng và trạng thái cấu hình đọc trên mục tiêu. Hai công cụ cùng dùng một dấu hiệu SMB có ích để phát hiện khác biệt trong cách chạy hoặc xử lý phản hồi, nhưng sự đồng thuận của chúng chưa thay thế kiểm tra bản vá. Ngược lại, một danh sách KB cũng chưa mô tả việc Server có đang phục vụ SMBv1 hay trạm kiểm thử có tiếp cận được dịch vụ; cần ghép với phép thương lượng và dữ liệu mạng.
+### 1.4.3. Xác định dấu hiệu lỗ hổng
 
-Ví dụ giả định, ba Server đều mở cổng 445 có thể mang ý nghĩa khác nhau: Server thứ nhất chỉ chấp nhận SMBv2; Server thứ hai vẫn chấp nhận SMBv1 nhưng đã vá; Server thứ ba chưa vá và có dấu hiệu phù hợp phép thăm dò. Kết quả giống nhau ở cấp độ cổng không làm ba cấu hình có cùng rủi ro đối với đường tấn công MS17-010. Nếu Server thứ ba không tạo được phiên trong một lượt thử, vẫn phải giữ bằng chứng chưa vá và tìm nguyên nhân của lượt thử, thay vì hạ kết luận chỉ theo việc phiên không xuất hiện.
+Mức 3 đi sâu vào việc thu thập các phản hồi kỹ thuật để nhận diện dấu hiệu driver `srv.sys` chưa được cài đặt bản cập nhật an ninh MS17-010.
 
-### 1.4.3. Nguyên tắc giảm thiểu rủi ro và phòng thủ giao thức SMB
+- **Phản hồi từ dịch vụ:** Trạm kiểm thử thiết lập phiên kết nối tới tài nguyên chia sẻ quản trị `IPC$` và gửi gói tin giao dịch thăm dò an toàn qua Named Pipe:
+  - *Dấu hiệu chưa vá:* Máy chủ phản hồi mã trạng thái `STATUS_INSUFF_SERVER_RESOURCES` (`0xC0000205`). Đây là phản xạ đặc trưng của nhánh mã `srv.sys` cũ khi xử lý yêu cầu bộ nhớ bất thường.
+  - *Dấu hiệu đã vá hoặc an toàn:* Máy chủ phản hồi mã lỗi `STATUS_ACCESS_DENIED` (`0xC0000022`), mã lỗi handle không hợp lệ, hoặc từ chối thực hiện yêu cầu giao dịch.
+- **Mức độ tin cậy:** Cung cấp chỉ báo có độ tin cậy kỹ thuật cao về việc hệ thống mục tiêu đang thiếu gói cập nhật bảo mật của Microsoft.
+- **Ranh giới suy luận:** Dấu hiệu ở Mức 3 **mới dừng lại ở mức độ suy đoán có căn cứ, chưa phải bằng chứng khẳng định việc khai thác chắc chắn thành công**. Kết quả này có thể bị sai lệch nếu máy chủ áp dụng chính sách chặn kết nối nặc danh hoặc có thiết bị giám sát lưu lượng mạng can thiệp.
 
-Các biện pháp phòng thủ cần được lựa chọn theo vị trí chúng tác động lên đường tấn công. Bản vá MS17-010 sửa phần xử lý bị lỗi trong SMBv1 [7]. Vì vậy, phép kiểm tra sau vá cần xác nhận gói cập nhật phù hợp với hệ điều hành và đối chiếu phản hồi thăm dò; việc cổng 445 vẫn mở không mâu thuẫn với mục tiêu vá, vì Server vẫn có thể cần cung cấp chia sẻ tệp.
+### 1.4.4. Xác minh lỗ hổng
 
-Vô hiệu hóa SMBv1 tác động vào khả năng sử dụng giao thức cũ, thay vì sửa nội dung một yêu cầu đã tới phần xử lý. Khi Server không còn chấp nhận SMBv1, đường tấn công SMBv1 đang xét không thể tiếp tục theo cùng trình tự. Microsoft cung cấp cách cấu hình theo từng phiên bản Windows và lưu ý ảnh hưởng tới hệ thống còn phụ thuộc SMBv1 [8]. Do đó, trước khi áp dụng cần xác định Client và ứng dụng cần dùng giao thức nào; sau cấu hình cần kiểm tra cả việc từ chối SMBv1 và việc truy cập hợp lệ qua phiên bản được giữ lại.
+Mức 4 là bước xác thực thực nghiệm nhằm làm rõ khả năng can thiệp bộ nhớ và thực thi mã tùy ý của lỗ hổng CVE-2017-0144 trong môi trường lab cô lập.
 
-Tường lửa và phân đoạn mạng giới hạn nguồn có thể kết nối tới dịch vụ [15]. Trong thiết kế của đề tài, chính sách cho phép Client nghiệp vụ truy cập Server nhưng chặn trạm kiểm thử ở một phân vùng khác. Nếu quy tắc có hiệu lực, trạng thái quan sát từ trạm bị chặn thay đổi dù cấu hình SMB bên trong Server có thể giữ nguyên. Vì vậy, bằng chứng tường lửa có hiệu lực phải gắn với địa chỉ nguồn, đích và cổng được kiểm tra; nó không thay thế bằng chứng đã vá hệ điều hành.
+- **Xác minh thực nghiệm:** Kích hoạt mô-đun khai thác có kiểm soát để gửi gói tin kích hoạt lỗi tràn vùng đệm Non-Paged Pool:
+  - *Xác minh thành công:* Trạm kiểm thử thiết lập được phiên điều khiển tương tác từ xa (Command Shell hoặc Meterpreter) với đặc quyền `NT AUTHORITY\SYSTEM`.
+  - *Gián đoạn dịch vụ:* Quá trình can thiệp bộ nhớ thất bại làm máy chủ mục tiêu bị treo cứng hoặc gặp lỗi dừng màn hình xanh (BSOD).
+- **Hệ quả thực tế:** Cung cấp minh chứng thực nghiệm xác thực nhất về việc lỗ hổng có thể bị lợi dụng để chiếm đoạt quyền điều khiển cao nhất, đồng thời cảnh báo rủi ro làm tê liệt tính sẵn sàng của máy chủ.
+- **Phạm vi áp dụng:** Do can thiệp trực tiếp vào bộ nhớ nhân, việc kiểm tra ở Mức 4 tuyệt đối không được thực hiện trên môi trường thực tế mà chỉ triển khai trong mạng lab cô lập, sau khi đã sao lưu trạng thái máy ảo bằng snapshot.
 
-Ba biện pháp bổ sung cho nhau vì sửa lỗi, loại bỏ giao thức cũ và hạn chế đường tiếp cận là ba lớp can thiệp khác nhau. Chỉ có tường lửa thì cấu hình dễ bị ảnh hưởng nếu chính sách bị thay đổi hoặc một nguồn được cho phép bị chiếm quyền. Chỉ có bản vá của nhóm MS17-010 thì chưa trả lời các rủi ro khác của dịch vụ SMB. Đây là phân tích phạm vi tác dụng của từng biện pháp, chưa phải kết luận đã kiểm chứng mọi đường tấn công.
+### 1.4.5. Giới hạn của phương pháp xác minh
 
-Kiểm thử lại cần đồng thời trả lời hai câu hỏi: điều kiện mà biện pháp hướng tới có thực sự thay đổi không, và Client hợp lệ còn hoàn thành tác vụ cần thiết không. Chẳng hạn, sau khi tắt SMBv1, bằng chứng thích hợp gồm kết quả thương lượng không chấp nhận SMBv1 và kết quả truy cập tệp qua SMBv2. Nếu mọi kết nối đều thất bại do Server dừng, chưa thể xem đó là kết quả phòng thủ đáp ứng yêu cầu nghiệp vụ. Chương 2 cụ thể hóa các cặp phép kiểm tra này trong chuỗi trạng thái có đối chứng.
+Để bảo đảm tính khách quan và khoa học, nhóm em xác lập các giới hạn kỹ thuật cần tính đến khi đánh giá kết quả kiểm thử:
 
----
+- **Ảnh hưởng của tường lửa:** Tường lửa mạng hoặc tường lửa cục bộ Windows Firewall nếu được cấu hình chặn cổng hoặc lọc gói tin sẽ khiến công cụ ghi nhận trạng thái `Filtered`. Trạng thái này chỉ phản ánh việc đường truyền bị chặn từ vị trí trạm kiểm thử, không phản ánh việc dịch vụ bên trong máy chủ có an toàn hay không.
+- **Chính sách hạn chế kết nối nặc danh (Null Session):** Nếu máy chủ Windows được cấu hình cấm hoàn toàn các kết nối nặc danh vào tài nguyên `IPC$`, các kịch bản thăm dò ở Mức 3 sẽ không thể hoàn tất bước thiết lập phiên và không nhận được mã phản hồi NT Status. Khi đó, công cụ có thể báo không phát hiện thấy lỗ hổng (âm tính giả) dù thực tế hệ thống vẫn chưa được vá bản cập nhật MS17-010.
+- **Sự khác biệt giữa các phiên bản Windows:** Cùng một lỗ hổng MS17-010 nhưng cấu trúc bộ nhớ nhân và cơ chế bảo vệ của Windows 7 SP1 x64, Windows Server 2008 R2 và Windows 10 có sự khác biệt rõ rệt. Một kỹ thuật khai thác thành công trên Windows 7 có thể gây lỗi BSOD ngay lập tức trên Windows 10 do các cơ chế bảo vệ phân bổ vùng nhớ được tăng cường.
+- **Tính phi tuyệt đối của việc quan sát từ bên ngoài:** Mọi công cụ quét mạng từ xa (Black-box) chỉ ghi nhận những phản hồi trên đường truyền, không thể thay thế cho việc kiểm tra cấu hình nội tại của hệ thống. Do đó, để đưa ra kết luận chuẩn xác, nhóm em luôn đối chiếu kết quả kiểm thử từ xa với việc kiểm tra trực tiếp danh mục bản vá KB (Hotfix) và trạng thái tính năng SMBv1 bằng lệnh quản trị trên máy chủ mục tiêu (kiểm tra White-box).
 
-## TỔNG KẾT CHƯƠNG 1
-
-Chương 1 trình bày cơ sở về SMB, các lỗ hổng thuộc thông báo MS17-010 và vai trò của công cụ kiểm thử. Cổng mạng, phiên bản giao thức, phản hồi của phép thăm dò và khả năng thực thi mã được phân biệt thành bốn mức bằng chứng. Kết quả ở một mức chưa đủ để kết luận mức tiếp theo; đặc biệt, cổng mở hoặc SMBv1 đang bật không tự chứng minh hệ thống chưa vá.
-
-Khung phân định này là cách tổ chức đánh giá của đề tài, giúp liên kết kiến thức giao thức với bước quan sát trong lab. Chương 2 sử dụng khung đó để thiết kế trạng thái máy mục tiêu, điểm thu thập dữ liệu và tiêu chí đánh giá phòng thủ. Các giới hạn về xác thực, phản hồi công cụ và tác động lên hệ thống phải được kiểm tra khi áp dụng; phần chưa có dữ liệu thực nghiệm chưa được trình bày như kết quả.
-
-
-## TÀI LIỆU THAM KHẢO
-
-[1] Microsoft, "What is Microsoft SMB Protocol and CIFS Protocol?," Microsoft Learn, 2025. [Online]. Available: https://learn.microsoft.com/en-us/windows/win32/fileio/microsoft-smb-protocol-and-cifs-protocol-overview
-
-[2] Microsoft, "Direct hosting of SMB over TCP/IP," Microsoft Learn, 2026. [Online]. Available: https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/direct-hosting-of-smb-over-tcpip
-
-[3] Microsoft, "What is SMB File Sharing for Windows and Windows Server?," Microsoft Learn, 2025. [Online]. Available: https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview
-
-[4] Microsoft, "SMB security enhancements," Microsoft Learn, Jul. 2025. [Online]. Available: https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-security
-
-[5] Microsoft, "What is Server Message Block signing?," Microsoft Learn, Oct. 2024. [Online]. Available: https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview. [Accessed: Oct. 4, 2026].
-
-[6] Microsoft, "SMB 3.1.1 Pre-authentication integrity in Windows 10," Microsoft Learn, archived Open Specifications blog. [Online]. Available: https://learn.microsoft.com/en-us/archive/blogs/openspecification/smb-3-1-1-pre-authentication-integrity-in-windows-10. [Accessed: Oct. 4, 2026].
-
-[7] Microsoft, "Microsoft Security Bulletin MS17-010 - Critical," Microsoft Learn / Security TechCenter, Mar. 2017. [Online]. Available: https://learn.microsoft.com/en-us/security-updates/securitybulletins/2017/ms17-010
-
-[8] Microsoft, "Detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows," Microsoft Learn, 2025. [Online]. Available: https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3
-
-[9] Microsoft, "[MS-SMB2]: Connecting to a Share by Using an SMB2 Negotiate," Microsoft Open Specifications. [Online]. Available: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/c9efe8ca-ff34-44d0-bfbe-58a9b9db50d4. [Accessed: Oct. 4, 2026].
-
-[10] Microsoft, "[MS-CIFS]: Common Internet File System (CIFS) Protocol," Microsoft Open Specifications, "Per SMB Session" and sec. 3.2.5.4. [Online]. Available: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-cifs/c7cb45aa-f923-4cd4-a9d5-4a1418e41d42; https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-cifs/c42729fb-c655-424f-8d9a-44825d609b86. [Accessed: Oct. 4, 2026].
-
-[11] Microsoft Security Response Center (MSRC), "Eternal Synergy Exploit Analysis," Microsoft, 2017. [Online]. Available: https://msrc.microsoft.com/blog/2017/05/eternal-synergy-exploit-analysis/
-
-[12] National Institute of Standards and Technology (NIST), "CVE-2017-0144 Detail," National Vulnerability Database (NVD), Mar. 2017. [Online]. Available: https://nvd.nist.gov/vuln/detail/CVE-2017-0144
-
-[13] Microsoft Threat Intelligence, "New ransomware, old techniques: Petya adds-worm capabilities," Microsoft Security Blog, Jun. 2017. [Online]. Available: https://www.microsoft.com/en-us/security/blog/2017/06/27/new-ransomware-old-techniques-petya-adds-worm-capabilities/
-
-[14] Rapid7, "MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption," Rapid7 Exploit Database, 2017. [Online]. Available: https://www.rapid7.com/db/modules/exploit/windows/smb/ms17_010_eternalblue/
-
-[15] National Institute of Standards and Technology, Guidelines on Firewalls and Firewall Policy, NIST SP 800-41 Rev. 1, 2009. [Online]. Available: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-41r1.pdf.
-
-[16] Microsoft Threat Intelligence, "WannaCrypt ransomware worm targets out-of-date systems," Microsoft Security Blog, May 2017. [Online]. Available: https://www.microsoft.com/en-us/security/blog/2017/05/12/wannacrypt-ransomware-worm-targets-out-of-date-systems/
-
-[17] Kali Linux, "What is Kali Linux?," Kali Linux Documentation. [Online]. Available: https://www.kali.org/docs/introduction/what-is-kali-linux/. [Accessed: Oct. 4, 2026].
-
-[18] G. Lyon, *Nmap Network Scanning: The Official Nmap Project Guide to Network Discovery and Vulnerability Scanning*. Sunnyvale, CA: Insecure.Com LLC, 2009. [Online]. Available: https://nmap.org/book/; sec. "TCP SYN (Stealth) Scan": https://nmap.org/book/synscan.html.
-
-[19] P. Calderon and Nmap Project, "smb-vuln-ms17-010.nse Script Source Code," Nmap Project, 2017. [Online]. Available: https://svn.nmap.org/nmap/scripts/smb-vuln-ms17-010.nse
-
-[20] P. Calderon and Nmap Project, "smb-protocols.nse Script Source Code," Nmap Project. [Online]. Available: https://svn.nmap.org/nmap/scripts/smb-protocols.nse. [Accessed: Oct. 4, 2026].
-
-[21] Rapid7, "Metasploit Framework," Metasploit Documentation. [Online]. Available: https://docs.rapid7.com/metasploit/msf-overview/. [Accessed: Oct. 4, 2026].
-
-[22] Rapid7, "MS17-010 SMB RCE Detection," Metasploit Framework, source code. [Online]. Available: https://github.com/rapid7/metasploit-framework/blob/master/modules/auxiliary/scanner/smb/smb_ms17_010.rb. [Accessed: Oct. 4, 2026].
+Toàn bộ khung tiêu chí 4 mức và các giới hạn kỹ thuật này tạo thành nền tảng phương pháp luận xuyên suốt, làm cơ sở trực tiếp để nhóm em thiết kế mô hình mạng lab cô lập trong Chương 2 và triển khai thực nghiệm đối chứng trong Chương 3.
