@@ -160,3 +160,18 @@
 - Không suy ra trải nghiệm hoặc đóng góp từ giọng viết; dữ liệu, marker và điều kiện bằng chứng vẫn giữ. Nguyên tắc này được áp dụng trong các lượt viết/review tiếp theo, không mặc nhiên chứng nhận hai chương hiện hành đã được kiểm lại theo toàn bộ nguyên tắc mới.
 - Không sửa các chương, dữ liệu lab, quyết định thiết kế hoặc bản Chương 1 đối chiếu của agent khác trong lượt này. Cổng vẫn G4; bước tiếp theo là đối chiếu bản viết và review nội dung theo hồ sơ giọng mới.
 - Kiểm tra cập nhật hồ sơ: validate_project.py đạt; unittest 7/7 đạt; git diff --check đạt. Lint hồ sơ có ba cảnh báo ở nội dung lịch sử, đã phân loại trong STYLE_REVIEW; mẫu hồ sơ không có cảnh báo.
+
+## Đối chiếu đầu vào Mở đầu ngày 2026-10-04
+
+- Người dùng xác nhận phần yêu cầu Mở đầu còn thiếu nằm trong “đề mục tham khảo”; đã đọc tài liệu này và ATTT_DACN_01_DeCuongChiTiet tại đường dẫn G: được chỉ định. SHA256 trùng với bản trong inputs. Chi tiết ở INTRODUCTION_INPUT_REVIEW.md.
+- Cấu trúc Mở đầu dùng bảy mục và hai mục con 2.1/2.2 theo yêu cầu trực tiếp; sửa số mục 4 bị lặp trong mẫu. Tài liệu mẫu là dữ liệu đối chiếu, không tự coi diễn giải kỹ thuật của mẫu là bằng chứng.
+- `[CẦN TÁC GIẢ XÁC NHẬN]` Ánh xạ IEEE toàn báo cáo vẫn chưa có: Microsoft MS17-010 là [7] ở Chương 1, [5] ở Chương 2 và [1] trong bản Mở đầu hiện có. Mục 3.6 của yêu cầu trực tiếp buộc dừng và báo xung đột; không chọn số riêng chương làm số chung đã duyệt.
+- Bản Mở đầu, script dựng và Word xuất hiện/thay đổi trong workspace ngoài thao tác của lượt đối chiếu này; giữ nguyên, chưa chứng nhận cấu trúc/render/visual QA và chưa commit/push bản cuối. Không sửa artifact LOCKED hoặc chuyển cổng.
+- Kiểm tra đối chiếu: validate_project.py đạt; unittest 7/7 đạt; lint bản Mở đầu hiện có không cảnh báo; citation audit riêng bản Mở đầu đạt cấu trúc (15 lượt/6 mục) nhưng chưa đạt điều kiện số toàn cục. Xem giới hạn kiểm tra trong báo cáo.
+
+## Hoàn thành phần Mở đầu (DOCX) ngày 2026-10-04
+
+- Đã hoàn tất tài liệu DOCX hoàn chỉnh `work/do-an/outputs/MO_DAU_DO_AN.docx` cho phần Mở đầu (gồm 7 mục đầy đủ 1–7 và danh mục Tài liệu tham khảo [1]–[6], đã sửa lỗi trùng số mục 4).
+- Tuân thủ nghiêm ngặt chuẩn HUIT 2024: khổ A4, lề chuẩn (trên 3.5cm, dưới 3.0cm, trái 3.5cm, phải 2.0cm), Times New Roman 13pt, giãn dòng 1.5 lines, thụt lề 1.25cm, căn đều hai bên.
+- Đã thẩm định OpenXML schema qua `officecli validate` (0 lỗi). Đã kết xuất hình ảnh 12/12 trang bằng Word gốc (`--render native`) và thẩm định trực quan độc lập từng trang, xử lý triệt để viền kẻ Title, heading/intro mồ côi và phân trang danh mục tài liệu tham khảo.
+- Đã tạo báo cáo kiểm thử và thẩm định toàn diện tại `work/do-an/INTRODUCTION_REVIEW.md`. Trạng thái: `READY_FOR_INDEPENDENT_REVIEW`.
