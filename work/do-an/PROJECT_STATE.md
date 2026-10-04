@@ -177,3 +177,14 @@
 - Agent không được viết prose toàn văn Chương 2–3–4 trước khi lập outline + evidence map theo ma trận và được duyệt.
 - ISS-01 được thu hẹp: evidence canonical hiện đã có cho Scenario 1, Scenario 2, Case B và Case C; các claim ngoài ma trận vẫn mang nhãn thiếu dữ liệu. Không coi ISS-01 đã đóng hoàn toàn vì Case A và các phép đo không có artifact vẫn mở.
 - Bước tiếp theo: agent lập lại OUTLINE Chương 2–3–4 và evidence map chi tiết theo `EXPERIMENTAL_TRUTH_MATRIX.md`, không dựng DOCX và không viết dài trước duyệt.
+
+
+## DEC-25 — Kích hoạt Execution Plan sau audit roadmap
+
+- Ngày: 2026-10-05. Người dùng yêu cầu triển khai sau khi blueprint đã được dựng và audit.
+- `ROADMAP_BLUEPRINT_2026_10_05.md` đã re-audit PASS 96.4/100, 0 blocker cấp cấu trúc.
+- `EXECUTION_PLAN_2026_10_05.md` đã final-audit PASS 97.8/100, 0 blocker và được chuyển sang `ACTIVE / X0_IN_PROGRESS`.
+- `ROADMAP_2_6.md` giữ vai trò sub-roadmap lịch sử cho source/voice/DOCX recovery, không phải master execution plan.
+- Không cho phép viết Chương 2–4 trước X3B `REPORT_OUTLINE_FREEZE`.
+- Phase hiện hành: **X0 — Requirement & Governance Reconciliation**.
+- X0 phải dùng đề cương chi tiết thực, HUIT profile, Truth Matrix và artifact repo; không suy ra rubric từ trí nhớ.
