@@ -1,11 +1,11 @@
-# BÁO CÁO TỰ ĐÁNH GIÁ VIẾT LẠI CẤU TRÚC CHƯƠNG 2 (X5 R4 SELF-REVIEW)
+# BÁO CÁO TỰ ĐÁNH GIÁ VIẾT LẠI CẤU TRÚC CHƯƠNG 2 (X5 R5 SELF-REVIEW)
 
 **Thời điểm thực hiện:** 2026-10-05
 **Vai trò thực hiện:** Executor / Writing Agent
 **Tài liệu đánh giá:** `work/do-an/CHAPTER_2.md`
 **Nhánh làm việc:** `feature/x5-chapter-2-structural-revision`
-**Căn cứ đánh giá:** `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R3.md`, `PROJECT_STATE.md` (DEC-31, DEC-32), `SOURCE_LEDGER.md`
-**Trạng thái đề xuất:** `X5_STRUCTURAL_REWRITE_R4_READY_FOR_EXTERNAL_REVIEW`
+**Căn cứ đánh giá:** `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R4.md`, `PROJECT_STATE.md` (DEC-32, DEC-33), `SOURCE_LEDGER.md`
+**Trạng thái đề xuất:** `X5_STRUCTURAL_REWRITE_R5_READY_FOR_FINAL_EXTERNAL_REVIEW`
 
 ---
 
@@ -17,6 +17,7 @@ Bản thảo Chương 2 tuân thủ tuyệt đối cấu trúc được Người
 - **Số lượng phân mục:** Đạt chính xác **8/8 H2** và **27/27 H3**.
 - **Thứ tự và định danh:** 100% heading giữ nguyên văn bản canonical, không thêm heading mới, không bớt heading, không đổi tên, không đảo thứ tự.
 - **Không hồi quy cấu trúc cũ:** Loại bỏ hoàn toàn mô hình phân mảnh cũ.
+- **Ngân sách hình và bảng:** Giữ nguyên 4 vị trí chờ hình vẽ và 5 bảng biểu chuẩn tắc.
 
 ### 1.2. Tính duy nhất vai trò của từng phân mục (Role Uniqueness Audit)
 Mỗi cụm phân mục trong Chương 2 thực hiện đúng một chức năng duy nhất, loại bỏ hiện tượng chồng lấn:
@@ -31,20 +32,22 @@ Mỗi cụm phân mục trong Chương 2 thực hiện đúng một chức năng
 
 ---
 
-## 2. Kiểm toán các điểm sửa đổi kỹ thuật vòng R4 (R4 Final Technical Micro-Patch)
+## 2. Kiểm toán đóng các yêu cầu sửa đổi nhỏ từ hội đồng (R4 Panel Minor Revision Closure: MR-01 → MR-10)
 
-Vòng R4 giải quyết dứt điểm toàn bộ blocker và các điểm tinh chỉnh độ chính xác từ `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R3.md`:
+Vòng R5 hoàn tất việc đóng toàn diện 10 khuyến nghị sửa đổi nhỏ (MR-01 đến MR-10) nêu tại `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R4.md`:
 
-| STT | Vấn đề R3 nêu | Hành động xử lý trong R4 | Vị trí cập nhật trong CHAPTER_2.md | Kết quả kiểm toán |
+| Mã | Nội dung yêu cầu từ Hội đồng | Hành động xử lý trong R5 | Vị trí cập nhật trong CHAPTER_2.md | Kết quả kiểm toán |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | **BLOCKER: Cơ chế `smb-vuln-ms17-010` sai nguồn** | Bỏ hoàn toàn `PeekNamedPipe (opcode 0x2300)`; bám sát Nmap NSEDoc chính thức: kết nối `IPC$`, thực hiện giao dịch SMB trên FID 0 và phân tích mã trạng thái phản hồi để tìm dấu hiệu MS17-010 [9] | Mục 2.5.1 | `PeekNamedPipe` = 0, `0x2300` = 0 |
-| **2** | **Case C rule wording chứa SYN** | Chuyển thành "Luật chặn TCP có bật ghi log, áp dụng từ `192.168.56.10` tới `192.168.56.20` trên các cổng 139 và 445"; chuyển gói SYN về log quan sát thuộc Chương 3 | Mục 2.6.3 | Khớp C-RULE-02 |
-| **3** | **Rò rỉ tập dialect trong 2.7.2** | Thay thế exact dialect set `SMB 2.0.2 đến 3.0.2` bằng cụm trung tính `các dialect SMB2/SMB3`; danh sách dialect cụ thể thuộc Chương 3 | Mục 2.7.2 | `SMB 2.0.2 đến 3.0.2` = 0 |
-| **4** | **Patch baseline precision trong 2.2.5** | Phản ánh đầy đủ canonical mapping: không ghi nhận KB4012213 hoặc KB4012216, không ghi nhận bản cập nhật thay thế tương ứng theo mapping, `srv.sys < 6.3.9600.18604` xác nhận UNPATCHED | Mục 2.2.5 | Đầy đủ mapping |
-| **5** | **Tuyệt đối hóa patching trong 2.6.4** | Bỏ cụm "biện pháp duy nhất tác động trực tiếp"; chuyển thành "Patching là biện pháp trực tiếp thay đổi trạng thái bản vá của implementation bị ảnh hưởng bởi MS17-010 trong driver nhân `srv.sys` [4], [5]" | Mục 2.6.4 | `biện pháp duy nhất` = 0 |
-| **6** | **Diễn giải trạng thái UNPATCHED trong 2.5.2** | Bỏ nhận định "phản ánh khiếm khuyết trong nhân"; sửa thành "Trạng thái `UNPATCHED` cho biết hệ thống chưa đạt mức cập nhật được Microsoft xác minh cho MS17-010; trạng thái này không tự chứng minh khai thác thành công" | Mục 2.5.2 | Khách quan, chuẩn mực |
-| **7** | **Đánh giá Case B trong 2.7.4** | Bỏ câu dạng actual result ("tính sẵn sàng SMB2/3 vẫn được quan sát"); chuyển thành tiêu chí kiểm tra: "đồng thời kiểm tra các dialect SMB2/SMB3 còn khả dụng trong phép thương lượng sau can thiệp hay không" | Mục 2.7.4 | Tiêu chí phương pháp |
-| **8** | **Văn phong tổng kết chương trong 2.8** | Bỏ "bảo đảm an toàn kiểm thử" và "tạo cơ sở chuẩn xác"; chuyển thành "giới hạn phạm vi kết nối của lab và hỗ trợ kiểm soát rủi ro trong quá trình thử nghiệm" và "làm cơ sở để Chương 3 trình bày dữ liệu đo đạc thực tế" | Mục 2.8 | `bảo đảm an toàn kiểm thử` = 0 |
+| **MR-01** | **Xóa causal wording của NO USABLE RESULT** | Bỏ "nếu kịch bản NSE không nhận đủ phản hồi để phân loại"; thay bằng "nếu script không cung cấp verdict usable, kết quả được phân loại `UNKNOWN / NO USABLE SCRIPT RESULT`", không gán nguyên nhân | Mục 2.5.2 | Đạt chuẩn Negative Result Policy |
+| **MR-02** | **Chuẩn hóa thuật ngữ cấu hình SMB Server** | Bỏ "điều chỉnh dịch vụ LanmanServer"; sửa thành "Thao tác chỉ thay đổi cấu hình SMB Server, không gỡ tính năng `FS-SMB1` và không thay đổi driver `srv.sys` (`SMBv1 disabled != PATCHED`)" | Mục 2.6.2 | Khớp lệnh PowerShell |
+| **MR-03** | **Sửa lỗi logic 'Tách biệt L3' trong Bảng 2.1** | Hai máy thuộc cùng dải `192.168.56.0/24`. Thay "Tách biệt L3" tại cột Ý nghĩa thiết kế thành "Địa chỉ tĩnh trong cùng mạng lab" | Bảng 2.1 (Mục 2.2.4) | Khớp kiến trúc mạng |
+| **MR-04** | **Chuẩn hóa thuật ngữ Reachability** | Bảng 2.2 sửa "Khả năng định tuyến L3" thành "Khả năng hiện diện / tiếp cận trong mạng lab". Mục 2.7.1 phân loại thành "có phản hồi trong phép tiền kiểm hoặc không ghi nhận phản hồi trong phép tiền kiểm" | Bảng 2.2 và Mục 2.7.1 | Bao hàm cả ARP/ICMP |
+| **MR-05** | **Chuẩn hóa phản hồi TCP Closed** | Thay `closed (nhận RST-ACK)` thành `closed (nhận phản hồi RST, cổng đóng)` theo đúng ngữ nghĩa Nmap SYN scan | Mục 2.7.1 | Khớp Nmap documentation |
+| **MR-06** | **Thu hẹp phạm vi đánh giá signing** | Bỏ "đánh giá khả năng chống tấn công chuyển tiếp"; chuyển thành mục tiêu phương pháp: "nhằm đánh giá chính sách ký số SMB và mức độ bắt buộc ký" | Mục 2.7.2 | Đúng phạm vi Chương 2 |
+| **MR-07** | **Loại bỏ result-like wording ở Case B** | Bỏ nhận định "cổng TCP 445 vẫn mở"; thay bằng quan hệ phương pháp: "việc vô hiệu hóa SMBv1 không đồng nghĩa đóng TCP 445; phép retest cần kiểm tra khả năng tiếp cận SMB2/SMB3 sau can thiệp" | Mục 2.7.4 | Ranh giới phương pháp |
+| **MR-08** | **Giảm biệt ngữ nội bộ (Repo Jargon)** | Thay `canonical` -> "lượt đo chính thức" / "bộ dữ liệu thực nghiệm hiện hành"; `implementation` -> "thành phần SMB bị ảnh hưởng"; `reason` -> "lý do phân loại"; ổn định dùng "bề mặt dịch vụ" và "bề mặt tấn công" | Mục 2.3.2, 2.4.2, 2.6.2, 2.6.4, 2.7.4, Bảng 2.2, Bảng 2.3 | Văn phong khoa học tự nhiên |
+| **MR-09** | **Chuẩn hóa mục tiêu nghiên cứu câu đầu** | Sửa "đánh giá nhận diện MS17-010 từ xa" thành "đánh giá khả năng nhận diện dấu hiệu MS17-010 từ xa" | Mục 2.1.1 | Chính xác và tự nhiên |
+| **MR-10** | **Chuẩn hóa phát biểu an toàn (Safety Wording)** | Bỏ claim kết quả tuyệt đối "không gây sập hệ thống"; sửa thành "không thực hiện thao tác có chủ đích gây sập hoặc gián đoạn hệ thống" | Mục 2.1.2 | Cam kết phương pháp |
 
 ---
 
@@ -53,8 +56,8 @@ Vòng R4 giải quyết dứt điểm toàn bộ blocker và các điểm tinh c
 Chương 2 giữ nghiêm ngặt ranh giới: **HOW / WITH WHAT / UNDER WHAT CONDITIONS**, không kể trước kết quả thực nghiệm (**WHAT WAS OBSERVED**):
 - **Kịch bản 1:** Trình bày thiết kế lệnh `nmap -sS -sV` và 4 kịch bản NSE an toàn; không công bố danh sách dialect thực tế hay banner chi tiết quan sát được trên cổng 139/445 trong lượt chạy cụ thể (`microsoft-ds` = 0, `netbios-ssn` = 0, `syn-ack` = 0 trong văn phong phương pháp 2.4).
 - **Kịch bản 2:** Mô tả cơ chế hoạt động chuẩn của `smb-vuln-ms17-010.nse` (giao dịch SMB trên FID 0 phân tích mã lỗi); không trình bày kết quả quan sát cụ thể hay lỗi chi tiết thu được.
-- **Case B:** Trình bày lệnh can thiệp PowerShell `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` và kế hoạch đo lại dialect/NSE-04; không đưa bảng so sánh output trước/sau can thiệp.
-- **Case C:** Trình bày cấu hình Transparent Bridge pfSense, cờ `net.link.bridge.pfil_member = 1`, `net.link.bridge.pfil_bridge = 0`, `net.link.bridge.pfil_onlyip = 1` và luật chặn TCP cổng 139/445 có ghi log; không trích xuất log block thực tế của pfSense.
+- **Case B:** Trình bày lệnh can thiệp PowerShell `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` và kế hoạch đo lại dialect/NSE-04; không đưa bảng so sánh output trước/sau can thiệp, không khẳng định trạng thái mở cổng thực tế.
+- **Case C:** Trình bày cấu hình Transparent Bridge pfSense, cờ `net.link.bridge.pfil_member = 1`, `net.link.bridge.pfil_bridge = 0`, `net.link.bridge.pfil_onlyip = 1` và luật chặn TCP cổng 139/445 có ghi log; không trích xuất log block thực tế của pfSense (gói SYN chỉ thuộc log Chương 3).
 - **Đánh giá chung:** Không có hiện tượng rò rỉ kết quả thực nghiệm (No Result Leakage).
 
 ---
@@ -72,7 +75,7 @@ Toàn bộ các khóa sự thật kỹ thuật (Technical Truth Locks) được 
 8. **Điểm phục hồi:** Snapshot `Before Demo` có trên cả hai máy ảo, phục vụ hoàn nguyên trong quy trình kiểm thử vi sai.
 9. **Kịch bản NSE an toàn:** Đúng 4 kịch bản canonical (`smb-protocols`, `smb-os-discovery`, `smb2-security-mode`, `smb2-capabilities`); tuyệt đối không dùng wildcard (`smb-vuln*`).
 10. **Phán quyết từ xa NSE-SMB-04:** Khóa cứng định dạng `UNKNOWN / NO USABLE SCRIPT RESULT`.
-11. **Case B:** Can thiệp `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` là làm cứng giao thức (Protocol Hardening) mức dịch vụ; không phải bản vá, không gỡ tính năng, không thay đổi driver nhị phân.
+11. **Case B:** Can thiệp `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` là làm cứng giao thức (Protocol Hardening) mức cấu hình dịch vụ; không phải bản vá, không gỡ tính năng, không thay đổi driver nhị phân.
 12. **Case C:** Tường lửa pfSense hoạt động như cầu nối trong suốt (Transparent Bridge) lọc L2/L3 trên member interface (`net.link.bridge.pfil_member = 1`, `net.link.bridge.pfil_bridge = 0`, `net.link.bridge.pfil_onlyip = 1`); pfSense không nằm trong baseline topology ban đầu.
 13. **Case A:** Được định vị là đối chứng lý thuyết và khuyến nghị kỹ thuật; không trình bày như kịch bản đã thực nghiệm hoàn tất trong dataset hiện hành.
 
@@ -87,7 +90,7 @@ Chương 2 sử dụng 11 trích dẫn chuẩn, xuất hiện tuần tự từ `
 - `[3]`: Microsoft Learn — Direct hosting of SMB over TCP/IP (Cổng 139/445, xuất hiện tại 2.2.4).
 - `[4]`: Microsoft Security Bulletin MS17-010 (Thông tin lỗ hổng và mã KB, xuất hiện tại 2.2.5, 2.6.4).
 - `[5]`: Microsoft Support Article 4023057 — How to verify that MS17-010 is installed (Ngưỡng `srv.sys >= 6.3.9600.18604`, xuất hiện tại 2.2.5, 2.6.4, 2.7.3).
-- `[6]`: Gordon Lyon — Nmap Network Scanning (Kỹ thuật quét SYN, reason, filtered, xuất hiện tại 2.3.3, 2.4.2).
+- `[6]`: Gordon Lyon — Nmap Network Scanning (Kỹ thuật quét SYN, lý do phân loại, filtered, xuất hiện tại 2.3.3, 2.4.2).
 - `[7]`: Paulino Calderon — `smb-protocols.nse` (Thăm dò dialect SMB, xuất hiện tại 2.4.2, 2.5.1).
 - `[8]`: Microsoft Learn — SMB signing (Chính sách ký số SMB, xuất hiện tại 2.4.2, 2.5.1).
 - `[9]`: Paulino Calderon & Ron Bowes — `smb-vuln-ms17-010.nse` (Cơ chế giao dịch SMB trên FID 0 phân tích mã lỗi phản hồi, xuất hiện tại 2.5.1).
@@ -109,7 +112,7 @@ Bản thảo được rà soát kỹ lưỡng theo các nguyên tắc trong `AUT
 - **Tính trực tiếp kỹ thuật:** Câu văn ngắn gọn, trực diện, đi thẳng vào bản chất giao thức và tham số cấu hình.
 - **Loại bỏ từ sáo rỗng:** Tuyệt đối không sử dụng các từ ngữ rỗng nghĩa hoặc cảm thán như "toàn diện", "tối ưu", "chuẩn mực", "chặt chẽ", "vô cùng", "rất", "trong bối cảnh hiện nay".
 - **Không dịch thô phản cảm:** Tránh các cụm từ dịch máy như "sự thật mặt đất" (thay bằng "trạng thái hệ thống nội bộ" / "căn cứ nội bộ"), "chân lý nội bộ", "ngăn xếp mạng" khi không phân tích network stack.
-- **Kiểm soát độ dài câu:** Toàn bộ các câu phức đã được hiệu chỉnh để có độ dài dưới 50 từ, bảo đảm mạch lạc và không vi phạm linter học thuật.
+- **Kiểm soát độ dài câu:** Toàn bộ các câu phức đã được hiệu chỉnh để có độ dài dưới 50 từ, bảo đảm mạch lạc và không vi phạm linter học thuật (error=0, warning=0).
 
 ---
 
@@ -137,8 +140,8 @@ Mỗi vị trí chờ đều có đầy đủ 4 trường thông tin: Mục đí
 ## 8. Kiểm toán số lượng từ (Word Count Audit)
 
 - **Mục tiêu quy định:** 3.800 – 4.500 từ.
-- **Số từ thực tế đo được:** **4.486 từ** (tính theo biểu thức chuẩn `[0-9A-Za-zÀ-ỹĐđ]+`).
-- **Đánh giá:** Nằm hoàn toàn trong khoảng mục tiêu an toàn [3.800, 4.500], mật độ thông tin kỹ thuật cao, cô đọng, không dàn trải.
+- **Số từ thực tế đo được:** **4.471 từ** (tính theo biểu thức chuẩn `[0-9A-Za-zÀ-ỹĐđ]+`).
+- **Đánh giá:** Nằm hoàn toàn trong khoảng mục tiêu an toàn [3.800, 4.500], sát mức khuyến nghị 4.3k–4.4k, mật độ thông tin kỹ thuật cao, cô đọng, không dàn trải.
 
 ---
 
@@ -146,21 +149,29 @@ Mỗi vị trí chờ đều có đầy đủ 4 trường thông tin: Mục đí
 
 | Khóa kiểm tra | Giá trị yêu cầu | Giá trị thực tế | Đánh giá |
 | :--- | :--- | :--- | :--- |
+| `không nhận đủ phản hồi để phân loại` trong 2.5.2 | 0 | 0 | PASS |
+| `điều chỉnh dịch vụ LanmanServer` | 0 | 0 | PASS |
+| `Tách biệt L3` | 0 | 0 | PASS |
+| `Khả năng định tuyến L3` | 0 | 0 | PASS |
+| `RST-ACK` trong 2.7.1 | 0 | 0 | PASS |
+| `đánh giá khả năng chống tấn công chuyển tiếp` trong 2.7.2 | 0 | 0 | PASS |
+| `cổng TCP 445 vẫn mở` trong 2.7.4 | 0 | 0 | PASS |
+| `đánh giá nhận diện MS17-010 từ xa` | 0 | 0 | PASS |
+| `không gây sập hệ thống` | 0 | 0 | PASS |
 | `PeekNamedPipe` | 0 | 0 | PASS |
 | `0x2300` | 0 | 0 | PASS |
-| `pfil_bridge = 1` | 0 | 0 | PASS |
-| `pfil_bridge=1` | 0 | 0 | PASS |
 | `S1-RAW-06` | 0 | 0 | PASS |
+| `pfil_bridge = 1` | 0 | 0 | PASS |
 | `<safe_nse>` | 0 | 0 | PASS |
-| `microsoft-ds` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
-| `netbios-ssn` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
-| `syn-ack` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
-| `SMB 2.0.2 đến 3.0.2` trong 2.7 | 0 | 0 | PASS |
 | `biện pháp duy nhất` | 0 | 0 | PASS |
 | `bảo đảm an toàn kiểm thử` | 0 | 0 | PASS |
 | `Mặc định hệ điều hành` | 0 | 0 | PASS |
 | `không dùng DNS` | 0 | 0 | PASS |
 | `không qua lọc gói của máy vật lý` | 0 | 0 | PASS |
+| `microsoft-ds` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
+| `netbios-ssn` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
+| `syn-ack` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
+| `SMB 2.0.2 đến 3.0.2` trong 2.7 | 0 | 0 | PASS |
 | `pfil_member = 1` | >= 1 | 1 | PASS |
 | `pfil_bridge = 0` | >= 1 | 1 | PASS |
 | `pfil_onlyip = 1` | >= 1 | 1 | PASS |
@@ -181,7 +192,7 @@ Mỗi vị trí chờ đều có đầy đủ 4 trường thông tin: Mục đí
 
 ## 11. Kết luận và đề xuất trạng thái
 
-Executor / Writing Agent xác nhận đã hoàn thành toàn diện vòng sửa đổi kỹ thuật chính xác cuối cùng (final technical micro-patch R4) theo đúng tất cả các chỉ thị của External Reviewer R3 và Người dùng.
+Executor / Writing Agent xác nhận đã đóng toàn bộ các khuyến nghị sửa đổi nhỏ (MR-01 đến MR-10) từ Hội đồng phản biện R4, hoàn thiện bản thảo Chương 2 đạt chất lượng kỹ thuật và văn phong học thuật cao nhất.
 
 **Trạng thái bàn giao:**
-`X5_STRUCTURAL_REWRITE_R4_READY_FOR_EXTERNAL_REVIEW`
+`X5_STRUCTURAL_REWRITE_R5_READY_FOR_FINAL_EXTERNAL_REVIEW`
