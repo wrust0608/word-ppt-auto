@@ -9,17 +9,17 @@
 
 | Artifact | Trạng thái | Đường dẫn | Ghi chú |
 |---|---|---|---|
-| PROJECT_PROFILE | LOCKED | work/do-an/PROJECT_PROFILE.md | Đã khóa toàn diện (G0) |
+| PROJECT_PROFILE | LOCKED_CANONICAL_2026_10_05 | work/do-an/PROJECT_PROFILE.md | Đã realign theo canonical demo sau X3B approval |
 | INSTITUTION_PROFILE | LOCKED | work/do-an/INSTITUTION_PROFILE.md | Đã khóa chuẩn HUIT 2024 (G0) |
 | AUTHOR_VOICE | LOCKED | work/do-an/AUTHOR_VOICE.md | Đã khóa hồ sơ giọng tác giả (G0) |
-| RESEARCH_MAP | LOCKED | work/do-an/RESEARCH_MAP.md | Đã khóa 4 RQ, 4 Mục tiêu và phương pháp luận (G1) |
+| RESEARCH_MAP | LOCKED_CANONICAL_2026_10_05 | work/do-an/RESEARCH_MAP.md | Giữ 4 RQ nhưng realign RQ3/RQ4, M3/M4 theo evidence thật |
 | SOURCE_LEDGER | REOPENED_RECHECK | work/do-an/SOURCE_LEDGER.md | Đã đối soát NotebookLM; có nguồn bổ sung S020-S026 và một nhóm nguồn cũ cần nhập lại/thay thế |
 | ARGUMENT_MAP | LOCKED | work/do-an/ARGUMENT_MAP.md | Đã khóa chuỗi lập luận C001 - C006 (G3) |
 | CLAIM_MATRIX | REOPENED_RECHECK | work/do-an/CLAIM_MATRIX.md | Sáu luận điểm trung tâm đã chuyển sang nguồn khả dụng; cần đồng bộ bibliography Chương 1 |
-| OUTLINE | LOCKED | work/do-an/OUTLINE.md | Đã khóa cấu trúc 4 chương, ngân sách từ (G3) |
-| CHAPTER_ARGUMENT | LOCKED | work/do-an/CHAPTER_ARGUMENT.md | Đã cập nhật toàn diện Hợp đồng Chương 2 theo mô hình Causal-Chain và Enterprise Topology |
+| OUTLINE | LOCKED_CANONICAL_2026_10_05 | work/do-an/OUTLINE.md | X3B user-approved; Ch2–4 bám Truth Matrix/Evidence Map |
+| CHAPTER_ARGUMENT | LOCKED_CANONICAL_INDEX | work/do-an/CHAPTER_ARGUMENT.md | Hợp đồng enterprise lịch sử đã archive; canonical contracts tách Ch2/3/4 |
 | CHAPTER_1 | DEPTH_REVISED_REVIEW_PENDING | work/do-an/CHAPTER_1.md | Đã viết lại cơ chế và phân tích; 22 mục/78 lượt dẫn; xem DEPTH_REVIEW_2026_10_04.md |
-| CHAPTER_2 | DEPTH_REVISED_REVIEW_PENDING | work/do-an/CHAPTER_2.md | Làm rõ lý do thiết kế, đối chứng và suy luận kết quả; 10 mục/20 lượt dẫn; dữ liệu lab còn mở |
+| CHAPTER_2 | HISTORICAL_DRAFT_SUPERSEDED / X5_READY | work/do-an/CHAPTER_2.md | Bản cũ không đại diện canonical lab; sẽ viết lại theo contract khóa |
 | REVIEW_REPORT | HISTORICAL_REOPENED | work/do-an/REVIEW_REPORT.md | Điểm PASS cũ không chứng nhận bản hiện hành; dùng REVISION_PASS_2026_10_04.md |
 | STYLE_REVIEW | REVIEWED_ADVISORY | work/do-an/STYLE_REVIEW.md | Không còn VI011; ba VI012 đã phân loại; không thay kiểm định nội dung hoặc xuất bản |
 | AUTHOR_VOICE_CALIBRATION | APPROVED_CHOICES_RECORDED | work/do-an/AUTHOR_VOICE_CALIBRATION.md | 1B, 2A, 3A và điều chỉnh thuật ngữ đã được tác giả xác nhận; không yêu cầu duyệt lại giọng |
@@ -201,3 +201,35 @@
 - Chưa sửa các artifact LOCKED cũ (PROJECT_PROFILE, RESEARCH_MAP, OUTLINE, CHAPTER_ARGUMENT).
 - Chưa viết prose Chương 2–4.
 - Bước kế tiếp hợp lệ sau khi người dùng duyệt X3B: mở Change Request để supersede artifact stale, khóa outline/contracts canonical, sau đó bắt đầu X4/X5 theo Execution Plan.
+
+
+## DEC-26 — Phê duyệt X3B và khóa kiến trúc báo cáo canonical
+
+- Ngày: 2026-10-05. Người duyệt cuối: người dùng, quyết định trực tiếp “chốt”.
+- X3B REPORT_OUTLINE_FREEZE được phê duyệt sau reviewer score 98.3/100.
+- Change Request áp dụng: `CHANGE_REQUEST_CR-2026-10-05-X3B.md`.
+- Đã lưu lịch sử trước thay đổi:
+  - `history/OUTLINE_PRE_X3B_2026_10_05.md`
+  - `history/CHAPTER_ARGUMENT_PRE_X3B_2026_10_05.md`
+- Đã realign và khóa:
+  - `PROJECT_PROFILE.md`
+  - `RESEARCH_MAP.md`
+  - `OUTLINE.md`
+  - `CHAPTER_ARGUMENT.md`
+- Đã khóa canonical:
+  - `OUTLINE_2_4_PROPOSED.md` (filename giữ để truy vết, status bên trong đã LOCKED_CANONICAL)
+  - `ARGUMENT_MAP_2_4_PROPOSED.md`
+  - `CLAIM_MATRIX_2_4.md`
+  - `CHAPTER_2_CONTRACT.md`
+  - `CHAPTER_3_CONTRACT.md`
+  - `CHAPTER_4_CONTRACT.md`
+  - `CHAPTERS_2_4_EVIDENCE_MAP.md`
+  - `FIGURE_TABLE_BUDGET.md`
+- Windows 7/3 VLAN/Client control không còn là canonical narrative.
+- Chỉ thị “tránh demo” đã bị supersede.
+- Case C canonical = pfSense Transparent Bridge.
+- Case A patch vẫn HISTORICAL/SUPPLEMENTARY cho tới khi có evidence audit.
+- X3B = PASS / CP3 CLOSED.
+- Execution Plan chuyển sang `ACTIVE / X4_X5_READY_AFTER_X3B_APPROVAL`.
+- Chương 2 cũ được coi là historical draft; X5 phải viết lại từ contract canonical.
+- Chưa cho phép Chương 3/4 prose trước khi Chương 2 đi qua review riêng; X6/X7 vẫn theo gate.
