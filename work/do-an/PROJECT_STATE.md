@@ -586,3 +586,27 @@
 - Status: `CHAPTER_2_PRODUCT_ALIGNED_READY_FOR_USER_REVIEW`.
 - CP5-USER remains PENDING.
 - X6 / Chapter 3 remains BLOCKED until explicit user approval.
+
+
+## DEC-45 — User approves Chapter 2; final DOCX and Chapter 3 evidence preparation authorized
+
+- Ngày: 2026-10-06.
+- User explicitly approved moving forward from Chapter 2 and requested:
+  1. creation of the final Word report for Chapter 2;
+  2. preparation of the necessary evidence/data package for Chapter 3.
+- Approved Chapter 2 source candidate:
+  `a22c12d3bb3e6fcad8d828127f2a6ca5b67a097f`
+  on branch `feature/x5-chapter-2-product-aligned`.
+- External review score: 97/100 — PASS; blockers 0.
+- CP5-USER: **APPROVED**.
+- Chapter 2 structure/content: **LOCKED**.
+- Allowed next work:
+  - generate `CHAPTER_2_FINAL.docx` from the locked Chapter 2;
+  - render and visually QA every page before delivery;
+  - stage canonical Chapter 3 evidence from the original source package without reusing the ZIP directory structure;
+  - build Chapter 3 evidence index/result matrix/figure plan only.
+- Not yet authorized:
+  - drafting Chapter 3 narrative/prose;
+  - changing Chapter 2 content;
+  - inventing new experiments/results.
+- X6 status: `PREPARATION_AUTHORIZED / PROSE_BLOCKED` until the staged evidence package is externally reviewed.
