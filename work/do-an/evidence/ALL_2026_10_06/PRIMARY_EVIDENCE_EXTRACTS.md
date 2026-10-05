@@ -1,228 +1,101 @@
 # Primary Evidence Extracts — ALL(1).zip
 
-Purpose: keep a compact, repo-local snapshot of the primary evidence needed for Chapters 2–4 so future agents do not have to reconstruct experimental truth from summaries or folder names.
+Status: `AUDITED_R2`
 
 Source archive SHA-256:
 `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`
 
-This file preserves selected direct observations. The full archive remains the provenance source; hashes in `CANONICAL_EVIDENCE_MAP_ALL_ZIP.md` bind these extracts to source artifacts.
+This is a convenience extract. Exact paths/hashes are in `CANONICAL_EVIDENCE_MAP_ALL_ZIP.md`; full inventory is in `FULL_ARCHIVE_MANIFEST_ALL_2026_10_06.csv`.
 
-## Environment / local state
+## Environment / final local state
 
-### Final pre-demo
-- Kali: `192.168.56.10/24`
-- Kali default route to Internet: none
-- Nmap: 7.99
-- Windows: `192.168.56.20/24`
-- Windows default route to Internet: none
-- LanmanServer: Running
-- FS-SMB1: Installed
-- SMB1=True
-- SMB2=True
-- TCP 445: Listen
-- TCP 139: Listen
-- `srv.sys` numeric: `6.3.9600.16421`
-- Microsoft minimum updated: `6.3.9600.18604`
-- local classification: `UNPATCHED`
-- custom Windows Firewall rule: `ATTT Lab SMB 139-445`, local ports 139/445, remote source `192.168.56.10`
-- default File and Printer Sharing group: disabled
+- Kali `192.168.56.10/24`; no default route; Nmap 7.99.
+- Windows `192.168.56.20/24`; no default route.
+- LanmanServer Running/Automatic.
+- SMB1=True; SMB2=True; FS-SMB1 Installed.
+- TCP 139/445 Listening.
+- `srv.sys` displayed FileVersion `6.3.9600.16384`; numeric `6.3.9600.16421`.
+- project local patch classification: `UNPATCHED`.
+- custom Windows Firewall rule: TCP 139/445 from `.56.10`; default File and Printer Sharing group not opened wholesale.
+- final snapshots: `Before Demo` current on Kali and Windows after the snapshot step.
 
-### Final snapshots
-Kali:
-- `Basic`
-- `Before Demo` current
+## Scenario 1
 
-Windows:
-- `Basic`
-- `Before Demo` current
+- B2 subnet discovery: `.56.1`, `.56.20`, `.56.100`, `.56.10` up.
+- B3: `.56.20` up.
+- B4: 139/445 open, syn-ack ttl 128.
+- B5: 139 Windows netbios-ssn; 445 Windows Server 2008 R2–2012 microsoft-ds fingerprint.
+- B6: NT LM 0.12 (SMBv1), 2.0.2, 2.1, 3.0, 3.0.2.
+- B6: 3.0.2 signing enabled but not required.
+- B6: capabilities include DFS, Leasing and Multi-credit as shown.
+- `smb-os-discovery`: no usable output.
 
-## Scenario 1 raw observations
+Exact operator vs raw command forms: `COMMAND_LINEAGE_MATRIX.md`.
 
-### B2 — subnet discovery
-Command:
-`nmap -sn -PR -T3 --max-retries 2 -oA b2_host_discovery 192.168.56.0/24`
+## Scenario 2
 
-Observed up:
-- 192.168.56.1
-- 192.168.56.20
-- 192.168.56.100
-- 192.168.56.10
+- NSE-SMB-01: 139/445 open.
+- NSE-SMB-02: SMBv1 + SMB2/3 dialects.
+- NSE-SMB-03: signing enabled but not required.
+- NSE-SMB-04: 445 open, no Host script result, no vulnerability verdict.
+- remote classification: `UNKNOWN / NO USABLE SCRIPT RESULT`.
+- local patch classification remains independently `UNPATCHED`.
 
-### B3 — target alive
-Command:
-`nmap -sn -PR -T3 --max-retries 2 -oA b3_target_alive 192.168.56.20`
+## Case B
 
-Observed:
-- target 192.168.56.20 up
+Direct local state:
+- before: SMB1=True, SMB2=True, FS-SMB1 Installed, LanmanServer Running.
+- action: `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force`.
+- after: SMB1=False, SMB2=True, FS-SMB1 Installed, LanmanServer Running.
 
-### B4 — ports
-Command:
-`nmap -sS -p 139,445 -T3 --max-retries 2 --reason -oA b4_smb_ports 192.168.56.20`
+Raw retest:
+- SMBv1 dialect absent; SMB2/3 remain.
+- 445 open for MS17-010 retest; no Host script verdict.
+- remote classification remains UNKNOWN.
+- patch state remains UNPATCHED.
 
-Observed:
-- 139/tcp open netbios-ssn — syn-ack ttl 128
-- 445/tcp open microsoft-ds — syn-ack ttl 128
+## Case C
 
-### B5 — service/version
-Command:
-`nmap -sS -sV --version-intensity 5 -p 139,445 -T3 --max-retries 2 -oA b5_smb_version 192.168.56.20`
+Direct screenshots:
+- CASE_C_KALI=em2; CASE_C_WINDOWS=em3.
+- bridge0 contains both Case C member interfaces.
+- `pfil_member=1`, `pfil_bridge=0`.
+- Block IPv4 TCP rule configured on CASE_C_KALI:
+  - source `.56.10`;
+  - destination `.56.20`;
+  - SMB_Ports;
+  - logging enabled;
+  - description `CASE C - Block SMB Kali to Windows`.
+- block row is above pass row.
 
-Observed:
-- 139/tcp open netbios-ssn — Microsoft Windows netbios-ssn
-- 445/tcp open microsoft-ds — Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+Final manifest/closure:
+- data plane uses `ATTT-PFS-KALI` and `ATTT-PFS-WIN`;
+- management Host `.57.1` ↔ pfSense em1 `.57.2`;
+- `pfil_onlyip=1`;
+- pfSense CE 2.9.0-RELEASE.
 
-### B6 — SMB NSE
-Command:
-`nmap -sS -p 139,445 --script smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities -T3 --max-retries 2 -oA b6_smb_nse 192.168.56.20`
+Raw retest:
+- 139/445 filtered, no-response.
+- 445 filtered for MS17-010 retest; no script verdict.
 
-Observed:
-- dialect NT LM 0.12 (SMBv1)
-- dialect 2.0.2
-- dialect 2.1
-- dialect 3.0
-- dialect 3.0.2
-- 3.0.2 message signing enabled but not required
-- capabilities include DFS; Leasing and Multi-credit where shown
-- no usable `smb-os-discovery` output
+Firewall log direct observation:
+- red-X blocked action;
+- interface CASE_C_KALI;
+- source `.56.10`;
+- destination `.56.20:139` and `:445`;
+- TCP SYN;
+- scan-time entries.
 
-## Scenario 2 raw observations
+Conflict:
+- visible rule label in screenshot: `CASE C baseline pass Kali to Windows (100000104)`;
+- manifest/closure attribution: `CASE C - Block SMB Kali to Windows (1000000104)`.
 
-### NSE-SMB-01
-Command:
-`nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20`
-
-Observed:
-- 139/tcp open — syn-ack ttl 128
-- 445/tcp open — syn-ack ttl 128
-
-### NSE-SMB-02
-Command:
-`nmap --privileged -p 445 -n -T3 --max-retries 2 --script smb-protocols -oA evidence/nse-smb/NSE-SMB-02_protocols 192.168.56.20`
-
-Observed:
-- NT LM 0.12 (SMBv1)
-- 2.0.2
-- 2.1
-- 3.0
-- 3.0.2
-
-### NSE-SMB-03
-Command:
-`nmap --privileged -p 445 -n -T3 --max-retries 2 --script smb2-security-mode -oA evidence/nse-smb/NSE-SMB-03_signing 192.168.56.20`
-
-Observed:
-- 3.0.2 message signing enabled but not required
-
-### NSE-SMB-04
-Command:
-`nmap --privileged -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20`
-
-Observed:
-- host up
-- 445/tcp open
-- no Host script results
-- no vulnerability verdict
-
-Classification:
-`UNKNOWN / NO USABLE SCRIPT RESULT`
-
-## Case B — disable SMBv1
-
-Before:
-- SMB1=True
-- SMB2=True
-- FS-SMB1 Installed
-- LanmanServer Running
-- patch UNPATCHED
-
-Action:
-`Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force`
-
-After local:
-- SMB1=False
-- SMB2=True
-- FS-SMB1 Installed
-- LanmanServer Running
-- TCP 139/445 listening
-- Windows Firewall lab rule unchanged
-- `srv.sys 6.3.9600.16421` unchanged / UNPATCHED
-
-Protocol retest:
-`nmap --privileged -p 445 -n -T3 --max-retries 2 --script smb-protocols -oA evidence/nse-smb/NSE-SMB-02_protocols 192.168.56.20`
-
-Observed:
-- SMBv1 NT LM 0.12 absent
-- 2.0.2, 2.1, 3.0, 3.0.2 remain
-
-MS17-010 retest:
-`nmap --privileged -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20`
-
-Observed:
-- 445/tcp open
-- no Host script results
-- no vulnerability verdict
-
-Classification:
-`UNKNOWN / NO USABLE SCRIPT RESULT`
-
-## Case C — pfSense transparent bridge
-
-Data plane:
-`Kali .56.10 -> ATTT-PFS-KALI -> em2 -> bridge0 -> em3 -> ATTT-PFS-WIN -> Windows .56.20`
-
-Management plane:
-`Host .57.1 <-> Host-Only #2 <-> pfSense em1 .57.2`
-
-pfSense:
-- CE 2.9.0-RELEASE
-- bridge0 members em2/em3
-- pfil_member=1
-- pfil_bridge=0
-- pfil_onlyip=1
-- block rule on CASE_C_KALI/em2:
-  - IPv4 TCP
-  - source 192.168.56.10
-  - destination 192.168.56.20
-  - destination ports 139/445
-  - logging enabled
-- block rule above baseline pass rule
-
-Canonical port retest:
-`sudo nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20`
-
-Observed:
-- host up, arp-response
-- 139/tcp filtered — no-response
-- 445/tcp filtered — no-response
-
-Canonical pfSense log:
-- matching rule `CASE C - Block SMB Kali to Windows`
-- interface CASE_C_KALI
-- source 192.168.56.10
-- destination 192.168.56.20
-- TCP SYN to ports 139/445
-- action Block
-
-Canonical MS17-010 retest:
-`nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20`
-
-Observed:
-- host up
-- 445/tcp filtered
-- no vulnerability verdict
-
-Windows local state remains:
-- SMB1=True
-- SMB2=True
-- TCP 139/445 listening
-- `srv.sys 6.3.9600.16421`
-- UNPATCHED
-- Windows Firewall baseline allow rule unchanged
+Therefore the log proves blocked matching traffic in the pfSense path but **not** the exact named-rule attribution.
 
 ## Exclusions / caution
 
-- Do not treat `Kali_Baseline.txt` as final tool baseline; it predates Nmap installation.
-- Do not treat Case C pre-repair/debug attempts as canonical.
-- Do not adopt causal explanations for missing NSE output from summary prose unless independently proven.
-- Do not treat Case A patching as completed experiment.
-- Do not treat archive folders as report headings.
+- `Kali_Baseline.txt` is early pre-Nmap history.
+- Case C debug/pre-repair attempts are noncanonical.
+- Summary causal explanations for no NSE output are not facts unless direct evidence supports them.
+- Case A patching is not a completed experiment.
+- Archive folder hierarchy is not a report outline.
