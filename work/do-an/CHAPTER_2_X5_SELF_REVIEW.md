@@ -23,7 +23,7 @@
   - 2.5. Kiểm thử hai biện pháp giảm thiểu đã thực hiện (2.5.1, 2.5.2, 2.5.3)
   - 2.6. Dữ liệu thực nghiệm và nguyên tắc sử dụng (2.6.1, 2.6.2, 2.6.3)
   - 2.7. Tổng kết chương
-- **Dung lượng từ:** **3.815 từ** (nằm trọn vẹn trong biên độ thiết kế ~3.200 – 3.800 từ).
+- **Dung lượng từ:** **3.778 từ** (nằm trong biên độ thiết kế 3.200 – 3.800 từ).
 - **Kiến trúc trực quan và bảng biểu:**
   - 02 sơ đồ Mermaid:
     - Hình 2.1: Sơ đồ topo kết nối mạng ở trạng thái baseline trên VirtualBox (`192.168.56.0/24`).
@@ -99,6 +99,13 @@
    ```
 
 ---
+
+## 3.3. Hiệu chỉnh sau external final review
+
+External reviewer đã thực hiện một micro-adjustment trực tiếp sau R2 để:
+- đưa dung lượng chương xuống dưới ngưỡng 3.800 từ;
+- bỏ nốt một số câu có thể bị hiểu như kết quả đo thay vì điều kiện/phương pháp;
+- giữ nguyên toàn bộ exact commands, cấu trúc 7 H2 / 20 H3, Case B và topology Case C.
 
 ## 4. Kết luận và đề xuất
 
