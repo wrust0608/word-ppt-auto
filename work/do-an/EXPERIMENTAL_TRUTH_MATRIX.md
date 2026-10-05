@@ -43,7 +43,7 @@ Nhãn dùng trong ma trận:
 | SMB service | LanmanServer Running/Automatic; TCP 139,445 listen | `Final_PreDemo_Audit.txt` | VERIFIED_FACT |
 | SMB local baseline | SMB1=True; SMB2=True | `Final_PreDemo_Audit.txt` | VERIFIED_FACT |
 | Windows Firewall baseline | Allow TCP 139/445 chỉ từ `192.168.56.10`; group File and Printer Sharing mặc định tắt | `Windows_FirewallPrep_Final.txt` | VERIFIED_FACT |
-| Patch MS17-010 | `UNPATCHED`; `srv.sys 6.3.9600.16421 < 6.3.9600.18604`; không có KB4012213/KB4012216 hoặc rollup thay thế | `MS17-010_Official_Mapping.txt` | VERIFIED_FACT; prose phải dẫn nguồn Microsoft tương ứng |
+| Patch MS17-010 | `UNPATCHED`; `srv.sys 6.3.9600.16421 < 6.3.9600.18604`; local hotfix inventory không ghi nhận KB4012213/KB4012216 hoặc update chứa fix MS17-010 trong inventory quan sát | local mapping/state + direct patch visuals | VERIFIED_FACT cho local state; ngưỡng/mapping phải dẫn nguồn Microsoft tương ứng |
 
 ## 3. Kịch bản 1 — Nmap SMB 139/445
 
@@ -250,3 +250,46 @@ Configured Block rule existence/order remain separately proven by direct screens
 - Chapter 3 must bind each result to raw/direct evidence; do not use summary prose as ground truth.
 - Chapter 4 may compare Baseline, Case B and Case C within these bounds.
 - Case A remains theory/recommendation only.
+
+
+## 14. R3 final data-integrity locks — 2026-10-06
+
+Authoritative additions:
+- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_AUDIT_R3_FINAL_LOCK.md`
+- `work/do-an/evidence/ALL_2026_10_06/TIMEBASE_AND_CROSS_LAYER_LOCKS.md`
+
+These R3 locks supersede any broader wording elsewhere in this matrix.
+
+### 14.1 Clock domains
+Kali Nmap raw, host manifests, pfSense UI, and Windows do not share a proven common wall-clock/timezone.
+
+Do not order cross-system events solely from displayed timestamp strings. Use run lineage and artifact correspondence.
+
+### 14.2 Signing observations
+Keep both direct observations without forced reconciliation:
+- local Windows: `EnableSecuritySignature=False`, `RequireSecuritySignature=False`;
+- remote Nmap: SMB 3.0.2 `Message signing enabled but not required`.
+
+Use each only in its observation context unless protocol/source analysis explicitly explains the relationship.
+
+### 14.3 B2 unidentified host
+Scenario 1 B2 observes `.56.100` up. Its identity is not established by the canonical layer.
+
+Host-Only DHCP is disabled. A separate host NatNetwork-Lab DHCP configuration exists, but final pre-demo Kali/Windows NIC audits show no NAT/Bridged adapters.
+
+Forbidden: identify `.56.100` as DHCP/pfSense/another specific node without new direct evidence.
+
+### 14.4 Patch mapping artifact
+`MS17-010_Official_Mapping.txt` is composite.
+- local machine observations may support local patch state;
+- Microsoft KB/version rules require official Microsoft source citation;
+- prefer “not observed in local hotfix inventory” over an omniscient claim about all historical package installation.
+
+### 14.5 Case C log attribution
+Exact named-rule attribution remains `CONFLICTING_EVIDENCE / UNRESOLVED`.
+
+Allowed:
+matching SMB SYN traffic was blocked in the pfSense path.
+
+Forbidden:
+claim that the canonical log screenshot independently proves the named configured Block rule was the matching rule.
