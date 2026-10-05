@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sun Oct  4 03:29:25 2026 as: /usr/lib/nmap/nmap --privileged -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
+Host: 192.168.56.20 ()	Status: Up
+Host: 192.168.56.20 ()	Ports: 445/filtered/tcp//microsoft-ds///
+# Nmap done at Sun Oct  4 03:29:25 2026 -- 1 IP address (1 host up) scanned in 0.51 seconds

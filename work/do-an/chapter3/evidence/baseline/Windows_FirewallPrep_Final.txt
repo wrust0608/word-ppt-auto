@@ -1,0 +1,146 @@
+==================================================
+WINDOWS FIREWALL PREPARATION AUDIT (TASK 2E)
+==================================================
+
+[1] FIREWALL PROFILES (Get-NetFirewallProfile)
+
+Name                                                Enabled          DefaultInboundAction         DefaultOutboundAction
+----                                                -------          --------------------         ---------------------
+Domain                                                 True                 NotConfigured                 NotConfigured
+Private                                                True                 NotConfigured                 NotConfigured
+Public                                                 True                 NotConfigured                 NotConfigured
+
+[2] CUSTOM FIREWALL RULE (Get-NetFirewallRule)
+
+
+DisplayName : ATTT Lab SMB 139-445
+Name        : {0a8d1ca6-6d50-48ea-a8e3-ae156ee29214}
+Enabled     : True
+Direction   : Inbound
+Action      : Allow
+Profile     : Any
+
+[3] PORT FILTER (Get-NetFirewallPortFilter)
+
+Protocol                                LocalPort                               RemotePort                             
+--------                                ---------                               ----------                             
+TCP                                     {139, 445}                              Any
+
+[4] ADDRESS FILTER (Get-NetFirewallAddressFilter)
+
+LocalAddress                                                RemoteAddress                                              
+------------                                                -------------                                              
+Any                                                         192.168.56.10
+
+[5] SMB LOCAL LISTENING STATE (Get-NetTCPConnection)
+
+LocalAddress                                      LocalPort                         State OwningProcess                
+------------                                      ---------                         ----- -------------                
+::                                                      445                        Listen                              
+192.168.56.20                                           139                        Listen
+
+[6] ORIGINAL FILE AND PRINTER SHARING GROUP (Get-NetFirewallRule)
+
+Name                                                                                                              Count
+----                                                                                                              -----
+False                                                                                                                16
+
+[7] FILE AND PRINTER SHARING RULES DETAIL
+
+
+Name        : FPS-NB_Session-In-TCP
+DisplayName : File and Printer Sharing (NB-Session-In)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-NB_Session-Out-TCP
+DisplayName : File and Printer Sharing (NB-Session-Out)
+Enabled     : False
+Direction   : Outbound
+Action      : Allow
+
+Name        : FPS-SMB-In-TCP
+DisplayName : File and Printer Sharing (SMB-In)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-SMB-Out-TCP
+DisplayName : File and Printer Sharing (SMB-Out)
+Enabled     : False
+Direction   : Outbound
+Action      : Allow
+
+Name        : FPS-NB_Name-In-UDP
+DisplayName : File and Printer Sharing (NB-Name-In)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-NB_Name-Out-UDP
+DisplayName : File and Printer Sharing (NB-Name-Out)
+Enabled     : False
+Direction   : Outbound
+Action      : Allow
+
+Name        : FPS-NB_Datagram-In-UDP
+DisplayName : File and Printer Sharing (NB-Datagram-In)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-NB_Datagram-Out-UDP
+DisplayName : File and Printer Sharing (NB-Datagram-Out)
+Enabled     : False
+Direction   : Outbound
+Action      : Allow
+
+Name        : FPS-SpoolSvc-In-TCP
+DisplayName : File and Printer Sharing (Spooler Service - RPC)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-RPCSS-In-TCP
+DisplayName : File and Printer Sharing (Spooler Service - RPC-EPMAP)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-ICMP4-ERQ-In
+DisplayName : File and Printer Sharing (Echo Request - ICMPv4-In)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-ICMP4-ERQ-Out
+DisplayName : File and Printer Sharing (Echo Request - ICMPv4-Out)
+Enabled     : False
+Direction   : Outbound
+Action      : Allow
+
+Name        : FPS-ICMP6-ERQ-In
+DisplayName : File and Printer Sharing (Echo Request - ICMPv6-In)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-ICMP6-ERQ-Out
+DisplayName : File and Printer Sharing (Echo Request - ICMPv6-Out)
+Enabled     : False
+Direction   : Outbound
+Action      : Allow
+
+Name        : FPS-LLMNR-In-UDP
+DisplayName : File and Printer Sharing (LLMNR-UDP-In)
+Enabled     : False
+Direction   : Inbound
+Action      : Allow
+
+Name        : FPS-LLMNR-Out-UDP
+DisplayName : File and Printer Sharing (LLMNR-UDP-Out)
+Enabled     : False
+Direction   : Outbound
+Action      : Allow
+

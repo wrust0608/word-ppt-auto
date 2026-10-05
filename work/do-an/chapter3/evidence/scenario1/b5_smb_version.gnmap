@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Oct  3 21:50:57 2026 as: /usr/lib/nmap/nmap -sS -sV --version-intensity 5 -p 139,445 -T3 --max-retries 2 -oA b5_smb_version 192.168.56.20
+Host: 192.168.56.20 ()	Status: Up
+Host: 192.168.56.20 ()	Ports: 139/open/tcp//netbios-ssn//Microsoft Windows netbios-ssn/, 445/open/tcp//microsoft-ds//Microsoft Windows Server 2008 R2 - 2012 microsoft-ds/
+# Nmap done at Sat Oct  3 21:51:04 2026 -- 1 IP address (1 host up) scanned in 7.67 seconds

@@ -1,0 +1,399 @@
+================================================================================
+STAGE 2 / RUN 4 — EMERGENCY PAUSE & STATE REPORT
+================================================================================
+Timestamp: 2026-10-04T13:58:00+07:00
+Run Status: PAUSED FOR REVIEW
+Mode: READ-ONLY INSPECTION — NO NEW CHANGES MADE
+
+--------------------------------------------------------------------------------
+1. CURRENT STATUS
+--------------------------------------------------------------------------------
+RUN 4 (Case C pfSense Transparent Bridge Remediation) is officially PAUSED.
+All modification, scan, troubleshooting, and repair activities are halted.
+The lab environment has been thoroughly inspected in read-only mode to capture
+the exact factual state for technical review and redesign.
+
+--------------------------------------------------------------------------------
+2. LAST KNOWN GOOD STATE
+--------------------------------------------------------------------------------
+- VirtualBox Host-Only network repair completed successfully (RUN 4-R = PASS).
+- Host-Only adapter #1 (192.168.56.1/24) and #2 (192.168.57.1/24) healthy.
+- Kali and Windows independent baseline verified from "Before Demo" snapshots.
+- pfSense-CaseC installed (pfSense CE 2.9.0-RELEASE).
+- Isolated management interface operational on 192.168.57.2/24 via HTTP.
+- pfSense Snapshot "Basic" created (UUID: e1b9b54c-5cb2-475d-8bea-91373f89c585).
+- pfSense transparent bridge (bridge0) created with members em2 and em3.
+- Bridge filtering tunables verified: pfil_member = 1, pfil_bridge = 0.
+- Baseline PASS rule created on CASE_C_KALI (192.168.56.10 -> 192.168.56.20).
+- pfSense Snapshot "Before Case C" created (UUID: dd1bcf85-1a2b-40d5-be42-f89d0af97ce8).
+- Case C BLOCK rule created for TCP 139, 445 with logging above baseline PASS.
+- Real WebGUI evidence captured (pfSense_03 through pfSense_08).
+
+--------------------------------------------------------------------------------
+3. CRASH CONTEXT
+--------------------------------------------------------------------------------
+- Stage of Crash:
+  Antigravity experienced a session compaction / interruption during active
+  troubleshooting of Layer-2 ARP resolution across the pfSense transparent bridge
+  (approximately 13:35–13:40 local time).
+- Last Scripts/Commands Executed Before Crash:
+  * test_kali_tcpdump.ps1
+  * kali_test_perm_arp.png
+  * clear_win_arp.ps1 (netsh interface ip delete arpcache on Windows)
+- First Commands Executed After Reopen:
+  * VBoxManage list runningvms
+  * Scratch directory inspection
+  * Read-only verification of WebGUI and VM state
+- Pre-Crash Confirmed States:
+  * pfSense installation, management, bridge creation, rule configuration,
+    and cutover to internal networks ATTT-PFS-KALI and ATTT-PFS-WIN.
+- Post-Crash Discovered Root Cause:
+  * VirtualBox internal switch driver (DrvIntNet) initialized running sessions
+    of Kali and pfSense with IfPolicyPromisc="deny" (flags 0x8000). Although
+    VBoxManage modifyvm --nicpromisc allow-all was configured on disk, VirtualBox
+    does not apply promiscuous forwarding policy changes to active running VM
+    instances without a complete clean power cycle.
+
+--------------------------------------------------------------------------------
+4. VM STATE
+--------------------------------------------------------------------------------
+VirtualBox Version: 7.2.20r175154
+
+Virtual Machines:
+1. Kali-Linux:
+   - UUID: e603b604-60d0-4583-b544-61d03f21f30d
+   - Current State: RUNNING
+   - Snapshots:
+     * "Basic": cfb57ffc-d9e0-40dc-931d-4dacc2cee1d7
+     * "Before Demo": 10f14d46-d5f0-4672-b857-afa6e2eab872 (Current Node)
+
+2. Windows-Server-2012:
+   - UUID: 9afb9570-3ba8-428b-939d-db6729e76b43
+   - Current State: POWERED OFF (Clean poweroff during baseline check)
+   - Snapshots:
+     * "Basic": fb274788-f056-4fed-b66f-02b0eabafc25
+     * "Before Demo": dab6f871-24e0-4264-a9f2-9c8b704a77fc (Current Node)
+
+3. pfSense-CaseC:
+   - UUID: 5e272c3c-70ff-4f93-b514-053cb1ff7339
+   - Current State: RUNNING
+   - Snapshots:
+     * "Basic": e1b9b54c-5cb2-475d-8bea-91373f89c585
+     * "Before Case C": dd1bcf85-1a2b-40d5-be42-f89d0af97ce8 (Current Node)
+
+--------------------------------------------------------------------------------
+5. HOST NETWORK
+--------------------------------------------------------------------------------
+1. Adapter: VirtualBox Host-Only Ethernet Adapter
+   - InterfaceAlias: Ethernet 2
+   - IPv4: 192.168.56.1 / 255.255.255.0
+   - DHCP: Disabled
+   - Status: Up
+   - Default Gateway: None
+
+2. Adapter: VirtualBox Host-Only Ethernet Adapter #2
+   - InterfaceAlias: Ethernet 3
+   - IPv4: 192.168.57.1 / 255.255.255.0
+   - DHCP: Disabled
+   - Status: Up
+   - Default Gateway: None
+
+--------------------------------------------------------------------------------
+6. pfSense STATE
+--------------------------------------------------------------------------------
+- Edition: pfSense Community Edition (CE)
+- Version: 2.9.0-RELEASE (amd64, FreeBSD 15.0-CURRENT)
+- Management IP: 192.168.57.2/24 on em1 (isolated host-only)
+- WebGUI Protocol: HTTP (port 80)
+- SSH Service: Active on port 22
+- Temporary NAT (NIC 1): Cable disconnected (cableconnected1="off")
+- Data Interfaces:
+  * CASE_C_KALI (opt1 / em2): IPv4 None, IPv6 None, Promisc Up
+  * CASE_C_WINDOWS (opt2 / em3): IPv4 None, IPv6 None, Promisc Up
+- Bridge:
+  * Name: bridge0
+  * Members: em2 (CASE_C_KALI), em3 (CASE_C_WINDOWS)
+- Tunables:
+  * net.link.bridge.pfil_member = 1
+  * net.link.bridge.pfil_bridge = 0
+  * net.link.bridge.pfil_onlyip = 1
+- Firewall Rules on CASE_C_KALI (em2 / opt1):
+  * Rule 1 (Top): BLOCK IPv4 TCP
+    Source: 192.168.56.10
+    Destination: 192.168.56.20
+    Ports: Alias "SMB_Ports" (139, 445)
+    Logging: ENABLED
+    Description: "CASE C - Block SMB Kali to Windows"
+  * Rule 2 (Second): PASS IPv4 Any
+    Source: 192.168.56.10
+    Destination: 192.168.56.20
+    Ports: Any
+    Logging: Disabled
+    Description: "CASE C baseline pass Kali to Windows"
+
+--------------------------------------------------------------------------------
+7. CURRENT TOPOLOGY
+--------------------------------------------------------------------------------
+Kali-Linux (192.168.56.10/24)
+   | NIC 1 (MAC: 08:00:27:32:77:A9)
+   v
+Internal Network: ATTT-PFS-KALI
+   |
+   v NIC 3 (em2, MAC: 08:00:27:4C:CF:30)
+pfSense-CaseC
+   | [bridge0: em2 <---> em3]
+   v NIC 4 (em3, MAC: 08:00:27:A8:19:6A)
+Internal Network: ATTT-PFS-WIN
+   |
+   v NIC 1 (MAC: 08:00:27:55:71:CE)
+Windows-Server-2012 (192.168.56.20/24)
+
+Separate Management:
+Host (192.168.57.1/24) <---> Host-Only #2 <---> pfSense NIC 2 (em1: 192.168.57.2/24)
+
+--------------------------------------------------------------------------------
+8. WINDOWS STATE
+--------------------------------------------------------------------------------
+- Power State: POWERED OFF (Clean poweroff)
+- Last Verified Configuration:
+  * IPv4: 192.168.56.20/24 (Ethernet, InterfaceIndex 12)
+  * Default Gateway: None
+  * Connection Profile: Unidentified network (Public)
+  * LanmanServer Service: Running
+  * EnableSMB1Protocol: True
+  * EnableSMB2Protocol: True
+  * Listening Ports: TCP 139, TCP 445
+  * Driver: srv.sys version 6.3.9600.16384
+  * Patch Status: UNPATCHED for MS17-010
+  * Windows Firewall: Rule "ATTT Lab SMB 139-445" Enabled (Inbound Allow TCP 139,445 from 192.168.56.10)
+  * ARP Cache before poweroff: No static entries; 192.168.56.10 marked Unreachable.
+
+--------------------------------------------------------------------------------
+9. KALI STATE
+--------------------------------------------------------------------------------
+- Power State: RUNNING
+- IP: 192.168.56.10/24 on eth0 (MAC: 08:00:27:32:77:a9)
+- Route: 192.168.56.0/24 dev eth0 scope link (No default route to Internet)
+- Neighbor State: 192.168.56.20 dev eth0 lladdr 08:00:27:55:71:ce STALE
+- Static ARP: NOT IN EFFECT (Verified dynamic state STALE)
+
+--------------------------------------------------------------------------------
+10. BRIDGE / ARP FINDINGS
+--------------------------------------------------------------------------------
+- Diagnostic Observation:
+  When Kali runs locked command:
+    sudo nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason 192.168.56.20
+  Nmap sends ARP request probes (who-has 192.168.56.20 tell 192.168.56.10).
+  pfSense tcpdump confirms the ARP packet enters em2 and is bridged out em3.
+  However, Windows does not return an ARP reply to Kali, causing Nmap to output:
+    "Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn"
+    "1 IP address (0 hosts up) scanned in 1.46 seconds"
+- Status Classification of Actions:
+  * ARP Issue Observed: EXECUTED & VERIFIED
+  * Windows Neighbor State Checked: EXECUTED & VERIFIED (Unreachable)
+  * Kali Neighbor State Checked: EXECUTED & VERIFIED (FAILED / STALE)
+  * Bridge FDB Verified: EXECUTED & VERIFIED (Learned both MACs on bridge0)
+  * Ping Verified: EXECUTED & VERIFIED (100% loss due to lack of ARP)
+  * Static ARP Idea: CONSIDERED and briefly TESTED, then DELETED and REVERTED.
+  * Static ARP Current Status: NOT USED / NOT IN EFFECT.
+- Underlying VirtualBox Phenomenon:
+  Running VM sessions retained IfPolicyPromisc="deny" in DrvIntNet memory.
+  In VirtualBox, updating promiscuous policy on an adapter requires a full VM
+  power cycle (poweroff -> start) to initialize the virtual switch filter.
+
+--------------------------------------------------------------------------------
+11. FIREWALL STATE
+--------------------------------------------------------------------------------
+- pfSense CASE_C_KALI Ruleset:
+  1. BLOCK IPv4 TCP from 192.168.56.10 to 192.168.56.20 port SMB_Ports (139, 445), Log: YES
+  2. PASS IPv4 Any from 192.168.56.10 to 192.168.56.20, Log: NO
+- Rule Order: Block rule is FIRST, Baseline Pass rule is SECOND.
+- Windows Firewall: Untouched from baseline (Custom rule ATTT Lab SMB 139-445 active).
+
+--------------------------------------------------------------------------------
+12. CANONICAL NSE STATUS
+--------------------------------------------------------------------------------
+1. NSE-SMB-01:
+   - Command: sudo nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20
+   - Execution Status: INVALIDATED / PRE-REQUISITE L2 ARP INCOMPLETE
+   - Result: "0 hosts up" (Host discovery failure, not TCP filtering)
+   - Canonical Status: NOT CANONICALLY SATISFIED (Attribution gate not reached)
+
+2. NSE-SMB-04:
+   - Command: nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
+   - Execution Status: NOT EXECUTED
+   - Reason: Gate held — attribution pass required before NSE-SMB-04.
+
+--------------------------------------------------------------------------------
+13. RAW EVIDENCE INVENTORY
+--------------------------------------------------------------------------------
+On Kali:
+1. /home/kali/remediation_pfsense/evidence/nse-smb:
+   - NSE-SMB-01_ports.gnmap (267 bytes, 01:12 UTC) [PRE-REPAIR / ABORTED]
+   - NSE-SMB-01_ports.nmap  (267 bytes, 01:12 UTC) [PRE-REPAIR / ABORTED]
+   - NSE-SMB-01_ports.xml   (951 bytes, 01:12 UTC) [PRE-REPAIR / ABORTED]
+
+2. /home/kali/remediation_pfsense_final/evidence/nse-smb:
+   - NSE-SMB-01_ports.gnmap (267 bytes, 01:43 UTC) [DEBUG / INVALIDATED]
+   - NSE-SMB-01_ports.nmap  (267 bytes, 01:43 UTC) [DEBUG / INVALIDATED]
+   - NSE-SMB-01_ports.xml   (951 bytes, 01:43 UTC) [DEBUG / INVALIDATED]
+
+Classification:
+All raw files preserved intact. No files overwritten or deleted.
+
+--------------------------------------------------------------------------------
+14. SCREENSHOT INVENTORY
+--------------------------------------------------------------------------------
+Host Path: D:\SHARE_ALL\ATTT_DACN_01_BAOCAO_WORD\Evidence\04_Remediation_pfSense
+
+Canonical / Candidate Evidence:
+1. pfSense_01_Installer_Network.png     (3.6 KB) - Real VM install boot
+2. pfSense_02_CE_Install.png            (7.4 KB) - Real VM install confirmation
+3. pfSense_03_Interface_Assignment.png (67.8 KB) - Real WebGUI interfaces
+4. pfSense_04_Bridge.png               (40.4 KB) - Real WebGUI bridge0 members
+5. pfSense_05_Bridge_Filtering.png     (12.8 KB) - Real WebGUI bridge tunables
+6. pfSense_06_Baseline_Pass_Rule.png   (44.7 KB) - Real WebGUI baseline pass rule
+7. pfSense_07_Block_Rule_Config.png   (130.5 KB) - Real WebGUI block rule details
+8. pfSense_08_Rule_Order.png           (48.5 KB) - Real WebGUI rule hierarchy
+9. pfSense_CaseC_09_NSE01_Ports.png   (442.7 KB) - Real Kali terminal attempt
+
+Audit / Internal Visuals:
+- HostRepair/HostRepair_03_PostRepair_Network.png (Internal audit visual)
+- HostRepair/HostRepair_04_New_HostOnly.png       (Internal audit visual)
+- HostRepair/HostRepair_05_Native_HostOnly_Verification.txt (Native text)
+
+--------------------------------------------------------------------------------
+15. WORKING / VERIFIED
+--------------------------------------------------------------------------------
+[x] VirtualBox Host-Only driver repaired and healthy.
+[x] Original .56 Host-Only adapter verified (192.168.56.1/24, DHCP Off, Up).
+[x] Management .57 Host-Only adapter verified (192.168.57.1/24, DHCP Off, Up).
+[x] pfSense CE 2.9.0-RELEASE installed cleanly.
+[x] Isolated pfSense management access verified via HTTP (192.168.57.2).
+[x] pfSense Snapshot "Basic" verified (e1b9b54c-5cb2-475d-8bea-91373f89c585).
+[x] pfSense transparent bridge configured with em2 and em3.
+[x] Bridge tunables verified (pfil_member=1, pfil_bridge=0).
+[x] Baseline PASS rule verified on CASE_C_KALI.
+[x] pfSense Snapshot "Before Case C" verified (dd1bcf85-1a2b-40d5-be42-f89d0af97ce8).
+[x] Case C BLOCK rule with logging verified above baseline PASS.
+[x] Real WebGUI screenshots (pfSense_03 through 08) captured natively.
+[x] Independent target baselines preserved intact.
+
+--------------------------------------------------------------------------------
+16. NOT WORKING / NOT VERIFIED
+--------------------------------------------------------------------------------
+[ ] Dynamic ARP resolution between Kali and Windows across pfSense bridge.
+[ ] End-to-end L2 transparent bridge packet forwarding in current session.
+[ ] Valid execution of locked NSE-SMB-01 (blocked by L2 discovery failure).
+[ ] pfSense firewall log attribution matching TCP 139/445 probes.
+[ ] Execution of locked NSE-SMB-04.
+
+--------------------------------------------------------------------------------
+17. CHANGES ALREADY MADE
+--------------------------------------------------------------------------------
+- VirtualBox NIC attachments:
+  * Kali NIC1 changed to Internal Network ATTT-PFS-KALI.
+  * Windows NIC1 changed to Internal Network ATTT-PFS-WIN.
+  * pfSense NIC3 attached to ATTT-PFS-KALI, NIC4 to ATTT-PFS-WIN.
+- VirtualBox NIC promiscuous policies configured to allow-all on disk (.vbox).
+- pfSense system configuration updated with bridge0, alias SMB_Ports, and rules.
+- Dedicated clean working root created on Kali: /home/kali/remediation_pfsense_final.
+
+--------------------------------------------------------------------------------
+18. OPEN PROBLEMS
+--------------------------------------------------------------------------------
+1. VirtualBox DrvIntNet Session State:
+   VirtualBox Internal Network switches do not reload promiscuous mode dynamically
+   for active running VM processes. A coordinated clean power cycle (shutdown all
+   three VMs, then cold boot) is needed to allow VirtualBox to instantiate the
+   virtual switches with allow-all promiscuous policies.
+2. FreeBSD Member Filtering Symmetry:
+   When pfil_member = 1, outbound and return packets on em3 (CASE_C_WINDOWS) must
+   have an explicit pass rule or state tracking to allow Windows return traffic.
+
+--------------------------------------------------------------------------------
+19. SAFE RESUME POINT
+--------------------------------------------------------------------------------
+The safe resume point is:
+1. Clean shutdown of Kali and pfSense (Windows is already powered off).
+2. Cold boot all three VMs in sequence: pfSense -> Windows -> Kali.
+3. Verify L2 ARP resolution between Kali and Windows across the bridge.
+4. Execute canonical NSE-SMB-01 and verify pfSense log attribution.
+
+--------------------------------------------------------------------------------
+20. LIMITATIONS / UNKNOWN
+--------------------------------------------------------------------------------
+- Exact behavior of Windows Public firewall profile regarding ARP response
+  under VirtualBox internal network bridge after cold boot remains to be observed.
+- Windows is currently powered off; its local state was verified prior to poweroff
+  and remains safe on snapshot "Before Demo".
+================================================================================
+
+--------------------------------------------------------------------------------
+21. FINAL BOUNDED COMPLETION CLOSURE
+--------------------------------------------------------------------------------
+- Cold-Boot Retest Result:
+  PASS. The coordinated clean power cycle and cold boot sequence
+  (pfSense-CaseC -> Windows-Server-2012 -> Kali-Linux) successfully resolved
+  the VirtualBox DrvIntNet session state issue. VirtualBox instantiated the internal
+  switches (ATTT-PFS-KALI and ATTT-PFS-WIN) with allow-all promiscuous policies.
+  Dynamic ARP resolution across the pfSense transparent bridge succeeded immediately:
+  Kali confirmed dynamic mapping: 192.168.56.20 dev eth0 lladdr 08:00:27:55:71:ce REACHABLE.
+
+- Canonical Case C Implementation:
+  pfSense Transparent Bridge Firewall (Path A) is VERIFIED and CANONICAL.
+  Windows Firewall fallback was NOT needed and was SKIPPED entirely.
+
+- Exact Canonical NSE-SMB-01 Result:
+  Command: sudo nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20
+  Result:
+    Host is up, received arp-response (0.00054s latency).
+    139/tcp filtered netbios-ssn  no-response
+    445/tcp filtered microsoft-ds no-response
+    MAC Address: 08:00:27:55:71:CE (Oracle VirtualBox virtual NIC)
+    1 IP address (1 host up) scanned in 1.33 seconds
+
+- pfSense Firewall Attribution:
+  PASS. Native WebGUI system logs (Status: System Logs: Firewall) confirmed
+  exact matching block entries for the canonical scan:
+    Rule: CASE C - Block SMB Kali to Windows (1000000104)
+    Interface: CASE_C_KALI
+    Source: 192.168.56.10
+    Destination: 192.168.56.20
+    Ports: TCP 139 and TCP 445 (SYN)
+    Action: Block (Logged)
+  Captured in: pfSense_10_Block_Log_CANONICAL.png.
+
+- Exact Canonical NSE-SMB-04 Result:
+  Command: nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
+  Result:
+    Host is up (0.00054s latency).
+    445/tcp filtered microsoft-ds
+    MAC Address: 08:00:27:55:71:CE (Oracle VirtualBox virtual NIC)
+    1 IP address (1 host up) scanned in 0.51 seconds
+  Script Verdict: UNKNOWN (No script execution results returned because port 445 was filtered by pfSense).
+
+- Windows Local State & Patch Status:
+  EnableSMB1Protocol: True
+  EnableSMB2Protocol: True
+  TCP 139 State: Listen
+  TCP 445 State: Listen
+  srv.sys FileVersion String: 6.3.9600.16384 (winblue_rtm.130821-1623)
+  srv.sys Canonical Numeric Version: 6.3.9600.16421
+  MS17-010 Patch State: UNPATCHED
+  Windows Firewall: Baseline Allow rule "ATTT Lab SMB 139-445" active; no host-side block rules added.
+
+- Academic Remediation Interpretation:
+  Remediation Effectiveness: VERIFIED at the Network Layer.
+  Network access control via pfSense transparent bridge successfully blocked
+  inbound SMB attack vectors (TCP 139/445) from Kali to Windows, eliminating
+  remote exploitable exposure for MS17-010 without modifying target operating
+  system code, patching the vulnerability, or disabling SMB protocols.
+  Filtering does NOT mean PATCHED or SAFE; the target remains intrinsically vulnerable
+  if network-layer perimeter protections are bypassed or absent.
+
+- Canonical Evidence Files:
+  All 6 canonical raw files verified in /home/kali/run4_casec_canonical/evidence/nse-smb
+  and backed up to host at Evidence\04_Remediation_pfSense\raw\.
+================================================================================
+

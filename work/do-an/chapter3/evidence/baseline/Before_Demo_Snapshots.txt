@@ -1,0 +1,52 @@
+==================================================
+BEFORE DEMO SNAPSHOT VERIFICATION (TASK FINAL-PREP)
+Timestamp: 2026-10-04T08:22:00+07:00
+==================================================
+
+[1] VM: Kali-Linux
+--------------------------------------------------
+VM Name:             Kali-Linux
+UUID:                e603b604-60d0-4583-b544-61d03f21f30d
+Final VMState:       poweroff
+
+NIC Configuration:
+  NIC 1:             hostonly (VirtualBox Host-Only Ethernet Adapter)
+  MAC 1:             0800273277A9
+  Cable 1:           on
+  NIC 2 - 8:         none
+
+Snapshot Hierarchy:
+  - Name:            Basic
+    UUID:            cfb57ffc-d9e0-40dc-931d-4dacc2cee1d7
+    Description:     Fresh ISO install, Guest Additions verified, bidirectional clipboard verified, clean shutdown
+
+  - Name:            Before Demo
+    UUID:            10f14d46-d5f0-4672-b857-afa6e2eab872 (CURRENT *)
+    Description:     Final isolated lab baseline before SMB/Nmap demonstrations
+
+
+[2] VM: Windows-Server-2012
+--------------------------------------------------
+VM Name:             Windows-Server-2012
+UUID:                9afb9570-3ba8-428b-939d-db6729e76b43
+Final VMState:       poweroff
+
+NIC Configuration:
+  NIC 1:             hostonly (VirtualBox Host-Only Ethernet Adapter)
+  MAC 1:             0800275571CE
+  Cable 1:           on
+  NIC 2 - 8:         none
+
+Snapshot Hierarchy:
+  - Name:            Basic
+    UUID:            fb274788-f056-4fed-b66f-02b0eabafc25
+    Description:     Windows Server 2012 R2 Standard GUI clean install with Guest Additions, bidirectional clipboard verified, offline basic baseline
+
+  - Name:            Before Demo
+    UUID:            dab6f871-24e0-4264-a9f2-9c8b704a77fc (CURRENT *)
+    Description:     Final isolated lab baseline before SMB/Nmap demonstrations
+
+
+==================================================
+STATUS: PASS - READY FOR STAGE 2 DEMONSTRATIONS
+==================================================

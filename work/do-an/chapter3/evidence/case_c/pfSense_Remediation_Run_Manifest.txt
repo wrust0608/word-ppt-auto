@@ -1,0 +1,170 @@
+================================================================================
+STAGE 2 / RUN 4 — pfSense REMEDIATION RUN MANIFEST
+================================================================================
+Run ID: STAGE 2 / RUN 4 — CASE C pfSense
+Date: 2026-10-04
+Execution Host: Windows 11 Enterprise (AMD64)
+Hypervisor: Oracle VM VirtualBox 7.2.20r175154
+Implementation Mode: Canonical Path A (pfSense Transparent Bridge Firewall)
+Run Status: PASS — COMPLETE
+
+--------------------------------------------------------------------------------
+1. VIRTUAL MACHINE & SNAPSHOT MANIFEST
+--------------------------------------------------------------------------------
+Virtual Machines:
+1. pfSense-CaseC:
+   - VM UUID: 5e272c3c-70ff-4f93-b514-053cb1ff7339
+   - OS: FreeBSD 15.0-CURRENT / amd64 (pfSense CE 2.9.0-RELEASE)
+   - Snapshot "Basic": e1b9b54c-5cb2-475d-8bea-91373f89c585
+   - Snapshot "Before Case C": dd1bcf85-1a2b-40d5-be42-f89d0af97ce8 (Current Node)
+
+2. Windows-Server-2012:
+   - VM UUID: 9afb9570-3ba8-428b-939d-db6729e76b43
+   - OS: Windows Server 2012 R2 Standard Evaluation (Build 9600, x64)
+   - Snapshot "Basic": fb274788-f056-4fed-b66f-02b0eabafc25
+   - Snapshot "Before Demo": dab6f871-24e0-4264-a9f2-9c8b704a77fc (Current Node)
+
+3. Kali-Linux:
+   - VM UUID: e603b604-60d0-4583-b544-61d03f21f30d
+   - OS: Kali Linux 2026 (Debian 64-bit)
+   - Snapshot "Basic": cfb57ffc-d9e0-40dc-931d-4dacc2cee1d7
+   - Snapshot "Before Demo": 10f14d46-d5f0-4672-b857-afa6e2eab872 (Current Node)
+
+--------------------------------------------------------------------------------
+2. NETWORK ARCHITECTURE & TOPOLOGY
+--------------------------------------------------------------------------------
+Host Adapters:
+- VirtualBox Host-Only Ethernet Adapter:
+  * IP: 192.168.56.1 / 255.255.255.0
+  * DHCP: Disabled, Status: Up
+- VirtualBox Host-Only Ethernet Adapter #2:
+  * IP: 192.168.57.1 / 255.255.255.0
+  * DHCP: Disabled, Status: Up
+
+Data Plane Topology:
+Kali-Linux (192.168.56.10/24, MAC: 08:00:27:32:77:A9)
+   | NIC 1 (Internal Network 'ATTT-PFS-KALI', Promisc: allow-all)
+   v
+pfSense-CaseC (NIC 3 / em2 / CASE_C_KALI, MAC: 08:00:27:4C:CF:30)
+   | [Transparent Bridge: bridge0]
+pfSense-CaseC (NIC 4 / em3 / CASE_C_WINDOWS, MAC: 08:00:27:A8:19:6A)
+   v NIC 1 (Internal Network 'ATTT-PFS-WIN', Promisc: allow-all)
+Windows-Server-2012 (192.168.56.20/24, MAC: 08:00:27:55:71:CE)
+
+Management Plane:
+Host (192.168.57.1/24) <---> Host-Only #2 <---> pfSense NIC 2 (em1: 192.168.57.2/24)
+HTTP WebGUI: http://192.168.57.2/
+
+Bridge Tunables:
+- net.link.bridge.pfil_member = 1
+- net.link.bridge.pfil_bridge = 0
+- net.link.bridge.pfil_onlyip = 1
+
+--------------------------------------------------------------------------------
+3. FIREWALL RULE CONFIGURATION
+--------------------------------------------------------------------------------
+Interface: CASE_C_KALI (em2 / opt1)
+
+Rule 1 (Top / Evaluated First):
+- Action: BLOCK
+- Interface: CASE_C_KALI
+- Address Family: IPv4
+- Protocol: TCP
+- Source: 192.168.56.10
+- Destination: 192.168.56.20
+- Destination Port: Alias "SMB_Ports" (139, 445)
+- State Type: keep state
+- Logging: ENABLED
+- Description: "CASE C - Block SMB Kali to Windows"
+- Rule ID: 1000000104
+
+Rule 2 (Second / Evaluated Below Block):
+- Action: PASS
+- Interface: CASE_C_KALI
+- Address Family: IPv4
+- Protocol: Any
+- Source: 192.168.56.10
+- Destination: 192.168.56.20
+- Destination Port: Any
+- Logging: Disabled
+- Description: "CASE C baseline pass Kali to Windows"
+
+--------------------------------------------------------------------------------
+4. SOURCE COMMAND COMPLIANCE
+--------------------------------------------------------------------------------
+Command 1 (Port Scan):
+sudo nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20
+- Working Directory: /home/kali/run4_casec_canonical
+- Execution Deviations: NONE (Exact command compliance: 100%)
+- Result: 139/tcp filtered (no-response), 445/tcp filtered (no-response)
+
+Command 2 (Vulnerability Script):
+nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
+- Working Directory: /home/kali/run4_casec_canonical
+- Execution Deviations: NONE (Exact command compliance: 100%)
+- Result: 445/tcp filtered (no-response), script output suppressed due to closed/filtered port.
+
+--------------------------------------------------------------------------------
+5. CANONICAL RAW ARTIFACTS INVENTORY
+--------------------------------------------------------------------------------
+Primary Location (Kali): /home/kali/run4_casec_canonical/evidence/nse-smb
+Host Backup: D:\SHARE_ALL\ATTT_DACN_01_BAOCAO_WORD\Evidence\04_Remediation_pfSense\raw
+
+Artifacts:
+1. NSE-SMB-01_ports.gnmap (398 bytes) - Grepable format for port scan
+2. NSE-SMB-01_ports.nmap  (541 bytes) - Standard Nmap text output
+3. NSE-SMB-01_ports.xml  (1847 bytes) - Machine-readable XML format
+4. NSE-SMB-04_ms17010.gnmap (389 bytes) - Grepable format for MS17-010 scan
+5. NSE-SMB-04_ms17010.nmap  (477 bytes) - Standard Nmap text output
+6. NSE-SMB-04_ms17010.xml  (1745 bytes) - Machine-readable XML format
+
+--------------------------------------------------------------------------------
+6. HISTORICAL / DIAGNOSTIC ARTIFACTS (PRESERVED)
+--------------------------------------------------------------------------------
+Kali Directories:
+1. /home/kali/remediation_pfsense/evidence/nse-smb [PRE-REPAIR / ABORTED]
+   - NSE-SMB-01_ports.gnmap (267 bytes)
+   - NSE-SMB-01_ports.nmap  (267 bytes)
+   - NSE-SMB-01_ports.xml   (951 bytes)
+
+2. /home/kali/remediation_pfsense_final/evidence/nse-smb [DEBUG / INVALIDATED]
+   - NSE-SMB-01_ports.gnmap (267 bytes)
+   - NSE-SMB-01_ports.nmap  (267 bytes)
+   - NSE-SMB-01_ports.xml   (951 bytes)
+
+--------------------------------------------------------------------------------
+7. SCREENSHOT EVIDENCE INVENTORY
+--------------------------------------------------------------------------------
+Directory: D:\SHARE_ALL\ATTT_DACN_01_BAOCAO_WORD\Evidence\04_Remediation_pfSense
+
+Foundation Evidence:
+- pfSense_01_Installer_Network.png     (3.6 KB) - pfSense boot & network setup
+- pfSense_02_CE_Install.png            (7.4 KB) - pfSense CE installation confirmation
+- pfSense_03_Interface_Assignment.png (67.8 KB) - WebGUI interface configuration
+- pfSense_04_Bridge.png               (40.4 KB) - WebGUI bridge0 membership (em2, em3)
+- pfSense_05_Bridge_Filtering.png     (12.8 KB) - WebGUI bridge tunables verification
+- pfSense_06_Baseline_Pass_Rule.png   (44.7 KB) - WebGUI baseline pass rule
+
+Canonical Test Evidence:
+- pfSense_07_Block_Rule_Config.png   (130.5 KB) - WebGUI Case C block rule configuration
+- pfSense_08_Rule_Order.png           (48.5 KB) - WebGUI rule hierarchy (Block above Pass)
+- pfSense_CaseC_09_NSE01_Ports_CANONICAL.png (445.2 KB) - Real Kali terminal NSE-SMB-01 output
+- pfSense_10_Block_Log_CANONICAL.png (3.6 MB)   - Real pfSense WebGUI filter log attribution
+- pfSense_CaseC_11_NSE04_MS17010_CANONICAL.png (448.1 KB) - Real Kali terminal NSE-SMB-04 output
+
+Documentation & Reports:
+- RUN4_PAUSE_STATE_REPORT.txt (Report file with Section 21 Closure)
+- pfSense_Remediation_Summary.txt (Experiment summary, interpretation, conclusions)
+- pfSense_Remediation_Run_Manifest.txt (This file)
+
+--------------------------------------------------------------------------------
+8. STATIC ARP & CREDENTIAL SAFETY CLASSIFICATION
+--------------------------------------------------------------------------------
+Static ARP:
+- Diagnostic Status: TEMPORARILY USED FOR DIAGNOSTIC ONLY; REMOVED; NOT PART OF CANONICAL CASE C.
+- Canonical Run Status: NOT IN EFFECT (Dynamic ARP resolution verified across bridge).
+
+Credential Safety:
+- Plaintext credentials exposed in scripts/transcripts/reports during this run: NONE.
+- All credentials loaded dynamically from local storage at runtime.
+================================================================================

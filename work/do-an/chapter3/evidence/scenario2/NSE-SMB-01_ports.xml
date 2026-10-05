@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sat Oct  3 22:07:14 2026 as: /usr/lib/nmap/nmap -sS -p 139,445 -n -T3 -&#45;max-retries 2 -&#45;reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -sS -p 139,445 -n -T3 -&#45;max-retries 2 -&#45;reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20" start="1791079634" startstr="Sat Oct  3 22:07:14 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="139,445"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.20" addrtype="ipv4"/>
+<address addr="08:00:27:55:71:CE" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1791079634" endtime="1791079635"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.20" addrtype="ipv4"/>
+<address addr="08:00:27:55:71:CE" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" method="table" conf="3"/></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" method="table" conf="3"/></port>
+</ports>
+<times srtt="521" rttvar="2894" to="100000"/>
+</host>
+<runstats><finished time="1791079635" timestr="Sat Oct  3 22:07:15 2026" summary="Nmap done at Sat Oct  3 22:07:15 2026; 1 IP address (1 host up) scanned in 1.33 seconds" elapsed="1.33" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

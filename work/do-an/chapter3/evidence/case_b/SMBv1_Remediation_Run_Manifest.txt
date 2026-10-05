@@ -1,0 +1,63 @@
+==================================================
+STAGE 2 / RUN 3 — REMEDIATION CASE B: DISABLE SMBv1
+RUN MANIFEST
+Execution Date: 2026-10-04T09:31:00+07:00
+Target: 192.168.56.20 (Windows-Server-2012)
+Attacker: 192.168.56.10 (Kali-Linux)
+==================================================
+
+PRECHECK:
+STATUS: PASS
+LOCAL STATE:
+- LanmanServer: Running / Automatic
+- FS-SMB1 Feature: Installed
+- EnableSMB1Protocol: True
+- EnableSMB2Protocol: True
+- Firewall Rule "ATTT Lab SMB 139-445": Enabled, TCP 139,445, RemoteAddress 192.168.56.10
+
+BEFORE:
+LOCAL STATE:
+- EnableSMB1Protocol = True
+- EnableSMB2Protocol = True
+- FS-SMB1 = Installed
+- LanmanServer = Running
+SCREENSHOT: SMBv1_Remediation_01_Before.png
+
+ACTION:
+COMMAND: Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
+STATUS: PASS (Executed without error, exited code 0, single variable modified)
+SCREENSHOT: SMBv1_Remediation_02_Action.png
+
+AFTER LOCAL:
+STATUS: PASS
+LOCAL STATE:
+- EnableSMB1Protocol = False
+- EnableSMB2Protocol = True
+- FS-SMB1 = Installed (not uninstalled)
+- LanmanServer = Running (TCP 139, 445 listening)
+- Firewall Rule = Enabled, 139,445, RemoteAddress 192.168.56.10 (unchanged)
+- srv.sys = 6.3.9600.16421 (UNPATCHED, unchanged)
+SCREENSHOT: SMBv1_Remediation_03_After_Local.png
+
+NSE-SMB-02 RETEST:
+COMMAND: nmap -p 445 -n -T3 --max-retries 2 --script smb-protocols -oA evidence/nse-smb/NSE-SMB-02_protocols 192.168.56.20
+STATUS: PASS
+RAW: NSE-SMB-02_protocols.nmap, NSE-SMB-02_protocols.xml, NSE-SMB-02_protocols.gnmap
+SCREENSHOT: SMBv1_Remediation_04_NSE02_Protocols.png
+RESULT: SMBv1 (NT LM 0.12) completely absent; SMB2/SMB3 dialects (2.0.2, 2.1, 3.0, 3.0.2) remain active
+
+NSE-SMB-04 RETEST:
+COMMAND: nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
+STATUS: PASS
+RAW: NSE-SMB-04_ms17010.nmap, NSE-SMB-04_ms17010.xml, NSE-SMB-04_ms17010.gnmap
+SCREENSHOT: SMBv1_Remediation_05_NSE04_MS17010.png
+RESULT: UNKNOWN (NO USABLE SCRIPT OUTPUT) — SMBv1 probe silenced; target binary patch state remains UNPATCHED
+
+INTEGRITY:
+EXPECTED: 6
+ACTUAL: 6
+MISSING: 0
+SCREENSHOT RAW EVIDENCE: SMBv1_Remediation_06_Raw_Evidence.png
+HOST BACKUP PATH: D:\SHARE_ALL\ATTT_DACN_01_BAOCAO_WORD\Evidence\03_Remediation_SMBv1\raw
+KALI WORKING DIR: /home/kali/remediation_smbv1
+KALI EVIDENCE DIR: /home/kali/remediation_smbv1/evidence/nse-smb

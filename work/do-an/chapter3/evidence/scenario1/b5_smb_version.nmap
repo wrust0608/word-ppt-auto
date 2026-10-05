@@ -1,0 +1,12 @@
+# Nmap 7.99 scan initiated Sat Oct  3 21:50:57 2026 as: /usr/lib/nmap/nmap -sS -sV --version-intensity 5 -p 139,445 -T3 --max-retries 2 -oA b5_smb_version 192.168.56.20
+Nmap scan report for 192.168.56.20
+Host is up (0.00030s latency).
+
+PORT    STATE SERVICE      VERSION
+139/tcp open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp open  microsoft-ds Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+MAC Address: 08:00:27:55:71:CE (Oracle VirtualBox virtual NIC)
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Oct  3 21:51:04 2026 -- 1 IP address (1 host up) scanned in 7.67 seconds

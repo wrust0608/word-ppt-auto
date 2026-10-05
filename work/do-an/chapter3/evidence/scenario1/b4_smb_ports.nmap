@@ -1,0 +1,10 @@
+# Nmap 7.99 scan initiated Sat Oct  3 21:49:52 2026 as: /usr/lib/nmap/nmap -sS -p 139,445 -T3 --max-retries 2 --reason -oA b4_smb_ports 192.168.56.20
+Nmap scan report for 192.168.56.20
+Host is up, received arp-response (0.00035s latency).
+
+PORT    STATE SERVICE      REASON
+139/tcp open  netbios-ssn  syn-ack ttl 128
+445/tcp open  microsoft-ds syn-ack ttl 128
+MAC Address: 08:00:27:55:71:CE (Oracle VirtualBox virtual NIC)
+
+# Nmap done at Sat Oct  3 21:49:54 2026 -- 1 IP address (1 host up) scanned in 1.30 seconds
