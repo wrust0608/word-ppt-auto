@@ -215,7 +215,69 @@ Local Windows evidence supports:
 
 External Microsoft sources in the Source Ledger remain required when this mapping is cited academically.
 
-## 11. Quality verdict
+## 11. Semantic cross-check of canonical visuals
+
+The byte audit was followed by direct visual checks against raw/local claims.
+
+### Scenario 2 MS17-010 visual
+`Scenario2_NSE04_MS17010.png` shows:
+- operator command without literal `--privileged`;
+- target `.56.20`;
+- 445/tcp open;
+- no Host script result/verdict.
+
+This matches the raw result and confirms why operator-command provenance must remain separate from Nmap-recorded argv.
+
+### Case B visuals
+Direct screenshots show:
+- Before: LanmanServer Running, FS-SMB1 Installed, SMB1=True, SMB2=True.
+- Action: `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force`.
+- After: SMB1=False, SMB2=True, FS-SMB1 Installed, LanmanServer Running.
+- Protocol retest screenshot shows only SMB2/3 dialects 2.0.2, 2.1, 3.0, 3.0.2.
+
+These agree with the Case B raw/local ledger.
+
+### Case C scan visuals
+`pfSense_CaseC_09_NSE01_Ports_CANONICAL.png` shows:
+- operator command with `sudo`;
+- target `.56.20`;
+- 139/445 filtered;
+- reason no-response;
+- host up by ARP.
+
+`pfSense_CaseC_11_NSE04_MS17010_CANONICAL.png` shows:
+- operator MS17-010 command without literal `--privileged`;
+- 445 filtered;
+- no script verdict.
+
+Both match their raw Nmap outputs.
+
+### Windows patch visual
+`Windows_MS17010_01_SrvSysVersion.png` directly shows:
+- display FileVersion/ProductVersion `6.3.9600.16384`;
+- constructed numeric version `6.3.9600.16421`.
+
+This matches the local mapping ledger.
+
+### Case C configuration visuals
+`pfSense_03_Interface_Assignment.png` shows:
+- CASE_C_KALI = em2;
+- CASE_C_WINDOWS = em3.
+
+`pfSense_07_Block_Rule_Config.png` shows:
+- Block / IPv4 / TCP;
+- CASE_C_KALI;
+- source `.56.10`;
+- destination `.56.20`;
+- destination alias SMB_Ports;
+- logging enabled;
+- description `CASE C - Block SMB Kali to Windows`.
+
+`pfSense_08_Rule_Order.png` shows the block row above the pass row.
+
+These configuration visuals are internally consistent with the configured-policy claim, independently of the firewall-log label conflict.
+
+## 12. Quality verdict
 
 After R2 corrections, the evidence layer is:
 - byte-traceable;
