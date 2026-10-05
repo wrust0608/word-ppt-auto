@@ -459,3 +459,8 @@
 - CP5-USER: PENDING.
 - X6 / Chapter 3: BLOCKED until the user explicitly approves the revised Chapter 2.
 - No Chapter 3 prose may be drafted from summary files or historical reports; future Chapter 3 must bind claims to normalized raw/local evidence.
+
+
+### DEC-40 evidence ingest addendum
+- Added `work/do-an/evidence/ALL_2026_10_06/CANONICAL_NMAP_TEXT_OUTPUTS.md` containing the canonical human-readable `.nmap` outputs for Scenario 1, Scenario 2, Case B and Case C.
+- Future Chapter 3 analysis must use this repo-local raw snapshot plus the SHA-bound evidence map before consulting any summary prose.
