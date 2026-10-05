@@ -1,9 +1,9 @@
 # ĐỀ XUẤT BỔ SUNG NGUỒN VÀO SỔ NGUỒN — X5 STRUCTURAL REWRITE
 
-Trạng thái: `PROPOSED_FOR_CHANGE_CONTROL`
+Trạng thái: `APPROVED / INCORPORATED AS S032`
 Ngày lập: 2026-10-05
 Agent: Executor / Writing Agent
-Phạm vi: Đề xuất bổ sung tài liệu kỹ thuật hỗ trợ ngưỡng phiên bản tệp driver `srv.sys` phục vụ Chương 2 và Chương 3.
+Phạm vi: Tài liệu kỹ thuật hỗ trợ ngưỡng phiên bản tệp driver `srv.sys` phục vụ Chương 2 và Chương 3 (đã được External Reviewer phê duyệt và tích hợp vào SOURCE_LEDGER.md với mã S032).
 
 ---
 
@@ -11,14 +11,14 @@ Phạm vi: Đề xuất bổ sung tài liệu kỹ thuật hỗ trợ ngưỡng 
 
 | Thuộc tính | Chi tiết |
 | :--- | :--- |
-| **Mã đề xuất (Proposed ID)** | `S032` (hoặc định danh theo quyết định của External Reviewer) |
+| **Mã nguồn chính thức (Source ID)** | `S032` (Đã được External Reviewer chính thức phê duyệt) |
 | **Tác giả / Cơ quan xuất bản** | Microsoft Support |
 | **Năm xuất bản / Cập nhật** | 2017 (Cập nhật lưu trữ Microsoft Support) |
 | **Tiêu đề tài liệu** | How to verify that MS17-010 is installed |
 | **Loại tài liệu** | Hướng dẫn kỹ thuật hỗ trợ chính thức (Official Support Article / Verification Guide) |
 | **Mã định danh tài liệu** | Article ID: 4023057 |
 | **Đường dẫn URL** | `https://support.microsoft.com/en-us/help/4023057/how-to-verify-that-ms17-010-is-installed` |
-| **Trạng thái đối soát** | `CANDIDATE_FOR_VERIFICATION` |
+| **Trạng thái đối soát** | `APPROVED / INCORPORATED AS S032` |
 
 ---
 
@@ -49,7 +49,7 @@ Phạm vi: Đề xuất bổ sung tài liệu kỹ thuật hỗ trợ ngưỡng 
 
 ---
 
-## 5. Kiến nghị quản trị
+## 5. Kết luận quản trị
 
-- Kính trình External Reviewer xem xét và đưa vào quy trình Change Control cập nhật `SOURCE_LEDGER.md` tại thời điểm phù hợp.
-- Trong bản nháp Chương 2 hiện tại, trích dẫn được đánh số theo thứ tự xuất hiện tuần tự là `[5]` mà không tự ý sửa đổi file khóa `SOURCE_LEDGER.md`.
+- External Reviewer đã xác minh tài liệu và chính thức tích hợp vào `SOURCE_LEDGER.md` với mã định danh `S032`.
+- Trong bản nháp Chương 2, trích dẫn được đánh số theo thứ tự xuất hiện tuần tự là `[5]`. Không sửa đổi các sự thật nguồn đã khóa khác.
