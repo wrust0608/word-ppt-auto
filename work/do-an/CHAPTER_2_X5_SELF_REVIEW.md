@@ -2,9 +2,9 @@
 
 - **Nhiệm vụ:** X5 — Soạn thảo Chương 2 Canonical theo kiến trúc báo cáo đã khóa (X3B Approval)
 - **Tệp đánh giá:** `work/do-an/CHAPTER_2.md`
-- **Phiên bản:** Corrective Pass sau phản biện độc lập
+- **Phiên bản:** Corrective & Author Voice Pass (Lượt cuối trước External Review)
 - **Thời điểm:** 2026-10-05
-- **Trạng thái tự công bố:** `X5_DRAFT_READY_FOR_EXTERNAL_REVIEW`
+- **Trạng thái tự công bố:** `AUTHOR_VOICE_REVIEW_COMPLETED`, `X5_DRAFT_READY_FOR_EXTERNAL_REVIEW`
 - **Ghi chú bảo vệ:** Executor không tự tuyên bố PASS; người dùng là final approver; bản thảo sẵn sàng để reviewer độc lập kiểm tra trực tiếp từ remote repository.
 
 ---
@@ -14,10 +14,10 @@
 | Tiêu chí | Quy định tại Contract | Kết quả thực tế tại `CHAPTER_2.md` | Đánh giá |
 |---|---|---|---|
 | **Vai trò chương** | Chương Thiết kế và Phương pháp (Method / Design), không phải Result | Mô tả kiến trúc, baseline, quy trình đo và tiêu chí; không diễn giải số liệu kết quả chi tiết của Ch3 | ĐẠT |
-| **Dung lượng từ** | 3.500 – 4.500 từ | **4.432 từ** | ĐẠT (trong ngân sách [3.500, 4.500]) |
+| **Dung lượng từ** | 3.500 – 4.500 từ | **4.417 từ** (4.448 từ nếu tính theo regex từ tố) | ĐẠT (trong ngân sách [3.500, 4.500]) |
 | **Cấu trúc đề mục** | Bám sát 9 mục lớn 2.1–2.9 theo `OUTLINE.md` | Đầy đủ 9 mục lớn 2.1–2.9 và toàn bộ **42 tiểu mục cấp 3** đã khóa | ĐẠT (42/42 khớp chính xác) |
 | **Ngân sách hình/bảng** | 3–5 hình/sơ đồ, 3–5 bảng biểu (`FIGURE_TABLE_BUDGET.md`) | **3 hình/sơ đồ** (Hình 2.1, Sơ đồ 2.2, Sơ đồ 2.3) và **5 bảng biểu** (Bảng 2.1 đến Bảng 2.5) | ĐẠT |
-| **Quy tắc phân tầng** | Tách biệt 5 lớp quan sát và 3 cấp độ dữ kiện | Thiết kế rõ 5 lớp quan sát; phân định Source Fact, Interpretation và Security Assertion | ĐẠT |
+| **Quy tắc phân tầng** | Tách biệt 5 lớp quan sát và 3 cấp độ dữ kiện | Thiết kế rõ 5 lớp quan sát; phân định dữ kiện nguồn, diễn giải và nhận định an toàn | ĐẠT |
 
 ---
 
@@ -169,8 +169,48 @@ Bản thảo `CHAPTER_2.md` đã được quét tự động bằng script bảo
 
 ---
 
-## 7. Các vấn đề và nhãn còn mở (Open Labels)
+## 7. Author Voice & Method-Boundary Review
+
+Thực hiện rà soát chuyên sâu theo yêu cầu của đợt hiệu chỉnh cuối (calibrated pass) nhằm bảo đảm Chương 2 phân định tuyệt đối ranh giới phương pháp và thể hiện dấu ấn thực tế của nhóm:
+
+### 7.1. Bảng đối chiếu 10 tiêu chí rà soát phương pháp và giọng văn tác giả
+
+| Kiểm tra | Kết quả | Ví dụ FIX / KEEP_WITH_REASON |
+|---|:---:|---|
+| **Result leakage** | ĐÃ SỬA TRIỆT ĐỂ | - **FIX (2.2.5):** Bản cũ ghi ping dưới 1 ms, packet loss 0%, bảo đảm kênh truyền vật lý. Đã sửa thành: *"Mục đích của bước kiểm tra này là xác nhận hai máy ảo thông tuyến IP với nhau trên dải 192.168.56.0/24 trước khi thực hiện các phép đo SMB... Việc xác nhận kết nối mạng ở tầng IP giúp loại bỏ sớm các lỗi do card mạng ảo hoặc cấu hình định tuyến sai, tránh làm sai lệch kết quả thăm dò dịch vụ sau đó."*<br>- **FIX (2.5.4):** Bản cũ ghi gói SYN-ACK xác nhận cổng open. Đã sửa thành: *"Quá trình kiểm tra gửi các gói tin TCP SYN tới hai cổng này và căn cứ vào gói phản hồi từ máy chủ để phân loại trạng thái cổng. Trạng thái quan sát thực tế trong lượt chạy kiểm thử được ghi nhận và phân tích chi tiết tại Chương 3."*<br>- **FIX (Bảng 2.4):** Chuyển từ bảng ghi kết quả quan sát (open/open, filtered/filtered) thành *"Ma trận thiết kế biến can thiệp và phép đo lại"* chỉ mô tả biến thay đổi, biến kiểm soát và câu hỏi cần giải quyết. |
+| **Overclaim** | ĐÃ SỬA TRIỆT ĐỂ | - **FIX (2.1.3):** Bản cũ ghi "tách rời hoàn toàn khỏi mạng nội bộ và Internet". Đã sửa chuẩn hóa theo evidence pre-demo: *"Tại trạng thái pre-demo đã khóa, hai máy ảo chỉ sử dụng card mạng Host-Only và không cấu hình chế độ NAT hay Bridged Adapter. Trạm Kali Linux không thiết lập default route hướng ra ngoài."*<br>- **FIX (Bảng 2.5):** Không dùng nhãn nhị phân VULNERABLE/NOT VULNERABLE. Chuyển thành *"Khung diễn giải bằng chứng giữa quan sát từ xa và trạng thái bản vá nội bộ"* thể hiện rõ 5 nguyên tắc phi nhị phân (UNKNOWN ≠ an toàn; UNPATCHED ≠ khai thác thành công; FILTERED ≠ đã vá; SMBv1 disabled ≠ đã vá; scanner verdict không thay thế kiểm tra nội bộ). |
+| **Mở đoạn lặp cấu trúc** | ĐÃ SỬA TRIỆT ĐỂ | - **FIX (2.6.1–2.6.4):** Trước đây các tiểu mục đều mở đầu máy móc bằng "Phép đo NSE...". Đã sửa đa dạng hóa: 2.6.1 (*"Kỹ thuật NSE-SMB-01 kiểm tra trạng thái mở..."*), 2.6.2 (*"Đối với dialect giao thức, kỹ thuật NSE-SMB-02 sử dụng..."*), 2.6.3 (*"Chính sách ký số thông điệp được kiểm tra qua kỹ thuật NSE-SMB-03..."*), 2.6.4 (*"Kỹ thuật NSE-SMB-04 gửi yêu cầu SMB..."*). |
+| **Câu tổng kết thừa** | ĐÃ SỬA TRIỆT ĐỂ | - **FIX (2.1.x, 2.4.x, 2.5.x, 2.6.x, 2.9):** Cắt bỏ toàn bộ các câu kết sáo rỗng lặp đi lặp lại ở cuối mỗi tiểu mục (ví dụ "Qua đó bảo đảm cơ sở chuẩn mực...", "Như vậy tạo thành chuỗi suy luận chặt chẽ..."). Mục 2.9 chỉ chốt gọn kiến trúc đã thiết kế và việc chuyển giao sang việc trình bày kết quả đo đạc thực tế tại Chương 3 mà không dùng khẩu hiệu. |
+| **Liên từ công thức** | ĐÃ SỬA TRIỆT ĐỂ | - **FIX:** Rà soát và loại bỏ triệt để các liên từ nối công thức máy móc (`qua đó`, `từ đó`, `như vậy`, `đồng thời`, `có thể thấy` - đều có số lượng bằng 0 trong `CHAPTER_2.md`). Thay thế bằng câu văn diễn đạt trực tiếp cơ chế tác động hoặc mối liên hệ kỹ thuật. |
+| **Khung ba ý cưỡng ép** | ĐÃ SỬA TRIỆT ĐỂ | - **FIX:** Không gượng ép chêm bộ ba từ "an toàn, tái lập và truy vết" vào các đoạn văn nếu nội dung không thực sự đòi hỏi. Viết đúng số lượng quan hệ kỹ thuật thực tế (ví dụ: mục 2.1.4 chỉ rõ 3 cơ chế kỹ thuật cụ thể là lưu nhật ký thô, gắn nhãn Evidence ID và lưu trữ kèm mã băm SHA-256). |
+| **Thuật ngữ cứng/dịch thô** | ĐÃ SỬA TRIỆT ĐỂ | - **FIX:** Thay "bản tin" bằng "gói tin TCP" / "yêu cầu SMB" / "phản hồi từ máy chủ"; thay "sự thật mặt đất" / "chân lý nội bộ" bằng "trạng thái bản vá nội bộ" / "dữ kiện gốc"; thay "kênh truyền vật lý" bằng "kết nối mạng IP trong dải Host-Only"; sau lần đầu định nghĩa "phương ngữ (dialect)", các đoạn sau dùng thống nhất thuật ngữ `dialect`. |
+| **Prose giống handbook/template** | ĐÃ SỬA TRIỆT ĐỂ | - **FIX:** Loại bỏ khuôn mẫu "Mục tiêu... Phương pháp... Kết quả mong đợi...". Thay bằng lối hành văn kỹ thuật tự nhiên, tập trung giải thích cơ chế hoạt động mạng và logic kiểm soát của từng bước đo đạc. |
+| **Lựa chọn kỹ thuật chưa có lý do** | ĐÃ BỔ SUNG ĐẦY ĐỦ | - **FIX:** Làm rõ "dấu tay riêng" và tư duy thiết kế của nhóm:<br>+ *Host-Only:* Do máy mục tiêu ở trạng thái chưa vá, lưu lượng quét chỉ phát sinh giữa Kali và Windows Server; việc tinh giản topology giúp loại trừ hoàn toàn nhiễu định tuyến bên ngoài và truy nguyên chính xác nguồn gốc gói tin.<br>+ *Snapshot:* Case B và Case C can thiệp ở hai tầng khác nhau (dịch vụ hệ thống vs mạng trung gian); việc hoàn nguyên về snapshot chung trước mỗi kịch bản giúp phân lập biến can thiệp, không để tác động của ca trước ảnh hưởng ca sau.<br>+ *Trạng thái bản vá nội bộ (local patch ground truth):* Script NSE từ xa có thể không đưa ra phán quyết (`UNKNOWN`), do đó thông tin nhị phân `srv.sys` và hotfix được duy trì như một trục tham chiếu độc lập.<br>+ *Raw output:* Ảnh chụp màn hình có thể bị cắt xén, báo cáo tóm tắt có thể mang thiên kiến diễn giải; khi xuất hiện mâu thuẫn, nhật ký thô được ưu tiên cao nhất.<br>+ *Case B vs Case C:* Case B làm hẹp bề mặt giao thức ngay trên máy chủ; Case C chặn luồng kết nối trên đường truyền mạng; hai biện pháp kiểm tra hai khía cạnh phòng thủ khác nhau. |
+| **Trải nghiệm/quan điểm tự tạo** | ĐÃ LOẠI TRỪ | - **FIX:** Không đưa vào trải nghiệm chủ quan, cảm xúc cá nhân hay đánh giá tự tạo ("chúng tôi nhận thấy", "rất tốt", "hoàn hảo"). Mọi nhận định đều bám chắc vào các mốc Evidence ID và tiêu chí kỹ thuật đã khóa. |
+
+### 7.2. Kết quả quét các cụm từ phong cách và thuật ngữ cấm
+
+| Cụm từ kiểm tra | Số lượng xuất hiện | Phân loại | Ghi chú và hướng xử lý |
+|---|:---:|:---:|---|
+| `bảo đảm` | 0 | FIX | Đã thay thế bằng các động từ kỹ thuật cụ thể (xác nhận, duy trì, kiểm soát, phân lập) |
+| `qua đó` | 0 | FIX | Đã loại bỏ, chuyển sang câu văn mô tả trực tiếp hành động |
+| `từ đó` | 0 | FIX | Đã thay bằng mệnh đề thể hiện mối quan hệ nguyên nhân - kết quả kỹ thuật |
+| `đồng thời` | 0 | FIX | Đã tách thành các câu độc lập hoặc dùng liên từ tự nhiên |
+| `như vậy` | 0 | FIX | Đã lược bỏ các câu kết đoạn sáo rỗng |
+| `có thể thấy` | 0 | FIX | Đã thay bằng phân tích trực tiếp dựa trên dữ kiện quan sát |
+| `toàn diện` | 0 | FIX | Đã chuyển thành phạm vi đo cụ thể (các lớp quan sát đã định nghĩa) |
+| `tối ưu` | 0 | FIX | Đã thay bằng lý do kỹ thuật cụ thể phù hợp với mục tiêu thực nghiệm |
+| `chuẩn mực` | 0 | FIX | Đã thay bằng việc viện dẫn tiêu chuẩn kỹ thuật (NIST, Microsoft) |
+| `chặt chẽ` | 0 | FIX | Đã thay bằng quy tắc kiểm soát và tiêu chí dừng cụ thể |
+| `sự thật mặt đất` | 0 | FIX | Đã thay bằng "trạng thái bản vá nội bộ" hoặc "dữ kiện gốc" |
+| `chân lý nội bộ` | 0 | FIX | Đã thay bằng "dữ kiện gốc từ hệ điều hành" |
+| `kênh truyền vật lý` | 0 | FIX | Đã thay bằng "kết nối mạng IP trong dải Host-Only" |
+| `nút mạng chưa xác thực` | 0 | FIX | Đã thay bằng "trạm kiểm thử chưa có quyền đăng nhập" |
+
+---
+
+## 8. Các vấn đề và nhãn còn mở (Open Labels)
 
 1. **`ISS-01` (`[CẦN DỮ LIỆU]`):** Thu hẹp vào phần dữ liệu nhật ký thô và hình ảnh thực chứng chi tiết của Chương 3 (sẽ được tích hợp và giải quyết tại nhiệm vụ X6).
 2. **`Case A Patch`:** Tiếp tục duy trì nhãn `THEORETICAL_BASELINE_ONLY` trong phạm vi nghiên cứu, không suy diễn khi chưa có canonical raw log.
-3. **Quyền quyết định cuối cùng:** Bản thảo được hoàn thiện ở trạng thái `X5_DRAFT_READY_FOR_EXTERNAL_REVIEW`, sẵn sàng để hội đồng thẩm định độc lập đánh giá trực tiếp từ remote repository.
+3. **Quyền quyết định cuối cùng:** Bản thảo được hoàn thiện ở trạng thái `AUTHOR_VOICE_REVIEW_COMPLETED` và `X5_DRAFT_READY_FOR_EXTERNAL_REVIEW`, sẵn sàng để hội đồng thẩm định độc lập đánh giá trực tiếp từ remote repository.
