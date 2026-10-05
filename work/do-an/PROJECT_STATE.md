@@ -553,3 +553,20 @@
 - Case C must show its separate transparent-bridge topology and must preserve the bounded rule-label conflict.
 - CP5-USER remains PENDING.
 - X6 / Chapter 3 remains BLOCKED until explicit user approval of product-aligned Chapter 2.
+
+
+## DEC-43 — Product-aligned Chapter 2 R1 external review
+
+- Ngày: 2026-10-06.
+- Candidate verified: `1e1cc9edc191efb2a03e6b20807fa82d32841448`.
+- Review: `work/do-an/X5_PRODUCT_ALIGNED_EXTERNAL_REVIEW_R1.md`.
+- Score: **89/100 — REVISE_MINOR_BLOCKING**.
+- Structure **7 H2 / 20 H3 remains LOCKED**.
+- Product-aligned direction: PASS.
+- Remaining blockers:
+  1. result-specific values still leak into Chapter 2 method tables;
+  2. generic `FILTERED` wording incorrectly assigns packet-blocking causality.
+- Additional micro-corrections: tighten SMBv1 inference, avoid absolute Case B wording, replace “ngưỡng an toàn”, bound isolation wording, clarify troubleshooting preservation, simplify final self-evaluative sentence.
+- X5 remains open for R2 micro-patch only.
+- CP5-USER PENDING.
+- X6 / Chapter 3 BLOCKED.
