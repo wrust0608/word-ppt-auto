@@ -391,3 +391,16 @@
 - R5 remains technical baseline.
 - X5 remains OPEN for demo-style R2 correction.
 - CP5-USER PENDING; X6 BLOCKED.
+
+
+## DEC-37 — Demo-style R2 accepted in presentation; micro technical/source patch remains
+
+- Ngày: 2026-10-05.
+- Candidate verified: `c3f6b4d65caa6ce6056ecc63cb7f6e14a9b4a3f9`.
+- External review: `X5_DEMO_STYLE_EXTERNAL_REVIEW_R2.md`.
+- Score: **84/100 — REVISE_MINOR_BLOCKING**.
+- Presentation direction: PASS.
+- Structure: **7 H2 / 20 H3 LOCKED for demo style**.
+- Remaining issues are limited to: Windows baseline overstatement, UNKNOWN/FILTERED causal wording, deterministic NSE status wording, residual internal jargon, Windows Firewall wording, Case B workload wording, and unverified FULL_TEXT research sources.
+- X5 OPEN for R3 micro-patch only.
+- CP5-USER PENDING; X6 BLOCKED.
