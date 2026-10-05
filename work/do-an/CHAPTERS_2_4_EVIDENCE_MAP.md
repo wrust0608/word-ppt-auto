@@ -1,6 +1,6 @@
 # CHAPTERS 2–4 EVIDENCE MAP — PROPOSED
 
-Trạng thái: X3_REVIEW_PENDING
+Trạng thái: `LOCKED_CANONICAL / USER_APPROVED_2026_10_05`
 
 | Section | Nhiệm vụ | Evidence/Source chính | Boundary |
 |---|---|---|---|
