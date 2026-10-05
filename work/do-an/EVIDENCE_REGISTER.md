@@ -71,3 +71,33 @@ Evidence gốc hiện nằm trong gói `ALL.zip` do người dùng cung cấp, k
 - inference boundary.
 
 Nếu agent không truy cập được `ALL.zip` hoặc byte gốc, phải dừng phần cần evidence thay vì tái tạo từ report cũ.
+
+
+## 6. ALL(1).zip normalized ingest — 2026-10-06
+
+The user supplied a newer packaged product archive `ALL(1).zip`. It was independently extracted and audited without using its folder structure as a report outline.
+
+Source provenance:
+- archive size: 28,547,199 bytes;
+- archive SHA-256: `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`;
+- total extracted files: 174;
+- experimental/evidence files inside the five evidence groups: 168;
+- root reference/DOCX files: 6.
+
+Normalized ingest files:
+- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_INGEST_ALL_2026_10_06.md`
+- `work/do-an/evidence/ALL_2026_10_06/CANONICAL_COMMANDS_FROM_ALL_ZIP.md`
+- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_USE_POLICY_ALL_ZIP.md`
+- `work/do-an/evidence/ALL_2026_10_06/CANONICAL_EVIDENCE_MAP_ALL_ZIP.md`
+
+These files supersede memory-based reconstruction of exact commands, run chronology, and canonical-vs-troubleshooting classification.
+
+Important lineage corrections locked by the ingest:
+1. `Kali_Baseline.txt` is historical pre-tool state: Nmap was not yet installed.
+2. Final pre-demo state later contains Nmap 7.99 and all required NSE scripts.
+3. `Final_PreDemo_Audit.txt` at 08:20 precedes creation of `Before Demo`; `Before_Demo_Snapshots.txt` at 08:22 is the final snapshot state.
+4. VirtualBox report prose should use 7.2.20; exact build `7.2.20r175154` is supported by later Case C/repair evidence if revision is needed.
+5. Case C pre-repair/aborted/debug artifacts remain preserved but are excluded from canonical experimental conclusions.
+6. No canonical Case A patch experiment exists in the archive.
+
+For Chapters 2–4, exact Nmap command flags must come from `CANONICAL_COMMANDS_FROM_ALL_ZIP.md`, not from earlier prose drafts.
