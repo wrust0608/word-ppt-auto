@@ -526,3 +526,30 @@
 - Chapter 2 may now be redesigned against this R3 data lock.
 - CP5-USER remains PENDING.
 - Chapter 3/X6 remains BLOCKED until explicit user approval of revised Chapter 2.
+
+
+## DEC-42 — X5 product-aligned Chapter 2 execution opened
+
+- Ngày: 2026-10-06.
+- User instructed execution after final R3 evidence-layer audit.
+- New branch created from demo-style R4 candidate:
+  `feature/x5-chapter-2-product-aligned`
+  based on `38057dc2c9c35fce593d5a784d6df8ad9465282e`.
+- Change Request:
+  `work/do-an/CHANGE_REQUEST_CR-2026-10-06-X5-PRODUCT-ALIGNED.md`.
+- Executor prompt:
+  `work/do-an/prompts/X5_REWRITE_CHAPTER_2_PRODUCT_ALIGNED.md`.
+- Chapter 2 structure remains 7 H2 / 20 H3 but is product-aligned:
+  - baseline/model;
+  - final pre-demo state;
+  - Scenario 1 exact method;
+  - Scenario 2 exact method;
+  - only two performed mitigations: SMBv1 disable + pfSense;
+  - canonical-data scope for Chapter 3;
+  - interpretation boundaries.
+- Case A removed from performed experimental design; patching remains baseline verification / Chapter 4 recommendation.
+- Scenario 1 commands must use operator lineage and must not contain prose-added `-Pn`.
+- Scenario 2 must show all four operator commands; raw-only `--privileged` is not to be rewritten as operator input.
+- Case C must show its separate transparent-bridge topology and must preserve the bounded rule-label conflict.
+- CP5-USER remains PENDING.
+- X6 / Chapter 3 remains BLOCKED until explicit user approval of product-aligned Chapter 2.
