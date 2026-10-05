@@ -7,11 +7,11 @@ Trọng tâm gồm cấu hình trạm kiểm thử Kali Linux và máy mục ti�
 ## 2.1. Phạm vi và mô hình thực nghiệm
 
 ### 2.1.1. Mục tiêu và phạm vi thực nghiệm
-Mô hình thực nghiệm được xây dựng nhằm cung cấp không gian kiểm thử an toàn, độc lập và có khả năng tái lập [1]. Mục tiêu chính gồm:
+Mô hình thực nghiệm được xây dựng nhằm cung cấp không gian kiểm thử an toàn, độc lập và có thể tái lập [1]. Mục tiêu chính gồm:
 1. **Khảo sát bề mặt dịch vụ:** Đánh giá cấu hình SMB, nhận diện cổng TCP 139, 445 và xác định các dialect SMB được hỗ trợ.
 2. **Thăm dò dấu hiệu an ninh:** Thăm dò phản ứng dịch vụ trước gói tin NSE chuẩn hóa liên quan MS17-010 mà không gây gián đoạn hệ thống.
 3. **Đo đạc hiệu quả giảm thiểu:** So sánh sự thay đổi trạng thái mạng và kết quả quét trước và sau can thiệp phòng thủ.
-4. **Bảo đảm an toàn kiểm thử:** Giới hạn đường truyền trong mạng Host-Only cô lập, loại trừ kết nối mạng ngoài.
+4. **Bảo đảm an toàn kiểm thử:** Ở trạng thái baseline, hai máy ảo chỉ sử dụng Host-Only NIC, không cấu hình NAT/Bridged và không có default route, qua đó giới hạn đường kết nối của chúng trong mạng lab.
 
 Phạm vi thực nghiệm tập trung vào các phương pháp quét phi xâm nhập, không gửi payload khai thác và chỉ ghi nhận phản ứng dịch vụ.
 
@@ -30,7 +30,7 @@ flowchart LR
 
 Hình 2.1. Sơ đồ topo kết nối mạng ở trạng thái baseline trên VirtualBox
 
-Cả hai máy ảo cùng thuộc dải mạng `192.168.56.0/24`. Mỗi máy ảo chỉ gắn một card mạng Host-Only, không dùng card NAT hay Bridged, không đặt default gateway để bảo đảm tính khép kín. Trong kịch bản mở rộng ở Mục 2.5.3, máy ảo pfSense được tích hợp theo mô hình cầu nối trong suốt (Transparent Bridge) để lọc gói mà không thay đổi địa chỉ IP hai đầu.
+Cả hai máy ảo cùng thuộc dải mạng `192.168.56.0/24`. Ở trạng thái baseline, hai máy ảo chỉ sử dụng Host-Only NIC, không cấu hình NAT/Bridged và không có default route, qua đó giới hạn đường kết nối của chúng trong mạng lab. Trong kịch bản mở rộng ở Mục 2.5.3, máy ảo pfSense được tích hợp theo mô hình cầu nối trong suốt (Transparent Bridge) để lọc gói mà không thay đổi địa chỉ IP hai đầu.
 
 ### 2.1.3. Thành phần và thông số môi trường
 Thông số phần cứng, hệ điều hành và cấu hình mạng được tổng hợp trong Bảng 2.1.
@@ -54,7 +54,7 @@ Môi trường ảo hóa thiết lập trên Oracle VM VirtualBox 7.2.20. Card m
 Môi trường thực nghiệm triển khai trên Oracle VM VirtualBox 7.2.20:
 - **Giao diện mạng:** Khởi tạo card mạng Host-Only dải `192.168.56.0/24`, địa chỉ host adapter là `192.168.56.1/24`.
 - **Vô hiệu hóa DHCP:** Tắt VirtualBox DHCP Server để ngăn cấp IP động, bảo đảm tính ổn định cho cấu hình IP tĩnh.
-- **Cách ly mạng:** Không kích hoạt card NAT hay Bridged, không đặt default gateway nhằm bảo đảm lưu lượng chỉ lưu chuyển cục bộ.
+- **Cách ly mạng:** Ở trạng thái baseline, hai máy ảo chỉ sử dụng Host-Only NIC, không cấu hình NAT/Bridged và không có default route, qua đó giới hạn đường kết nối của chúng trong mạng lab.
 
 ### 2.2.2. Chuẩn bị Kali Linux và công cụ Nmap/NSE
 Trạm kiểm thử sử dụng Kali Linux 64-bit (Kernel 6.12.33-amd64) [2]:
@@ -72,7 +72,7 @@ Trạm mục tiêu sử dụng Windows Server 2012 R2 Standard Evaluation Build 
 Hiện trạng an ninh trạm mục tiêu được xác minh qua PowerShell trước khi đo đạc:
 - **Danh mục hotfix:** Lệnh `Get-HotFix` xác nhận danh mục cập nhật nội bộ không ghi nhận KB4012213, KB4012216 hoặc bản cập nhật thay thế theo bản tin MS17-010 [4].
 - **Driver nhân:** Tệp driver `srv.sys` tại `C:\Windows\System32\drivers\srv.sys` có FileVersion String `6.3.9600.16384` và phiên bản số `6.3.9600.16421`.
-- **Đối chiếu ngưỡng an toàn:** Giá trị này thấp hơn ngưỡng phiên bản đã cập nhật tối thiểu `6.3.9600.18604` theo công bố của Microsoft [5].
+- **Đối chiếu ngưỡng phiên bản đã cập nhật:** Giá trị này thấp hơn ngưỡng phiên bản đã cập nhật tối thiểu `6.3.9600.18604` theo công bố của Microsoft [5].
 - **Trạng thái:** Hệ thống được xác định ở trạng thái chưa vá (`UNPATCHED`) để làm đối chứng ban đầu.
 
 ### 2.2.5. Snapshot và kiểm tra trước thực nghiệm
@@ -85,7 +85,7 @@ Hiện trạng an ninh trạm mục tiêu được xác minh qua PowerShell trư
 ### 2.3.1. Mục tiêu và dữ liệu cần quan sát
 Kịch bản 1 thực hiện khảo sát bề mặt dịch vụ SMB từ góc độ người đánh giá an ninh mạng:
 - **Mục tiêu:** Xác định tính sẵn sàng của máy mục tiêu, kiểm tra socket TCP 139 và 445, nhận diện phiên bản dịch vụ và các dialect SMB được hỗ trợ.
-- **Dữ liệu cần quan sát:** Phản hồi ARP, trạng thái cổng, cờ phản hồi TCP (`syn-ack`), chuỗi dịch vụ (`microsoft-ds`, `netbios-ssn`), hệ điều hành và danh sách dialect SMB.
+- **Dữ liệu cần quan sát:** Phản hồi ARP, trạng thái cổng, cờ phản hồi TCP tại trường REASON, chuỗi dịch vụ (`microsoft-ds`, `netbios-ssn`), hệ điều hành và danh sách dialect SMB.
 - **Nguyên tắc an toàn:** Toàn bộ lệnh quét chỉ thu thập thông tin cấu hình, không can thiệp sâu hay làm gián đoạn máy chủ mục tiêu.
 
 ### 2.3.2. Quy trình quét và các lệnh thực hiện
@@ -98,16 +98,16 @@ Bảng 2.2. Quy trình các bước thực hiện trong Kịch bản 1
 | **B1** | `ip addr show; ip route show` | Kiểm tra IP và định tuyến trạm kiểm thử | Địa chỉ `eth0` (`192.168.56.10/24`) và bảng định tuyến subnet |
 | **B2** | `sudo nmap -sn -PR 192.168.56.0/24 -T3 --max-retries 2 -oA b2_host_discovery` | Khảo sát các trạm hoạt động trong subnet | Danh sách IP phản hồi thăm dò ARP trong mạng |
 | **B3** | `sudo nmap -sn -PR 192.168.56.20 -T3 --max-retries 2 -oA b3_target_alive` | Xác nhận riêng tính sẵn sàng của máy mục tiêu | Trạng thái trạm `192.168.56.20` đang hoạt động (host up) |
-| **B4** | `sudo nmap -sS -p 139,445 192.168.56.20 -T3 --max-retries 2 --reason -oA b4_smb_ports` | Quét trạng thái cổng TCP 139 và 445 [6] | Trạng thái cổng và cờ phản hồi `syn-ack` tại trường `REASON` |
-| **B5** | `sudo nmap -sS -sV --version-intensity 5 -p 139,445 192.168.56.20 -T3 --max-retries 2 -oA b5_smb_version` | Nhận diện phiên bản dịch vụ và hệ điều hành | Chuỗi định danh dịch vụ, phiên bản Windows Server |
-| **B6** | `sudo nmap -sS -p 139,445 --script smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities 192.168.56.20 -T3 --max-retries 2 -oA b6_smb_nse` | Khảo sát đặc trưng an toàn giao thức SMB [7], [8] | Danh sách dialect (`NT LM 0.12`, SMBv2/v3) và cấu hình ký số |
+| **B4** | `sudo nmap -sS -p 139,445 192.168.56.20 -T3 --max-retries 2 --reason -oA b4_smb_ports` | Quét trạng thái cổng TCP 139 và 445 [6] | Trạng thái cổng và trường REASON do Nmap trả về |
+| **B5** | `sudo nmap -sS -sV --version-intensity 5 -p 139,445 192.168.56.20 -T3 --max-retries 2 -oA b5_smb_version` | Nhận diện phiên bản dịch vụ và hệ điều hành | Chuỗi service/version fingerprint do Nmap trả về |
+| **B6** | `sudo nmap -sS -p 139,445 --script smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities 192.168.56.20 -T3 --max-retries 2 -oA b6_smb_nse` | Khảo sát đặc trưng an toàn giao thức SMB [7], [8] | Danh sách dialect SMB, chính sách ký số và các capability do script trả về |
 
 Các tham số quét gồm `-sS` (quét TCP SYN nửa mở), `-sV` (nhận diện phiên bản với `--version-intensity 5`), `--reason` (hiển thị cờ trạng thái) và `-oA` (xuất đồng thời 3 định dạng tệp thô).
 
 ### 2.3.3. Giới hạn kết luận của Kịch bản 1
 Dữ liệu thu được từ Kịch bản 1 chỉ phản ánh bề mặt dịch vụ nhìn từ bên ngoài:
 1. `445 open != vulnerable`: Cổng TCP 139 và 445 mở chỉ xác nhận dịch vụ SMB đang lắng nghe kết nối, chưa đủ căn cứ khẳng định hệ thống tồn tại lỗ hổng bảo mật.
-2. `SMBv1 enabled != MS17-010 confirmed`: Việc phát hiện dialect `NT LM 0.12` (SMBv1) chỉ xác nhận giao thức này còn được hỗ trợ; nguy cơ bị khai thác MS17-010 còn phụ thuộc vào trạng thái bản vá của driver nhân `srv.sys`.
+2. `SMBv1 enabled != MS17-010 confirmed`: SMBv1 được bật chỉ cho thấy giao thức liên quan còn được hỗ trợ; trạng thái này không đủ để xác nhận MS17-010. Việc đánh giá cần đối chiếu thêm trạng thái bản vá nội bộ và kết quả kiểm tra từ xa.
 
 Kết quả Kịch bản 1 đóng vai trò định danh dịch vụ, làm tiền đề cho các phép đo chuyên sâu trong Kịch bản 2.
 
@@ -125,10 +125,10 @@ Bảng 2.3. Danh mục 4 phép đo trong Kịch bản 2
 
 | Phép đo | Lệnh thực hiện | Mục đích kỹ thuật | Thông tin cần ghi nhận |
 | :--- | :--- | :--- | :--- |
-| **NSE-SMB-01** | `sudo nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20` | Kiểm tra tính sẵn sàng của cổng SMB trước đo đạc | Trạng thái cổng TCP 139, 445 và cờ phản hồi `syn-ack` |
-| **NSE-SMB-02** | `nmap -p 445 -n -T3 --max-retries 2 --script smb-protocols -oA evidence/nse-smb/NSE-SMB-02_protocols 192.168.56.20` | Liệt kê chi tiết các dialect SMB được hỗ trợ | Sự xuất hiện của dialect `NT LM 0.12` (SMBv1) và SMB2/3 |
-| **NSE-SMB-03** | `nmap -p 445 -n -T3 --max-retries 2 --script smb2-security-mode -oA evidence/nse-smb/NSE-SMB-03_signing 192.168.56.20` | Thăm dò cấu hình ký số SMB2/SMB3 từ xa | Trạng thái `message_signing` (bật hay bắt buộc) |
-| **NSE-SMB-04** | `nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20` | Kiểm tra dấu hiệu lỗ hổng MS17-010 [9] | Phản ứng nghiệp vụ của máy chủ đối với script thăm dò |
+| **NSE-SMB-01** | `sudo nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20` | Kiểm tra tính sẵn sàng của cổng SMB trước đo đạc | Trạng thái TCP 139/445 và trường REASON |
+| **NSE-SMB-02** | `nmap -p 445 -n -T3 --max-retries 2 --script smb-protocols -oA evidence/nse-smb/NSE-SMB-02_protocols 192.168.56.20` | Liệt kê chi tiết các dialect SMB được hỗ trợ | Danh sách dialect SMB do script trả về |
+| **NSE-SMB-03** | `nmap -p 445 -n -T3 --max-retries 2 --script smb2-security-mode -oA evidence/nse-smb/NSE-SMB-03_signing 192.168.56.20` | Thăm dò cấu hình ký số SMB2/SMB3 từ xa | Chính sách ký số SMB do script trả về |
+| **NSE-SMB-04** | `nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20` | Kiểm tra dấu hiệu lỗ hổng MS17-010 [9] | Script output / verdict nếu có |
 
 Các phép đo dùng tùy chọn `-n` để bỏ qua phân giải DNS giúp tối ưu tốc độ, `-T3` bảo đảm độ ổn định và tham số `-oA` xuất toàn bộ kết quả phục vụ đối chứng.
 
@@ -156,7 +156,7 @@ Bảng 2.4. Thiết kế các kịch bản thực nghiệm và kế hoạch đo 
 Biện pháp cập nhật bản vá đóng vai trò tham chiếu kỹ thuật trong phần thảo luận tại Chương 4, không nằm trong các ca can thiệp thực nghiệm đo đạc lại của đồ án.
 
 ### 2.5.2. Vô hiệu hóa SMBv1 trên Windows Server
-Biện pháp giảm thiểu thứ nhất (Case B) can thiệp ở tầng dịch vụ hệ điều hành theo khuyến nghị của Microsoft [10], nhằm loại bỏ hoàn toàn việc hỗ trợ giao thức kế thừa SMBv1.
+Biện pháp giảm thiểu thứ nhất (Case B) can thiệp ở tầng dịch vụ hệ điều hành theo khuyến nghị của Microsoft [10], nhằm vô hiệu hóa SMBv1 trong cấu hình SMB Server.
 
 - **Thao tác can thiệp:** Trên Windows Server 2012 R2, mở PowerShell Administrator và thực thi câu lệnh:
 ```powershell
@@ -172,7 +172,7 @@ nmap -p 445 -n -T3 --max-retries 2 --script smb-protocols -oA evidence/nse-smb/N
 
 nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
 ```
-- **Ranh giới an ninh:** Thao tác can thiệp không yêu cầu khởi động lại máy và không gỡ tính năng `FS-SMB1`. Việc tắt SMBv1 chỉ loại bỏ bề mặt giao thức ở tầng dịch vụ, không thay đổi mã nhị phân driver nhân `srv.sys` (`SMBv1 disabled != PATCHED`).
+- **Ranh giới an ninh:** Trong kịch bản không thực hiện bước khởi động lại máy, tính năng `FS-SMB1` vẫn duy trì cài đặt trên hệ thống. Việc vô hiệu hóa SMBv1 trong cấu hình SMB Server không thay đổi mã nhị phân driver nhân `srv.sys` (`SMBv1 disabled != PATCHED`).
 
 ### 2.5.3. Kiểm soát SMB bằng pfSense Transparent Bridge
 Biện pháp giảm thiểu thứ hai (Case C) triển khai tường lửa chuyên dụng theo NIST SP 800-41 Rev. 1 [11]. pfSense CE 2.9.0 đóng vai trò cầu nối trong suốt (Transparent Bridge) L2, cho phép lọc gói mà không thay đổi dải IP `192.168.56.0/24` của hai trạm.
@@ -193,12 +193,11 @@ flowchart LR
 
 Hình 2.2. Sơ đồ kiến trúc mạng pfSense Transparent Bridge trong kịch bản Case C
 
-Cấu hình triển khai và kiểm thử Case C gồm:
 - **Mặt phẳng dữ liệu và quản trị:** Giao diện `em2` (nội bộ `ATTT-PFS-KALI`) và `em3` (`ATTT-PFS-WIN`) ghép thành `bridge0`. Quản trị dùng `em1` trên Host-Only thứ hai (`192.168.57.0/24`, IP `192.168.57.2`), truy cập WebGUI từ máy vật lý `192.168.57.1`.
-- **Thông số nhân:** Cấu hình `System Tunables` gồm `net.link.bridge.pfil_member = 1` (lọc trên giao diện thành viên), `net.link.bridge.pfil_bridge = 0` (tắt lọc trên bridge tổng) và `net.link.bridge.pfil_onlyip = 1` (chỉ truyền gói tin IP qua bridge).
+- **Thông số nhân:** Cấu hình `System Tunables` của pfSense gồm `net.link.bridge.pfil_member = 1` (lọc trên giao diện thành viên), `net.link.bridge.pfil_bridge = 0` (tắt lọc trên bridge tổng) và `net.link.bridge.pfil_onlyip = 1` (chỉ truyền gói tin IP qua bridge).
 - **Luật tường lửa:** Cấu hình luật chặn (`Block`) lưu lượng IPv4 TCP từ nguồn `192.168.56.10` tới đích `192.168.56.20` trên cổng 139, 445 tại giao diện `em2`, đồng thời bật ghi log (`Log packets`).
 - **Kế hoạch đối chiếu:** Thực hiện lại phép quét cổng (tương đương NSE-SMB-01) và kịch bản MS17-010 (tương đương NSE-SMB-04) từ Kali Linux để đối chiếu khả năng tiếp cận dịch vụ và kiểm tra log tường lửa.
-- **Ranh giới an ninh:** Gói tin bị chặn trên đường truyền phản ánh dịch vụ bị cô lập từ xa, không chứng minh máy chủ nội bộ đã được vá lỗ hổng (`FILTERED != PATCHED`).
+- **Ranh giới an ninh:** Khả năng tiếp cận dịch vụ bị kiểm soát qua tường lửa không chứng minh máy chủ nội bộ đã được vá lỗ hổng (`FILTERED != PATCHED`).
 
 ## 2.6. Dữ liệu thực nghiệm và nguyên tắc sử dụng
 
@@ -212,14 +211,14 @@ Cấu hình triển khai và kiểm thử Case C gồm:
 ### 2.6.2. Phạm vi dữ liệu dùng cho đánh giá
 Việc đánh giá kết quả thực nghiệm tại Chương 3 tuân thủ nguyên tắc chọn lọc khoa học:
 - **Dữ liệu được chấp nhận:** Chỉ sử dụng bộ dữ liệu thực nghiệm chính thức, hoàn chỉnh thu được từ các phiên chạy theo kịch bản chuẩn hóa (trạng thái baseline, Kịch bản 1, Kịch bản 2, các phép đo lại của Case B và cấu hình kèm kết quả Case C).
-- **Dữ liệu bị loại trừ:** Loại trừ các dữ liệu từ các lần chạy thử nghiệm môi trường sơ bộ, các phiên kiểm tra phục hồi (HostRepair) hoặc các bản ghi bị gián đoạn do lỗi thao tác nhằm bảo đảm tính khách quan và nhất quán của kết quả đánh giá.
+- **Dữ liệu phục vụ phân tích và đối soát:** Dữ liệu từ các lần chạy thử nghiệm môi trường sơ bộ, các phiên kiểm tra phục hồi (HostRepair) hoặc các bản ghi gián đoạn vẫn được lưu trữ đầy đủ để phục vụ truy vết kỹ thuật. Nhóm dữ liệu này không được dùng làm tập kết quả chính nhằm bảo đảm tính khách quan và nhất quán của kết quả đánh giá.
 
 ### 2.6.3. Nguyên tắc diễn giải kết quả
 Quá trình phân tích dữ liệu thực nghiệm tuân thủ 5 ranh giới suy luận an toàn cốt lõi:
 1. `445 open != vulnerable`: Cổng mở chỉ khẳng định socket đang lắng nghe, chưa đủ kết luận hệ thống có lỗ hổng.
-2. `SMBv1 enabled != MS17-010 confirmed`: Bật SMBv1 chỉ là điều kiện giao thức cần; nguy cơ phụ thuộc vào trạng thái bản vá của driver `srv.sys`.
+2. `SMBv1 enabled != MS17-010 confirmed`: SMBv1 được bật chỉ cho thấy giao thức liên quan còn được hỗ trợ; trạng thái này không đủ để xác nhận MS17-010. Việc đánh giá cần đối chiếu thêm trạng thái bản vá nội bộ và kết quả kiểm tra từ xa.
 3. `UNKNOWN != SAFE`: Khi script thăm dò không trả về kết luận rõ ràng, trạng thái được ghi nhận là `UNKNOWN / NO USABLE SCRIPT RESULT`, không được suy diễn thành an toàn.
-4. `FILTERED != PATCHED`: Cổng ở trạng thái `FILTERED` cho biết gói tin bị chặn trên đường truyền, không chứng minh máy chủ đã được vá lỗi.
+4. `FILTERED != PATCHED`: FILTERED cho biết Nmap không nhận đủ phản hồi để phân loại cổng là open hay closed; trạng thái này không chứng minh máy chủ đã được vá.
 5. `SMBv1 disabled != PATCHED`: Tắt SMBv1 chỉ loại bỏ bề mặt giao thức ở tầng dịch vụ, không thay đổi mã nhị phân driver nhân.
 
 Đồng thời, đồ án không so sánh các mốc thời gian hiển thị giữa các máy ảo như một đồng hồ thống nhất, tránh suy diễn sai lệch về trình tự thời gian.
@@ -230,4 +229,4 @@ Chương 2 đã hoàn thành thiết kế mô hình thực nghiệm và chuẩn 
 
 Thông số trạm kiểm thử Kali Linux và máy mục tiêu Windows Server 2012 R2 đã được chuẩn hóa. Đồ án xây dựng quy trình 6 bước cho Kịch bản 1, 4 phép đo cho Kịch bản 2, cùng phương pháp kiểm thử đối chiếu cho hai giải pháp giảm thiểu gồm vô hiệu hóa SMBv1 và tường lửa pfSense Transparent Bridge.
 
-Hệ thống dữ liệu đa định dạng cùng 5 nguyên tắc diễn giải an toàn tạo lập nền tảng khoa học vững chắc, làm cơ sở để Chương 3 trình bày số liệu đo đạc chi tiết, phân tích so sánh và đánh giá khách quan hiệu quả phòng thủ.
+Các tệp kết quả và nguyên tắc diễn giải trên được dùng làm cơ sở phân tích tại Chương 3.
