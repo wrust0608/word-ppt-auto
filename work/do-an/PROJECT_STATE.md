@@ -344,3 +344,19 @@
 - X5 remains OPEN for final editorial/technical micro-edit only.
 - CP5-TECH not yet locked because project threshold for lock is >=95.
 - CP5-USER PENDING; X6 BLOCKED.
+
+
+## DEC-34 — X5 R5 passes final external review; CP5-TECH locked
+
+- Ngày: 2026-10-05.
+- Candidate commit verified: `97faf32564191ab0b590bf02e287c6c4935cbbdc`.
+- External review artifact: `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R5.md`.
+- Final score: **96/100**.
+- Blockers: **0**.
+- Structure: **8 H2 / 27 H3 LOCKED**.
+- `CP5-TECH = PASS`.
+- Candidate status: `CHAPTER_2_LOCKED_CANDIDATE_FOR_USER_REVIEW`.
+- Non-blocking publication notes retained for G5/G6 only; X5 is not reopened for them.
+- `CP5-USER = PENDING`: người dùng phải đọc trực tiếp và phê duyệt Chương 2.
+- `X6 = BLOCKED` cho tới khi CP5-USER PASS.
+- Không merge structural branch vào main trước user approval/reconciliation step.
