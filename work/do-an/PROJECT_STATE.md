@@ -293,3 +293,25 @@
 - User-approved structure vẫn LOCKED và không bị rollback.
 - X5 tiếp tục REOPENED cho corrective rewrite trong repo thật.
 - CP5-USER PENDING; X6 BLOCKED.
+
+
+## DEC-31 — X5 structural rewrite R2 remote-verified; blocking technical patch required
+
+- Ngày: 2026-10-05.
+- Remote candidate commit verified: `ac0ee9e1750e1cbac36ae21fbd22c15e9f9c3c0e`.
+- Review artifact: `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R2.md`.
+- Score: **84/100 — REVISE_BLOCKING**.
+- Structure 8 H2 / 27 H3 remains LOCKED; no structural rewrite needed.
+- Major remaining corrections:
+  - Case C pfSense tunables canonical: pfil_member=1, pfil_bridge=0, pfil_onlyip=1;
+  - separate Scenario1 B2 subnet discovery from B3 target verification;
+  - remove -sV/OS conflation and observed-result leakage;
+  - remove invalid S1-RAW-06 ID;
+  - make snapshot restore wording methodological, not undocumented event claim;
+  - tighten generic FILTERED semantics;
+  - simplify/correct Case A root-cause sourcing;
+  - remove several baseline/evaluation overclaims.
+- Source S032 (Microsoft Support, MS17-010 installation verification) independently verified and added to SOURCE_LEDGER.
+- X5 remains OPEN for surgical patch only.
+- CP5-USER PENDING.
+- X6 BLOCKED.
