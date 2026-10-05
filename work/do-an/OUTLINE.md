@@ -1,26 +1,215 @@
 # Đề cương lập luận
 
+Trạng thái: `LOCKED_CANONICAL_2026_10_05`
+
 ## Ngân sách toàn văn
 
-- Tổng số từ dự kiến: 18,000 - 24,000 từ (tương đương 50 - 70 trang A4 theo chuẩn HUIT).
-- Giới hạn cơ sở đào tạo: Đồ án chuyên ngành từ 40 - 80 trang.
-- Phần không tính vào giới hạn: Trang bìa, phụ bìa, nhiệm vụ đề tài, lời cam đoan, mục lục, danh mục từ viết tắt, danh mục bảng/hình, tài liệu tham khảo, phụ lục.
+- Mở đầu: 1.200–1.500 từ.
+- Chương 1: khoảng 7.000–8.500 từ; ưu tiên tái sử dụng bản đã có sau X4 review.
+- Chương 2: 3.500–4.500 từ.
+- Chương 3: 4.500–6.000 từ.
+- Chương 4: 3.500–4.500 từ.
+- Kết luận/kiến nghị: 800–1.200 từ.
+- Tổng dự kiến: khoảng 20.500–26.200 từ trước lượt anti-rambling.
 
-## Cấu trúc chi tiết và phân bổ lập luận
+## Vai trò từng phần
 
-| Phần / Chương | Câu hỏi cần trả lời | Kết luận cần đạt | Claim IDs | Nguồn & Bằng chứng | Ngân sách từ | Ràng buộc loại trừ |
-|---|---|---|---|---|---|---|
-| **Mở đầu** | Vì sao cần nghiên cứu kiểm thử và phòng thủ SMB trên Windows? Mục tiêu, phạm vi và nguyên tắc an toàn là gì? | Xác lập tính cấp thiết của đề tài, 4 mục tiêu kỹ thuật, phạm vi lab cô lập và cam kết đạo đức an ninh mạng | Nền tảng | Đề cương chi tiết HUIT, [7], [10] | 1,200 - 1,500 từ | Không đưa kết quả thực nghiệm vào mở đầu |
-| **Chương 1: Cơ sở lý thuyết và công cụ kiểm thử SMB** | SMB hoạt động ra sao? MS17-010 phát sinh từ đâu? Công cụ và tiêu chí nhận diện/xác minh gồm những gì? | Hệ thống hóa toàn diện kiến trúc SMB, phân tích cơ chế lỗi nhân `srv.sys` của MS17-010, xác định rõ 4 mức tiêu chí nhận diện | C001, C002, C003 | S001, S002, S003, S004, S005, S006, S007, S008, S009, S011 | 7,000 - 8,500 từ | Không viết lan man lịch sử Windows chung |
-| **Chương 2: Thiết kế và triển khai mô hình thực nghiệm** | Môi trường lab cô lập cần được thiết kế và cấu hình như thế nào để đảm bảo tính an toàn, khôi phục được và chuẩn hóa kiểm thử? | Thiết lập kiến trúc mạng ảo Host-only cô lập, bảng IP tĩnh, cơ chế snapshot máy ảo và bộ kịch bản kiểm thử có kiểm soát | C004 | S010, S012, Đề cương chi tiết | 3,000 - 3,500 từ | Không cấu hình card mạng Bridged ra Internet |
-| **Chương 3: Thực nghiệm kiểm thử SMB** | Quy trình khảo sát, quét NSE và xác minh mức độ tác động của MS17-010 được thực hiện theo những bước chuẩn hóa nào? | Chuẩn hóa phương pháp luận kiểm thử, phân định rõ giữa banner grab và xác minh lỗ hổng thực tế | C003, C004 | S003, S004, S005, S012 | 2,500 - 3,500 từ | **Tránh demo và số liệu demo thực tế theo chỉ thị của tác giả** (gán nhãn `[CẦN DỮ LIỆU]`) |
-| **Chương 4: Đánh giá kết quả, phân tích rủi ro và khuyến nghị** | Tác động của MS17-010 tới CIA là gì? Các biện pháp phòng thủ nào triệt để nhất và rủi ro tương thích cần quản lý ra sao? | Thiết lập ma trận trước-sau phòng thủ, xây dựng lộ trình hardening đa tầng (patch, disable SMBv1, firewall, segmentation) | C005, C006 | S001, S002, S011 | 3,500 - 4,500 từ | Không đưa khuyến nghị mơ hồ, chung chung |
-| **Kết luận và kiến nghị** | Đề tài đã đạt được những gì so với đề cương? Đâu là giới hạn và hướng phát triển? | Tổng kết các đóng góp lý thuyết và phương pháp luận; chỉ rõ hạn chế thiếu số liệu lab thực tế và đề xuất hướng mở rộng | Tổng kết | Đề cương HUIT | 800 - 1,200 từ | Không kết luận vượt quá phạm vi dữ liệu |
+| Phần | Câu hỏi chính | Kết luận cần đạt | Ràng buộc |
+|---|---|---|---|
+| Mở đầu | Vì sao nghiên cứu, mục tiêu/phạm vi/phương pháp là gì? | Đặt đúng vấn đề và giới hạn | Không đưa kết quả chi tiết |
+| Chương 1 | SMB/MS17-010/công cụ hoạt động ra sao? | Nền lý thuyết đủ cho experiment | Không lặp Ch2–4 |
+| Chương 2 | Lab/phương pháp được thiết kế thế nào? | Mô hình canonical an toàn, tái lập, truy vết | Không kể chi tiết kết quả |
+| Chương 3 | Thực nghiệm cho thấy gì? | AUTHOR_DATA canonical, 100% trace | Không suy diễn vượt evidence |
+| Chương 4 | Kết quả có ý nghĩa gì? | So sánh mitigation, risk, limitations, recommendation | Không đưa evidence mới |
+| Kết luận | Đã trả lời RQ/O đến đâu? | Tổng hợp đúng mức | Không tạo claim mới |
 
-## Mạch chuyển chương (Chapter Transitions)
+## Mạch chuyển chương
 
-1. **Từ Mở đầu sang Chương 1**: Sau khi xác lập tính cấp thiết và phạm vi nghiên cứu, Chương 1 xây dựng nền tảng lý thuyết vững chắc về giao thức SMB và giải phẫu chuyên sâu cơ chế lỗi bộ nhớ mức nhân của MS17-010.
-2. **Từ Chương 1 sang Chương 2**: Khi cơ chế lỗ hổng và tiêu chí lý thuyết đã sáng tỏ, Chương 2 hiện thực hóa bằng mô hình kiến trúc lab mạng cô lập và kịch bản kiểm thử an toàn.
-3. **Từ Chương 2 sang Chương 3**: Dựa trên hạ tầng lab và kịch bản đã duyệt, Chương 3 chuẩn hóa quy trình thực nghiệm từ quét nhận diện cổng đến phương pháp xác minh lỗ hổng có kiểm soát.
-4. **Từ Chương 3 sang Chương 4**: Từ các cấp độ phát hiện trong thực nghiệm, Chương 4 nâng tầm lên phân tích rủi ro hệ thống và đề xuất chiến lược phòng thủ đa tầng bền vững.
-5. **Từ Chương 4 sang Kết luận**: Đóng gói toàn bộ công trình, đánh giá mức độ hoàn thành so với CLO của đề cương HUIT và vạch ra định hướng nghiên cứu tiếp theo.
+1. Chương 1 cung cấp thuật ngữ và cơ chế cần thiết để hiểu phương pháp đo.
+2. Chương 2 chuyển nền lý thuyết thành lab, kịch bản, tiêu chí và evidence model.
+3. Chương 3 trình bày dữ liệu canonical theo Scenario 1/2 và Case B/C.
+4. Chương 4 diễn giải sự khác biệt giữa reachability, protocol surface, remote signal, patch state và mitigation layers.
+5. Kết luận đóng RQ/O và công khai giới hạn.
+
+---
+
+Trạng thái: `LOCKED_CANONICAL / USER_APPROVED_2026_10_05`
+
+# CHƯƠNG 2. THIẾT KẾ VÀ TRIỂN KHAI MÔ HÌNH THỰC NGHIỆM
+
+## 2.1. Yêu cầu và nguyên tắc thiết kế
+### 2.1.1. Mục tiêu của môi trường thực nghiệm
+### 2.1.2. Phạm vi, nguyên tắc an toàn và giới hạn đạo đức
+### 2.1.3. Nguyên tắc cô lập mạng và khả năng khôi phục
+### 2.1.4. Nguyên tắc thu thập, truy vết và bảo toàn bằng chứng
+
+## 2.2. Kiến trúc môi trường thực nghiệm
+### 2.2.1. Nền tảng Oracle VirtualBox
+### 2.2.2. Máy kiểm thử Kali Linux
+### 2.2.3. Máy mục tiêu Windows Server 2012 R2
+### 2.2.4. Mạng Host-Only và bảng địa chỉ IP
+### 2.2.5. Kiểm tra kết nối trong phạm vi lab
+
+## 2.3. Chuẩn bị trạng thái baseline
+### 2.3.1. Trạng thái hệ điều hành và dịch vụ SMB
+### 2.3.2. Trạng thái SMBv1/SMB2 và TCP 139/445
+### 2.3.3. Cấu hình Windows Firewall phục vụ phép đo
+### 2.3.4. Xác định trạng thái bản vá MS17-010 và srv.sys
+### 2.3.5. Kiểm tra Nmap và NSE script trên Kali
+### 2.3.6. Snapshot Before Demo và phương án phục hồi
+
+## 2.4. Phương pháp kiểm thử và mô hình bằng chứng
+### 2.4.1. Các lớp quan sát: reachability, service, protocol, remote signal, local ground truth
+### 2.4.2. Quy tắc phân biệt dữ kiện, diễn giải và kết luận
+### 2.4.3. Định dạng raw output và Evidence ID
+### 2.4.4. Quy tắc xử lý UNKNOWN, NO OUTPUT và FILTERED
+
+## 2.5. Thiết kế Kịch bản 1 — Khảo sát dịch vụ SMB bằng Nmap
+### 2.5.1. Mục tiêu và điều kiện bắt đầu
+### 2.5.2. Phát hiện máy trong mạng lab
+### 2.5.3. Xác nhận máy mục tiêu
+### 2.5.4. Kiểm tra TCP 139/445
+### 2.5.5. Nhận diện dịch vụ và phiên bản
+### 2.5.6. Khảo sát SMB bằng NSE
+### 2.5.7. Tiêu chí dừng và bằng chứng cần thu
+
+## 2.6. Thiết kế Kịch bản 2 — Đánh giá cấu hình SMB và MS17-010 bằng NSE
+### 2.6.1. NSE-SMB-01 — trạng thái cổng
+### 2.6.2. NSE-SMB-02 — SMB dialects
+### 2.6.3. NSE-SMB-03 — SMB signing
+### 2.6.4. NSE-SMB-04 — dấu hiệu MS17-010
+### 2.6.5. Đối chiếu remote observation với local patch ground truth
+### 2.6.6. Tiêu chí kết luận và giới hạn suy diễn
+
+## 2.7. Thiết kế kiểm thử biện pháp giảm thiểu
+### 2.7.1. Nguyên tắc differential testing và phục hồi baseline
+### 2.7.2. Case B — Vô hiệu hóa SMBv1
+### 2.7.3. Case C — Giới hạn TCP 139/445 bằng pfSense Transparent Bridge
+### 2.7.4. Vai trò của cập nhật bản vá trong mô hình phòng thủ
+### 2.7.5. Ma trận biến can thiệp và phép đo lại
+
+## 2.8. Tiêu chí đánh giá kết quả
+### 2.8.1. Tiêu chí reachability
+### 2.8.2. Tiêu chí protocol surface
+### 2.8.3. Tiêu chí remote vulnerability signal
+### 2.8.4. Tiêu chí patch ground truth
+### 2.8.5. Tiêu chí hiệu quả và giới hạn của mitigation
+
+## 2.9. Tổng kết Chương 2
+
+# CHƯƠNG 3. THỰC NGHIỆM KIỂM THỬ DỊCH VỤ SMB VÀ MS17-010
+
+## 3.1. Xác nhận trạng thái trước thực nghiệm
+### 3.1.1. Trạng thái Kali Linux và công cụ
+### 3.1.2. Trạng thái Windows Server 2012 R2
+### 3.1.3. Trạng thái mạng, SMB và firewall
+### 3.1.4. Snapshot và patch baseline
+
+## 3.2. Kết quả Kịch bản 1 — Khảo sát dịch vụ SMB
+### 3.2.1. Phát hiện máy trong mạng lab
+### 3.2.2. Xác nhận máy mục tiêu
+### 3.2.3. Trạng thái TCP 139/445
+### 3.2.4. Nhận diện dịch vụ SMB
+### 3.2.5. SMB dialects và các thông tin NSE quan sát được
+### 3.2.6. Tổng hợp Kịch bản 1 và ranh giới kết luận
+
+## 3.3. Kết quả Kịch bản 2 — Đánh giá cấu hình SMB và MS17-010
+### 3.3.1. NSE-SMB-01 — TCP 139/445
+### 3.3.2. NSE-SMB-02 — SMB dialects
+### 3.3.3. NSE-SMB-03 — SMB signing
+### 3.3.4. NSE-SMB-04 — kết quả kiểm tra MS17-010
+### 3.3.5. Phân loại remote verdict UNKNOWN
+
+## 3.4. Đối chiếu với trạng thái bản vá cục bộ
+### 3.4.1. Phiên bản srv.sys và hotfix baseline
+### 3.4.2. Xác định trạng thái UNPATCHED
+### 3.4.3. Quan hệ giữa remote verdict và local ground truth
+
+## 3.5. Case B — Thực nghiệm vô hiệu hóa SMBv1
+### 3.5.1. Trạng thái trước can thiệp
+### 3.5.2. Thao tác vô hiệu hóa SMBv1
+### 3.5.3. Trạng thái cục bộ sau can thiệp
+### 3.5.4. Retest SMB dialects
+### 3.5.5. Retest MS17-010
+### 3.5.6. Kết quả differential test
+
+## 3.6. Case C — Thực nghiệm giới hạn SMB bằng pfSense
+### 3.6.1. Mô hình pfSense Transparent Bridge
+### 3.6.2. Baseline pass rule
+### 3.6.3. Thiết lập block TCP 139/445
+### 3.6.4. Retest trạng thái cổng từ Kali
+### 3.6.5. Đối chiếu firewall log
+### 3.6.6. Retest MS17-010 qua đường bị lọc
+### 3.6.7. Xác nhận trạng thái Windows phía sau không đổi
+
+## 3.7. Tổng hợp kết quả thực nghiệm
+### 3.7.1. Ma trận Baseline — Case B — Case C
+### 3.7.2. Các kết luận được phép rút ra
+### 3.7.3. Các kết luận không được phép suy diễn
+### 3.7.4. Các dữ liệu chưa có hoặc không thuộc canonical run
+
+## 3.8. Tổng kết Chương 3
+
+# CHƯƠNG 4. ĐÁNH GIÁ KẾT QUẢ, RỦI RO VÀ KHUYẾN NGHỊ
+
+## 4.1. Khung đánh giá kết quả
+### 4.1.1. Reachability
+### 4.1.2. Protocol surface
+### 4.1.3. Remote vulnerability signal
+### 4.1.4. Local patch ground truth
+### 4.1.5. Mitigation layer
+
+## 4.2. Đánh giá trạng thái baseline
+### 4.2.1. Ý nghĩa của TCP 139/445 open
+### 4.2.2. Ý nghĩa của SMBv1 được chấp nhận
+### 4.2.3. Ý nghĩa của remote verdict UNKNOWN
+### 4.2.4. Ý nghĩa của local state UNPATCHED
+
+## 4.3. Đánh giá Case B — Vô hiệu hóa SMBv1
+### 4.3.1. Thay đổi trên bề mặt giao thức
+### 4.3.2. Những gì không thay đổi trên host
+### 4.3.3. Hiệu quả và giới hạn của biện pháp
+### 4.3.4. Ảnh hưởng tương thích cần xem xét
+
+## 4.4. Đánh giá Case C — Kiểm soát truy cập bằng pfSense
+### 4.4.1. Thay đổi về khả năng tiếp cận từ Kali
+### 4.4.2. Quy thuộc kết quả cho firewall rule
+### 4.4.3. Những gì không thay đổi trên Windows target
+### 4.4.4. Hiệu quả và giới hạn của biện pháp
+
+## 4.5. Vai trò của cập nhật bản vá
+### 4.5.1. Patching khác với disable SMBv1 và network filtering
+### 4.5.2. Vị trí của patching trong defense-in-depth
+### 4.5.3. Giới hạn thực nghiệm: chưa có Case A canonical
+
+## 4.6. So sánh các lớp phòng thủ
+### 4.6.1. Patching
+### 4.6.2. Protocol hardening
+### 4.6.3. Network access control
+### 4.6.4. Ma trận defense-in-depth
+
+## 4.7. Đánh giá rủi ro và rủi ro còn lại
+### 4.7.1. Tác động tới tính bí mật
+### 4.7.2. Tác động tới tính toàn vẹn
+### 4.7.3. Tác động tới tính sẵn sàng
+### 4.7.4. Residual risk sau từng lớp kiểm soát
+
+## 4.8. Giới hạn và threats to validity
+### 4.8.1. Một Windows target và một nguồn kiểm thử
+### 4.8.2. Môi trường ảo hóa
+### 4.8.3. Không thực hiện khai thác RCE canonical
+### 4.8.4. Remote NSE verdict UNKNOWN
+### 4.8.5. Không có Case A patch canonical
+### 4.8.6. Không có benchmark hiệu năng
+
+## 4.9. Khuyến nghị triển khai
+### 4.9.1. Cập nhật bản vá bảo mật
+### 4.9.2. Loại bỏ hoặc vô hiệu hóa SMBv1 khi không cần thiết
+### 4.9.3. Giới hạn TCP 139/445 theo nhu cầu nghiệp vụ
+### 4.9.4. Phân đoạn mạng và kiểm soát truy cập
+### 4.9.5. Giám sát và kiểm tra định kỳ
+### 4.9.6. Kiểm thử lại sau thay đổi
+
+## 4.10. Hướng phát triển
+## 4.11. Tổng kết Chương 4
+
