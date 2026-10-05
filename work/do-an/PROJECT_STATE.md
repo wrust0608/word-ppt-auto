@@ -246,3 +246,19 @@
 - Không được bắt đầu X6/Chương 3 khi `CP5-USER` chưa PASS.
 - Nếu người dùng yêu cầu chỉnh sau khi đọc, reopen X5 qua change-control nhưng chỉ sửa phạm vi được yêu cầu; không tự mở rộng rewrite.
 - Sau CP5-TECH, nhiệm vụ của reviewer là dừng và trình bản Chương 2 cùng QA summary cho người dùng, không tự động phát prompt X6.
+
+
+## DEC-28 — CP5-TECH PASS, chờ người dùng đọc trực tiếp Chương 2
+
+- Ngày: 2026-10-05.
+- External Reviewer đã kiểm tra trực tiếp remote candidate trên branch `feature/x5-chapter-2-canonical`.
+- Candidate commit: `ba0cd980a0075427959567d4793dc1e35b95773d`.
+- Review artifact: `X5_EXTERNAL_REVIEW_2026_10_05.md`.
+- Điểm technical/academic review: **96/100**.
+- Blocker: **0**.
+- Trạng thái Chương 2: `CHAPTER_2_LOCKED_CANDIDATE_FOR_USER_REVIEW`.
+- `CP5-TECH = PASS`.
+- `CP5-USER = PENDING`.
+- `X6 = BLOCKED`.
+- Không được bắt đầu Chương 3 trước quyết định duyệt trực tiếp của người dùng.
+- Candidate branch hiện diverged so với `main` do `main` đã chứa governance DEC-27; sau CP5-USER cần reconcile/cherry-pick có kiểm soát, không merge thô làm mất quyết định governance.
