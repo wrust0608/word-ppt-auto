@@ -8,10 +8,10 @@ Nội dung trọng tâm gồm cấu hình trạm kiểm thử Kali Linux và tr�
 
 ### 2.1.1. Mục tiêu của mô hình
 Mô hình thực nghiệm được xây dựng nhằm cung cấp không gian kiểm thử an toàn, độc lập và có thể tái lập [1]. Mục tiêu chính gồm:
-1. **Khảo sát bề mặt dịch vụ:** Đánh giá cấu hình SMB, nhận diện trạng thái cổng TCP 139, 445 và phân loại phiên bản giao thức đang chạy.
+1. **Khảo sát bề mặt dịch vụ:** Đánh giá cấu hình SMB, nhận diện trạng thái cổng TCP 139, 445 và xác định các dialect SMB được hỗ trợ.
 2. **Thăm dò dấu hiệu an ninh:** Kiểm tra chỉ dấu liên quan đến lỗ hổng MS17-010 qua các gói tin thăm dò chuẩn hóa của NSE mà không gây gián đoạn hệ thống.
 3. **Đo đạc hiệu quả giảm thiểu:** So sánh sự thay đổi trạng thái mạng và kết quả quét trước và sau can thiệp phòng thủ.
-4. **Bảo đảm an toàn kiểm thử:** Giới hạn lưu lượng trong môi trường lab nội bộ, ngăn lưu lượng thoát ra mạng bên ngoài.
+4. **Bảo đảm an toàn kiểm thử:** Giới hạn đường kết nối của hai máy ảo trong mạng Host-Only theo cấu hình lab.
 
 ### 2.1.2. Sơ đồ và thành phần của mô hình
 Mô hình gồm trạm kiểm thử Kali Linux và trạm mục tiêu Windows Server 2012 R2, kết nối trực tiếp qua mạng Host-Only ảo hóa.
@@ -21,7 +21,7 @@ flowchart LR
     subgraph HostOnlyNetwork [Mạng Host-Only cô lập: 192.168.56.0/24]
         direction LR
         Attacker["Trạm kiểm thử (Kali Linux)<br/>192.168.56.10/24<br/>Kernel 6.12.33-amd64"]
-        Target["Trạm mục tiêu (Windows Server 2012 R2)<br/>192.168.56.20/24<br/>Build 9600 (RTM)"]
+        Target["Trạm mục tiêu (Windows Server 2012 R2)<br/>192.168.56.20/24<br/>Build 9600"]
         Attacker <-->|"Lưu lượng TCP 139, 445<br/>(Giới hạn nội bộ)"| Target
     end
 ```
@@ -38,7 +38,7 @@ Bảng 2.1. Thông số kỹ thuật của các máy ảo trong môi trường t
 | Thông số | Trạm kiểm thử (Kali Linux) | Trạm mục tiêu (Windows Server) | Ý nghĩa thiết kế |
 | :--- | :--- | :--- | :--- |
 | **Hệ điều hành** | Kali Linux (Kernel 6.12.33-amd64) [2] | Windows Server 2012 R2 Eval | Môi trường chuẩn hóa |
-| **Bản dựng** | Kali Rolling (Nmap 7.99) | Build 9600 (RTM nguyên bản) | Tái hiện máy chưa vá |
+| **Bản dựng** | Kali Rolling (Nmap 7.99) | Build 9600 | Phiên bản hệ điều hành của máy mục tiêu |
 | **Phần cứng ảo** | 2 vCPU, 4096 MB RAM | 2 vCPU, 4096 MB RAM | Đồng nhất tài nguyên |
 | **IP / Subnet** | `192.168.56.10/24` (Tĩnh) | `192.168.56.20/24` (Tĩnh) | Cố định địa chỉ mạng |
 | **Giao diện mạng**| 1 Host-Only NIC (`eth0`) | 1 Host-Only NIC (`Ethernet`) | Cách ly, không Internet |
@@ -64,13 +64,13 @@ Trạm kiểm thử sử dụng Kali Linux 64-bit (Kernel 6.12.33-amd64) [2]:
 ### 2.2.3. Cấu hình máy Windows Server 2012 R2
 Trạm mục tiêu sử dụng Windows Server 2012 R2 Standard Evaluation 64-bit:
 - **Cấu hình mạng:** Gán địa chỉ tĩnh `192.168.56.20/24` trên giao diện `Ethernet`.
-- **Trạng thái hệ thống:** Giữ nguyên bản dựng Build 9600 (RTM), không cài đặt bất kỳ gói rollup nào để làm hệ thống đối chứng trước khi áp dụng các biện pháp an ninh.
+- **Trạng thái hệ thống:** Sử dụng bản dựng Windows Server 2012 R2 Standard Evaluation Build 9600. Hệ thống không ghi nhận KB4012213, KB4012216 hoặc bản cập nhật thay thế tương ứng theo mapping MS17-010, qua đó xác định trạng thái bản vá nội bộ là UNPATCHED để làm đối chứng trước khi áp dụng các biện pháp an ninh.
 
 ### 2.2.4. Cấu hình SMB và Windows Firewall
 Dịch vụ chia sẻ tệp và tường lửa trên trạm mục tiêu được cấu hình qua PowerShell:
 - **Kích hoạt dịch vụ:** Dịch vụ SMB (`LanmanServer`) đặt chế độ khởi động tự động (`Automatic`) và đang chạy (`Running`). Dịch vụ lắng nghe trên TCP 445 (Direct-hosted SMB) và TCP 139 (NetBIOS Session Service qua TCP/IP) [3].
 - **Trạng thái giao thức:** Cả SMBv1 và SMBv2 đều được bật (`EnableSMB1Protocol = True`, `EnableSMB2Protocol = True`), tính năng hệ thống `FS-SMB1` được cài đặt đầy đủ.
-- **Tường lửa:** Windows Firewall bật (`Enabled`), tạo luật Inbound cho phép TCP 139 và TCP 445 từ `192.168.56.10`, ngăn chặn truy cập ngoài phạm vi kiểm thử.
+- **Tường lửa:** Windows Firewall bật (`Enabled`), giữ rule cho phép TCP 139 và TCP 445 từ địa chỉ `192.168.56.10` phục vụ lab; nhóm File and Printer Sharing mặc định không được mở toàn bộ.
 
 ### 2.2.5. Kiểm tra bản vá MS17-010 và tạo snapshot
 Trước khi thực hiện demo, hiện trạng an ninh trạm mục tiêu được kiểm tra nghiêm ngặt:
@@ -83,10 +83,10 @@ Trước khi thực hiện demo, hiện trạng an ninh trạm mục tiêu đư�
 ### 2.3.1. Mục tiêu và phạm vi
 Kịch bản Demo 1 tập trung khảo sát bề mặt dịch vụ SMB từ góc độ người đánh giá an ninh:
 - **Mục tiêu:** Xác định trạng thái socket trên cổng TCP 139 và TCP 445, nhận diện phiên bản dịch vụ và các dialect SMB được máy chủ hỗ trợ.
-- **Phạm vi:** Giới hạn trong các kỹ thuật quét phi xâm nhập, không gửi payload khai thác, dừng lại sau khi lưu kết quả và không gây gián đoạn máy mục tiêu.
+- **Phạm vi:** Giới hạn trong các kỹ thuật quét phi xâm nhập, không gửi payload khai thác, dừng lại sau khi lưu kết quả và không thực hiện thao tác có chủ đích gây gián đoạn máy mục tiêu.
 
 ### 2.3.2. Quy trình và các lệnh thực hiện
-Quy trình khảo sát của Demo 1 gồm 6 bước kỹ thuật canonical trên trạm Kali Linux:
+Quy trình khảo sát của Demo 1 gồm 6 bước kỹ thuật theo kịch bản đã xây dựng trên trạm Kali Linux:
 
 - **Bước 1 (B1): Kiểm tra cấu hình IP và bảng định tuyến của trạm kiểm thử:**
 ```bash
@@ -151,12 +151,12 @@ Quy trình Demo 2 chuẩn hóa thành 4 phép đo tuần tự từ `NSE-SMB-01` 
 nmap -p445 --script smb-vuln-ms17-010 -Pn -oA demo2_ms17010 192.168.56.20
 ```
 
-Về cơ chế kỹ thuật, kịch bản `smb-vuln-ms17-010` kết nối pipe `IPC$`, gửi gói tin giao dịch SMB (transaction) tới mã định danh tệp FID 0 và phân tích mã lỗi trả về từ máy chủ [9]. Nếu máy chủ chưa được cập nhật bản vá, nó phản hồi mã lỗi đặc trưng `STATUS_INSUFF_SERVER_RESOURCES`, qua đó Nmap ghi nhận dấu hiệu lỗ hổng.
+Về cơ chế kỹ thuật, kịch bản `smb-vuln-ms17-010` kết nối pipe `IPC$`, gửi gói tin giao dịch SMB (transaction) tới mã định danh tệp FID 0 và phân tích mã lỗi trả về từ máy chủ [9]. Script sử dụng `STATUS_INSUFF_SERVER_RESOURCES` như một dấu hiệu để nhận diện hệ thống có khả năng bị ảnh hưởng bởi MS17-010.
 
 ### 2.4.3. Đối chiếu với trạng thái bản vá và giới hạn kết luận
 Quy trình đánh giá thiết lập nguyên tắc đối chiếu trên hai trục thông tin độc lập:
 1. **Trục tín hiệu từ xa (Remote Signal):** Kết quả phân loại từ kịch bản NSE. Nếu kịch bản cung cấp kết luận sử dụng được thì ghi nhận theo đúng kết quả đó; nếu không đủ dữ liệu kết luận thì ghi nhận `UNKNOWN / NO USABLE SCRIPT RESULT`.
-2. **Trục trạng thái nội bộ (Local Ground Truth):** Kiểm tra trực tiếp trên Windows Server qua phiên bản driver `srv.sys` và danh sách hotfix từ `Get-HotFix`.
+2. **Trục trạng thái nội bộ (Trạng thái bản vá nội bộ):** Kiểm tra trực tiếp trên Windows Server qua phiên bản driver `srv.sys` và danh sách hotfix từ `Get-HotFix`.
 
 *Ranh giới suy luận an toàn:*
 - Kết quả từ xa không xác định không đồng nghĩa máy chủ an toàn (`UNKNOWN != SAFE`).
@@ -176,13 +176,13 @@ Bảng 2.2. Ma trận kiểm thử vi sai các giải pháp an toàn dịch vụ
 
 | Trường hợp | Tên giải pháp | Tầng tác động | Mục tiêu can thiệp | Nội dung cần kiểm tra lại |
 | :--- | :--- | :--- | :--- | :--- |
-| **Baseline** | Chưa can thiệp | Không | Giữ nguyên hiện trạng RTM | Kiểm tra trạng thái cổng TCP 139/445, SMB dialect, tín hiệu NSE và trạng thái bản vá nội bộ. |
+| **Baseline** | Chưa can thiệp | Không | Giữ nguyên hiện trạng ban đầu | Kiểm tra trạng thái cổng TCP 139/445, SMB dialect, tín hiệu NSE và trạng thái bản vá nội bộ. |
 | **Case B** | Vô hiệu hóa SMBv1 | Tầng dịch vụ OS | Tắt giao thức kế thừa SMBv1 [10] | Kiểm tra SMBv1 còn xuất hiện hay không, SMB2/3 còn thương lượng không, trạng thái bản vá nội bộ có thay đổi hay không. |
 | **Case C** | Tường lửa pfSense Bridge | Tầng mạng (L2/L3) | Chặn cổng TCP 139, 445 [11] | Kiểm tra khả năng tiếp cận TCP 139/445 từ Kali Linux, kiểm tra nhật ký tường lửa có ghi nhận luật chặn không, trạng thái nội bộ Windows có thay đổi hay không. |
 | **Case A** | Cập nhật bản vá KB4012213 | Tầng nhân OS (Driver) | Thay đổi trạng thái bản vá trong driver `srv.sys` [4], [5] | Tham chiếu lý thuyết / Không đo đạc trực tiếp (`REFERENCE ONLY / NOT MEASURED`). |
 
 ### 2.5.2. Case B — Vô hiệu hóa SMBv1
-Biện pháp giảm thiểu thứ nhất (Case B) là làm cứng giao thức (Protocol Hardening) ở tầng ứng dụng theo khuyến nghị của Microsoft [10], nhằm vô hiệu hóa SMBv1 và duy trì chia sẻ tệp qua SMBv2/SMBv3.
+Biện pháp giảm thiểu thứ nhất (Case B) là làm cứng giao thức (Protocol Hardening) ở tầng ứng dụng theo khuyến nghị của Microsoft [10], nhằm vô hiệu hóa SMBv1 và giữ SMB2/SMB3 là các phiên bản giao thức còn được phép thương lượng.
 
 - **Thao tác can thiệp:** Trên Windows Server 2012 R2, mở PowerShell Administrator và thực thi câu lệnh:
 ```powershell
@@ -215,7 +215,7 @@ Cập nhật bản vá là biện pháp trực tiếp thay đổi trạng thái 
 ### 2.6.1. Log và ảnh chụp thực nghiệm
 Để phục vụ phân tích chi tiết và bảo đảm tính minh chứng khoa học ở Chương 3, dữ liệu thực nghiệm được lưu trữ theo các định dạng chuẩn:
 
-1. **Tập tin nhật ký Nmap (`-oA`):** Mọi lệnh quét bắt buộc dùng tham số `-oA <filename>` để xuất ra 3 định dạng đồng thời:
+1. **Tập tin nhật ký Nmap (`-oA`):** Các lệnh Nmap trong kịch bản được lưu bằng tham số `-oA <filename>` để xuất ra 3 định dạng đồng thời:
    - Tệp văn bản chuẩn (`.nmap`): Kết quả bảng trực quan, dễ đọc và trích dẫn.
    - Tệp máy đọc (`.xml`): Lưu trữ cấu trúc chi tiết, phục vụ trích xuất tự động qua script.
    - Tệp Grep (`.gnmap`): Hỗ trợ lọc nhanh theo dòng lệnh.
@@ -226,8 +226,8 @@ Quá trình diễn giải dữ liệu thực nghiệm ở Chương 3 bắt buộ
 
 1. `445 open != vulnerable`: Cổng TCP 139/445 mở chỉ xác nhận socket đang lắng nghe, chưa đủ căn cứ kết luận máy chủ có điểm yếu an ninh.
 2. `SMBv1 enabled != MS17-010 confirmed`: Bật SMBv1 chỉ là điều kiện giao thức cần; nguy cơ bị tổn thương phụ thuộc vào việc nhân hệ điều hành đã được vá lỗi hay chưa.
-3. `UNKNOWN != SAFE`: Khi kịch bản NSE trả về kết quả không xác định do cơ chế phản hồi hoặc điều kiện mạng, hệ thống không thể tự động được coi là an toàn.
-4. `FILTERED != PATCHED`: Trạng thái cổng bị lọc do tường lửa chặn gói chỉ phản ánh lưu lượng bị chặn trên đường truyền, không đại diện cho trạng thái bản vá nội bộ.
+3. `UNKNOWN != SAFE`: Khi script không cung cấp verdict usable, kết quả được ghi nhận `UNKNOWN / NO USABLE SCRIPT RESULT` và không được suy diễn thành `SAFE`.
+4. `FILTERED != PATCHED`: `FILTERED` cho biết Nmap không nhận đủ phản hồi để phân loại cổng là open hay closed; trạng thái này không chứng minh máy chủ đã được vá.
 5. `SMBv1 disabled != PATCHED`: Vô hiệu hóa SMBv1 chỉ đóng tính năng ở tầng dịch vụ, không thay đổi mã nhị phân driver nhân `srv.sys`.
 
 ## 2.7. Tổng kết chương
