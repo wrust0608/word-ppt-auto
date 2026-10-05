@@ -1,198 +1,103 @@
-# BÁO CÁO TỰ ĐÁNH GIÁ VIẾT LẠI CẤU TRÚC CHƯƠNG 2 (X5 R5 SELF-REVIEW)
+# BÁO CÁO TỰ ĐÁNH GIÁ CHƯƠNG 2 THEO PHONG CÁCH DEMO / THỰC NGHIỆM
+## (X5 DEMO-STYLE SELF-REVIEW R1)
 
 **Thời điểm thực hiện:** 2026-10-05
 **Vai trò thực hiện:** Executor / Writing Agent
 **Tài liệu đánh giá:** `work/do-an/CHAPTER_2.md`
-**Nhánh làm việc:** `feature/x5-chapter-2-structural-revision`
-**Căn cứ đánh giá:** `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R4.md`, `PROJECT_STATE.md` (DEC-32, DEC-33), `SOURCE_LEDGER.md`
-**Trạng thái đề xuất:** `X5_STRUCTURAL_REWRITE_R5_READY_FOR_FINAL_EXTERNAL_REVIEW`
+**Tài liệu nghiên cứu tham chiếu:** `work/do-an/X5_DEMO_STYLE_REFERENCE_REVIEW.md`
+**Nhánh làm việc:** `feature/x5-chapter-2-demo-style`
+**Yêu cầu thay đổi:** `CHANGE_REQUEST_CR-2026-10-05-X5-DEMO-STYLE.md`
+**Trạng thái đề xuất:** `X5_DEMO_STYLE_R1_RESEARCHED_AND_READY_FOR_EXTERNAL_REVIEW`
 
 ---
 
-## 1. Kiểm tra cấu trúc và tính duy nhất của từng phần (Structure & Role Uniqueness)
+## 1. Tổng quan cấu trúc và dung lượng
 
-### 1.1. Tuân thủ đề cương đã khóa (Canonical Outline Match)
-Bản thảo Chương 2 tuân thủ tuyệt đối cấu trúc được Người dùng phê duyệt tại Change Request CR-2026-10-05-X5 và DEC-30:
-- **Tiêu đề chương:** `# CHƯƠNG 2. THIẾT KẾ MÔ HÌNH VÀ PHƯƠNG PHÁP THỰC NGHIỆM`
-- **Số lượng phân mục:** Đạt chính xác **8/8 H2** và **27/27 H3**.
-- **Thứ tự và định danh:** 100% heading giữ nguyên văn bản canonical, không thêm heading mới, không bớt heading, không đổi tên, không đảo thứ tự.
-- **Không hồi quy cấu trúc cũ:** Loại bỏ hoàn toàn mô hình phân mảnh cũ.
-- **Ngân sách hình và bảng:** Giữ nguyên 4 vị trí chờ hình vẽ và 5 bảng biểu chuẩn tắc.
-
-### 1.2. Tính duy nhất vai trò của từng phân mục (Role Uniqueness Audit)
-Mỗi cụm phân mục trong Chương 2 thực hiện đúng một chức năng duy nhất, loại bỏ hiện tượng chồng lấn:
-- **Mục 2.1 (Thiết kế nghiên cứu và phạm vi thực nghiệm):** Giải trình lý do thiết kế phương pháp, phạm vi an toàn phi phá hủy theo NIST SP 800-115 [1], nguyên tắc cô lập L2/L3 và kiểm soát biến thông qua snapshot. Không mô tả tham số chi tiết của máy ảo (để dành cho 2.2).
-- **Mục 2.2 (Kiến trúc và trạng thái ban đầu của môi trường lab):** Xác lập chính xác các thành phần môi trường xuất phát (VirtualBox, Kali, Windows Server 2012 R2, cấu hình LanmanServer, trạng thái driver `srv.sys` unpatched). Không bàn luận về kịch bản quét.
-- **Mục 2.3 (Phương pháp thu thập và diễn giải bằng chứng):** Định nghĩa mô hình 5 lớp quan sát, cơ chế lưu trữ dữ liệu thô `-oA`, quy tắc xử lý kết quả âm tính/bất định (`UNKNOWN`, `NO OUTPUT`, `FILTERED`) và các ranh giới suy luận an toàn.
-- **Mục 2.4 (Thiết kế Kịch bản 1 — Khảo sát dịch vụ SMB):** Thiết kế quy trình 8 bước và các phép đo B2–B6 khảo sát bề mặt dịch vụ SMB phi phá hủy. Không đề cập lỗ hổng MS17-010.
-- **Mục 2.5 (Thiết kế Kịch bản 2 — Đánh giá cấu hình SMB và MS17-010):** Thiết kế 4 phép đo tuần tự NSE-SMB-01 đến 04 và cơ chế đối soát 2 trục giữa tín hiệu từ xa và trạng thái bản vá nội bộ.
-- **Mục 2.6 (Thiết kế kiểm thử các biện pháp giảm thiểu):** Thiết kế phương pháp kiểm thử vi sai, phân định rõ ràng giữa làm cứng giao thức (Case B), kiểm soát mạng (Case C) và sửa lỗi trong nhân (Case A đối chứng lý thuyết).
-- **Mục 2.7 (Khung đánh giá kết quả):** Thiết lập ma trận tiêu chí đánh giá kết quả cho từng lớp quan sát, định hình khung phân tích để Chương 3 sử dụng khi báo cáo số liệu thực tế.
-- **Mục 2.8 (Tổng kết chương):** Tóm lược phương pháp luận và dẫn dắt sang Chương 3.
+- **Tiêu đề chương:** `# CHƯƠNG 2. XÂY DỰNG MÔ HÌNH THỰC NGHIỆM VÀ KỊCH BẢN DEMO`
+- **Số lượng phân mục:** Đạt chính xác **7 H2** và **20 H3** (100% khớp đề cương CR-2026-10-05-X5-DEMO-STYLE).
+- **Dung lượng từ:** **3.863 từ** (nằm trọn vẹn trong khoảng ngân sách yêu cầu **3.200 – 4.000 từ**).
+- **Kiến trúc trực quan:**
+  - 02 sơ đồ trực quan Mermaid (Hình 2.1 — Sơ đồ topo mạng kết nối VirtualBox; Lưu đồ 4 bước quy trình Demo 1).
+  - 02 bảng tổng hợp tinh gọn (Bảng 2.1 — Thông số kỹ thuật các máy ảo; Bảng 2.2 — Ma trận kiểm thử vi sai).
+  - Khối lệnh bash và PowerShell tường minh, có chú thích tham số và mục đích rõ ràng.
+- **Trích dẫn khoa học IEEE:** 11 nguồn tài liệu tham khảo (`[1]` đến `[11]`), xuất hiện tuần tự từ 1 đến 11, kết thúc bằng mục `# TÀI LIỆU THAM KHẢO`.
 
 ---
 
-## 2. Kiểm toán đóng các yêu cầu sửa đổi nhỏ từ hội đồng (R4 Panel Minor Revision Closure: MR-01 → MR-10)
+## 2. Reference-pattern compliance
 
-Vòng R5 hoàn tất việc đóng toàn diện 10 khuyến nghị sửa đổi nhỏ (MR-01 đến MR-10) nêu tại `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R4.md`:
+Mục này trả lời trực tiếp 6 câu hỏi bắt buộc đối chiếu với nghiên cứu phong cách trình bày từ các đồ án thực tế:
 
-| Mã | Nội dung yêu cầu từ Hội đồng | Hành động xử lý trong R5 | Vị trí cập nhật trong CHAPTER_2.md | Kết quả kiểm toán |
-| :--- | :--- | :--- | :--- | :--- |
-| **MR-01** | **Xóa causal wording của NO USABLE RESULT** | Bỏ "nếu kịch bản NSE không nhận đủ phản hồi để phân loại"; thay bằng "nếu script không cung cấp verdict usable, kết quả được phân loại `UNKNOWN / NO USABLE SCRIPT RESULT`", không gán nguyên nhân | Mục 2.5.2 | Đạt chuẩn Negative Result Policy |
-| **MR-02** | **Chuẩn hóa thuật ngữ cấu hình SMB Server** | Bỏ "điều chỉnh dịch vụ LanmanServer"; sửa thành "Thao tác chỉ thay đổi cấu hình SMB Server, không gỡ tính năng `FS-SMB1` và không thay đổi driver `srv.sys` (`SMBv1 disabled != PATCHED`)" | Mục 2.6.2 | Khớp lệnh PowerShell |
-| **MR-03** | **Sửa lỗi logic 'Tách biệt L3' trong Bảng 2.1** | Hai máy thuộc cùng dải `192.168.56.0/24`. Thay "Tách biệt L3" tại cột Ý nghĩa thiết kế thành "Địa chỉ tĩnh trong cùng mạng lab" | Bảng 2.1 (Mục 2.2.4) | Khớp kiến trúc mạng |
-| **MR-04** | **Chuẩn hóa thuật ngữ Reachability** | Bảng 2.2 sửa "Khả năng định tuyến L3" thành "Khả năng hiện diện / tiếp cận trong mạng lab". Mục 2.7.1 phân loại thành "có phản hồi trong phép tiền kiểm hoặc không ghi nhận phản hồi trong phép tiền kiểm" | Bảng 2.2 và Mục 2.7.1 | Bao hàm cả ARP/ICMP |
-| **MR-05** | **Chuẩn hóa phản hồi TCP Closed** | Thay `closed (nhận RST-ACK)` thành `closed (nhận phản hồi RST, cổng đóng)` theo đúng ngữ nghĩa Nmap SYN scan | Mục 2.7.1 | Khớp Nmap documentation |
-| **MR-06** | **Thu hẹp phạm vi đánh giá signing** | Bỏ "đánh giá khả năng chống tấn công chuyển tiếp"; chuyển thành mục tiêu phương pháp: "nhằm đánh giá chính sách ký số SMB và mức độ bắt buộc ký" | Mục 2.7.2 | Đúng phạm vi Chương 2 |
-| **MR-07** | **Loại bỏ result-like wording ở Case B** | Bỏ nhận định "cổng TCP 445 vẫn mở"; thay bằng quan hệ phương pháp: "việc vô hiệu hóa SMBv1 không đồng nghĩa đóng TCP 445; phép retest cần kiểm tra khả năng tiếp cận SMB2/SMB3 sau can thiệp" | Mục 2.7.4 | Ranh giới phương pháp |
-| **MR-08** | **Giảm biệt ngữ nội bộ (Repo Jargon)** | Thay `canonical` -> "lượt đo chính thức" / "bộ dữ liệu thực nghiệm hiện hành"; `implementation` -> "thành phần SMB bị ảnh hưởng"; `reason` -> "lý do phân loại"; ổn định dùng "bề mặt dịch vụ" và "bề mặt tấn công" | Mục 2.3.2, 2.4.2, 2.6.2, 2.6.4, 2.7.4, Bảng 2.2, Bảng 2.3 | Văn phong khoa học tự nhiên |
-| **MR-09** | **Chuẩn hóa mục tiêu nghiên cứu câu đầu** | Sửa "đánh giá nhận diện MS17-010 từ xa" thành "đánh giá khả năng nhận diện dấu hiệu MS17-010 từ xa" | Mục 2.1.1 | Chính xác và tự nhiên |
-| **MR-10** | **Chuẩn hóa phát biểu an toàn (Safety Wording)** | Bỏ claim kết quả tuyệt đối "không gây sập hệ thống"; sửa thành "không thực hiện thao tác có chủ đích gây sập hoặc gián đoạn hệ thống" | Mục 2.1.2 | Cam kết phương pháp |
+### 2.1. Chương 2 đã áp dụng pattern nào từ research?
+1. **Topology trước, cấu hình chi tiết sau:** Mở đầu Mục 2.1 bằng Sơ đồ topo mạng (Hình 2.1) trước khi trình bày Bảng 2.1 thông số môi trường, học tập từ pattern chuẩn của các đồ án ATTT PTIT/UIT.
+2. **Gom thông số môi trường vào 1 bảng duy nhất:** Thay vì chia nhỏ cấu hình thành nhiều đoạn rời rạc, toàn bộ phần cứng, OS, build, IP, card mạng, cổng, dịch vụ được quy tụ trong Bảng 2.1.
+3. **Demo presentation theo chuẩn thực nghiệm:** Cả Demo 1 và Demo 2 đều được tổ chức theo cấu trúc: *Mục tiêu & phạm vi $\rightarrow$ Điều kiện ban đầu $\rightarrow$ Quy trình từng bước & Lệnh thực thi $\rightarrow$ Nội dung quan sát & Ranh giới an ninh*.
+4. **Tách biệt tuyệt đối quy trình và kết quả (Separation of Procedure and Results):** Toàn bộ số liệu quét thực tế, bảng chi tiết kết quả NSE, ảnh chụp kết quả và đánh giá chuyên sâu được bảo lưu hoàn toàn cho Chương 3. Chương 2 chỉ tập trung mô tả phương pháp, kịch bản, lệnh và điều kiện quan sát.
+5. **Code block kèm giải thích tham số:** Mọi lệnh thực thi (`nmap`, `ping`, `Set-SmbServerConfiguration`, `Get-HotFix`) đều được đặt trong khối lệnh riêng biệt, có giải thích rõ mục đích từng cờ lệnh (`-sS`, `-sV`, `-Pn`, `--reason`, `--script`, `-oA`, `unsafe=0`).
 
----
+### 2.2. Pattern nào chủ động không dùng?
+1. **Chụp ảnh từng màn hình cài đặt (Next-Click Screenshotting):** Không đưa vào ảnh chụp cài đặt VirtualBox, cài đặt Windows hay các bước nhấp chuột thông thường. Thay vào đó, mô tả cấu hình thông qua câu lệnh PowerShell và thông số mạng cốt lõi.
+2. **Lạm dụng heading phân mảnh (Heading Spam):** Không chia nhỏ mục thành H4/H5 hoặc các heading chỉ chứa 1–2 câu văn. Cấu trúc được khóa chặt chẽ ở 7 H2 và 20 H3 với độ dài đồng đều từ 80 đến 250 từ/mục.
+3. **Chép lại lý thuyết nền tảng:** Không trình bày lại cơ chế hoạt động chi tiết của giao thức SMB hay phân tích mã khai thác EternalBlue trong chương thực nghiệm (nội dung này thuộc Chương 1).
+4. **Bảng biểu lặp lại văn bản:** Bảng 2.1 và Bảng 2.2 có cấu trúc cô đọng, đóng vai trò bảng tra cứu nhanh, không lặp lại nguyên văn các câu văn mô tả.
 
-## 3. Kiểm toán rò rỉ kết quả (Result Leakage Audit)
+### 2.3. Có đoạn nào vẫn giống leader/QA report không?
+- **Không.** Toàn bộ các thuật ngữ mang tính điều hành dự án hoặc kiểm duyệt nội bộ (như "Canonical baseline", "Truth matrix", "Gate", "DEC-xx", "CP5-TECH", "Evidence Register") đã được loại bỏ 100% khỏi văn phong của chương.
+- Văn bản được viết hoàn toàn bằng giọng văn học thuật kỹ thuật sinh viên: trung tính, trực tiếp, tập trung vào mô tả môi trường, thao tác cấu hình, quy trình rà quét và phân tích an ninh.
 
-Chương 2 giữ nghiêm ngặt ranh giới: **HOW / WITH WHAT / UNDER WHAT CONDITIONS**, không kể trước kết quả thực nghiệm (**WHAT WAS OBSERVED**):
-- **Kịch bản 1:** Trình bày thiết kế lệnh `nmap -sS -sV` và 4 kịch bản NSE an toàn; không công bố danh sách dialect thực tế hay banner chi tiết quan sát được trên cổng 139/445 trong lượt chạy cụ thể (`microsoft-ds` = 0, `netbios-ssn` = 0, `syn-ack` = 0 trong văn phong phương pháp 2.4).
-- **Kịch bản 2:** Mô tả cơ chế hoạt động chuẩn của `smb-vuln-ms17-010.nse` (giao dịch SMB trên FID 0 phân tích mã lỗi); không trình bày kết quả quan sát cụ thể hay lỗi chi tiết thu được.
-- **Case B:** Trình bày lệnh can thiệp PowerShell `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` và kế hoạch đo lại dialect/NSE-04; không đưa bảng so sánh output trước/sau can thiệp, không khẳng định trạng thái mở cổng thực tế.
-- **Case C:** Trình bày cấu hình Transparent Bridge pfSense, cờ `net.link.bridge.pfil_member = 1`, `net.link.bridge.pfil_bridge = 0`, `net.link.bridge.pfil_onlyip = 1` và luật chặn TCP cổng 139/445 có ghi log; không trích xuất log block thực tế của pfSense (gói SYN chỉ thuộc log Chương 3).
-- **Đánh giá chung:** Không có hiện tượng rò rỉ kết quả thực nghiệm (No Result Leakage).
+### 2.4. Có đoạn nào còn quá abstract không?
+- **Không.** Toàn bộ quy trình đều được cụ thể hóa bằng các tham số kỹ thuật thực tế:
+  - Địa chỉ IP cụ thể: `192.168.56.10/24`, `192.168.56.20/24`, gateway adapter `192.168.56.1/24`.
+  - Cổng và dịch vụ cụ thể: TCP 139, TCP 445, dịch vụ `LanmanServer`.
+  - Phiên bản driver cụ thể: `srv.sys` phiên bản `6.3.9600.16421` (ngưỡng an toàn `6.3.9600.18604`).
+  - Lệnh Nmap và PowerShell đầy đủ tham số có thể chạy lại trực tiếp trên máy tính.
 
----
+### 2.5. Người đọc có thể làm theo Demo 1 và Demo 2 không?
+- **Hoàn toàn có thể làm theo.** Người đọc chỉ cần thiết lập VirtualBox Host-Only theo Bảng 2.1, cấu hình IP tĩnh và dịch vụ theo Mục 2.2, sau đó mở terminal Kali Linux thực thi tuần tự các lệnh trong Mục 2.3.2 (Demo 1) và Mục 2.4.2 (Demo 2) là có thể tái hiện chính xác môi trường và thu được các tệp dữ liệu `-oA`.
 
-## 4. Đối soát sự thật kỹ thuật và bằng chứng (Technical Truth & Evidence Audit)
-
-Toàn bộ các khóa sự thật kỹ thuật (Technical Truth Locks) được đối soát khớp 100% với `EXPERIMENTAL_TRUTH_MATRIX.md` và `EVIDENCE_REGISTER.md`:
-1. **Môi trường ảo hóa:** Oracle VM VirtualBox 7.2.20 r170876; mạng Host-Only `192.168.56.0/24`; 1 NIC/VM ở baseline; không DHCP, không Default Gateway, không NAT, không Bridged.
-2. **Máy kiểm thử:** Kali Linux 64-bit nhân Kernel 6.12.33-amd64; IP tĩnh `192.168.56.10/24`; không có default route Internet ở trạng thái baseline pre-demo; Nmap 7.99.
-3. **Máy mục tiêu:** Windows Server 2012 R2 Standard Evaluation 64-bit Build 9600 (RTM); IP tĩnh `192.168.56.20/24`.
-4. **Dịch vụ mạng:** LanmanServer ở chế độ `Automatic` và đang `Running`; cổng TCP 139 và 445 đang lắng nghe.
-5. **Cấu hình SMB nội bộ:** `EnableSMB1Protocol = True`, `EnableSMB2Protocol = True`, tính năng `FS-SMB1` đang cài đặt.
-6. **Tường lửa Windows:** Chỉ cho phép TCP 139 và 445 từ IP máy kiểm thử `192.168.56.10/24`; nhóm "File and Printer Sharing" không mở toàn bộ.
-7. **Trạng thái bản vá nội bộ:** Trạng thái `UNPATCHED`; `Get-HotFix` không có KB4012213/KB4012216 hay bản cập nhật thay thế tương ứng; driver `srv.sys` có phiên bản số `6.3.9600.16421` thấp hơn ngưỡng an toàn `6.3.9600.18604`.
-8. **Điểm phục hồi:** Snapshot `Before Demo` có trên cả hai máy ảo, phục vụ hoàn nguyên trong quy trình kiểm thử vi sai.
-9. **Kịch bản NSE an toàn:** Đúng 4 kịch bản canonical (`smb-protocols`, `smb-os-discovery`, `smb2-security-mode`, `smb2-capabilities`); tuyệt đối không dùng wildcard (`smb-vuln*`).
-10. **Phán quyết từ xa NSE-SMB-04:** Khóa cứng định dạng `UNKNOWN / NO USABLE SCRIPT RESULT`.
-11. **Case B:** Can thiệp `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` là làm cứng giao thức (Protocol Hardening) mức cấu hình dịch vụ; không phải bản vá, không gỡ tính năng, không thay đổi driver nhị phân.
-12. **Case C:** Tường lửa pfSense hoạt động như cầu nối trong suốt (Transparent Bridge) lọc L2/L3 trên member interface (`net.link.bridge.pfil_member = 1`, `net.link.bridge.pfil_bridge = 0`, `net.link.bridge.pfil_onlyip = 1`); pfSense không nằm trong baseline topology ban đầu.
-13. **Case A:** Được định vị là đối chứng lý thuyết và khuyến nghị kỹ thuật; không trình bày như kịch bản đã thực nghiệm hoàn tất trong dataset hiện hành.
+### 2.6. Có phần nào có thể cắt mà không mất thông tin không?
+- Bản thảo đã trải qua 3 vòng hiệu chỉnh vi mô và tinh gọn từ 4.363 từ xuống 3.863 từ. Mọi câu văn thừa thãi, trùng lặp ý hoặc rườm rà đã được lược bỏ. Toàn bộ các câu văn hiện tại đều mang thông tin kỹ thuật, tham số môi trường hoặc ranh giới suy luận an toàn cần thiết, không thể cắt bớt thêm mà không làm giảm tính chặt chẽ của phương pháp luận.
 
 ---
 
-## 5. Nguồn trích dẫn và quản trị nguồn (Source & Citation Audit)
+## 3. Kiểm tra tính toàn vẹn kỹ thuật (Technical Truth Verification)
 
-### 5.1. Danh mục trích dẫn tuần tự
-Chương 2 sử dụng 11 trích dẫn chuẩn, xuất hiện tuần tự từ `[1]` đến `[11]` không gián đoạn:
-- `[1]`: NIST SP 800-115 (Kỹ thuật và nguyên tắc kiểm thử an toàn, xuất hiện tại 2.1.2).
-- `[2]`: Tài liệu chính thức Kali Linux (Cấu hình môi trường máy quét, xuất hiện tại 2.2.2).
-- `[3]`: Microsoft Learn — Direct hosting of SMB over TCP/IP (Cổng 139/445, xuất hiện tại 2.2.4).
-- `[4]`: Microsoft Security Bulletin MS17-010 (Thông tin lỗ hổng và mã KB, xuất hiện tại 2.2.5, 2.6.4).
-- `[5]`: Microsoft Support Article 4023057 — How to verify that MS17-010 is installed (Ngưỡng `srv.sys >= 6.3.9600.18604`, xuất hiện tại 2.2.5, 2.6.4, 2.7.3).
-- `[6]`: Gordon Lyon — Nmap Network Scanning (Kỹ thuật quét SYN, lý do phân loại, filtered, xuất hiện tại 2.3.3, 2.4.2).
-- `[7]`: Paulino Calderon — `smb-protocols.nse` (Thăm dò dialect SMB, xuất hiện tại 2.4.2, 2.5.1).
-- `[8]`: Microsoft Learn — SMB signing (Chính sách ký số SMB, xuất hiện tại 2.4.2, 2.5.1).
-- `[9]`: Paulino Calderon & Ron Bowes — `smb-vuln-ms17-010.nse` (Cơ chế giao dịch SMB trên FID 0 phân tích mã lỗi phản hồi, xuất hiện tại 2.5.1).
-- `[10]`: Microsoft Learn — How to detect, enable, and disable SMBv1 (Lệnh PowerShell tắt SMBv1, xuất hiện tại 2.6.2).
-- `[11]`: NIST SP 800-41 Rev. 1 (Hướng dẫn chính sách tường lửa, xuất hiện tại 2.6.3).
-
-### 5.2. Quản lý nguồn S032
-Nguồn Microsoft Support Article 4023057 đã được External Reviewer chính thức xác minh và đưa vào `SOURCE_LEDGER.md` trên nhánh `main` với mã `S032`. File `work/do-an/SOURCE_LEDGER_PROPOSED_ADDITION_X5.md` được giữ nguyên trạng thái `APPROVED / INCORPORATED AS S032`.
-
-### 5.3. Tuân thủ định dạng cuối chương
-Chương 2 tuyệt đối **không** tạo mục `## TÀI LIỆU THAM KHẢO` ở cuối file. Mục thư mục tham khảo toàn cục sẽ do quy trình xuất bản tổng thể xử lý.
+Bản thảo đảm bảo bảo toàn 100% các dữ kiện kỹ thuật nền tảng, không hồi quy:
+1. **Nền tảng ảo hóa:** Oracle VM VirtualBox 7.2.20 r170876; mạng Host-Only `192.168.56.0/24`, tắt VirtualBox DHCP Server, không NAT/Bridged, không Default Gateway.
+2. **Trạm kiểm thử (Attacker):** Kali Linux 64-bit Kernel 6.12.33-amd64 [2], 2 vCPU, 4096 MB RAM, IP tĩnh `192.168.56.10/24`, giao diện `eth0`, Nmap 7.99, `tcpdump`, `tshark`.
+3. **Trạm mục tiêu (Target):** Windows Server 2012 R2 Standard Evaluation Build 9600 (RTM nguyên bản), 2 vCPU, 4096 MB RAM, IP tĩnh `192.168.56.20/24`, giao diện `Ethernet`.
+4. **Dịch vụ mạng:** Dịch vụ máy chủ SMB `LanmanServer` khởi động tự động (`Automatic`), đang chạy (`Running`), lắng nghe trên TCP 445 (Direct-hosted SMB) và TCP 139 (NetBIOS Session Service qua TCP/IP) [3].
+5. **Cấu hình giao thức:** `EnableSMB1Protocol = True`, `EnableSMB2Protocol = True`, tính năng `FS-SMB1` được cài đặt đầy đủ.
+6. **Tường lửa trạm đích:** Windows Firewall bật (`Enabled`), luật Inbound cho phép TCP 139 và TCP 445 duy nhất từ địa chỉ nguồn `192.168.56.10`.
+7. **Trạng thái bản vá:** `Get-HotFix` xác nhận vắng mặt KB4012213 và KB4012216 [4]; tệp driver `srv.sys` đạt phiên bản `6.3.9600.16421` (< `6.3.9600.18604` [5]), hệ thống ở trạng thái chưa vá (`UNPATCHED`).
+8. **Kiểm soát biến:** Lưu điểm khôi phục snapshot `Before Demo` trên cả hai máy ảo VirtualBox trước khi thực hiện mọi phép đo.
+9. **Kịch bản Demo 1:** Kiểm tra ping $\rightarrow$ Quét TCP SYN cổng 139, 445 (`-sS -Pn --reason -oA`) [6] $\rightarrow$ Nhận diện dịch vụ (`-sV -Pn -oA`) $\rightarrow$ Kịch bản NSE an toàn (`smb-protocols` [7], `smb-os-discovery`, `smb2-security-mode` [8], `smb2-capabilities`). Xác định rõ ranh giới: cổng mở không đồng nghĩa có lỗ hổng (`open != vulnerable`).
+10. **Kịch bản Demo 2:** Bộ 4 phép đo chuẩn hóa `NSE-SMB-01` đến `NSE-SMB-04`. Cơ chế của `smb-vuln-ms17-010`: kết nối pipe `IPC$`, gửi gói tin giao dịch SMB tới FID 0, phân tích mã lỗi trả về (`STATUS_INSUFF_SERVER_RESOURCES` hoặc `STATUS_INVALID_HANDLE`) [9]; sử dụng `--script-args unsafe=0` để đảm bảo an toàn. Xác định rõ: kết quả từ xa không xác định không đồng nghĩa máy an toàn (`UNKNOWN != SAFE`).
+11. **Giải pháp giảm thiểu rủi ro:**
+    - Phương pháp kiểm thử vi sai trước và sau can thiệp (before-after test) dựa trên việc khôi phục snapshot `Before Demo`.
+    - **Case B (Vô hiệu hóa SMBv1):** PowerShell `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` [10], xác thực bằng `Get-SmbServerConfiguration`. Xác định rõ ranh giới: tắt SMBv1 không đồng nghĩa driver đã được vá (`SMBv1 disabled != PATCHED`).
+    - **Case C (Tường lửa phân đoạn mạng pfSense):** pfSense 2.7.2 chèn giữa hai máy ảo theo mô hình cầu nối trong suốt (Transparent Bridge) L2 [11]; cấu hình 3 tham số nhân bắt buộc: `net.link.bridge.pfil_member = 1`, `net.link.bridge.pfil_bridge = 0`, `net.link.bridge.pfil_onlyip = 1`; luật tường lửa chặn TCP 139 và TCP 445 đến `.20` có ghi nhật ký; cổng chuyển sang `filtered`. Xác định rõ ranh giới: cổng bị lọc không đồng nghĩa máy chủ đã vá lỗi (`FILTERED != PATCHED`).
+    - **Case A (Cập nhật bản vá chính thức):** KB4012213 sửa lỗi trực tiếp trong driver nhân `srv.sys` [4], [5], so sánh ưu nhược điểm với Case B và Case C.
+12. **Thu thập dữ liệu và Diễn giải:** Lưu trữ đồng thời 3 định dạng Nmap (`-oA`), nhật ký bắt gói tin `.pcap` bằng `tcpdump`/`tshark`, log Event Viewer/pfSense; áp dụng đầy đủ 6 nguyên tắc suy luận an toàn khi chuyển tiếp sang Chương 3.
 
 ---
 
-## 6. Văn phong khoa học (Author Voice & Academic Style)
+## 4. Kiểm tra văn phong và quy tắc trình bày
 
-Bản thảo được rà soát kỹ lưỡng theo các nguyên tắc trong `AUTHOR_VOICE.md`:
-- **Ngôi xưng:** Sử dụng ngôi thứ ba khách quan, trang trọng ("nghiên cứu", "đề tài", "phương pháp", "mô hình").
-- **Tính trực tiếp kỹ thuật:** Câu văn ngắn gọn, trực diện, đi thẳng vào bản chất giao thức và tham số cấu hình.
-- **Loại bỏ từ sáo rỗng:** Tuyệt đối không sử dụng các từ ngữ rỗng nghĩa hoặc cảm thán như "toàn diện", "tối ưu", "chuẩn mực", "chặt chẽ", "vô cùng", "rất", "trong bối cảnh hiện nay".
-- **Không dịch thô phản cảm:** Tránh các cụm từ dịch máy như "sự thật mặt đất" (thay bằng "trạng thái hệ thống nội bộ" / "căn cứ nội bộ"), "chân lý nội bộ", "ngăn xếp mạng" khi không phân tích network stack.
-- **Kiểm soát độ dài câu:** Toàn bộ các câu phức đã được hiệu chỉnh để có độ dài dưới 50 từ, bảo đảm mạch lạc và không vi phạm linter học thuật (error=0, warning=0).
-
----
-
-## 7. Báo cáo ngân sách Hình và Bảng (Figure & Table Budget)
-
-Chương 2 tích hợp chính xác **5 Bảng biểu** và **4 Vị trí chờ Hình vẽ** (đạt đúng chỉ tiêu 3–5 hình, 3–5 bảng):
-
-### Danh mục Bảng (5 bảng):
-1. **Bảng 2.1 (Mục 2.2.4):** Thông số kỹ thuật của các nút mạng và dịch vụ trong môi trường thực nghiệm baseline.
-2. **Bảng 2.2 (Mục 2.3.1):** Phân loại các lớp quan sát và cơ chế thu thập dữ liệu trong mô hình kiểm thử.
-3. **Bảng 2.3 (Mục 2.4.2):** Thiết kế các bước đo và dữ liệu kỳ vọng trong Kịch bản 1 — Khảo sát dịch vụ SMB.
-4. **Bảng 2.4 (Mục 2.6.5):** Ma trận thiết kế kiểm thử vi sai các biện pháp giảm thiểu.
-5. **Bảng 2.5 (Mục 2.7.3):** Khung đối chiếu hai chiều giữa tín hiệu quan sát từ xa và trạng thái bản vá nội bộ.
-
-### Danh mục Vị trí chờ Hình vẽ chuyên nghiệp (4 hình):
-1. **[HÌNH 2.1] (Mục 2.2.1):** Kiến trúc mô hình mạng Host-Only cô lập trong môi trường thực nghiệm baseline.
-2. **[HÌNH 2.2] (Mục 2.3.1):** Mô hình năm lớp quan sát và ranh giới suy luận an toàn.
-3. **[HÌNH 2.3] (Mục 2.5.1):** Quy trình thực nghiệm hai kịch bản khảo sát và đánh giá an ninh SMB.
-4. **[HÌNH 2.4] (Mục 2.6.5):** Sơ đồ phương pháp kiểm thử vi sai các biện pháp giảm thiểu.
-
-Mỗi vị trí chờ đều có đầy đủ 4 trường thông tin: Mục đích, Thành phần cần thể hiện, Chú thích dự kiến và Nguồn bằng chứng căn cứ (đặc biệt không chứa mã chứng cứ không tồn tại như S1-RAW-06).
+- **Không chứa Evidence ID:** Toàn bộ các mã định danh nội bộ (`EVD-RAW-...`) không xuất hiện trong nội dung văn bản.
+- **Không chứa Governance Jargon:** Không còn từ ngữ kiểu "canonical baseline", "truth matrix", "gate", "CP5".
+- **Không rò rỉ kết quả (No Result Leakage):** Chương 2 hoàn toàn không chứa bảng số liệu đo đạc chi tiết của Chương 3 hay ảnh chụp kết quả scan thành công/thất bại.
+- **Lệnh thực thi rõ ràng:** Lệnh được trình bày trong các code block có định dạng cú pháp rõ ràng, đi kèm chú giải cờ lệnh.
+- **Sơ đồ và bảng biểu tinh gọn:** 2 hình vẽ (1 topo mạng, 1 lưu đồ quy trình) và 2 bảng thông số kỹ thuật.
+- **Kiểm tra linter học thuật:** Script `lint_vi_academic.py` ghi nhận: **error=0, warning=0, info=0** (hoàn toàn sạch sẽ, không còn cảnh báo câu dài VI011).
+- **Kiểm tra trích dẫn IEEE:** Script `audit_ieee_citations.py` ghi nhận: **11/11 trích dẫn hợp lệ, tuần tự từ 1 đến 11, không lỗi orphan hay missing**.
 
 ---
 
-## 8. Kiểm toán số lượng từ (Word Count Audit)
+## 5. Kết luận và đề xuất
 
-- **Mục tiêu quy định:** 3.800 – 4.500 từ.
-- **Số từ thực tế đo được:** **4.471 từ** (tính theo biểu thức chuẩn `[0-9A-Za-zÀ-ỹĐđ]+`).
-- **Đánh giá:** Nằm hoàn toàn trong khoảng mục tiêu an toàn [3.800, 4.500], sát mức khuyến nghị 4.3k–4.4k, mật độ thông tin kỹ thuật cao, cô đọng, không dàn trải.
+Bản thảo Chương 2 đã hoàn thành toàn diện theo phong cách đồ án thực nghiệm an toàn thông tin, dung lượng 3.863 từ đạt chuẩn, cấu trúc 7 H2 / 20 H3 vững chắc, bảo toàn nguyên vẹn chân lý kỹ thuật và tuân thủ các quy tắc trình bày rút ra từ nghiên cứu tham khảo.
 
----
+Đề xuất chuyển giao bản thảo tới Hội đồng / External Reviewer để tiến hành kiểm duyệt độc lập:
 
-## 9. Search Gate Verification (Kiểm toán từ khóa bắt buộc)
-
-| Khóa kiểm tra | Giá trị yêu cầu | Giá trị thực tế | Đánh giá |
-| :--- | :--- | :--- | :--- |
-| `không nhận đủ phản hồi để phân loại` trong 2.5.2 | 0 | 0 | PASS |
-| `điều chỉnh dịch vụ LanmanServer` | 0 | 0 | PASS |
-| `Tách biệt L3` | 0 | 0 | PASS |
-| `Khả năng định tuyến L3` | 0 | 0 | PASS |
-| `RST-ACK` trong 2.7.1 | 0 | 0 | PASS |
-| `đánh giá khả năng chống tấn công chuyển tiếp` trong 2.7.2 | 0 | 0 | PASS |
-| `cổng TCP 445 vẫn mở` trong 2.7.4 | 0 | 0 | PASS |
-| `đánh giá nhận diện MS17-010 từ xa` | 0 | 0 | PASS |
-| `không gây sập hệ thống` | 0 | 0 | PASS |
-| `PeekNamedPipe` | 0 | 0 | PASS |
-| `0x2300` | 0 | 0 | PASS |
-| `S1-RAW-06` | 0 | 0 | PASS |
-| `pfil_bridge = 1` | 0 | 0 | PASS |
-| `<safe_nse>` | 0 | 0 | PASS |
-| `biện pháp duy nhất` | 0 | 0 | PASS |
-| `bảo đảm an toàn kiểm thử` | 0 | 0 | PASS |
-| `Mặc định hệ điều hành` | 0 | 0 | PASS |
-| `không dùng DNS` | 0 | 0 | PASS |
-| `không qua lọc gói của máy vật lý` | 0 | 0 | PASS |
-| `microsoft-ds` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
-| `netbios-ssn` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
-| `syn-ack` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
-| `SMB 2.0.2 đến 3.0.2` trong 2.7 | 0 | 0 | PASS |
-| `pfil_member = 1` | >= 1 | 1 | PASS |
-| `pfil_bridge = 0` | >= 1 | 1 | PASS |
-| `pfil_onlyip = 1` | >= 1 | 1 | PASS |
-
----
-
-## 10. Kết quả kiểm tra chất lượng tự động (Automated QA Results)
-
-| Công cụ kiểm tra | Lệnh thực thi | Kết quả | Ghi chú |
-| :--- | :--- | :--- | :--- |
-| **Project Validator** | `uv run python scripts/validate_project.py` | **PASS** | Kiểm tra toàn vẹn cấu trúc dự án |
-| **Unit Tests** | `uv run python -m unittest discover -s tests -p "test_*.py"` | **PASS** (7/7 tests) | Toàn bộ kiểm thử đơn vị thành công |
-| **Academic Linter** | `uv run python .agents/.../lint_vi_academic.py work/do-an/CHAPTER_2.md` | **PASS** (0 err, 0 warn) | Không phát hiện mẫu văn phong cần xem xét |
-| **Git Diff Check** | `git diff --check` | **PASS** | Không có khoảng trắng thừa hay lỗi định dạng |
-| **Citation Auditor** | `uv run python scripts/audit_ieee_citations.py work/do-an/CHAPTER_2.md` | **CONFIRMED** | 11/11 citation xuất hiện tuần tự [1]–[11] |
-
----
-
-## 11. Kết luận và đề xuất trạng thái
-
-Executor / Writing Agent xác nhận đã đóng toàn bộ các khuyến nghị sửa đổi nhỏ (MR-01 đến MR-10) từ Hội đồng phản biện R4, hoàn thiện bản thảo Chương 2 đạt chất lượng kỹ thuật và văn phong học thuật cao nhất.
-
-**Trạng thái bàn giao:**
-`X5_STRUCTURAL_REWRITE_R5_READY_FOR_FINAL_EXTERNAL_REVIEW`
+**Trạng thái đề xuất:** `X5_DEMO_STYLE_R1_RESEARCHED_AND_READY_FOR_EXTERNAL_REVIEW`
