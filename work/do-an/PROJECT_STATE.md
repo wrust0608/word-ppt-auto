@@ -629,3 +629,27 @@
   - structure proposal.
 - Chapter 3 prose remains prohibited during this preparation task.
 - External review is required before drafting `CHAPTER_3.md`.
+
+
+## DEC-47 — X6 evidence-prep R1 rejected for DOCX drift and Chapter 3 logic regressions
+
+- Ngày: 2026-10-06.
+- Candidate reviewed: `bdaafd77ff3e03b573a852809025559159096529`.
+- Review: `work/do-an/X6_EVIDENCE_PREP_EXTERNAL_REVIEW_R1.md`.
+- Score: **61/100 — REVISE_BLOCKING**.
+- PASS:
+  - 83 staged files have 0 SHA mismatch;
+  - source archive hash matches;
+  - 78 staged files are primary/direct evidence and 5 are secondary metadata/closure;
+  - committed Figure 2.1/2.2 images match the approved product-aligned topology.
+- BLOCKER A:
+  - `CHAPTER_2_FINAL_DOCX_QA.md` describes a legacy Chapter 2, not the user-approved Product-Aligned Chapter 2;
+  - DOCX must be regenerated from locked `main:work/do-an/CHAPTER_2.md` and re-rendered/reviewed.
+- BLOCKER B:
+  - Chapter 3 prep incorrectly uses KB4012212/KB4012215 instead of locked KB4012213/KB4012216;
+  - .56.100 was re-identified despite UNKNOWN lock;
+  - signing interpretation overreaches;
+  - Case B overclaims SMB2/3 workload validation;
+  - Case C conflates filtered with firewall causality in raw rows and overclaims complete isolation/vulnerability persistence;
+  - result proposal reintroduces five-layer/L1-L5 jargon rejected from public report architecture.
+- Chapter 3 prose remains BLOCKED.
