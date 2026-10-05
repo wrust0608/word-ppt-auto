@@ -1,7 +1,10 @@
-# CANONICAL CORE EVIDENCE SHA-256 — X1
-# Source archive: ALL.zip
+# LEGACY CORE EVIDENCE SHA-256 — X1 (SUPERSEDED AS PRIMARY MANIFEST)
+# Historical source label: ALL.zip
 # Generated: 2026-10-05
-# Core canonical files hashed: 83
+# Core subset files hashed: 83
+# R2 authoritative full inventory: work/do-an/evidence/ALL_2026_10_06/FULL_ARCHIVE_MANIFEST_ALL_2026_10_06.csv
+# R2 source archive: ALL(1).zip SHA256 dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3
+# Keep this file only for historical X1 traceability; do not use it as the complete current evidence inventory.
 # Format: SHA256  Path
 
 48e0b58fdce20e1e2be5e988e8ecc6a53480c6e81a7711f45057f9a832ebe85e  00_Environment_Hình và các bằng chứng xây dựng môi trường/Baseline/Kali/Kali_Baseline.txt
