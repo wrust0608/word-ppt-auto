@@ -570,3 +570,19 @@
 - X5 remains open for R2 micro-patch only.
 - CP5-USER PENDING.
 - X6 / Chapter 3 BLOCKED.
+
+
+## DEC-44 — Product-aligned Chapter 2 passes final external review
+
+- Ngày: 2026-10-06.
+- Final candidate: `a22c12d3bb3e6fcad8d828127f2a6ca5b67a097f`.
+- External review: `work/do-an/X5_PRODUCT_ALIGNED_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **97/100 — PASS**.
+- Blockers: **0**.
+- Final reviewer-side micro-adjustment reduced the chapter to **3,778 words** and removed residual result-like/absolute wording without changing experiment logic.
+- Structure: **7 H2 / 20 H3 LOCKED**.
+- Product alignment: PASS.
+- Evidence alignment against R3 final data lock: PASS.
+- Status: `CHAPTER_2_PRODUCT_ALIGNED_READY_FOR_USER_REVIEW`.
+- CP5-USER remains PENDING.
+- X6 / Chapter 3 remains BLOCKED until explicit user approval.
