@@ -1,103 +1,195 @@
-# EVIDENCE REGISTER — X1
+# EVIDENCE REGISTER — ALL(1).zip AUDITED R2
 
-Trạng thái: `X1_REVIEW_PENDING`
-Ngày: 2026-10-05
-Nguồn: `ALL.zip` do người dùng cung cấp.
+Trạng thái: `CANONICAL_EVIDENCE_REGISTER_R2`  
+Ngày audit: 2026-10-06  
+Nguồn byte gốc: `ALL(1).zip`
 
-## 1. Phân loại toàn gói evidence
+## 1. Identity của gói nguồn
 
-- Tổng file evidence trong 5 nhóm `00_Environment` → `04_Remediation_pfSense`: **168**
-- `CANONICAL`: **109**
-- `SUPPORTING`: **35**
-- `TROUBLESHOOTING`: **23**
-- `EXCLUDED_DUPLICATE`: **1**
+- ZIP size: **28,547,199 bytes**
+- SHA-256: `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`
+- Regular files: **174**
+- Extracted bytes: **30,910,261**
 
-Quy tắc ưu tiên: raw/local state > manifest/summary > screenshot > historical report.
+Full inventory:
+`work/do-an/evidence/ALL_2026_10_06/FULL_ARCHIVE_MANIFEST_ALL_2026_10_06.csv`
 
-## 2. Core canonical evidence dùng để ánh xạ claim
+Forensic review:
+`work/do-an/evidence/ALL_2026_10_06/EVIDENCE_AUDIT_R2_ALL_2026_10_06.md`
 
-| ID | Artifact | Vai trò | Claim tối đa |
-|---|---|---|---|
-| ENV-CORE-01 | `00_Environment.../PreDemo/Final_PreDemo_Audit.txt` | Canonical pre-demo state | OS/network/tool/SMB state tại thời điểm trước demo |
-| ENV-CORE-02 | `00_Environment.../PreDemo/Before_Demo_Snapshots.txt` | Snapshot lineage | snapshot `Before Demo` |
-| ENV-CORE-03 | `00_Environment.../PatchBaseline/MS17-010_Official_Mapping.txt` | Local patch ground truth | Windows target = UNPATCHED theo mapping đã đối chiếu |
-| ENV-CORE-04 | `00_Environment.../FirewallPrep/Windows_FirewallPrep_Final.txt` | Windows firewall prep | phạm vi rule phục vụ lab |
-| ENV-CORE-05 | `00_Environment.../Network/VirtualBox_HostOnly_Config.txt` | Network design | Host-Only baseline |
-| ENV-CORE-06 | `00_Environment.../Baseline/Kali/Kali_Baseline.txt` | Kali baseline | IP/route/tool baseline |
-| ENV-CORE-07 | `00_Environment.../Baseline/Windows/Windows_Baseline.txt` | Windows baseline | OS/SMB/service/firewall baseline |
-| S1-RAW-01 | `01_Scenario1.../raw/b2_host_discovery.*` | Scenario 1 host discovery | target/subnet host observation |
-| S1-RAW-02 | `01_Scenario1.../raw/b3_target_alive.*` | Target reachability | target alive at measurement time |
-| S1-RAW-03 | `01_Scenario1.../raw/b4_smb_ports.*` | TCP 139/445 | ports open from Kali; no vulnerability inference |
-| S1-RAW-04 | `01_Scenario1.../raw/b5_smb_version.*` | Service fingerprint | SMB/microsoft-ds service fingerprint |
-| S1-RAW-05 | `01_Scenario1.../raw/b6_smb_nse.*` | SMB NSE enumeration | SMB dialect/signing/capability observations only |
-| S1-META-01 | `Scenario1_Run_Manifest.txt` + `Scenario1_Summary.txt` | Run metadata | subordinate to raw |
-| S2-RAW-01 | `02_Scenario2.../raw/NSE-SMB-01_ports.*` | Reachability | 139/445 open |
-| S2-RAW-02 | `02_Scenario2.../raw/NSE-SMB-02_protocols.*` | Protocols | NT LM 0.12 + SMB2/3 dialect observations |
-| S2-RAW-03 | `02_Scenario2.../raw/NSE-SMB-03_signing.*` | Signing | signing observation only |
-| S2-RAW-04 | `02_Scenario2.../raw/NSE-SMB-04_ms17010.*` | MS17-010 remote probe | `UNKNOWN / NO USABLE SCRIPT RESULT` |
-| S2-META-01 | `Scenario2_Run_Manifest.txt` + `Scenario2_Summary.txt` | Run metadata | subordinate to raw |
-| B-LOCAL-01 | `SMBv1_Remediation_01_Before.png` | Case B before state | SMB1 enabled before intervention |
-| B-ACTION-01 | `SMBv1_Remediation_02_Action.png` | Intervention | SMB1 disable action |
-| B-LOCAL-02 | `SMBv1_Remediation_03_After_Local.png` | Case B after state | SMB1 disabled; other local states as shown |
-| B-RAW-01 | `03_Remediation_SMBv1.../raw/NSE-SMB-02_protocols.*` | Protocol retest | NT LM 0.12 no longer appears; SMB2/3 remain |
-| B-RAW-02 | `03_Remediation_SMBv1.../raw/NSE-SMB-04_ms17010.*` | MS17-010 retest | remote verdict remains UNKNOWN |
-| B-META-01 | `SMBv1_Remediation_Run_Manifest.txt` + `SMBv1_Remediation_Summary.txt` | Case B metadata | subordinate to raw/local state |
-| C-TOPO-01 | `pfSense_04_Bridge.png` + `pfSense_05_Bridge_Filtering.png` | Case C topology | transparent bridge/filtering setup |
-| C-RULE-01 | `pfSense_06_Baseline_Pass_Rule.png` | baseline rule | pre-block pass behavior |
-| C-RULE-02 | `pfSense_07_Block_Rule_Config.png` + `pfSense_08_Rule_Order.png` | block policy | configured TCP 139/445 block in correct order |
-| C-RAW-01 | `04_Remediation_pfSense.../raw/NSE-SMB-01_ports.*` | reachability retest | 139/445 filtered from Kali |
-| C-LOG-01 | `pfSense_10_Block_Log_CANONICAL.png` | causal attribution | pfSense rule blocked matching SMB SYN traffic |
-| C-RAW-02 | `04_Remediation_pfSense.../raw/NSE-SMB-04_ms17010.*` | MS17-010 retest | cannot classify through filtered path; UNKNOWN |
-| C-META-01 | `pfSense_Remediation_Run_Manifest.txt` + `pfSense_Remediation_Summary.txt` | Case C metadata | subordinate to raw/log |
+## 2. Phân loại toàn bộ 174 file
 
-## 3. Supporting evidence classes
+| Class | Count |
+|---|---:|
+| PRIMARY_RAW | 39 |
+| PRIMARY_VISUAL | 33 |
+| PRIMARY_LOCAL_STATE | 5 |
+| SECONDARY_META | 4 |
+| SECONDARY_INTERPRETATION | 4 |
+| SUPPORTING | 35 |
+| SUPPORTING_BASELINE | 7 |
+| HISTORICAL_EARLY_STATE | 7 |
+| TROUBLESHOOTING | 31 |
+| SOURCE_AUTHORITY | 3 |
+| HISTORICAL_REFERENCE | 2 |
+| STYLE_REFERENCE | 1 |
+| EXCLUDED_BYTE_DUPLICATE | 2 |
+| EXCLUDED_SUPERSEDED | 1 |
+| **TOTAL** | **174** |
 
-- Installation/basic screenshots and tool-install screenshots: `SUPPORTING`.
-- VM config text and auxiliary pfSense interface/tunable screenshots: `SUPPORTING`.
-- HostRepair, pfSense console experiments, PHP/touch/ctrl+c/repair logs: `TROUBLESHOOTING`.
-- `pfSense_CaseC_09_NSE01_Ports.png`: `EXCLUDED_DUPLICATE`; canonical file is `_CANONICAL.png`.
+Các số đếm X1 cũ `109 canonical / 35 supporting / 23 troubleshooting / 1 duplicate` được **supersede** bởi phân loại R2 này vì R2 kiểm kê toàn bộ 174 file theo exact path + SHA-256.
 
-## 4. Stable-ID rule
+## 3. Thứ tự ưu tiên bằng chứng
 
-Chương 2–4 phải trỏ tới các ID core ở mục 2. Nếu cần một screenshot phụ, Evidence Map được phép trỏ path cụ thể nhưng claim vẫn phải neo vào raw/local-state core evidence tương ứng.
+1. Machine-generated raw output hoặc direct local-state artifact.
+2. Direct screenshot của đúng trạng thái/lượt canonical.
+3. Final run manifest / final bounded closure nếu không mâu thuẫn direct evidence.
+4. Summary/interpretation.
+5. Historical reports.
 
-## 5. Provenance boundary
+Nếu direct artifact và manifest mâu thuẫn:
+- giữ cả hai;
+- gắn `CONFLICTING_EVIDENCE`;
+- không “hòa giải” bằng suy đoán;
+- claim tối đa phải bám direct artifact.
 
-Evidence gốc hiện nằm trong gói `ALL.zip` do người dùng cung cấp, không mặc định commit binary vào Git. Repo lưu:
-- stable Evidence ID;
-- canonical path trong archive;
-- SHA-256 manifest;
-- conflict policy;
-- inference boundary.
+## 4. Core stable IDs
 
-Nếu agent không truy cập được `ALL.zip` hoặc byte gốc, phải dừng phần cần evidence thay vì tái tạo từ report cũ.
+Exact archive paths, SHA-256 và evidence grade nằm tại:
 
+`work/do-an/evidence/ALL_2026_10_06/CANONICAL_EVIDENCE_MAP_ALL_ZIP.md`
 
-## 6. ALL(1).zip normalized ingest — 2026-10-06
+### Environment
+- `ENV-CORE-01`: final pre-demo audit.
+- `ENV-CORE-02`: final `Before Demo` snapshot verification.
+- `ENV-CORE-03`: MS17-010 local patch mapping/state.
+- `ENV-CORE-04`: final Windows Firewall lab-rule audit.
+- `ENV-CORE-05`: baseline Host-Only/NIC configuration.
+- `ENV-HIST-01`: early Kali pre-Nmap state; **not final demo baseline**.
+- `ENV-SUP-01`: early Windows baseline; subordinate to final state.
 
-The user supplied a newer packaged product archive `ALL(1).zip`. It was independently extracted and audited without using its folder structure as a report outline.
+### Scenario 1
+- `S1-RAW-01` subnet discovery.
+- `S1-RAW-02` target alive.
+- `S1-RAW-03` TCP 139/445.
+- `S1-RAW-04` service/version.
+- `S1-RAW-05` SMB NSE.
+- `S1-META-01` operator-command/run metadata.
 
-Source provenance:
-- archive size: 28,547,199 bytes;
-- archive SHA-256: `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`;
-- total extracted files: 174;
-- experimental/evidence files inside the five evidence groups: 168;
-- root reference/DOCX files: 6.
+### Scenario 2
+- `S2-RAW-01` ports.
+- `S2-RAW-02` protocols.
+- `S2-RAW-03` signing.
+- `S2-RAW-04` MS17-010 remote probe.
+- `S2-META-01` operator-command/run metadata.
 
-Normalized ingest files:
-- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_INGEST_ALL_2026_10_06.md`
-- `work/do-an/evidence/ALL_2026_10_06/CANONICAL_COMMANDS_FROM_ALL_ZIP.md`
-- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_USE_POLICY_ALL_ZIP.md`
-- `work/do-an/evidence/ALL_2026_10_06/CANONICAL_EVIDENCE_MAP_ALL_ZIP.md`
+### Case B
+- `B-LOCAL-01` before.
+- `B-ACTION-01` disable action.
+- `B-LOCAL-02` after.
+- `B-RAW-01` protocol retest.
+- `B-RAW-02` MS17-010 retest.
+- `B-META-01` operator-command/run metadata.
 
-These files supersede memory-based reconstruction of exact commands, run chronology, and canonical-vs-troubleshooting classification.
+### Case C
+- `C-IFACE-01`: interface assignment.
+- `C-BRIDGE-01`: bridge membership.
+- `C-TUNE-DIRECT-01`: direct screenshot proving pfil_member=1 and pfil_bridge=0.
+- `C-RULE-01`: baseline pass rule.
+- `C-RULE-02`: configured block rule.
+- `C-RULE-03`: block-over-pass order.
+- `C-RAW-01`: 139/445 filtered retest.
+- `C-RAW-02`: MS17-010 retest through filtered path.
+- `C-VIS-01`: canonical port screenshot.
+- `C-LOG-01`: canonical firewall log, **CONFLICTING rule-label attribution**.
+- `C-VIS-02`: canonical MS17-010 screenshot.
+- `C-META-01`: final manifest; supports operator commands, topology names, `pfil_onlyip=1`, version/snapshot.
+- `C-CLOSURE-01`: mixed chronology; only Section 21 is final closure.
 
-Important lineage corrections locked by the ingest:
-1. `Kali_Baseline.txt` is historical pre-tool state: Nmap was not yet installed.
-2. Final pre-demo state later contains Nmap 7.99 and all required NSE scripts.
-3. `Final_PreDemo_Audit.txt` at 08:20 precedes creation of `Before Demo`; `Before_Demo_Snapshots.txt` at 08:22 is the final snapshot state.
-4. VirtualBox report prose should use 7.2.20; exact build `7.2.20r175154` is supported by later Case C/repair evidence if revision is needed.
-5. Case C pre-repair/aborted/debug artifacts remain preserved but are excluded from canonical experimental conclusions.
-6. No canonical Case A patch experiment exists in the archive.
+## 5. Nmap raw integrity
 
-For Chapters 2–4, exact Nmap command flags must come from `CANONICAL_COMMANDS_FROM_ALL_ZIP.md`, not from earlier prose drafts.
+There are **13 canonical scan groups**, each with:
+- `.nmap`
+- `.xml`
+- `.gnmap`
+
+For all 13 groups, the Nmap argv is identical across the three formats.
+
+Result: **13/13 PASS**.
+
+Repo-local readable raw snapshot:
+`work/do-an/evidence/ALL_2026_10_06/CANONICAL_NMAP_TEXT_OUTPUTS.md`
+
+Operator-vs-raw command lineage:
+`work/do-an/evidence/ALL_2026_10_06/COMMAND_LINEAGE_MATRIX.md`
+
+## 6. Chronology locks
+
+1. `Kali_Baseline.txt` is historical pre-Nmap state. Final pre-demo audit supersedes it for tool state.
+2. `Final_PreDemo_Audit.txt` records no `Before Demo` snapshot at ~08:20; `Before_Demo_Snapshots.txt` verifies its creation/current state at ~08:22. Final truth: snapshot exists.
+3. `RUN4_PAUSE_STATE_REPORT.txt` contains both troubleshooting history and later final closure. Only Section 21 supports final Case C closure.
+4. Case C pre-repair/aborted/debug attempts are not canonical result evidence.
+5. No complete Case A patch experiment exists.
+
+## 7. Case C evidence-grade lock
+
+### Directly proven
+- CASE_C_KALI=em2 and CASE_C_WINDOWS=em3.
+- bridge0 membership.
+- `pfil_member=1`, `pfil_bridge=0`.
+- Block rule config: IPv4 TCP, source `.56.10`, destination `.56.20`, SMB_Ports, logging enabled.
+- Block row above pass row.
+- canonical retest: 139/445 filtered/no-response.
+- canonical MS17-010 retest: 445 filtered, no script verdict.
+- firewall log at canonical scan time: blocked TCP SYN from `.56.10` to `.56.20:139/445` on CASE_C_KALI.
+
+### Supported by final metadata, not direct screenshot
+- data-plane Internal Network names `ATTT-PFS-KALI`, `ATTT-PFS-WIN`.
+- management Host `.57.1` ↔ pfSense em1 `.57.2`.
+- `pfil_onlyip=1`.
+- pfSense CE 2.9.0-RELEASE.
+- snapshot `Before Case C`.
+
+### Unresolved conflict
+`C-LOG-01` visible Rule label:
+`CASE C baseline pass Kali to Windows (100000104)`
+
+Manifest/closure says:
+`CASE C - Block SMB Kali to Windows (1000000104)`.
+
+Allowed claim:
+**pfSense log shows the matching SMB SYN traffic was blocked in the pfSense path during the canonical scan.**
+
+Forbidden until resolved:
+**the log rows definitively match the configured named Case C Block rule.**
+
+The configured Block rule's existence and order remain independently proven by `C-RULE-02` and `C-RULE-03`.
+
+## 8. Negative result policy
+
+- Scenario 2 MS17-010: `UNKNOWN / NO USABLE SCRIPT RESULT`.
+- Case B MS17-010: `UNKNOWN / NO USABLE SCRIPT RESULT`.
+- Case C MS17-010: 445 filtered, no verdict -> `UNKNOWN` from that vantage point.
+- Local patch state: `UNPATCHED` is independent from remote verdict.
+
+Do not create causes, statuses, NTSTATUS values, exploit success, or safety claims absent from direct evidence.
+
+## 9. Duplicate/exclusion lock
+
+Exact byte duplicates:
+1. `Windows_Baseline_02_SystemInfo_OS.png` == `Windows_Baseline_03_SystemInfo_Hotfix.png`.
+2. `pfSense_05_Bridge_Filtering.png` == `pfSense_tunables.png`.
+
+Superseded noncanonical:
+- `pfSense_CaseC_09_NSE01_Ports.png` -> use `pfSense_CaseC_09_NSE01_Ports_CANONICAL.png`.
+
+## 10. Provenance boundary for Chapters 2–4
+
+Archive folders are **not** report sections.
+
+Chapter structure must be designed independently. After structure is approved:
+- Chapter 2 maps method/configuration claims to this register.
+- Chapter 3 maps each result claim to raw/direct evidence.
+- Chapter 4 compares only verified states.
+
+No Chapter 3 prose is permitted before CP5-USER approval of revised Chapter 2.
