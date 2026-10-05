@@ -19,7 +19,8 @@
 | OUTLINE | LOCKED_CANONICAL_2026_10_05 | work/do-an/OUTLINE.md | X3B user-approved; Ch2–4 bám Truth Matrix/Evidence Map |
 | CHAPTER_ARGUMENT | LOCKED_CANONICAL_INDEX | work/do-an/CHAPTER_ARGUMENT.md | Hợp đồng enterprise lịch sử đã archive; canonical contracts tách Ch2/3/4 |
 | CHAPTER_1 | DEPTH_REVISED_REVIEW_PENDING | work/do-an/CHAPTER_1.md | Đã viết lại cơ chế và phân tích; 22 mục/78 lượt dẫn; xem DEPTH_REVIEW_2026_10_04.md |
-| CHAPTER_2 | HISTORICAL_DRAFT_SUPERSEDED / X5_READY | work/do-an/CHAPTER_2.md | Bản cũ không đại diện canonical lab; sẽ viết lại theo contract khóa |
+| CHAPTER_2 | X5_DRAFT_READY_FOR_EXTERNAL_REVIEW | work/do-an/CHAPTER_2.md | Bản thảo canonical đã viết lại (4.432 từ, 9 mục lớn 2.1–2.9, 42 tiểu mục cấp 3); sẵn sàng cho external review |
+| CHAPTER_2_X5_SELF_REVIEW | READY_FOR_EXTERNAL_REVIEW | work/do-an/CHAPTER_2_X5_SELF_REVIEW.md | Báo cáo tự đánh giá tuân thủ contract, fact, 42/42 headings, 0 unknown Evidence ID và QA |
 | REVIEW_REPORT | HISTORICAL_REOPENED | work/do-an/REVIEW_REPORT.md | Điểm PASS cũ không chứng nhận bản hiện hành; dùng REVISION_PASS_2026_10_04.md |
 | STYLE_REVIEW | REVIEWED_ADVISORY | work/do-an/STYLE_REVIEW.md | Không còn VI011; ba VI012 đã phân loại; không thay kiểm định nội dung hoặc xuất bản |
 | AUTHOR_VOICE_CALIBRATION | APPROVED_CHOICES_RECORDED | work/do-an/AUTHOR_VOICE_CALIBRATION.md | 1B, 2A, 3A và điều chỉnh thuật ngữ đã được tác giả xác nhận; không yêu cầu duyệt lại giọng |
@@ -233,3 +234,23 @@
 - Execution Plan chuyển sang `ACTIVE / X4_X5_READY_AFTER_X3B_APPROVAL`.
 - Chương 2 cũ được coi là historical draft; X5 phải viết lại từ contract canonical.
 - Chưa cho phép Chương 3/4 prose trước khi Chương 2 đi qua review riêng; X6/X7 vẫn theo gate.
+
+## X5 — Soạn thảo Chương 2 Canonical (2026-10-05)
+
+- Trạng thái nhiệm vụ: `X5_DRAFT_READY_FOR_EXTERNAL_REVIEW` (Không tự tuyên bố PASS; chờ người dùng và external review phê duyệt).
+- Tệp kết quả:
+  - `work/do-an/CHAPTER_2.md`: Bản thảo canonical hoàn chỉnh 4.432 từ, bám sát cấu trúc 9 mục lớn (2.1–2.9) và đúng 42 tiểu mục cấp 3 theo `OUTLINE.md`.
+  - `work/do-an/CHAPTER_2_X5_SELF_REVIEW.md`: Báo cáo tự đánh giá chi tiết sau corrective pass: đối soát 42/42 headings, 100% Stable Evidence IDs từ `EVIDENCE_REGISTER.md` (UNKNOWN_EVIDENCE_ID = 0), audit 10 trích dẫn IEEE tuần tự [1]–[10] khớp `SOURCE_LEDGER.md`, rà soát `CVE-2017-7494 count = 0`, không rò rỉ kết quả sang Chương 3.
+- Kiểm tra tự động:
+  - `lint_vi_academic.py`: 0 lỗi, 0 cảnh báo ("Không phát hiện mẫu văn phong cần xem xét.").
+  - `audit_ieee_citations.py`: 0 lỗi (cấu trúc [1]–[10] tuần tự, không missing, không orphan).
+  - `validate_project.py`: PASS.
+  - `unittest`: 7/7 tests PASS.
+  - `git diff --check`: Clean.
+  - `heading alignment`: 42/42 level-3 headings khớp chính xác OUTLINE.md (missing=0, extra=0, reordered=0).
+  - `evidence validation`: UNKNOWN_EVIDENCE_ID = 0 trên cả hai tệp.
+- Ranh giới bảo toàn:
+  - Không sửa `EXPERIMENTAL_TRUTH_MATRIX.md`.
+  - Không viết Chương 3–4 và không dựng DOCX.
+  - Baseline NSE-MS17-010 giữ chuẩn `UNKNOWN / NO USABLE SCRIPT RESULT`.
+  - Case A giữ chuẩn phân tích lý thuyết/khuyến nghị, chưa có canonical result.

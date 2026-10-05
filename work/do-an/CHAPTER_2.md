@@ -1,362 +1,295 @@
 # CHƯƠNG 2. THIẾT KẾ VÀ TRIỂN KHAI MÔ HÌNH THỰC NGHIỆM
 
-Chương 2 thiết kế môi trường kiểm thử SMB dựa trên cơ sở lý thuyết ở Chương 1. Mô hình gồm các phân vùng mạng, chuỗi cấu hình phòng thủ và điểm thu thập dữ liệu để xác định điều kiện của đường tấn công đang xét. Client hợp lệ được bố trí riêng nhằm kiểm tra ảnh hưởng của biện pháp phòng thủ lên hoạt động chia sẻ tệp.
+Chương 2 trình bày thiết kế kiến trúc môi trường lab và quy trình kiểm thử dịch vụ SMB cùng lỗ hổng MS17-010. Trọng tâm của chương là mô hình thực nghiệm an toàn, tái lập, lưu trữ bằng chứng nguyên bản và phân định năm lớp quan sát từ kết nối mạng đến bản vá nội bộ.
 
----
+## 2.1. Yêu cầu và nguyên tắc thiết kế
 
-## 2.1. YÊU CẦU VÀ NGUYÊN TẮC THIẾT KẾ MÔ HÌNH THỰC NGHIỆM
+### 2.1.1. Mục tiêu của môi trường thực nghiệm
+Môi trường thực nghiệm được thiết kế nhằm khảo sát dịch vụ SMB và đánh giá trạng thái an ninh của lỗ hổng MS17-010 trong điều kiện kiểm soát chặt chẽ. Trọng tâm của mô hình là phân định rõ ràng giữa các lớp quan sát từ xa và sự thật bản vá nội bộ, tạo cơ sở thực chứng để đánh giá hiệu lực của các biện pháp giảm thiểu.
 
-### 2.1.1. Nguyên tắc đạo đức nghề nghiệp và phạm vi kiểm thử được ủy quyền
+### 2.1.2. Phạm vi, nguyên tắc an toàn và giới hạn đạo đức
+Phạm vi thực nghiệm tuân thủ nghiêm ngặt các nguyên tắc kiểm thử an ninh theo hướng dẫn NIST SP 800-115 [1]. Nghiên cứu chỉ áp dụng các kỹ thuật quét cổng, trinh sát dịch vụ và thăm dò logic không phá hủy. Quy trình nghiêm cấm phát tán mã khai thác vũ khí hóa, không thực hiện tấn công chiếm quyền điều khiển và không gây nghẽn dịch vụ mạng.
 
-Phạm vi kiểm thử gồm các máy ảo do nhóm quản lý trong lab; địa chỉ mục tiêu, tác vụ được phép và điều kiện dừng phải được xác định trước theo nguyên tắc lập kế hoạch kiểm thử của NIST [1]. Chương này thiết kế phương pháp, chưa trình bày kết quả demo. Các thao tác có khả năng gây mất ổn định chỉ được xét trên mục tiêu đã lưu điểm khôi phục và dữ liệu thử nghiệm. Khi xảy ra sự cố, lượt thử được dừng để lưu bằng chứng và phục hồi, thay vì tiếp tục thử trên trạng thái đã bị tác động.
+### 2.1.3. Nguyên tắc cô lập mạng và khả năng khôi phục
+Thực nghiệm đòi hỏi cô lập nghiêm ngặt nhằm ngăn ngừa mất ổn định dịch vụ và phát tán gói tin ra hạ tầng dùng chung. Môi trường lab được tách rời hoàn toàn khỏi mạng nội bộ và Internet. Hệ thống áp dụng cơ chế chụp ảnh trạng thái `Before Demo` trước khi phát lệnh đo. Sau mỗi kịch bản can thiệp, máy ảo được hoàn nguyên về mốc ban đầu để loại bỏ sai số lũy tích.
 
-### 2.1.2. Yêu cầu về tính cô lập và kiểm soát rủi ro mạng
+### 2.1.4. Nguyên tắc thu thập, truy vết và bảo toàn bằng chứng
+Tính truy vết yêu cầu mọi kết luận đều đối chiếu được với dữ liệu gốc ghi nhận tại thời điểm phát lệnh. Quy trình chuẩn hóa việc lưu trữ raw text log cho tất cả lệnh Nmap và PowerShell. Mỗi tệp dữ liệu được gán mã Stable Evidence ID chuẩn hóa từ sổ đăng ký bằng chứng, ghi rõ thời gian đo và tham số thực thi.
 
-Tính cô lập phải được xác định bằng cấu hình đường kết nối. Các card mạng lab chỉ nối vào hệ thống chuyển mạch ảo nội bộ; không dùng kết nối chuyển tiếp tới mạng cơ sở đào tạo hoặc Internet thật. Gateway của các máy trỏ về tường lửa lab, địa chỉ được quản lý riêng và WAN chỉ là mạng mô phỏng. Trước lượt thử cần kiểm tra tuyến và các card đang hoạt động, vì một card bổ sung có thể tạo đường kết nối ngoài thiết kế. Log và dữ liệu phát sinh được giữ trong phạm vi nghiên cứu.
+## 2.2. Kiến trúc môi trường thực nghiệm
 
-Tường lửa vừa thực thi chính sách giữa các phân vùng vừa tạo điểm quan sát lưu lượng. Theo nguyên tắc chính sách lọc của NIST, quy tắc cần bám nguồn, đích và dịch vụ được phép [2]. Trong lab, yêu cầu này được cụ thể hóa bằng hai nguồn truy cập riêng: trạm kiểm thử và Client nghiệp vụ. Cấu hình cô lập giúp giới hạn phạm vi tác động; snapshot phục vụ phục hồi mục tiêu khi phép thử gây sự cố.
+### 2.2.1. Nền tảng Oracle VirtualBox
+Nền tảng Oracle VM VirtualBox 7.2.20 r170876 được lựa chọn làm hạ tầng thực thi cho toàn bộ mô hình lab. Cơ chế mạng Host-Only Adapter liên kết các máy ảo qua switch ảo nội bộ, không bắc cầu ra card mạng vật lý của máy chủ.
 
-### 2.1.3. Mô hình chuỗi điều kiện của đường tấn công (Causal-Chain Model)
-
-Đường tấn công được phân thành khả năng tiếp cận mạng ($R$), phản hồi SMB ($S$), chấp nhận SMBv1 ($D$), trạng thái lỗ hổng ($V$), thực thi mã thành công ($E$) và kênh kết nối ngược ($C$). Trong cấu hình lab, thực thi thành công cần:
-
-$$E \implies R \land S \land D \land V$$
-
-Chiều suy luận ngược không được bảo đảm: các điều kiện cần cùng thỏa mãn chưa chứng minh $E$, vì bước thực thi còn phụ thuộc vào công cụ và trạng thái mục tiêu. Kịch bản dùng kết nối ngược còn cần $C$ để có phiên tương tác. Không dùng kết quả $E$ làm tiền điều kiện để suy ra chính nó.
-
-$R$ được xét bằng lưu lượng và chính sách; $S$ cần phản hồi SMB, còn $D$ cần phản hồi thương lượng. $V$ được đánh giá bằng dấu hiệu thăm dò cùng build, bản vá và cấu hình. $E,C$ cần bằng chứng thực thi và kết nối tương ứng [3], [4]. Ví dụ giả định, Server chỉ chấp nhận SMBv2 có thể thỏa $R,S$ nhưng không thỏa $D$. Server chấp nhận SMBv1 nhưng không tạo phiên chưa chỉ ra lỗi ở thực thi hay đường ngược. Tách các điều kiện giúp phân biệt hai kết quả này.
-
-Mỗi điều kiện được ghi `True`, `False` hoặc `Unknown`; giá trị cuối chỉ phần chưa đủ dữ liệu. Khi bước trước bị chặn, không gán mọi bước sau bằng `False`. Một điều kiện cần được xác nhận không thỏa mãn cho phép kết luận đường tấn công đang xét bị chặn tại cấu hình và nguồn kiểm tra đó.
-
----
-
-## 2.2. THIẾT KẾ KIẾN TRÚC MẠNG LAB DOANH NGHIỆP MÔ PHỎNG
-
-### 2.2.1. Cấu trúc mạng phân đoạn 3 VLAN
-
-Mô hình tách Server tại VLAN 10, trạm kiểm thử tại VLAN 20 và Client hợp lệ tại VLAN 30; địa chỉ chi tiết ở Bảng 2.1. Hai trạm truy cập phục vụ hai góc quan sát trên cùng Server: nguồn kiểm thử có tiếp cận được không và nguồn nghiệp vụ còn sử dụng tài nguyên được không. Nếu chỉ có một nguồn, bị từ chối truy cập sẽ khó phân biệt với mất dịch vụ. VLAN tạo sự phân chia mạng; kiểm soát giữa các vùng phụ thuộc đường định tuyến và chính sách tường lửa [2].
-
-### 2.2.2. Nguyên lý Inter-VLAN Routing và Firewall Inspection
-
-Firewall/UTM là điểm định tuyến giữa các VLAN (Inter-VLAN Routing), với các địa chỉ gateway `192.168.10.1`, `192.168.20.1` và `192.168.30.1`. Switch chỉ chuyển mạch lớp 2, không tạo tuyến thay thế giữa các phân vùng. Các chính sách được kiểm tra tại điểm định tuyến này và log được thu tại đây. Mạng WAN mô phỏng `172.16.0.0/24` không có đường kết nối tới Internet thật.
-
-Kiểm tra trạng thái kết nối (Stateful Inspection) phân biệt một kết nối mới với các gói thuộc kết nối đã được chấp nhận. NIST mô tả bảng trạng thái dùng thông tin địa chỉ, cổng và trạng thái kết nối để hỗ trợ quyết định lọc [2]. Trong lab, phản hồi từ Server trong kết nối SMB tới cổng 445 cần được phân biệt với một kết nối TCP mới do Server khởi tạo tới trạm kiểm thử. Cho phép phản hồi của kết nối SMB không tự đồng nghĩa với cho phép kết nối mới đó.
-
-Ở $S_0$, $S_1$ và $S_2$, thiết kế cho phép trạm kiểm thử tại VLAN 20 truy cập TCP 139/445 của mục tiêu, đồng thời có quy tắc riêng cho kênh thử nghiệm từ mục tiêu về `192.168.20.10:4444`. Quy tắc sau phục vụ đánh giá $C$ khi dùng kết nối ngược, nên phải được ghi riêng với quy tắc truy cập SMB. Nếu có bằng chứng thực thi nhưng kết nối ngược bị chặn, nguyên nhân không tạo được phiên tương tác có thể nằm ở đường trở về; không được dùng kết quả này để xác nhận mục tiêu đã vá.
-
-Ở $S_3$, quy tắc chặn và ghi log được áp dụng cho lưu lượng TCP 139/445 từ VLAN 20 tới VLAN 10, còn truy cập TCP 445 từ VLAN 30 vẫn được cho phép. Khi xác nhận lưu lượng kiểm thử bị chặn tại chiều vào, đề tài có thể kết luận đường tấn công này bị gián đoạn ở $R$. Không từ đó suy ra quy tắc chiều ra đã chặn mọi kết nối ngược: hiệu lực của quy tắc chiều ra là câu hỏi khác và cần phép kiểm tra riêng nếu được đưa vào phạm vi đánh giá.
-
-### 2.2.3. Sơ đồ Topo mạng kiến trúc doanh nghiệp mô phỏng
-
-Sơ đồ 2.1 mô tả chi tiết kiến trúc kết nối và phân bổ phân vùng mạng trong môi trường thực nghiệm:
+Kiến trúc kết nối mạng giữa các thành phần thực nghiệm được mô tả trong Hình 2.1.
 
 ```
 +-------------------------------------------------------------------------+
-|                  MẠNG DOANH NGHIỆP MÔ PHỎNG (ENTERPRISE LAB)            |
+|                  NỀN TẢNG ẢO HÓA ORACLE VM VIRTUALBOX                   |
 |                                                                         |
-|  [SIMULATED WAN: 172.16.0.0/24] (Cô lập hoàn toàn, không Internet thật) |
-|                                 |                                       |
-|                                 v (WAN Interface: 172.16.0.2)           |
-|  +-------------------------------------------------------------------+  |
-|  |                 FIREWALL / UTM APPLIANCE (pfSense / VyOS)         |  |
-|  |   - Điểm duy nhất thực hiện Inter-VLAN Routing                    |  |
-|  |   - Default Gateway: .10.1 (VLAN 10), .20.1 (VLAN 20), .30.1 (VLAN30)|
-|  |   - Điểm thực thi chính sách lọc gói & Stateful Inspection        |  |
-|  +-----------------------------------+-------------------------------+  |
-|                                      |                                  |
-|                                      | Trunk 802.1Q (VLAN 10, 20, 30)   |
-|                                      v                                  |
-|  +-------------------------------------------------------------------+  |
-|  |               CORE SWITCH LAYER 2 (802.1Q Switching Only)         |  |
-|  |               (Không định tuyến L3, chỉ trunking và access)       |  |
-|  +-------------------+---------------+-------------------------------+  |
-|                      |               |               |                  |
-|        Access VLAN 10|  Access VLAN 20|  Access VLAN 30|                 |
-|                      v               v               v                  |
-|             +----------------+ +---------------+ +------------------+   |
-|             | SERVER SUBNET  | |PENTEST SUBNET | | USER SUBNET      |   |
-|             | VLAN 10        | | VLAN 20       | | VLAN 30          |   |
-|             | 192.168.10.0/24| |192.168.20.0/24| | 192.168.30.0/24  |   |
-|             +----------------+ +---------------+ +------------------+   |
-|                      |                 |                 |              |
-|                      v                 v                 v              |
-|             +----------------+ +---------------+ +------------------+   |
-|             | Target-Win7    | | Attacker-Kali | | Client-WinUser   |   |
-|             | 192.168.10.20  | | 192.168.20.10 | | 192.168.30.50    |   |
-|             | Target 4-State | | Trạm kiểm thử | | Trạm đối chứng   |   |
-|             | (S0->S1->S2->S3| | Nmap/NSE/MSF  | | nghiệp vụ hợp lệ |   |
-|             +----------------+ +---------------+ +------------------+   |
+|  +-----------------------+                   +-----------------------+  |
+|  |     MÁY KIỂM THỬ      |                   |      MÁY MỤC TIÊU     |  |
+|  |      KALI LINUX       |                   | WINDOWS SERVER 2012R2 |  |
+|  |  (Kernel 6.12.33)     |                   |     (Build 9600)      |  |
+|  |  IP: 192.168.56.10/24 |                   |  IP: 192.168.56.20/24 |  |
+|  +-----------+-----------+                   +-----------+-----------+  |
+|              |                                           |              |
+|              +========== MẠNG HOST-ONLY: 192.168.56.0/24 ============+  |
 |                                                                         |
+|  [Ranh giới kỹ thuật: Không Default Gateway | Không DHCP | Không NAT]   |
 +-------------------------------------------------------------------------+
 ```
-*Sơ đồ 2.1: Sơ đồ topo mạng phân đoạn doanh nghiệp mô phỏng (Enterprise Network Topology)*
+*Hình 2.1. Kiến trúc mô hình mạng Host-Only cô lập trong môi trường thực nghiệm*
 
-### 2.2.4. Phân bổ không gian địa chỉ IP và thông số kỹ thuật
+### 2.2.2. Máy kiểm thử Kali Linux
+Máy kiểm thử sử dụng bản phân phối Kali Linux 64-bit (nhân Linux Kernel 6.12.33-amd64) theo tài liệu chuẩn của dự án Kali Linux [2], phục vụ đánh giá an ninh mạng chuyên nghiệp. Máy ảo được cấu hình 2 vCPU và 4096 MB RAM, gán địa chỉ IP tĩnh `192.168.56.10/24`. Bộ công cụ Nmap cùng thư viện NSE được cài đặt sẵn để thực thi các kịch bản kiểm tra dịch vụ SMB.
 
-Ma trận thông số mạng, phân bổ địa chỉ IP và cấu hình giao diện mạng được chuẩn hóa tại Bảng 2.1:
+### 2.2.3. Máy mục tiêu Windows Server 2012 R2
+Máy mục tiêu là đối tượng đánh giá, cài đặt Windows Server 2012 R2 Standard Evaluation 64-bit (Build 9600), cấu hình 2 vCPU và 4096 MB RAM, gán địa chỉ IP tĩnh `192.168.56.20/24`. Dịch vụ chia sẻ tệp LanmanServer mở socket lắng nghe trên cổng TCP 445 cho Direct-hosted SMB và TCP 139 cho NetBIOS over TCP/IP theo tài liệu kỹ thuật của Microsoft [3].
 
-*Bảng 2.1: Ma trận phân bổ địa chỉ IP, VLAN và thông số kỹ thuật các nút mạng*
+### 2.2.4. Mạng Host-Only và bảng địa chỉ IP
+Mạng Host-Only sử dụng dải địa chỉ IPv4 `192.168.56.0/24`, tắt dịch vụ DHCP và không cấu hình Default Gateway hay DNS. Thông số chi tiết của các nút mạng và phân bổ tài nguyên phần cứng được tổng hợp trong Bảng 2.1.
 
-| Tên nút mạng | Phân vùng mạng | VLAN ID | Địa chỉ IP / Subnet | Default Gateway | Dịch vụ lắng nghe chính | Vai trò nghiên cứu |
-|---|---|:---:|---|---|---|---|
-| **Firewall/UTM** | Định tuyến biên | 10, 20, 30 | `192.168.10.1`, `20.1`, `30.1` | Không có (Root GW) | Lọc gói, ghi nhật ký, Inter-VLAN routing | Điểm kiểm soát chính sách và bẻ gãy tiền điều kiện $R$ |
-| **Attacker-Kali** | Pentest Subnet | 20 | `192.168.20.10/24` | `192.168.20.1` | Cổng 4444 chỉ mở khi kiểm tra kênh ngược trong lab | Trạm phát sinh lưu lượng kiểm thử (Nmap, Metasploit) |
-| **Target-Win7** | Server Subnet | 10 | `192.168.10.20/24` | `192.168.10.1` | TCP 445 (`microsoft-ds`), TCP 139 (`netbios-ssn`) | Đối tượng kiểm thử đơn biến qua 4 trạng thái snapshot |
-| **Client-WinUser**| User Subnet | 30 | `192.168.30.50/24` | `192.168.30.1` | Client SMB Workstation | Đối chứng nghiệp vụ dương tính (Positive Business Control) |
+*Bảng 2.1. Thông số kỹ thuật của các nút mạng trong môi trường thực nghiệm*
 
----
+| Tham số cấu hình | Máy kiểm thử (Kali Linux) | Máy mục tiêu (Windows Server) | Ghi chú kỹ thuật |
+| :--- | :--- | :--- | :--- |
+| **Hệ điều hành** | Kali Linux (Kernel 6.12.33) | Windows Server 2012 R2 Eval | Nền tảng 64-bit chuẩn hóa |
+| **Số hiệu bản dựng** | Kali Rolling (Nmap 7.99) | Build 9600 (Trạng thái RTM) | Xác định mã định danh OS |
+| **Địa chỉ IP / Mask**| `192.168.56.10 / 24` | `192.168.56.20 / 24` | Gán tĩnh, tắt DHCP |
+| **Cổng đo đạc** | Dải cổng cao ngẫu nhiên | TCP 139, TCP 445 | LanmanServer lắng nghe |
+| **Mạng ảo hóa** | Host-Only Adapter | Host-Only Adapter | Không Gateway, cô lập |
+| **Tài nguyên** | 2 vCPU, 4096 MB RAM | 2 vCPU, 4096 MB RAM | Đủ tài nguyên đo đạc |
 
-## 2.3. MÔ HÌNH MÁY TRẠNG THÁI ĐƠN BIẾN (SINGLE-VARIABLE CAUSAL STATE MACHINE)
+### 2.2.5. Kiểm tra kết nối trong phạm vi lab
+Trước khi đo đạc bảo mật, quy trình kiểm tra kết nối hai chiều bằng ICMP Echo Request (`ping`) giữa `192.168.56.10` và `192.168.56.20`. Kết quả xác nhận độ trễ truyền gói tin dưới 1 ms và tỷ lệ mất gói bằng 0%, bảo đảm kênh truyền vật lý đạt độ tin cậy.
 
-### 2.3.1. Thiết kế chuỗi 4 trạng thái Snapshot trên cùng một hệ thống mục tiêu
+## 2.3. Chuẩn bị trạng thái baseline
 
-Đề tài dùng một máy ảo Windows 7 SP1 x64 qua chuỗi $S_0 \to S_1 \to S_2 \to S_3$. Cách này giữ chung hệ điều hành và cấu hình nền, rồi bổ sung từng biện pháp theo thứ tự. Mỗi trạng thái được lưu snapshot và kèm hồ sơ build, bản vá, SMBv1, quy tắc mạng. Trước lượt thử cần xác nhận lại hồ sơ; snapshot không tự bảo đảm mọi hoạt động nền hoặc bố cục bộ nhớ đều giống nhau.
+### 2.3.1. Trạng thái hệ điều hành và dịch vụ SMB
+Đường cơ sở phản ánh cấu hình dịch vụ nguyên bản. Dịch vụ LanmanServer đặt ở chế độ tự động chạy (`Running`), mở socket lắng nghe trên hệ thống.
 
-Ở $S_0$, mục tiêu dự kiến là Windows 7 SP1 x64 Build 7601, chưa vá MS17-010, SMBv1 bật và cho phép trạm kiểm thử truy cập TCP 139/445. Cần đối chiếu cả cập nhật thay thế; thiếu riêng KB4012212 chưa đủ để xác nhận chưa vá [5]. $S_1$ bổ sung KB4012212 phù hợp, giữ SMBv1 và chính sách mạng để kiểm tra thay đổi ở $V$. Nếu cổng đóng sau cập nhật, phải giải thích trước khi quy kết phản hồi thăm dò cho bản vá.
+### 2.3.2. Trạng thái SMBv1/SMB2 và TCP 139/445
+Trên Windows Server 2012 R2 mặc định, cả SMBv1 và SMBv2/SMB3 đều bật để tương thích ngược. Lệnh `Get-SmbServerConfiguration` xác nhận hai giao thức hoạt động, mở cổng TCP 139 và 445.
 
-$S_2$ giữ bản vá và vô hiệu hóa Server SMBv1 theo hướng dẫn cho phiên bản Windows tương ứng [6]. Thương lượng mới kiểm tra thay đổi ở $D$, tác vụ Client kiểm tra khả năng sử dụng SMBv2. $S_3$ giữ cấu hình đó, chặn TCP 139/445 từ VLAN 20 tới VLAN 10 và cho phép TCP 445 từ VLAN 30. Lưu lượng cùng log kiểm tra thay đổi ở $R$; nguồn hợp lệ kiểm tra riêng chức năng Server.
+### 2.3.3. Cấu hình Windows Firewall phục vụ phép đo
+Chính sách Windows Firewall được điều chỉnh có kiểm soát để đo đạc chuẩn xác. Nhóm kích hoạt luật `File and Printer Sharing (SMB-In)` cho địa chỉ `192.168.56.10`, bảo đảm phản hồi phản ánh đúng logic dịch vụ.
 
-Chuỗi này có tính tích lũy: $S_2$ có cả bản vá và việc tắt SMBv1, còn $S_3$ có thêm phân đoạn mạng. Do đó, so sánh việc tạo phiên giữa $S_0$ và $S_3$ không xác định được đóng góp riêng của từng biện pháp. Các chuyển tiếp liền kề chỉ hỗ trợ phân tích khi phép đo tương ứng xác nhận điều kiện đã thay đổi: bản vá và dấu hiệu tại $S_1$, phiên bản tại $S_2$, đường tiếp cận tại $S_3$. Thiết kế chưa bao gồm mọi tổ hợp phòng thủ, nên không dùng nó để suy ra hiệu quả độc lập hoặc tương tác của mọi tổ hợp.
+### 2.3.4. Xác định trạng thái bản vá MS17-010 và srv.sys
+Trạng thái bản vá được kiểm tra trực tiếp trên máy mục tiêu. Lệnh `Get-HotFix` xác nhận chưa cài đặt bản vá KB4012213 hoặc KB4012216. Tệp trình điều khiển `srv.sys` tại đường dẫn hệ thống ghi nhận phiên bản `6.3.9600.16421`, thấp hơn ngưỡng an toàn `6.3.9600.18604` theo khuyến cáo trong bản tin bảo mật MS17-010 của Microsoft [4], xác lập sự thật mặt đất nội bộ là `UNPATCHED`.
 
-### 2.3.2. Vai trò đối chứng nghiệp vụ dương tính của trạm Client tại VLAN 30
+### 2.3.5. Kiểm tra Nmap và NSE script trên Kali
+Tại máy kiểm thử Kali Linux, lệnh `nmap --version` xác nhận phiên bản Nmap đang hoạt động theo chuẩn phát hành công cụ quét mạng của Gordon Lyon [5]. Thư mục `/usr/share/nmap/scripts/` chứa đầy đủ các kịch bản: `smb-protocols.nse`, `smb-security-mode.nse`, `smb2-security-mode.nse` và `smb-vuln-ms17-010.nse`.
 
-Client tại VLAN 30 là đối chứng cho khả năng phục vụ tác vụ hợp lệ. Ở mỗi trạng thái, `Client-WinUser` (`192.168.30.50`) thiết lập kết nối tới `\192.168.10.20\ShareData` bằng tài khoản được cấp quyền, đọc tệp thử nghiệm, ghi trong phạm vi cho phép và đọc lại để đối chiếu nội dung. Đọc và ghi được ghi riêng vì quyền đọc chưa chắc bao gồm quyền ghi. Phiên bản SMB được xác định từ dữ liệu kết nối; chỉ dùng `Get-SmbConnection` khi Windows Client thực tế hỗ trợ lệnh này.
+### 2.3.6. Snapshot Before Demo và phương án phục hồi
+Sau khi chuẩn hóa baseline, snapshot `Before Demo` được tạo trên máy ảo mục tiêu. Sau mỗi kịch bản can thiệp, hệ thống hoàn nguyên về mốc này để bảo đảm tính độc lập giữa các lượt đo.
 
-Trước lượt sau thay đổi cấu hình, Client phải đóng phiên cũ và thiết lập kết nối mới. Xem một tệp đã mở hoặc dữ liệu còn trong bộ nhớ đệm chưa chứng minh Server đang phục vụ yêu cầu mới. Nếu VLAN 20 bị từ chối nhưng Client hợp lệ vẫn hoàn thành tác vụ, kết quả phù hợp với mục tiêu hạn chế theo nguồn. Nếu cả hai đều thất bại, phải kiểm tra Server, chính sách mạng và xác thực. Đối chứng đo chức năng chia sẻ tệp trong lab, chưa đại diện cho mọi ứng dụng hoặc tải của một tổ chức.
+## 2.4. Phương pháp kiểm thử và mô hình bằng chứng
 
-*Bảng 2.2: Trạng thái dự kiến và bằng chứng cần thu*
+### 2.4.1. Các lớp quan sát: reachability, service, protocol, remote signal, local ground truth
+Quy trình thực nghiệm xây dựng mô hình quan sát phân tách năm lớp nhằm tránh nhầm lẫn giữa các cấp độ thông tin mạng, tạo thành chuỗi suy luận logic có kiểm soát. Cấu trúc phân loại năm lớp quan sát và phương thức thu thập bằng chứng được chuẩn hóa trong Bảng 2.2.
 
-| Trạng thái | Thay đổi cấu hình | Phép kiểm tra chính | Đối chứng Client |
-|---|---|---|---|
-| $S_0$ | Cấu hình gốc | Đường mạng, SMBv1, bản vá, dấu hiệu và tác động | Thương lượng, đọc, ghi |
-| $S_1$ | Bổ sung bản vá | Cập nhật và phản hồi thăm dò | SMBv2, đọc, ghi |
-| $S_2$ | Giữ vá, tắt SMBv1 | Phản hồi thương lượng | SMBv2, đọc, ghi |
-| $S_3$ | Giữ $S_2$, chặn VLAN 20 | Lưu lượng và log theo nguồn | SMBv2, đọc, ghi |
+*Bảng 2.2. Phân loại các lớp quan sát và cơ chế thu thập dữ liệu trong mô hình kiểm thử*
 
-Các giá trị là thiết kế, chưa phải số đo; dữ liệu thật được lưu ở Bảng 2.4. Thiếu bằng chứng vẫn ghi `[CẦN DỮ LIỆU]`.
+| Lớp quan sát | Đối tượng đo đạc | Công cụ thực hiện | Dữ liệu đầu ra kỳ vọng | Ý nghĩa an toàn |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Reachability** | Kết nối tầng mạng IP | `ping` (ICMP Echo) | Round-trip time, packet loss | Xác nhận thông tuyến |
+| **2. Port & Service**| Cổng TCP 139, 445 | `nmap -sS -p139,445` | `open`, `closed`, `filtered` | Xác định bề mặt dịch vụ |
+| **3. Protocol State** | Phương ngữ và ký số SMB | `smb-protocols`, `smb*-mode` | Danh sách dialects, Signing | Tính năng giao thức bật |
+| **4. Remote Signal** | Thăm dò lỗ hổng từ xa | `smb-vuln-ms17-010.nse` | `VULNERABLE`, `UNKNOWN` | Tín hiệu suy diễn từ xa |
+| **5. Ground Truth** | Bản vá và mã tệp nội bộ | `Get-HotFix`, `srv.sys` | Mã hotfix, version `srv.sys` | Bằng chứng xác thực nội bộ |
 
-### 2.3.3. Kiểm chứng vị trí chặn đường tấn công và khả năng phục vụ Client
+### 2.4.2. Quy tắc phân biệt dữ kiện, diễn giải và kết luận
+Báo cáo kỹ thuật tách bạch ba khái niệm: Dữ kiện nguồn (Source Fact), Diễn giải kỹ thuật (Interpretation) và Kết luận an ninh (Security Assertion). Kết luận an ninh chỉ hình thành khi có sự hội tụ giữa dữ kiện từ xa và sự thật nội bộ.
 
-Kết luận về phòng thủ cần kết hợp điều kiện đã thay đổi với tác vụ hợp lệ. “Không tạo được phiên thử nghiệm” chưa phân biệt bản vá, từ chối giao thức, chặn mạng, lỗi công cụ hay sự cố mục tiêu. Do chuỗi có tính tích lũy, các trạng thái sau phải được đọc qua phép đo riêng ở Bảng 2.2; kết quả cuối nêu điều kiện đã xác nhận và phần còn chưa xác định.
-
----
-
-## 2.4. PHƯƠNG PHÁP LUẬN VÀ CHUẨN HÓA KỸ THUẬT THEO MÔ HÌNH BẠCH HỘP
-
-Năm kỹ thuật có nhiệm vụ khác nhau: khảo sát đường tiếp cận, kiểm tra phiên bản, nhận diện dấu hiệu chưa vá, đối chiếu công cụ và xác minh tác động. Mỗi kỹ thuật giữ mười thành phần theo hợp đồng chương; Metasploit được dùng theo vai trò scanner hoặc module khai thác [7]. Phần diễn giải nêu cách dùng kết quả, còn bảng ghi đầu vào, tiêu chí và ranh giới suy luận để đối chiếu giữa các lượt.
-
-### 2.4.1. Kỹ thuật 1: Khảo sát tiếp cận và nhận diện dịch vụ (TCP SYN Scan & Service Detection)
-
-Phép khảo sát được dùng để đánh giá đường kết nối nên không được giả định trước $R = \text{True}$. Quét SYN xét phản hồi ở tầng TCP; nhận diện `-sV` tiếp tục xét phản hồi dịch vụ. Hai bước trả lời hai câu hỏi khác nhau. SYN-ACK cho thấy cổng có phản hồi, còn việc Server xử lý SMB cần bằng chứng ứng dụng [3].
-
-| Thành phần | Thiết kế phép kiểm tra |
-|---|---|
-| Input | `nmap -sS -sV -p 139,445 -n -Pn --reason 192.168.10.20` |
-| Preconditions | Mục tiêu thuộc lab; trạm có quyền quét SYN và cấu hình mạng đã ghi. |
-| Internal Mechanism | SYN-ACK tương ứng `open`, RST tương ứng `closed`; thiếu phản hồi hoặc một số mã ICMP tương ứng `filtered` [3]. |
-| Observation Point | Lưu lượng tại Kali, tường lửa và mục tiêu khi cần xác định đường gói tin. |
-| Success Criterion | Có phản hồi cổng và kết quả nhận diện phù hợp SMB; lưu riêng hai kết quả. |
-| Failure Criterion | `closed` hoặc `filtered`; chưa quy nguyên nhân cho tường lửa nếu thiếu đối chứng. |
-| Output / Evidence | Output văn bản/XML, `reason`, lưu lượng của lượt tương ứng. |
-| Inference Boundary | Hỗ trợ đánh giá tiếp cận; $S$ cần phản hồi SMB. Chưa kết luận phiên bản hoặc lỗ hổng. |
-| Limitation | Mất phản hồi chưa phân biệt mất gói, chặn mạng hay máy đích dừng. |
-| Defense Breakpoint | Quy tắc mạng hướng tới $R$; kiểm chứng ở $S_3$. |
-
-### 2.4.2. Kỹ thuật 2: Thăm dò phiên bản SMB (Dialect Negotiation Probe)
-
-Phép thương lượng trả lời Server có chấp nhận SMBv1 hay không. Script gọi `smb.list_dialects` và xuất danh sách hỗ trợ; mã nguồn còn có nhánh không nhận được phiên bản nào và lưu ý khả năng phản hồi bị chặn [8]. Vì vậy, không có output khác với nhận phản hồi hợp lệ chỉ chấp nhận SMBv2. Cũng không mô tả mọi phiên bản như các chuỗi trong một yêu cầu SMBv1 duy nhất.
-
-| Thành phần | Thiết kế phép kiểm tra |
-|---|---|
-| Input | `nmap -p 445 --script smb-protocols 192.168.10.20` |
-| Preconditions | Đã xác định đường kết nối và phản hồi SMB để diễn giải kết quả phiên bản. |
-| Internal Mechanism | Dùng thư viện SMB để nhận diện các phiên bản được chấp nhận [8]. |
-| Observation Point | Output script và yêu cầu/phản hồi thương lượng trong lưu lượng. |
-| Success Criterion | Có bằng chứng Server chấp nhận `NT LM 0.12`, tương ứng $D = \text{True}$. |
-| Failure Criterion | Chỉ chấp nhận SMBv2 trở lên: $D = \text{False}$; thiếu phản hồi: `Unknown`. |
-| Output / Evidence | Danh sách hỗ trợ, lỗi và phản hồi thương lượng tương ứng. |
-| Inference Boundary | Xác định giao thức được chấp nhận; chưa xác nhận MS17-010. |
-| Limitation | Phụ thuộc khả năng nhận phản hồi; phải đọc kèm lỗi. |
-| Defense Breakpoint | Vô hiệu hóa SMBv1 hướng tới $D$; kiểm chứng ở $S_2$. |
-
-### 2.4.3. Kỹ thuật 3: Phát hiện dấu hiệu MS17-010 bằng Nmap NSE
-
-Phép thăm dò cần đi tới `IPC$` và nhận phản hồi Transaction trước khi có thể đánh giá dấu hiệu. Các nhánh mã trạng thái được giải thích tại Mục 1.3.3. Trong mã nguồn hiện hành, nhánh không hoàn tất phép kiểm tra cũng có thể mang nhãn `NOT_VULN`, nên phải lưu lỗi và ghi `Unknown` khi chưa đủ dữ liệu [4].
-
-| Thành phần | Thiết kế phép kiểm tra |
-|---|---|
-| Input | `nmap -p 445 --script smb-vuln-ms17-010 -n -Pn 192.168.10.20` |
-| Preconditions | Tiếp cận được SMBv1, thiết lập phiên và kết nối `IPC$` theo cấu hình xác thực. |
-| Internal Mechanism | Gửi `SMB_COM_TRANSACTION` với `PeekNamedPipe` và đọc NT Status [4]. |
-| Observation Point | Output/lỗi NSE và phản hồi SMB tại Kali, mục tiêu. |
-| Success Criterion | Nhận phản hồi hợp lệ `0xC0000205`, phù hợp dấu hiệu chưa vá. |
-| Failure Criterion | `0xC0000022`/`0xC0000008` trong phản hồi thăm dò phù hợp nhánh đã vá; không hoàn tất: `Unknown`. |
-| Output / Evidence | Output, lỗi, mã trạng thái, dữ liệu cấu hình và bản vá để đối chiếu. |
-| Inference Boundary | Dấu hiệu ở Cấp độ 3; nhãn CVE-2017-0143 của script không xác nhận riêng CVE-2017-0144. |
-| Limitation | Xác thực hoặc lỗi mạng có thể ngăn phép thăm dò; nhóm `safe` không bảo đảm không tác động. |
-| Defense Breakpoint | Bản vá hướng tới $V$; chưa được coi là đã đạt nếu chỉ thiếu output. |
-
-### 2.4.4. Kỹ thuật 4: Đối chiếu bằng Metasploit Auxiliary Scanner
-
-Scanner phụ trợ cũng kết nối `IPC$`, gửi yêu cầu và xét `STATUS_INSUFF_SERVER_RESOURCES` [9]. So sánh với NSE có thể phát hiện khác biệt do cấu hình hoặc xử lý phản hồi, nhưng hai công cụ cùng dựa vào một dấu hiệu chưa tạo đối chứng độc lập về bản vá. Đối chứng khác loại là trạng thái cập nhật trên mục tiêu và dữ liệu mạng.
-
-| Thành phần | Thiết kế phép kiểm tra |
-|---|---|
-| Input | Module `auxiliary/scanner/smb/smb_ms17_010`, mục tiêu `192.168.10.20`. |
-| Preconditions | Tiếp cận SMBv1 và thiết lập được phiên tới `IPC$`. |
-| Internal Mechanism | Thăm dò FID 0 và phân loại mã trạng thái [9]. |
-| Observation Point | Console và lưu lượng của lượt scanner. |
-| Success Criterion | Phản hồi phù hợp dấu hiệu chưa vá và được module nhận diện. |
-| Failure Criterion | Phản hồi phù hợp nhánh không thấy dấu hiệu; lỗi kết nối hoặc không nhận diện: chưa đủ kết luận. |
-| Output / Evidence | Log đầy đủ, mã phản hồi và cấu hình tùy chọn module. |
-| Inference Boundary | Đối chiếu Cấp độ 3, chưa xác nhận thực thi mã. |
-| Limitation | Kết quả chịu ảnh hưởng phiên bản module, xác thực và các tùy chọn kiểm tra bổ sung. |
-| Defense Breakpoint | Bản vá hoặc tắt SMBv1 tác động vào $V$ hoặc $D$; phải đối chiếu phép đo riêng. |
-
-### 2.4.5. Kỹ thuật 5: Xác minh tác động trong lab bằng Metasploit Exploit Module
-
-Kỹ thuật này chuyển từ nhận diện dấu hiệu sang kiểm tra tác động quan sát được. Cơ chế FEA và bố trí vùng nhớ đã phân tích tại Mục 1.2.3; ở đây trọng tâm là tiêu chí phân biệt thực thi mã, kênh tương tác và sự cố. Rapid7 ghi nhận module có thể gây mất ổn định hoặc BSOD [10]. Giới hạn một lần thử là quy tắc vận hành của đề tài, không phải bảo đảm an toàn của module.
-
-| Thành phần | Thiết kế phép kiểm tra |
-|---|---|
-| Input | `exploit/windows/smb/ms17_010_eternalblue`; mục tiêu `192.168.10.20`; trạm nhận kênh thử nghiệm `192.168.20.10:4444`. |
-| Preconditions | Đã đối chiếu $R,S,D,V$; đúng cấu hình module; có snapshot và chính sách cho kênh ngược trong lab. |
-| Internal Mechanism | Khai thác lỗi FEA kết hợp bố trí vùng nhớ để tìm cách chuyển hướng thực thi [10]. |
-| Observation Point | Console, định danh mục tiêu, lưu lượng kênh ngược và trạng thái hệ điều hành. |
-| Success Criterion | Có phiên hợp lệ và output lệnh xác minh danh tính, quyền, mục tiêu; không chỉ một thông báo tạo phiên. |
-| Failure Criterion | Không có bằng chứng thực thi: chưa đạt Cấp độ 4; có BSOD/reboot/treo: phân loại và lưu bằng chứng sự cố. |
-| Output / Evidence | Log lệnh/output, thời điểm, lưu lượng và dấu vết sự cố nếu có. |
-| Inference Boundary | `SYSTEM` xác nhận quyền phiên quan sát được, chưa chứng minh kiểm soát toàn bộ nhân hoặc mọi Windows. |
-| Limitation | Kênh ngược có thể thất bại riêng; bố cục bộ nhớ và cấu hình ảnh hưởng kết quả. |
-| Defense Breakpoint | Đánh giá điều kiện cần bị chặn, chưa quy thất bại riêng cho $V$ khi thiếu dữ liệu. |
-
-Nếu console không tạo được phiên, cần đọc cùng lưu lượng và trạng thái mục tiêu. Không thấy kết nối ngược chưa phân biệt mã chưa thực thi với kênh bị chặn; có BSOD chứng minh sự cố nhưng không chứng minh thực thi thành công. Ngược lại, một phiên trả output `SYSTEM` phải được gắn với đúng mục tiêu và lượt thử. Các chuỗi output nêu trong thiết kế là tiêu chí dự kiến, không phải log đã thu. Sau lượt thử, dừng và kiểm tra trạng thái trước khi khôi phục hoặc tiếp tục; không tự lặp phép khai thác khi chưa phân loại kết quả.
-
-*Bảng 2.3: Bảng đối chiếu các kỹ thuật kiểm thử với các tiền điều kiện và 4 cấp độ trạng thái*
-
-| Kỹ thuật kiểm thử | Công cụ thực thi | Tiền điều kiện kiểm chứng | Cấp độ đối chiếu | Bằng chứng kỹ thuật cốt lõi |
-|---|---|:---:|:---:|---|
-| **Kỹ thuật 1** | `nmap -sS -sV -p 445` | Khảo sát $R,S$ | **Cấp độ 1** | `SYN-ACK` và phản hồi nhận diện; $S$ cần phản hồi SMB |
-| **Kỹ thuật 2** | `nmap --script smb-protocols` | $D$ | **Cấp độ 2** | Phản hồi chấp nhận phương ngữ `NT LM 0.12 (SMBv1)` |
-| **Kỹ thuật 3** | `nmap --script smb-vuln-ms17-010` | Dấu hiệu liên quan $V$ | **Cấp độ 3** | `0xC0000205`, cần đối chiếu bản vá/cấu hình |
-| **Kỹ thuật 4** | `auxiliary/scanner/smb/smb_ms17_010` | Đối chiếu dấu hiệu $V$ | **Cấp độ 3** | Log scanner, chưa thay kiểm tra bản vá |
-| **Kỹ thuật 5** | `exploit/.../ms17_010_eternalblue` | $E, C$ | **Cấp độ 4** | Phiên Meterpreter quyền `SYSTEM` (BSOD bị tính là FAIL) |
-
-Sơ đồ 2.2 mô tả tuần tự luồng kiểm thử nhân quả và sự tương tác giữa các kỹ thuật:
+Mô hình luồng dữ liệu thu thập và đối chiếu được thể hiện trong Sơ đồ 2.2.
 
 ```
-[Trạm kiểm thử: Kali Linux]
-         |
-         |---> (1) Kỹ thuật 1: Kiểm chứng R & S (Cổng 445 mở / microsoft-ds?)
-         |     [Không đủ phản hồi: Dừng -> kiểm tra nguyên nhân] ---> Thành công (Cấp độ 1)
-         |
-         |---> (2) Kỹ thuật 2: Kiểm chứng D (Chấp nhận dialect NT LM 0.12?)
-         |     [Không xác định: Dừng -> kiểm tra điều kiện] -----------> Thành công (Cấp độ 2)
-         |
-         |---> (3) Kỹ thuật 3 & 4: Kiểm chứng V (Mã lỗi NT Status 0xC0000205?)
-         |     [Không có dấu hiệu: đối chiếu KB và lỗi] -> Thành công (Cấp độ 3)
-         |
-         |---> (4) Kỹ thuật 5: Kiểm chứng E & C (Khai thác có kiểm soát)
-               |
-               +---> Phiên Meterpreter thành công? ===> PASS CẤP ĐỘ 4 (RCE SYSTEM)
-               |
-               +---> BSOD / Crash / Reboot / Timeout? => Chưa đạt Cấp độ 4; phân loại sự cố
++-------------------------------------------------------------------------+
+|                  LUỒNG THU THẬP VÀ ĐỐI CHIẾU DỮ LIỆU                    |
+|                                                                         |
+|  [ĐẦU RA CÔNG CỤ ĐO]   ----->  [DỮ KIỆN NGUỒN: Mã lỗi, phản hồi thô]    |
+|                                          |                              |
+|                                          v                              |
+|                                [DIỄN GIẢI KỸ THUẬT: Đặc tả giao thức]   |
+|                                          |                              |
+|  [SỰ THẬT NỘI BỘ]      ----->  [ĐỐI CHIẾU VI SAI HAI CHIỀU]             |
+|                                          |                              |
+|                                          v                              |
+|                                [KẾT LUẬN AN NINH CÓ RANH GIỚI]          |
++-------------------------------------------------------------------------+
 ```
-*Sơ đồ 2.2: Sơ đồ tuần tự các pha kiểm thử theo mô hình chuỗi nhân quả*
+*Sơ đồ 2.2. Luồng thu thập dữ liệu và phân tách các lớp quan sát*
 
----
+### 2.4.3. Định dạng raw output và Evidence ID
+Dữ liệu kiểm thử được lưu trữ dạng raw log và ảnh chụp theo hệ thống Stable Evidence ID trong `EVIDENCE_REGISTER.md`:
+- `ENV-CORE-01` đến `ENV-CORE-07`: Môi trường mạng, trạm Kali, máy chủ Windows Server 2012 R2, tường lửa và snapshot `Before Demo`.
+- `S1-RAW-01` đến `S1-RAW-05` và `S1-META-01`: Dữ liệu thô rà quét mạng, cổng TCP 139/445 và dịch vụ SMB trong Kịch bản 1.
+- `S2-RAW-01` đến `S2-RAW-04` và `S2-META-01`: Dữ liệu bốn kỹ thuật NSE (trạng thái cổng, phương ngữ, ký số, MS17-010) trong Kịch bản 2.
+- `B-LOCAL-01`, `B-ACTION-01`, `B-LOCAL-02`, `B-RAW-01`, `B-RAW-02`, `B-META-01`: Bằng chứng can thiệp vô hiệu hóa SMBv1 Case B.
+- `C-TOPO-01`, `C-RULE-01`, `C-RULE-02`, `C-RAW-01`, `C-LOG-01`, `C-RAW-02`, `C-META-01`: Bằng chứng cấu hình pfSense và log chặn lọc Case C.
+Quy định này bảo đảm mọi kết luận đều truy vết trực tiếp tới dữ liệu gốc nguyên bản.
 
-## 2.5. MA TRẬN BẰNG CHỨNG ĐA NGUỒN VÀ QUY TRÌNH VẬN HÀNH AN TOÀN
+### 2.4.4. Quy tắc xử lý UNKNOWN, NO OUTPUT và FILTERED
+Quy trình thiết lập quy tắc chặt chẽ cho các phản hồi không xác định:
+- Trạng thái `UNKNOWN` hoặc `NO USABLE SCRIPT RESULT`: Công cụ quét không nhận được dữ liệu hợp lệ; dữ kiện này không được suy diễn thành hệ thống an toàn.
+- Trạng thái `NO OUTPUT`: Kịch bản NSE không in kết quả, phản ánh điều kiện kích hoạt chưa thỏa mãn.
+- Trạng thái `FILTERED`: Cổng không phản hồi do có thiết bị lọc gói tin trung gian, không đồng nghĩa với việc lỗ hổng đã được vá.
 
-### 2.5.1. Thiết kế Ma trận bằng chứng thu thập đa nguồn (Evidence Matrix)
+## 2.5. Thiết kế Kịch bản 1 — Khảo sát dịch vụ SMB bằng Nmap
 
-Bảng 2.4 nối cấu hình mục tiêu với phản hồi và tác động của cùng lượt thử. Các ô chưa có dữ liệu giữ nhãn `[CẦN DỮ LIỆU]`; không điền giả thuyết thành kết quả.
+### 2.5.1. Mục tiêu và điều kiện bắt đầu
+Kịch bản 1 khảo sát bề mặt dịch vụ SMB từ góc độ nút mạng chưa xác thực, gồm phát hiện máy, quét cổng và nhận diện phiên bản. Bảng 2.3 tổng hợp thông số thiết kế kịch bản kiểm thử.
 
-*Bảng 2.4: Ma trận bằng chứng thực nghiệm đối chiếu đa nguồn (Evidence Matrix)*
+*Bảng 2.3. Thiết kế các kịch bản kiểm thử dịch vụ SMB và thông số thực thi NSE*
 
-| Snapshot State | Windows Build & Hotfix | Cấu hình SMBv1 | Trạng thái Routing / Firewall | Nmap Raw Output & Reason | Mã phản hồi NSE (NT Status) | Metasploit Console Log | Bằng chứng Wireshark PCAP | Firewall Drop Log Evidence | Kết luận Cấp độ 1–4 |
-|:---:|---|---|---|---|---|---|---|---|:---:|
-| **$S_0$** | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` |
-| **$S_1$** | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` |
-| **$S_2$** | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` |
-| **$S_3$** | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` | `[CẦN DỮ LIỆU]` |
+| Tên kịch bản / Phép đo | Lệnh thực thi đại diện | Cổng mục tiêu | Mục tiêu kỹ thuật chính | Dữ liệu đầu ra cốt lõi |
+| :--- | :--- | :--- | :--- | :--- |
+| **Kịch bản 1 — Phát hiện** | `nmap -sn 192.168.56.0/24` | Không quét cổng | Rà quét máy đang hoạt động trong mạng lab | Địa chỉ IP, MAC của máy chủ |
+| **Kịch bản 1 — Quét cổng** | `nmap -sS -sV -p139,445 ...` | TCP 139, 445 | Xác định trạng thái cổng và dịch vụ | Trạng thái `open`, LanmanServer |
+| **Kịch bản 2 — NSE-SMB-01**| `nmap -p139,445 192.168.56.20` | TCP 139, 445 | Thiết lập mốc đối chứng trạng thái cổng | Trạng thái cổng baseline |
+| **Kịch bản 2 — NSE-SMB-02**| `nmap -p445 --script smb-protocols` | TCP 445 | Liệt kê danh sách phương ngữ SMB | Danh sách dialects (1.0, 2.02..)|
+| **Kịch bản 2 — NSE-SMB-03**| `nmap -p445 --script smb*-mode` | TCP 445 | Kiểm tra chính sách ký số thông điệp | Trạng thái signing enabled |
+| **Kịch bản 2 — NSE-SMB-04**| `nmap -p445 --script smb-vuln*` | TCP 445 | Thăm dò dấu hiệu logic lỗ hổng MS17-010 | Dấu hiệu phản hồi từ xa |
 
-Mỗi lượt có mã lượt, snapshot, thời điểm, phiên bản công cụ và cấu hình để nối output, log và lưu lượng. Ghép phản hồi trước vá với log sau vá có thể tạo kết luận sai dù từng tệp đúng. Vì vậy, giữ dữ liệu gốc và dẫn phần diễn giải tới đúng tệp, thời điểm hoặc yêu cầu.
+### 2.5.2. Phát hiện máy trong mạng lab
+Pha đầu của Kịch bản 1 thực hiện Ping Scan (`-sn`) trên dải `192.168.56.0/24`. Nmap gửi ARP Request tới từng IP trong lab. Phản hồi ARP Reply xác nhận sự hiện diện của máy mục tiêu cùng địa chỉ MAC card mạng ảo.
 
-Khi bằng chứng không nhất quán, giữ khác biệt để điều tra. Ví dụ giả định, có bản vá nhưng còn dấu hiệu chưa vá thì cần kiểm tra snapshot, hoàn tất cập nhật và địa chỉ mục tiêu. Không chọn riêng kết quả thuận lợi để điền nhãn cuối; ma trận giúp chỉ ra chỗ cần kiểm tra tiếp.
+### 2.5.3. Xác nhận máy mục tiêu
+Khi ghi nhận IP hoạt động `192.168.56.20`, quy trình đối chiếu MAC với VirtualBox để xác nhận đúng mục tiêu, tránh quét nhầm card host `192.168.56.1`. IP này được cố định cho toàn bộ phép đo.
 
-### 2.5.2. Quy trình kiểm chứng lưu lượng đa điểm (Multi-Point PCAP Verification)
+### 2.5.4. Kiểm tra TCP 139/445
+Kỹ thuật SYN Stealth Scan (`-sS`) được áp dụng cho cổng TCP 139 và 445. Gói tin SYN-ACK từ máy chủ xác nhận cổng `open`. Nmap gửi gói RST để giải phóng phiên mà không duy trì kết nối đầy đủ.
 
-Chỉ thấy `filtered` chưa chỉ ra vị trí chặn. Để đánh giá $R$ tại $S_3$, thu đồng thời ba bằng chứng: SYN được phát tại Kali, log tường lửa ghi quy tắc chặn, và lưu lượng tại mục tiêu không có SYN tương ứng. Các bản ghi phải khớp địa chỉ, cổng, giao thức và thời gian; phép bắt gói tại mục tiêu phải hoạt động với đúng giao diện, bộ lọc. Thiếu gói trong một tệp chưa được kiểm tra điều kiện thu thập không có cùng giá trị với xác nhận gói không tới đích.
+### 2.5.5. Nhận diện dịch vụ và phiên bản
+Để xác định tiến trình lắng nghe, Nmap kích hoạt dò phiên bản dịch vụ (`-sV`). Chuỗi thăm dò nhận diện dịch vụ `netbios-ssn` trên cổng 139 và `microsoft-ds` của Windows Server 2012 R2 trên cổng 445.
 
-Nếu mục tiêu nhận SYN nhưng Kali không nhận phản hồi, cần kiểm tra dịch vụ và đường trở về; đó khác với chặn chiều vào. Kiểm tra từ Client hợp lệ giúp phân biệt hạn chế theo nguồn với mất khả năng phục vụ. Ba nguồn thu bổ sung cho nhau để định vị nguyên nhân, thay vì chỉ lặp kết luận của công cụ. Hiện các tệp và log còn `[CẦN DỮ LIỆU]`.
+### 2.5.6. Khảo sát SMB bằng NSE
+Kịch bản NSE cơ bản thu thập định danh máy chủ không cần quyền quản trị. Bản tin đàm phán ghi nhận tên NetBIOS, domain và dấu thời gian, khẳng định dịch vụ SMB xử lý yêu cầu bình thường.
 
-### 2.5.3. Kế hoạch ứng phó sự cố màn hình xanh (BSOD) và quy trình Rollback
+### 2.5.7. Tiêu chí dừng và bằng chứng cần thu
+Kịch bản 1 kết thúc khi ghi nhận đầy đủ trạng thái mở của TCP 139/445 và định danh dịch vụ `microsoft-ds`. Dữ liệu xuất ra được lưu trữ nguyên bản vào các tệp nhật ký thô thuộc họ `S1-RAW` (từ `S1-RAW-01` đến `S1-RAW-05`) cùng tệp siêu dữ liệu `S1-META-01`, làm mốc tham chiếu cho Kịch bản 2.
 
-Nguy cơ mất ổn định của module đòi hỏi điểm khôi phục và tiêu chí kiểm tra dịch vụ sau sự cố [10]. Sơ đồ 2.3 mô tả trình tự dự kiến:
+## 2.6. Thiết kế Kịch bản 2 — Đánh giá cấu hình SMB và MS17-010 bằng NSE
+
+### 2.6.1. NSE-SMB-01 — trạng thái cổng
+Phép đo `NSE-SMB-01` thiết lập đường cơ sở độc lập về trạng thái cổng trước khi chạy script chuyên sâu. Phép quét tập trung vào TCP 139 và 445, bảo đảm kênh truyền ổn định trước khi gửi bản tin phức tạp.
+
+### 2.6.2. NSE-SMB-02 — SMB dialects
+Đối với phương ngữ giao thức, phép đo `NSE-SMB-02` sử dụng script `smb-protocols.nse` [6] để liệt kê danh mục phương ngữ SMB máy chủ chấp nhận. Bản tin đàm phán `SMB_COM_NEGOTIATE` được gửi đi, khẳng định sự hiện diện thực tế của SMBv1 (`NT LM 0.12`) trên hệ thống.
+
+### 2.6.3. NSE-SMB-03 — SMB signing
+Chính sách ký số thông điệp (Message Signing) được kiểm tra trong phép đo `NSE-SMB-03` qua script `smb-security-mode.nse` và `smb2-security-mode.nse` nhằm rà soát các tính năng an ninh mở rộng của SMB theo tài liệu của Microsoft [7]. Dữ liệu thu được xác định hai trạng thái: tính năng ký số được hỗ trợ (`message_signing: enabled`) và tính năng ký số có bắt buộc (`message_signing: required`).
+
+### 2.6.4. NSE-SMB-04 — dấu hiệu MS17-010
+Dấu hiệu lỗ hổng MS17-010 được thăm dò chuyên biệt trong phép đo `NSE-SMB-04` qua script `smb-vuln-ms17-010.nse`. Script kết nối tài nguyên `IPC$` và gửi bản tin `SMB_COM_TRANSACTION2` thăm dò phi phá hủy theo cấu trúc mã nguồn của Calderon [8], phân tích phản hồi từ `srv.sys` để đưa ra phán quyết an ninh.
+
+### 2.6.5. Đối chiếu remote observation với local patch ground truth
+Quy trình đối chiếu kết quả `smb-vuln-ms17-010.nse` với sự thật nội bộ gồm phiên bản `srv.sys` (6.3.9600.16421) và log `Get-HotFix`. Phương pháp này làm rõ tín hiệu từ xa có phản ánh đúng thực trạng chưa vá lỗi hay không.
+
+### 2.6.6. Tiêu chí kết luận và giới hạn suy diễn
+Kịch bản 2 xác định ranh giới suy diễn: kết quả NSE chỉ phản ánh dấu hiệu từ xa tại thời điểm phát lệnh, không thay thế kiểm tra nhân hệ điều hành. Quy trình nghiêm cấm suy diễn máy chủ an toàn khi công cụ gặp lỗi kết nối.
+
+## 2.7. Thiết kế kiểm thử biện pháp giảm thiểu
+
+### 2.7.1. Nguyên tắc differential testing và phục hồi baseline
+Kiểm thử vi sai xem mỗi giải pháp giảm thiểu là một biến can thiệp độc lập. Hệ thống bắt đầu từ snapshot `Before Demo`, áp dụng can thiệp, đo lại Kịch bản 1 và 2, rồi hoàn nguyên về đường cơ sở.
+
+Trình tự vòng lặp kiểm thử vi sai và đối chiếu đa tầng được mô tả trong Sơ đồ 2.3.
 
 ```
-+-------------------------------------------------------------+
-|               BƯỚC 1: KHỞI TẠO VÀ LƯU SNAPSHOT              |
-|        Tạo "Clean Baseline" khi máy ảo ở trạng thái sạch    |
-|        (S0_Clean, S1_Clean, S2_Clean, S3_Clean)             |
-+------------------------------+------------------------------+
-                               |
-                               v
-+-------------------------------------------------------------+
-|               BƯỚC 2: THỰC THI KỊCH BẢN KIỂM THỬ            |
-|       Chạy Kỹ thuật 1 -> Kỹ thuật 2 -> Kỹ thuật 3 -> KT 5   |
-+------------------------------+------------------------------+
-                               |
-                               v
-               /-------------------------------\
-              /    Hệ thống có bị sự cố BSOD?   \
-              \      (Crash nhân hệ điều hành)  /
-               \-------------------------------/
-                       |               |
-                  CÓ   |               |   KHÔNG
-                       v               v
-+------------------------------+  +---------------------------+
-| BƯỚC 3A: QUY TRÌNH ROLLBACK  |  | BƯỚC 3B: GHI NHẬN KẾT QUẢ |
-| - Dừng tiến trình Metasploit |  | - Thu thập log phiên MSF  |
-| - Đánh dấu: Cấp 4 = FAIL     |  | - Dừng bắt gói tệp .pcap  |
-| - Khôi phục Snapshot sạch    |  | - Thu thập Firewall log   |
-| - Kiểm tra sẵn sàng dịch vụ  |  | - Chuyển pha đối chứng    |
-+------------------------------+  +---------------------------+
++-------------------------------------------------------------------------+
+|                  QUY TRÌNH KIỂM THỬ VI SAI VÀ ĐỐI CHIẾU                 |
+|                                                                         |
+|  [SNAPSHOT BEFORE DEMO] ----> [ÁP DỤNG CAN THIỆP PHÒNG THỦ]             |
+|  (Trạng thái mốc sạch)        (Case B: Tắt SMBv1 / Case C: pfSense)     |
+|           ^                                      |                      |
+|           |                                      v                      |
+|           |                           [ĐO LẠI KỊCH BẢN 1 & 2]           |
+|           |                           (Quét cổng, NSE protocols, vuln)  |
+|           |                                      |                      |
+|           |                                      v                      |
+|   [HOÀN NGUYÊN SNAPSHOT] <---- [SO SÁNH SAI KHÁC VỚI BASELINE]          |
+|   (Loại bỏ sai số đo)       (Định lượng hiệu quả bảo vệ)             |
++-------------------------------------------------------------------------+
 ```
-*Sơ đồ 2.3: Quy trình quản lý trạng thái máy ảo và cơ chế khôi phục tức thời qua Snapshot*
+*Sơ đồ 2.3. Mô hình quy trình kiểm thử vi sai và đối chiếu đa lớp*
 
-Khi có sự cố, dừng công cụ, lưu thời điểm và bằng chứng quan sát được rồi khôi phục snapshot của trạng thái tương ứng. Không quy một mã lỗi cụ thể cho phép thử nếu chưa có dữ liệu. Sau khôi phục, kiểm tra lại build, bản vá, SMBv1 và quy tắc mạng trước khi thực hiện tác vụ Client.
+### 2.7.2. Case B — Vô hiệu hóa SMBv1
+Biện pháp Case B can thiệp cấu hình giao thức theo hướng dẫn của Microsoft [9]. Lệnh `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` được thực thi và máy chủ khởi động lại. Can thiệp này loại bỏ SMB 1.0 khỏi đàm phán, trong khi SMB 2.x/3.x vẫn hoạt động trên cổng 445.
 
-Khôi phục snapshot và khôi phục nghiệp vụ là hai mốc khác nhau. Máy ảo trở về điểm lưu chưa đủ để xác nhận Server phục vụ được yêu cầu mới. Nếu đo thời gian phục hồi, ghi riêng thời gian thao tác khôi phục và thời gian tới khi Client hoàn tất đọc, ghi tệp. Ping hoặc cổng 445 mở riêng lẻ chưa đo chức năng chia sẻ tệp. Hiện chưa có số đo thời gian và dữ liệu kiểm tra sau khôi phục: `[CẦN DỮ LIỆU]`.
+### 2.7.3. Case C — Giới hạn TCP 139/445 bằng pfSense Transparent Bridge
+Biện pháp Case C triển khai tường lửa lọc gói theo hướng dẫn NIST SP 800-41 Rev. 1 [10], dùng pfSense Transparent Bridge chặn lưu lượng TCP 139/445 giữa hai máy ảo:
+- Chặn gói TCP đến cổng 139 (`Block TCP * * 139`);
+- Chặn gói TCP đến cổng 445 (`Block TCP * * 445`);
+- Cho phép ICMP Echo lưu thông để giám sát kết nối mạng.
+Cấu hình này kỳ vọng chuyển trạng thái cổng từ `open` sang `filtered`, ngăn gói thăm dò dịch vụ từ xa.
 
----
+### 2.7.4. Vai trò của cập nhật bản vá trong mô hình phòng thủ
+Trong lý thuyết an ninh mạng, cập nhật bản vá chính thức (Case A với gói KB4012213 hoặc KB4012216) là biện pháp căn bản khắc phục lỗi logic trong `srv.sys` [4]. Trong môi trường lab cô lập, Case A đóng vai trò mốc tham chiếu lý thuyết song song với thực nghiệm Case B và C.
 
-## TỔNG KẾT CHƯƠNG 2
+### 2.7.5. Ma trận biến can thiệp và phép đo lại
+Ma trận biến can thiệp được thiết lập để theo dõi biến động hệ thống qua từng phép đo. Bảng 2.4 tổng hợp ma trận can thiệp và phương án kiểm thử vi sai.
 
-Chương 2 thiết kế lab ba VLAN và chuỗi bốn trạng thái trên cùng máy mục tiêu để theo dõi quá trình bổ sung biện pháp phòng thủ. Các điều kiện của đường tấn công được gắn với điểm quan sát, tiêu chí đánh giá và dữ liệu cần thu thập. Chuỗi trạng thái giữ tính tích lũy; kết luận về tác dụng riêng của mỗi biện pháp phải dựa vào phép kiểm tra điều kiện tương ứng, không chỉ dựa vào việc phiên thử nghiệm thất bại.
+*Bảng 2.4. Ma trận biến can thiệp và phương án kiểm thử giảm thiểu Case B và Case C*
 
-Client tại VLAN 30 được dùng để kiểm tra truy cập hợp lệ sau mỗi cấu hình. Ma trận bằng chứng và quy trình khôi phục giúp tổ chức các lượt kiểm tra dự kiến; chúng chưa chứng minh việc triển khai hoặc thử nghiệm đã thành công. Các kết quả về đọc/ghi tệp, lưu lượng, khả năng thực thi mã và thời gian khôi phục còn `[CẦN DỮ LIỆU]`. Trong phạm vi hiện tại, chương cung cấp thiết kế và tiêu chí kiểm chứng, chưa đưa ra kết quả demo thực tế.
+| Trường hợp thực nghiệm | Vị trí áp dụng | Biến can thiệp | Trạng thái cổng 139/445 | SMBv1 | Cơ chế cốt lõi |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Baseline (Mốc đối chứng)**| Không can thiệp | Trạng thái mặc định OS | `open` / `open` | Bình thường | Mốc đối chứng chuẩn |
+| **Case B (Tắt SMBv1)** | Cấu hình máy chủ | `EnableSMB1Protocol = $false` | `open` / `open` | Vô hiệu hóa | Loại bỏ giao thức lỗi thời |
+| **Case C (Lọc cổng pfSense)**| Cầu nối mạng | Luật chặn TCP 139/445 | `filtered` / `filtered` | Bị chặn mạng | Thu hẹp bề mặt tấn công |
+| **Case A (Cập nhật bản vá)** | Nhân hệ điều hành | Gói vá KB4012213 (srv.sys) | `open` / `open` | Hoạt động an toàn | Tham chiếu phân tích lý thuyết |
 
+## 2.8. Tiêu chí đánh giá kết quả
+
+### 2.8.1. Tiêu chí reachability
+Tiêu chí reachability xác định khả năng liên lạc tầng mạng dựa trên ICMP Echo. Tỷ lệ mất gói bằng không khẳng định kênh truyền thông suốt. Nếu mất toàn bộ gói tin, quy trình dừng lại để xử lý kết nối trước khi phân tích tầng trên.
+
+### 2.8.2. Tiêu chí protocol surface
+Tiêu chí protocol surface đánh giá độ mở của bề mặt dịch vụ qua trạng thái cổng và phương ngữ chấp nhận. Bề mặt dịch vụ tồn tại khi cổng 139/445 ở trạng thái `open`. Bề mặt giao thức tiềm ẩn nguy cơ khi phản hồi `smb-protocols` chứa phương ngữ `NT LM 0.12`.
+
+### 2.8.3. Tiêu chí remote vulnerability signal
+Tiêu chí remote vulnerability signal phân loại phản hồi `smb-vuln-ms17-010` theo ba trạng thái: `VULNERABLE` (khẳng định lỗi logic), `NOT VULNERABLE` (từ chối an toàn) và `UNKNOWN / NO USABLE SCRIPT RESULT` (kết nối hủy hoặc lỗi cú pháp).
+
+### 2.8.4. Tiêu chí patch ground truth
+Tiêu chí patch ground truth xác lập chân lý nội bộ qua `Get-HotFix` và phiên bản `srv.sys` (ngưỡng an toàn 6.3.9600.18604). Bảng 2.5 chuẩn hóa khung đối sánh giữa dữ kiện từ xa và sự thật nội bộ.
+
+*Bảng 2.5. Tiêu chí phân loại kết quả kiểm thử và ranh giới suy diễn bảo mật*
+
+| Dữ kiện từ xa (Remote Signal) | Sự thật nội bộ (Local Ground Truth) | Đánh giá an ninh tổng hợp | Ranh giới suy diễn bắt buộc |
+| :--- | :--- | :--- | :--- |
+| `VULNERABLE` | `UNPATCHED` (srv.sys < .18604) | Nguy cơ khai thác trực tiếp | Bằng chứng hội tụ đầy đủ hai chiều |
+| `UNKNOWN / NO RESULT` | `UNPATCHED` (srv.sys < .18604) | Nguy cơ tiềm ẩn chưa xác định | Tín hiệu từ xa bị lỗi, hệ thống vẫn tồn tại lỗ hổng |
+| `UNKNOWN / NO RESULT` | `PATCHED` (srv.sys >= .18604) | Không phát hiện nguy cơ | Đã vá lỗi nội bộ, tín hiệu từ xa không mang rủi ro |
+| `FILTERED` (Cổng bị chặn) | `UNPATCHED` (srv.sys < .18604) | Bề mặt mạng được bảo vệ | Dịch vụ được che chắn, nhân hệ thống chưa vá lỗi |
+
+### 2.8.5. Tiêu chí hiệu quả và giới hạn của mitigation
+Tiêu chí giải pháp đo lường mức độ thu hẹp bề mặt tấn công và tính khả dụng dịch vụ. Case B loại bỏ SMBv1 nhưng có thể ảnh hưởng tương thích; Case C chặn lưu lượng qua mạng nhưng không vá lỗi nội tại máy chủ.
+
+## 2.9. Tổng kết Chương 2
+
+Chương 2 đã thiết lập kiến trúc môi trường lab và quy trình kiểm thử dịch vụ SMB cùng lỗ hổng MS17-010. Mô hình Host-Only bảo đảm cô lập an toàn. Cơ chế snapshot `Before Demo`, mô hình năm lớp quan sát và kiểm thử vi sai bảo đảm tính tái lập của dữ liệu.
+
+Khung tiêu chí đánh giá phân tách rõ dữ kiện nguồn, diễn giải kỹ thuật và kết luận bảo mật. Việc đối chiếu tín hiệu từ xa với sự thật bản vá nội bộ ngăn chặn suy diễn chủ quan. Toàn bộ thiết kế kịch bản và ma trận biến can thiệp là cơ sở chuẩn mực để triển khai thực nghiệm trong Chương 3.
 
 ## TÀI LIỆU THAM KHẢO
 
-[1] National Institute of Standards and Technology, Technical Guide to Information Security Testing and Assessment, NIST SP 800-115, 2008. [Online]. Available: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-115.pdf.
+[1] National Institute of Standards and Technology, Technical Guide to Information Security Testing and Assessment, NIST SP 800-115, 2008. [Online]. Available: https://csrc.nist.gov/pubs/sp/800/115/final
 
-[2] National Institute of Standards and Technology, Guidelines on Firewalls and Firewall Policy, NIST SP 800-41 Rev. 1, 2009. [Online]. Available: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-41r1.pdf.
+[2] Kali Linux Project, "What is Kali Linux?," Kali Linux Documentation. [Online]. Available: https://www.kali.org/docs/introduction/what-is-kali-linux/
 
-[3] G. Lyon, *Nmap Network Scanning: The Official Nmap Project Guide to Network Discovery and Vulnerability Scanning*. Sunnyvale, CA: Insecure.Com LLC, 2009.
+[3] Microsoft Learn, "Direct hosting of SMB over TCP/IP," Microsoft Learn, 2026. [Online]. Available: https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/direct-hosting-of-smb-over-tcpip
 
-[4] P. Calderon and Nmap Project, "smb-vuln-ms17-010.nse Script Source Code," Nmap Project, 2017. [Online]. Available: https://svn.nmap.org/nmap/scripts/smb-vuln-ms17-010.nse
+[4] Microsoft, "Microsoft Security Bulletin MS17-010 - Critical," Microsoft Learn / Security TechCenter, Mar. 2017. [Online]. Available: https://learn.microsoft.com/en-us/security-updates/securitybulletins/2017/ms17-010
 
-[5] Microsoft, "Microsoft Security Bulletin MS17-010 - Critical," Microsoft Learn / Security TechCenter, Mar. 2017. [Online]. Available: https://learn.microsoft.com/en-us/security-updates/securitybulletins/2017/ms17-010
+[5] G. Lyon, Nmap Network Scanning: The Official Nmap Project Guide to Network Discovery and Vulnerability Scanning. Sunnyvale, CA: Insecure.Com LLC, 2009. [Online]. Available: https://nmap.org/book/
 
-[6] Microsoft, "Detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows," Microsoft Learn, 2025. [Online]. Available: https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3
+[6] P. Calderon and Nmap Project, "smb-protocols.nse Script Source Code," Nmap Project. [Online]. Available: https://svn.nmap.org/nmap/scripts/smb-protocols.nse
 
-[7] Rapid7, "Metasploit Framework," Metasploit Documentation. [Online]. Available: https://docs.rapid7.com/metasploit/msf-overview/. [Accessed: Oct. 4, 2026].
+[7] Microsoft Learn, "SMB security enhancements," Microsoft Learn, 2025. [Online]. Available: https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-security
 
-[8] P. Calderon and Nmap Project, "smb-protocols.nse Script Source Code," Nmap Project. [Online]. Available: https://svn.nmap.org/nmap/scripts/smb-protocols.nse. [Accessed: Oct. 4, 2026].
+[8] P. Calderon and Nmap Project, "smb-vuln-ms17-010.nse Script Source Code," Nmap Project, 2017. [Online]. Available: https://svn.nmap.org/nmap/scripts/smb-vuln-ms17-010.nse
 
-[9] Rapid7, "MS17-010 SMB RCE Detection," Metasploit Framework, source code. [Online]. Available: https://github.com/rapid7/metasploit-framework/blob/master/modules/auxiliary/scanner/smb/smb_ms17_010.rb. [Accessed: Oct. 4, 2026].
+[9] Microsoft Learn, "Detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows," Microsoft Learn, 2025. [Online]. Available: https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3
 
-[10] Rapid7, "MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption," Rapid7 Exploit Database, 2017. [Online]. Available: https://www.rapid7.com/db/modules/exploit/windows/smb/ms17_010_eternalblue/
+[10] National Institute of Standards and Technology, Guidelines on Firewalls and Firewall Policy, NIST SP 800-41 Rev. 1, 2009. [Online]. Available: https://csrc.nist.gov/pubs/sp/800/41/r1/final
