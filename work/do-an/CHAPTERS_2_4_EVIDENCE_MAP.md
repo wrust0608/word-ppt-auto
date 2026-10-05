@@ -20,7 +20,7 @@ Trạng thái: `LOCKED_CANONICAL / USER_APPROVED_2026_10_05`
 | 3.3.4–3.3.5 | MS17-010 remote | S2-RAW-04 | UNKNOWN |
 | 3.4 | local patch reconciliation | ENV-CORE-03 + Microsoft | UNPATCHED != exploit success |
 | 3.5 | Case B | B-LOCAL-01/02, B-ACTION-01, B-RAW-01/02 | disable != patch |
-| 3.6 | Case C | C-TOPO-01, C-RULE-01/02, C-RAW-01/02, C-LOG-01 | filtered from Kali != patch |
+| 3.6 | Case C | C-IFACE-01, C-BRIDGE-01, C-TUNE-DIRECT-01, C-RULE-01/02/03, C-RAW-01/02, C-LOG-01 | filtered from Kali != patch; C-LOG-01 proves blocked matching traffic but exact named-rule attribution is unresolved |
 | 3.7 | result matrix | all AUTHOR_DATA IDs | no new evidence |
 | 4.1–4.2 | evaluation framework/baseline | X2-C02..06 + sources | interpret, not re-run |
 | 4.3 | Case B analysis | X2-C07/08 + Microsoft | scope of protocol mitigation |
