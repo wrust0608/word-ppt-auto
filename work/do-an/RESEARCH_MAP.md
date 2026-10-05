@@ -1,51 +1,59 @@
 # Bản đồ nghiên cứu
 
+Trạng thái: `LOCKED_CANONICAL_2026_10_05`
+
 ## Vấn đề trung tâm
 
-Nguy cơ an ninh bắt nguồn từ việc duy trì giao thức SMBv1 không an toàn trên các hệ thống Windows trong mạng nội bộ, dẫn đến nguy cơ bị tấn công thực thi mã từ xa mức nhân qua nhóm lỗ hổng MS17-010 (tiêu biểu là EternalBlue / CVE-2017-0144); đồng thời giải quyết yêu cầu xây dựng quy trình kiểm thử đánh giá có kiểm soát và giải pháp phòng thủ đa tầng có đối chứng.
+Đánh giá an ninh SMB không thể đồng nhất cổng TCP 445 mở, SMBv1 được chấp nhận, tín hiệu từ công cụ quét và trạng thái bản vá của hệ điều hành. Đề tài xây dựng một quy trình kiểm thử có kiểm soát để phân biệt các lớp bằng chứng này, sau đó đánh giá tác động và giới hạn của các biện pháp giảm thiểu ở lớp giao thức và lớp mạng.
 
 ## Khoảng trống cần xử lý
 
-1. Nhầm lẫn phổ biến giữa trạng thái "cổng 445 đang mở / SMBv1 đang bật" với trạng thái "hệ thống thực sự tồn tại lỗ hổng MS17-010 chưa được vá".
-2. Thiếu quy trình kiểm thử an toàn trong môi trường mạng cô lập có cơ chế kiểm soát rủi ro và khôi phục sự cố.
-3. Thiếu khung đối chiếu toàn diện về hiệu quả và rủi ro tương thích khi triển khai các biện pháp phòng thủ SMB (cập nhật bản vá, vô hiệu hóa SMBv1, giới hạn cổng 445, phân đoạn mạng).
+1. Nhầm lẫn giữa reachability, SMB protocol state, remote vulnerability signal và local patch ground truth.
+2. Thiếu quy trình kiểm thử có khả năng truy vết bằng raw output, ảnh canonical và trạng thái cục bộ.
+3. Thiếu đối chiếu rõ ràng giữa patching, vô hiệu hóa SMBv1 và network access control.
+4. Dễ diễn giải sai kết quả âm tính/bất định của scanner thành “an toàn”.
 
 ## Câu hỏi nghiên cứu
 
-| ID | Câu hỏi | Có thể trả lời bằng | Tiêu chí hoàn thành |
+| ID | Câu hỏi | Phương pháp/bằng chứng | Tiêu chí hoàn thành |
 |---|---|---|---|
-| RQ1 | Kiến trúc, cơ chế bắt tay (dialect negotiation, session setup, tree connect) và sự khác biệt về bảo mật giữa SMBv1, SMBv2, SMBv3 trên Windows là gì? | Phân tích tài liệu kỹ thuật Microsoft, chuẩn giao thức và giáo trình chuyên ngành | Lập bảng so sánh chi tiết các đặc tính bảo mật, mã lệnh, mã hóa, signing và cổng dịch vụ giữa 3 phiên bản |
-| RQ2 | Cơ chế phát sinh lỗi bộ nhớ dẫn đến nhóm lỗ hổng MS17-010 (CVE-2017-0144) trong driver srv.sys là gì và điều kiện tác động thực tế ra sao? | Phân tích bản tin bảo mật MS17-010, cơ sở dữ liệu NVD, Windows Internals | Làm rõ cơ chế xử lý gói tin sai trong kernel, điều kiện cần và mức độ ảnh hưởng đến CIA |
-| RQ3 | Mô hình lab cô lập cần được thiết kế như thế nào để phục vụ quét, nhận diện và xác minh an toàn trạng thái SMB mà không vi phạm nguyên tắc đạo đức? | Thiết kế kiến trúc mạng ảo Host-only/Internal, phân bổ IP, snapshot, quy trình Nmap/NSE | Bản vẽ sơ đồ lab, bảng tham số cấu hình mạng và bộ tiêu chí xác minh 4 mức |
-| RQ4 | Các biện pháp phòng thủ kỹ thuật nào giúp triệt tiêu nguy cơ MS17-010 và những rủi ro tương thích hệ thống cần lường trước là gì? | Nghiên cứu tài liệu hardening của Microsoft, phân tích tác động tương thích | Bảng ma trận so sánh trước-sau phòng thủ và danh mục khuyến nghị đa tầng |
+| RQ1 | Kiến trúc, negotiation/session/resource access và sự khác biệt bảo mật giữa SMBv1, SMBv2, SMBv3 là gì? | Microsoft/Open Specs, tài liệu SMB security, nguồn học thuật | Giải thích đúng cơ chế và bảng so sánh phục vụ phần thực nghiệm |
+| RQ2 | MS17-010 liên quan tới cơ chế xử lý SMB nào, điều kiện tác động và ý nghĩa an ninh ra sao? | Microsoft MS17-010, NVD, nguồn kỹ thuật đã xác minh | Phân biệt bulletin/CVE, cơ chế lỗi, điều kiện và tác động |
+| RQ3 | Mô hình lab và quy trình kiểm thử nào cho phép phân biệt reachability, protocol state, remote detection signal và local patch ground truth một cách an toàn, truy vết được? | VirtualBox Host-Only, snapshot, Nmap/NSE, Windows local state, Evidence IDs | Lab canonical + Scenario 1/2 + inference boundaries |
+| RQ4 | Các lớp giảm thiểu ảnh hưởng như thế nào tới bề mặt giao thức, khả năng tiếp cận và trạng thái host; hiệu quả và giới hạn của từng lớp là gì? | Before/after Case B/C, Microsoft/NIST, local ground truth | Ma trận so sánh và khuyến nghị defense-in-depth không overclaim |
 
 ## Mục tiêu
 
-| ID | Mục tiêu | Câu hỏi liên quan | Sản phẩm/bằng chứng |
+| ID | Mục tiêu | RQ | Sản phẩm/bằng chứng |
 |---|---|---|---|
-| O1 | Hệ thống hóa cơ sở lý thuyết về kiến trúc và giao thức SMB trên Windows | RQ1 | Báo cáo Chương 1 (mục 1.1) với sơ đồ luồng bản tin và bảng so sánh SMBv1-v3 |
-| O2 | Phân tích chuyên sâu cơ chế kỹ thuật và bề mặt tấn công của MS17-010 | RQ2 | Báo cáo Chương 1 (mục 1.2) với phân tích CVE, driver srv.sys và ma trận điều kiện ảnh hưởng |
-| O3 | Thiết kế kiến trúc lab cô lập và xây dựng bộ tiêu chí xác minh trạng thái an toàn SMB | RQ3 | Thiết kế Chương 2 & Tiêu chí Chương 1 (mục 1.4); kịch bản kiểm thử có kiểm soát |
-| O4 | Đề xuất giải pháp phòng thủ đa tầng, đánh giá rủi ro và phân tích tương thích | RQ4 | Báo cáo Chương 4 với ma trận trước-sau phòng thủ và hướng dẫn hardening |
+| O1 | Hệ thống hóa cơ sở lý thuyết SMB | RQ1 | Chương 1 |
+| O2 | Phân tích MS17-010 và bề mặt tấn công | RQ2 | Chương 1 |
+| O3 | Thiết kế và mô tả lab canonical cùng quy trình kiểm thử có kiểm soát | RQ3 | Chương 2 + Evidence Map |
+| O4 | Phân tích kết quả và đánh giá các lớp giảm thiểu | RQ4 | Chương 3–4, ma trận Baseline/Case B/Case C |
 
 ## Phương pháp
 
 | ID | Phương pháp | Đầu vào | Đầu ra | Giới hạn |
 |---|---|---|---|---|
-| M1 | Phân tích tài liệu học thuật và tiêu chuẩn kỹ thuật | MS17-010, RFC, Microsoft Learn, Windows Internals | Báo cáo lý thuyết và sơ đồ cơ chế | Phụ thuộc vào tài liệu chính thống công bố |
-| M2 | Thiết kế kiến trúc mô hình thực nghiệm ảo hóa | Yêu cầu cô lập lab, sơ đồ kết nối, dải địa chỉ IP | Sơ đồ mạng lab, bảng thông số máy ảo | Giới hạn trong môi trường ảo hóa nội bộ |
-| M3 | Phương pháp kiểm thử an ninh mạng theo chuẩn có kiểm soát | Công cụ Kali Linux, Nmap, NSE, Metasploit | Kịch bản kiểm thử, tiêu chí xác minh trạng thái | **Hiện tại tránh demo và kết quả demo thực tế theo chỉ thị người dùng** |
-| M4 | Phân tích so sánh và đánh giá rủi ro | Trạng thái trước và sau khi áp dụng biện pháp bảo vệ | Bảng so sánh trước-sau, danh mục khuyến nghị | Cần xác thực thực tế khi có số liệu demo |
+| M1 | Phân tích tài liệu kỹ thuật/học thuật | Microsoft, NVD, Nmap, NIST, Rapid7 và nguồn đã xác minh | Nền lý thuyết/claim nguồn | Không dùng NotebookLM như nguồn trích dẫn |
+| M2 | Thiết kế lab ảo hóa cô lập | VirtualBox, Kali, Windows Server 2012 R2, Host-Only, snapshot | Sơ đồ, cấu hình và baseline | Môi trường ảo hóa, một target chính |
+| M3 | Kiểm thử an ninh có kiểm soát | Scenario 1/2, raw Nmap/NSE, local Windows state | AUTHOR_DATA có Evidence ID | Không có canonical exploit/RCE result; remote NSE04 có thể UNKNOWN |
+| M4 | Differential before/after testing | Baseline, Case B, Case C | So sánh tác động từng mitigation | Case A patch chưa có canonical evidence |
+| M5 | Phân tích rủi ro và khuyến nghị | Kết quả canonical + nguồn hardening | Chương 4, residual risk, recommendation | Không định lượng ngoài dữ liệu |
 
 ## Phạm vi và giả định
 
-- Trong phạm vi: Kiến trúc giao thức SMB (v1, v2, v3); lỗ hổng MS17-010 / CVE-2017-0144; công cụ Nmap, NSE, Metasploit trong Kali Linux; biện pháp phòng thủ (patch, disable SMBv1, firewall 445, network segmentation).
-- Ngoài phạm vi: **Tránh các phần liên quan đến demo và kết quả demo thực tế ở giai đoạn hiện tại (theo yêu cầu người dùng)**; không phát tán mã độc; không kiểm thử ngoài môi trường lab cô lập.
-- Giả định: Môi trường lab được cách ly hoàn toàn với mạng bên ngoài; máy ảo Windows mục tiêu hỗ trợ cơ chế snapshot.
-- Ràng buộc: Tuân thủ quy định trình bày HUIT 2024; tuân thủ thời hạn 10 tuần; tuân thủ nguyên tắc không bịa dữ liệu.
+- Trong phạm vi: demo canonical Scenario 1/2, Case B, Case C; local patch ground truth; đánh giá giới hạn công cụ.
+- Ngoài phạm vi kết quả: exploit/RCE thành công, performance benchmark, Case A patch nếu chưa audit được evidence.
+- Giả định: kết luận chỉ áp dụng trong topology/vantage point và trạng thái hệ thống đã ghi nhận.
+- Ràng buộc: không bịa data; raw evidence ưu tiên hơn summary; UNKNOWN được giữ là UNKNOWN.
 
 ## Tiêu chí đánh giá toàn công trình
 
-1. Tính chính xác kỹ thuật: Phân biệt rõ ràng giữa các khái niệm (cổng mở vs dịch vụ chạy vs lỗ hổng tồn tại).
-2. Tính hệ thống: Lập luận có cấu trúc xuyên suốt từ cơ chế giao thức -> nguyên nhân lỗ hổng -> phương pháp phát hiện -> giải pháp phòng thủ.
-3. Tính trung thực học thuật: Mọi khẳng định kỹ thuật đều có trích dẫn nguồn chuẩn (Microsoft, NIST, Nmap, giáo trình); các phần chưa có dữ liệu thực nghiệm được gắn nhãn `[CẦN DỮ LIỆU]` thay vì suy đoán.
+1. Mỗi RQ có câu trả lời hoặc giới hạn rõ.
+2. 100% experimental result claims trong Chương 3 truy tới Evidence ID.
+3. Không có unresolved raw/prose conflict.
+4. Phân biệt SOURCE_FACT, AUTHOR_DATA, INTERPRETATION và PROPOSAL.
+5. Không đồng nhất OPEN, SMBv1 enabled, UNKNOWN, UNPATCHED và FILTERED.
+6. Mọi recommendation quan trọng có nguồn hoặc được ghi rõ là proposal.
+7. Báo cáo, DOCX và slide cùng dùng một canonical truth.
