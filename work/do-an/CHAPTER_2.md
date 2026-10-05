@@ -7,9 +7,9 @@ Trọng tâm gồm cấu hình trạm kiểm thử Kali Linux và máy mục ti�
 ## 2.1. Phạm vi và mô hình thực nghiệm
 
 ### 2.1.1. Mục tiêu và phạm vi thực nghiệm
-Mô hình thực nghiệm được xây dựng nhằm cung cấp không gian kiểm thử an toàn, độc lập và có thể tái lập [1]. Mục tiêu chính gồm:
+Mô hình thực nghiệm được xây dựng để cung cấp môi trường kiểm thử có kiểm soát và có thể tái lập [1]. Mục tiêu chính gồm:
 1. **Khảo sát bề mặt dịch vụ:** Đánh giá cấu hình SMB, nhận diện cổng TCP 139, 445 và xác định các dialect SMB được hỗ trợ.
-2. **Thăm dò dấu hiệu an ninh:** Thăm dò phản ứng dịch vụ trước gói tin NSE chuẩn hóa liên quan MS17-010 mà không gây gián đoạn hệ thống.
+2. **Thăm dò dấu hiệu an ninh:** Thăm dò phản ứng dịch vụ trước gói tin NSE chuẩn hóa liên quan MS17-010 mà không thực hiện thao tác có chủ đích gây gián đoạn.
 3. **Đo đạc hiệu quả giảm thiểu:** So sánh sự thay đổi trạng thái mạng và kết quả quét trước và sau can thiệp phòng thủ.
 4. **Bảo đảm an toàn kiểm thử:** Ở trạng thái baseline, hai máy ảo chỉ sử dụng Host-Only NIC, không cấu hình NAT/Bridged và không có default route, qua đó giới hạn đường kết nối của chúng trong mạng lab.
 
@@ -43,7 +43,7 @@ Bảng 2.1. Thông số kỹ thuật của các máy ảo trong môi trường t
 | **Bản dựng** | Kali Rolling (Nmap 7.99) | Build 9600 | Hệ điều hành mục tiêu |
 | **Phần cứng ảo** | 2 vCPU, 4096 MB RAM | 2 vCPU, 4096 MB RAM | Đồng nhất tài nguyên |
 | **IP / Subnet** | `192.168.56.10/24` (Tĩnh) | `192.168.56.20/24` (Tĩnh) | Cố định địa chỉ mạng |
-| **Giao diện mạng**| 1 Host-Only NIC (`eth0`) | 1 Host-Only NIC (`Ethernet`) | Cách ly, không Internet |
+| **Giao diện mạng**| 1 Host-Only NIC (`eth0`) | 1 Host-Only NIC (`Ethernet`) | Cấu hình baseline Host-Only |
 | **Cổng dịch vụ** | Cổng nguồn ngẫu nhiên | TCP 139 và TCP 445 [3] | Khảo sát dịch vụ SMB |
 
 Môi trường ảo hóa thiết lập trên Oracle VM VirtualBox 7.2.20. Card mạng máy chủ đóng vai trò host adapter mang địa chỉ `192.168.56.1/24` phục vụ giám sát khi cần thiết.
@@ -97,7 +97,7 @@ Bảng 2.2. Quy trình các bước thực hiện trong Kịch bản 1
 | :--- | :--- | :--- | :--- |
 | **B1** | `ip addr show; ip route show` | Kiểm tra IP và định tuyến trạm kiểm thử | Địa chỉ `eth0` (`192.168.56.10/24`) và bảng định tuyến subnet |
 | **B2** | `sudo nmap -sn -PR 192.168.56.0/24 -T3 --max-retries 2 -oA b2_host_discovery` | Khảo sát các trạm hoạt động trong subnet | Danh sách IP phản hồi thăm dò ARP trong mạng |
-| **B3** | `sudo nmap -sn -PR 192.168.56.20 -T3 --max-retries 2 -oA b3_target_alive` | Xác nhận riêng tính sẵn sàng của máy mục tiêu | Trạng thái trạm `192.168.56.20` đang hoạt động (host up) |
+| **B3** | `sudo nmap -sn -PR 192.168.56.20 -T3 --max-retries 2 -oA b3_target_alive` | Xác nhận riêng tính sẵn sàng của máy mục tiêu | Trạng thái phản hồi của `192.168.56.20` |
 | **B4** | `sudo nmap -sS -p 139,445 192.168.56.20 -T3 --max-retries 2 --reason -oA b4_smb_ports` | Quét trạng thái cổng TCP 139 và 445 [6] | Trạng thái cổng và trường REASON do Nmap trả về |
 | **B5** | `sudo nmap -sS -sV --version-intensity 5 -p 139,445 192.168.56.20 -T3 --max-retries 2 -oA b5_smb_version` | Nhận diện phiên bản dịch vụ và hệ điều hành | Chuỗi service/version fingerprint do Nmap trả về |
 | **B6** | `sudo nmap -sS -p 139,445 --script smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities 192.168.56.20 -T3 --max-retries 2 -oA b6_smb_nse` | Khảo sát đặc trưng an toàn giao thức SMB [7], [8] | Danh sách dialect SMB, chính sách ký số và các capability do script trả về |
@@ -116,7 +116,7 @@ Kết quả Kịch bản 1 đóng vai trò định danh dịch vụ, làm tiền
 ### 2.4.1. Mục tiêu và điều kiện thực hiện
 Kịch bản 2 mở rộng khảo sát an ninh bằng cách sử dụng các kịch bản NSE để nhận diện chỉ dấu liên quan đến lỗ hổng MS17-010:
 - **Mục tiêu:** Thăm dò phản ứng của dịch vụ SMB trước các gói tin nghiệp vụ chuẩn hóa, kiểm tra sự tồn tại của SMBv1 và khảo sát dấu hiệu an ninh mà không gây mất ổn định máy chủ.
-- **Điều kiện thực hiện:** Hoàn thành Kịch bản 1, xác nhận cổng TCP 139 và 445 mở, dịch vụ SMB phản hồi bình thường và hệ thống đã lưu mốc snapshot `Before Demo`.
+- **Điều kiện thực hiện:** Hoàn thành Kịch bản 1, xác nhận đường truy cập SMB đáp ứng điều kiện tiếp tục kiểm tra và hệ thống đã lưu mốc snapshot `Before Demo`.
 
 ### 2.4.2. Bốn phép đo NSE-SMB-01 đến NSE-SMB-04
 Quy trình Kịch bản 2 chuẩn hóa thành 4 phép đo tuần tự từ `NSE-SMB-01` đến `NSE-SMB-04` thực hiện từ trạm kiểm thử Kali Linux. Chi tiết các phép đo được mô tả trong Bảng 2.3.
@@ -172,7 +172,7 @@ nmap -p 445 -n -T3 --max-retries 2 --script smb-protocols -oA evidence/nse-smb/N
 
 nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
 ```
-- **Ranh giới an ninh:** Trong kịch bản không thực hiện bước khởi động lại máy, tính năng `FS-SMB1` vẫn duy trì cài đặt trên hệ thống. Việc vô hiệu hóa SMBv1 trong cấu hình SMB Server không thay đổi mã nhị phân driver nhân `srv.sys` (`SMBv1 disabled != PATCHED`).
+- **Ranh giới an ninh:** Trong kịch bản không thực hiện bước khởi động lại máy và không thực hiện thao tác gỡ tính năng `FS-SMB1`. Việc vô hiệu hóa SMBv1 trong cấu hình SMB Server không thay đổi mã nhị phân driver nhân `srv.sys` (`SMBv1 disabled != PATCHED`).
 
 ### 2.5.3. Kiểm soát SMB bằng pfSense Transparent Bridge
 Biện pháp giảm thiểu thứ hai (Case C) triển khai tường lửa chuyên dụng theo NIST SP 800-41 Rev. 1 [11]. pfSense CE 2.9.0 đóng vai trò cầu nối trong suốt (Transparent Bridge) L2, cho phép lọc gói mà không thay đổi dải IP `192.168.56.0/24` của hai trạm.
@@ -225,7 +225,7 @@ Quá trình phân tích dữ liệu thực nghiệm tuân thủ 5 ranh giới su
 
 ## 2.7. Tổng kết chương
 
-Chương 2 đã hoàn thành thiết kế mô hình thực nghiệm và chuẩn hóa các kịch bản kiểm thử cho dịch vụ SMB cùng lỗ hổng MS17-010. Mạng ảo Host-Only trên Oracle VM VirtualBox 7.2.20 thiết lập môi trường cô lập, an toàn và có khả năng tái lập nhờ mốc snapshot `Before Demo`.
+Chương 2 đã hoàn thành thiết kế mô hình thực nghiệm và các kịch bản kiểm thử cho dịch vụ SMB cùng MS17-010. Mạng Host-Only trên Oracle VM VirtualBox 7.2.20 giới hạn đường kết nối của hai máy ảo trong lab; snapshot `Before Demo` được dùng làm mốc phục hồi.
 
 Thông số trạm kiểm thử Kali Linux và máy mục tiêu Windows Server 2012 R2 đã được chuẩn hóa. Đồ án xây dựng quy trình 6 bước cho Kịch bản 1, 4 phép đo cho Kịch bản 2, cùng phương pháp kiểm thử đối chiếu cho hai giải pháp giảm thiểu gồm vô hiệu hóa SMBv1 và tường lửa pfSense Transparent Bridge.
 
