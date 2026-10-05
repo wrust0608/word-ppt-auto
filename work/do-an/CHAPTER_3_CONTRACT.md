@@ -1,4 +1,6 @@
-# CHAPTER 3 CONTRACT — PROPOSED
+# CHAPTER 3 CONTRACT — LOCKED_CANONICAL
+
+Trạng thái: `LOCKED_WAITING_FOR_X6`
 
 Question: Các phép đo canonical thực tế cho thấy gì về reachability, SMB protocol state, remote MS17-010 signal, patch ground truth và tác động của Case B/C?
 
