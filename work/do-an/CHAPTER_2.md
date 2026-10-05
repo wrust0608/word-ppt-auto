@@ -2,7 +2,7 @@
 
 Chương 2 trình bày thiết kế, cài đặt môi trường mạng thực nghiệm cô lập và chuẩn hóa các kịch bản khảo sát an toàn dịch vụ SMB cùng lỗ hổng MS17-010.
 
-Trọng tâm gồm cấu hình trạm kiểm thử Kali Linux và máy mục tiêu Windows Server 2012 R2. Đồ án xây dựng hai kịch bản khảo sát bằng Nmap và NSE, thiết lập phương pháp kiểm thử đối chiếu cho hai giải pháp giảm thiểu gồm vô hiệu hóa SMBv1 và tường lửa pfSense Transparent Bridge, chuẩn hóa dữ liệu thu thập phục vụ Chương 3.
+Nội dung gồm cấu hình Kali Linux và Windows Server 2012 R2, hai kịch bản Nmap/NSE, hai biện pháp giảm thiểu đã thực hiện và quy tắc sử dụng dữ liệu cho Chương 3.
 
 ## 2.1. Phạm vi và mô hình thực nghiệm
 
