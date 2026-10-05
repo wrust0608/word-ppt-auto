@@ -10,11 +10,14 @@ Tài liệu này là cổng kiểm soát sự thật thực nghiệm trước kh
 
 Thứ tự ưu tiên khi có mâu thuẫn:
 
-1. Raw output trực tiếp từ công cụ hoặc trạng thái cục bộ của hệ điều hành (`.nmap`, `.xml`, `.gnmap`, PowerShell/system audit, firewall log).
-2. Manifest/Summary của đúng lượt chạy canonical nếu khớp raw output.
-3. Ảnh chụp của đúng lượt chạy canonical.
-4. Kịch bản gốc và tài liệu kỹ thuật để giải thích ý nghĩa phép đo.
-5. Báo cáo thực nghiệm cũ, Word cũ và nội dung agent trước đây chỉ là `HISTORICAL_REFERENCE`.
+1. Machine-generated raw output hoặc direct local-state artifact (`.nmap`, `.xml`, `.gnmap`, PowerShell/system audit).
+2. Direct screenshot/log của đúng trạng thái hoặc lượt canonical.
+3. Final run manifest / bounded final closure nếu không mâu thuẫn direct evidence.
+4. Summary/interpretation.
+5. Kịch bản gốc và tài liệu kỹ thuật để giải thích ý nghĩa phép đo.
+6. Báo cáo thực nghiệm cũ, Word cũ và nội dung agent trước đây chỉ là `HISTORICAL_REFERENCE`.
+
+Nếu direct artifact và manifest mâu thuẫn, giữ cả hai, gắn `CONFLICTING_EVIDENCE`, và hạ claim về mức direct artifact cho phép; không hòa giải bằng suy đoán.
 
 Nếu cấp thấp hơn mâu thuẫn cấp cao hơn, giữ cấp cao hơn và ghi mâu thuẫn. Không chọn kết quả thuận lợi hơn để “hòa giải”.
 
@@ -91,11 +94,11 @@ Nhãn dùng trong ma trận:
 | ETM-C-02 | Kali/Windows IP không đổi; Windows SMB1=True, SMB2=True, LanmanServer Running, patch=UNPATCHED | pfSense summary | biến thay đổi chính là policy pfSense | không nói host được patch/harden nội tại |
 | ETM-C-03 | BLOCK TCP `192.168.56.10 -> 192.168.56.20:139,445`, log enabled, đặt trên pass rule | rule config/order | policy đúng source/dest/ports | không suy ra mọi nguồn/đường đều bị chặn |
 | ETM-C-04 | Retest ports: 139/445 từ `open/syn-ack` -> `filtered/no-response` | Case C `NSE-SMB-01_ports.*` | từ Kali, đường TCP 139/445 bị lọc trong topology thử nghiệm | không suy ra service local đã tắt |
-| ETM-C-05 | pfSense log ghi SYN Kali->Windows 139/445 bị rule Case C block | `pfSense_10_Block_Log_CANONICAL.png` | quy thuộc trực tiếp thay đổi reachability cho rule pfSense trong canonical run | không mở rộng thành “bảo vệ tuyệt đối” |
-| ETM-C-06 | Retest MS17-010: 445 filtered, không verdict | Case C `NSE-SMB-04_ms17010.*` | classification = UNKNOWN do không thiết lập được TCP 445 | không gọi SAFE/PATCHED/NOT VULNERABLE |
+| ETM-C-05 | pfSense log tại thời điểm canonical scan ghi blocked TCP SYN từ `.56.10` tới `.56.20:139/445` trên CASE_C_KALI; visible Rule label trong screenshot mâu thuẫn manifest về tên/ID rule | `pfSense_10_Block_Log_CANONICAL.png` + Case C manifest/closure | được kết luận matching SMB SYN traffic bị chặn trong pfSense path; exact named-rule attribution = `CONFLICTING_EVIDENCE / UNRESOLVED` | không được nói log screenshot đã chứng minh chính xác named rule `CASE C - Block SMB Kali to Windows` cho tới khi conflict được resolve |
+| ETM-C-06 | Retest MS17-010: 445 `filtered`, không có script verdict | Case C `NSE-SMB-04_ms17010.*` | remote classification = UNKNOWN từ vantage point này; raw chỉ chứng minh 445 filtered và không có verdict | không gọi SAFE/PATCHED/NOT VULNERABLE; không thêm causal explanation ngoài raw |
 | ETM-C-07 | host phía sau vẫn UNPATCHED và local SMB1=True | pfSense summary | network filtering giảm exposure từ nguồn/đường thử nhưng không đổi patch/protocol state host | không nói bypass firewall => chắc chắn exploit thành công |
 
-**Khóa:** pfSense chặn có kiểm chứng đường truy cập TCP 139/445 từ Kali trong topology canonical; `FILTERED != PATCHED`.
+**Khóa:** TCP 139/445 từ Kali bị lọc trong topology Case C và pfSense log ghi matching SMB SYN traffic bị block trên CASE_C_KALI. Exact named-rule attribution của log đang có conflict giữa screenshot và manifest, nên không được viết mạnh hơn. `FILTERED != PATCHED`.
 
 ## 7. Ma trận tổng hợp dùng cho Chương 4
 
@@ -188,52 +191,62 @@ Sau khi duyệt: **Chương 2 -> review -> Chương 3 -> review -> Chương 4 ->
 Bộ evidence 2026-10-04 đủ để xây báo cáo thực nghiệm có giá trị mà không cần ép NSE-SMB-04 phải trả `VULNERABLE`. Trục nghiên cứu cần giữ là sự phân biệt giữa **quan sát từ xa**, **trạng thái giao thức**, **ground truth bản vá**, và **tác động của từng lớp mitigation**. Mọi kết luận vượt các ranh giới trên phải mang nhãn thiếu bằng chứng hoặc bị loại khỏi bản chính thức.
 
 
-## 13. Normalized source-package ingest lock — ALL(1).zip
 
-Source package audit is now fixed at:
-- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_INGEST_ALL_2026_10_06.md`
-- `work/do-an/evidence/ALL_2026_10_06/CANONICAL_COMMANDS_FROM_ALL_ZIP.md`
-- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_USE_POLICY_ALL_ZIP.md`
+## 13. ALL(1).zip audit R2 lock — 2026-10-06
+
+Authoritative internal evidence layer:
+- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_AUDIT_R2_ALL_2026_10_06.md`
+- `work/do-an/evidence/ALL_2026_10_06/FULL_ARCHIVE_MANIFEST_ALL_2026_10_06.csv`
 - `work/do-an/evidence/ALL_2026_10_06/CANONICAL_EVIDENCE_MAP_ALL_ZIP.md`
+- `work/do-an/evidence/ALL_2026_10_06/COMMAND_LINEAGE_MATRIX.md`
+- `work/do-an/evidence/ALL_2026_10_06/CANONICAL_NMAP_TEXT_OUTPUTS.md`
+- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_USE_POLICY_ALL_ZIP.md`
 
-Archive identity:
-`ALL(1).zip` — SHA-256 `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`.
+Archive SHA-256:
+`dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`.
 
-### 13.1 Exact command lock
+### 13.1 Command provenance lock
+Do not merge operator command and Nmap-recorded argv:
+- operator command comes from manifest/screenshot and may contain `sudo`;
+- Nmap raw argv comes from `.nmap/.xml/.gnmap` and may contain normalized `--privileged`.
 
-Scenario 1 exact raw commands include:
-- B2/B3: `-sn -PR -T3 --max-retries 2`;
-- B4: `-sS -p 139,445 -T3 --max-retries 2 --reason`;
-- B5: `-sS -sV --version-intensity 5 -p 139,445 -T3 --max-retries 2`;
-- B6: `-sS -p 139,445 --script smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities -T3 --max-retries 2`.
+All 13 raw triplets agree internally on Nmap argv: **13/13 PASS**.
 
-Do not silently add `-Pn` to Scenario 1 prose when describing the actually executed commands.
+### 13.2 Baseline chronology lock
+- `Kali_Baseline.txt` is early pre-Nmap history; final pre-demo state has Nmap 7.99.
+- pre-demo audit precedes creation of `Before Demo`; later snapshot audit establishes final snapshot state.
+- Case C topology is separate from baseline and must not be projected backward.
 
-Scenario 2 exact raw commands use `-n -T3 --max-retries 2`, with `--privileged` recorded in raw headers for NSE-SMB-02/03/04.
+### 13.3 Case C evidence-grade lock
+Direct evidence proves:
+- CASE_C_KALI=em2; CASE_C_WINDOWS=em3;
+- bridge0 membership;
+- `pfil_member=1`, `pfil_bridge=0`;
+- configured BLOCK rule source `.56.10` -> destination `.56.20`, SMB_Ports, logging enabled;
+- block row above pass row;
+- 139/445 filtered/no-response in canonical retest;
+- 445 filtered/no MS17-010 verdict.
 
-Case B retest uses only:
-- `smb-protocols`;
-- `smb-vuln-ms17-010`.
+Final metadata supports, but direct screenshot does not independently prove:
+- `pfil_onlyip=1`;
+- Internal Network names and management-plane addresses;
+- pfSense CE 2.9.0-RELEASE and snapshot metadata.
 
-Case C canonical retest uses only:
-- NSE-SMB-01 ports;
-- NSE-SMB-04 MS17-010.
+### 13.4 Case C log conflict lock
+`pfSense_10_Block_Log_CANONICAL.png` visibly shows blocked SMB SYN traffic at canonical scan time, but its Rule label reads:
+`CASE C baseline pass Kali to Windows (100000104)`.
 
-### 13.2 Topology lock for Case C
+Manifest/closure claims:
+`CASE C - Block SMB Kali to Windows (1000000104)`.
 
-Case C changes the VirtualBox network topology and therefore must not be described as merely “adding pfSense to the baseline Host-Only link”.
+Therefore:
+- allowed: matching SMB SYN traffic was blocked in the pfSense path;
+- forbidden: exact named-rule attribution is proven by the log screenshot.
 
-Data plane:
-`Kali .56.10 -> ATTT-PFS-KALI -> pfSense em2 -> bridge0 -> pfSense em3 -> ATTT-PFS-WIN -> Windows .56.20`.
+Configured Block rule existence/order remain separately proven by direct screenshots.
 
-Management plane:
-`Host .57.1 <-> Host-Only #2 <-> pfSense em1 .57.2`.
-
-This topology is specific to Case C. It must not be projected backward into Scenario 1 or Scenario 2 baseline.
-
-### 13.3 Report-writing consequences
-
-- Chapter 2 may describe method/design using these exact facts but must not leak detailed results that belong in Chapter 3.
-- Chapter 3 must bind each claim to the normalized evidence map and raw files.
-- Chapter 4 may compare Baseline vs Case B vs Case C; Case A remains recommendation/theory unless new audited evidence is provided.
-- Archive folder names are provenance only and must not be reused as report-section architecture.
+### 13.5 Report-writing consequence
+- Chapter 2 may use verified setup/method facts, with exact commands taken through the command-lineage matrix.
+- Chapter 3 must bind each result to raw/direct evidence; do not use summary prose as ground truth.
+- Chapter 4 may compare Baseline, Case B and Case C within these bounds.
+- Case A remains theory/recommendation only.
