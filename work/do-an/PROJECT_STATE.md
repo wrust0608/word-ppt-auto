@@ -315,3 +315,18 @@
 - X5 remains OPEN for surgical patch only.
 - CP5-USER PENDING.
 - X6 BLOCKED.
+
+
+## DEC-32 — X5 structural rewrite R3 near-lock; one micro-patch remains
+
+- Ngày: 2026-10-05.
+- Remote candidate commit verified: `d7fe54d56cc6f7de1ada0817ebd23d254ec22ddc`.
+- External review artifact: `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R3.md`.
+- Score: **93/100 — MINOR_BLOCKING_PATCH_REQUIRED**.
+- Structure 8 H2 / 27 H3 remains LOCKED.
+- R2 blockers were closed.
+- Remaining technical blocker: description of `smb-vuln-ms17-010` mechanism must match Nmap official behavior (IPC$ + transaction on FID 0 + status-code check), not unsupported PeekNamedPipe/opcode wording.
+- Minor required precision fixes: Case C rule vs observed SYN log, remove exact dialect set from Chapter 2 framework, strengthen superseding-update patch wording, remove absolute patch/Host-Only phrasing, keep Case B evaluation as criterion rather than observed result.
+- X5 OPEN for R4 micro-patch only.
+- CP5-USER PENDING.
+- X6 BLOCKED.
