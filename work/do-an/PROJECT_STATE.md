@@ -360,3 +360,20 @@
 - `CP5-USER = PENDING`: người dùng phải đọc trực tiếp và phê duyệt Chương 2.
 - `X6 = BLOCKED` cho tới khi CP5-USER PASS.
 - Không merge structural branch vào main trước user approval/reconciliation step.
+
+
+## DEC-35 — User rejects R5 presentation style; Chapter 2 reopened as simple demo-style
+
+- Ngày: 2026-10-05.
+- User feedback: R5 reads like a report for a leader/QA rather than an academic project report centered on demo implementation.
+- User direction: **càng đơn giản, dễ hiểu, đúng trọng tâm càng tốt**.
+- R5 commit `97faf32564191ab0b590bf02e287c6c4935cbbdc` remains the technical baseline only.
+- Previous CP5-TECH PASS is retained as validation of technical facts in R5, but it does NOT certify the new final presentation.
+- New approved presentation Change Request: `CHANGE_REQUEST_CR-2026-10-05-X5-DEMO-STYLE.md`.
+- New branch: `feature/x5-chapter-2-demo-style`.
+- New structure: **7 H2 / 20 H3**, demo-first.
+- New prompt: `work/do-an/prompts/X5_REWRITE_CHAPTER_2_DEMO_STYLE.md`.
+- X5 reopened for demo-style rewrite.
+- New demo-style candidate must be external-reviewed from scratch.
+- CP5-USER remains PENDING.
+- X6 remains BLOCKED.
