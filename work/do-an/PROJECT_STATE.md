@@ -377,3 +377,17 @@
 - New demo-style candidate must be external-reviewed from scratch.
 - CP5-USER remains PENDING.
 - X6 remains BLOCKED.
+
+
+## DEC-36 — Demo-style R1 presentation direction accepted; technical/research grounding rejected
+
+- Ngày: 2026-10-05.
+- Candidate verified: `aec00df5efe9dd35d3a031becb1a056695ad2994`.
+- Review: `X5_DEMO_STYLE_EXTERNAL_REVIEW_R1.md`.
+- Score: **66/100 — REVISE_BLOCKING**.
+- Presentation direction is approved: **7 H2 / 20 H3 retained**.
+- Research-first workflow is retained, but source access/verification must be explicit; metadata-only sources cannot support invented full-text presentation observations.
+- Major technical regressions: Demo1 flow changed, unsupported `unsafe=0`, mitigation expected-result overclaims, Case B extra restart/retests, pfSense version 2.7.2 instead of canonical 2.9.0, Case A overclaims, unsupported tcpdump/tshark/pcap/Event Viewer additions, snapshot restore overclaim.
+- R5 remains technical baseline.
+- X5 remains OPEN for demo-style R2 correction.
+- CP5-USER PENDING; X6 BLOCKED.
