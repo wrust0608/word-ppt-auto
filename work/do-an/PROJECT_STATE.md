@@ -18,7 +18,7 @@
 | CLAIM_MATRIX | REOPENED_RECHECK | work/do-an/CLAIM_MATRIX.md | Sáu luận điểm trung tâm đã chuyển sang nguồn khả dụng; cần đồng bộ bibliography Chương 1 |
 | OUTLINE | LOCKED_CANONICAL_2026_10_05 | work/do-an/OUTLINE.md | X3B user-approved; Ch2–4 bám Truth Matrix/Evidence Map |
 | CHAPTER_ARGUMENT | LOCKED_CANONICAL_INDEX | work/do-an/CHAPTER_ARGUMENT.md | Hợp đồng enterprise lịch sử đã archive; canonical contracts tách Ch2/3/4 |
-| CHAPTER_2 | AUTHOR_VOICE_REVIEW_COMPLETED | work/do-an/CHAPTER_2.md | Bản thảo canonical đã hiệu chỉnh phương pháp và giọng tác giả (4.417 từ, 9 mục lớn 2.1–2.9, 42 tiểu mục cấp 3); sẵn sàng cho external review |
+| CHAPTER_2 | AUTHOR_VOICE_REVIEW_COMPLETED | work/do-an/CHAPTER_2.md | Bản thảo canonical đã hiệu chỉnh phương pháp và giọng tác giả (4.426 từ, 9 mục lớn 2.1–2.9, 42 tiểu mục cấp 3); sẵn sàng cho external review |
 | CHAPTER_2_X5_SELF_REVIEW | X5_DRAFT_READY_FOR_EXTERNAL_REVIEW | work/do-an/CHAPTER_2_X5_SELF_REVIEW.md | Báo cáo tự đánh giá tuân thủ contract, fact, 42/42 headings, 0 unknown Evidence ID, 10 tiêu chí author voice & method boundary review |
 | REVIEW_REPORT | HISTORICAL_REOPENED | work/do-an/REVIEW_REPORT.md | Điểm PASS cũ không chứng nhận bản hiện hành; dùng REVISION_PASS_2026_10_04.md |
 | STYLE_REVIEW | REVIEWED_ADVISORY | work/do-an/STYLE_REVIEW.md | Không còn VI011; ba VI012 đã phân loại; không thay kiểm định nội dung hoặc xuất bản |
@@ -238,8 +238,8 @@
 
 - Trạng thái nhiệm vụ: `AUTHOR_VOICE_REVIEW_COMPLETED`, `X5_DRAFT_READY_FOR_EXTERNAL_REVIEW` (Không tự tuyên bố PASS; chờ người dùng và external review phê duyệt).
 - Tệp kết quả:
-  - `work/do-an/CHAPTER_2.md`: Bản thảo canonical hoàn chỉnh 4.417 từ (trong ngân sách [3.500, 4.500]), bám sát cấu trúc 9 mục lớn (2.1–2.9) và đúng 42 tiểu mục cấp 3 theo `OUTLINE.md`.
-  - `work/do-an/CHAPTER_2_X5_SELF_REVIEW.md`: Báo cáo tự đánh giá chi tiết sau corrective & author voice pass: đối soát 42/42 headings, 100% Stable Evidence IDs từ `EVIDENCE_REGISTER.md` (UNKNOWN_EVIDENCE_ID = 0), audit 10 trích dẫn IEEE tuần tự [1]–[10] khớp `SOURCE_LEDGER.md`, rà soát `CVE-2017-7494 count = 0`, phân định triệt để phương pháp vs kết quả Chương 3 (sửa 2.2.5, 2.5.4, Bảng 2.4, Bảng 2.5, phân biệt quy trình vs thực tế triển khai 2.7), loại bỏ overclaim và ngôn phong công thức/AI template, làm rõ dấu tay riêng của nhóm (Host-Only, snapshot, local patch ground truth, ưu tiên raw evidence, Case B vs Case C).
+  - `work/do-an/CHAPTER_2.md`: Bản thảo canonical hoàn chỉnh 4.426 từ (trong ngân sách [3.500, 4.500]), bám sát cấu trúc 9 mục lớn (2.1–2.9) và đúng 42 tiểu mục cấp 3 theo `OUTLINE.md`.
+  - `work/do-an/CHAPTER_2_X5_SELF_REVIEW.md`: Báo cáo tự đánh giá chi tiết sau corrective, author voice & surgical technical patch: đối soát 42/42 headings, 100% Stable Evidence IDs từ `EVIDENCE_REGISTER.md` (UNKNOWN_EVIDENCE_ID = 0), audit 10 trích dẫn IEEE tuần tự [1]–[10] khớp `SOURCE_LEDGER.md`, rà soát `CVE-2017-7494 count = 0`, phân định triệt để phương pháp vs kết quả Chương 3, loại bỏ hoàn toàn wildcard NSE (`smb-vuln*`, `smb*-mode` = 0), chuẩn hóa quy tắc NO OUTPUT và FILTERED theo Negative Result Policy, chuẩn hóa tiêu chí tín hiệu MS17-010 (không dùng giả định 3 trạng thái và không dùng nhãn `SAFE`), loại bỏ cam kết restore khi chưa có artifact, chuẩn hóa baseline Windows Server 2012 R2.
 - Kiểm tra tự động:
   - `lint_vi_academic.py`: 0 lỗi, 0 cảnh báo ("Không phát hiện mẫu văn phong cần xem xét.").
   - `audit_ieee_citations.py`: PASS (0 issues: cấu trúc [1]–[10] tuần tự, không missing, không orphan).
