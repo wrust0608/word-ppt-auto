@@ -1,4 +1,6 @@
-# CHAPTER 4 CONTRACT — PROPOSED
+# CHAPTER 4 CONTRACT — LOCKED_CANONICAL
+
+Trạng thái: `LOCKED_WAITING_FOR_X7`
 
 Question: Các kết quả thực nghiệm có ý nghĩa gì đối với đánh giá rủi ro SMB và lựa chọn biện pháp phòng thủ đa tầng?
 
