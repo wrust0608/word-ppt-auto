@@ -500,3 +500,29 @@
 - This conflict does not invalidate Scenario 1, Scenario 2, Case B, or the observed Case C filtering result; it limits only the exact rule-name attribution of the firewall-log rows.
 - Chapter 2 remains reopened for product-aligned redesign. CP5-USER remains PENDING.
 - Chapter 3/X6 remains BLOCKED until the user explicitly approves the revised Chapter 2.
+
+
+## DEC-41 — ALL(1).zip evidence layer final data audit R3
+
+- Ngày: 2026-10-06.
+- Evidence layer was independently re-reviewed directly against source ZIP bytes and canonical visuals/raw outputs.
+- Final audit artifact:
+  - `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_AUDIT_R3_FINAL_LOCK.md`
+  - `work/do-an/evidence/ALL_2026_10_06/TIMEBASE_AND_CROSS_LAYER_LOCKS.md`
+- Quality status: `HIGH_ASSURANCE / TRACEABLE / BOUNDED_UNCERTAINTY`.
+- Source package identity remains:
+  - SHA-256 `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`
+  - 174 regular files.
+- Full manifest remains 174 rows with no source-path/hash/size mismatch per audit R2; independent spot/hash revalidation of core artifacts passed.
+- New R3 logic locks:
+  - different systems use different clock domains; displayed timestamps are not a unified timeline;
+  - local SMB signing flags and remote Nmap signing observation must remain separate observations;
+  - Scenario 1 host `.56.100` remains unidentified;
+  - host NatNetwork-Lab existence does not imply baseline Kali/Windows NAT connectivity;
+  - Microsoft mapping claims require official-source citation; local archive artifact supports local observation only;
+  - Case C exact named-rule log attribution remains unresolved because direct screenshot label conflicts with manifest/closure.
+- Case C bounded conflict does not invalidate configured Block rule, block-before-pass order, filtered canonical retest, or direct blocked-SYN observation. It only prevents exact named-rule attribution from the log screenshot.
+- Experimental Truth Matrix and Evidence Register updated to enforce R3 locks.
+- Chapter 2 may now be redesigned against this R3 data lock.
+- CP5-USER remains PENDING.
+- Chapter 3/X6 remains BLOCKED until explicit user approval of revised Chapter 2.
