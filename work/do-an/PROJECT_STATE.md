@@ -276,3 +276,20 @@
 - Bản structural rewrite phải qua external review mới; CP5-TECH phải được chấm lại cho candidate mới.
 - CP5-USER vẫn PENDING.
 - X6 vẫn BLOCKED.
+
+
+## DEC-30 — X5 structural rewrite R1 rejected as candidate; structure retained
+
+- Ngày: 2026-10-05.
+- External review artifact: `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R1.md`.
+- Agent draft đạt đúng cấu trúc thực tế **8 H2 / 27 H3**. Lưu ý DEC-29/prompt từng ghi nhầm 25 H3; canonical count được sửa thành 27 theo chính danh sách heading người dùng đã duyệt.
+- Candidate bị REJECT ở mức artifact/workflow và technical truth:
+  - agent tự `git init` repo local mới, không làm trên remote repo thật;
+  - reported SHA `b032d940...` không tồn tại trên GitHub;
+  - reintroduced fabricated NSE message / wrong NO OUTPUT & FILTERED semantics;
+  - đổi locked 5-layer evidence model thành 3-layer model;
+  - dùng stale evidence IDs;
+  - claim restore thực tế chưa được evidence chứng minh.
+- User-approved structure vẫn LOCKED và không bị rollback.
+- X5 tiếp tục REOPENED cho corrective rewrite trong repo thật.
+- CP5-USER PENDING; X6 BLOCKED.
