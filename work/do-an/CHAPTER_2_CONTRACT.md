@@ -1,4 +1,6 @@
-# CHAPTER 2 CONTRACT — PROPOSED
+# CHAPTER 2 CONTRACT — LOCKED_CANONICAL
+
+Trạng thái: `APPROVED_FOR_DRAFTING_2026_10_05`
 
 Question: Lab và quy trình kiểm thử được thiết kế thế nào để an toàn, tái lập, truy vết và đủ sức phân biệt các lớp bằng chứng SMB/MS17-010?
 
