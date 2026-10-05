@@ -262,3 +262,17 @@
 - `X6 = BLOCKED`.
 - Không được bắt đầu Chương 3 trước quyết định duyệt trực tiếp của người dùng.
 - Candidate branch hiện diverged so với `main` do `main` đã chứa governance DEC-27; sau CP5-USER cần reconcile/cherry-pick có kiểm soát, không merge thô làm mất quyết định governance.
+
+
+## DEC-29 — Người dùng duyệt cấu trúc mới Chương 2 và reopen X5 có kiểm soát
+
+- Ngày: 2026-10-05.
+- Người dùng trực tiếp duyệt cấu trúc Chương 2 mới vì đúng trọng tâm, không lan man.
+- Change Request: `CHANGE_REQUEST_CR-2026-10-05-X5-STRUCTURE.md` = APPROVED_BY_USER.
+- Cấu trúc mới: 8 H2 / 25 H3, theo trục research design → lab/baseline → evidence method → Scenario 1 → Scenario 2 → mitigation → evaluation framework → chapter summary.
+- Candidate X5 cũ commit `ba0cd980a0075427959567d4793dc1e35b95773d` giữ làm baseline kỹ thuật đã kiểm định, không còn là candidate cuối về cấu trúc.
+- X5 được REOPEN có kiểm soát trên branch `feature/x5-chapter-2-structural-revision`.
+- Prompt executor chính thức: `work/do-an/prompts/X5_REWRITE_CHAPTER_2_STRUCTURE_LOCKED.md`.
+- Bản structural rewrite phải qua external review mới; CP5-TECH phải được chấm lại cho candidate mới.
+- CP5-USER vẫn PENDING.
+- X6 vẫn BLOCKED.
