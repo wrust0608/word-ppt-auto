@@ -13,7 +13,7 @@ Trạng thái: `LOCKED_CANONICAL_FOR_CHAPTERS_2_4`
 | X2-C07 | Disable SMBv1 làm NT LM 0.12 biến mất trong retest và SMB2/3 còn phản hồi | AUTHOR_DATA | B-LOCAL-01/02, B-RAW-01 | STRONG | Ch3/4 | Không đồng nghĩa patched |
 | X2-C08 | Case B remote MS17-010 verdict vẫn UNKNOWN | AUTHOR_DATA | B-RAW-02 | STRONG | Ch3/4 | Không gọi safe |
 | X2-C09 | pfSense block rule làm 139/445 filtered từ Kali | AUTHOR_DATA | C-RULE-02, C-RAW-01 | STRONG | Ch3/4 | Chỉ vantage point đã đo |
-| X2-C10 | pfSense log quy thuộc blocked SYN cho rule Case C | AUTHOR_DATA | C-LOG-01 | STRONG | Ch3 | Không suy ra host patched |
+| X2-C10 | pfSense log ghi blocked TCP SYN từ Kali tới Windows trên 139/445 trong Case C; exact named-rule attribution đang conflict | AUTHOR_DATA | C-LOG-01 + C-RULE-02/03 | BOUNDED_STRONG | Ch3 | Được nói traffic bị block trong pfSense path; không nói log đã chứng minh chính xác named Block rule |
 | X2-C11 | Case C không cho phép remote MS17-010 classification qua filtered path | AUTHOR_DATA | C-RAW-02 | STRONG | Ch3/4 | UNKNOWN/not assessable from that vantage |
 | X2-C12 | Patch, disable SMBv1 và network filtering tác động lên các lớp khác nhau | INTERPRETATION | X2-C02/C07/C09 + Microsoft/NIST | STRONG | Ch4 | Không nói mọi lớp tương đương |
 | X2-C13 | Case A patch chưa có canonical experiment | AUTHOR_DATA/PROJECT_STATE | Truth Matrix + Evidence Register | STRONG | Ch3/4 | Chỉ recommendation/supplementary |
