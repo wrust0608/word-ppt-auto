@@ -34,6 +34,16 @@ Extension counts:
 A full byte-level inventory is stored in:
 `FULL_ARCHIVE_MANIFEST_ALL_2026_10_06.csv`.
 
+Independent revalidation was performed directly against ZIP members, not against the extracted directory:
+- ZIP regular files checked: **174**
+- manifest rows checked: **174**
+- size mismatches: **0**
+- SHA-256 mismatches: **0**
+- missing/extra paths: **0**
+- result: **174/174 PASS**
+
+The copy committed to GitHub was also compared against the generated manifest source after BOM/newline normalization: **identical, 175 CSV lines including header**.
+
 ## 3. Rebuilt classification
 
 The earlier legacy counts in `EVIDENCE_REGISTER.md` are superseded by the full-file audit.
