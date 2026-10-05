@@ -186,3 +186,54 @@ Sau khi duyệt: **Chương 2 -> review -> Chương 3 -> review -> Chương 4 ->
 ## 12. Kết luận quản trị
 
 Bộ evidence 2026-10-04 đủ để xây báo cáo thực nghiệm có giá trị mà không cần ép NSE-SMB-04 phải trả `VULNERABLE`. Trục nghiên cứu cần giữ là sự phân biệt giữa **quan sát từ xa**, **trạng thái giao thức**, **ground truth bản vá**, và **tác động của từng lớp mitigation**. Mọi kết luận vượt các ranh giới trên phải mang nhãn thiếu bằng chứng hoặc bị loại khỏi bản chính thức.
+
+
+## 13. Normalized source-package ingest lock — ALL(1).zip
+
+Source package audit is now fixed at:
+- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_INGEST_ALL_2026_10_06.md`
+- `work/do-an/evidence/ALL_2026_10_06/CANONICAL_COMMANDS_FROM_ALL_ZIP.md`
+- `work/do-an/evidence/ALL_2026_10_06/EVIDENCE_USE_POLICY_ALL_ZIP.md`
+- `work/do-an/evidence/ALL_2026_10_06/CANONICAL_EVIDENCE_MAP_ALL_ZIP.md`
+
+Archive identity:
+`ALL(1).zip` — SHA-256 `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`.
+
+### 13.1 Exact command lock
+
+Scenario 1 exact raw commands include:
+- B2/B3: `-sn -PR -T3 --max-retries 2`;
+- B4: `-sS -p 139,445 -T3 --max-retries 2 --reason`;
+- B5: `-sS -sV --version-intensity 5 -p 139,445 -T3 --max-retries 2`;
+- B6: `-sS -p 139,445 --script smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities -T3 --max-retries 2`.
+
+Do not silently add `-Pn` to Scenario 1 prose when describing the actually executed commands.
+
+Scenario 2 exact raw commands use `-n -T3 --max-retries 2`, with `--privileged` recorded in raw headers for NSE-SMB-02/03/04.
+
+Case B retest uses only:
+- `smb-protocols`;
+- `smb-vuln-ms17-010`.
+
+Case C canonical retest uses only:
+- NSE-SMB-01 ports;
+- NSE-SMB-04 MS17-010.
+
+### 13.2 Topology lock for Case C
+
+Case C changes the VirtualBox network topology and therefore must not be described as merely “adding pfSense to the baseline Host-Only link”.
+
+Data plane:
+`Kali .56.10 -> ATTT-PFS-KALI -> pfSense em2 -> bridge0 -> pfSense em3 -> ATTT-PFS-WIN -> Windows .56.20`.
+
+Management plane:
+`Host .57.1 <-> Host-Only #2 <-> pfSense em1 .57.2`.
+
+This topology is specific to Case C. It must not be projected backward into Scenario 1 or Scenario 2 baseline.
+
+### 13.3 Report-writing consequences
+
+- Chapter 2 may describe method/design using these exact facts but must not leak detailed results that belong in Chapter 3.
+- Chapter 3 must bind each claim to the normalized evidence map and raw files.
+- Chapter 4 may compare Baseline vs Case B vs Case C; Case A remains recommendation/theory unless new audited evidence is provided.
+- Archive folder names are provenance only and must not be reused as report-section architecture.
