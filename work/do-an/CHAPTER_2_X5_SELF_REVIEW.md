@@ -1,11 +1,11 @@
-# BÁO CÁO TỰ ĐÁNH GIÁ VIẾT LẠI CẤU TRÚC CHƯƠNG 2 (X5 R3 SELF-REVIEW)
+# BÁO CÁO TỰ ĐÁNH GIÁ VIẾT LẠI CẤU TRÚC CHƯƠNG 2 (X5 R4 SELF-REVIEW)
 
 **Thời điểm thực hiện:** 2026-10-05
 **Vai trò thực hiện:** Executor / Writing Agent
 **Tài liệu đánh giá:** `work/do-an/CHAPTER_2.md`
 **Nhánh làm việc:** `feature/x5-chapter-2-structural-revision`
-**Căn cứ đánh giá:** `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R2.md`, `PROJECT_STATE.md` (DEC-29, DEC-30), `SOURCE_LEDGER.md`
-**Trạng thái đề xuất:** `X5_STRUCTURAL_REWRITE_R3_READY_FOR_EXTERNAL_REVIEW`
+**Căn cứ đánh giá:** `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R3.md`, `PROJECT_STATE.md` (DEC-31, DEC-32), `SOURCE_LEDGER.md`
+**Trạng thái đề xuất:** `X5_STRUCTURAL_REWRITE_R4_READY_FOR_EXTERNAL_REVIEW`
 
 ---
 
@@ -31,36 +31,30 @@ Mỗi cụm phân mục trong Chương 2 thực hiện đúng một chức năng
 
 ---
 
-## 2. Kiểm toán các điểm sửa đổi kỹ thuật vòng R3 (R3 Surgical Technical Patch)
+## 2. Kiểm toán các điểm sửa đổi kỹ thuật vòng R4 (R4 Final Technical Micro-Patch)
 
-Vòng R3 giải quyết dứt điểm toàn bộ các blocker và khuyến nghị kỹ thuật từ `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R2.md`:
+Vòng R4 giải quyết dứt điểm toàn bộ blocker và các điểm tinh chỉnh độ chính xác từ `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R3.md`:
 
-| STT | Vấn đề R2 nêu | Hành động xử lý trong R3 | Vị trí cập nhật trong CHAPTER_2.md | Kết quả kiểm toán |
+| STT | Vấn đề R3 nêu | Hành động xử lý trong R4 | Vị trí cập nhật trong CHAPTER_2.md | Kết quả kiểm toán |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | **Case C tunables sai** (`pfil_bridge = 1`) | Chuyển sang cấu hình canonical transparent bridge lọc trên member interface: `pfil_member = 1`, `pfil_bridge = 0`, `pfil_onlyip = 1` | Mục 2.6.3 | Đã sửa, `pfil_bridge = 1` = 0 |
-| **2** | **Gộp lệnh B2 và B3** | Tách biệt hoàn toàn: B2 quét host discovery dải `192.168.56.0/24` (`S1-RAW-01`); B3 xác nhận riêng máy mục tiêu `192.168.56.20` (`S1-RAW-02`) | Mục 2.4.1, 2.4.2 và Bảng 2.3 | Tách 2 hàng rõ ràng |
-| **3** | **Conflation `-sV` và OS** | Tách bạch: `-sV` phục vụ nhận diện dịch vụ/phiên bản; build OS chính xác đến từ baseline nội bộ. Bảng 2.3 sửa thành "Nhận diện dịch vụ / phiên bản" | Mục 2.4.2 và Bảng 2.3 | Hoàn toàn tách biệt |
-| **4** | **Rò rỉ kết quả thực nghiệm trong 2.4** | Xóa toàn bộ các giá trị quan sát cụ thể (`syn-ack`, `microsoft-ds`, `netbios-ssn`) trong văn phong mô tả phương pháp Mục 2.4; chuyển trọng tâm vào thu thập port state/reason và fingerprint dịch vụ | Mục 2.4.2 | Rò rỉ = 0 |
-| **5** | **Evidence ID không hợp lệ** (`S1-RAW-06`) | Sửa chú thích Hình 2.3 thành `S1-RAW-01 đến S1-RAW-05, S1-META-01`; không dùng `S1-RAW-06` | Chú thích Hình 2.3 | Invalid ID = 0 |
-| **6** | **Văn phong Snapshot như quan sát lịch sử** | Chuyển sang văn phong phương pháp luận: Snapshot `Before Demo` là yêu cầu của quy trình kiểm thử vi sai nhằm bảo đảm tái lập trạng thái sạch | Mục 2.1.3, 2.2.5, 2.6.1 | Chuẩn phương pháp |
-| **7** | **Ngữ nghĩa `FILTERED` gán cho pfSense** | Chuyển sang định nghĩa trung tính theo Nmap: `FILTERED` nghĩa là Nmap không thể xác định open/closed do filtering hoặc không nhận đủ phản hồi; không quy kết causal cho pfSense ở Ch.2 | Mục 2.7.1 và Bảng 2.5 | Định nghĩa trung tính |
-| **8** | **Baseline network tồn tại claim vượt chứng cứ** | Loại bỏ `không dùng DNS` và `không qua lọc gói của máy vật lý`. Giữ nguyên Host-Only, 1 NIC/VM, no NAT, no Bridged, no default Internet route | Mục 2.2.1 và Bảng 2.1 | Khớp bằng chứng |
-| **9** | **SMB wording suy diễn "mặc định OS"** | Bỏ "Mặc định hệ điều hành" trong Bảng 2.1; chuyển thành "Trạng thái baseline đã kiểm tra"; văn bản ghi nhận `EnableSMB1Protocol=True` và `EnableSMB2Protocol=True` | Mục 2.2.4 và Bảng 2.1 | Khớp kiểm tra thực tế |
-| **10** | **Placeholder `<safe_nse>`** | Liệt kê tường minh tập 4 NSE an toàn: `smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities` | Bảng 2.3 | Explicit list |
-| **11** | **Ranh giới kết quả Case B** | Mục 2.6.2 không khẳng định kết quả hậu can thiệp là cổng 445 tiếp tục mở; chỉ mô tả phép retest được thiết kế để kiểm tra sự tồn tại của SMB1, bề mặt SMB2/3 và remote signal | Mục 2.6.2 | Ranh giới chuẩn |
-| **12** | **Tinh giản Case A (Patching)** | Lược bỏ phân tích chi tiết OS/2 FEA / buffer overflow (dành cho Ch.1); mô tả bản vá tác động trực tiếp lên driver `srv.sys`; Bảng 2.4 ghi `REFERENCE ONLY / NOT MEASURED IN CANONICAL RUN` | Mục 2.6.4 và Bảng 2.4 | Tinh giản chuẩn mực |
-| **13** | **Chuẩn hóa đánh giá Case B và Case C** | Bỏ các từ tuyệt đối hóa (`triệt tiêu`, `loại bỏ nguy cơ`, `mọi máy trạm duy trì kết nối`, `che giấu dịch vụ`). Đánh giá mức độ thu hẹp bề mặt từ nguồn/đường truyền kiểm soát | Mục 2.7.4 | Khách quan, chuẩn mực |
-| **14** | **Trạng thái nguồn S032** | Nguồn S032 (Microsoft Support Article 4023057) đã được External Reviewer xác minh và phê duyệt trên `origin/main` trong `SOURCE_LEDGER.md` | `SOURCE_LEDGER_PROPOSED_ADDITION_X5.md` | `APPROVED / INCORPORATED AS S032` |
+| **1** | **BLOCKER: Cơ chế `smb-vuln-ms17-010` sai nguồn** | Bỏ hoàn toàn `PeekNamedPipe (opcode 0x2300)`; bám sát Nmap NSEDoc chính thức: kết nối `IPC$`, thực hiện giao dịch SMB trên FID 0 và phân tích mã trạng thái phản hồi để tìm dấu hiệu MS17-010 [9] | Mục 2.5.1 | `PeekNamedPipe` = 0, `0x2300` = 0 |
+| **2** | **Case C rule wording chứa SYN** | Chuyển thành "Luật chặn TCP có bật ghi log, áp dụng từ `192.168.56.10` tới `192.168.56.20` trên các cổng 139 và 445"; chuyển gói SYN về log quan sát thuộc Chương 3 | Mục 2.6.3 | Khớp C-RULE-02 |
+| **3** | **Rò rỉ tập dialect trong 2.7.2** | Thay thế exact dialect set `SMB 2.0.2 đến 3.0.2` bằng cụm trung tính `các dialect SMB2/SMB3`; danh sách dialect cụ thể thuộc Chương 3 | Mục 2.7.2 | `SMB 2.0.2 đến 3.0.2` = 0 |
+| **4** | **Patch baseline precision trong 2.2.5** | Phản ánh đầy đủ canonical mapping: không ghi nhận KB4012213 hoặc KB4012216, không ghi nhận bản cập nhật thay thế tương ứng theo mapping, `srv.sys < 6.3.9600.18604` xác nhận UNPATCHED | Mục 2.2.5 | Đầy đủ mapping |
+| **5** | **Tuyệt đối hóa patching trong 2.6.4** | Bỏ cụm "biện pháp duy nhất tác động trực tiếp"; chuyển thành "Patching là biện pháp trực tiếp thay đổi trạng thái bản vá của implementation bị ảnh hưởng bởi MS17-010 trong driver nhân `srv.sys` [4], [5]" | Mục 2.6.4 | `biện pháp duy nhất` = 0 |
+| **6** | **Diễn giải trạng thái UNPATCHED trong 2.5.2** | Bỏ nhận định "phản ánh khiếm khuyết trong nhân"; sửa thành "Trạng thái `UNPATCHED` cho biết hệ thống chưa đạt mức cập nhật được Microsoft xác minh cho MS17-010; trạng thái này không tự chứng minh khai thác thành công" | Mục 2.5.2 | Khách quan, chuẩn mực |
+| **7** | **Đánh giá Case B trong 2.7.4** | Bỏ câu dạng actual result ("tính sẵn sàng SMB2/3 vẫn được quan sát"); chuyển thành tiêu chí kiểm tra: "đồng thời kiểm tra các dialect SMB2/SMB3 còn khả dụng trong phép thương lượng sau can thiệp hay không" | Mục 2.7.4 | Tiêu chí phương pháp |
+| **8** | **Văn phong tổng kết chương trong 2.8** | Bỏ "bảo đảm an toàn kiểm thử" và "tạo cơ sở chuẩn xác"; chuyển thành "giới hạn phạm vi kết nối của lab và hỗ trợ kiểm soát rủi ro trong quá trình thử nghiệm" và "làm cơ sở để Chương 3 trình bày dữ liệu đo đạc thực tế" | Mục 2.8 | `bảo đảm an toàn kiểm thử` = 0 |
 
 ---
 
 ## 3. Kiểm toán rò rỉ kết quả (Result Leakage Audit)
 
 Chương 2 giữ nghiêm ngặt ranh giới: **HOW / WITH WHAT / UNDER WHAT CONDITIONS**, không kể trước kết quả thực nghiệm (**WHAT WAS OBSERVED**):
-- **Kịch bản 1:** Trình bày thiết kế lệnh `nmap -sS -sV` và 4 kịch bản NSE an toàn; không công bố danh sách dialect thực tế hay banner chi tiết quan sát được trên cổng 139/445 trong lượt chạy cụ thể.
-- **Kịch bản 2:** Mô tả cơ chế hoạt động của `smb-vuln-ms17-010.nse` (gửi `SMB_COM_TRANSACTION` với hàm `PeekNamedPipe`); không trình bày đoạn văn mô tả hiện tượng scan thực tế không ra output (dành cho Chương 3).
+- **Kịch bản 1:** Trình bày thiết kế lệnh `nmap -sS -sV` và 4 kịch bản NSE an toàn; không công bố danh sách dialect thực tế hay banner chi tiết quan sát được trên cổng 139/445 trong lượt chạy cụ thể (`microsoft-ds` = 0, `netbios-ssn` = 0, `syn-ack` = 0 trong văn phong phương pháp 2.4).
+- **Kịch bản 2:** Mô tả cơ chế hoạt động chuẩn của `smb-vuln-ms17-010.nse` (giao dịch SMB trên FID 0 phân tích mã lỗi); không trình bày kết quả quan sát cụ thể hay lỗi chi tiết thu được.
 - **Case B:** Trình bày lệnh can thiệp PowerShell `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` và kế hoạch đo lại dialect/NSE-04; không đưa bảng so sánh output trước/sau can thiệp.
-- **Case C:** Trình bày cấu hình Transparent Bridge pfSense, cờ `pfil_member = 1`, `pfil_bridge = 0`, `pfil_onlyip = 1` và luật chặn cổng 139/445; không trích xuất log block thực tế của pfSense.
+- **Case C:** Trình bày cấu hình Transparent Bridge pfSense, cờ `net.link.bridge.pfil_member = 1`, `net.link.bridge.pfil_bridge = 0`, `net.link.bridge.pfil_onlyip = 1` và luật chặn TCP cổng 139/445 có ghi log; không trích xuất log block thực tế của pfSense.
 - **Đánh giá chung:** Không có hiện tượng rò rỉ kết quả thực nghiệm (No Result Leakage).
 
 ---
@@ -74,7 +68,7 @@ Toàn bộ các khóa sự thật kỹ thuật (Technical Truth Locks) được 
 4. **Dịch vụ mạng:** LanmanServer ở chế độ `Automatic` và đang `Running`; cổng TCP 139 và 445 đang lắng nghe.
 5. **Cấu hình SMB nội bộ:** `EnableSMB1Protocol = True`, `EnableSMB2Protocol = True`, tính năng `FS-SMB1` đang cài đặt.
 6. **Tường lửa Windows:** Chỉ cho phép TCP 139 và 445 từ IP máy kiểm thử `192.168.56.10/24`; nhóm "File and Printer Sharing" không mở toàn bộ.
-7. **Trạng thái bản vá nội bộ:** Trạng thái `UNPATCHED`; `Get-HotFix` không có KB4012213/KB4012216; driver `srv.sys` có phiên bản số `6.3.9600.16421` thấp hơn ngưỡng an toàn `6.3.9600.18604`.
+7. **Trạng thái bản vá nội bộ:** Trạng thái `UNPATCHED`; `Get-HotFix` không có KB4012213/KB4012216 hay bản cập nhật thay thế tương ứng; driver `srv.sys` có phiên bản số `6.3.9600.16421` thấp hơn ngưỡng an toàn `6.3.9600.18604`.
 8. **Điểm phục hồi:** Snapshot `Before Demo` có trên cả hai máy ảo, phục vụ hoàn nguyên trong quy trình kiểm thử vi sai.
 9. **Kịch bản NSE an toàn:** Đúng 4 kịch bản canonical (`smb-protocols`, `smb-os-discovery`, `smb2-security-mode`, `smb2-capabilities`); tuyệt đối không dùng wildcard (`smb-vuln*`).
 10. **Phán quyết từ xa NSE-SMB-04:** Khóa cứng định dạng `UNKNOWN / NO USABLE SCRIPT RESULT`.
@@ -96,12 +90,12 @@ Chương 2 sử dụng 11 trích dẫn chuẩn, xuất hiện tuần tự từ `
 - `[6]`: Gordon Lyon — Nmap Network Scanning (Kỹ thuật quét SYN, reason, filtered, xuất hiện tại 2.3.3, 2.4.2).
 - `[7]`: Paulino Calderon — `smb-protocols.nse` (Thăm dò dialect SMB, xuất hiện tại 2.4.2, 2.5.1).
 - `[8]`: Microsoft Learn — SMB signing (Chính sách ký số SMB, xuất hiện tại 2.4.2, 2.5.1).
-- `[9]`: Paulino Calderon & Ron Bowes — `smb-vuln-ms17-010.nse` (Cơ chế thăm dò IPC$ PeekNamedPipe, xuất hiện tại 2.5.1).
+- `[9]`: Paulino Calderon & Ron Bowes — `smb-vuln-ms17-010.nse` (Cơ chế giao dịch SMB trên FID 0 phân tích mã lỗi phản hồi, xuất hiện tại 2.5.1).
 - `[10]`: Microsoft Learn — How to detect, enable, and disable SMBv1 (Lệnh PowerShell tắt SMBv1, xuất hiện tại 2.6.2).
 - `[11]`: NIST SP 800-41 Rev. 1 (Hướng dẫn chính sách tường lửa, xuất hiện tại 2.6.3).
 
 ### 5.2. Quản lý nguồn S032
-Nguồn Microsoft Support Article 4023057 đã được External Reviewer chính thức xác minh và đưa vào `SOURCE_LEDGER.md` trên nhánh `main` với mã `S032`. File `work/do-an/SOURCE_LEDGER_PROPOSED_ADDITION_X5.md` được cập nhật trạng thái `APPROVED / INCORPORATED AS S032`.
+Nguồn Microsoft Support Article 4023057 đã được External Reviewer chính thức xác minh và đưa vào `SOURCE_LEDGER.md` trên nhánh `main` với mã `S032`. File `work/do-an/SOURCE_LEDGER_PROPOSED_ADDITION_X5.md` được giữ nguyên trạng thái `APPROVED / INCORPORATED AS S032`.
 
 ### 5.3. Tuân thủ định dạng cuối chương
 Chương 2 tuyệt đối **không** tạo mục `## TÀI LIỆU THAM KHẢO` ở cuối file. Mục thư mục tham khảo toàn cục sẽ do quy trình xuất bản tổng thể xử lý.
@@ -143,7 +137,7 @@ Mỗi vị trí chờ đều có đầy đủ 4 trường thông tin: Mục đí
 ## 8. Kiểm toán số lượng từ (Word Count Audit)
 
 - **Mục tiêu quy định:** 3.800 – 4.500 từ.
-- **Số từ thực tế đo được:** **4.485 từ** (tính theo biểu thức chuẩn `[0-9A-Za-zÀ-ỹĐđ]+`).
+- **Số từ thực tế đo được:** **4.486 từ** (tính theo biểu thức chuẩn `[0-9A-Za-zÀ-ỹĐđ]+`).
 - **Đánh giá:** Nằm hoàn toàn trong khoảng mục tiêu an toàn [3.800, 4.500], mật độ thông tin kỹ thuật cao, cô đọng, không dàn trải.
 
 ---
@@ -152,6 +146,8 @@ Mỗi vị trí chờ đều có đầy đủ 4 trường thông tin: Mục đí
 
 | Khóa kiểm tra | Giá trị yêu cầu | Giá trị thực tế | Đánh giá |
 | :--- | :--- | :--- | :--- |
+| `PeekNamedPipe` | 0 | 0 | PASS |
+| `0x2300` | 0 | 0 | PASS |
 | `pfil_bridge = 1` | 0 | 0 | PASS |
 | `pfil_bridge=1` | 0 | 0 | PASS |
 | `S1-RAW-06` | 0 | 0 | PASS |
@@ -159,11 +155,12 @@ Mỗi vị trí chờ đều có đầy đủ 4 trường thông tin: Mục đí
 | `microsoft-ds` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
 | `netbios-ssn` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
 | `syn-ack` trong văn phong phương pháp 2.4 | 0 | 0 | PASS |
+| `SMB 2.0.2 đến 3.0.2` trong 2.7 | 0 | 0 | PASS |
+| `biện pháp duy nhất` | 0 | 0 | PASS |
+| `bảo đảm an toàn kiểm thử` | 0 | 0 | PASS |
 | `Mặc định hệ điều hành` | 0 | 0 | PASS |
 | `không dùng DNS` | 0 | 0 | PASS |
 | `không qua lọc gói của máy vật lý` | 0 | 0 | PASS |
-| Fabricated NSE warning | 0 | 0 | PASS |
-| Generic `FILTERED = pfSense/firewall` attribution | 0 | 0 | PASS |
 | `pfil_member = 1` | >= 1 | 1 | PASS |
 | `pfil_bridge = 0` | >= 1 | 1 | PASS |
 | `pfil_onlyip = 1` | >= 1 | 1 | PASS |
@@ -184,7 +181,7 @@ Mỗi vị trí chờ đều có đầy đủ 4 trường thông tin: Mục đí
 
 ## 11. Kết luận và đề xuất trạng thái
 
-Executor / Writing Agent xác nhận đã hoàn thành toàn diện vòng sửa đổi kỹ thuật chính xác (surgical technical patch R3) theo đúng tất cả các chỉ thị của External Reviewer và Người dùng.
+Executor / Writing Agent xác nhận đã hoàn thành toàn diện vòng sửa đổi kỹ thuật chính xác cuối cùng (final technical micro-patch R4) theo đúng tất cả các chỉ thị của External Reviewer R3 và Người dùng.
 
 **Trạng thái bàn giao:**
-`X5_STRUCTURAL_REWRITE_R3_READY_FOR_EXTERNAL_REVIEW`
+`X5_STRUCTURAL_REWRITE_R4_READY_FOR_EXTERNAL_REVIEW`
