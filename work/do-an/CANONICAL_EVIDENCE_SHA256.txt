@@ -1,0 +1,89 @@
+# CANONICAL CORE EVIDENCE SHA-256 — X1
+# Source archive: ALL.zip
+# Generated: 2026-10-05
+# Core canonical files hashed: 83
+# Format: SHA256  Path
+
+48e0b58fdce20e1e2be5e988e8ecc6a53480c6e81a7711f45057f9a832ebe85e  00_Environment_Hình và các bằng chứng xây dựng môi trường/Baseline/Kali/Kali_Baseline.txt
+e90610146178766e7be3a6dbad360c0ce7d11f642ae089409bdb5d98b6ce1a6a  00_Environment_Hình và các bằng chứng xây dựng môi trường/Baseline/Windows/Windows_Baseline.txt
+119fb52ab97bb1c467678ff2f796428809ff61e811c6cf6740ee9bea4aeadfe3  00_Environment_Hình và các bằng chứng xây dựng môi trường/FirewallPrep/Windows_FirewallPrep_Final.txt
+3ad52e11942ce9504d3ffcd6529e049d405e0d75c5bff37cf44660da327cfc15  00_Environment_Hình và các bằng chứng xây dựng môi trường/Network/Kali_Network_Config.png
+d3e75eb5e9005769fac2a038ec38f968f7cc39281ace4ab9fb2a71e0bf9f0034  00_Environment_Hình và các bằng chứng xây dựng môi trường/Network/Kali_to_Windows_Connectivity.png
+33d87da88f5357b1601b69e5a4650433f7c031aa33f38d33369fc2cac86d7bc9  00_Environment_Hình và các bằng chứng xây dựng môi trường/Network/VirtualBox_HostOnly_Config.txt
+6ecdb1abb3026e015a72f9577d6a5fa10b41350dec6bec05d5c7cbf9b4e9c699  00_Environment_Hình và các bằng chứng xây dựng môi trường/Network/Windows_Network_Config.png
+938e4c15fb96c0c39cf02ec473fe5addb646e9d8f06f3aab7021ca0f3c8e8261  00_Environment_Hình và các bằng chứng xây dựng môi trường/PatchBaseline/MS17-010_Official_Mapping.txt
+4e120518454ea263f7ae8aa1373f0a5e1303c81e27e6f6a6bd5e509149222308  00_Environment_Hình và các bằng chứng xây dựng môi trường/PreDemo/Before_Demo_Snapshots.txt
+532a2fa06ee0df772444ea14242591d4ee407d0477e0081f68a549bff6a66b38  00_Environment_Hình và các bằng chứng xây dựng môi trường/PreDemo/Final_PreDemo_Audit.txt
+33cf929549d40491a1e272b200912f000024dff58f3fa49b93804c93d33b8ca4  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b2_host_discovery.gnmap
+d2219adb0a780a139143ddb3cd65131f8a4a7a1c539a52be6d075f17500a3557  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b2_host_discovery.nmap
+769be1181049fb9fafe1535cb99c3bc00a6eff462744e44f45c9b53f8e8619a3  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b2_host_discovery.xml
+5394398885154a5a75cda5b10687071ca0b508db226f56300984aab3b123adb4  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b3_target_alive.gnmap
+502927b7aad6d735b6c05644ac74a65b4d9bab53830be17a04d5f993e2e2520b  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b3_target_alive.nmap
+d544cb56d9b29719440fdf7e04cfd8d980dd5916f88f9a84717615dd3e15132c  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b3_target_alive.xml
+0228ab27cebc22a500620ffd3d74197ef040a178311fc160ca85e74e0e4ad46c  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b4_smb_ports.gnmap
+f15c7d358c9eac1b1457e4b4e014770fc02a9a554f8098128720de3a08ee22e6  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b4_smb_ports.nmap
+ffe897d5ac0f38afa7a2bddc9387cb3609e769031606e1a18e772e9cf89cd9f6  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b4_smb_ports.xml
+5f163a5a1002e075163e7a8ac58a9f3b782ec6280bb4b7b865cb13678db7f43c  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b5_smb_version.gnmap
+13b9ff03c7f4ab9d0cc472fd46e60afd65ca2bfc3b646d823cf21b176508fff4  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b5_smb_version.nmap
+71e84fbd765cd85505a683128c7c4991bc2e8a2cd3455fca2501f0b8c8c2e801  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b5_smb_version.xml
+6f70d0b36ada412ae0a3bccdab674c0d3aea421ea04aa45a20f62b71afd1b830  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b6_smb_nse.gnmap
+a4dc92245ee2ea9688f1362b47f42b177cac350ac6b000f6b08adc01c4911c53  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b6_smb_nse.nmap
+993860df555d55171858a418d9469f361fead0713a501565510adb8b982a616a  01_Scenario1_Hình và các bằng chứng kịch bản 1/raw/b6_smb_nse.xml
+23c5f0d7cf3d9ed5a72fc2245ae3aba58693ade3263787cc5534170fef312937  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_B1_IP_Route.png
+b413b2e0a6a0cc53a5b5cf5e2f2e11dfd233d7a8cad6a8be8886807decb7eb57  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_B2_Host_Discovery.png
+04fad478c54acdfe0c06958455a070d790ce8d6db12f897953aab4d3ad1b5949  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_B3_Target_Alive.png
+9f7a4b919c78cb08ec90f6c9bfa465176a1fa88876549ad235ab4f11c3f41a50  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_B4_SMB_Ports.png
+05699e248fa66ab224adc6809fb057a282d86c29c3ce2851823e07bd874f6466  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_B5_SMB_Version.png
+b5b236cbe695b530b44e0af592f010f1f49bef9f5da427b9958fd9020bd651f8  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_B6_SMB_NSE_A.png
+2b35cf96d3f8872abda91640e7a052de25e2970f21027aa4f26c31cc12ebdf96  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_B7_Raw_Evidence.png
+3f8f92f0efca82bd4e1a93b9539c210f1adad1cf0e62a3b6d1e6d3b8716983ef  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_Run_Manifest.txt
+c7fd00bde28daa486b1a5c53beb801b126a7c1100fb4e965aa1fb9af22e366fa  01_Scenario1_Hình và các bằng chứng kịch bản 1/Scenario1_Summary.txt
+e44b9d8958acef339b1109fa1551465da806255f26073b1358d08fd789e9d346  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-01_ports.gnmap
+17395ddf5206cd1aa71e45737163beacea69d3ded80b19ce9cdd35b84ebb71cb  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-01_ports.nmap
+91b4aa457ac7e0041091dd642487656217ce2cbbe7e684123dcbc99f48769904  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-01_ports.xml
+0e803fe2c7adf2b6e36b64d4a8baf9f4ed36ea8865d74e7d2869983132bb6e31  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-02_protocols.gnmap
+cf9447b8f927bf896a582b8ea5ac8efa86b8cebca29c2b9afd7033a36aa4fa08  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-02_protocols.nmap
+f0b0647d0c7cbb5fa89c8dcab017e5f00db460f6119e5c58a2539904e36096f1  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-02_protocols.xml
+a249ca839725427c712ba74f84cf08b3664923f5c9962ea7f2db3c9fd1e2c5d6  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-03_signing.gnmap
+96a7152bf76805ed8539c3c6c97be2a8f88f6a7edd459229bad706371aa31fa0  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-03_signing.nmap
+408133be111de2365750cb03e148a904fea680322849774d0106800af88fa558  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-03_signing.xml
+90c66779ce8304bc9dde39a0fe92c67219750160e0be2f265171151f110347cd  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-04_ms17010.gnmap
+181fcaab11b414a6943317964d002db5a6f953e63ef43bec01b165f5ac7a4cd4  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-04_ms17010.nmap
+cfd274057e8cb1153470487525ebd8ceb8b37ca946c4522a3d8276d7f1184a92  02_Scenario2_Hình và các bằng chứng kịch bản 2/raw/NSE-SMB-04_ms17010.xml
+56c0a8cbb22bee4f22a21587ec38581525881ed95c3eff40db930db91956fda4  02_Scenario2_Hình và các bằng chứng kịch bản 2/Scenario2_NSE01_Ports.png
+e57de3aea8688fa73551bbc43b67a258907741de6ca09111219eec0a2413ceb0  02_Scenario2_Hình và các bằng chứng kịch bản 2/Scenario2_NSE02_Protocols.png
+5fc4507628dc0568ecea02ee5124558b0f0835bea289405ca316b124c1fe5cfe  02_Scenario2_Hình và các bằng chứng kịch bản 2/Scenario2_NSE03_Signing.png
+c970e56481a920061416949ea7543dcb96f1f2f99635dbe201131073202e14ac  02_Scenario2_Hình và các bằng chứng kịch bản 2/Scenario2_NSE04_MS17010.png
+a211c71f5329ba309487ea9683c09228aae6411b09b0f751333211306ff497ee  02_Scenario2_Hình và các bằng chứng kịch bản 2/Scenario2_Raw_Evidence.png
+2b18d0d61cfa820526d53f6ff2d593b27b8bddbce971bb5a25b4d0da6e6658bd  02_Scenario2_Hình và các bằng chứng kịch bản 2/Scenario2_Run_Manifest.txt
+c62d3616b49100a2dad366657d24cf899c538f9e8ad48f49af9efe8bae9f5ca9  02_Scenario2_Hình và các bằng chứng kịch bản 2/Scenario2_Summary.txt
+9e2052ca5a685205af0418d1225f14637f42e9a5f44fd19bb2c7880711a7c4cf  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/raw/NSE-SMB-02_protocols.gnmap
+30d8877e83b80ac6bd82daca3a80d3bbc33bb65e974e60d1db4d7699deae8337  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/raw/NSE-SMB-02_protocols.nmap
+8c7e3fe44ffb0a379252e8d2910ab3a4b840585b71c25eb3b0f438c5b4fcc944  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/raw/NSE-SMB-02_protocols.xml
+991f767d6f5266bb3b44a2caba155790f6bbfbdee6bfaafdcbb089e8e92b2d62  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/raw/NSE-SMB-04_ms17010.gnmap
+85336e92da87a65d81145d95e361b8267c2460f30d3f4d66fa7de66631b236c3  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/raw/NSE-SMB-04_ms17010.nmap
+da8a908e1aca518faea88fb521c0c39e95391e5a75d36cbf785d12b814c13541  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/raw/NSE-SMB-04_ms17010.xml
+e19cc9c7209769dd3bdfe530f59c8dee85087119c5147ccfb5bd6ac087498ca3  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/SMBv1_Remediation_01_Before.png
+feb3a6ba1fe983177a6b4d190d7b1f880beea2c69af914b9edae2e5986b0467f  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/SMBv1_Remediation_02_Action.png
+2f762508ec98da3b6ed75813c32ed5622cbe1c982e6e6e2907086152e9a6a6ad  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/SMBv1_Remediation_03_After_Local.png
+21ed6473f4e7010841e9730620b159c272238cf7335eb80fcfaf4ad61f7a7b5a  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/SMBv1_Remediation_04_NSE02_Protocols.png
+f808cee46a84ce58cbfa31e8d01b61f8649d0453f45d90e949f966352fd57fba  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/SMBv1_Remediation_05_NSE04_MS17010.png
+20154f55fd9db9ddce0dea2411f33df084b568a03419167acff379740364b896  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/SMBv1_Remediation_06_Raw_Evidence.png
+6a0a60568c545b7bbf457e5199d0e6a3d8e2eebe85817698cf5f8e3d07abc0d0  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/SMBv1_Remediation_Run_Manifest.txt
+85e388b227102ac888926f5ba00dc13fad2cdd12c49c7d7e0d03c15c8cd099b2  03_Remediation_SMBv1_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi tắt smbv1/SMBv1_Remediation_Summary.txt
+f955b3d556f20372a9a831da4d4daa441e05dea5fe49a7f05d1cca013fd0a517  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_04_Bridge.png
+9408c0962dd4a221152b9c6fd927a7d9417cfb54c626a3dd9d50f5e325c985da  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_05_Bridge_Filtering.png
+30fd54c59431083b19d8ed3dc2f0e002910382d587a361c84bc17adf3dbf1fa6  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_06_Baseline_Pass_Rule.png
+af694b811ebed2a431746198ff3cb62b4af356db8b17b257966889eca11e3fa1  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_07_Block_Rule_Config.png
+6029ea7c923c297aa9bc65c3c551a17e1d4f569a2c98f78846a39c69e22aeb45  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_08_Rule_Order.png
+3b8383c54143f8a01eb6201462a6b30877f4b95f27b1a72f54b8b07562a68bc2  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_10_Block_Log_CANONICAL.png
+de266abb4fa3e8412cfc091975d714bb4bf1168a2e3d7f6cba7d7276f22dfba7  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_CaseC_09_NSE01_Ports_CANONICAL.png
+ecd605f0c2e46690988253ec104f9111844e06a600e3e2d1b0a45506ce5cbf12  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_CaseC_11_NSE04_MS17010_CANONICAL.png
+2b0cf912febf59ed93d2e76e5ac40da056af6dce3d353b4a3737c9ad7b4df54c  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_Remediation_Run_Manifest.txt
+8c947419681f8d98d0ec7f545d6dbc189c4e07752813ae84f014c5696bf91a6b  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/pfSense_Remediation_Summary.txt
+81109d00c18143ed53ecdcb6261c6726c428c01fd10261833cd45171886422ca  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/raw/NSE-SMB-01_ports.gnmap
+5dd208208d4f281b86897a44ad0f3bc4006b380b72475af0893085b9d453481e  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/raw/NSE-SMB-01_ports.nmap
+89990ae787eda0f26156a1251deef83260a2cb5290a52f28baf76ddf0623da31  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/raw/NSE-SMB-01_ports.xml
+2306bb0e5aa9ec2182701e245c9a0dd37a71c0f40ea9bc0d7ac6832b68118e8f  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/raw/NSE-SMB-04_ms17010.gnmap
+ddd2f63535f7b7485c36de1146fb252b4690f3f2c98b259b22a90217ff488d03  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/raw/NSE-SMB-04_ms17010.nmap
+7c33ca6b3951945c7d891b696ab89b78fe05931cc98c33970f9a55a912380c60  04_Remediation_pfSense_Hình và các bằng chứng thực thi biện pháp giảm thiểu khi có firewall pfsen hạn chế/raw/NSE-SMB-04_ms17010.xml
