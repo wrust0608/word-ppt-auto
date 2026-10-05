@@ -175,13 +175,28 @@ Viết từ contract đã khóa:
 - evaluation criteria.
 
 ### Gate X5
-PASS khi:
+
+X5 được tách thành hai cổng bắt buộc:
+
+#### CP5-TECH — Technical/Academic Lock
+Đạt khi:
 - method/result separation rõ;
 - mọi config fact có evidence;
 - đủ tái lập;
 - không troubleshooting diary;
-- reviewer chấm >= 90/100;
-- user duyệt.
+- reviewer external chấm >= 95/100;
+- không còn blocker; chỉ cho phép minor editorial issue đã đóng.
+
+CP5-TECH chỉ có nghĩa **Chương 2 đạt chuẩn kỹ thuật/academic để trình người dùng xem trực tiếp**. Không mở X6.
+
+#### CP5-USER — Direct User Review & Approval
+Sau CP5-TECH:
+- dừng toàn bộ tiến trình Chương 3;
+- cung cấp Chương 2 locked candidate và báo cáo QA cho người dùng đọc trực tiếp;
+- người dùng được quyền yêu cầu sửa, reopen X5 hoặc phê duyệt;
+- chỉ khi người dùng có quyết định rõ ràng như `duyệt`, `chốt Chương 2` hoặc tương đương thì CP5-USER mới PASS.
+
+**X6 bị BLOCKED nếu CP5-USER chưa PASS.**
 
 ## 9. Phase X6 — Chapter 3 Production (Critical)
 
@@ -327,6 +342,7 @@ Có thể song song:
 
 Không song song:
 - Ch2–4 prose trước X3B.
+- Chương 3 trước CP5-USER.
 - Conclusion trước X6/X7.
 - DOCX trước X9.
 - Defense final trước X9/X10.
@@ -338,7 +354,8 @@ Không song song:
 - CP2: X2 PASS — research logic sạch.
 - CP3: X3B PASS — outline freeze.
 - CP4: X4 PASS — Ch1 khóa.
-- CP5: X5 PASS — Ch2 khóa.
+- CP5-TECH: X5 technical/academic lock — Ch2 trở thành locked candidate để người dùng đọc trực tiếp.
+- CP5-USER: Người dùng trực tiếp xem và phê duyệt Ch2 — điều kiện bắt buộc để mở X6.
 - CP6: X6 PASS — Ch3 khóa.
 - CP7: X7 PASS — Ch4 khóa.
 - CP8: X9 PASS — full Markdown khóa.
