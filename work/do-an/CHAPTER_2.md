@@ -155,8 +155,8 @@ Về cơ chế kỹ thuật, kịch bản `smb-vuln-ms17-010` kết nối pipe `
 
 ### 2.4.3. Đối chiếu với trạng thái bản vá và giới hạn kết luận
 Quy trình đánh giá thiết lập nguyên tắc đối chiếu trên hai trục thông tin độc lập:
-1. **Trục tín hiệu từ xa (Remote Signal):** Kết quả phân loại từ kịch bản NSE. Nếu kịch bản cung cấp kết luận sử dụng được thì ghi nhận theo đúng kết quả đó; nếu không đủ dữ liệu kết luận thì ghi nhận `UNKNOWN / NO USABLE SCRIPT RESULT`.
-2. **Trục trạng thái nội bộ (Trạng thái bản vá nội bộ):** Kiểm tra trực tiếp trên Windows Server qua phiên bản driver `srv.sys` và danh sách hotfix từ `Get-HotFix`.
+1. **Kết quả kiểm tra từ xa:** Kết quả phân loại từ kịch bản NSE. Nếu kịch bản cung cấp kết luận sử dụng được thì ghi nhận theo đúng kết quả đó; nếu không đủ dữ liệu kết luận thì ghi nhận `UNKNOWN / NO USABLE SCRIPT RESULT`.
+2. **Trạng thái bản vá nội bộ:** Kiểm tra trực tiếp trên Windows Server qua phiên bản driver `srv.sys` và danh sách hotfix từ `Get-HotFix`.
 
 *Ranh giới suy luận an toàn:*
 - Kết quả từ xa không xác định không đồng nghĩa máy chủ an toàn (`UNKNOWN != SAFE`).
@@ -169,7 +169,7 @@ Quy trình đánh giá thiết lập nguyên tắc đối chiếu trên hai tr�
 
 Quy trình tuân thủ 3 nguyên tắc:
 1. **Tính đơn biến:** Chỉ áp dụng một biện pháp can thiệp tại mỗi ca thử; giữ nguyên phần cứng, hệ điều hành và dải IP.
-2. **Quy chuẩn bộ phép đo:** Sử dụng cùng một tập hợp lệnh Nmap và kịch bản NSE để đối chiếu.
+2. **Quy chuẩn bộ phép đo:** Sau mỗi can thiệp, thực hiện lại các phép đo tương ứng để so sánh với trạng thái ban đầu.
 3. **Mốc phục hồi trạng thái:** Snapshot `Before Demo` được giữ làm mốc phục hồi khi cần đưa môi trường trở về baseline trước khi đổi biến can thiệp.
 
 Bảng 2.2. Ma trận kiểm thử vi sai các giải pháp an toàn dịch vụ SMB
@@ -179,7 +179,7 @@ Bảng 2.2. Ma trận kiểm thử vi sai các giải pháp an toàn dịch vụ
 | **Baseline** | Chưa can thiệp | Không | Giữ nguyên hiện trạng ban đầu | Kiểm tra trạng thái cổng TCP 139/445, SMB dialect, tín hiệu NSE và trạng thái bản vá nội bộ. |
 | **Case B** | Vô hiệu hóa SMBv1 | Tầng dịch vụ OS | Tắt giao thức kế thừa SMBv1 [10] | Kiểm tra SMBv1 còn xuất hiện hay không, SMB2/3 còn thương lượng không, trạng thái bản vá nội bộ có thay đổi hay không. |
 | **Case C** | Tường lửa pfSense Bridge | Tầng mạng (L2/L3) | Chặn cổng TCP 139, 445 [11] | Kiểm tra khả năng tiếp cận TCP 139/445 từ Kali Linux, kiểm tra nhật ký tường lửa có ghi nhận luật chặn không, trạng thái nội bộ Windows có thay đổi hay không. |
-| **Case A** | Cập nhật bản vá KB4012213 | Tầng nhân OS (Driver) | Thay đổi trạng thái bản vá trong driver `srv.sys` [4], [5] | Tham chiếu lý thuyết / Không đo đạc trực tiếp (`REFERENCE ONLY / NOT MEASURED`). |
+| **Case A** | Cập nhật bản vá MS17-010 | Tầng nhân OS (Driver) | Thay đổi trạng thái bản vá trong driver `srv.sys` [4], [5] | Chỉ tham khảo / chưa đo đạc trực tiếp. |
 
 ### 2.5.2. Case B — Vô hiệu hóa SMBv1
 Biện pháp giảm thiểu thứ nhất (Case B) là làm cứng giao thức (Protocol Hardening) ở tầng ứng dụng theo khuyến nghị của Microsoft [10], nhằm vô hiệu hóa SMBv1 và giữ SMB2/SMB3 là các phiên bản giao thức còn được phép thương lượng.
@@ -208,7 +208,7 @@ Biện pháp giảm thiểu thứ hai (Case C) đại diện cho giải pháp ki
 - **Ranh giới an ninh:** Trạng thái bị lọc trên đường truyền không đồng nghĩa máy chủ nội bộ đã được vá lỗi (`FILTERED != PATCHED`).
 
 ### 2.5.4. Vai trò của cập nhật bản vá
-Cập nhật bản vá là biện pháp trực tiếp thay đổi trạng thái bản vá của hệ điều hành. Đối với Windows Server 2012 R2, các gói cập nhật áp dụng gồm KB4012213, KB4012216 hoặc các bản cập nhật thay thế (superseding update) [4], [5]. Việc cập nhật giúp nâng phiên bản driver `srv.sys` đạt hoặc vượt ngưỡng phiên bản đã cập nhật tối thiểu `6.3.9600.18604` (minimum updated version). Bộ evidence hiện hành không có kịch bản thực nghiệm Case A hoàn chỉnh, do đó Case A đóng vai trò đối chứng lý thuyết để làm rõ sự khác biệt giữa can thiệp tầng nhân, can thiệp cấu hình dịch vụ (Case B) và kiểm soát mạng (Case C).
+Cập nhật bản vá là biện pháp trực tiếp thay đổi trạng thái bản vá của hệ điều hành. Đối với Windows Server 2012 R2, các gói cập nhật áp dụng gồm KB4012213, KB4012216 hoặc các bản cập nhật thay thế (superseding update) [4], [5]. Việc cập nhật giúp nâng phiên bản driver `srv.sys` đạt hoặc vượt ngưỡng phiên bản đã cập nhật tối thiểu `6.3.9600.18604` (minimum updated version). Bộ dữ liệu thực nghiệm hiện có không có kịch bản thực nghiệm Case A hoàn chỉnh, do đó Case A đóng vai trò đối chứng lý thuyết để làm rõ sự khác biệt giữa can thiệp tầng nhân, can thiệp cấu hình dịch vụ (Case B) và kiểm soát mạng (Case C).
 
 ## 2.6. Thu thập dữ liệu phục vụ đánh giá
 
@@ -225,7 +225,7 @@ Cập nhật bản vá là biện pháp trực tiếp thay đổi trạng thái 
 Quá trình diễn giải dữ liệu thực nghiệm ở Chương 3 bắt buộc tuân thủ 5 nguyên tắc suy luận an toàn cốt lõi:
 
 1. `445 open != vulnerable`: Cổng TCP 139/445 mở chỉ xác nhận socket đang lắng nghe, chưa đủ căn cứ kết luận máy chủ có điểm yếu an ninh.
-2. `SMBv1 enabled != MS17-010 confirmed`: Bật SMBv1 chỉ là điều kiện giao thức cần; nguy cơ bị tổn thương phụ thuộc vào việc nhân hệ điều hành đã được vá lỗi hay chưa.
+2. `SMBv1 enabled != MS17-010 confirmed`: SMBv1 được bật chỉ cho thấy giao thức liên quan còn được hỗ trợ; trạng thái này không đủ để xác nhận MS17-010. Việc đánh giá cần đối chiếu với trạng thái bản vá nội bộ và kết quả kiểm tra từ xa.
 3. `UNKNOWN != SAFE`: Khi script không cung cấp verdict usable, kết quả được ghi nhận `UNKNOWN / NO USABLE SCRIPT RESULT` và không được suy diễn thành `SAFE`.
 4. `FILTERED != PATCHED`: `FILTERED` cho biết Nmap không nhận đủ phản hồi để phân loại cổng là open hay closed; trạng thái này không chứng minh máy chủ đã được vá.
 5. `SMBv1 disabled != PATCHED`: Vô hiệu hóa SMBv1 chỉ đóng tính năng ở tầng dịch vụ, không thay đổi mã nhị phân driver nhân `srv.sys`.
@@ -236,4 +236,4 @@ Chương 2 đã hoàn thành toàn bộ công tác xây dựng mô hình thực 
 
 Thông số kỹ thuật trạm kiểm thử Kali Linux và máy mục tiêu Windows Server 2012 R2 đã được chuẩn hóa. Đồ án xây dựng quy trình 6 bước chi tiết cho Kịch bản Demo 1 và 4 phép đo cho Kịch bản Demo 2. Đồng thời, đồ án thiết lập phương pháp kiểm thử vi sai trước và sau can thiệp cho hai giải pháp giảm thiểu gồm vô hiệu hóa SMBv1 và tường lửa pfSense CE 2.9.0.
 
-Hệ thống dữ liệu thô đa định dạng cùng 5 nguyên tắc diễn giải an toàn tạo lập nền tảng khoa học vững chắc. Đây là cơ sở để Chương 3 tiến hành phân tích số liệu đo đạc thực tế và thảo luận chuyên sâu về hiệu quả của các giải pháp phòng thủ.
+Các tệp kết quả và nguyên tắc diễn giải trên được dùng làm cơ sở phân tích ở Chương 3.
