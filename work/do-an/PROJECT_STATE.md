@@ -330,3 +330,17 @@
 - X5 OPEN for R4 micro-patch only.
 - CP5-USER PENDING.
 - X6 BLOCKED.
+
+
+## DEC-33 — Panel-style review of X5 R4: pass with minor revisions
+
+- Ngày: 2026-10-05.
+- Candidate commit verified: `6ec02ffcacd02c66e14858cad89e2c719fdccfc4`.
+- Review artifact: `X5_STRUCTURAL_REWRITE_EXTERNAL_REVIEW_R4.md`.
+- Score: **94/100 — PASS_WITH_MINOR_REVISIONS**.
+- Blockers: **0**.
+- Structure 8 H2 / 27 H3 remains LOCKED.
+- Required final micro-edits: NO OUTPUT causal wording, SMB Server configuration wording, table L3 semantics, reachability terminology, RST wording, signing criterion, Case B result-like phrase, internal repo jargon, objective wording and safety wording.
+- X5 remains OPEN for final editorial/technical micro-edit only.
+- CP5-TECH not yet locked because project threshold for lock is >=95.
+- CP5-USER PENDING; X6 BLOCKED.
