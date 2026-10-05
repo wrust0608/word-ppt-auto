@@ -404,3 +404,16 @@
 - Remaining issues are limited to: Windows baseline overstatement, UNKNOWN/FILTERED causal wording, deterministic NSE status wording, residual internal jargon, Windows Firewall wording, Case B workload wording, and unverified FULL_TEXT research sources.
 - X5 OPEN for R3 micro-patch only.
 - CP5-USER PENDING; X6 BLOCKED.
+
+
+## DEC-38 — Demo-style R3 presentation passes; final micro-patch remains
+
+- Ngày: 2026-10-05.
+- Candidate verified: `df674075e8b6c76e9a7f906db5be26c010e4e700`.
+- Review: `X5_DEMO_STYLE_EXTERNAL_REVIEW_R3.md`.
+- Score: **92/100 — PASS_PRESENTATION / FINAL_MICRO_PATCH_REQUIRED**.
+- Presentation direction: PASS.
+- Structure: **7 H2 / 20 H3 LOCKED**.
+- Remaining items: tighten SMBv1 inference boundary; correct PTIT TL03 handle to HVCNBCVT/3493; make Case A table label update-neutral; correct before/after retest wording; remove small residual jargon/self-evaluative prose.
+- X5 OPEN only for final micro-patch.
+- CP5-USER PENDING; X6 BLOCKED.
