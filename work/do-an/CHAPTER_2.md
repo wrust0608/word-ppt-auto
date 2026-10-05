@@ -11,7 +11,7 @@ Môi trường lab phục vụ khảo sát dịch vụ SMB và đánh giá an ni
 Phạm vi thực nghiệm tuân thủ hướng dẫn NIST SP 800-115 [1], chỉ áp dụng kỹ thuật quét cổng, trinh sát dịch vụ và kiểm tra logic giao thức phi phá hủy. Quy trình không phát tán mã khai thác, không tấn công chiếm quyền điều khiển và không gây nghẽn dịch vụ.
 
 ### 2.1.3. Nguyên tắc cô lập mạng và khả năng khôi phục
-Tại trạng thái pre-demo đã khóa, hai máy ảo chỉ sử dụng card mạng Host-Only, không cấu hình NAT hoặc Bridged và trạm Kali không có default route ra Internet. Nhằm phục vụ kiểm thử vi sai, snapshot `Before Demo` trên máy mục tiêu được xác định làm mốc thiết kế chuẩn để phục hồi baseline giữa các biến can thiệp, tránh việc thay đổi của kịch bản trước ảnh hưởng tới kết quả của kịch bản sau.
+Tại trạng thái pre-demo đã khóa, hai máy ảo chỉ sử dụng card mạng Host-Only, không cấu hình NAT hoặc Bridged và trạm Kali không có default route ra Internet. Phục vụ kiểm thử vi sai, snapshot `Before Demo` tồn tại cho cả Kali Linux và Windows Server như mốc thiết kế chuẩn. Đây là phương án phục hồi baseline giữa các can thiệp độc lập, tránh để thay đổi của kịch bản trước ảnh hưởng tới kết quả của kịch bản sau.
 
 ### 2.1.4. Nguyên tắc thu thập, truy vết và bảo toàn bằng chứng
 Tính truy vết đòi hỏi mọi nhận định kỹ thuật đều đối chiếu được với dữ liệu gốc. Khi cần kiểm tra lại, Evidence ID cho phép quay về đúng raw file hoặc ảnh trạng thái tương ứng. Quy trình ưu tiên raw log và XML hơn ảnh chụp hoặc bản tóm tắt: ảnh có thể bị cắt xén, tóm tắt đã qua diễn giải, do đó tệp nhật ký thô là căn cứ đối chiếu cao nhất.
@@ -77,10 +77,10 @@ Windows Firewall mặc định có thể lọc lưu lượng SMB từ mạng ngo
 Trạng thái bản vá được kiểm tra trên máy mục tiêu. Lệnh `Get-HotFix` xác nhận chưa cài đặt bản vá KB4012213 hoặc KB4012216. Tệp driver `srv.sys` ghi nhận phiên bản `6.3.9600.16421`, thấp hơn ngưỡng `6.3.9600.18604` theo tài liệu MS17-010 [4]. Do công cụ quét từ xa có thể trả về kết quả UNKNOWN, thông tin hotfix và `srv.sys` được giữ như trục đối chứng độc lập, xác định trạng thái bản vá nội bộ là `UNPATCHED`.
 
 ### 2.3.5. Kiểm tra Nmap và NSE script trên Kali
-Tại trạm Kali Linux, lệnh `nmap --version` xác nhận phiên bản Nmap đang hoạt động theo Gordon Lyon [5]. Thư mục `/usr/share/nmap/scripts/` chứa đầy đủ các kịch bản: `smb-protocols.nse`, `smb-security-mode.nse`, `smb2-security-mode.nse` và `smb-vuln-ms17-010.nse`.
+Tại trạm Kali Linux, lệnh `nmap --version` xác nhận phiên bản Nmap đang hoạt động theo Gordon Lyon [5]. Thư mục `/usr/share/nmap/scripts/` sẵn sàng tập kịch bản NSE canonical cho thực nghiệm: nhóm kịch bản khảo sát an toàn ở Kịch bản 1 (`smb-protocols.nse`, `smb-os-discovery.nse`, `smb2-security-mode.nse`, `smb2-capabilities.nse`) và nhóm kịch bản đánh giá cấu hình cùng lỗ hổng ở Kịch bản 2 (`smb-protocols.nse`, `smb2-security-mode.nse`, `smb-vuln-ms17-010.nse`).
 
 ### 2.3.6. Snapshot Before Demo và phương án phục hồi
-Snapshot `Before Demo` được tạo trên máy ảo sau khi hoàn tất baseline. Việc giữ snapshot giúp hai can thiệp độc lập (Case B đổi dịch vụ trên Server và Case C lọc cổng trên đường mạng) đều xuất phát từ cùng mốc sạch, tránh can thiệp trước gây nhiễu can thiệp sau.
+Snapshot `Before Demo` được thiết lập trên cả hai máy ảo Kali Linux và Windows Server sau khi hoàn tất cấu hình baseline. Trong quá trình thực nghiệm, Windows Server là máy chịu thay đổi cấu hình chính ở Case B khi thao tác dịch vụ. Việc duy trì snapshot đóng vai trò là phương án và mốc phục hồi baseline sạch cho môi trường lab. Nhờ đó, hai can thiệp độc lập (Case B đổi cấu hình dịch vụ trên Server và Case C lọc cổng trên đường mạng) đều xuất phát từ cùng mốc chuẩn mà không làm xáo trộn môi trường đo.
 
 ## 2.4. Phương pháp kiểm thử và mô hình bằng chứng
 
@@ -143,6 +143,7 @@ Kịch bản 1 khảo sát bề mặt dịch vụ SMB từ góc nhìn máy khác
 | :--- | :--- | :--- | :--- | :--- |
 | **Kịch bản 1 — Host Discovery** | `nmap -sn 192.168.56.0/24` | Không quét cổng | Rà quét máy trong mạng lab | IP, MAC máy mục tiêu |
 | **Kịch bản 1 — Port Scan** | `nmap -sS -sV -p139,445 ...` | TCP 139, 445 | Xác định trạng thái cổng và dịch vụ | Trạng thái cổng, LanmanServer |
+| **Kịch bản 1 — Safe SMB NSE** | `nmap -p139,445 --script smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities ...` | TCP 139, 445 | Khảo sát dialect, OS discovery khi có dữ liệu, signing và SMB2 capabilities | Thuộc tính cấu hình SMB an toàn |
 | **Kịch bản 2 — NSE-SMB-01** | `nmap -p139,445 192.168.56.20` | TCP 139, 445 | Mốc đối chứng trạng thái cổng | Trạng thái cổng baseline |
 | **Kịch bản 2 — NSE-SMB-02** | `nmap -p445 --script smb-protocols` | TCP 445 | Liệt kê danh sách dialect SMB | Danh sách dialects |
 | **Kịch bản 2 — NSE-SMB-03** | `nmap -p445 --script smb2-security-mode` | TCP 445 | Kiểm tra chính sách ký số | Trạng thái message signing |
@@ -158,7 +159,7 @@ Khi ghi nhận IP `192.168.56.20`, quy trình đối chiếu địa chỉ MAC v�
 Kỹ thuật SYN Stealth Scan (`-sS`) gửi gói TCP SYN đến cổng 139 và 445 để phân loại trạng thái cổng. Khi nhận phản hồi TCP, công cụ gửi gói RST giải phóng phiên mà không duy trì kết nối đầy đủ; kết quả đo được ghi nhận tại Chương 3.
 
 ### 2.5.5. Nhận diện dịch vụ và phiên bản
-Để xác định tiến trình lắng nghe, Nmap kích hoạt dò phiên bản (`-sV`). phân tích chuỗi định danh dịch vụ trên cổng 139 và 445 theo cơ sở dữ liệu công cụ.
+Nmap sử dụng kỹ thuật dò phiên bản (`-sV`) để phân tích chuỗi định danh dịch vụ trên TCP 139 và 445 theo cơ sở dữ liệu nhận diện của công cụ.
 
 ### 2.5.6. Khảo sát SMB bằng NSE
 Các kịch bản NSE cơ bản gửi yêu cầu thương lượng SMB ở mức người dùng khách nhằm thu thập định danh máy chủ như tên NetBIOS, domain và dấu thời gian.
@@ -231,15 +232,15 @@ Bảng 2.4 tổng hợp ma trận thiết kế biến can thiệp và phương �
 
 | Trường hợp | Biến chủ động thay đổi | Các biến cần giữ | Phép đo lại | Câu hỏi cần trả lời |
 | :--- | :--- | :--- | :--- | :--- |
-| **Baseline (Mốc đối chứng)** | Không can thiệp | Mặc định OS, mở TCP 139/445 | Kịch bản 1 và 2 | Bề mặt dịch vụ ban đầu phản hồi ra sao? |
+| **Baseline (Mốc đối chứng)** | Không can thiệp | Cấu hình baseline canonical của Windows Server, LanmanServer và TCP 139/445 | Kịch bản 1 và 2 | Bề mặt dịch vụ ban đầu phản hồi ra sao? |
 | **Case B (Tắt SMBv1)** | `EnableSMB1Protocol True -> False` | IP, LanmanServer, UNPATCHED | Đo lại `smb-protocols` và `smb-vuln-ms17-010` | Server có còn chấp nhận SMBv1 không? |
 | **Case C (Lọc cổng pfSense)** | Thêm pfSense Bridge chặn 139/445 | Cấu hình máy chủ (SMB1=True, UNPATCHED) | Đo lại trạng thái cổng, NSE và log pfSense | Chặn cổng trên mạng đổi khả năng tiếp cận ra sao? |
-| **Case A (Cập nhật bản vá)** | Gói KB4012213 (srv.sys >= .18604) | Lớp tham chiếu lý thuyết, không đo lại | So sánh lý thuyết với Case B/C | Bản vá sửa driver khác gì giảm thiểu bề mặt? |
+| **Case A (Cập nhật bản vá)** | Bản cập nhật MS17-010 áp dụng cho Windows Server 2012 R2 (KB4012213 / KB4012216, srv.sys >= .18604) | Mốc tham chiếu lý thuyết (THEORETICAL_REFERENCE_ONLY), không đo lại | So sánh lý thuyết với Case B/C | Bản vá sửa driver trong nhân khác gì giải pháp giảm thiểu bề mặt? |
 
 ## 2.8. Tiêu chí đánh giá kết quả
 
 ### 2.8.1. Tiêu chí reachability
-Tiêu chí reachability xác định khả năng liên lạc tầng mạng qua ICMP Echo. Tỷ lệ mất gói bằng không khẳng định kết nối thông suốt; nếu mất toàn bộ gói, quy trình dừng để kiểm tra mạng trước khi đo tầng dịch vụ.
+Tiêu chí reachability dựa trên phản hồi ICMP Echo nhằm xác nhận hai máy có thể tiếp cận nhau ở lớp mạng tại thời điểm kiểm tra. Phép đo này chỉ đóng vai trò điều kiện tiên quyết (precondition) để loại trừ sự cố cấu hình mạng ảo, không thay thế cho phép quét cổng TCP 139/445 cũng như các bước kiểm tra dịch vụ và giao thức. Nếu mất liên lạc tầng mạng, quy trình dừng để kiểm tra kết nối trước khi thực hiện các phép đo tiếp theo.
 
 ### 2.8.2. Tiêu chí protocol surface
 Tiêu chí protocol surface đánh giá độ mở dịch vụ qua trạng thái cổng và dialect chấp nhận. Bề mặt dịch vụ mở khi cổng 139/445 ở trạng thái open; bề mặt giao thức tiềm ẩn nguy cơ khi phản hồi `smb-protocols` chứa dialect SMBv1 (`NT LM 0.12`).

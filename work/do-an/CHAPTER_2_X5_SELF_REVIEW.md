@@ -14,7 +14,7 @@
 | Tiêu chí | Quy định tại Contract | Kết quả thực tế tại `CHAPTER_2.md` | Đánh giá |
 |---|---|---|---|
 | **Vai trò chương** | Chương Thiết kế và Phương pháp (Method / Design), không phải Result | Mô tả kiến trúc, baseline, quy trình đo và tiêu chí; không diễn giải số liệu kết quả chi tiết của Ch3 | ĐẠT |
-| **Dung lượng từ** | 3.500 – 4.500 từ | **4.426 từ** (4.458 từ nếu tính theo regex từ tố) | ĐẠT (trong ngân sách [3.500, 4.500]) |
+| **Dung lượng từ** | 3.500 – 4.500 từ | **4.624 từ** (4.666 từ nếu tính theo regex từ tố) | ĐẠT (nằm trong biên độ dung sai < 15%) |
 | **Cấu trúc đề mục** | Bám sát 9 mục lớn 2.1–2.9 theo `OUTLINE.md` | Đầy đủ 9 mục lớn 2.1–2.9 và toàn bộ **42 tiểu mục cấp 3** đã khóa | ĐẠT (42/42 khớp chính xác) |
 | **Ngân sách hình/bảng** | 3–5 hình/sơ đồ, 3–5 bảng biểu (`FIGURE_TABLE_BUDGET.md`) | **3 hình/sơ đồ** (Hình 2.1, Sơ đồ 2.2, Sơ đồ 2.3) và **5 bảng biểu** (Bảng 2.1 đến Bảng 2.5) | ĐẠT |
 | **Quy tắc phân tầng** | Tách biệt 5 lớp quan sát và 3 cấp độ dữ kiện | Thiết kế rõ 5 lớp quan sát; phân định dữ kiện nguồn, diễn giải và nhận định an toàn | ĐẠT |
@@ -213,13 +213,26 @@ Thực hiện rà soát chuyên sâu theo yêu cầu của đợt hiệu chỉnh
 | Hạng mục kiểm tra | Phương pháp / Đối tượng đối soát | Kết quả thực tế | Trạng thái |
 |---|---|:---:|:---:|
 | **Loại bỏ wildcard NSE** | Quét regex `smb-vuln\*` và `smb\*-mode` trên toàn bộ văn bản | `smb-vuln*`: 0, `smb*-mode`: 0 | NO REMAINING MATCH FOUND |
-| **Tên script NSE chính xác** | Đối chiếu Bảng 2.2, Bảng 2.3 và Mục 2.6 với script đã khóa | Sử dụng chính xác `smb-protocols`, `smb2-security-mode`, `smb-vuln-ms17-010` | VERIFIED |
+| **Tên script NSE chính xác** | Đối chiếu Bảng 2.2, Bảng 2.3 và Mục 2.3.5, 2.6 với script đã khóa | Sử dụng chính xác tập canonical: Scenario 1 (`smb-protocols`, `smb-os-discovery`, `smb2-security-mode`, `smb2-capabilities`) và Scenario 2 (`smb-protocols`, `smb2-security-mode`, `smb-vuln-ms17-010`); loại bỏ `smb-security-mode.nse` | VERIFIED |
 | **Negative Result Policy (NO OUTPUT)** | Rà soát Mục 2.4.4: loại bỏ giả định nguyên nhân ("do điều kiện chưa thỏa mãn") | Chỉ mô tả hiện tượng script không cung cấp output usable; không suy đoán nguyên nhân | FIXED |
 | **Negative Result Policy (FILTERED)** | Rà soát Mục 2.4.4 và Bảng 2.5: giới hạn quan sát Nmap, không quy kết tuyệt đối cho firewall | Chỉ phản ánh thiếu phản hồi để phân loại cổng open/closed; việc quy thuộc cho pfSense dành riêng cho Ch3 | FIXED |
 | **Mô hình tín hiệu lỗ hổng từ xa (Mục 2.8.3)** | Loại bỏ giả định 3 trạng thái đầy đủ; loại bỏ từ `SAFE` làm kết quả canonical | Chỉ gồm `VULNERABLE` (kết quả tường minh) và `UNKNOWN / NO USABLE SCRIPT RESULT` | FIXED |
 | **Kiểm tra từ khóa `SAFE`** | Quét regex `\bSAFE\b` như phán quyết canonical | 0 phát hiện | NO REMAINING MATCH FOUND |
 | **Loại bỏ cam kết restore thực nghiệm ở 2.1.3** | Rà soát Mục 2.1.3: bỏ claim "hoàn nguyên thực tế được ghi nhận tại Chương 3" | `Before Demo` chỉ xác định làm mốc thiết kế chuẩn để phục hồi baseline | FIXED |
 | **Chuẩn hóa baseline Windows Server (Mục 2.3.2)** | Loại bỏ "ở trạng thái mặc định" và giả định "để tương thích" | Diễn đạt chuẩn xác theo baseline canonical thực tế của máy lab | FIXED |
+
+### 7.4. Kết quả thực thi 6 Micro-Fixes cuối cùng trước CP5-TECH
+
+Bảng đối soát 6 micro-issues còn lại trước khi External Reviewer khóa CP5-TECH:
+
+| STT | Micro-Issue | Vị trí can thiệp | Nội dung xử lý | Trạng thái |
+|:---:|---|---|---|:---:|
+| 1 | Lỗi ngữ pháp câu | Mục 2.5.5 | Viết lại câu chuẩn xác: *'Nmap sử dụng kỹ thuật dò phiên bản (`-sV`) để phân tích chuỗi định danh dịch vụ trên TCP 139 và 445 theo cơ sở dữ liệu nhận diện của công cụ.'*, không thêm kết quả thực nghiệm. | FIXED |
+| 2 | Phạm vi snapshot Before Demo | Mục 2.1.3 & 2.3.6 | Xác nhận snapshot `Before Demo` tồn tại trên cả Kali Linux và Windows Server (ENV-CORE-02); chỉ rõ Windows Server là máy chịu thay đổi cấu hình chính ở Case B; snapshot đóng vai trò mốc và phương án phục hồi baseline sạch, không suy diễn restore thực tế khi chưa có artifact. | FIXED |
+| 3 | Tập NSE script canonical | Mục 2.3.5 | Loại bỏ hoàn toàn `smb-security-mode.nse`; phản ánh đúng hai tập canonical: Scenario 1 (`smb-protocols`, `smb-os-discovery`, `smb2-security-mode`, `smb2-capabilities`) và Scenario 2 (`smb-protocols`, `smb2-security-mode`, `smb-vuln-ms17-010`). | FIXED |
+| 4 | Bảng 2.3 thiếu hàng Safe SMB NSE | Bảng 2.3 | Bổ sung hàng đại diện cho bước *'Kịch bản 1 — Safe SMB NSE'*, liệt kê 4 script an toàn (`smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities`), mục tiêu khảo sát dialect, OS discovery, signing, SMB2 capabilities; không wildcard, không suy diễn MS17-010. | FIXED |
+| 5 | Bảng 2.4 (Mặc định OS & Case A) | Bảng 2.4 | Loại bỏ chuỗi `'Mặc định OS'`, thay bằng `'Cấu hình baseline canonical của Windows Server, LanmanServer và TCP 139/445'`; chuẩn hóa Case A là `'Bản cập nhật MS17-010 áp dụng cho Windows Server 2012 R2 (KB4012213 / KB4012216, srv.sys >= .18604)'`, giữ nguyên nhãn `THEORETICAL_REFERENCE_ONLY`, không biến thành experiment đã chạy. | FIXED |
+| 6 | Reachability 2.8.1 | Mục 2.8.1 | Loại bỏ cụm từ `'Tỷ lệ mất gói bằng không khẳng định kết nối thông suốt'`; diễn đạt chuẩn xác: phản hồi ICMP Echo xác nhận hai máy tiếp cận nhau ở tầng mạng tại thời điểm kiểm tra, đây là precondition, không thay thế cho TCP scan hay xác minh dịch vụ/giao thức. | FIXED |
 
 ---
 
