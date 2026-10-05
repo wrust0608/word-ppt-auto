@@ -1,5 +1,7 @@
 # Hồ sơ dự án
 
+Trạng thái: `LOCKED_CANONICAL_2026_10_05`
+
 ## Nhận diện
 
 - Mã dự án: do-an
@@ -12,48 +14,65 @@
   - Nguyễn Minh Thắng (MSSV: 2033216558, Lớp: 12DHBM03)
   - Nguyễn Hoài Tiến (MSSV: 2033216575, Lớp: 12DHBM09)
 - Người hướng dẫn: ThS. Ngô Quốc Huy (thông tin liên hệ được lưu cục bộ trong `CONTACTS.local.md`, không đưa lên Git)
-- Thời hạn: 10 tuần (24/08/2026 - 18/10/2026)
+- Thời gian thực hiện: 24/08/2026 - 18/10/2026. Khác biệt cách gọi số tuần giữa hồ sơ lịch sử và thông báo HUIT được theo dõi trong `REQUIREMENT_RECONCILIATION.md`.
 
 ## Vấn đề nghiên cứu
 
-- Bối cảnh: Server Message Block (SMB) là giao thức truyền thông mạng nội bộ mặc định trên Windows, vận hành ở cấp nhân (kernel-mode driver srv.sys / srv2.sys). Các lỗ hổng quản lý bộ nhớ trong SMBv1, tiêu biểu là MS17-010 (CVE-2017-0144 / EternalBlue), cho phép thực thi mã từ xa (RCE) không cần chứng thực, gây ra các cuộc tấn công mạng nghiêm trọng trên phạm vi toàn cầu như WannaCry.
-- Vấn đề cần giải quyết:
-  1. Phân tích kiến trúc, dialect negotiation, session setup và cơ chế xử lý gói tin của SMB qua cổng TCP 139/445; làm rõ sự khác biệt giữa SMBv1, SMBv2 và SMBv3.
-  2. Phân tích cơ chế phát sinh lỗi bộ nhớ dẫn đến MS17-010 trong driver srv.sys.
-  3. Xây dựng mô hình mạng lab cô lập, quy trình nhận diện dịch vụ, quét đánh giá và tiêu chí xác minh trạng thái an toàn của SMB.
-  4. Đề xuất và phân tích các giải pháp giảm thiểu: cập nhật bản vá, vô hiệu hóa SMBv1, cấu hình tường lửa cổng 445 và phân đoạn mạng.
-- Vì sao vấn đề quan trọng: SMBv1 vẫn còn tồn tại trong nhiều hệ thống mạng doanh nghiệp để tương thích thiết bị cũ; việc hiểu rõ bề mặt tấn công và phương pháp hardening đa tầng là yêu cầu cốt lõi trong bảo mật hạ tầng mạng.
-- Khoảng trống ban đầu: Thực tế đánh giá an ninh thường đồng nhất việc "mở cổng 445" hoặc "bật SMBv1" với "tồn tại lỗ hổng MS17-010"; thiếu tiêu chí phân định rõ ràng giữa nhận diện dịch vụ và xác minh lỗ hổng thực tế; thiếu bảng đối chiếu trước - sau phòng thủ.
+- SMB là giao thức chia sẻ tài nguyên quan trọng trong hệ sinh thái Windows; SMBv1 và nhóm lỗ hổng MS17-010 tạo ra bề mặt rủi ro đáng kể trên hệ thống chưa được hardening.
+- Đề tài cần phân biệt rõ bốn lớp: khả năng tiếp cận dịch vụ, trạng thái giao thức, tín hiệu phát hiện từ xa và trạng thái bản vá cục bộ.
+- Đề tài xây dựng lab cô lập, thực hiện khảo sát Nmap/NSE có kiểm soát, đối chiếu ground truth cục bộ và đánh giá các lớp giảm thiểu.
 
 ## Phạm vi
 
-- Đối tượng nghiên cứu: Giao thức SMB (v1, v2, v3), nhóm lỗ hổng MS17-010 (trọng tâm CVE-2017-0144), công cụ kiểm thử (Kali Linux, Nmap, NSE script, Metasploit Framework) và các cơ chế phòng thủ Windows/Firewall.
-- Phạm vi nội dung: Nghiên cứu lý thuyết nền tảng, cơ chế lỗ hổng, thiết kế kiến trúc lab cô lập, kịch bản kiểm thử bảo mật và quy trình phòng thủ đa tầng.
-- Nội dung ngoài phạm vi: **Tránh các phần liên quan đến demo và kết quả demo thực tế theo chỉ thị của người dùng** ở giai đoạn hiện tại. Không tự tạo kết quả thực nghiệm hay log khai thác giả lập.
-- Giới hạn đạo đức, pháp lý hoặc an toàn: Mọi hoạt động kiểm thử chỉ được thực hiện trong môi trường mạng ảo cô lập (Host-only / Internal Network) với cơ chế snapshot; nghiêm cấm quét hoặc khai thác ra mạng thực; tuân thủ quy tắc an toàn thông tin và chỉ thị của GVHD.
+- Đối tượng nghiên cứu: SMBv1/v2/v3; TCP 139/445; MS17-010 với trọng tâm CVE-2017-0144/EternalBlue; Kali Linux; Nmap/NSE; vai trò của Metasploit; Windows hardening và firewall/network access control.
+- Nền tảng thực nghiệm canonical: **Oracle VM VirtualBox**.
+- Máy kiểm thử canonical: Kali Linux.
+- Máy mục tiêu canonical: Windows Server 2012 R2 Standard Evaluation, Build 9600.
+- Mạng baseline canonical: VirtualBox Host-Only, cô lập khỏi Bridged/NAT tại thời điểm pre-demo đã khóa.
+- Thực nghiệm canonical hiện có:
+  1. Scenario 1 — Nmap SMB 139/445.
+  2. Scenario 2 — NSE SMB / MS17-010.
+  3. Case B — Vô hiệu hóa SMBv1 và retest.
+  4. Case C — pfSense Transparent Bridge chặn TCP 139/445 và retest.
+- Trạng thái bản vá baseline canonical: `UNPATCHED` theo local ground truth đã đối chiếu.
+- Remote `smb-vuln-ms17-010` canonical: `UNKNOWN / NO USABLE SCRIPT RESULT`.
+- Case A patch trong báo cáo lịch sử **không phải canonical result** nếu chưa phục hồi và audit evidence riêng.
+- Metasploit nằm trong phạm vi nghiên cứu công cụ/phương pháp, nhưng không có canonical exploit/RCE result trong evidence hiện hành.
 
-## Nguồn lực
+## Ngoài phạm vi kết quả
 
-- Notebook URL/ID: `[CẤU HÌNH CỤC BỘ — KHÔNG LƯU TRONG GIT]`
-- Dữ liệu hiện có:
-  - `work/do-an/inputs/ATTT_DACN_01_DeCuongChiTiet.docx` (Đề cương chi tiết đã duyệt)
-  - `work/do-an/inputs/đề mục tham khảo.docx` (Đề mục tham khảo và bản nháp phần 1.1)
-- Tài liệu bắt buộc:
-  - Bản tin bảo mật Microsoft Security Bulletin MS17-010
-  - Microsoft Learn: Detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows
-  - NVD: CVE-2017-0144 Detail
-  - Nmap Official Guide & smb-vuln-ms17-010 NSE Script Documentation
-  - Metasploit Framework Documentation
-  - Windows Internals (Part 1 & Part 2, ấn bản 7)
-- Mẫu văn bản thật của tác giả: `work/do-an/inputs/đề mục tham khảo.docx` (mục 1.1)
-- Hồ sơ giọng tác giả: `work/do-an/AUTHOR_VOICE.md`
-- Công cụ được phép: NotebookLM MCP, OfficeCLI, Nmap, Metasploit, VMware Workstation / VirtualBox.
-- Quy định hoặc template áp dụng: `profiles/HUIT_2024.md` (Hồ sơ quy định trình bày Đồ án/Luận văn HUIT 2024).
+- Không tuyên bố exploit success, RCE, SYSTEM, Meterpreter, reverse shell hoặc BSOD như kết quả canonical khi không có evidence.
+- Không quét hoặc khai thác hệ thống ngoài lab được cấp phép.
+- Không dùng kết quả lịch sử để lấp khoảng trống raw evidence hiện hành.
+- Không định lượng performance/CPU/memory/Event Viewer nếu chưa có artifact đo tương ứng.
+
+## Nguồn lực và evidence
+
+- Notebook URL/ID: `[CẤU HÌNH CỤC BỘ — KHÔNG LƯU TRONG GIT]`.
+- Đề cương chi tiết và hai kịch bản giảng viên là nguồn kỹ thuật/định hướng ưu tiên.
+- `EXPERIMENTAL_TRUTH_MATRIX.md`: canonical truth gate cho Chương 2–4.
+- `EVIDENCE_REGISTER.md`: stable Evidence IDs.
+- `CANONICAL_EVIDENCE_SHA256.txt`: checksum của core canonical evidence set.
+- `NEGATIVE_RESULT_POLICY.md`: quy tắc UNKNOWN/NO OUTPUT/FILTERED.
+- Báo cáo thực nghiệm cũ: `HISTORICAL_REFERENCE`.
+
+## Tài liệu nền bắt buộc
+
+- Microsoft Security Bulletin MS17-010.
+- Microsoft Learn về SMBv1/v2/v3 và SMB security.
+- NVD cho CVE trọng tâm.
+- Nmap Official Guide và NSE documentation/source.
+- NIST SP 800-115 và NIST firewall guidance phù hợp.
+- Rapid7/Metasploit documentation khi mô tả vai trò công cụ.
 
 ## Yêu cầu đầu ra
 
-- Độ dài dự kiến: Theo quy định Đồ án chuyên ngành HUIT (khoảng 40 - 70 trang tùy cấu trúc).
-- Định dạng đầu ra: Markdown chuẩn và DOCX (xuất bản qua OfficeCLI).
-- Chuẩn trích dẫn: IEEE số trong ngoặc vuông ([1], [2]...), danh mục tài liệu xếp theo thứ tự xuất hiện.
-- Các sản phẩm phụ: Sơ đồ kiến trúc lab, bảng ma trận phân tích trước - sau phòng thủ, slide thuyết trình (khi hoàn thành).
-- Cổng cần người dùng/GVHD phê duyệt: Toàn bộ từ `G0_INTAKE` đến `G6_PUBLICATION`.
+- Báo cáo Markdown canonical và DOCX theo chuẩn HUIT.
+- Trích dẫn IEEE theo thứ tự xuất hiện.
+- Sơ đồ lab, bảng trước-sau, evidence map, phụ lục kỹ thuật có chọn lọc.
+- Slide bảo vệ, Q&A bank, demo runbook, rollback plan và evidence quick-index.
+- Gate dự án: G0–G6 của repo + `G7_DEFENSE` trong Execution Plan hiện hành.
+
+## Quy tắc điều phối
+
+Khi có mâu thuẫn: yêu cầu trực tiếp hiện tại > HUIT/đề cương > quyết định canonical hiện hành > evidence đã xác minh > quy trình repo > author voice. Mọi thay đổi scope hoặc mở lại artifact LOCKED phải qua `CHANGE_CONTROL.md`.
