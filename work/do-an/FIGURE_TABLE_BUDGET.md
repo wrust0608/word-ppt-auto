@@ -4,7 +4,7 @@ Trạng thái: X3_REVIEW_PENDING
 
 ## Main body target
 - Ch2: 3–5 hình, 3–5 bảng.
-- Ch3: 10–15 hình canonical, 2–4 bảng.
+- Ch3: 8–12 hình canonical, 2–4 bảng.
 - Ch4: 0–2 hình, 3–5 bảng.
 
 ## Quy tắc
