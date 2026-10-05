@@ -38,6 +38,8 @@ Trạng thái hợp lệ: `CANDIDATE`, `INGESTED`, `VERIFIED`, `REJECTED`, `RECH
 
 | S031 | VERIFIED | Microsoft | n.d. | SMB 3.1.1 Pre-authentication integrity in Windows 10 | Archived official technical article | https://learn.microsoft.com/en-us/archive/blogs/openspecification/smb-3-1-1-pre-authentication-integrity-in-windows-10 | NO | Summary; Overview; Pre-auth integrity hash, SHA-512; guest/anonymous exception; đọc gốc 2026-10-04 | Cao | Giải thích giá trị băm trong tạo khóa và giới hạn phiên; chưa nhập notebook |
 
+| S032 | VERIFIED | Microsoft Support | 2017 | How to verify that MS17-010 is installed | Official Support / Verification Guide | https://support.microsoft.com/en-us/security/how-to-verify-that-ms17-010-is-installed | NO | Method 1 + Method 2: Windows 8.1 / Windows Server 2012 R2; KB4012213/KB4012216; minimum updated srv.sys 6.3.9600.18604; PowerShell/file-version verification | Rất cao | Xác minh MS17-010 bằng KB/file version; ngưỡng srv.sys cho Windows Server 2012 R2 |
+
 ## Nguồn bị loại
 
 | Source ID | Lý do loại | Luận điểm bị ảnh hưởng |
