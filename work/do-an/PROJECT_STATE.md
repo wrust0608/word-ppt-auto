@@ -464,3 +464,39 @@
 ### DEC-40 evidence ingest addendum
 - Added `work/do-an/evidence/ALL_2026_10_06/CANONICAL_NMAP_TEXT_OUTPUTS.md` containing the canonical human-readable `.nmap` outputs for Scenario 1, Scenario 2, Case B and Case C.
 - Future Chapter 3 analysis must use this repo-local raw snapshot plus the SHA-bound evidence map before consulting any summary prose.
+
+
+## DEC-41 — ALL(1).zip evidence layer R2 forensic audit completed
+
+- Ngày: 2026-10-06.
+- User requested re-review to ensure the normalized evidence layer is logically coherent and as accurate as the source package permits.
+- R2 audit performed directly against source ZIP bytes, not only the extracted directory.
+- Source archive: `ALL(1).zip`, 28,547,199 bytes, SHA-256 `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`.
+- Full manifest validation: **174/174 files PASS**, 0 size mismatch, 0 SHA-256 mismatch, 0 missing/extra path.
+- Full manifest committed at `work/do-an/evidence/ALL_2026_10_06/FULL_ARCHIVE_MANIFEST_ALL_2026_10_06.csv`.
+- R2 classification rebuilt over all 174 files; legacy X1 counts are superseded.
+- All 13 canonical Nmap scan groups contain `.nmap/.xml/.gnmap`; Nmap argv agrees across all three formats: **13/13 PASS**.
+- Command provenance is now split into:
+  - operator command from manifest/screenshot;
+  - Nmap-recorded argv from raw.
+  `sudo` and Nmap's recorded `--privileged` are no longer conflated.
+- Exact archive paths replace abbreviated `...` paths in the canonical evidence map.
+- Direct-vs-secondary Case C grading corrected:
+  - direct screenshot: `pfil_member=1`, `pfil_bridge=0`;
+  - `pfil_onlyip=1` is final-manifest/closure supported, not screenshot-proven.
+- Canonical visual/raw cross-checks passed for Scenario 2 MS17-010, Case B before/action/after + protocol retest, Case C NSE01/NSE04, Windows `srv.sys`, and pfSense interface/rule/order configuration.
+- **One bounded unresolved conflict was discovered and preserved**:
+  - `pfSense_10_Block_Log_CANONICAL.png` directly shows blocked TCP SYN from `.56.10` to `.56.20:139/445` on CASE_C_KALI;
+  - visible Rule label is `CASE C baseline pass Kali to Windows (100000104)`;
+  - manifest/closure claims `CASE C - Block SMB Kali to Windows (1000000104)`.
+  - Therefore the allowed canonical claim is that matching SMB SYN traffic was blocked in the pfSense path; exact named-rule attribution is NOT considered proven.
+- `CLAIM_MATRIX_2_4.md`, `CHAPTERS_2_4_EVIDENCE_MAP.md`, `EVIDENCE_CONFLICT_REPORT.md`, `EVIDENCE_REGISTER.md`, and `EXPERIMENTAL_TRUTH_MATRIX.md` were reconciled to this bound.
+- New audit artifacts:
+  - `EVIDENCE_AUDIT_R2_ALL_2026_10_06.md`
+  - `COMMAND_LINEAGE_MATRIX.md`
+  - `FULL_ARCHIVE_MANIFEST_ALL_2026_10_06.csv`
+- Legacy `CANONICAL_EVIDENCE_SHA256.txt` is retained only for X1 history and explicitly marked superseded as the complete manifest.
+- Evidence-layer status: `AUDITED_R2_WITH_ONE_BOUNDED_CONFLICT`.
+- This conflict does not invalidate Scenario 1, Scenario 2, Case B, or the observed Case C filtering result; it limits only the exact rule-name attribution of the firewall-log rows.
+- Chapter 2 remains reopened for product-aligned redesign. CP5-USER remains PENDING.
+- Chapter 3/X6 remains BLOCKED until the user explicitly approves the revised Chapter 2.
