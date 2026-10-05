@@ -233,3 +233,16 @@
 - Execution Plan chuyển sang `ACTIVE / X4_X5_READY_AFTER_X3B_APPROVAL`.
 - Chương 2 cũ được coi là historical draft; X5 phải viết lại từ contract canonical.
 - Chưa cho phép Chương 3/4 prose trước khi Chương 2 đi qua review riêng; X6/X7 vẫn theo gate.
+
+
+## DEC-27 — Cổng người dùng bắt buộc sau khi khóa kỹ thuật Chương 2
+
+- Ngày: 2026-10-05.
+- Quyết định trực tiếp của người dùng: sau khi reviewer khóa Chương 2 về mặt kỹ thuật/academic, người dùng sẽ **tự xem và đánh giá trực tiếp** trước khi cho phép tiếp tục.
+- Tách X5 thành:
+  - `CP5-TECH`: reviewer external xác nhận Chương 2 đạt chuẩn kỹ thuật/academic, >=95/100, 0 blocker.
+  - `CP5-USER`: người dùng trực tiếp đọc bản locked candidate và ra quyết định duyệt/chỉnh.
+- `CP5-TECH` **không đồng nghĩa final approval**.
+- Không được bắt đầu X6/Chương 3 khi `CP5-USER` chưa PASS.
+- Nếu người dùng yêu cầu chỉnh sau khi đọc, reopen X5 qua change-control nhưng chỉ sửa phạm vi được yêu cầu; không tự mở rộng rewrite.
+- Sau CP5-TECH, nhiệm vụ của reviewer là dừng và trình bản Chương 2 cùng QA summary cho người dùng, không tự động phát prompt X6.
