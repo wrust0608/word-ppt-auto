@@ -1,6 +1,6 @@
 # FIGURE / TABLE BUDGET — PROPOSED
 
-Trạng thái: X3_REVIEW_PENDING
+Trạng thái: `LOCKED_CANONICAL / USER_APPROVED_2026_10_05`
 
 ## Main body target
 - Ch2: 3–5 hình, 3–5 bảng.
