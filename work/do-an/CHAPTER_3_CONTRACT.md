@@ -10,6 +10,6 @@ Mandatory rule: 100% result claims phải trace tới Evidence ID.
 
 Exclude: Case A như canonical result; RCE/SYSTEM/Metasploit success; output từ historical report không có raw canonical; troubleshooting.
 
-Required visuals: Scenario 1 3–4 hình; Scenario 2 3–4 hình; Case B 3 hình; Case C 4 hình tối đa; summary matrix 1–2 bảng.
+Required visuals: tổng 8–12 hình chính. Scenario 1 ưu tiên 2–3 hình; Scenario 2 2–3 hình; Case B khoảng 2 hình; Case C 3–4 hình. Raw/troubleshooting/ảnh lặp chuyển phụ lục. Summary matrix 1–2 bảng.
 
 Target length: 4,500–6,000 words; chất lượng evidence quan trọng hơn số từ.
