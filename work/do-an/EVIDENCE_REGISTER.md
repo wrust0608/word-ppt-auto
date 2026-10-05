@@ -193,3 +193,25 @@ Chapter structure must be designed independently. After structure is approved:
 - Chapter 4 compares only verified states.
 
 No Chapter 3 prose is permitted before CP5-USER approval of revised Chapter 2.
+
+
+## 11. R3 final evidence lock
+
+Final audit:
+`work/do-an/evidence/ALL_2026_10_06/EVIDENCE_AUDIT_R3_FINAL_LOCK.md`
+
+Cross-layer/timebase policy:
+`work/do-an/evidence/ALL_2026_10_06/TIMEBASE_AND_CROSS_LAYER_LOCKS.md`
+
+Quality state:
+`HIGH_ASSURANCE / TRACEABLE / BOUNDED_UNCERTAINTY`
+
+### Additional locks
+- Cross-system timestamp strings are not a single authenticated timeline.
+- SMB signing local configuration flags and remote Nmap observation are separate evidence statements.
+- Scenario 1 B2 host `.56.100` is unidentified.
+- Presence of a host-side NatNetwork-Lab does not imply Kali/Windows had NAT; final pre-demo VM NIC state has precedence.
+- Microsoft patch mapping/version-threshold claims must be cited to official Microsoft sources; archive mapping text is not external authority.
+- Case C log proves blocked matching traffic but not exact named-rule attribution because the visible Rule label conflicts with manifest/closure.
+
+Future agents must read R3 final audit before this register if a wording conflict exists.
