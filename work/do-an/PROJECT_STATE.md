@@ -417,3 +417,17 @@
 - Remaining items: tighten SMBv1 inference boundary; correct PTIT TL03 handle to HVCNBCVT/3493; make Case A table label update-neutral; correct before/after retest wording; remove small residual jargon/self-evaluative prose.
 - X5 OPEN only for final micro-patch.
 - CP5-USER PENDING; X6 BLOCKED.
+
+
+## DEC-39 — Demo-style R4 passes final external review; ready for user reading
+
+- Ngày: 2026-10-06.
+- Candidate verified: `38057dc2c9c35fce593d5a784d6df8ad9465282e`.
+- External review: `X5_DEMO_STYLE_EXTERNAL_REVIEW_R4.md`.
+- Score: **96/100 — PASS**.
+- Blockers: **0**.
+- Demo-style structure **7 H2 / 20 H3 LOCKED**.
+- Candidate status: `CHAPTER_2_DEMO_STYLE_READY_FOR_USER_REVIEW`.
+- X5 is no longer open for agent polishing before user reading.
+- CP5-USER remains PENDING.
+- X6 remains BLOCKED until explicit user approval of Chapter 2.
