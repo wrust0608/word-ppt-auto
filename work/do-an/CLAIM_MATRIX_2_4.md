@@ -1,6 +1,6 @@
 # CLAIM MATRIX 2–4 — PROPOSED
 
-Trạng thái: X2_PROPOSED / NOT_LOCKED
+Trạng thái: `LOCKED_CANONICAL_FOR_CHAPTERS_2_4`
 
 | Claim ID | Claim | Type | Evidence/Source | Support | Dùng ở | Boundary |
 |---|---|---|---|---|---|---|
