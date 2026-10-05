@@ -188,3 +188,16 @@
 - Không cho phép viết Chương 2–4 trước X3B `REPORT_OUTLINE_FREEZE`.
 - Phase hiện hành: **X0 — Requirement & Governance Reconciliation**.
 - X0 phải dùng đề cương chi tiết thực, HUIT profile, Truth Matrix và artifact repo; không suy ra rubric từ trí nhớ.
+
+
+## Execution progress — 2026-10-05
+
+- X0 Requirement & Governance Reconciliation: REVIEWER PASS 97.9/100.
+- X1 Canonical Evidence Governance: REVIEWER PASS 98.9/100.
+- X2 Research & Argument Realignment: REVIEWER PASS 99.0/100.
+- X3A WBS_FREEZE: PASS.
+- X3B REPORT_OUTLINE_FREEZE: REVIEWER PASS 98.3/100, **PENDING USER APPROVAL**.
+- Đã tạo Evidence Register, conflict report, negative-result policy, core SHA-256 manifest, argument/claim proposal, outline/evidence map, chapter contracts và figure/table budget.
+- Chưa sửa các artifact LOCKED cũ (PROJECT_PROFILE, RESEARCH_MAP, OUTLINE, CHAPTER_ARGUMENT).
+- Chưa viết prose Chương 2–4.
+- Bước kế tiếp hợp lệ sau khi người dùng duyệt X3B: mở Change Request để supersede artifact stale, khóa outline/contracts canonical, sau đó bắt đầu X4/X5 theo Execution Plan.
