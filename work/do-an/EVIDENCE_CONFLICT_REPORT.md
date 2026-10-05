@@ -1,7 +1,7 @@
 # EVIDENCE CONFLICT REPORT — X1
 
-Trạng thái: `X1_REVIEW_PENDING`
-Ngày: 2026-10-05
+Trạng thái: `AUDITED_R2_ACTIVE`
+Ngày cập nhật: 2026-10-06
 
 | ID | Mâu thuẫn | Nguồn lịch sử/thấp hơn | Nguồn canonical | Quyết định |
 |---|---|---|---|---|
@@ -15,5 +15,7 @@ Ngày: 2026-10-05
 | CF-08 | pfSense port screenshot duplicate | `pfSense_CaseC_09_NSE01_Ports.png` | `..._CANONICAL.png` + raw | Bản không `_CANONICAL` bị loại |
 | CF-09 | `filtered = safe/patched` | prose risk | pfSense raw + Windows local state | Chỉ kết luận reachability từ Kali bị lọc |
 | CF-10 | `SMBv1 disabled = patched` | prose risk | Case B local state + patch baseline | Cấm; patch state không đổi |
+
+| CF-11 | Case C canonical firewall log Rule label mâu thuẫn manifest/closure | screenshot hiển thị `CASE C baseline pass Kali to Windows (100000104)` | manifest/closure nói `CASE C - Block SMB Kali to Windows (1000000104)` | Giữ conflict: log chỉ chứng minh matching SMB SYN bị block trong pfSense path; exact named-rule attribution chưa resolve |
 
 Nếu phục hồi evidence Case A hoặc chạy lại demo sinh kết quả mới, phải mở Change Request và audit lineage trước khi thay canonical truth.
