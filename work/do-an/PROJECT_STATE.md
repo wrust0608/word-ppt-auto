@@ -431,3 +431,31 @@
 - X5 is no longer open for agent polishing before user reading.
 - CP5-USER remains PENDING.
 - X6 remains BLOCKED until explicit user approval of Chapter 2.
+
+
+## DEC-40 — ALL(1).zip normalized evidence ingest; Chapter 2 reopened for product-alignment review
+
+- Ngày: 2026-10-06.
+- User supplied packaged product archive `ALL(1).zip` and explicitly directed that it be treated as evidence only, not as a reusable report outline.
+- Archive audited independently: 174 extracted files, of which 168 are experimental/evidence artifacts and 6 are root reference/DOCX files.
+- Archive SHA-256: `dc63f3ba5ed514f0c6b5e947474baca712c15a4c08c42b2228e421512cb04ff3`.
+- Normalized evidence layer added under `work/do-an/evidence/ALL_2026_10_06/`:
+  - `EVIDENCE_INGEST_ALL_2026_10_06.md`
+  - `CANONICAL_COMMANDS_FROM_ALL_ZIP.md`
+  - `EVIDENCE_USE_POLICY_ALL_ZIP.md`
+  - `CANONICAL_EVIDENCE_MAP_ALL_ZIP.md`
+  - `PRIMARY_EVIDENCE_EXTRACTS.md`
+- `EVIDENCE_REGISTER.md` and `EXPERIMENTAL_TRUTH_MATRIX.md` updated to point to the normalized ingest.
+- Key corrections locked from source product:
+  - Scenario 1 exact command flags restored from raw output; earlier prose-added `-Pn` is not part of the executed Scenario 1 commands.
+  - Scenario 2 exact command lineage includes `--privileged` for NSE-SMB-02/03/04 as recorded in raw headers.
+  - Case C has a distinct VirtualBox topology with two Internal Networks plus separate pfSense management plane; it is not simply the baseline Host-Only link with a firewall inserted.
+  - VirtualBox exact installed revision supported by later evidence is `7.2.20r175154`; generic report version may remain 7.2.20.
+  - `Kali_Baseline.txt` is historical pre-Nmap state, not final demo baseline.
+  - Final `Before Demo` snapshots were created after the pre-demo audit; chronology is preserved.
+  - Case A patching is not a completed canonical experiment in this package.
+  - Case C pre-repair/aborted/debug artifacts are excluded from canonical conclusions.
+- Previous R4 presentation pass remains useful as style reference only. Chapter 2 is reopened for product-alignment review against the normalized evidence package before CP5-USER.
+- CP5-USER: PENDING.
+- X6 / Chapter 3: BLOCKED until the user explicitly approves the revised Chapter 2.
+- No Chapter 3 prose may be drafted from summary files or historical reports; future Chapter 3 must bind claims to normalized raw/local evidence.
