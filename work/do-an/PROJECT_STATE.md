@@ -610,3 +610,22 @@
   - changing Chapter 2 content;
   - inventing new experiments/results.
 - X6 status: `PREPARATION_AUTHORIZED / PROSE_BLOCKED` until the staged evidence package is externally reviewed.
+
+
+## DEC-46 — X6 evidence-prep executor package created
+
+- Ngày: 2026-10-06.
+- Main now contains the user-approved locked `work/do-an/CHAPTER_2.md`.
+- Preparation branch created: `feature/x6-ch3-evidence-prep`.
+- Executor prompt:
+  `work/do-an/prompts/X6_FINALIZE_CH2_DOCX_AND_PREP_CH3_EVIDENCE.md`.
+- Required deliverables:
+  - `work/do-an/output/CHAPTER_2_FINAL.docx`;
+  - `work/do-an/output/CHAPTER_2_FINAL_DOCX_QA.md`;
+  - staged canonical Chapter 3 evidence;
+  - Chapter 3 evidence index;
+  - result matrix;
+  - figure plan;
+  - structure proposal.
+- Chapter 3 prose remains prohibited during this preparation task.
+- External review is required before drafting `CHAPTER_3.md`.
