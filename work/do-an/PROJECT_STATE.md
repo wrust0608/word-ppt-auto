@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `G0_CH3_GOVERNANCE_RECONCILIATION`.
+- Current gate: `X7A0_BASELINE_EVIDENCE_PRESENTATION_PLAN`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -24,11 +24,10 @@
 
 ### Current immediate sequence
 
-1. Finish G0 governance reconciliation.
-2. Build `feature/ch3-integration` containing current governance + X6 staged evidence.
-3. Open **X7A0 — 3.1 Baseline Evidence & Presentation Plan**.
-4. Review X7A0 before any 3.1 prose.
-5. Only after plan approval open X7A1 prose drafting.
+1. Execute **X7A0 — 3.1 Baseline Evidence & Presentation Plan** only.
+2. External-review the plan before any 3.1 prose.
+3. After plan approval, open X7A1 prose drafting from the approved integration state.
+4. After 3.1 user approval, lock numbering and integrate before opening X7B0.
 
 ### Current read order for any new agent
 
@@ -782,3 +781,17 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   7. figure/table numbering lock across isolated sections not yet defined.
 - Recommended next action: complete governance reconciliation G0, then re-open X7A.
 - No Chapter 3 prose should be drafted until G0 passes.
+
+
+## DEC-52 — G0 Chapter 3 governance reconciliation PASS; X7A0 opened
+
+- Ngày: 2026-10-06.
+- G0 review: `work/do-an/G0_CH3_GOVERNANCE_RECONCILIATION_FINAL.md`.
+- G0 verdict: **PASS / blockers 0**.
+- Current Chapter 3 accumulation branch: `feature/ch3-integration`.
+- X6 evidence merged into integration at `85f28df4c4c2a5409a11c886b826a56c6736044b`.
+- Current isolated planning branch: `feature/x7a0-ch3-baseline-plan`.
+- X7A0 prompt: `work/do-an/prompts/X7A0_BASELINE_EVIDENCE_PRESENTATION_PLAN.md`.
+- X7A0 is **plan-only**: figure selection + presentation plan + claim-evidence map + self-review.
+- 3.1 prose remains BLOCKED until X7A0 external review.
+- Scenario 1/2, Case B/C, synthesis and Chapter 4 remain BLOCKED.
