@@ -1,5 +1,22 @@
 # Bàn giao dự án luận văn
 
+> **CURRENT OVERRIDE — 2026-10-06**
+>
+> Mọi hướng dẫn bàn giao 2026-10-04 ở phần dưới là lịch sử nếu mâu thuẫn với trạng thái mới.
+>
+> Điểm bắt đầu hiện hành cho agent:
+> 1. `work/do-an/PROJECT_STATE.md` — đọc **Current State Summary 2026-10-06** ở đầu file.
+> 2. `work/do-an/CHAPTER_3_CONTRACT.md`.
+> 3. `work/do-an/CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`.
+> 4. `work/do-an/CHAPTER_3_SECTION_EVIDENCE_MAP.md`.
+> 5. `work/do-an/CHAPTER_3_NUMBERING_LEDGER.md`.
+> 6. Artifact/prompt của phase hiện hành.
+>
+> Chương 2 đã USER APPROVED và final DOCX đã PASS. X6 evidence-prep đã PASS. Chương 3 dùng sectioned workflow; prompt monolithic X7 cũ không được chạy. X7A đang/đã chờ G0 governance reconciliation theo DEC-51.
+>
+> Nếu nội dung phía dưới yêu cầu quay lại duyệt giọng, coi demo data chưa có, hoặc tiếp tục roadmap 2–6 như current work, đó là trạng thái lịch sử.
+
+
 > Cập nhật mới nhất 2026-10-04: sau phản hồi bản báo cáo thiếu chiều sâu, đã viết lại cơ chế và lập luận trong CHAPTER_1/2; chi tiết và ánh xạ citation ở work/do-an/DEPTH_REVIEW_2026_10_04.md. Thống kê các lượt trước phía dưới là lịch sử; PROJECT_STATE.md có trạng thái hiện hành. Giọng đã chốt, không yêu cầu duyệt lại. Chương sửa chưa duyệt, Word chưa dựng lại.
 
 > Giọng tác giả: DEC-23 bổ sung mục tiêu và 13 nguyên tắc về cách tư duy, lựa chọn kỹ thuật, dữ liệu cụ thể và diễn đạt theo nội dung; đã đồng bộ AUTHOR_VOICE.md và mẫu hồ sơ. Không ép khuôn đoạn, độ dài hoặc nhịp câu.
