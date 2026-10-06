@@ -25,7 +25,10 @@ git status --short
 git rev-parse HEAD
 ```
 
-Then confirm the branch contains the current integration synchronization commit supplied by the repository after G0/R1 review.
+Current reviewer-cleaned R2 starting HEAD:
+`668cc5d697b98cdccd26707289bef4944f9ec320`
+
+Record this as `R2_BASE_SHA` before editing.
 
 Do not trust the R1 handoff SHA. The R1 handoff SHA was incorrect.
 
@@ -348,7 +351,7 @@ R2:
 - do not touch unrelated files.
 
 At completion:
-`git diff --name-only <R1_HEAD>..HEAD`
+`git diff --name-only 668cc5d697b98cdccd26707289bef4944f9ec320..HEAD`
 must show only the four allowed X7A0 planning artifacts.
 
 ## 16. QA
