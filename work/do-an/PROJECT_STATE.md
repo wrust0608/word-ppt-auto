@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `WR1_PASS_WAITING_FOR_USER_APPROVAL`.
+- Current gate: `RG1_R2_CORRECTION_REQUIRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1649,3 +1649,16 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   `WR1_PASS_WAITING_FOR_USER_APPROVAL`.
 - WR2 remains BLOCKED until explicit WR1 user approval.
 - X7D1 remains BLOCKED until both WR1 and WR2 are approved.
+
+
+## DEC-88 — Report-wide enrichment RG1 R1 requires correction
+
+- Ngày: 2026-10-06.
+- RG1 R1 candidate: `4cff2beb0e3823112d60e08d21f89773783ccf81`.
+- Review verdict: **84/100 — REVISE_BLOCKING**.
+- Review artifact lives on `feature/rg1-ch1-argument-realignment`:
+  `work/do-an/RG1_CHAPTER1_EXTERNAL_REVIEW_R1.md`.
+- The four-axis Chapter 1 architecture remains accepted.
+- R2 is required for technical overclaim and source-provenance corrections.
+- WR1 remains a layout snapshot only and is not user-approved final editorial content.
+- RG2 / Chapter 2 enrichment remains BLOCKED until RG1 final external PASS + user approval.
