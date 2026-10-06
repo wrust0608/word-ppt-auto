@@ -2,6 +2,7 @@
 
 - Trạng thái: `LOCKED`
 - Ngày hiệu chỉnh theo hệ thống văn phong mới: 2026-10-04
+- **Roadmap note 2026-10-07:** Các ví dụ kỹ thuật/lựa chọn lịch sử ở phần dưới chỉ dùng hiệu chỉnh giọng, không phải nguồn truth hay roadmap. Khi xung đột, `EXPERIMENTAL_TRUTH_MATRIX.md`, Chapter 3 locks và `ROADMAP_CURRENT_CH2_CH3_2026_10_07.md` có ưu tiên cao hơn.
 - Phạm vi khóa: quy ước diễn đạt và dấu ấn của công trình; mọi khẳng định kỹ thuật vẫn phải được kiểm chứng bằng nguồn.
 - Nguyên tắc bảo toàn: hồ sơ này không được phép ghi đè quy định HUIT, quyết định dự án, dữ liệu thực nghiệm hoặc metadata nguồn.
 
