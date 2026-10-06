@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `WR1_DEMO1_WORD_REVIEW_REQUIRED`.
+- Current gate: `X7D0_CASEB_PLAN_IN_PROGRESS_WORD_REVIEW_DEFERRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1505,3 +1505,19 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7D0 branch already exists but is **PAUSED_BY_USER_WORD_REVIEW_GATE**.
 - X7D0 must not execute until WR1 and WR2 both pass independent Word review and receive user approval.
 - Chapter 4 must not open until WR3 passes independent full-document review + user approval.
+
+
+## DEC-81 — Finish already-running X7D0 before starting Word checkpoints
+
+- Ngày: 2026-10-06.
+- User clarified that X7D0 is already running in Antigravity and must be completed/reviewed/locked before starting the new Word-review workflow, to avoid parallel gates and context confusion.
+- Therefore:
+  1. the current in-progress X7D0 Case B plan continues unchanged on `feature/x7d0-ch3-caseb-plan`;
+  2. no WR1/WR2 executor prompt is to be sent while X7D0 is running;
+  3. after X7D0 external review + explicit user approval, WR1 starts;
+  4. after WR1 approval, WR2 starts;
+  5. only after WR1 + WR2 approval may X7D1 Section 3.4 prose open.
+- The previously prepared branch `feature/wr1-demo1-word-review` is **DORMANT / DO NOT EXECUTE**.
+- A fresh WR1 branch must be created later from the integration HEAD that includes the user-approved X7D0 plan lock.
+- This sequencing change does not alter the content scope of WR1, WR2 or WR3.
+- X7E / Case C and Chapter 4 remain blocked.

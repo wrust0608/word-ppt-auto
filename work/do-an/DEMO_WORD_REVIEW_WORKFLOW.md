@@ -70,23 +70,30 @@ Purpose:
 
 ## 3. Gate order
 
+Because X7D0 Case B planning had already been dispatched to the executor before the Word-checkpoint requirement was added, that in-progress task is allowed to finish first. Do not interrupt or restart it.
+
 Current order becomes:
 
-1. WR1 Demo 1 DOCX build
-2. independent Word review
-3. user approval
-4. WR2 Demo 2 DOCX build
-5. independent Word review
-6. user approval
-7. resume X7D0 Case B planning
-8. complete X7D/X7E/X7F
-9. assemble complete Chapter 3
-10. WR3 Chapter 2 + Chapter 3 full DOCX build
-11. independent full-document review
-12. user approval
-13. only then proceed to Chapter 4
+1. finish the already-running X7D0 Case B Evidence & Presentation Plan;
+2. independent X7D0 external review;
+3. user approval / lock of X7D0;
+4. WR1 Demo 1 DOCX build;
+5. independent WR1 Word review;
+6. user approval of WR1;
+7. WR2 Demo 2 DOCX build;
+8. independent WR2 Word review;
+9. user approval of WR2;
+10. only then open X7D1 Section 3.4 prose;
+11. complete X7D1 / X7E / X7F;
+12. assemble complete Chapter 3;
+13. WR3 Chapter 2 + Chapter 3 full DOCX build;
+14. independent full-document review;
+15. user approval;
+16. only then proceed to Chapter 4.
 
-X7D0 may already exist as a prepared branch, but execution is paused until WR1 and WR2 are approved.
+The already-created `feature/wr1-demo1-word-review` branch is a dormant preparation artifact and must not be executed. After X7D0 receives user approval, create a fresh WR1 branch from the then-current integration HEAD so the review workflow has one unambiguous lineage.
+
+This exception applies only to the already-running X7D0 plan task. X7D1 prose remains blocked by WR1 + WR2 approval.
 
 ## 4. DOCX content rule
 
