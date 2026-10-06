@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7D0_CASEB_PLAN_IN_PROGRESS_WORD_REVIEW_DEFERRED`.
+- Current gate: `X7D0_R2_CORRECTION_REQUIRED_WORD_REVIEW_DEFERRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1521,3 +1521,33 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - A fresh WR1 branch must be created later from the integration HEAD that includes the user-approved X7D0 plan lock.
 - This sequencing change does not alter the content scope of WR1, WR2 or WR3.
 - X7E / Case C and Chapter 4 remain blocked.
+
+
+## DEC-82 — X7D0 Case B plan R1 requires bounded correction before Word checkpoints
+
+- Ngày: 2026-10-06.
+- Executor R1 candidate:
+  `90f821a4080639fd3e494a153a82359873585716`.
+- Independent external review:
+  `work/do-an/X7D0_CASEB_PLAN_EXTERNAL_REVIEW_R1.md` on the X7D0 branch.
+- Score: **88/100 — REVISE_BLOCKING**.
+- Main presentation geometry remains accepted:
+  - 2 H3;
+  - 1 Bảng 3.5;
+  - Hình 3.7 from After Local;
+  - Hình 3.8 from protocol retest;
+  - Before/Action dropped;
+  - combined NSE04 optional.
+- Required corrections include:
+  - remove unsupported Case B retest SYN-ACK;
+  - narrow dialect wording to values recorded by `smb-protocols`;
+  - remove no-interruption inference from point-in-time LanmanServer states;
+  - keep local `EnableSMB2Protocol` independent from remote dialect observation;
+  - correct UNPATCHED evidence provenance;
+  - restore bounded UNKNOWN wording;
+  - improve Hình 3.7/3.8 crop proposals;
+  - remove speculative/generalized rhetoric.
+- R2 prompt:
+  `work/do-an/prompts/X7D0_R2_CORRECT_CASEB_PLAN.md`.
+- WR1 / WR2 remain deferred until X7D0 receives final external PASS + explicit user approval.
+- X7D1 remains blocked until WR1 + WR2 are later approved.
