@@ -12,7 +12,7 @@
 > 5. `work/do-an/CHAPTER_3_NUMBERING_LEDGER.md`.
 > 6. Artifact/prompt của phase hiện hành.
 >
-> Chương 2 đã USER APPROVED và final DOCX đã PASS. X6 evidence-prep đã PASS. Chương 3 dùng sectioned workflow; prompt monolithic X7 cũ không được chạy. X7A0 baseline presentation plan đã external PASS và được user APPROVED. Numbering Bảng 3.1–3.2 / Hình 3.1–3.3 đã khóa. Current phase = X7A1 viết riêng Section 3.1; X7B vẫn blocked.
+> Chương 2 đã USER APPROVED và final DOCX đã PASS. X6 evidence-prep đã PASS. Chương 3 dùng sectioned workflow; prompt monolithic X7 cũ không được chạy. X7A0 baseline presentation plan đã external PASS và được user APPROVED. Numbering Bảng 3.1–3.2 / Hình 3.1–3.3 đã khóa. Current phase = X7A1 viết riêng Section 3.1; X7B vẫn blocked. Current work branch: `feature/x7a1-ch3-baseline-draft`.
 >
 > Nếu nội dung phía dưới yêu cầu quay lại duyệt giọng, coi demo data chưa có, hoặc tiếp tục roadmap 2–6 như current work, đó là trạng thái lịch sử.
 
