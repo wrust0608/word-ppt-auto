@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7E0_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
+- Current gate: `X7E1_CASEC_PROSE_NEXT`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1827,3 +1827,24 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Verdict: **99/100 — PASS**.
 - Plan is NOT integrated yet.
 - X7E1 / Section 3.5 prose remains BLOCKED until explicit user approval.
+
+
+## DEC-100 — User approves Case C presentation plan
+
+- Ngày: 2026-10-07.
+- User explicitly approved ("chốt") the X7E0 Case C plan.
+- User approval lock:
+  `work/do-an/X7E0_CASEC_PLAN_USER_APPROVAL_LOCK.md`.
+- Final review:
+  `work/do-an/X7E0_CASEC_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- X7E0 plan is now **USER APPROVED / LOCKED**.
+- Locked presentation:
+  - Bảng 3.6;
+  - Hình 3.9–3.11;
+  - bridge and NSE04 screenshots remain OPTIONAL/DROP in the standard layout.
+- Next numbering:
+  - Bảng 3.7;
+  - Hình 3.12.
+- Only approved X7E0 plan/review/approval artifacts are integrated.
+- Next authorized work: X7E1 — create approved crops and write Section 3.5 prose.
+- No Sections 3.6–3.7, Chapter 3 assembly, Word, Chapter 2 rewrite, or Chapter 4 work yet.

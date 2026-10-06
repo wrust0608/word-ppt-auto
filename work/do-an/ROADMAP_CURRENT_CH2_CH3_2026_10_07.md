@@ -22,15 +22,15 @@ Locked:
 - 3.2 Scenario 1;
 - 3.3 Scenario 2;
 - 3.4 Case B;
-- Bảng 3.1–3.5;
-- Hình 3.1–3.8.
+- Bảng 3.1–3.6;
+- Hình 3.1–3.11.
 
 Next numbering:
-- Bảng 3.6;
-- Hình 3.9.
+- Bảng 3.7;
+- Hình 3.12.
 
 Not complete:
-- 3.5 Case C plan/prose;
+- 3.5 Case C prose;
 - 3.6 comparison;
 - 3.7 chapter conclusion;
 - assembled Chapter 3;
@@ -62,11 +62,11 @@ Gate:
 external review -> user approval -> integrate.
 
 ### STEP 2 — X7E0/X7E1: Section 3.5 Case C
-X7E0:
-- inspect all Case C evidence;
-- select minimum useful tables/figures;
-- handle the rule-label conflict explicitly;
-- review/user approve the plan.
+X7E0 — COMPLETE / USER APPROVED:
+- all Case C evidence inspected;
+- 1 Bảng 3.6 + 3 main figures selected;
+- rule-label conflict explicitly bounded;
+- plan externally reviewed and user-approved.
 
 X7E1:
 - write the result section from the approved plan;
@@ -190,6 +190,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7E0 — Section 3.5 Case C evidence/presentation plan`
+`X7E1 — create final Case C crops and write Section 3.5 prose`
 
 Nothing else is authorized in parallel.
