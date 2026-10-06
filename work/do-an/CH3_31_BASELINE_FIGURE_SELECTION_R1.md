@@ -1,12 +1,13 @@
 # BÁO CÁO LỰA CHỌN VÀ ĐÁNH GIÁ HÌNH ẢNH MỤC 3.1 BASELINE (CH3_31_BASELINE_FIGURE_SELECTION_R1)
 
-- **Trạng thái:** `PLAN_LOCKED_FOR_EXTERNAL_REVIEW`
-- **Pha thực hiện:** `X7A0 — Baseline Evidence & Presentation Plan`
+- **Trạng thái:** `R2_READY_FOR_FINAL_EXTERNAL_REVIEW`
+- **Pha thực hiện:** `X7A0 R2 — Correct Baseline Evidence & Presentation Plan`
 - **Phạm vi thẩm tra:** Toàn bộ 13 tệp ảnh chụp màn hình đã stage tại `work/do-an/chapter3/evidence/baseline/`
 - **Nguyên tắc cốt lõi:**
   1. **Chống lạm dụng ảnh chụp màn hình (Anti-Screenshot Spam):** Chỉ giữ ảnh (`KEEP`) khi và chỉ khi ảnh đó trực tiếp chứng minh một thuộc tính kỹ thuật có giá trị mà bảng tổng hợp hoặc văn xuôi không thể truyền tải một cách thuyết phục bằng chứng thị giác.
   2. **Bảo tồn tính toàn vẹn bằng chứng:** Tuyệt đối không chỉnh sửa tệp ảnh gốc. Mọi đề xuất cắt cúp (`crop`) chỉ nhằm tối ưu hóa việc trình bày bố cục bản in, giữ nguyên ngữ cảnh kỹ thuật trọng yếu.
-  3. **Ưu tiên bảng biểu:** Dữ liệu cấu hình hệ điều hành, tham số mạng và danh mục bản vá được ưu tiên tuyệt đối đưa vào Bảng 3.1.
+  3. **Ưu tiên bảng biểu:** Dữ liệu cấu hình hệ điều hành, tham số mạng và danh mục bản vá được ưu tiên đưa vào Bảng 3.1 và Bảng 3.2.
+  4. **Chính sách cắt cúp không khóa tọa độ cứng (Non-rigid crop policy):** Trong pha lập kế hoạch R2, không khóa cứng tọa độ pixel; chỉ mô tả vùng thông tin cần giữ, vùng giao diện thừa có thể loại bỏ, ngữ cảnh bắt buộc bảo tồn và mục đích trình bày.
 
 ---
 
@@ -16,52 +17,77 @@
 |---|---|---|---|---|---|---|---|
 | `Kali_PreDemo_01_Network_Tools.png` | Cửa sổ terminal Kali: `ip address` (192.168.56.10/24), `ip route` (192.168.56.0/24), `nmap --version` (7.99), tạo thư mục `evidence/nse-smb` | Không. Đây là thông số môi trường cơ bản của trạm kiểm thử | Có. Bảng 3.1 trình bày IP, routing và phiên bản Nmap gọn gàng hơn | Tốt (1280x800), nhưng nền desktop xanh chiếm phần lớn diện tích | Có (cắt cửa sổ terminal nếu dùng) | **DROP** | Loại bỏ. Toàn bộ tham số mạng Kali được tích hợp trọn vẹn vào Bảng 3.1. |
 | `Kali_PreDemo_02_NSE_Scripts.png` | Trợ giúp tĩnh của Nmap (`nmap --script-help`) cho `smb-protocols` và `smb-vuln-ms17-010` | Không. Chỉ là văn bản tài liệu trợ giúp có sẵn của Nmap | Có. Trích dẫn tài liệu chuẩn hoặc ghi chú nguồn | Tốt, chữ sắc nét | Không | **DROP** | Loại bỏ. Không phản ánh trạng thái thực nghiệm của môi trường lab. |
-| `Kali_to_Windows_Connectivity.png` | Lệnh `ping -c 2 192.168.56.20` bị mất gói 100% (do Windows Firewall chặn ICMP), kèm `ip neigh` xác nhận ARP `08:00:27:55:71:ce REACHABLE` | Có một phần. Chứng minh tính thông mạng L2 thành công dù L3 ICMP bị chặn | Có. Bảng 3.1 có thể ghi nhận trạng thái kết nối mạng L2/L3 | Tốt, chữ rõ ràng | Có (cắt riêng cửa sổ dòng lệnh) | **OPTIONAL** | Ảnh dự phòng. Sử dụng nếu phản biện yêu cầu bằng chứng thị giác về việc kiểm tra thông mạng hai máy trước khi quét cổng. |
+| `Kali_to_Windows_Connectivity.png` | Kiểm tra kết nối từ Kali tới Windows: hai yêu cầu ICMP Echo không nhận được phản hồi (100% packet loss), kèm `ip neigh` xác nhận ARP `192.168.56.20 lladdr 08:00:27:55:71:ce REACHABLE` | Có một phần. Chứng minh trạng thái láng giềng ARP L2 là REACHABLE trong khi hai gói ICMP không có phản hồi | Có. Bảng 3.1 có thể ghi nhận hoặc lược bỏ để tập trung vào dữ liệu quét cổng | Tốt, chữ rõ ràng | Có (cắt riêng cửa sổ dòng lệnh) | **OPTIONAL** | Ảnh dự phòng. Giữ làm ảnh tùy chọn nếu cần minh chứng trạng thái láng giềng L2 giữa hai máy trước khi quét; không đưa vào kế hoạch chính để tránh gán nguyên nhân thiếu căn cứ. |
 | `Windows_Baseline_01_Winver.png` | Hộp thoại About Windows: Windows Server 2012 R2 Standard Evaluation, Version 6.3 (Build 9600) trên nền Server Manager | Không. Chỉ là hộp thoại nhận diện phiên bản hệ điều hành cơ bản | Có. Bảng 3.1 công bố phiên bản hệ điều hành và số Build chuẩn xác | Tốt, giao diện sắc nét | Có (cắt hộp thoại Winver) | **DROP** | Loại bỏ. Hộp thoại Windows cơ bản không cung cấp giá trị kỹ thuật sâu về an ninh. |
-| `Windows_Baseline_04_SMB_Service.png` | PowerShell: `Get-Service LanmanServer` hiển thị Name: LanmanServer, Status: Running | Không. Thông tin đơn lẻ, bị trùng lặp | Có. Hoàn toàn tích hợp vào một dòng của Bảng 3.1 | Kém. Cửa sổ hẹp, nhiều khoảng trống đen, cột StartType bị che khuất | Không | **DROP** | Loại bỏ. Bố cục kém và bị thay thế hoàn toàn bởi bảng tổng hợp. |
-| `Windows_Baseline_05_SMB_Features.png` | PowerShell: `Get-WindowsFeature FS-SMB1` hiển thị trạng thái `[X] Installed` | Không. Chỉ thể hiện một thuộc tính cài đặt tính năng | Có. Tích hợp vào Bảng 3.1 | Trung bình. Quá ít thông tin trên diện tích ảnh lớn | Không | **DROP** | Loại bỏ. Không đủ mật độ thông tin để giữ một hình riêng trong báo cáo. |
-| `Windows_Baseline_06_SMB_Config.png` | PowerShell: `Get-SmbServerConfiguration` hiển thị EnableSMB1Protocol=True, EnableSMB2Protocol=True, SecuritySignature=False | Không. Bị trùng lặp | Có. Tích hợp vào Bảng 3.1 | Trung bình. Cửa sổ đen chiếm diện tích lớn | Không | **DROP** | Loại bỏ. Trùng lặp hoàn toàn với dữ liệu cấu hình trong Bảng 3.1. |
-| `Windows_Baseline_07_Firewall.png` | PowerShell: Profiles Domain/Private/Public True, 4 luật File and Printer Sharing đầu tiên False | Không. Hiển thị bị cắt cụt tên luật hiển thị (DisplayName) | Có. Tích hợp vào Bảng 3.1 | Kém. Tên luật bị ẩn, không đủ thông tin kết luận | Không | **DROP** | Loại bỏ. Bị thay thế hoàn toàn bởi `Windows_FirewallPrep_04_Scope.png` và `Windows_PreDemo_02_Firewall.png`. |
-| `Windows_FirewallPrep_04_Scope.png` | PowerShell: Profiles Enabled=True, 16 luật File and Printer Sharing đều False, cổng 139 và 445 đang Listen | Có một phần. Chứng minh trạng thái cổng lắng nghe và luật mặc định bị tắt | Có. Bảng 3.1 trình bày mạch lạc hơn | Khá tốt. Nửa màn hình trái | Có (cắt cửa sổ PowerShell) | **OPTIONAL** | Ảnh dự phòng. Có thể dùng nếu cần minh chứng cục bộ về cổng 139/445 đang Listen trên Windows. |
-| `Windows_MS17010_01_SrvSysVersion.png` | PowerShell: 1) FileVersion String `6.3.9600.16384 (winblue_rtm.130821-1623)`; 2) Trích xuất phiên bản số `$vi.FileMajorPart...` = `6.3.9600.16421` | **CỰC KỲ CAO (ĐỘC BẢN)**. Trực tiếp minh chứng sự khác biệt kỹ thuật giữa chuỗi hiển thị và phiên bản số nhị phân của `srv.sys` | Bảng so sánh được số liệu, nhưng ảnh này là bằng chứng thị giác không thể thay thế cho câu hỏi nghiên cứu cốt lõi | Rất cao. Chữ trắng trên nền xanh PowerShell rất sắc nét, màn hình sạch, không bị popup rác | **CÓ**. Đề xuất cắt bỏ phần desktop trống bên phải, tập trung trọn vẹn vào cửa sổ PowerShell | **KEEP (ƯU TIÊN 1)** | **Hình 3.1 (Tạm thời)**. Minh chứng thuộc tính phiên bản driver `srv.sys` tại mốc xuất phát. |
-| `Windows_MS17010_02_Hotfix.png` | Giống ảnh 01 kèm thêm lệnh `Get-HotFix` hiển thị 6 bản vá từ 21/03/2014; có popup "Action Center" ở góc phải taskbar | Có. Hiển thị danh sách 6 hotfix trên hệ thống | Có. Danh sách 6 hotfix đưa vào Bảng 3.1 vừa khoa học vừa tránh được popup rác | Khá tốt, nhưng góc dưới phải có bong bóng Action Center làm giảm tính chỉn chu | Cần cắt bỏ thanh taskbar có popup | **OPTIONAL** | Ảnh dự phòng. Nếu phản biện yêu cầu ảnh chụp danh sách hotfix; ưu tiên đưa danh sách hotfix vào bảng biểu. |
-| `Windows_PreDemo_01_Network_SMB.png` | Hợp nhất kiểm toán toàn diện: IP Ethernet 192.168.56.20, routes, LanmanServer Running, FS-SMB1 Installed, SMB config, Listeners 139/445, và phiên bản số srv.sys 6.3.9600.16421 | Có. Kiểm toán tập trung toàn bộ cấu hình mạng và dịch vụ SMB cục bộ | Có. Bảng 3.1 tổng hợp toàn diện các tham số này | Khá tốt, nhưng chữ hơi nhỏ do dồn nhiều lệnh | Có (cắt riêng cửa sổ PowerShell) | **OPTIONAL** | Ảnh dự phòng. Minh chứng kiểm toán toàn diện cấu hình máy chủ trước demo nếu không dùng ảnh tường lửa riêng. |
-| `Windows_PreDemo_02_Firewall.png` | Cấu hình quy tắc tường lửa `ATTT Lab SMB 139-445`: Inbound Allow, TCP 139/445, RemoteAddress chỉ duy nhất `192.168.56.10`; Profiles True; 16 luật FPS False | **RẤT CAO**. Chứng minh cơ chế an ninh chủ động giới hạn phạm vi quét từ Kali, giải thích nguyên nhân cô lập lưu lượng | Bảng tóm tắt được, nhưng ảnh này có giá trị minh chứng thị giác thuyết phục về thiết kế an ninh lab | Rất cao. Các khối lệnh phân chia rõ ràng, không có khoảng trống thừa | **CÓ**. Đề xuất cắt bỏ phần desktop Server Manager trống bên phải | **KEEP (ƯU TIÊN 2)** | **Hình 3.2 (Tạm thời)**. Minh chứng cấu hình quy tắc tường lửa máy chủ kiểm soát phạm vi kết nối SMB. |
+| `Windows_Baseline_04_SMB_Service.png` | PowerShell: `Get-Service LanmanServer` hiển thị Name: LanmanServer, Status: Running | Không. Thông tin đơn lẻ, bị trùng lặp | Có. Hoàn toàn tích hợp vào Bảng 3.1 | Kém. Cửa sổ hẹp, nhiều khoảng trống đen, cột StartType bị che khuất | Không | **DROP** | Loại bỏ. Bố cục kém và bị thay thế hoàn toàn bởi ảnh kiểm toán tổng hợp `Windows_PreDemo_01_Network_SMB.png`. |
+| `Windows_Baseline_05_SMB_Features.png` | PowerShell: `Get-WindowsFeature FS-SMB1` hiển thị trạng thái `[X] Installed` | Không. Chỉ thể hiện một thuộc tính cài đặt tính năng | Có. Tích hợp vào Bảng 3.1 | Trung bình. Quá ít thông tin trên diện tích ảnh lớn | Không | **DROP** | Loại bỏ. Mật độ thông tin thấp, được tích hợp trong ảnh tổng hợp. |
+| `Windows_Baseline_06_SMB_Config.png` | PowerShell: `Get-SmbServerConfiguration` hiển thị EnableSMB1Protocol=True, EnableSMB2Protocol=True, SecuritySignature=False | Không. Bị trùng lặp | Có. Tích hợp vào Bảng 3.1 | Trung bình. Cửa sổ đen chiếm diện tích lớn | Không | **DROP** | Loại bỏ. Trùng lặp hoàn toàn với dữ liệu cấu hình trong Bảng 3.1 và ảnh tổng hợp. |
+| `Windows_Baseline_07_Firewall.png` | PowerShell: Profiles Domain/Private/Public True, 4 luật File and Printer Sharing đầu tiên False | Không. Hiển thị bị cắt cụt tên luật hiển thị (DisplayName) | Có. Tích hợp vào Bảng 3.1 | Kém. Tên luật bị ẩn, không đủ thông tin kết luận | Không | **DROP** | Loại bỏ. Bị thay thế hoàn toàn bởi `Windows_PreDemo_02_Firewall.png`. |
+| `Windows_FirewallPrep_04_Scope.png` | PowerShell: Profiles Enabled=True, 16 luật File and Printer Sharing đều False, cổng 139 và 445 đang Listen | Có một phần. Chứng minh trạng thái cổng lắng nghe và luật mặc định bị tắt | Có. Bảng 3.1 trình bày mạch lạc hơn | Khá tốt. Nửa màn hình trái | Có (cắt cửa sổ PowerShell) | **OPTIONAL** | Ảnh dự phòng. Có thể dùng nếu cần minh chứng bổ trợ về cổng 139/445 đang Listen cục bộ trên Windows. |
+| `Windows_MS17010_01_SrvSysVersion.png` | PowerShell: 1) FileVersion String `6.3.9600.16384 (winblue_rtm.130821-1623)`; 2) Trích xuất phiên bản số nhị phân `$vi.FileMajorPart...` = `6.3.9600.16421` | Cao. Minh chứng sự khác biệt kỹ thuật giữa chuỗi hiển thị và phiên bản số nhị phân của `srv.sys` | Có thể đối chiếu trong Bảng 3.2 | Rất cao. Chữ trắng trên nền xanh PowerShell rất sắc nét | Có | **OPTIONAL** | Ảnh dự phòng. Chuyển sang OPTIONAL vì ảnh `Windows_MS17010_02_Hotfix.png` (Hình 3.3) đã chứa toàn bộ thông tin phiên bản srv.sys này kèm thêm danh mục kiểm kê hotfix. |
+| `Windows_MS17010_02_Hotfix.png` | PowerShell: Chuỗi FileVersion hiển thị, trích xuất phiên bản số nhị phân `6.3.9600.16421`, và lệnh `Get-HotFix` hiển thị 6 bản vá hệ thống từ ngày 21/03/2014 | **CỰC KỲ CAO (HỢP NHẤT)**. Tập hợp đầy đủ cả thuộc tính phiên bản driver `srv.sys` và danh mục bản vá thực tế trên một màn hình duy nhất | Bảng 3.2 đối chiếu số liệu, nhưng ảnh này là bằng chứng thị giác trực tiếp nguyên gốc mạnh nhất cho trạng thái bản vá | Rất tốt. Cửa sổ PowerShell rõ ràng; thông báo Action Center ở góc phải taskbar có thể loại bỏ bằng crop | **CÓ** (cắt bỏ thanh taskbar) | **KEEP (ƯU TIÊN 3)** | **Hình 3.3 (Tạm thời)**. Minh chứng thuộc tính phiên bản driver `srv.sys` và danh mục bản vá ghi nhận trên máy chủ mục tiêu. |
+| `Windows_PreDemo_01_Network_SMB.png` | PowerShell: Hợp nhất kiểm toán toàn diện gồm IP Ethernet 192.168.56.20, routing, LanmanServer Running, FS-SMB1 Installed, cờ SMB server, cổng lắng nghe 139/445 và phiên bản số srv.sys 6.3.9600.16421 | **RẤT CAO (HỢP NHẤT)**. Cung cấp cái nhìn trực quan tổng thể về cấu hình mạng, dịch vụ chia sẻ tệp và các cổng đang lắng nghe cục bộ | Bảng 3.1 tổng hợp thông số, nhưng ảnh này là minh chứng trực tiếp không thể thiếu cho cấu hình dịch vụ trước thử nghiệm | Tốt. Cửa sổ hiển thị tuần tự các khối lệnh kiểm toán | **CÓ** (cắt bỏ phần desktop Server Manager trống) | **KEEP (ƯU TIÊN 1)** | **Hình 3.1 (Tạm thời)**. Minh chứng trạng thái mạng, dịch vụ SMB và các cổng lắng nghe trên máy chủ trước thực nghiệm. |
+| `Windows_PreDemo_02_Firewall.png` | PowerShell: Cấu hình quy tắc tường lửa tùy biến `ATTT Lab SMB 139-445` (Inbound Allow, TCP 139/445, RemoteAddress duy nhất `192.168.56.10`), 3 profile True, 16 luật chia sẻ tệp mặc định False | **RẤT CAO**. Chứng minh cơ chế kiểm soát chủ động giới hạn phạm vi quét từ trạm Kali, bảo đảm an toàn cho lab | Bảng 3.1 tóm tắt, nhưng ảnh này là bằng chứng thị giác thuyết phục nhất về thiết lập quy tắc tường lửa tùy biến | Rất cao. Các khối lệnh phân chia rõ ràng, không có khoảng trống thừa | **CÓ** (cắt bỏ phần Server Manager nền) | **KEEP (ƯU TIÊN 2)** | **Hình 3.2 (Tạm thời)**. Minh chứng cấu hình quy tắc tường lửa tùy biến kiểm soát phạm vi nguồn truy cập dịch vụ SMB. |
 
 ---
 
-## 2. Tổng Hợp Phân Loại Và Đề Xuất Bộ Hình Ảnh Cuối Cùng
+## 2. Tổng Hợp Phân Loại Và Đề Xuất Bộ Hình Ảnh R2
 
 ### 2.1. Thống Kê Phân Loại
 - **Tổng số ảnh đã thẩm tra:** 13 ảnh.
-- **Số lượng KEEP (Giữ lại):** 2 ảnh (`Windows_MS17010_01_SrvSysVersion.png`, `Windows_PreDemo_02_Firewall.png`).
-- **Số lượng OPTIONAL (Dự phòng):** 3 ảnh (`Kali_to_Windows_Connectivity.png`, `Windows_MS17010_02_Hotfix.png`, `Windows_PreDemo_01_Network_SMB.png`).
-- **Số lượng DROP (Loại bỏ):** 8 ảnh (`Kali_PreDemo_01`, `Kali_PreDemo_02`, `Windows_Baseline_01`, `Windows_Baseline_04`, `Windows_Baseline_05`, `Windows_Baseline_06`, `Windows_Baseline_07`, `Windows_FirewallPrep_04`).
+- **Số lượng KEEP (Giữ lại):** 3 ảnh (`Windows_PreDemo_01_Network_SMB.png`, `Windows_PreDemo_02_Firewall.png`, `Windows_MS17010_02_Hotfix.png`).
+- **Số lượng OPTIONAL (Dự phòng):** 3 ảnh (`Windows_MS17010_01_SrvSysVersion.png`, `Kali_to_Windows_Connectivity.png`, `Windows_FirewallPrep_04_Scope.png`).
+- **Số lượng DROP (Loại bỏ):** 7 ảnh (`Kali_PreDemo_01`, `Kali_PreDemo_02`, `Windows_Baseline_01`, `Windows_Baseline_04`, `Windows_Baseline_05`, `Windows_Baseline_06`, `Windows_Baseline_07`).
 
 ### 2.2. Đề Xuất Bộ Hình Ảnh Chính Thức Cho Mục 3.1 (Tentative Numbering)
 
 1. **Hình 3.1 (Tạm thời):**
-   - **Tệp nguồn:** `work/do-an/chapter3/evidence/baseline/Windows_MS17010_01_SrvSysVersion.png`
-   - **SHA-256 nguồn:** `2f8c1b7ce276919c72bb40a75fbeacdef81f2fa98695758df27f8772bdc149c8`
-   - **Chú thích đề xuất:** *Hình 3.1. Phiên bản hiển thị và phiên bản số của tệp srv.sys trên máy chủ Windows Server 2012 R2 trước thực nghiệm*
-   - **Vai trò chứng minh:** Xác nhận trực quan chuỗi FileVersion hiển thị `6.3.9600.16384` và phiên bản số nhị phân `6.3.9600.16421`. Kết luận trạng thái bản vá cục bộ (UNPATCHED) được thực hiện thông qua việc đối chiếu với ngưỡng cập nhật tối thiểu `6.3.9600.18604` của Microsoft và danh mục hotfix trong Bảng 3.1.
-   - **Yêu cầu cắt cúp (Crop Proposal):** Cắt giữ lại toàn bộ cửa sổ PowerShell (tọa độ khoảng $X: 0 \rightarrow 875\,\text{px}, Y: 0 \rightarrow 960\,\text{px}$ trên ảnh gốc $1440 \times 900\,\text{px}$), loại bỏ phần nền Server Manager trống bên phải để phóng to cỡ chữ, đảm bảo khả năng đọc hoàn hảo trên trang in A4.
+   - **Tệp nguồn:** `work/do-an/chapter3/evidence/baseline/Windows_PreDemo_01_Network_SMB.png`
+   - **SHA-256 nguồn:** `e3744451374e9544f29dda79b06bd1e8df122119ef046b20dfb9f396d65a0b34`
+   - **Chú thích đề xuất:** *Hình 3.1. Trạng thái mạng, dịch vụ SMB và các cổng lắng nghe trên máy chủ Windows Server 2012 R2 trước thực nghiệm*
+   - **Vai trò chứng minh:** Minh chứng trực quan các lệnh PowerShell kiểm toán mạng (IP 192.168.56.20), dịch vụ LanmanServer (Running / Automatic), tính năng FS-SMB1 Installed, cờ hỗ trợ SMB cục bộ, các cổng TCP 139/445 đang lắng nghe và phiên bản số nhị phân srv.sys 6.3.9600.16421.
+   - **Ranh giới chú thích và diễn giải:** Chú thích chỉ mô tả các thuộc tính mạng và dịch vụ hiển thị trong giao diện PowerShell. Không tuyên bố bức ảnh chứng minh mọi giá trị tham số trong Bảng 3.1 nếu vùng ảnh crop không bao hàm giá trị đó; không đồng nhất trạng thái cổng lắng nghe cục bộ với trạng thái `OPEN` nhìn từ xa qua mạng.
+   - **Kế hoạch cắt cúp đề xuất (Crop Proposal):**
+     * *Vùng thông tin phải giữ:* Cửa sổ PowerShell chính hiển thị các lệnh kiểm toán mạng, dịch vụ LanmanServer, cấu hình SMB server, cổng lắng nghe và phiên bản srv.sys.
+     * *Giao diện thừa loại bỏ:* Nền Server Manager trống bên phải và thanh taskbar bên dưới.
+     * *Ngữ cảnh bắt buộc bảo tồn:* Tiêu đề cửa sổ PowerShell, các câu lệnh đã thực thi và các khối kết quả đầu ra.
+     * *Mục đích trình bày:* Tăng kích thước phông chữ, bảo đảm người đọc xem rõ từng tham số trên trang in A4.
 
 2. **Hình 3.2 (Tạm thời):**
    - **Tệp nguồn:** `work/do-an/chapter3/evidence/baseline/Windows_PreDemo_02_Firewall.png`
-   - **SHA-256 nguồn:** `60847` bytes / SHA-256: `c685573c3c1d00460d49d8718cc02a48ef8bceda26ce5cac1ab913e1db0d7077`
-   - **Chú thích đề xuất:** *Hình 3.2. Cấu hình quy tắc tường lửa tùy biến kiểm soát phạm vi truy cập dịch vụ SMB trên máy chủ mục tiêu*
-   - **Vai trò chứng minh:** Xác nhận chính sách kiểm soát an ninh tại máy chủ: quy tắc `ATTT Lab SMB 139-445` chỉ cho phép lưu lượng TCP cổng 139/445 từ duy nhất trạm Kali `192.168.56.10`, trong khi các profile tường lửa đều bật và 16 quy tắc chia sẻ tệp mặc định đều bị vô hiệu hóa.
-   - **Yêu cầu cắt cúp (Crop Proposal):** Cắt giữ lại cửa sổ PowerShell chính (tọa độ khoảng $X: 50 \rightarrow 990\,\text{px}, Y: 60 \rightarrow 900\,\text{px}$), loại bỏ thanh taskbar và phần Server Manager nền.
+   - **SHA-256 nguồn:** `c685573c3c1d00460d49d8718cc02a48ef8bceda26ce5cac1ab913e1db0d7077`
+   - **Chú thích đề xuất:** *Hình 3.2. Cấu hình quy tắc tường lửa tùy biến kiểm soát phạm vi nguồn truy cập dịch vụ SMB trên máy chủ mục tiêu*
+   - **Vai trò chứng minh:** Minh chứng chính sách kiểm soát an ninh tại máy chủ: quy tắc tùy biến `ATTT Lab SMB 139-445` (Inbound Allow, TCP 139/445) với phạm vi địa chỉ nguồn từ xa chỉ định duy nhất `192.168.56.10`, trong khi 3 hồ sơ tường lửa đều bật và 16 quy tắc chia sẻ tệp mặc định đều bị vô hiệu hóa.
+   - **Ranh giới chú thích và diễn giải:** Chú thích mô tả quy tắc tường lửa tùy biến và phạm vi nguồn tương ứng. Không tuyên bố bức ảnh này tự nó chứng minh mọi nguồn IP khác đều bị chặn trên mọi phương diện.
+   - **Kế hoạch cắt cúp đề xuất (Crop Proposal):**
+     * *Vùng thông tin phải giữ:* Cửa sổ PowerShell hiển thị 5 khối lệnh kiểm toán tường lửa (thuộc tính quy tắc tùy biến, hồ sơ tường lửa, danh sách luật mặc định).
+     * *Giao diện thừa loại bỏ:* Thanh taskbar và phần nền Server Manager mờ phía sau.
+     * *Ngữ cảnh bắt buộc bảo tồn:* Tên quy tắc `ATTT Lab SMB 139-445`, cổng `{139, 445}`, địa chỉ nguồn `192.168.56.10`, trạng thái 3 profile `True` và số lượng 16 luật mặc định `False`.
+     * *Mục đích trình bày:* Loại bỏ chi tiết giao diện thừa, làm nổi bật chính sách kiểm soát an ninh mạng của máy chủ.
+
+3. **Hình 3.3 (Tạm thời):**
+   - **Tệp nguồn:** `work/do-an/chapter3/evidence/baseline/Windows_MS17010_02_Hotfix.png`
+   - **SHA-256 nguồn:** `c2130e7256c08f592f9f884ec979e505c775cdfb74bc149dfa63fef5335e658f`
+   - **Chú thích đề xuất:** *Hình 3.3. Thuộc tính phiên bản tệp driver srv.sys và danh mục bản vá được ghi nhận trên máy chủ mục tiêu*
+   - **Vai trò chứng minh:** Minh chứng chuỗi FileVersion hiển thị `6.3.9600.16384`, việc trích xuất phiên bản số nhị phân cấu thành `6.3.9600.16421` và danh mục 6 bản vá hệ thống qua `Get-HotFix` trên cùng một màn hình PowerShell.
+   - **Ranh giới chú thích và diễn giải:** Tuyệt đối không đưa chữ "UNPATCHED" trực tiếp vào tiêu đề ảnh; kết luận `UNPATCHED` là kết quả phân tích đối chiếu tổng hợp giữa phiên bản số nhị phân, danh mục bản vá thiếu hụt và ngưỡng tài liệu chính thức của Microsoft trong Bảng 3.2. Không đồng nhất trạng thái chưa vá cục bộ với khả năng khai thác thành công từ xa qua mạng.
+   - **Kế hoạch cắt cúp đề xuất (Crop Proposal):**
+     * *Vùng thông tin phải giữ:* Cửa sổ PowerShell chứa toàn bộ các lệnh lấy thuộc tính tệp `srv.sys` và bảng kết quả `Get-HotFix`.
+     * *Giao diện thừa loại bỏ:* Thanh taskbar và bong bóng thông báo "View messages in Action Center" ở khay hệ thống, phần nền desktop trống.
+     * *Ngữ cảnh bắt buộc bảo tồn:* Toàn bộ nội dung lệnh kiểm tra `srv.sys`, các dòng chuỗi/số phiên bản và bảng danh mục 6 hotfix.
+     * *Mục đích trình bày:* Loại bỏ popup thông báo không liên quan ở khay hệ thống, bảo đảm tính trang nghiêm khoa học và rõ ràng của bằng chứng bản vá.
 
 ---
 
 ## 3. Lý Do Loại Bỏ Các Ảnh Trùng Lặp (Redundancy & Rejection Rationales)
 
 1. **Nhóm ảnh môi trường Kali (`Kali_PreDemo_01`, `Kali_PreDemo_02`):**
-   - Các lệnh `ip address`, `ip route` và `nmap --version` chỉ cung cấp các giá trị tham số cấu hình cơ bản (192.168.56.10/24, kernel route, Nmap 7.99). Việc đưa ảnh chụp terminal của các lệnh này vào báo cáo gây loãng tài liệu; bảng tổng hợp trình bày các tham số này chuẩn mực và tiết kiệm không gian hơn.
+   - Các lệnh cấu hình mạng Kali (`ip address`, `ip route`) và phiên bản Nmap chỉ cung cấp các giá trị cấu hình cơ bản (192.168.56.10/24, kernel route, Nmap 7.99). Việc đưa ảnh chụp terminal của các lệnh này vào báo cáo gây loãng tài liệu; Bảng 3.1 trình bày các tham số này chuẩn mực và tiết kiệm không gian hơn.
    - Ảnh trợ giúp NSE scripts chỉ hiển thị tài liệu văn bản tĩnh có sẵn của công cụ, không mang tính chứng minh dữ liệu thực nghiệm.
 2. **Nhóm ảnh Windows đơn lẻ (`Windows_Baseline_01`, `04`, `05`, `06`, `07`):**
-   - Đây là các ảnh chụp từng lệnh PowerShell rời rạc trong quá trình chuẩn bị ban đầu. Hầu hết các ảnh này có thông tin thưa thớt, cửa sổ chiếm diện tích lớn nhưng chỉ có 1-2 dòng văn bản, bố cục trống trải và đã bị thay thế hoàn toàn bởi ảnh kiểm toán hợp nhất `Windows_PreDemo_01` hoặc Bảng 3.1.
-3. **Ảnh `Windows_MS17010_02_Hotfix.png`:**
-   - Mặc dù có lệnh `Get-HotFix`, ảnh chụp này bị lỗi hiển thị do bong bóng thông báo "View messages in Action Center" xuất hiện ở khay hệ thống, làm giảm tính nghiêm túc khoa học. Danh mục 6 bản vá được đưa vào Bảng 3.1 giúp người đọc dễ tra cứu số hiệu KB và ngày cài đặt hơn rất nhiều so với nhìn ảnh chụp.
+   - Đây là các ảnh chụp từng lệnh PowerShell rời rạc trong quá trình chuẩn bị ban đầu. Hầu hết các ảnh này có thông tin thưa thớt, cửa sổ chiếm diện tích lớn nhưng chỉ có 1-2 dòng văn bản, bố cục trống trải và đã bị thay thế hoàn toàn bởi ảnh kiểm toán hợp nhất `Windows_PreDemo_01_Network_SMB.png` (Hình 3.1) và Bảng 3.1.
+3. **Chuyển `Windows_MS17010_01_SrvSysVersion.png` sang OPTIONAL:**
+   - Ảnh này chỉ hiển thị phiên bản `srv.sys`. Do ảnh `Windows_MS17010_02_Hotfix.png` (Hình 3.3) đã hiển thị toàn bộ nội dung của ảnh 01 đồng thời cung cấp thêm bảng kiểm kê 6 hotfix hệ thống, việc giữ ảnh 02 và chuyển ảnh 01 sang dự phòng giúp giảm thiểu hoàn toàn sự trùng lặp thị giác.
+4. **Giữ `Kali_to_Windows_Connectivity.png` và `Windows_FirewallPrep_04_Scope.png` ở mức OPTIONAL:**
+   - Ảnh kết nối mạng Kali-Windows chỉ dùng dự phòng nếu phản biện yêu cầu minh chứng trạng thái láng giềng L2 ARP REACHABLE; việc lược bỏ khỏi kế hoạch chính giúp tránh suy diễn sai về nguyên nhân ICMP không có phản hồi.
+   - Ảnh phạm vi tường lửa 04 chỉ mang tính hỗ trợ cho quy tắc tùy biến, đã được phản ánh vượt trội trong `Windows_PreDemo_02_Firewall.png`.
