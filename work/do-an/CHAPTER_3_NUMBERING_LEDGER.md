@@ -7,9 +7,9 @@ Mục đích: khóa số Hình/Bảng giữa các section được viết độc
 
 ## Current counters
 
-- Next available table: **Bảng 3.5**
-- Next available figure: **Hình 3.7**
-- Approved numbering allocations: **3** (Section 3.1, Section 3.2 and Section 3.3 fully USER APPROVED / LOCKED)
+- Next available table: **Bảng 3.6**
+- Next available figure: **Hình 3.9**
+- Approved numbering allocations: **4** (Sections 3.1–3.3 fully approved; Section 3.4 Case B presentation plan USER APPROVED / LOCKED)
 
 ## Lock rules
 
@@ -29,3 +29,5 @@ Mục đích: khóa số Hình/Bảng giữa các section được viết độc
 | 3.2 Scenario 1 | Bảng 3.3 | Hình 3.4–3.5 | X7B0 plan approval + X7B1 99/100 external PASS + user approval 2026-10-06 | 3.4 | 3.6 |
 
 | 3.3 Scenario 2 | Bảng 3.4 | Hình 3.6 | X7C0 plan approval + X7C1 99/100 external PASS + user approval 2026-10-06 | 3.5 | 3.7 |
+
+| 3.4 Case B | Bảng 3.5 | Hình 3.7–3.8 | X7D0 99/100 external PASS + user approval 2026-10-06; prose pending X7D1 after WR1/WR2 | 3.6 | 3.9 |

@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7D0_PASS_WAITING_FOR_USER_APPROVAL_WORD_REVIEW_DEFERRED`.
+- Current gate: `WR1_DEMO1_WORD_REVIEW_BUILD`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1586,3 +1586,36 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - No X7D0 integration until explicit user approval.
 - WR1 / WR2 remain deferred until X7D0 user approval.
 - X7D1 remains blocked until WR1 + WR2 are approved.
+
+
+## DEC-84 — User approves X7D0 Case B plan; WR1 becomes active
+
+- Ngày: 2026-10-06.
+- User decision on X7D0: **APPROVED / CHỐT**.
+- Reviewer-final X7D0 source:
+  `feature/x7d0-ch3-caseb-plan@87e9ec8d04125d9953391bafc06345e5c78392eb`.
+- Final external review:
+  `work/do-an/X7D0_CASEB_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- X7D0 Case B plan is now **USER APPROVED / LOCKED**.
+- Locked Section 3.4 planning allocation:
+  - Bảng 3.5;
+  - Hình 3.7 = After Local;
+  - Hình 3.8 = protocol retest.
+- Locked image decisions:
+  - 01 Before DROP;
+  - 02 Action DROP;
+  - 03 After Local KEEP;
+  - 04 NSE02 Protocols KEEP;
+  - 05 combined NSE04 OPTIONAL / DROP.
+- Locked provisional crops:
+  - Hình 3.7: `x=0, y=30, width=872, height=310`;
+  - Hình 3.8: `x=0, y=24, width=1280, height=400`.
+- Next available numbering:
+  - **Bảng 3.6**;
+  - **Hình 3.9**.
+- X7D0 approved artifacts are explicitly integrated into `feature/ch3-integration`.
+- Per DEC-81, **WR1 Demo 1 Word review now becomes the active gate**.
+- X7D1 Section 3.4 prose remains BLOCKED until WR1 and WR2 both pass independent Word review + user approval.
+- X7E / Case C and Chapter 4 remain BLOCKED.
