@@ -1,5 +1,7 @@
 # ROADMAP REVIEW — PRE-X7A CHAPTER 3
 
+> **STATUS OVERRIDE 2026-10-07:** Đây là audit lịch sử trước khi X7A bắt đầu. Không dùng phần “roadmap beyond Chapter 3” làm next action. Current authority: `ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
+
 Date: 2026-10-06  
 Reviewer role: Lecturer / thesis-project reviewer in Information Security  
 Verdict: `DIRECTIONALLY_CORRECT / NOT_READY_TO_EXECUTE`
