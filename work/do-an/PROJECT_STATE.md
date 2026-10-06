@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7C0_AUTHORIZED_AFTER_X7B1_USER_APPROVAL`.
+- Current gate: `X7C0_SCENARIO2_EVIDENCE_PRESENTATION_PLAN`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1227,3 +1227,36 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7C0 is authorized for **Scenario 2 Evidence & Presentation Plan ONLY**.
 - X7C1 prose remains **BLOCKED** until X7C0 passes independent external review + user approval.
 - Chapter 4 remains **BLOCKED**.
+
+
+## DEC-71 — X7C0 Scenario 2 evidence/presentation planning opened
+
+- Ngày: 2026-10-06.
+- Section 3.2 user-approved artifacts were explicitly integrated into:
+  `feature/ch3-integration@e4b59086f32084752f3df1f3733fa05a407816d7`.
+- Numbering remains locked through Section 3.2:
+  - Bảng 3.1–3.3;
+  - Hình 3.1–3.5.
+- Next available numbering:
+  - **Bảng 3.4**;
+  - **Hình 3.6**.
+- X7C0 branch created from the exact integration HEAD:
+  `feature/x7c0-ch3-scenario2-plan`.
+- X7C0 prompt:
+  `work/do-an/prompts/X7C0_SCENARIO2_EVIDENCE_PRESENTATION_PLAN.md`.
+- Scope: **Scenario 2 Evidence & Presentation Plan ONLY**.
+- Mandatory evidence sequence:
+  - NSE-SMB-01 ports;
+  - NSE-SMB-02 protocols;
+  - NSE-SMB-03 signing;
+  - NSE-SMB-04 MS17-010 script.
+- Critical reviewer locks:
+  - `UNKNOWN / NO USABLE SCRIPT RESULT` must remain indeterminate;
+  - `UNKNOWN != SAFE`;
+  - local `UNPATCHED` and remote `UNKNOWN` are independent facts;
+  - do not call NSE-SMB-04 VULNERABLE / SAFE / NOT VULNERABLE / FALSE NEGATIVE;
+  - do not invent NTSTATUS or cause for absent script output;
+  - local signing and remote signing remain independent observations;
+  - operator command and Nmap-recorded argv must not be conflated.
+- X7C1 prose remains **BLOCKED** until X7C0 passes independent external review + user approval.
+- X7D and Chapter 4 remain **BLOCKED**.
