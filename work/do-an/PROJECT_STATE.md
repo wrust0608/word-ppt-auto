@@ -788,7 +788,7 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Ngày: 2026-10-06.
 - G0 review: `work/do-an/G0_CH3_GOVERNANCE_RECONCILIATION_FINAL.md`.
 - G0 verdict: **PASS / blockers 0**.
-- Current Chapter 3 accumulation branch: `feature/ch3-integration` @ `7cf63376b40de6758730e10756f403e9a1603ad6`.
+- Current Chapter 3 accumulation branch: `feature/ch3-integration` @ `74a76bdf5f7921849ba38de93135794c8214c7a9`.
 - X6 evidence merged into integration at `85f28df4c4c2a5409a11c886b826a56c6736044b`.
 - Current isolated planning branch: `feature/x7a0-ch3-baseline-plan` @ `33a490c6573dd7a140545fb5fb29b384e443fe88`.
 - X7A0 prompt: `work/do-an/prompts/X7A0_BASELINE_EVIDENCE_PRESENTATION_PLAN.md`.
@@ -883,3 +883,21 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   `work/do-an/prompts/X7A1_DRAFT_CH3_31_BASELINE.md`.
 - X7A1 may create derived presentation crops with SHA/crop-manifest traceability but must not modify source evidence.
 - X7B remains BLOCKED until Section 3.1 prose passes external review + user approval.
+
+
+## DEC-58 — X7A1 baseline prose branch created from approved integration state
+
+- Ngày: 2026-10-06.
+- Current integration HEAD after approved X7A0 artifacts + authority sync:
+  `74a76bdf5f7921849ba38de93135794c8214c7a9`.
+- X7A1 branch created from that exact HEAD:
+  `feature/x7a1-ch3-baseline-draft`.
+- X7A1 scope:
+  - write Section 3.1 only;
+  - create 2 locked tables;
+  - embed 3 locked figures;
+  - create traceable derived presentation crops/copies;
+  - no Scenario 1/2, Case B/C, Chapter 4 or final DOCX.
+- X7A1 prompt:
+  `work/do-an/prompts/X7A1_DRAFT_CH3_31_BASELINE.md`.
+- X7B remains BLOCKED.
