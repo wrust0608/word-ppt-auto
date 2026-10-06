@@ -7,9 +7,9 @@ Mục đích: khóa số Hình/Bảng giữa các section được viết độc
 
 ## Current counters
 
-- Next available table: **Bảng 3.1**
-- Next available figure: **Hình 3.1**
-- Approved section count: **0**
+- Next available table: **Bảng 3.3**
+- Next available figure: **Hình 3.4**
+- Approved numbering allocations: **1** (Section 3.1 presentation plan approved; prose pending)
 
 ## Lock rules
 
@@ -24,4 +24,4 @@ Mục đích: khóa số Hình/Bảng giữa các section được viết độc
 
 | Section | Tables locked | Figures locked | Approval reference | Next table | Next figure |
 |---|---|---|---|---|---|
-| — | — | — | Chưa có section được approved | 3.1 | 3.1 |
+| 3.1 Baseline | Bảng 3.1–3.2 | Hình 3.1–3.3 | X7A0 external PASS + user approval 2026-10-06; prose pending X7A1 | 3.3 | 3.4 |
