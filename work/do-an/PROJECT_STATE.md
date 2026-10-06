@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7D1_R2_CORRECTION_REQUIRED`.
+- Current gate: `X7D1_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1798,3 +1798,15 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - revert out-of-scope `scripts/validate_project.py` modification.
 - Prompt: `work/do-an/prompts/X7D1_R2_CORRECT_CH3_34_CASEB.md`.
 - X7E remains BLOCKED.
+
+
+## DEC-95 — X7D1 Case B R2 final external PASS
+
+- Ngày: 2026-10-07.
+- Executor R2 candidate: `2e0f74b1c466922d14e0d7c50357338f2ad89878`.
+- Reviewer applied two bounded wording tightenings without changing technical meaning.
+- Final review: `work/do-an/X7D1_CH3_34_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Verdict: **99/100 — PASS**.
+- Blockers: 0.
+- Section 3.4 is ready for explicit user approval.
+- Do not integrate and do not open Case C before user approval.
