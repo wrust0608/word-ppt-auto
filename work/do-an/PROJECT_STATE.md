@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7B0_SCENARIO1_EVIDENCE_PRESENTATION_PLAN`.
+- Current gate: `X7B0_R2_CORRECTION_REQUIRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1030,4 +1030,28 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - preserve `smb-os-discovery = no usable output`;
   - Scenario 1 must not conclude MS17-010.
 - X7B1 prose remains **BLOCKED** until X7B0 passes independent external review + user approval.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-64 — X7B0 Scenario 1 plan R1 requires bounded correction
+
+- Ngày: 2026-10-06.
+- R1 candidate:
+  `4a9e40626a14b0ff60d9820df59037e0d5e237e7`.
+- Independent external review:
+  `work/do-an/X7B0_SCENARIO1_PLAN_EXTERNAL_REVIEW_R1.md`.
+- Score: **91/100 — REVISE_MINOR_BLOCKING**.
+- Overall academic geometry PASS:
+  - 2 H3;
+  - 1 compact Bảng 3.3;
+  - B4 image DROP;
+  - B5/B6 images KEEP;
+  - B2/B3 without dedicated screenshots.
+- Blocking corrections:
+  1. remove invented `-Pn` from B4/B5/B6 descriptions;
+  2. remove/correct wrong B4 MAC `08:00:27:1B:32:04` (direct evidence is `08:00:27:55:71:CE`);
+  3. make Bảng 3.3 more result-oriented and avoid duplicating Chapter 2 command syntax; omit B3 latency from public table by default.
+- R2 prompt:
+  `work/do-an/prompts/X7B0_R2_CORRECT_SCENARIO1_PLAN.md`.
+- X7B1 prose remains **BLOCKED**.
 - Chapter 4 remains **BLOCKED**.
