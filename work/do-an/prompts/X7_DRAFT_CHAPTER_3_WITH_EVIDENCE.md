@@ -78,7 +78,7 @@ Create Bảng 3.1 containing:
 - Before Demo snapshot.
 
 Embed exactly:
-![Hình 3.1. Phiên bản hiển thị của tệp srv.sys trên máy Windows Server 2012 R2 trước thực nghiệm](chapter3/evidence/baseline/Windows_MS17010_01_SrvSysVersion.png)
+![Hình 3.1. Phiên bản hiển thị của tệp srv.sys trên máy Windows Server 2012 R2 trước thực nghiệm](../chapter3/evidence/baseline/Windows_MS17010_01_SrvSysVersion.png)
 
 Before image: introduce what is visible.
 After image:
@@ -101,7 +101,7 @@ Include:
 - smb-os-discovery no usable output.
 
 Embed exactly:
-![Hình 3.2. Kết quả NSE trong Kịch bản 1 ghi nhận các dialect SMB và chính sách ký số từ xa](chapter3/evidence/scenario1/Scenario1_B6_SMB_NSE_A.png)
+![Hình 3.2. Kết quả NSE trong Kịch bản 1 ghi nhận các dialect SMB và chính sách ký số từ xa](../chapter3/evidence/scenario1/Scenario1_B6_SMB_NSE_A.png)
 
 Do not repeat command blocks.
 Do not claim B5 fingerprint alone proves Windows Server 2012 R2.
@@ -114,7 +114,7 @@ Key result:
 NSE-SMB-04 = UNKNOWN / NO USABLE SCRIPT RESULT.
 
 Embed exactly:
-![Hình 3.3. Kết quả kiểm tra smb-vuln-ms17-010 không trả về phán quyết lỗ hổng có thể sử dụng](chapter3/evidence/scenario2/Scenario2_NSE04_MS17010.png)
+![Hình 3.3. Kết quả kiểm tra smb-vuln-ms17-010 không trả về phán quyết lỗ hổng có thể sử dụng](../chapter3/evidence/scenario2/Scenario2_NSE04_MS17010.png)
 
 After figure:
 - 445 is open;
@@ -140,9 +140,9 @@ Show:
 - patch state remains UNPATCHED.
 
 Embed exactly:
-![Hình 3.4. Trạng thái cấu hình SMB trên Windows Server sau khi vô hiệu hóa SMBv1](chapter3/evidence/case_b/SMBv1_Remediation_03_After_Local.png)
+![Hình 3.4. Trạng thái cấu hình SMB trên Windows Server sau khi vô hiệu hóa SMBv1](../chapter3/evidence/case_b/SMBv1_Remediation_03_After_Local.png)
 
-![Hình 3.5. Kết quả kiểm tra lại smb-protocols sau Case B cho thấy SMBv1 không còn xuất hiện trong danh sách dialect](chapter3/evidence/case_b/SMBv1_Remediation_04_NSE02_Protocols.png)
+![Hình 3.5. Kết quả kiểm tra lại smb-protocols sau Case B cho thấy SMBv1 không còn xuất hiện trong danh sách dialect](../chapter3/evidence/case_b/SMBv1_Remediation_04_NSE02_Protocols.png)
 
 Do not claim SMB2/3 workload was tested.
 Do not claim patched or safe.
@@ -157,11 +157,11 @@ Create Bảng 3.5 separating:
 - local Windows state.
 
 Embed exactly:
-![Hình 3.6. Thứ tự quy tắc trên giao diện CASE_C_KALI đặt quy tắc chặn SMB trước quy tắc cho phép](chapter3/evidence/case_c/pfSense_08_Rule_Order.png)
+![Hình 3.6. Thứ tự quy tắc trên giao diện CASE_C_KALI đặt quy tắc chặn SMB trước quy tắc cho phép](../chapter3/evidence/case_c/pfSense_08_Rule_Order.png)
 
-![Hình 3.7. Kết quả quét lại TCP 139 và 445 qua đường dẫn Case C ghi nhận trạng thái filtered](chapter3/evidence/case_c/pfSense_CaseC_09_NSE01_Ports_CANONICAL.png)
+![Hình 3.7. Kết quả quét lại TCP 139 và 445 qua đường dẫn Case C ghi nhận trạng thái filtered](../chapter3/evidence/case_c/pfSense_CaseC_09_NSE01_Ports_CANONICAL.png)
 
-![Hình 3.8. Nhật ký pfSense ghi nhận các gói TCP SYN SMB tương ứng với hành động Block](chapter3/evidence/case_c/pfSense_10_Block_Log_CANONICAL.png)
+![Hình 3.8. Nhật ký pfSense ghi nhận các gói TCP SYN SMB tương ứng với hành động Block](../chapter3/evidence/case_c/pfSense_10_Block_Log_CANONICAL.png)
 
 Writing order:
 1. Nmap reports filtered/no-response.
