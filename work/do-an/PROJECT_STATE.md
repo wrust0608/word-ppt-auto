@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7C1_R2_CORRECTION_REQUIRED`.
+- Current gate: `X7C1_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1421,4 +1421,41 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - R2 prompt:
   `work/do-an/prompts/X7C1_R2_CORRECT_CH3_33_SCENARIO2.md`.
 - X7D remains **BLOCKED**.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-77 — X7C1 Section 3.3 R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `092280ba0036fe7bf6c487035de3164dcd2b13f3`.
+- Final external review:
+  `work/do-an/X7C1_CH3_33_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- R1 blocker groups all closed:
+  - NSE02 wording restored to direct dialect observations;
+  - signing prose narrowed;
+  - NSE04 direct-observation/classification wording corrected;
+  - crop-manifest completion wording corrected;
+  - local UNPATCHED cross-reference simplified;
+  - exploitation scope simplified;
+  - self-review word-count/search contradictions corrected.
+- Independent R2 byte checks:
+  - prose words: 1,356;
+  - H2/H3: 1/2;
+  - table/figure: 1/1;
+  - only three authorized text files changed;
+  - Hình 3.6 unchanged.
+- Critical boundaries PASS:
+  - `UNKNOWN / NO USABLE SCRIPT RESULT`;
+  - `UNKNOWN != SAFE`;
+  - local `UNPATCHED` independent from remote `UNKNOWN`;
+  - no false-negative classification;
+  - no invented NTSTATUS/cause;
+  - local/remote signing independent;
+  - no Case B result leakage.
+- Current gate:
+  `X7C1_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7D remains **BLOCKED** until explicit user approval and completed Section 3.3 integration.
 - Chapter 4 remains **BLOCKED**.
