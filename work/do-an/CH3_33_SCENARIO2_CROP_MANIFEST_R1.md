@@ -37,6 +37,6 @@
   * Vùng không gian nền terminal trống trải màu đen phía dưới ($y > 354\,\text{px}$, chiếm 446 pixel chiều cao).
 - **Lý do cắt cúp:** Loại bỏ vùng nền terminal đen không mang thông tin, tối ưu hóa tỷ lệ khung hình trên trang in A4 portrait giúp tăng kích thước phông chữ dòng lệnh và cải thiện độ rõ nét cho người đọc.
 - **Ranh giới kỹ thuật được bảo tồn:**
-  * Bức ảnh minh chứng quan sát trực tiếp rằng phiên quét kết thúc bình thường, cổng 445 mở, không xuất hiện khối kết quả `Host script results:`, và không có thông báo lỗi hiển thị trong đầu ra ghi nhận.
+  * Bức ảnh minh chứng quan sát trực tiếp rằng đầu ra đạt đến dòng Nmap done, dấu nhắc shell xuất hiện sau đó, cổng 445 mở, không xuất hiện khối kết quả `Host script results:`, và không có thông báo lỗi hiển thị trong đầu ra ghi nhận.
   * Bức ảnh không tự nó chứng minh máy chủ an toàn hay đã được vá lỗi (`UNKNOWN != SAFE`).
   * Phân loại kỹ thuật tương ứng của đề án là `UNKNOWN / NO USABLE SCRIPT RESULT` (đây là phân loại phương pháp luận, không phải chuỗi ký tự nguyên văn do Nmap in ra).

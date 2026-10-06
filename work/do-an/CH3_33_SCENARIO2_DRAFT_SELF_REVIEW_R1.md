@@ -1,20 +1,24 @@
 # BÁO CÁO TỰ ĐÁNH GIÁ DỰ THẢO MỤC 3.3 SCENARIO 2 (CH3_33_SCENARIO2_DRAFT_SELF_REVIEW_R1)
 
-- **Trạng thái:** `X7C1_CH3_33_SCENARIO2_DRAFT_R1_READY_FOR_EXTERNAL_REVIEW`
-- **Pha thực hiện:** `X7C1 — Draft Chapter 3 Section 3.3 Scenario 2`
+- **Trạng thái:** `X7C1_CH3_33_SCENARIO2_DRAFT_R2_READY_FOR_FINAL_EXTERNAL_REVIEW`
+- **Pha thực hiện:** `X7C1 R2 — Correct Section 3.3 Scenario 2 Draft`
 - **Tệp dự thảo được đánh giá:** `work/do-an/CH3_33_SCENARIO2_DRAFT_R1.md`
 - **Branch:** `feature/x7c1-ch3-scenario2-draft`
-- **Starting HEAD:** `57f84063fc2cbb1607910ba46633e81e8392b3a4`
+- **Reviewer Base HEAD:** `f911bcd3e4c2a541efc90bb3e383b0107ec74dd5`
 - **Tổ tiên tích hợp (Base commit):** `d589e51e81aa0a3b87980ac73cef0d81ca330e17`
 
 ---
 
 ## 1. Kiểm Toán Số Lượng Từ (Word Count Audit)
 
-- **Tổng số từ toàn văn bản (kể cả bảng và cú pháp nhúng ảnh):** 2.229 từ.
-- **Số từ văn xuôi (loại trừ các dòng bảng Markdown, tiêu đề đề mục và cú pháp nhúng ảnh):** 1.719 từ.
-- **Số đoạn văn xuôi:** 15 đoạn văn.
-- **Đánh giá phạm vi độ dài:** Nằm trong khung dung lượng mục tiêu (~1.100–1.600 từ văn xuôi cho kịch bản kỹ thuật chuyên sâu có tính chất phân loại phương pháp luận phức tạp), bảo đảm diễn giải cặn kẽ ý nghĩa đo đạc, tách bạch khách quan giữa quan sát trực tiếp và phân loại kỹ thuật, không đệm từ ngữ sáo rỗng hay cam đoan an ninh thừa.
+- **Tổng số từ toàn văn bản (kể cả bảng Markdown và cú pháp nhúng ảnh):** 1.872 từ.
+- **Số từ văn xuôi (loại trừ các dòng bảng Markdown, tiêu đề đề mục và cú pháp nhúng ảnh):** 1.356 từ.
+- **Số đoạn văn xuôi:** 14 đoạn văn.
+- **Đánh giá phạm vi độ dài:** Nằm hoàn toàn trong khung dung lượng mục tiêu R2 (~1.300–1.550 từ văn xuôi). So với bản R1 (1.719 từ văn xuôi), bản R2 đã tinh gọn được 363 từ văn xuôi thông qua việc:
+  * Loại bỏ các câu lý thuyết an ninh chung về cơ chế ký số gói tin;
+  * Tinh gọn đoạn viện dẫn trạng thái bản vá cục bộ `UNPATCHED`, tham chiếu trực tiếp đến kết quả đã khóa tại Mục 3.1 mà không tái suy diễn chi tiết số nhị phân hay danh mục hotfix;
+  * Rút gọn đoạn ranh giới khai thác trong văn xuôi sinh viên, loại bỏ việc liệt kê danh mục công cụ khai thác (`Meterpreter`, `reverse shell`);
+  * Bỏ các diễn giải lặp lại về nguyên tắc `UNKNOWN != SAFE`.
 
 ---
 
@@ -39,9 +43,9 @@ Dự thảo tích hợp đúng 1 bảng tổng hợp kết quả đo đạc sinh
   - Cấu trúc: 4 cột (`Phép đo | Mục tiêu kỹ thuật | Kết quả ghi nhận trực tiếp | Phân loại & Ranh giới kết luận`).
   - Gồm 4 hàng tương ứng với 4 phép đo NSE thành phần:
     * **NSE-SMB-01:** Ghi nhận cổng `139/tcp` và `445/tcp` ở trạng thái `OPEN`, phản hồi `syn-ack`, TTL 128; phân loại là cổng dịch vụ mở (Open Ports); đóng khung ranh giới kỹ thuật `445 OPEN != vulnerable`.
-    * **NSE-SMB-02:** Ghi nhận kịch bản `smb-protocols` đàm phán thành công 5 phương ngữ (`NT LM 0.12 (SMBv1)`, `2.0.2`, `2.1`, `3.0`, `3.0.2`); giữ nguyên chú thích nguyên văn `[dangerous, but default]`; đóng khung ranh giới kỹ thuật `SMBv1 enabled != MS17-010 confirmed`.
+    * **NSE-SMB-02:** Mục tiêu kỹ thuật đã hiệu chỉnh: `Khảo sát các phương ngữ SMB được ghi nhận từ xa`. Tiêu đề phân loại: `Các phương ngữ SMB được ghi nhận`. Ghi nhận 5 phương ngữ (`NT LM 0.12 (SMBv1)`, `2.0.2`, `2.1`, `3.0`, `3.0.2`) kèm chú thích nguyên văn `[dangerous, but default]`; đóng khung ranh giới kỹ thuật `SMBv1 enabled != MS17-010 confirmed`.
     * **NSE-SMB-03:** Ghi nhận kịch bản `smb2-security-mode` trên phương ngữ 3.0.2 xác định chính sách ký số là `Message signing enabled but not required`; đóng khung kết quả quan sát từ xa độc lập với cờ cấu hình cục bộ và không khái quát hóa cho toàn bộ phương ngữ.
-    * **NSE-SMB-04:** Ghi nhận cổng 445/tcp mở, phiên quét đạt dòng `Nmap done`, không xuất hiện khối kết quả `Host script results:`, không có thông báo lỗi hiển thị; phân loại phương pháp luận là `UNKNOWN / NO USABLE SCRIPT RESULT`; nêu rõ UNKNOWN không phải chuỗi ký tự nguyên văn của Nmap; đóng khung ranh giới an toàn thông tin cốt lõi `UNKNOWN != SAFE`.
+    * **NSE-SMB-04:** Cổng 445/tcp mở, phiên quét đạt dòng `Nmap done`, không xuất hiện khối kết quả `Host script results:`, không có thông báo lỗi hiển thị; phân loại phương pháp luận là `UNKNOWN / NO USABLE SCRIPT RESULT`; nêu rõ UNKNOWN không phải chuỗi ký tự nguyên văn của Nmap. Wording phân loại đã hiệu chỉnh: *"Kết quả này chỉ cho phép phân loại là chưa xác định trong phạm vi phép đo; nguyên nhân của việc không có đầu ra script khả dụng không được xác lập. UNKNOWN != SAFE."*
   - Bảng không chứa mã nội bộ (Evidence ID, Claim ID) hay đường dẫn tệp trong kho lưu trữ.
 
 ---
@@ -54,47 +58,43 @@ Dự thảo nhúng duy nhất 1 hình ảnh phái sinh phục vụ trình bày:
   - Cú pháp nhúng: `![Hình 3.6. Kết quả thực thi kịch bản smb-vuln-ms17-010 từ trạm Kali Linux](chapter3/presentation/3_3/Hinh_3_6_MS17010_NSE.png)`
   - Tệp vật lý tồn tại trên đĩa: `work/do-an/chapter3/presentation/3_3/Hinh_3_6_MS17010_NSE.png`.
   - Kích thước: 1280 × 330 px.
+  - Mã băm SHA-256: `8f7a343fe9ab100a187a5ab4fe85cac320e9350cf5d59df0c4d78e385a137bdc` (bảo tồn nguyên vẹn 100%, không tái tạo ảnh trong R2).
 - **Quy tắc cắt giảm:** Tuyệt đối không tạo ảnh chụp màn hình riêng cho NSE-SMB-01, NSE-SMB-02, NSE-SMB-03 theo đúng quyết định của Kế hoạch trình bày X7C0 đã được phê duyệt.
 
 ---
 
 ## 5. Kiểm Toán Tệp Thuyết Minh Cắt Cúp (Crop-Manifest Audit)
 
-- Tệp thuyết minh cắt cúp: `work/do-an/CH3_33_SCENARIO2_CROP_MANIFEST_R1.md` được tạo đầy đủ và kiểm chứng tính toàn vẹn:
-  - **Tệp nguồn:** `work/do-an/chapter3/evidence/scenario2/Scenario2_NSE04_MS17010.png`
-    - Kích thước nguồn: 1280 × 800 px.
-    - Mã băm SHA-256 nguồn: `c970e56481a920061416949ea7543dcb96f1f2f99635dbe201131073202e14ac` (bảo toàn nguyên vẹn 100%, không bị sửa đổi byte).
+- Tệp thuyết minh cắt cúp: `work/do-an/CH3_33_SCENARIO2_CROP_MANIFEST_R1.md` đã được hiệu chỉnh câu từ theo đúng các dữ kiện thị giác trực tiếp:
+  - **Tệp nguồn:** `work/do-an/chapter3/evidence/scenario2/Scenario2_NSE04_MS17010.png` (1280 × 800 px, SHA-256: `c970e56481a920061416949ea7543dcb96f1f2f99635dbe201131073202e14ac`).
   - **Khung cắt cúp chuẩn hóa:** `x=0, y=24, width=1280, height=330`.
-  - **Tệp phái sinh:** `work/do-an/chapter3/presentation/3_3/Hinh_3_6_MS17010_NSE.png`
-    - Kích thước phái sinh: 1280 × 330 px.
-    - Mã băm SHA-256 phái sinh: `8f7a343fe9ab100a187a5ab4fe85cac320e9350cf5d59df0c4d78e385a137bdc`.
-  - **Nội dung bảo tồn:** Toàn bộ dòng lệnh vận hành Kali terminal, thông tin mục tiêu IP/MAC, trạng thái cổng 445/tcp mở, dòng thông báo hoàn tất `Nmap done` và dấu nhắc shell trả về.
-  - **Nội dung loại bỏ:** 24 px thanh tiêu đề máy ảo VirtualBox phía trên và 470 px khoảng đen trống không mang thông tin phía dưới terminal.
-  - **Can thiệp đồ họa:** Không bổ sung chú thích đồ họa (arrows, circles, highlights), không làm nét giả tạo (sharpening), không tái phối màu.
+  - **Tệp phái sinh:** `work/do-an/chapter3/presentation/3_3/Hinh_3_6_MS17010_NSE.png` (1280 × 330 px, SHA-256: `8f7a343fe9ab100a187a5ab4fe85cac320e9350cf5d59df0c4d78e385a137bdc`).
+  - **Câu từ ranh giới tại dòng 40:** Đã thay thế cụm từ suy diễn *"phiên quét kết thúc bình thường"* bằng dữ kiện quan sát trực tiếp: *"đầu ra đạt đến dòng Nmap done, dấu nhắc shell xuất hiện sau đó"*.
+  - Toàn bộ đường dẫn, mã băm SHA, kích thước và khung cắt cúp được giữ nguyên vẹn 100%.
 
 ---
 
-## 6. Ma Trận Đối Chiếu Đoạn Văn – Luận Điểm Đã Phê Duyệt (Paragraph-to-Claim Audit)
+## 6. Ma Trận Đối Chiếu Đoạn Văn – Luận Điểm Đã Hiệu Chỉnh (Paragraph-to-Claim Audit R2)
 
-Toàn bộ văn bản dự thảo, Bảng 3.4 và Hình 3.6 được ánh xạ đầy đủ 100% với 15 luận điểm kỹ thuật trong `work/do-an/CH3_33_SCENARIO2_CLAIM_EVIDENCE_MAP_R1.md` (`S2-C01` đến `S2-C15`):
+Toàn bộ văn bản dự thảo R2, Bảng 3.4 và Hình 3.6 được ánh xạ đầy đủ 100% với 15 luận điểm kỹ thuật trong `work/do-an/CH3_33_SCENARIO2_CLAIM_EVIDENCE_MAP_R1.md` (`S2-C01` đến `S2-C15`):
 
-| Claim ID | Tiểu mục | Nội dung luận điểm đã phê duyệt | Vị trí thể hiện trong văn bản R1 | Đánh giá ranh giới kỹ thuật |
+| Claim ID | Tiểu mục | Nội dung luận điểm đã phê duyệt | Vị trí thể hiện trong văn bản R2 | Đánh giá ranh giới kỹ thuật R2 |
 |---|---|---|---|---|
 | `S2-C01` | 3.3.1 | Cổng dịch vụ TCP 139 ở trạng thái mở từ xa | Đoạn 2 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 1) | Ghi nhận TCP 139 OPEN, phản hồi SYN-ACK, TTL=128 từ trạm Kali; không suy diễn kết nối phiên SMB thành công hay chia sẻ tệp sẵn sàng. |
 | `S2-C02` | 3.3.1 | Cổng dịch vụ TCP 445 ở trạng thái mở từ xa | Đoạn 2 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 1) | Ghi nhận TCP 445 OPEN, phản hồi SYN-ACK, TTL=128 từ trạm Kali; chỉ phản ánh khả năng tiếp cận ở tầng giao vận. |
 | `S2-C03` | 3.3.1 | Ranh giới kỹ thuật: Cổng 445 mở không đồng nghĩa với tồn tại lỗ hổng | Đoạn 2 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 1) | Khóa chặt ranh giới kỹ thuật: `445 OPEN != vulnerable`; không đồng nhất cổng mở với nguy cơ bị tấn công hay tồn tại lỗ hổng. |
-| `S2-C04` | 3.3.1 | NSE-SMB-02 ghi nhận 5 phương ngữ SMB, bao gồm SMBv1 | Đoạn 3 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 2) | Kịch bản `smb-protocols` ghi nhận 5 phương ngữ (`NT LM 0.12 (SMBv1)`, `2.0.2`, `2.1`, `3.0`, `3.0.2`); giữ nguyên chú thích nguyên văn `[dangerous, but default]`. |
-| `S2-C05` | 3.3.1 | Ranh giới kỹ thuật: Hỗ trợ SMBv1 không đồng nghĩa với xác nhận lỗ hổng MS17-010 | Đoạn 3 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 2) | Khóa chặt ranh giới kỹ thuật: `SMBv1 enabled != MS17-010 confirmed`; không dùng các lập luận về "điều kiện cần" hay "điều kiện tiên quyết cho khả năng bị ảnh hưởng". |
-| `S2-C06` | 3.3.1 | Chính sách ký số gói tin SMB từ xa là kích hoạt nhưng không bắt buộc | Đoạn 4 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 3) | Kịch bản `smb2-security-mode` trên phương ngữ 3.0.2 ghi nhận `Message signing enabled but not required`. |
+| `S2-C04` | 3.3.1 | NSE-SMB-02 ghi nhận 5 phương ngữ SMB, bao gồm SMBv1 | Đoạn 3 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 2) | Kịch bản `smb-protocols` ghi nhận 5 phương ngữ (`NT LM 0.12 (SMBv1)`, `2.0.2`, `2.1`, `3.0`, `3.0.2`); giữ nguyên chú thích nguyên văn `[dangerous, but default]` như một annotation mặc định của công cụ. |
+| `S2-C05` | 3.3.1 | Ranh giới kỹ thuật: Hỗ trợ SMBv1 không đồng nghĩa với xác nhận lỗ hổng MS17-010 | Đoạn 3 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 2) | Khóa chặt ranh giới kỹ thuật: `SMBv1 enabled != MS17-010 confirmed`; không dùng các lập luận về "điều kiện cần", "điều kiện tiên quyết", hay "tính chất mất an toàn". |
+| `S2-C06` | 3.3.1 | Chính sách ký số gói tin SMB từ xa là kích hoạt nhưng không bắt buộc | Đoạn 4 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 3) | Kịch bản `smb2-security-mode` trên phương ngữ 3.0.2 ghi nhận `Message signing enabled but not required`. Đã bỏ lý giải lý thuyết về tính toàn vẹn gói tin hay nghĩa vụ của client. |
 | `S2-C07` | 3.3.1 | Ranh giới kỹ thuật: Quan sát ký số từ xa và cờ cấu hình ký số cục bộ độc lập với nhau | Đoạn 4 Tiểu mục 3.3.1, Bảng 3.4 (Hàng 3) | Quan sát thăm dò từ xa của Nmap trên phương ngữ cụ thể duy trì độc lập với cờ cấu hình nội bộ tại Mục 3.1; không khái quát hóa cho mọi phương ngữ và không hòa giải trực tiếp hai tầng đo đạc. |
-| `S2-C08` | 3.3.2 | Lệnh Nmap được thực thi với tùy chọn `--script smb-vuln-ms17-010` | Đoạn 1 & Đoạn 3 Tiểu mục 3.3.2, Bảng 3.4 (Hàng 4) | Ghi nhận câu lệnh chỉ định tùy chọn `--script smb-vuln-ms17-010` nhắm vào cổng 445 của máy chủ mục tiêu `192.168.56.20`. |
-| `S2-C09` | 3.3.2 | Đầu ra NSE-SMB-04 đạt đến dòng hoàn tất `Nmap done` | Đoạn 3 Tiểu mục 3.3.2, Bảng 3.4 (Hàng 4) | Phiên quét kết thúc với dòng thông báo hoàn tất `Nmap done`, mục tiêu trực tuyến, cổng mở, dấu nhắc shell trả về bình thường; không coi kịch bản bị thất bại. |
+| `S2-C08` | 3.3.2 | Lệnh Nmap được thực thi với tùy chọn `--script smb-vuln-ms17-010` | Đoạn 1 & Đoạn 3 Tiểu mục 3.3.2, Bảng 3.4 (Hàng 4) | Ghi nhận: *"Phép đo NSE-SMB-04 được thực hiện bằng lệnh Nmap có tùy chọn --script smb-vuln-ms17-010 nhắm vào TCP 445 của 192.168.56.20."* Đã bỏ cụm từ "được kích hoạt", "gọi kịch bản chuyên biệt". |
+| `S2-C09` | 3.3.2 | Đầu ra NSE-SMB-04 đạt đến dòng hoàn tất `Nmap done` | Đoạn 3 Tiểu mục 3.3.2, Bảng 3.4 (Hàng 4) | Đầu ra ghi nhận đạt đến dòng thông báo hoàn tất `Nmap done`, dấu nhắc shell xuất hiện sau đó; không có thông báo lỗi hiển thị; đã bỏ cách nói "kết thúc bình thường" hay "trả về bình thường". |
 | `S2-C10` | 3.3.2 | Không xuất hiện khối kết quả `Host script results:` | Đoạn 3 Tiểu mục 3.3.2, Bảng 3.4 (Hàng 4) | Khối kết quả `Host script results:` không xuất hiện trong đầu ra ghi nhận; không có thông báo lỗi hiển thị; không bịa đặt bất kỳ kết quả NSE lịch sử nào. |
-| `S2-C11` | 3.3.2 | Phân loại kỹ thuật kết quả từ xa là `UNKNOWN / NO USABLE SCRIPT RESULT` | Đoạn 4 Tiểu mục 3.3.2, Bảng 3.4 (Hàng 4) | Phân loại phương pháp luận chuẩn xác là `UNKNOWN / NO USABLE SCRIPT RESULT`; nêu rõ UNKNOWN không phải chuỗi ký tự nguyên văn do Nmap in ra màn hình; không bịa đặt nguyên nhân vắng mặt đầu ra hay mã lỗi NTSTATUS. |
+| `S2-C11` | 3.3.2 | Phân loại kỹ thuật kết quả từ xa là `UNKNOWN / NO USABLE SCRIPT RESULT` | Đoạn 4 Tiểu mục 3.3.2, Bảng 3.4 (Hàng 4) | Phân loại phương pháp luận chuẩn xác là `UNKNOWN / NO USABLE SCRIPT RESULT`; nêu rõ UNKNOWN không phải chuỗi ký tự nguyên văn do Nmap in ra màn hình. Nguyên nhân vắng mặt đầu ra không được xác lập từ bộ bằng chứng hiện có. |
 | `S2-C12` | 3.3.2 | Ranh giới kỹ thuật: Kết quả không xác định từ xa không đồng nghĩa với an toàn | Đoạn 5 Tiểu mục 3.3.2, Bảng 3.4 (Hàng 4) | Khóa chặt nguyên tắc an toàn thông tin cốt lõi: `UNKNOWN != SAFE`; kịch bản không phát hiện lỗ hổng không đồng nghĩa với máy chủ an toàn; không tự suy diễn thành VULNERABLE, SAFE, NOT VULNERABLE hay PATCHED. |
-| `S2-C13` | 3.3.2 | Mốc chuẩn xuất phát cục bộ duy trì trạng thái chưa cài bản vá (UNPATCHED) | Đoạn 6 Tiểu mục 3.3.2 | Mục 3.1 đã phân loại trạng thái bản vá cục bộ là UNPATCHED; dữ kiện này được giữ độc lập với kết quả NSE từ xa (dựa trên srv.sys 6.3.9600.16421 < 6.3.9600.18604 và danh mục hotfix quan sát được không ghi nhận KB4012213/KB4012216). |
-| `S2-C14` | 3.3.2 | Ranh giới kỹ thuật: Mốc UNPATCHED cục bộ không biến kết quả từ xa thành VULNERABLE | Đoạn 7 Tiểu mục 3.3.2 | Hai trục thông tin độc lập: mốc cục bộ UNPATCHED không biến kết quả từ xa thành VULNERABLE; kết quả từ xa UNKNOWN không phủ định hiện trạng thiếu bản vá để coi máy chủ an toàn; không sử dụng ngôn từ âm tính giả (false negative). |
-| `S2-C15` | 3.3.2 | Ranh giới phạm vi: Kịch bản 2 hoàn toàn không chứa kết quả khai thác hoặc RCE | Đoạn 8 Tiểu mục 3.3.2 | Kịch bản 2 là quy trình rà quét thăm dò an ninh từ xa bằng NSE; không có bước khai thác tấn công và không sinh ra bất kỳ tệp bằng chứng hay kết quả nào về RCE, reverse shell hoặc Meterpreter. |
+| `S2-C13` | 3.3.2 | Mốc chuẩn xuất phát cục bộ duy trì trạng thái chưa cài bản vá (UNPATCHED) | Đoạn 6 Tiểu mục 3.3.2 | Viện dẫn chuẩn mực: *"Mục 3.1 đã phân loại trạng thái bản vá cục bộ là UNPATCHED; dữ kiện này được giữ độc lập với kết quả NSE từ xa."* Đã loại bỏ đoạn tái suy diễn rườm rà về `srv.sys` và hotfix. |
+| `S2-C14` | 3.3.2 | Ranh giới kỹ thuật: Mốc UNPATCHED cục bộ không biến kết quả từ xa thành VULNERABLE | Đoạn 6 Tiểu mục 3.3.2 | Hai trục thông tin độc lập: mốc cục bộ UNPATCHED không biến kết quả từ xa thành VULNERABLE; kết quả từ xa UNKNOWN không phủ định hiện trạng thiếu bản vá để coi máy chủ an toàn; không dùng ngôn từ âm tính giả (false negative). |
+| `S2-C15` | 3.3.2 | Ranh giới phạm vi: Kịch bản 2 hoàn toàn không chứa kết quả khai thác hoặc RCE | Đoạn 7 Tiểu mục 3.3.2 | Câu văn R2 chuẩn mực: *"Về ranh giới phạm vi, Kịch bản 2 dừng ở phạm vi rà quét NSE; không có bước khai thác hoặc kết quả thực thi mã từ xa được ghi nhận trong kịch bản này."* Đã loại bỏ danh mục công cụ (`Meterpreter`, `reverse shell`). |
 
 ---
 
@@ -106,40 +106,41 @@ Toàn bộ văn bản dự thảo, Bảng 3.4 và Hình 3.6 được ánh xạ �
 
 ---
 
-## 8. Kiểm Toán Ranh Giới Giao Thức SMBv1 và MS17-010 NSE02 (NSE02 SMBv1/MS17 Boundary Audit)
+## 8. Kiểm Toán Ranh Giới Giao Thức SMBv1 và MS17-010 NSE02 (NSE02 Dialect Wording Audit)
 
-- Chỉ ghi nhận đúng 5 phương ngữ xuất hiện trong đầu ra: `NT LM 0.12 (SMBv1)`, `2.0.2`, `2.1`, `3.0`, `3.0.2`.
-- Trích dẫn trung thực chú thích nguyên văn của Nmap: `[dangerous, but default]`.
-- Khóa chặt ranh giới: `SMBv1 enabled != MS17-010 confirmed`.
-- Loại bỏ hoàn toàn và không sử dụng các khái niệm "điều kiện cần" hoặc "điều kiện tiên quyết cho khả năng bị ảnh hưởng".
+- Câu văn R2: *"Kịch bản smb-protocols ghi nhận 5 phương ngữ: NT LM 0.12 (SMBv1), 2.0.2, 2.1, 3.0 và 3.0.2. Trong đầu ra ghi nhận của Nmap, phương ngữ NT LM 0.12 đi kèm chú thích nguyên văn [dangerous, but default]; đây là annotation mặc định của công cụ quét, không phải là kết luận hay phán quyết về lỗ hổng. Về mặt phương pháp luận, sự hiện diện của phương ngữ SMBv1 trong kết quả đo không đồng nghĩa với việc máy chủ đã được xác nhận dính lỗ hổng MS17-010 (SMBv1 enabled != MS17-010 confirmed)."*
+- Đã loại bỏ hoàn toàn các cụm từ bị gắn cờ:
+  * `hỗ trợ 5 phương ngữ` = 0.
+  * `hỗ trợ đàm phán` = 0.
+  * `Hỗ trợ đa phương ngữ` = 0.
+  * `tính chất mất an toàn` = 0.
+  * `tính tương thích ngược` = 0.
+  * `đàm phán và lập danh mục ... chấp thuận` = 0.
 
 ---
 
 ## 9. Kiểm Toán Tính Độc Lập Của Ký Số Gói Tin NSE03 (NSE03 Signing Independence Audit)
 
-- Ghi nhận chính xác kết quả thăm dò trên phương ngữ 3.0.2: `Message signing enabled but not required`.
-- Không khái quát hóa kết quả ký số cho toàn bộ các phương ngữ SMB khác.
-- Duy trì tính độc lập nghiêm ngặt: không sử dụng cờ cấu hình cục bộ `RequireSecuritySignature` tại Mục 3.1 để xác nhận hay hòa giải quan sát ký số từ xa; hai tầng đo đạc được đối soát riêng biệt.
+- Câu văn R2: *"Trên phương ngữ 3.0.2 được ghi nhận, kịch bản trả về kết quả Message signing enabled but not required. Đây là quan sát thăm dò từ xa của kịch bản Nmap trên phương ngữ cụ thể này và được duy trì độc lập với các cờ cấu hình nội bộ tại Mục 3.1. Kết quả này không được khái quát hóa cho các phương ngữ khác và không dùng để đối chiếu hay hòa giải trực tiếp với thiết lập trong hệ điều hành."*
+- Đã loại bỏ lý thuyết an ninh rộng về "bảo vệ tính toàn vẹn gói tin" và nghĩa vụ ký số của các trạm khách.
 
 ---
 
 ## 10. Kiểm Toán Quan Sát Trực Tiếp Phép Đo NSE04 (NSE04 Direct-Observation Audit)
 
 - Bằng chứng lệnh và đầu ra hiển thị:
-  * Câu lệnh chỉ định rõ: `--script smb-vuln-ms17-010` nhắm vào cổng 445 của trạm `192.168.56.20`.
-  * Trạng thái mục tiêu: trực tuyến (`Host is up`).
-  * Trạng thái cổng: 445/tcp mở (`open microsoft-ds`).
-  * Trạng thái hoàn tất: phiên quét đạt đến dòng `Nmap done` và dấu nhắc shell trả về bình thường.
-  * Hiện diện đầu ra kịch bản: **Không xuất hiện** khối kết quả `Host script results:`.
-  * Thông báo lỗi: **Không có** thông báo lỗi hiển thị trong đầu ra ghi nhận.
+  * Câu lệnh: *"Phép đo NSE-SMB-04 được thực hiện bằng lệnh Nmap có tùy chọn --script smb-vuln-ms17-010 nhắm vào TCP 445 của 192.168.56.20."* (Đã bỏ "được kích hoạt", "gọi kịch bản chuyên biệt").
+  * Đầu ra hoàn tất: *"Đầu ra ghi nhận đạt đến dòng thông báo hoàn tất Nmap done, dấu nhắc shell xuất hiện sau đó, và không có thông báo lỗi hiển thị trong đầu ra ghi nhận."* (Đã bỏ "kết thúc bình thường", "trả về bình thường").
+  * Hiện diện đầu ra kịch bản: **Không xuất hiện** khối `Host script results:`.
 
 ---
 
 ## 11. Kiểm Toán Phân Loại Kỹ Thuật UNKNOWN (UNKNOWN Classification Audit)
 
 - Phân loại kỹ thuật chuẩn xác của đề án: **`UNKNOWN / NO USABLE SCRIPT RESULT`**.
-- Khẳng định tường minh trong văn bản: `UNKNOWN` là phân loại phương pháp luận của đề án, **không phải chuỗi ký tự nguyên văn do Nmap in ra màn hình**.
-- Không tuyên bố ảnh chụp màn hình tự nó "chứng minh UNKNOWN"; ảnh chụp màn hình ghi nhận sự vắng mặt của khối kết quả kịch bản, và đề án phân loại hiện tượng này là UNKNOWN.
+- Khẳng định tường minh: `UNKNOWN` là phân loại phương pháp luận của đề án, **không phải chuỗi ký tự nguyên văn do Nmap in ra màn hình**.
+- Wording nguyên nhân đầu ra vắng mặt: *"Nguyên nhân của việc không có đầu ra script khả dụng không được xác lập từ bộ bằng chứng hiện có."* (Đã bỏ cách nói khẳng định tuyệt đối "nguyên nhân không thể xác định").
+- Tuyệt đối không bịa đặt mã lỗi NTSTATUS, quyền IPC$, tài khoản guest, và không tuyên bố kịch bản bị thất bại (failed).
 
 ---
 
@@ -154,10 +155,11 @@ Toàn bộ văn bản dự thảo, Bảng 3.4 và Hình 3.6 được ánh xạ �
 ## 13. Kiểm Toán Tính Độc Lập Giữa UNPATCHED Cục Bộ và UNKNOWN Từ Xa (Independence Audit)
 
 - Wording ưu tiên được thực hiện chuẩn xác: *"Mục 3.1 đã phân loại trạng thái bản vá cục bộ là UNPATCHED; dữ kiện này được giữ độc lập với kết quả NSE từ xa."*
-- Hai trục đo đạc độc lập:
-  * Trục nội bộ (Local Ground State): `UNPATCHED` (dựa trên `srv.sys` 6.3.9600.16421 < 6.3.9600.18604 và không có hotfix KB4012213/KB4012216 trong danh mục quan sát được).
-  * Trục từ xa (Remote Measurement State): `UNKNOWN / NO USABLE SCRIPT RESULT`.
-- Ranh giới tuyệt đối:
+- Đã loại bỏ việc tái diễn giải dài dòng các số hiệu `srv.sys` và hotfix trong Mục 3.3.
+- Đã loại bỏ hoàn toàn các cụm từ:
+  * `ngưỡng cập nhật an toàn tối thiểu` = 0.
+  * `các bản cập nhật thay thế tương ứng` = 0.
+- Ranh giới tuyệt đối được bảo tồn:
   * Không dùng `UNPATCHED` để suy diễn kết quả từ xa thành `VULNERABLE`.
   * Không dùng `UNKNOWN` để phủ định hiện trạng thiếu bản vá nhằm tuyên bố hệ thống an toàn hay đã vá (`PATCHED`).
 
@@ -184,9 +186,10 @@ Toàn bộ văn bản dự thảo, Bảng 3.4 và Hình 3.6 được ánh xạ �
 
 ## 16. Kiểm Toán Ranh Giới Khai Thác / RCE (Exploitation/RCE Boundary Audit)
 
-- Kịch bản 2 được định hình nghiêm ngặt là quy trình rà quét thăm dò an ninh từ xa bằng kịch bản NSE Nmap.
-- Không có bước khai thác tấn công (canonical exploit step).
-- Không có tệp bằng chứng hoặc kết quả nào liên quan đến thực thi mã từ xa (RCE), tạo phiên kết nối ngược (reverse shell) hoặc phiên Meterpreter.
+- Câu văn sinh viên đã tinh gọn chuẩn mực: *"Về ranh giới phạm vi, Kịch bản 2 dừng ở phạm vi rà quét NSE; không có bước khai thác hoặc kết quả thực thi mã từ xa được ghi nhận trong kịch bản này."*
+- Rà soát tự động xác nhận số lần xuất hiện trong văn xuôi sinh viên của các thuật ngữ công cụ khai thác sau là **0**:
+  * `Meterpreter`: 0.
+  * `reverse shell`: 0.
 - Không mô tả hành vi cấu trúc gói tin hoặc mã payload nội bộ của kịch bản NSE.
 
 ---
@@ -194,7 +197,7 @@ Toàn bộ văn bản dự thảo, Bảng 3.4 và Hình 3.6 được ánh xạ �
 ## 17. Kiểm Toán Xuất Xứ Dòng Lệnh Vận Hành (Command-Lineage Audit)
 
 - Câu lệnh thực thi trên giao diện terminal Kali được thể hiện đúng nguyên văn như quan sát trên màn hình: `nmap -p 445 --script smb-vuln-ms17-010 192.168.56.20`.
-- Không gán cờ nội bộ `--privileged` (vốn chỉ xuất hiện trong tệp argv Nmap thô) vào câu lệnh của người vận hành.
+- Không gán cờ nội bộ `--privileged` vào câu lệnh của người vận hành.
 - Không bịa đặt các tùy chọn không có trong bằng chứng như `-Pn`, `sudo`, hoặc các tùy chọn của các phép đo khác.
 
 ---
@@ -251,9 +254,11 @@ Toàn bộ văn bản dự thảo, Bảng 3.4 và Hình 3.6 được ánh xạ �
 
 ---
 
-## 23. Bảng Kiểm Tra Các Chuỗi Bắt Buộc & Nghiêm Cấm (Required/Forbidden Terms Audit)
+## 23. Bảng Kiểm Tra Các Chuỗi Bắt Buộc & Nghiêm Cấm (Required/Forbidden Terms Audit R2)
 
-| Chuỗi kiểm tra | Loại kiểm tra | Yêu cầu | Kết quả thực tế R1 | Đánh giá |
+Toàn bộ các phép tìm kiếm dưới đây được thực hiện trực tiếp trên các byte văn xuôi sinh viên cuối cùng sau khi hoàn tất chỉnh sửa:
+
+| Chuỗi kiểm tra | Loại kiểm tra | Yêu cầu | Kết quả thực tế R2 | Đánh giá |
 |---|---|---|---|---|
 | `3.3. Kết quả Kịch bản 2 — Kiểm tra dấu hiệu MS17-010 bằng NSE` | Bắt buộc | Xuất hiện | Có (H2 duy nhất) | ĐẠT |
 | `3.3.1. Khảo sát điều kiện kết nối và thuộc tính giao thức SMB (NSE-SMB-01 đến NSE-SMB-03)` | Bắt buộc | Xuất hiện | Có (H3 thứ nhất) | ĐẠT |
@@ -266,18 +271,30 @@ Toàn bộ văn bản dự thảo, Bảng 3.4 và Hình 3.6 được ánh xạ �
 | `UNKNOWN / NO USABLE SCRIPT RESULT` | Bắt buộc | Xuất hiện | Có | ĐẠT |
 | `UNKNOWN != SAFE` | Bắt buộc | Xuất hiện | Có | ĐẠT |
 | `Mục 3.1 đã phân loại trạng thái bản vá cục bộ là UNPATCHED; dữ kiện này được giữ độc lập với kết quả NSE từ xa.` | Bắt buộc | Xuất hiện nguyên văn | Có | ĐẠT |
-| `Baseline Case A` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `Nmap 7.95` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `sẵn sàng tiếp nhận` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `điều kiện cần` / `điều kiện tiên quyết` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `false negative` / `False Negative` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `âm tính giả` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `canonical` / `ground truth` / `gate` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `kiểm toán` | Nghiêm cấm trong văn xuôi | 0 lần | 0 | ĐẠT |
-| `S2-RAW-*` / `S2-IMG-*` / `S2-C*` | Nghiêm cấm trong văn xuôi | 0 lần | 0 | ĐẠT |
-| `Meterpreter` / `reverse shell` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `-Pn` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
-| `STATUS_` / `IPC$` | Nghiêm cấm | 0 lần | 0 | ĐẠT |
+| `hỗ trợ 5 phương ngữ` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `hỗ trợ đàm phán` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `Hỗ trợ đa phương ngữ` | Nghiêm cấm trong văn xuôi/bảng | 0 lần | **0** | ĐẠT |
+| `tính chất mất an toàn` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `phản ánh giới hạn của phép đo từ xa` | Nghiêm cấm trong văn xuôi/bảng | 0 lần | **0** | ĐẠT |
+| `được kích hoạt` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `gọi kịch bản chuyên biệt` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `trả về bình thường` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `kết thúc bình thường` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `ngưỡng cập nhật an toàn tối thiểu` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `các bản cập nhật thay thế tương ứng` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `Meterpreter` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `reverse shell` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `Baseline Case A` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
+| `Nmap 7.95` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
+| `sẵn sàng tiếp nhận` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
+| `điều kiện cần` / `điều kiện tiên quyết` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
+| `false negative` / `False Negative` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
+| `âm tính giả` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
+| `canonical` / `ground truth` / `gate` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
+| `kiểm toán` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `S2-RAW-*` / `S2-IMG-*` / `S2-C*` | Nghiêm cấm trong văn xuôi | 0 lần | **0** | ĐẠT |
+| `-Pn` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
+| `STATUS_` / `IPC$` | Nghiêm cấm | 0 lần | **0** | ĐẠT |
 
 ---
 
@@ -286,17 +303,18 @@ Toàn bộ văn bản dự thảo, Bảng 3.4 và Hình 3.6 được ánh xạ �
 1. `validate_project.py`: `Project validation passed.` (Mã thoát 0).
 2. `unittest discover`: 7/7 bài kiểm thử unit tests vượt qua (`OK`).
 3. `lint_vi_academic.py`: `Không phát hiện mẫu văn phong cần xem xét.` (error=0, warning=0, info=0).
-4. `git diff --check`: Sạch hoàn toàn, không có lỗi thụt lề hay khoảng trắng thừa.
-5. Ảnh bằng chứng gốc `Scenario2_NSE04_MS17010.png` giữ nguyên vẹn 100% (SHA-256 không đổi).
+4. `git diff --check`: Sạch hoàn toàn, không có lỗi định dạng hay khoảng trắng thừa.
+5. Ảnh bằng chứng gốc `Scenario2_NSE04_MS17010.png` giữ nguyên vẹn 100% (SHA-256 không đổi: `c970e56481a920061416949ea7543dcb96f1f2f99635dbe201131073202e14ac`).
+6. Ảnh phái sinh `Hinh_3_6_MS17010_NSE.png` giữ nguyên vẹn 100% (SHA-256 không đổi: `8f7a343fe9ab100a187a5ab4fe85cac320e9350cf5d59df0c4d78e385a137bdc`).
 
 ---
 
 ## 25. Các Vấn Đề Còn Băn Khoăn (Unresolved Concerns)
 
-- Không còn vấn đề kỹ thuật hay phương pháp luận nào tồn đọng. Dự thảo đáp ứng đầy đủ 100% các tiêu chí và ranh giới đã cam kết.
+- Không còn vấn đề kỹ thuật hay phương pháp luận nào tồn đọng. Toàn bộ 6 nhóm vấn đề chặn (Blocking Corrections A, B, C, D, E, F) nêu trong Báo cáo Thẩm tra Độc lập R1 đã được khắc phục triệt để và kiểm chứng tự động.
 
 ---
 
 **KẾT LUẬN TỰ ĐÁNH GIÁ:**
-Dự thảo Mục 3.3 R1 đạt trạng thái:
-`X7C1_CH3_33_SCENARIO2_DRAFT_R1_READY_FOR_EXTERNAL_REVIEW`
+Dự thảo Mục 3.3 R2 đạt trạng thái:
+`X7C1_CH3_33_SCENARIO2_DRAFT_R2_READY_FOR_FINAL_EXTERNAL_REVIEW`
