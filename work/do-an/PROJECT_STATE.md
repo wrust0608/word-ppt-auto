@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7B1_CH3_32_SCENARIO1_DRAFT`.
+- Current gate: `X7B1_R2_CORRECTION_REQUIRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1144,4 +1144,33 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - Bảng 3.4;
   - Hình 3.6.
 - Scenario 2 / X7C remains **BLOCKED** until Section 3.2 prose passes independent external review + user approval.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-68 — X7B1 Section 3.2 R1 requires bounded correction
+
+- Ngày: 2026-10-06.
+- R1 candidate:
+  `2bff0dead870f838284a02eea148f4c468263584`.
+- Independent external review:
+  `work/do-an/X7B1_CH3_32_EXTERNAL_REVIEW_R1.md`.
+- Score: **88/100 — REVISE_BLOCKING**.
+- Presentation implementation PASS:
+  - 1 H2 / 2 H3;
+  - Bảng 3.3;
+  - Hình 3.4–3.5;
+  - crop rectangles and derived image hashes independently verified;
+  - no later-section outcome leakage.
+- Blocking corrections:
+  1. narrow B3/B4 prose to direct ARP/TCP observations;
+  2. remove generalized "safe if patched" statement;
+  3. keep local signing flags independent from remote `smb2-security-mode`;
+  4. narrow B5 absolute wording and Scenario 2 transition;
+  5. correct stale X7B0 source SHA metadata and rebuild self-review claim numbering from the approved claim map.
+- Actual source SHA-256 verified from repository bytes:
+  - B5: `05699e248fa66ab224adc6809fb057a282d86c29c3ce2851823e07bd874f6466`;
+  - B6: `b5b236cbe695b530b44e0af592f010f1f49bef9f5da427b9958fd9020bd651f8`.
+- R2 prompt:
+  `work/do-an/prompts/X7B1_R2_CORRECT_CH3_32_SCENARIO1.md`.
+- X7C remains **BLOCKED**.
 - Chapter 4 remains **BLOCKED**.
