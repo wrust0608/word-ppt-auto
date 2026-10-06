@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7D1_CH3_34_PROSE_NEXT`.
+- Current gate: `ROADMAP_RESET_WAITING_FOR_USER_CONFIRMATION`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1738,4 +1738,4 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Chapter 4/publication/defense work is backlog and cannot auto-open.
 - X7H includes explicit whole-chapter coherence/compression review so independently approved sections do not produce a repetitive QA-like chapter.
 - No DOCX work before complete Chapter 3 user approval.
-- Current next action remains X7D1 only.
+- Next execution after user confirmation: X7D1 only. No executor task is opened before that confirmation.
