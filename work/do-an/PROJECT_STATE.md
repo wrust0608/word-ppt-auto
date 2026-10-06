@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7D0_AUTHORIZED_AFTER_X7C1_USER_APPROVAL`.
+- Current gate: `WR1_DEMO1_WORD_REVIEW_REQUIRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1482,3 +1482,26 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7D0 is authorized for **Case B Evidence & Presentation Plan ONLY**.
 - Section 3.4 prose remains **BLOCKED** until X7D0 passes independent external review + user approval.
 - Case C and Chapter 4 remain **BLOCKED**.
+
+
+## DEC-80 — User requires staged Word review checkpoints after each demo
+
+- Ngày: 2026-10-06.
+- User requirement:
+  1. after Demo 1, build a complete Word review snapshot and review everything completed through that demo;
+  2. after Demo 2, build another complete Word review snapshot and review everything completed through that demo;
+  3. after full Chapter 3 completion, assemble Chapter 2 + Chapter 3 into one complete Word document and perform full-document review.
+- Canonical workflow:
+  `work/do-an/DEMO_WORD_REVIEW_WORKFLOW.md`.
+- WR1 content:
+  - full approved Chapter 2;
+  - approved Chapter 3 Sections 3.1–3.2.
+- WR2 content:
+  - full approved Chapter 2;
+  - approved Chapter 3 Sections 3.1–3.3.
+- WR3 content:
+  - full approved Chapter 2;
+  - complete approved Chapter 3 Sections 3.1–3.7.
+- X7D0 branch already exists but is **PAUSED_BY_USER_WORD_REVIEW_GATE**.
+- X7D0 must not execute until WR1 and WR2 both pass independent Word review and receive user approval.
+- Chapter 4 must not open until WR3 passes independent full-document review + user approval.
