@@ -29,10 +29,13 @@ git status --short
 git rev-parse HEAD
 ```
 
-Confirm branch ancestry includes integration merge:
-`85f28df4c4c2a5409a11c886b826a56c6736044b`
+Confirm branch ancestry includes the current integration sync commit:
+`7cf63376b40de6758730e10756f403e9a1603ad6`
 
-If not, STOP.
+Expected X7A0 branch synchronization commit at handoff:
+`33a490c6573dd7a140545fb5fb29b384e443fe88`
+
+If the branch does not contain `7cf63376b40de6758730e10756f403e9a1603ad6`, STOP.
 
 ## 2. Mandatory read order
 
