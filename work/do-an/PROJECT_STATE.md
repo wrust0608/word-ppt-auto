@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7A1_CH3_31_BASELINE_DRAFT`.
+- Current gate: `X7B0_AUTHORIZED_AFTER_X7A1_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -24,10 +24,10 @@
 
 ### Current immediate sequence
 
-1. Execute **X7A1 — draft Section 3.1 Baseline** only.
-2. External-review the 3.1 prose, tables and derived presentation images.
-3. After user approval of 3.1 prose, integrate the completed section into `feature/ch3-integration`.
-4. Only then open X7B0 for Scenario 1 evidence/presentation planning.
+1. Section 3.1 is **USER APPROVED / LOCKED** at reviewer-final SHA `2d4690e8c40c870abd19019c0d51b31456a9229c`.
+2. Integrate only the approved Section 3.1 artifacts into `feature/ch3-integration`.
+3. Open X7B0 from the resulting integration HEAD for **Scenario 1 Evidence & Presentation Plan ONLY**.
+4. X7B1 prose remains BLOCKED until the X7B0 plan passes external review + user approval.
 
 ### Current read order for any new agent
 
@@ -788,7 +788,7 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Ngày: 2026-10-06.
 - G0 review: `work/do-an/G0_CH3_GOVERNANCE_RECONCILIATION_FINAL.md`.
 - G0 verdict: **PASS / blockers 0**.
-- Current Chapter 3 accumulation branch: `feature/ch3-integration` @ `7cf63376b40de6758730e10756f403e9a1603ad6`.
+- Current Chapter 3 accumulation branch: `feature/ch3-integration` @ `74a76bdf5f7921849ba38de93135794c8214c7a9`.
 - X6 evidence merged into integration at `85f28df4c4c2a5409a11c886b826a56c6736044b`.
 - Current isolated planning branch: `feature/x7a0-ch3-baseline-plan` @ `33a490c6573dd7a140545fb5fb29b384e443fe88`.
 - X7A0 prompt: `work/do-an/prompts/X7A0_BASELINE_EVIDENCE_PRESENTATION_PLAN.md`.
@@ -883,3 +883,122 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   `work/do-an/prompts/X7A1_DRAFT_CH3_31_BASELINE.md`.
 - X7A1 may create derived presentation crops with SHA/crop-manifest traceability but must not modify source evidence.
 - X7B remains BLOCKED until Section 3.1 prose passes external review + user approval.
+
+
+## DEC-58 — X7A1 baseline prose branch created from approved integration state
+
+- Ngày: 2026-10-06.
+- Current integration HEAD after approved X7A0 artifacts + authority sync:
+  `74a76bdf5f7921849ba38de93135794c8214c7a9`.
+- X7A1 branch created from that exact HEAD:
+  `feature/x7a1-ch3-baseline-draft`.
+- X7A1 scope:
+  - write Section 3.1 only;
+  - create 2 locked tables;
+  - embed 3 locked figures;
+  - create traceable derived presentation crops/copies;
+  - no Scenario 1/2, Case B/C, Chapter 4 or final DOCX.
+- X7A1 prompt:
+  `work/do-an/prompts/X7A1_DRAFT_CH3_31_BASELINE.md`.
+- X7B remains BLOCKED.
+
+
+## DEC-59 — X7A1 Section 3.1 R1 requires blocking prose revision
+
+- Ngày: 2026-10-06.
+- R1 branch: `feature/x7a1-ch3-baseline-draft`.
+- R1 remote HEAD: `9c180faab36738626976665059db507e06954725`.
+- External review:
+  `work/do-an/X7A1_CH3_31_EXTERNAL_REVIEW_R1.md`.
+- Score: **82/100 — REVISE_BLOCKING**.
+- PASS:
+  - clean scope;
+  - 1 H2 / 2 H3;
+  - 2 tables;
+  - 3 presentation figures;
+  - crop manifest and source hashes are valid;
+  - no later-section leakage.
+- Blocking corrections:
+  1. local SMB flags were converted into negotiation capability;
+  2. remote port state was incorrectly tied directly to a “middle firewall”;
+  3. firewall configuration was converted into proven traffic behavior/exclusion;
+  4. generalized FileVersion/RTM explanation exceeded approved claims;
+  5. “safe threshold”, absolute hotfix absence and snapshot reproducibility wording overreached;
+  6. current [4]/[5] citation mapping is wrong in the global Chapter 1 bibliography.
+- R2 citation strategy:
+  - visible prose names Microsoft sources naturally;
+  - internal non-rendering `CITE-ANCHOR: S005, S032`;
+  - final IEEE numbering deferred to global normalization gate.
+- R2 prompt:
+  `work/do-an/prompts/X7A1_R2_CORRECT_CH3_31_BASELINE.md`.
+- X7B remains BLOCKED.
+
+
+## DEC-60 — X7A1 Section 3.1 R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `c2acf1b4bc41c4260f14416fd217b94bf4f829c7`.
+- Reviewer-final X7A1 branch HEAD after one bounded route-wording micro-fix:
+  `2d4690e8c40c870abd19019c0d51b31456a9229c`.
+- Final review:
+  `work/do-an/X7A1_CH3_31_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- Section 3.1 locked design remains:
+  - 1 H2 / 2 H3;
+  - Bảng 3.1–3.2;
+  - Hình 3.1–3.3.
+- Citation handling:
+  - wrong visible [4]/[5] removed;
+  - internal non-rendering S005/S032 anchor retained;
+  - final IEEE numbering deferred to global normalization gate.
+- Current gate:
+  `X7A1_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7B remains BLOCKED until user approval and integration of completed Section 3.1.
+
+
+## DEC-61 — Canonical handoff created for migration to a new ChatGPT chat
+
+- Ngày: 2026-10-06.
+- User requested migration of reviewer/QA responsibility to a fresh ChatGPT conversation because the current conversation is too long.
+- Canonical new-chat handoff:
+  `work/do-an/CHATGPT_CURRENT_HANDOFF_2026_10_06.md`.
+- `HANDOFF.md` now points new ChatGPT sessions to that artifact.
+- Current gate remains:
+  `X7A1_PASS_WAITING_FOR_USER_APPROVAL`.
+- Reviewer-final Section 3.1 branch HEAD:
+  `2d4690e8c40c870abd19019c0d51b31456a9229c`.
+- Final X7A1 review:
+  `work/do-an/X7A1_CH3_31_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score:
+  **99/100 — PASS / blockers 0**.
+- Important: this handoff does not constitute user approval of Section 3.1.
+- X7B remains BLOCKED until explicit user approval and integration of completed Section 3.1.
+
+
+## DEC-62 — User approves Section 3.1; X7A1 locked and X7B0 authorized
+
+- Ngày: 2026-10-06.
+- User decision on Section 3.1: **APPROVED / CHỐT**.
+- Reviewer-final Section 3.1 source:
+  `feature/x7a1-ch3-baseline-draft@2d4690e8c40c870abd19019c0d51b31456a9229c`.
+- Final external review:
+  `work/do-an/X7A1_CH3_31_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- Section 3.1 is now **USER APPROVED / LOCKED**.
+- Locked public structure remains:
+  - 3.1 Trạng thái baseline trước đo đạc;
+  - 3.1.1 Trạng thái mạng và dịch vụ SMB;
+  - 3.1.2 Trạng thái bản vá và mốc phục hồi;
+  - Bảng 3.1–3.2;
+  - Hình 3.1–3.3.
+- Citation handling remains deferred to the publication-wide IEEE normalization gate via the internal S005/S032 anchor.
+- The approved Section 3.1 artifacts are to be explicitly integrated into `feature/ch3-integration`; do not merge unrelated branch history.
+- Next available numbering remains:
+  - **Bảng 3.3**;
+  - **Hình 3.4**.
+- X7B0 is authorized for **Scenario 1 Evidence & Presentation Plan ONLY**.
+- X7B1 prose remains BLOCKED until X7B0 passes external review + user approval.
+- Chapter 4 remains BLOCKED.
