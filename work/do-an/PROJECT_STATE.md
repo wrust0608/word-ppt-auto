@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7E0_CASEC_PLAN_IN_PROGRESS`.
+- Current gate: `X7E0_R2_CORRECTION_REQUIRED`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1810,3 +1810,27 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Scope: evidence/presentation plan only.
 - Agent must inspect all 17 staged Case C files and all 9 screenshots.
 - No prose, no crops, no Word, no Chapter 2/4 work.
+
+
+## DEC-98 — X7E0 Case C plan R1 requires bounded correction
+
+- Ngày: 2026-10-07.
+- Executor R1 candidate: `fe4aef1a7cce7bf5782cb8d6c9d3edfa10f08a26`.
+- External review: `work/do-an/X7E0_CASEC_PLAN_EXTERNAL_REVIEW_R1.md`.
+- Verdict: **87/100 — REVISE_BLOCKING**.
+- Accepted:
+  - 2 H3;
+  - one Bảng 3.6;
+  - three main figures Hình 3.9–3.11;
+  - explicit rule-label conflict;
+  - timebase boundary;
+  - Windows-local provenance separation.
+- R2 required:
+  - remove invented NSE04 causal explanation;
+  - correct baseline wording that incorrectly implied no firewall existed;
+  - narrow absolute/cross-layer causal language;
+  - fix Hình 3.9 crop proposal;
+  - remove nonexistent `CHAPTER_3_EVIDENCE_INDEX.md` reference and invented stable-ID registration;
+  - narrow rule-order theory and local-state continuity wording.
+- Prompt: `work/do-an/prompts/X7E0_R2_CORRECT_CASEC_PLAN.md`.
+- Section 3.5 prose remains BLOCKED.
