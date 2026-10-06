@@ -932,3 +932,27 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - R2 prompt:
   `work/do-an/prompts/X7A1_R2_CORRECT_CH3_31_BASELINE.md`.
 - X7B remains BLOCKED.
+
+
+## DEC-60 — X7A1 Section 3.1 R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `c2acf1b4bc41c4260f14416fd217b94bf4f829c7`.
+- Reviewer-final X7A1 branch HEAD after one bounded route-wording micro-fix:
+  `2d4690e8c40c870abd19019c0d51b31456a9229c`.
+- Final review:
+  `work/do-an/X7A1_CH3_31_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- Section 3.1 locked design remains:
+  - 1 H2 / 2 H3;
+  - Bảng 3.1–3.2;
+  - Hình 3.1–3.3.
+- Citation handling:
+  - wrong visible [4]/[5] removed;
+  - internal non-rendering S005/S032 anchor retained;
+  - final IEEE numbering deferred to global normalization gate.
+- Current gate:
+  `X7A1_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7B remains BLOCKED until user approval and integration of completed Section 3.1.
