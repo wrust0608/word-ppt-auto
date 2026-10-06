@@ -1,6 +1,8 @@
 # EXECUTION PLAN — ĐỒ ÁN SMB/NMAP/NSE–MS17-010
 
-Trạng thái: `ACTIVE / X4_X5_READY_AFTER_X3B_APPROVAL`  
+> **STATUS OVERRIDE 2026-10-07:** Không dùng tài liệu này để chọn bước tiếp theo. Current authority: `ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`. Các phase Chapter 4/publication/defense trong tài liệu này là backlog và không tự kích hoạt.
+
+Trạng thái: `HISTORICAL / SUPERSEDED_FOR_CURRENT_MILESTONE_2026_10_07`  
 Ngày: 2026-10-05  
 Nguồn: `ROADMAP_BLUEPRINT_2026_10_05.md`, `ROADMAP_BLUEPRINT_REAUDIT_2026_10_05.md`, `EXPERIMENTAL_TRUTH_MATRIX.md`.
 
