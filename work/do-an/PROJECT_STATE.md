@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7E0_CASEC_PLAN_IN_PROGRESS`.
+- Current gate: `X7E0_R2_CORRECTION_REQUIRED`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1808,3 +1808,12 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Active branch: `feature/x7e0-ch3-casec-plan`.
 - X7E0 scope: Case C evidence/presentation plan only.
 - Section 3.5 prose remains BLOCKED until plan review + user approval.
+
+
+## DEC-98 — X7E0 Case C plan R1 requires correction
+
+- Ngày: 2026-10-07.
+- Candidate: `fe4aef1a7cce7bf5782cb8d6c9d3edfa10f08a26`.
+- Verdict: **87/100 — REVISE_BLOCKING**.
+- Review and R2 prompt live on `feature/x7e0-ch3-casec-plan`.
+- Section 3.5 prose / X7E1 remains BLOCKED until X7E0 final PASS + user approval.
