@@ -290,3 +290,60 @@ X7F PASS -> assemble Chapter 3
 Assembled Chapter 3 -> external review -> user review -> final DOCX.
 
 Do not skip gates.
+
+## 12. Governance reconciliation addendum — DEC-51
+
+### 12.1 Integration branch
+
+Current accumulation branch:
+`feature/ch3-integration`
+
+Rules:
+- every section branch starts from current integration HEAD;
+- after external review + user approval, approved section artifacts are integrated;
+- next section starts only after that integration lock.
+
+### 12.2 Two-pass section workflow
+
+Each X7A–X7E section uses:
+
+**Pass 0 — Evidence & Presentation Plan**
+- inspect only the section evidence family;
+- review all candidate screenshots;
+- KEEP / OPTIONAL / DROP;
+- design the smallest useful table set;
+- record crop needs;
+- create section claim-evidence map;
+- no prose draft yet.
+
+**Pass 1 — Section Draft**
+- write only after Pass 0 review;
+- use approved figures/tables;
+- produce prose + self-review.
+
+### 12.3 Mandatory artifacts per section
+
+For 3.1–3.5:
+- `*_FIGURE_SELECTION.md`
+- `*_CLAIM_EVIDENCE_MAP.md`
+- `*_DRAFT_R*.md`
+- `*_SELF_REVIEW.md`
+
+X7F synthesis uses approved section outputs only and must not open new raw evidence.
+
+### 12.4 Numbering
+
+Use `CHAPTER_3_NUMBERING_LEDGER.md`.
+
+Figure/table numbers are tentative during Pass 0 and become locked only after user approval of the section.
+
+### 12.5 Assembly
+
+X7G is mechanical assembly only:
+- allowed: transitions, duplicate-sentence removal, terminology consistency, cross-references;
+- forbidden: new evidence, new result claims, reinterpretation.
+
+### 12.6 Global IEEE normalization
+
+Section claim maps use stable Source IDs.
+Final numeric IEEE labels are normalized across the full report at the publication-wide citation gate.
