@@ -27,9 +27,9 @@
   * Lệnh PowerShell kiểm tra cấu hình: `Get-SmbServerConfiguration | Select-Object EnableSMB1Protocol,EnableSMB2Protocol,EnableSecuritySignature,RequireSecuritySignature`.
   * Bảng giá trị cấu hình tương ứng: `EnableSMB1Protocol` mang giá trị `False`, `EnableSMB2Protocol` mang giá trị `True`, `EnableSecuritySignature` mang giá trị `False`, `RequireSecuritySignature` mang giá trị `False`.
   * Lệnh kiểm tra tính năng hệ thống: `Get-WindowsFeature FS-SMB1 | Select-Object Name,InstallState`.
-  * Kết quả trạng thái cài đặt tính năng: `FS-SMB1` mang giá trị `Installed`.
+  * Kết quả trạng thái cài đặt tính năng: `FS-SMB1` được ghi nhận `Installed`.
   * Lệnh kiểm tra dịch vụ máy chủ: `Get-Service LanmanServer | Select-Object Name,Status,StartType`.
-  * Kết quả trạng thái dịch vụ: `LanmanServer` ở trạng thái `Running` (chế độ khởi động `Running`).
+  * Kết quả trạng thái dịch vụ: `LanmanServer` được ghi nhận với `Status = Running`.
   * Dấu nhắc lệnh `PS C:\Users\Administrator>` xuất hiện trở lại tại cuối phiên kiểm tra.
 - **Thành phần giao diện bị loại bỏ:**
   * Thanh tiêu đề của cửa sổ console PowerShell ($y < 30\,\text{px}$).
@@ -38,7 +38,7 @@
   * Vùng không gian nền console màu đen trống trải phía dưới dấu nhắc lệnh ($y > 340\,\text{px}$).
 - **Lý do cắt cúp:** Loại bỏ các vùng giao diện hệ điều hành và khoảng đen vô ích, tập trung thị giác vào ba lệnh kiểm tra cấu hình, tính năng và dịch vụ cốt lõi, bảo đảm hiển thị rõ ràng trên khổ giấy báo cáo.
 - **Ranh giới kỹ thuật được bảo tồn:**
-  * Bức ảnh minh chứng cấu hình `EnableSMB1Protocol` hiển thị giá trị `False`, `EnableSMB2Protocol` hiển thị `True`, gói tính năng `FS-SMB1` vẫn `Installed`, và dịch vụ `LanmanServer` được ghi nhận `Running` tại thời điểm kiểm tra.
+  * Bức ảnh minh chứng cấu hình `EnableSMB1Protocol` hiển thị giá trị `False`, `EnableSMB2Protocol` hiển thị `True`, tính năng `FS-SMB1` được ghi nhận `Installed`, và dịch vụ `LanmanServer` được ghi nhận với `Status = Running` tại thời điểm kiểm tra.
   * Bức ảnh không chứng minh tính năng SMBv1 đã bị gỡ bỏ khỏi hệ điều hành Windows (`SMBv1 disabled != FS-SMB1 uninstalled`).
   * Bức ảnh không chứng minh máy chủ đã được cài đặt bản vá bảo mật MS17-010 (`SMBv1 disabled != PATCHED`); bức ảnh không trực tiếp hiển thị tệp driver `srv.sys` hay danh mục hotfix.
   * Bức ảnh không chứng minh tính liên tục không gián đoạn (zero downtime) của dịch vụ hay sự tương thích của toàn bộ ứng dụng nghiệp vụ hiện đại.
