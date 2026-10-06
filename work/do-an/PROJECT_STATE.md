@@ -696,3 +696,32 @@
 - Negative results must be preserved, especially Scenario 2/Case B UNKNOWN and Case C filtered/no-response.
 - Chapter 4 remains reserved for CIA/risk/recommendations/residual risk and is not to be drafted in X7.
 - X7 output is Markdown draft only; no Chapter 3 final DOCX until external review and user approval.
+
+
+## DEC-50 — Chapter 3 authoring changed from monolithic draft to isolated section workflow
+
+- Ngày: 2026-10-06.
+- User requested Chapter 3 be handled section by section because each demo has different evidence geometry, screenshot density and presentation needs.
+- Reviewer agrees and supersedes the monolithic X7 full-chapter drafting prompt.
+- New master workflow:
+  `work/do-an/CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`.
+- Change Request:
+  `work/do-an/CHANGE_REQUEST_CR-2026-10-06-X7-SECTIONED-CHAPTER3.md`.
+- First isolated phase:
+  `X7A — 3.1 Baseline`.
+- First executor prompt:
+  `work/do-an/prompts/X7A_DRAFT_CH3_31_BASELINE.md`.
+- First branch:
+  `feature/x7a-ch3-baseline`
+  based on reviewer-final X6 evidence-prep head `0241c1f82b73ba40093ce891815d30b3f23d0274`.
+- Phase progression:
+  - X7A: 3.1 Baseline
+  - X7B: 3.2 Scenario 1
+  - X7C: 3.3 Scenario 2
+  - X7D: 3.4 Case B
+  - X7E: 3.5 Case C
+  - X7F: 3.6 + 3.7 synthesis
+- Each phase is externally reviewed before the next opens.
+- There is no longer a global fixed 8-image/6-table quota for the whole chapter during drafting. Each section selects the minimum evidence needed for clarity.
+- The previous prompt `X7_DRAFT_CHAPTER_3_WITH_EVIDENCE.md` is superseded and must not be executed.
+- Chapter 4 remains blocked.
