@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7D0_AUTHORIZED_AFTER_X7C1_USER_APPROVAL`.
+- Current gate: `X7D0_CASEB_EVIDENCE_PRESENTATION_PLAN`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1482,3 +1482,38 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7D0 is authorized for **Case B Evidence & Presentation Plan ONLY**.
 - Section 3.4 prose remains **BLOCKED** until X7D0 passes independent external review + user approval.
 - Case C and Chapter 4 remain **BLOCKED**.
+
+
+## DEC-79 — X7D0 Case B evidence/presentation planning opened
+
+- Ngày: 2026-10-06.
+- Section 3.3 user-approved artifacts were explicitly integrated into:
+  `feature/ch3-integration@f6f3bf39fb9616cbf0d9f8fc3705868d44de7c9d`.
+- Numbering remains locked through Section 3.3:
+  - Bảng 3.1–3.4;
+  - Hình 3.1–3.6.
+- Next available numbering:
+  - **Bảng 3.5**;
+  - **Hình 3.7**.
+- X7D0 branch created from the exact integration HEAD:
+  `feature/x7d0-ch3-caseb-plan`.
+- X7D0 prompt:
+  `work/do-an/prompts/X7D0_CASEB_EVIDENCE_PRESENTATION_PLAN.md`.
+- Scope: **Case B Evidence & Presentation Plan ONLY**.
+- Critical Case B locks:
+  - SMB1 True -> False is a server configuration change;
+  - `FS-SMB1` remains Installed;
+  - `SMBv1 disabled != PATCHED`;
+  - local patch state remains `UNPATCHED`;
+  - protocol retest no longer lists `NT LM 0.12`;
+  - `2.0.2/2.1/3.0/3.0.2` remain observable;
+  - 445 remains OPEN in the retests;
+  - MS17-010 retest remains `UNKNOWN / NO USABLE SCRIPT RESULT`;
+  - `UNKNOWN != SAFE`;
+  - do not claim full SMB2/3 workload validation or no interruption.
+- Metadata discrepancy lock:
+  - manifest references `SMBv1_Remediation_06_Raw_Evidence.png`;
+  - this file is not present in the canonical staged Case B folder;
+  - it must not be invented/count as staged evidence.
+- X7D1 prose remains **BLOCKED** until X7D0 passes independent external review + user approval.
+- X7E / Case C and Chapter 4 remain **BLOCKED**.
