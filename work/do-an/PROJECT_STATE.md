@@ -828,3 +828,12 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   `work/do-an/prompts/X7A0_R2_CORRECT_BASELINE_PLAN.md`.
 - Section 3.1 prose remains BLOCKED.
 - X7A1 remains BLOCKED.
+
+
+## DEC-55 — X7A0 branch scope pollution cleaned before R2
+
+- Ngày: 2026-10-06.
+- Reviewer restored the superseded monolithic X7 prompt on the X7A0 branch to the current archival/superseded version.
+- Reviewer-cleaned X7A0 R2 starting HEAD:
+  `668cc5d697b98cdccd26707289bef4944f9ec320`.
+- X7A0 R2 executor must diff against this SHA and modify only the four baseline planning artifacts.
