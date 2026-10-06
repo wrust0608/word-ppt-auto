@@ -15,7 +15,9 @@ Trạng thái hiện hành:
 - X6 evidence prep: PASS.
 - Chapter 3: sectioned workflow.
 - G0 Chapter 3 governance: PASS.
-- Current phase: X7A0 baseline evidence/presentation plan only; prose 3.1 is still blocked.
+- X7A0 baseline presentation plan: USER APPROVED / numbering locked.
+- Current phase: X7A1 draft Section 3.1 only.
+- X7B Scenario 1 remains blocked until Section 3.1 external review + user approval.
 - Monolithic X7 prompt: SUPERSEDED.
 - Chapter 4: BLOCKED until Chapter 3 approval.
 
