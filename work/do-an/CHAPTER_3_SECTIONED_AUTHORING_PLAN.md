@@ -286,8 +286,10 @@ X7B PASS -> open X7C
 X7C PASS -> open X7D  
 X7D PASS -> open X7E  
 X7E PASS -> open X7F  
-X7F PASS -> assemble Chapter 3  
-Assembled Chapter 3 -> external review -> user review -> final DOCX.
+X7F PASS -> X7G mechanically assemble Chapter 3  
+X7G assembled Chapter 3 -> X7H whole-Chapter-3 coherence/technical review -> user approval  
+X7H user approval -> X7I assemble locked Chapter 2 + approved Chapter 3 into one review DOCX  
+X7I QA/reviewer PASS -> X7J final combined Chapters 2+3 user evaluation -> STOP.
 
 Do not skip gates.
 
@@ -337,13 +339,36 @@ Use `CHAPTER_3_NUMBERING_LEDGER.md`.
 
 Figure/table numbers are tentative during Pass 0 and become locked only after user approval of the section.
 
-### 12.5 Assembly
+### 12.5 Assembly and whole-chapter quality
 
 X7G is mechanical assembly only:
 - allowed: transitions, duplicate-sentence removal, terminology consistency, cross-references;
 - forbidden: new evidence, new result claims, reinterpretation.
 
+X7H reviews the assembled Chapter 3 as one thesis chapter, not as a collection of section QA artifacts. It must explicitly check:
+- cross-section repetition;
+- chapter length/balance;
+- result progression;
+- figure/table flow;
+- natural academic voice;
+- absence of internal QA/governance vocabulary.
+
+Editorial trimming/reordering is allowed if technical meaning does not change. Any technical change requires explicit section reopen.
+
+After X7H user approval, do not build a standalone final Chapter 3 DOCX. Proceed to the combined locked Chapter 2 + approved Chapter 3 review assembly defined by the current roadmap.
+
 ### 12.6 Global IEEE normalization
 
 Section claim maps use stable Source IDs.
 Final numeric IEEE labels are normalized across the full report at the publication-wide citation gate.
+
+
+## 13. Current roadmap override — DEC-91
+
+Current execution authority:
+`ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
+
+No WR1/WR2 intermediate Word checkpoints.
+No Chapter 4 auto-open.
+No Chapter 1/report-wide enrichment.
+No DOCX before X7H user approval.
