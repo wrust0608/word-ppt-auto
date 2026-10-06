@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7B0_R2_CORRECTION_REQUIRED`.
+- Current gate: `X7B0_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1054,4 +1054,35 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - R2 prompt:
   `work/do-an/prompts/X7B0_R2_CORRECT_SCENARIO1_PLAN.md`.
 - X7B1 prose remains **BLOCKED**.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-65 — X7B0 Scenario 1 plan R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `952fbd6637c5161e9681f050024deb9e3809b53c`.
+- Final external review:
+  `work/do-an/X7B0_SCENARIO1_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **98/100 — PASS**.
+- Blockers: **0**.
+- Reviewer applied two bounded wording micro-fixes after R2:
+  1. B3 limited to the directly observed target-`up` state;
+  2. B4 limited to directly observed TCP 139/445 reachability/open + SYN-ACK from the Kali vantage point.
+- Recommended Scenario 1 design for user review:
+  - 2 H3;
+  - 1 Bảng 3.3;
+  - B4 screenshot DROP;
+  - B5 screenshot KEEP as tentative Hình 3.4;
+  - B6 screenshot KEEP as tentative Hình 3.5.
+- Technical locks all PASS:
+  - `.56.100 = UNKNOWN`;
+  - `445 OPEN != vulnerable`;
+  - B5 fingerprint range only;
+  - SMBv1 != MS17-010 verdict;
+  - `smb-os-discovery = no usable output`;
+  - Scenario 1 does not conclude MS17-010.
+- Current gate:
+  `X7B0_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7B1 prose remains **BLOCKED** until explicit user approval and plan integration.
 - Chapter 4 remains **BLOCKED**.

@@ -21,8 +21,8 @@
 | **Số lượng bảng biểu đề xuất cho Mục 3.2** | **1** | `Bảng 3.3` (Trình tự và kết quả khảo sát dịch vụ SMB từ trạm Kali Linux) |
 | **Số lượng hình ảnh đề xuất cho Mục 3.2** | **2** | `Hình 3.4` (Thăm dò phiên bản dịch vụ) và `Hình 3.5` (Phân tích đặc tính giao thức SMB) |
 | **Số lượng hàng luận điểm ánh xạ (Claim-Map Rows)** | **13** | 13 claims (`S1-C01` đến `S1-C13`), 100% đạt trạng thái `VERIFIED` |
-| **Số lần xuất hiện cờ bị thêm sai `-Pn` trong 4 artifact X7B0** | **0** | Đã loại bỏ 100% cờ `-Pn` trong cả 4 tệp kế hoạch R2 |
-| **Số lần xuất hiện địa chỉ MAC sai `08:00:27:1B:32:04`** | **0** | Đã loại bỏ hoàn toàn; giá trị gốc trong bằng chứng trực tiếp là `08:00:27:55:71:CE` |
+| **Số lần `-Pn` còn xuất hiện trong mô tả phương pháp/bảng public hiện hành** | **0** | Chuỗi chỉ còn được nhắc trong phần audit lịch sử của self-review, không còn trong nội dung phương pháp dự kiến |
+| **Wrong B4 MAC remaining in current operational descriptions** | **0** | Mô tả hiện hành chỉ dùng giá trị trực tiếp `08:00:27:55:71:CE` khi cần |
 | **Độ trễ chi tiết B3 (`0,00034 s`) trong thiết kế bảng sinh viên** | **Đã loại bỏ** | Bảng 3.3 công khai chỉ ghi nhận trạng thái trực tuyến (`up`), không đưa độ trễ |
 | **Số lượng tuyên bố quá đà về OS chính xác tại B5** | **0** | Giữ chặt khoảng nhận diện `Microsoft Windows Server 2008 R2–2012` |
 | **Định danh thực thể `.56.100`** | **UNKNOWN** | Duy trì nghiêm ngặt nhãn `UNKNOWN identity`, không gán DHCP/router ảo |
@@ -50,13 +50,13 @@
 
 ## 3. Thẩm Tra Địa Chỉ MAC B4 (B4 MAC Address Audit)
 
-- **Vấn đề tại bản R1:** R1 ghi nhận nhầm giá trị MAC tại bước B4 thành `08:00:27:1B:32:04`.
+- **Vấn đề tại bản R1:** R1 từng ghi nhận sai giá trị MAC tại bước B4.
 - **Đối chiếu thực tế:** Tệp thô `b4_smb_ports.nmap` và ảnh chụp màn hình `Scenario1_B4_SMB_Ports.png` đều ghi nhận địa chỉ MAC thực tế là `08:00:27:55:71:CE`.
 - **Xử lý triệt để tại bản R2:**
-  * Đã loại bỏ hoàn toàn giá trị sai `08:00:27:1B:32:04`.
+  * Đã loại bỏ hoàn toàn giá trị sai khỏi các mô tả hiện hành.
   * Trong mô tả tệp tại bảng chọn ảnh, đã ghi nhận chuẩn xác `08:00:27:55:71:CE`.
   * Trong thiết kế Bảng 3.3 công khai, lược bỏ hoàn toàn trường MAC vì không đóng góp vào câu hỏi trọng tâm của người đọc Mục 3.2.
-  * **Kết quả tìm kiếm `08:00:27:1B:32:04`:** **0 kết quả**.
+  * **Wrong B4 MAC final search count:** **0** trong các mô tả hiện hành.
 
 ---
 
@@ -134,7 +134,7 @@ Trong pha X7B0 R2, đã bổ sung tọa độ nguồn `(x, y, width, height)` d�
 ## 10. Danh Mục Báo Cáo Rà Soát Theo Yêu Cầu R2 (Mandatory Reporting Items)
 
 Theo đúng quy định tại Mục 9 của prompt X7B0 R2, báo cáo tự đánh giá ghi nhận xác nhận rõ ràng:
-- `-Pn` final search count = 0 (trong toàn bộ mô tả phương pháp và bảng biểu kế hoạch);
+- `-Pn` final search count = 0 trong mô tả phương pháp và bảng biểu kế hoạch hiện hành (không tính dòng audit tự mô tả này);
 - wrong B4 MAC final search count = 0;
 - B3 latency removed from public table design;
 - B5 exact-OS overclaim count = 0;
