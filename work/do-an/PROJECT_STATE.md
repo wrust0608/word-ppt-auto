@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7D1_CH3_34_PROSE_ACTIVE`.
+- Current gate: `X7D1_CASEB_DRAFT_IN_PROGRESS`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1759,3 +1759,24 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Chapter 4 remains dormant/backlog.
 - X7D1 — Section 3.4 Case B prose is now the only authorized next execution task.
 - No other task may run in parallel.
+
+
+## DEC-93 — X7D1 Case B prose branch opened after roadmap confirmation
+
+- Ngày: 2026-10-07.
+- Branch:
+  `feature/x7d1-ch3-caseb-draft`.
+- Base:
+  `feature/ch3-integration@6c3e8c326321fd372dc6d047077bdc7256af0d09`.
+- Prompt:
+  `work/do-an/prompts/X7D1_WRITE_CH3_34_CASEB.md`.
+- Scope:
+  - write Section 3.4 only;
+  - create the two approved Case B presentation crops;
+  - create crop manifest + self-review;
+  - no Case C;
+  - no Chapter 3 assembly;
+  - no Word;
+  - no Chapter 2 changes;
+  - no Chapter 4.
+- Target prose length is intentionally concise because Sections 3.1–3.3 are already substantial.
