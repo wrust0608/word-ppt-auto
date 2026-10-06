@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7E1_CASEC_PROSE_NEXT`.
+- Current gate: `X7E1_CASEC_DRAFT_IN_PROGRESS`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1848,3 +1848,12 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Only approved X7E0 plan/review/approval artifacts are integrated.
 - Next authorized work: X7E1 — create approved crops and write Section 3.5 prose.
 - No Sections 3.6–3.7, Chapter 3 assembly, Word, Chapter 2 rewrite, or Chapter 4 work yet.
+
+
+## DEC-101 — X7E1 Case C prose active
+
+- Ngày: 2026-10-07.
+- X7E0 plan is integrated and locked.
+- Active branch: `feature/x7e1-ch3-casec-draft`.
+- X7E1 scope: Section 3.5 prose + Hình 3.9–3.11 crops only.
+- X7F / Sections 3.6–3.7 remain BLOCKED until Section 3.5 final external PASS + user approval.
