@@ -1,8 +1,9 @@
 # Trạng thái dự án
 
-## CURRENT STATE SUMMARY — 2026-10-06
+## CURRENT STATE SUMMARY — 2026-10-07
 
 - Current gate: `X7D1_CH3_34_PROSE_NEXT`.
+- Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -19,25 +20,32 @@
 - Monolithic X7 full-chapter prompt/constraints: `SUPERSEDED`.
 - Old `ROADMAP_2_6.md`: `HISTORICAL`.
 - Old detailed Ch2/Ch3 structures inside `OUTLINE.md`: `SUPERSEDED`.
-- Chapter 4: `BLOCKED` until full Chapter 3 passes external review + user approval.
-- Publication-wide final gates still required later: source closure, global IEEE numbering, cross-reference/figure-table consistency, final HUIT DOCX build and page-by-page visual QA.
+- Chapter 4: `DORMANT / BACKLOG`; it does not auto-open after Chapter 3. Explicit user instruction is required after the combined Chapter 2+3 review.
+- Current milestone ends after the complete Chapter 2+3 review DOCX is reviewed by the user. Full-thesis publication/defense work is backlog.
 
 ### Current immediate sequence
 
-1. Section 3.1 is **USER APPROVED / LOCKED** at reviewer-final SHA `2d4690e8c40c870abd19019c0d51b31456a9229c`.
-2. Integrate only the approved Section 3.1 artifacts into `feature/ch3-integration`.
-3. Open X7B0 from the resulting integration HEAD for **Scenario 1 Evidence & Presentation Plan ONLY**.
-4. X7B1 prose remains BLOCKED until the X7B0 plan passes external review + user approval.
+1. X7D1 — complete/review/user-approve Section 3.4 Case B prose.
+2. X7E0/X7E1 — plan, write, review and user-approve Section 3.5 Case C.
+3. X7F — write/review/user-approve Sections 3.6–3.7 using approved results only.
+4. X7G — mechanically assemble complete Chapter 3; no DOCX.
+5. X7H — whole-Chapter-3 coherence/compression/technical review + user approval.
+6. X7I — only after X7H approval, assemble locked Chapter 2 + approved Chapter 3 into one review DOCX and perform full visual QA.
+7. X7J — final combined Chapters 2+3 review and user evaluation.
+8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 
 ### Current read order for any new agent
 
-1. `PROJECT_STATE.md` — this Current State Summary.
-2. `CHAPTER_3_CONTRACT.md`.
-3. `CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`.
-4. `CHAPTER_3_SECTION_EVIDENCE_MAP.md`.
-5. `CHAPTER_3_NUMBERING_LEDGER.md`.
-6. `EXPERIMENTAL_TRUTH_MATRIX.md` + R3 locks.
-7. Phase-specific prompt.
+1. `ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
+2. `PROJECT_STATE.md` — this Current State Summary.
+3. `CHAPTER_3_CONTRACT.md`.
+4. `CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`.
+5. `CHAPTER_3_SECTION_EVIDENCE_MAP.md`.
+6. `CHAPTER_3_NUMBERING_LEDGER.md`.
+7. `EXPERIMENTAL_TRUTH_MATRIX.md` + R3 locks.
+8. Phase-specific prompt.
+
+Do not use historical execution/master/WR1/RG1 roadmaps to choose the next action.
 
 Any earlier instruction that conflicts with this sequence is historical unless explicitly reopened.
 
@@ -1716,3 +1724,18 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - No Chapter 2 rewrite/enrichment is authorized before that final assembly unless the user explicitly reopens Chapter 2.
 - Current gate:
   `X7D1_CH3_34_PROSE_NEXT`.
+
+
+## DEC-91 — Roadmap reset to current Chapters 2+3 product target
+
+- Ngày: 2026-10-07.
+- User requested a full roadmap audit because prior assistant decisions had drifted from the intended product.
+- Audit: `work/do-an/ROADMAP_AUDIT_2026_10_07.md`.
+- Sole current execution roadmap: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
+- Current milestone: finish all Chapter 3 -> whole-Chapter-3 review/user approval -> assemble locked Chapter 2 + approved Chapter 3 -> final combined document review/user evaluation.
+- Intermediate WR1/WR2 Word gates are cancelled.
+- Chapter 1/report-wide enrichment is abandoned.
+- Chapter 4/publication/defense work is backlog and cannot auto-open.
+- X7H includes explicit whole-chapter coherence/compression review so independently approved sections do not produce a repetitive QA-like chapter.
+- No DOCX work before complete Chapter 3 user approval.
+- Current next action remains X7D1 only.
