@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7A0_BASELINE_EVIDENCE_PRESENTATION_PLAN`.
+- Current gate: `X7A1_CH3_31_BASELINE_DRAFT`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -24,10 +24,10 @@
 
 ### Current immediate sequence
 
-1. Execute **X7A0 — 3.1 Baseline Evidence & Presentation Plan** only.
-2. External-review the plan before any 3.1 prose.
-3. After plan approval, open X7A1 prose drafting from the approved integration state.
-4. After 3.1 user approval, lock numbering and integrate before opening X7B0.
+1. Execute **X7A1 — draft Section 3.1 Baseline** only.
+2. External-review the 3.1 prose, tables and derived presentation images.
+3. After user approval of 3.1 prose, integrate the completed section into `feature/ch3-integration`.
+4. Only then open X7B0 for Scenario 1 evidence/presentation planning.
 
 ### Current read order for any new agent
 
@@ -788,10 +788,98 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Ngày: 2026-10-06.
 - G0 review: `work/do-an/G0_CH3_GOVERNANCE_RECONCILIATION_FINAL.md`.
 - G0 verdict: **PASS / blockers 0**.
-- Current Chapter 3 accumulation branch: `feature/ch3-integration`.
+- Current Chapter 3 accumulation branch: `feature/ch3-integration` @ `7cf63376b40de6758730e10756f403e9a1603ad6`.
 - X6 evidence merged into integration at `85f28df4c4c2a5409a11c886b826a56c6736044b`.
-- Current isolated planning branch: `feature/x7a0-ch3-baseline-plan`.
+- Current isolated planning branch: `feature/x7a0-ch3-baseline-plan` @ `33a490c6573dd7a140545fb5fb29b384e443fe88`.
 - X7A0 prompt: `work/do-an/prompts/X7A0_BASELINE_EVIDENCE_PRESENTATION_PLAN.md`.
 - X7A0 is **plan-only**: figure selection + presentation plan + claim-evidence map + self-review.
 - 3.1 prose remains BLOCKED until X7A0 external review.
 - Scenario 1/2, Case B/C, synthesis and Chapter 4 remain BLOCKED.
+
+
+## DEC-53 — X7A0 branch lineage synchronized to finalized integration HEAD
+
+- Ngày: 2026-10-06.
+- Finalized Chapter 3 integration HEAD after G0 sync:
+  `7cf63376b40de6758730e10756f403e9a1603ad6`.
+- X7A0 planning branch synchronized from that integration state:
+  `33a490c6573dd7a140545fb5fb29b384e443fe88`.
+- X7A0 may now execute the evidence/presentation-plan task only.
+- Section 3.1 prose remains blocked until X7A0 plan passes external review.
+
+
+## DEC-54 — X7A0 baseline plan R1 requires blocking revision
+
+- Ngày: 2026-10-06.
+- R1 branch: `feature/x7a0-ch3-baseline-plan`.
+- Actual remote R1 HEAD: `9cf53d151896b0e7ff75f5e13a4b8e85b90efdb9`.
+- Agent handoff SHA `9cf53d10a402327732ad57f8976b32dc96f5b721` was incorrect.
+- External review: `work/do-an/X7A0_BASELINE_PLAN_EXTERNAL_REVIEW_R1.md`.
+- Score: **81/100 — REVISE_BLOCKING**.
+- PASS: complete 13-image inventory, no prose, no evidence byte change, sound patch-version distinction.
+- Blockers:
+  1. public table design is audit-like/too wide and exposes evidence filenames;
+  2. absolute network-isolation wording and ICMP-causality overreach;
+  3. other overclaims around service health, local protocol flags, firewall scope and hotfix completeness;
+  4. invented `BL-*` IDs instead of registered `ENV-CORE-*`;
+  5. figure set should be revised to 3 direct images after reviewer visual inspection;
+  6. out-of-scope modification of superseded monolithic prompt.
+- R2 prompt:
+  `work/do-an/prompts/X7A0_R2_CORRECT_BASELINE_PLAN.md`.
+- Section 3.1 prose remains BLOCKED.
+- X7A1 remains BLOCKED.
+
+
+## DEC-55 — X7A0 branch scope pollution cleaned before R2
+
+- Ngày: 2026-10-06.
+- Reviewer restored the superseded monolithic X7 prompt on the X7A0 branch to the current archival/superseded version.
+- Reviewer-cleaned X7A0 R2 starting HEAD:
+  `668cc5d697b98cdccd26707289bef4944f9ec320`.
+- X7A0 R2 executor must diff against this SHA and modify only the four baseline planning artifacts.
+
+
+## DEC-56 — X7A0 baseline plan passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate: `33a694b94a6f32773c7c91591d2d127649183f3c`.
+- Reviewer-final section-plan branch HEAD after three micro-fixes:
+  `e6996af7ca53a273a93a1850e58c938bf40fad46`.
+- Final review:
+  `work/do-an/X7A0_BASELINE_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **98/100 — PASS**.
+- Blockers: **0**.
+- Approved presentation design:
+  - 2 H3;
+  - 2 student-facing tables;
+  - 3 KEEP figures;
+  - 16 claim-map rows;
+  - registered ENV-CORE IDs only.
+- No Section 3.1 prose exists yet.
+- Current gate: `X7A0_PASS_WAITING_FOR_USER_APPROVAL`.
+- Do not integrate/lock numbering/open X7A1 until explicit user approval.
+
+
+## DEC-57 — User approves X7A0; numbering locked and X7A1 authorized
+
+- Ngày: 2026-10-06.
+- User decision on X7A0: **APPROVED / CHỐT**.
+- Approval lock:
+  `work/do-an/X7A0_BASELINE_PLAN_USER_APPROVAL_LOCK.md`.
+- Locked Section 3.1 H3:
+  - 3.1.1 Trạng thái mạng và dịch vụ SMB
+  - 3.1.2 Trạng thái bản vá và mốc phục hồi
+- Locked tables:
+  - Bảng 3.1 Trạng thái mạng, dịch vụ SMB và Windows Firewall trước đo đạc
+  - Bảng 3.2 Trạng thái bản vá và mốc phục hồi
+- Locked figures:
+  - Hình 3.1 Windows_PreDemo_01_Network_SMB.png
+  - Hình 3.2 Windows_PreDemo_02_Firewall.png
+  - Hình 3.3 Windows_MS17010_02_Hotfix.png
+- Next available table number: **Bảng 3.3**.
+- Next available figure number: **Hình 3.4**.
+- Approved X7A0 artifacts have been explicitly integrated into `feature/ch3-integration`.
+- X7A1 prompt:
+  `work/do-an/prompts/X7A1_DRAFT_CH3_31_BASELINE.md`.
+- X7A1 may create derived presentation crops with SHA/crop-manifest traceability but must not modify source evidence.
+- X7B remains BLOCKED until Section 3.1 prose passes external review + user approval.
