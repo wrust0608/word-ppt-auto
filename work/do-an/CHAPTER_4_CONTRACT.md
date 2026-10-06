@@ -1,5 +1,7 @@
 # CHAPTER 4 CONTRACT — LOCKED_CANONICAL
 
+> **CURRENT-MILESTONE OVERRIDE 2026-10-07:** Hợp đồng này được giữ làm backlog. Không mở Chương 4 sau X7H/X7J nếu người dùng chưa yêu cầu rõ. Current milestone kết thúc tại review bản ghép Chương 2 + Chương 3.
+
 Trạng thái: `LOCKED_WAITING_FOR_X7`
 
 Question: Các kết quả thực nghiệm có ý nghĩa gì đối với đánh giá rủi ro SMB và lựa chọn biện pháp phòng thủ đa tầng?
