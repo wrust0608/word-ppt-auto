@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7C0_AUTHORIZED_AFTER_X7B1_USER_APPROVAL`.
+- Current gate: `X7C1_AUTHORIZED_AFTER_X7C0_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1227,3 +1227,142 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7C0 is authorized for **Scenario 2 Evidence & Presentation Plan ONLY**.
 - X7C1 prose remains **BLOCKED** until X7C0 passes independent external review + user approval.
 - Chapter 4 remains **BLOCKED**.
+
+
+## DEC-71 — X7C0 Scenario 2 evidence/presentation planning opened
+
+- Ngày: 2026-10-06.
+- Section 3.2 user-approved artifacts were explicitly integrated into:
+  `feature/ch3-integration@e4b59086f32084752f3df1f3733fa05a407816d7`.
+- Numbering remains locked through Section 3.2:
+  - Bảng 3.1–3.3;
+  - Hình 3.1–3.5.
+- Next available numbering:
+  - **Bảng 3.4**;
+  - **Hình 3.6**.
+- X7C0 branch created from the exact integration HEAD:
+  `feature/x7c0-ch3-scenario2-plan`.
+- X7C0 prompt:
+  `work/do-an/prompts/X7C0_SCENARIO2_EVIDENCE_PRESENTATION_PLAN.md`.
+- Scope: **Scenario 2 Evidence & Presentation Plan ONLY**.
+- Mandatory evidence sequence:
+  - NSE-SMB-01 ports;
+  - NSE-SMB-02 protocols;
+  - NSE-SMB-03 signing;
+  - NSE-SMB-04 MS17-010 script.
+- Critical reviewer locks:
+  - `UNKNOWN / NO USABLE SCRIPT RESULT` must remain indeterminate;
+  - `UNKNOWN != SAFE`;
+  - local `UNPATCHED` and remote `UNKNOWN` are independent facts;
+  - do not call NSE-SMB-04 VULNERABLE / SAFE / NOT VULNERABLE / FALSE NEGATIVE;
+  - do not invent NTSTATUS or cause for absent script output;
+  - local signing and remote signing remain independent observations;
+  - operator command and Nmap-recorded argv must not be conflated.
+- X7C1 prose remains **BLOCKED** until X7C0 passes independent external review + user approval.
+- X7D and Chapter 4 remain **BLOCKED**.
+
+
+## DEC-72 — X7C0 Scenario 2 plan R1 requires bounded correction
+
+- Ngày: 2026-10-06.
+- R1 candidate:
+  `4868942a5a6c86eb3feb03ce6110edfbcd2892e2`.
+- Independent external review:
+  `work/do-an/X7C0_SCENARIO2_PLAN_EXTERNAL_REVIEW_R1.md`.
+- Score: **90/100 — REVISE_MINOR_BLOCKING**.
+- Presentation geometry PASS:
+  - 2 H3;
+  - 1 Bảng 3.4;
+  - NSE01/02/03 images DROP;
+  - NSE04 image KEEP as tentative Hình 3.6;
+  - no second UNKNOWN-vs-UNPATCHED mini-table.
+- Core technical logic PASS:
+  - remote UNKNOWN remains indeterminate;
+  - `UNKNOWN != SAFE`;
+  - local UNPATCHED and remote UNKNOWN remain independent;
+  - local/remote signing remain independent.
+- Required bounded corrections:
+  1. remove invalid `Baseline Case A` wording;
+  2. fix Case B transition to selected retests, not all measurements;
+  3. narrow NSE01 to TCP OPEN/SYN-ACK only;
+  4. remove SMBv1 “necessary/prerequisite” theory;
+  5. separate direct NSE04 visible facts from UNKNOWN classification;
+  6. reuse exact approved Section 3.1 UNPATCHED wording;
+  7. correct provenance/terminology errors including Nmap 7.95->7.99, `--privileged` causality, measurement-label vs internal-ID classification, and unsupported exploit-payload wording.
+- Independent Scenario 2 image SHA-256 verification PASS.
+- R2 prompt:
+  `work/do-an/prompts/X7C0_R2_CORRECT_SCENARIO2_PLAN.md`.
+- X7C1 remains **BLOCKED**.
+- X7D and Chapter 4 remain **BLOCKED**.
+
+
+## DEC-73 — X7C0 Scenario 2 plan R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `41b17ab0242b59bb0810aac4cc1baa40fe6e8169`.
+- Final external review:
+  `work/do-an/X7C0_SCENARIO2_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- R1 blocking corrections all closed.
+- Reviewer applied bounded precision micro-fixes after R2:
+  - dialect wording narrowed to values recorded by `smb-protocols`;
+  - NSE04 completion wording narrowed to the visible `Nmap done` line;
+  - UNKNOWN wording no longer implies a cause for missing script output.
+- Recommended plan for user approval remains:
+  - 2 H3;
+  - Bảng 3.4;
+  - NSE01/02/03 screenshots DROP;
+  - NSE04 screenshot KEEP as tentative Hình 3.6;
+  - crop proposal `x=0, y=24, width=1280, height=330`.
+- Critical locks PASS:
+  - `UNKNOWN / NO USABLE SCRIPT RESULT`;
+  - `UNKNOWN != SAFE`;
+  - local `UNPATCHED` independent from remote `UNKNOWN`;
+  - no FALSE NEGATIVE;
+  - no invented NTSTATUS/cause;
+  - local/remote signing independent;
+  - measurement labels separated from internal IDs;
+  - no completed Case A implied.
+- Current gate:
+  `X7C0_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7C1 remains **BLOCKED** until explicit user approval and plan integration.
+- X7D and Chapter 4 remain **BLOCKED**.
+
+
+## DEC-74 — User approves X7C0 Scenario 2 plan; numbering locked and X7C1 authorized
+
+- Ngày: 2026-10-06.
+- User decision on X7C0: **APPROVED / CHỐT**.
+- Reviewer-final X7C0 source:
+  `feature/x7c0-ch3-scenario2-plan@f28b46a3de8fdd0bdc7de17949a8d29ff17e4fb5`.
+- Final external review:
+  `work/do-an/X7C0_SCENARIO2_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- Scenario 2 presentation plan is now **USER APPROVED / LOCKED**.
+- Locked Section 3.3 structure:
+  - 3.3.1 Khảo sát điều kiện kết nối và thuộc tính giao thức SMB (NSE-SMB-01 đến NSE-SMB-03);
+  - 3.3.2 Đánh giá dấu hiệu lỗ hổng MS17-010 và đối chiếu trạng thái bản vá (NSE-SMB-04).
+- Locked table:
+  - Bảng 3.4.
+- Locked figure:
+  - Hình 3.6 from `Scenario2_NSE04_MS17010.png`.
+- Locked figure decision:
+  - NSE01 DROP;
+  - NSE02 DROP;
+  - NSE03 DROP;
+  - NSE04 KEEP.
+- Approved provisional crop:
+  - `x=0, y=24, width=1280, height=330`.
+- Next available numbering:
+  - **Bảng 3.5**;
+  - **Hình 3.7**.
+- Approved X7C0 artifacts are to be explicitly integrated into `feature/ch3-integration`; do not merge unrelated branch history.
+- X7C1 is authorized to:
+  - create the approved Hình 3.6 presentation crop + crop manifest;
+  - write Section 3.3 prose only;
+  - produce self-review.
+- X7D remains BLOCKED until Section 3.3 prose passes independent external review + user approval.
+- Chapter 4 remains BLOCKED.
