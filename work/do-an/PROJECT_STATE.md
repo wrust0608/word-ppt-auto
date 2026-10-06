@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `RG1_CHAPTER1_ARGUMENT_REALIGNMENT_IN_PROGRESS`.
+- Current gate: `RG1_R2_CORRECTION_REQUIRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1676,3 +1676,29 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Current gate:
   `RG1_CHAPTER1_ARGUMENT_REALIGNMENT_IN_PROGRESS`.
 - RG2, RG3, RG4, RG5 remain BLOCKED until the preceding report-wide gate is reviewed and user-approved.
+
+
+## DEC-88 — RG1 Chapter 1 R1 requires bounded technical/source correction
+
+- Ngày: 2026-10-06.
+- Executor R1 candidate:
+  `4cff2beb0e3823112d60e08d21f89773783ccf81`.
+- Independent external review:
+  `work/do-an/RG1_CHAPTER1_EXTERNAL_REVIEW_R1.md`.
+- Score: **84/100 — REVISE_BLOCKING**.
+- The new chapter architecture is retained.
+- Required R2 corrections:
+  - rebuild Source Audit from the actual SOURCE_LEDGER;
+  - remove false/overstated source mappings;
+  - replace "ngưỡng an toàn" with Microsoft's "minimum updated srv.sys version" concept;
+  - narrow Nmap patched-branch interpretation to actual script behavior;
+  - preserve UNKNOWN cause uncertainty;
+  - remove absolute SMBv1 elimination/attack-block claims;
+  - narrow patching wording;
+  - remove unsupported availability probability ranking;
+  - prevent Case C result leakage and same-subnet overgeneralization;
+  - remove unperformed SMB2 workload-continuity claim;
+  - correct SYSTEM security-context wording.
+- R2 prompt:
+  `work/do-an/prompts/RG1_R2_CORRECT_CHAPTER1_ARGUMENT.md`.
+- RG2 remains BLOCKED.
