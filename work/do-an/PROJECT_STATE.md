@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7C1_AUTHORIZED_AFTER_X7C0_USER_APPROVAL`.
+- Current gate: `X7C1_CH3_33_SCENARIO2_DRAFT`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1366,3 +1366,26 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - produce self-review.
 - X7D remains BLOCKED until Section 3.3 prose passes independent external review + user approval.
 - Chapter 4 remains BLOCKED.
+
+
+## DEC-75 — X7C1 Scenario 2 prose branch opened from approved integration state
+
+- Ngày: 2026-10-06.
+- Approved X7C0 plan integrated into:
+  `feature/ch3-integration@d589e51e81aa0a3b87980ac73cef0d81ca330e17`.
+- X7C1 branch created from that exact integration HEAD:
+  `feature/x7c1-ch3-scenario2-draft`.
+- X7C1 prompt:
+  `work/do-an/prompts/X7C1_DRAFT_CH3_33_SCENARIO2.md`.
+- X7C1 scope:
+  - write Section 3.3 only;
+  - use exactly 2 locked H3;
+  - create Bảng 3.4 only;
+  - create approved Hình 3.6 presentation crop;
+  - create crop manifest;
+  - create draft self-review.
+- Locked next numbering after Section 3.3:
+  - Bảng 3.5;
+  - Hình 3.7.
+- X7D / Case B remains **BLOCKED** until Section 3.3 prose passes independent external review + user approval.
+- Chapter 4 remains **BLOCKED**.
