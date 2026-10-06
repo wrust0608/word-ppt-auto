@@ -1,94 +1,109 @@
 # KIỂM TOÁN NGUỒN HỌC THUẬT VÀ DỮ LIỆU KỸ THUẬT CHƯƠNG 1 (RG1_CHAPTER1_SOURCE_AUDIT_R1)
+## BẢN TÁI THIẾT LẬP TOÀN DIỆN TỪ SOURCE_LEDGER.MD CHÍNH THỨC (R2)
 
-- **Giai đoạn thực hiện:** RG1 — Chỉnh lý toàn diện Chương 1 theo lập luận thực nghiệm chuẩn mực.
+- **Giai đoạn thực hiện:** RG1 R2 — Hiệu chỉnh giới hạn kỹ thuật và chuẩn hóa nguồn học thuật sau Independent External Review R1.
 - **Tệp được kiểm toán:** `work/do-an/CHAPTER_1.md`
+- **Tệp căn cứ thẩm quyền:** `work/do-an/SOURCE_LEDGER.md`
 - **Nhánh:** `feature/rg1-ch1-argument-realignment`
 - **Thời gian lập:** 06/10/2026
 
 ---
 
-## 1. Bản đồ đối chiếu nguồn học thuật theo từng mục kỹ thuật
+## 1. Bảng đối chiếu 1:1 giữa danh mục trích dẫn Chương 1 và SOURCE_LEDGER.md
 
-Toàn bộ các luận điểm, tham số kỹ thuật và cơ chế giao thức trong Chương 1 được bảo đảm đối chiếu 1:1 với các nguồn tài liệu sơ cấp và thứ cấp đã được kiểm chứng trong `SOURCE_LEDGER.md`.
+Toàn bộ 21 mục tài liệu tham khảo trong Chương 1 được đối chiếu trực tiếp với các dòng nguồn đã được thẩm định trong `SOURCE_LEDGER.md`. Tuyệt đối không suy diễn mã nguồn từ số thứ tự trích dẫn, không sử dụng nguồn ở trạng thái `RECHECK` làm nguồn chứng minh, và không đưa vào các nguồn giả định không có trong sổ nguồn.
 
-| Mục trong Chương 1 | Nội dung kỹ thuật chính | Nguồn sơ cấp / Chuẩn quốc tế | Mã Ledger trong `SOURCE_LEDGER.md` | Chỉ số trích dẫn trong Chương 1 |
-| :--- | :--- | :--- | :--- | :--- |
-| **1.1.1 – 1.1.2** | Tổng quan kiến trúc SMB, mô hình Client-Server | Microsoft Official Learn, MS-SMB Specification | S020, S002 | [1], [2] |
-| **1.1.3** | Tiến hóa SMBv1, SMBv2, SMBv3, mã định danh phương ngữ | Microsoft MS-SMB, MS-SMB2 Specifications | S002, S006 | [2], [3] |
-| **1.1.4** | Cơ chế đóng gói NetBIOS over TCP port 139 và Direct-hosted SMB port 445 | IETF RFC 1001, RFC 1002 | S005 | [4] |
-| **1.1.5** | Quy trình bắt tay SMB, NegProt, SessionSetup, TreeConnect, IPC$, Signing | Microsoft MS-SMB, MS-SMB2, SMB Security Enhancements | S002, S006, S028 | [2], [3], [5] |
-| **1.2.1** | Thông báo bảo mật MS17-010, phân loại mức độ nghiêm trọng Critical | Microsoft Security Bulletin MS17-010 | S007 | [6] |
-| **1.2.2** | 6 mã CVE (CVE-2017-0143 đến CVE-2017-0148) và danh mục bản vá cho các dòng Windows | Microsoft MS17-010, NIST NVD (CVE-2017-0143..0148), KB4012213, KB4012216 | S001, S007, S010, S011, S012, S013, S022, S023 | [6], [7], [8], [9], [10], [11], [12], [13] |
-| **1.2.3** | Cơ chế kỹ thuật CVE-2017-0144, tràn bộ nhớ FEA (DWORD vs WORD), driver `srv.sys`, Pool Grooming | Rapid7 Technical Analysis (EternalBlue), NIST CVE-2017-0144 | S001, S025 | [7], [14] |
-| **1.2.4** | Điều kiện hệ thống dễ bị tổn thương, lý do chọn Windows Server 2012 R2 | Microsoft MS17-010, Microsoft Support Article 4023262 | S007, S032 | [6], [21] |
-| **1.2.5** | Đánh giá tác động an ninh C-I-A, nguy cơ sập nhân (BSOD) | Rapid7 Technical Analysis | S025 | [14] |
-| **1.2.6** | Các chiến dịch tấn công thực tế (WannaCry, NotPetya) | CISA Technical Alerts TA17-132A, TA17-181A | S014, S031 | [15], [16] |
-| **1.3.1** | Hệ điều hành trạm kiểm thử độc lập Kali Linux | Kali Linux Official Documentation | S017 | [17] |
-| **1.3.2** | Cơ chế quét cổng Nmap SYN (`-sS`) và nhận diện dịch vụ (`-sV`) | Nmap Official Network Scanning Guide (Gordon Lyon) | S018 | [18] |
-| **1.3.3** | Nền tảng Nmap Scripting Engine, logic `smb-vuln-ms17-010`, `smb-protocols`, `smb2-security-mode` | Nmap Official NSE Documentation & Script Sources | S018, S019, S026, S029 | [18], [19], [20] |
-| **1.3.4** | Cơ sở xác minh bản vá nội bộ Windows Server 2012 R2, Hotfix KB4012213/KB4012216, tệp `srv.sys` | Microsoft Support Article 4023262, KB4012213, KB4012216 | S022, S023, S032 | [8], [9], [21] |
-| **1.3.5** | Liên kết lý thuyết với 8 phép đo thực nghiệm lab | Tổng hợp các nguồn chuẩn sơ cấp Nmap, Microsoft, pfSense | S007, S008, S015, S018, S019, S032 | [6], [18], [19], [21], v.v. |
-| **1.4.1** | Mô hình bốn trục bằng chứng độc lập | Cơ sở phương pháp luận đối chiếu chéo | S018, S019, S032 | [18], [19], [21] |
-| **1.4.2** | Giới hạn kỹ thuật, phân biệt lỗi thu thập vs lỗi diễn giải, ranh giới `UNKNOWN != SAFE` | Nmap NSE Reference Guide, Microsoft Support | S018, S019, S032 | [18], [19], [21] |
-| **1.4.3** | Ba tầng kiểm soát phòng thủ (Patching, Protocol Hardening, Network Access Control) | Microsoft Support (KB2696547), pfSense Documentation, Microsoft MS17-010 | S007, S008, S015, S032 | [6], [21], v.v. |
+| Số trích dẫn [n] | Mã nguồn Ledger | Trạng thái Ledger | Tác giả / Cơ quan xuất bản | Năm | Tiêu đề tài liệu theo `SOURCE_LEDGER.md` | Vai trò bảo chứng kỹ thuật trong Chương 1 |
+| :---: | :---: | :---: | :--- | :---: | :--- | :--- |
+| **[1]** | **S020** | `VERIFIED` | Microsoft Learn | 2025 | What is Microsoft SMB Protocol and CIFS Protocol? | Khái niệm giao thức SMB/CIFS, phạm vi chức năng chia sẻ tệp và xác thực |
+| **[2]** | **S002** | `VERIFIED` | Microsoft Learn | 2026 | Direct hosting of SMB over TCP/IP | Cơ chế đóng gói NetBIOS over TCP (139) và Direct hosting SMB qua cổng TCP 445 |
+| **[3]** | **S006** | `VERIFIED` | Microsoft Learn | 2025 | What is SMB File Sharing for Windows and Windows Server? | Tiến hóa các thế hệ SMBv1, SMBv2, SMBv3 và tính năng gộp lệnh Compounding |
+| **[4]** | **S007** | `VERIFIED` | Microsoft Learn | 2025 | SMB security enhancements | Cơ chế mã hóa SMB Encryption và giới hạn bảo vệ trước việc hạ cấp giao thức |
+| **[5]** | **S023** | `VERIFIED` | Microsoft Learn | 2024 | What is Server Message Block signing? | Cơ chế ký số SMB Signing, thuật toán MD5/HMAC-SHA256/AES-CMAC và tính toàn vẹn |
+| **[6]** | **S031** | `VERIFIED` | Microsoft | n.d. | SMB 3.1.1 Pre-authentication integrity in Windows 10 | Cơ chế kiểm tra tính toàn vẹn trước xác thực SHA-512 trong SMB 3.1.1 |
+| **[7]** | **S005** | `VERIFIED` | Microsoft | 2017 | Microsoft Security Bulletin MS17-010 – Critical | Thông báo bảo mật chính thức MS17-010, phạm vi ảnh hưởng và phân loại Critical |
+| **[8]** | **S008** | `VERIFIED` | Microsoft Learn | 2025 | Detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows | Hướng dẫn cấu hình vô hiệu hóa SMBv1 máy chủ qua lệnh PowerShell `Set-SmbServerConfiguration` |
+| **[9]** | **S022** | `VERIFIED` | Microsoft Open Specifications | 2026 | [MS-SMB2]: Server Message Block (SMB) Protocol Versions 2 and 3 | Đặc tả kỹ thuật giao thức SMBv2/v3, cấu trúc đàm phán phương ngữ và mã trạng thái |
+| **[10]** | **S028** | `VERIFIED` | Microsoft | n.d. | MS-CIFS: Per SMB Session; Receiving a Tree Connect Response | Đặc tả phiên làm việc CIFS/SMBv1, định danh UID, TID và tài nguyên chia sẻ ngầm `IPC$` |
+| **[11]** | **S010** | `VERIFIED` | Microsoft Security Response Center (MSRC) | 2017 | Eternal Synergy Exploit Analysis | Phân tích kỹ thuật của Microsoft về cơ chế khai thác giao thức và các biến thể lỗ hổng |
+| **[12]** | **S011** | `VERIFIED` | NIST | 2017 | CVE-2017-0144 Detail | Bản ghi lỗ hổng bảo mật CVE-2017-0144 trên cơ sở dữ liệu quốc gia NVD |
+| **[13]** | **S012** | `VERIFIED` | Microsoft Threat Intelligence | 2017 | New ransomware, old techniques: Petya adds-worm capabilities | Phân tích cơ chế phát tán qua giao thức SMB và phá hủy cấu trúc MBR của mã độc NotPetya |
+| **[14]** | **S013** | `VERIFIED` | Rapid7 | 2017 | MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption | Phân tích kỹ thuật lỗi ép kiểu FEA (DWORD vs WORD) trong `srv.sys` và Pool Grooming |
+| **[15]** | **S025** | `VERIFIED` | K. Scarfone and P. Hoffman, NIST | 2009 | SP 800-41 Rev. 1: Guidelines on Firewalls and Firewall Policy | Hướng dẫn chuẩn mực về chính sách tường lửa, kiểm soát cổng và phân đoạn mạng |
+| **[16]** | **S015** | `VERIFIED` | Microsoft Threat Intelligence | 2017 | WannaCrypt ransomware worm targets out-of-date systems | Báo cáo của Microsoft về cơ chế lây lan mã độc WannaCry qua SMB trên máy chưa vá |
+| **[17]** | **S026** | `VERIFIED` | Kali Linux Project | n.d. | What is Kali Linux? | Tài liệu giới thiệu hệ điều hành kiểm thử chuyên dụng Kali Linux làm trạm đo đạc |
+| **[18]** | **S017** | `VERIFIED` | Gordon Lyon | 2009 | Nmap Network Scanning: The Official Nmap Project Guide | Cơ sở lý thuyết quét cổng TCP SYN (`-sS`), nhận diện dịch vụ (`-sV`) và kiến trúc NSE |
+| **[19]** | **S018** | `VERIFIED` | Paulino Calderon & Nmap Project | 2017 | smb-vuln-ms17-010.nse Script Source Code | Mã nguồn kịch bản NSE: opcode `0x25`, `PeekNamedPipe` `0x2300`, mã phản hồi NT Status |
+| **[20]** | **S029** | `VERIFIED` | Paulino Calderon / Nmap Project | n.d. | smb-protocols.nse Script Source Code | Mã nguồn kịch bản NSE khảo sát danh mục phương ngữ SMB được máy chủ hỗ trợ |
+| **[21]** | **S032** | `VERIFIED` | Microsoft Support | 2017 | How to verify that MS17-010 is installed | Hướng dẫn kỹ thuật kiểm tra bản vá MS17-010: KB và phiên bản `srv.sys` tối thiểu |
 
----
-
-## 2. Xác nhận ngưỡng bản vá kỹ thuật trên Windows Server 2012 R2
-
-Căn cứ tài liệu hỗ trợ kỹ thuật chính thức của Microsoft (**Microsoft Support Article 4023262: "How to verify that MS17-010 is installed"** [21]):
-
-1. **Gói cập nhật tương ứng cho Windows Server 2012 R2:**
-   - Bản cập nhật an ninh hàng tháng (Monthly Rollup): **KB4012216** [9].
-   - Bản cập nhật an ninh độc lập (Security Only): **KB4012213** [8].
-2. **Tệp driver nhân đích và 4 trường thuộc tính nhị phân:**
-   - Tệp chịu trách nhiệm: `C:\Windows\System32\drivers\srv.sys`.
-   - Bốn trường thuộc tính cần trích xuất: `FileVersion`, `ProductVersion`, `Length` (kích thước tệp byte), `LastWriteTime` (thời điểm ghi tệp).
-3. **Ngưỡng phiên bản an toàn tối thiểu (Version Threshold):**
-   - Microsoft công bố rõ ràng trong Article 4023262: Đối với Windows Server 2012 R2 (nhánh LDR/GDR), phiên bản tệp `srv.sys` sau khi cài đặt gói cập nhật tháng 03/2017 phải đạt giá trị tối thiểu là:
-     $$\text{Ngưỡng an toàn } srv.sys \geq \mathbf{6.3.9600.18604}$$
-   - Bất kỳ giá trị nào nhỏ hơn `6.3.9600.18604` (chẳng hạn phiên bản gốc RTM `6.3.9600.16384`) đều xác nhận máy chủ chưa được cập nhật bản vá khắc phục lỗi logic trong xử lý danh sách FEA.
+*Xác nhận kiểm toán:* 100% (21/21) tài liệu tham khảo trong Chương 1 đều có mã định danh đối ứng tồn tại trong `SOURCE_LEDGER.md` và đều ở trạng thái **`VERIFIED`**. Tuyệt đối không sử dụng bất kỳ nguồn nào trong nhóm `RECHECK` (như S001, S003, S004, S009, S014, S016, S019) để bảo chứng cho các luận điểm trong chương.
 
 ---
 
-## 3. Xác nhận ranh giới diễn giải kịch bản Nmap NSE
+## 2. Xác nhận nguồn và thuật ngữ xác minh bản vá trên Windows Server 2012 R2
 
-Căn cứ tài liệu đặc tả mã nguồn Nmap và kịch bản `smb-vuln-ms17-010.nse` [19]:
+Căn cứ tài liệu kỹ thuật chính thức của Microsoft (**Microsoft Support Article 4023262: "How to verify that MS17-010 is installed"** — Mã Ledger: **S032** [21]):
 
-1. **Cơ chế thăm dò:**
-   - Kịch bản thực hiện thăm dò an toàn bằng cách gửi lệnh `PeekNamedPipe` (mã hàm `0x2300`) trên đường ống `\PIPE\` thông qua kết nối chia sẻ ngầm `IPC$`.
-2. **Ranh giới trạng thái mã trạng thái phản hồi:**
-   - `STATUS_INSUFF_SERVER_RESOURCES` (`0xC0000205`): Máy chủ phản hồi mã lỗi tài nguyên đặc thù của driver chưa vá $\rightarrow$ Kịch bản xuất `State: VULNERABLE`.
-   - `STATUS_ACCESS_DENIED` (`0xC0000022`) hoặc `STATUS_INVALID_HANDLE` (`0xC0000008`): Máy chủ đã áp dụng kiểm soát tham số $\rightarrow$ Kịch bản xuất `This system is patched`.
+1. **Chuẩn hóa thuật ngữ khoa học:**
+   - Tuyệt đối không sử dụng các cụm từ suy diễn quá mức như "ngưỡng an toàn" hay "chứng chỉ an toàn toàn diện".
+   - Thuật ngữ chuẩn xác được xác lập: **"Phiên bản tệp `srv.sys` tối thiểu đã cập nhật đối với MS17-010"** (tiếng Anh: *Minimum updated srv.sys version for MS17-010*).
+2. **Giá trị kỹ thuật đối chiếu cho Windows Server 2012 R2:**
+   - Gói cập nhật tương ứng: **KB4012213** (Security Only) hoặc **KB4012216** (Monthly Rollup) [7], [21].
+   - Tệp driver nhân chịu trách nhiệm: `C:\Windows\System32\drivers\srv.sys`.
+   - Giá trị phiên bản số nguyên tối thiểu đã cập nhật:
+     $$\mathbf{srv.sys \geq 6.3.9600.18604}$$
+3. **Ranh giới phân loại kỹ thuật:**
+   - Máy chủ có tệp `srv.sys` đạt từ `6.3.9600.18604` trở lên được phân loại là **đã cập nhật đối với MS17-010**.
+   - Máy chủ có phiên bản thấp hơn giá trị trên (ví dụ phiên bản gốc RTM `6.3.9600.16384`) được phân loại là **chưa cập nhật bản vá (`UNPATCHED`) đối với MS17-010**.
+   - Tiêu chí này giới hạn trong phạm vi các lỗ hổng được xử lý trong bản tin MS17-010, không suy diễn thành sự an toàn tuyệt đối của toàn bộ hệ điều hành trước mọi nguy cơ khác.
+
+---
+
+## 3. Xác nhận cơ chế mã nguồn và ranh giới suy luận của kịch bản Nmap NSE
+
+Căn cứ mã nguồn chính thức của kịch bản `smb-vuln-ms17-010.nse` (Mã Ledger: **S018** [19]):
+
+1. **Ý nghĩa kỹ thuật của các mã phản hồi NT Status:**
+   - Mã `STATUS_INSUFF_SERVER_RESOURCES` (`0xC0000205`): Được mã nguồn kịch bản sử dụng làm tín hiệu đặc trưng của nhánh xử lý trên hệ thống chưa cập nhật bản vá $\rightarrow$ kịch bản xuất `State: VULNERABLE`.
+   - Mã `STATUS_ACCESS_DENIED` (`0xC0000022`) và `STATUS_INVALID_HANDLE` (`0xC0000008`): Được mã nguồn ghi nhận là có khả năng đã được vá (`likely patched`) $\rightarrow$ kịch bản xuất chuỗi thông báo `This system is patched.`.
+   - *Ranh giới giải thích:* Không tự ý suy diễn các giả định nguyên nhân nội bộ như "driver đã được bổ sung cơ chế kiểm soát tham số", mà chỉ mô tả chính xác ánh xạ mã lỗi theo đúng mã nguồn kịch bản.
+2. **Phạm vi nhận diện và mã CVE:**
+   - Kịch bản `smb-vuln-ms17-010.nse` là công cụ nhận diện từ xa đối với bản tin MS17-010 nói chung; trong siêu dữ liệu kết quả xuất, kịch bản gắn định danh tham chiếu với mã CVE-2017-0143.
+   - Kết quả kịch bản phản ánh tín hiệu phát hiện từ xa, không tự cấu thành bằng chứng chứng minh trực tiếp khả năng khai thác thành công lỗ hổng CVE-2017-0144 hay mã khai thác EternalBlue trên máy chủ mục tiêu.
 3. **Ranh giới trạng thái không xác định (`UNKNOWN / NO USABLE SCRIPT RESULT`):**
-   - Khi kịch bản không thể kết nối tới cổng SMB, cổng bị lọc (`filtered`), kết nối mạng bị ngắt (timeout) hoặc phiên xác thực nặc danh tới `IPC$` bị từ chối, kịch bản kết thúc mà không thể gửi hoặc không nhận được gói tin phản hồi của phép thăm dò `PeekNamedPipe`.
-   - Nmap không in ra khối kết luận trạng thái lỗ hổng.
-   - **Ranh giới phương pháp luận bắt buộc:** Đề tài xác lập nguyên tắc **`UNKNOWN != SAFE`**. Việc không quan sát được phản hồi từ xa không đồng nghĩa với việc máy chủ an toàn; đây là giới hạn của góc nhìn mạng từ trạm kiểm thử.
+   - Về mặt lý thuyết: Tiến trình quét có thể không thu được phản hồi thăm dò tại các giai đoạn kết nối khác nhau (kết nối mạng, phiên `IPC$`, hoặc nhận gói tin). Khi không có phản hồi hợp lệ cho lệnh `PeekNamedPipe`, kịch bản kết thúc mà không xuất khối kết luận lỗ hổng.
+   - Về mặt thực nghiệm đồ án: Đề tài ghi nhận nguyên trạng kết quả của kịch bản là không có kết luận khả dụng mà không tự ý gán cho một nguyên nhân giả định cụ thể nào.
+   - Nguyên tắc bất biến: **`UNKNOWN != SAFE`**.
 
 ---
 
 ## 4. Xác nhận hướng dẫn vô hiệu hóa giao thức SMBv1
 
-Căn cứ tài liệu kỹ thuật của Microsoft (**Microsoft Support KB2696547: "How to detect, enable and disable SMBv1, SMBv2, and SMBv3 in Windows"** [10]):
+Căn cứ tài liệu hỗ trợ kỹ thuật của Microsoft (**Microsoft Learn: "Detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows"** — Mã Ledger: **S008** [8]):
 
-1. **Phương pháp thực thi trên Windows Server 2012 R2:**
-   - Sử dụng PowerShell cmdlet chính thức:
+1. **Phương pháp cấu hình trên Windows Server 2012 R2:**
+   - Thực thi qua câu lệnh PowerShell quản trị:
      ```powershell
      Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
      ```
-   - Câu lệnh này cập nhật cấu hình dịch vụ máy chủ SMB nội bộ để từ chối khởi tạo giao thức SMBv1.
-2. **Tác động kỹ thuật đối với bề mặt mạng:**
-   - Máy chủ ngừng thương lượng phương ngữ `NT LM 0.12`. Khi trạm kiểm thử gửi yêu cầu Negotiate Protocol chứa SMBv1, máy chủ chỉ chấp thuận nếu trạm kiểm thử hỗ trợ SMBv2/SMBv3; nếu chỉ yêu cầu SMBv1, kết nối sẽ bị hủy bỏ ngay lập tức.
-3. **Ranh giới phòng thủ (Defense Boundary):**
-   - Việc tắt SMBv1 triệt tiêu đường truyền khai thác từ xa nhưng **không làm thay đổi cấu trúc mã nhị phân hay nâng cấp phiên bản của tệp `srv.sys` trên ổ đĩa** (`SMBv1 disabled != PATCHED`).
+2. **Phân biệt ranh giới kỹ thuật giữa cấu hình và tính năng:**
+   - Việc tắt cấu hình giao thức trên máy chủ (`EnableSMB1Protocol = $false`) có bản chất kỹ thuật hoàn toàn khác với việc gỡ bỏ gói tính năng Windows (`FS-SMB1 uninstalled`).
+   - Đề tài bảo toàn nghiêm ngặt hai ranh giới:
+     - **`SMBv1 disabled != FS-SMB1 uninstalled`**
+     - **`SMBv1 disabled != PATCHED`** (tắt cấu hình giao thức máy chủ loại bỏ phương ngữ `NT LM 0.12` khỏi danh sách đàm phán từ xa, nhưng không làm thay đổi hay nâng cấp phiên bản tệp nhị phân `srv.sys` trên đĩa cứng).
+3. **Loại bỏ ngôn ngữ tuyệt đối hóa:**
+   - Không sử dụng các từ ngữ mang tính tuyệt đối hóa như "triệt tiêu hoàn toàn", "đóng kín hoàn toàn bề mặt", "mọi gói tin bị chặn".
+   - Mô tả chính xác: Biện pháp cấu hình này làm giảm bề mặt tiếp xúc của giao thức và loại bỏ phương ngữ SMBv1 khỏi danh sách đàm phán trong các phép đo đạc lại.
 
 ---
 
-## 5. Rà soát các khẳng định bị loại bỏ do không đủ căn cứ nguồn
+## 5. Rà soát các chiến dịch mã độc WannaCry và NotPetya
 
-Trong quá trình chỉnh lý RG1, một số nội dung trong bản thảo cũ đã được rà soát và loại bỏ triệt để nhằm bảo đảm tính trung thực học thuật tuyệt đối:
-
-1. **Loại bỏ việc gọi Windows 7 là đối tượng thực nghiệm:** Bản thảo cũ đề cập Windows 7 SP1 là mục tiêu lab; điều này mâu thuẫn với cấu trúc thực nghiệm thực tế sử dụng máy chủ doanh nghiệp Windows Server 2012 R2. Nội dung này đã bị loại bỏ hoàn toàn khỏi các phần mô tả thực nghiệm.
-2. **Loại bỏ công cụ Metasploit Framework:** Bản thảo cũ dành một tiểu mục lớn giới thiệu Metasploit và các module khai thác/quét. Do đề tài hiện tại áp dụng phương pháp luận đo đạc phản ứng an toàn qua Nmap/NSE và xác minh bản vá nội bộ qua PowerShell, Metasploit không tham gia vào mô hình thực nghiệm và đã được loại bỏ 100%.
-3. **Loại bỏ khẳng định về việc thực nghiệm khai thác RCE / phiên SYSTEM:** Đề tài không thực hiện hành vi khai thác xâm nhập tạo phiên tải trọng trong lab. Khái niệm RCE và quyền `SYSTEM` chỉ được giữ lại trong phần phân tích lý thuyết về mức độ nguy hiểm của CVE-2017-0144 theo tài liệu của Rapid7.
-4. **Loại bỏ mô hình ba VLAN và Client nghiệp vụ:** Bản thảo cũ đề cập đến các phân vùng mạng nghiệp vụ và Client nghiệp vụ không tồn tại trong thiết kế mạng thực nghiệm thực tế. Nội dung này đã được thay thế bằng mô tả khách quan về cơ chế lọc gói của tường lửa trung gian Transparent Bridge (Case C).
+Căn cứ các báo cáo phân tích mối đe dọa chính thức của Microsoft Threat Intelligence:
+1. **Mã độc WannaCry (Mã Ledger: S015 [16]):**
+   - Dẫn chứng theo báo cáo *Microsoft Threat Intelligence (2017)*: Mã độc tự động quét cổng TCP 445 và phát tán dạng sâu (worm) qua các máy tính Windows chưa cập nhật bản vá MS17-010.
+   - Không sử dụng nguồn CISA TA17-132A (do mã S014 đang ở trạng thái `RECHECK`).
+2. **Mã độc NotPetya (Mã Ledger: S012 [13]):**
+   - Dẫn chứng theo báo cáo *Microsoft Threat Intelligence (2017)*: Mã độc kết hợp cơ chế lây lan qua giao thức SMB với hành vi phá hoại cấu trúc bản ghi khởi động (MBR) trên các hệ thống chưa được vá lỗi.
+   - Loại bỏ các số liệu thiệt hại định lượng quy đổi tiền tệ không có trong nguồn tài liệu được kiểm chứng.
