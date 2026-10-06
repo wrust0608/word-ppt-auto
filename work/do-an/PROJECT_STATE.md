@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7C0_R2_CORRECTION_REQUIRED`.
+- Current gate: `X7C0_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1293,4 +1293,39 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - R2 prompt:
   `work/do-an/prompts/X7C0_R2_CORRECT_SCENARIO2_PLAN.md`.
 - X7C1 remains **BLOCKED**.
+- X7D and Chapter 4 remain **BLOCKED**.
+
+
+## DEC-73 — X7C0 Scenario 2 plan R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `41b17ab0242b59bb0810aac4cc1baa40fe6e8169`.
+- Final external review:
+  `work/do-an/X7C0_SCENARIO2_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- R1 blocking corrections all closed.
+- Reviewer applied bounded precision micro-fixes after R2:
+  - dialect wording narrowed to values recorded by `smb-protocols`;
+  - NSE04 completion wording narrowed to the visible `Nmap done` line;
+  - UNKNOWN wording no longer implies a cause for missing script output.
+- Recommended plan for user approval remains:
+  - 2 H3;
+  - Bảng 3.4;
+  - NSE01/02/03 screenshots DROP;
+  - NSE04 screenshot KEEP as tentative Hình 3.6;
+  - crop proposal `x=0, y=24, width=1280, height=330`.
+- Critical locks PASS:
+  - `UNKNOWN / NO USABLE SCRIPT RESULT`;
+  - `UNKNOWN != SAFE`;
+  - local `UNPATCHED` independent from remote `UNKNOWN`;
+  - no FALSE NEGATIVE;
+  - no invented NTSTATUS/cause;
+  - local/remote signing independent;
+  - measurement labels separated from internal IDs;
+  - no completed Case A implied.
+- Current gate:
+  `X7C0_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7C1 remains **BLOCKED** until explicit user approval and plan integration.
 - X7D and Chapter 4 remain **BLOCKED**.

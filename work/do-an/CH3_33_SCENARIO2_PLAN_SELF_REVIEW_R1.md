@@ -25,7 +25,7 @@
 | **Số lần xuất hiện cụm “Baseline Case A” trong kế hoạch hiện hành** | **0** | Đã loại bỏ 100%; chỉ dùng “baseline” hoặc “trạng thái baseline” |
 | **Số lần phiên bản sai “Nmap 7.95” còn tồn tại** | **0** | Đã sửa chính xác thành “Nmap 7.99” theo tệp thô trực tiếp |
 | **Số lần cụm “sẵn sàng tiếp nhận” xuất hiện trong bảng/mô tả công khai** | **0** | Đã thay thế bằng việc ghi nhận TCP 139/445 OPEN và phản hồi SYN-ACK |
-| **Số lần lập luận SMBv1 là “điều kiện cần / tiên quyết”** | **0** | Đã loại bỏ hoàn toàn; chỉ ghi nhận 5 phương ngữ thực tế đàm phán |
+| **Số lần lập luận SMBv1 là “điều kiện cần / tiên quyết”** | **0** | Đã loại bỏ hoàn toàn; chỉ ghi nhận 5 phương ngữ được `smb-protocols` liệt kê |
 | **Tách biệt quan sát trực tiếp và phân loại UNKNOWN của NSE-SMB-04** | **Đạt** | Làm rõ ảnh chứng minh việc không xuất hiện script result; UNKNOWN là phân loại phương pháp luận |
 | **Đối chiếu trạng thái bản vá cục bộ UNPATCHED** | **Đạt** | Tái sử dụng chuẩn xác công thức đã phê chuẩn tại Mục 3.1 |
 | **Chuyển tiếp Case B ghi nhận các phép đo được chọn lặp lại** | **Đạt** | Ghi rõ chỉ lặp lại retest phương ngữ và retest MS17-010; không dùng “lặp lại toàn bộ” |
@@ -105,7 +105,7 @@ Kiểm toán nguồn gốc dòng lệnh giữa lớp người vận hành thao t
 
 - Quán triệt sâu sắc nguyên tắc:
   > **`UNKNOWN != SAFE`** (Không có kết quả khả dụng hoàn toàn KHÔNG đồng nghĩa với an toàn).
-- Văn bản kế hoạch khẳng định việc Nmap không in ra phán quyết lỗ hổng chỉ phản ánh giới hạn nhận diện của công cụ quét từ xa trong điều kiện thực nghiệm cụ thể, không chứng minh máy chủ an toàn hay đã được khắc phục lỗ hổng.
+- Văn bản kế hoạch chỉ ghi nhận rằng phép đo từ xa không cung cấp phán quyết lỗ hổng khả dụng; nguyên nhân của việc không có đầu ra script không được xác lập. Kết quả này không chứng minh máy chủ an toàn hay đã được khắc phục lỗ hổng.
 - Số lượng vi phạm suy diễn an toàn từ kết quả UNKNOWN: **0**.
 
 ---
@@ -132,7 +132,7 @@ Kiểm toán nguồn gốc dòng lệnh giữa lớp người vận hành thao t
 
 ## 8. Thẩm Tra Ngăn Chặn Rò Rỉ Khai Thác / RCE (Exploit / RCE Leakage Audit)
 
-- Kịch bản 2 là một kịch bản rà quét an ninh từ xa bằng kịch bản Nmap NSE, hoàn toàn không phải là kịch bản khai thác tấn công.
+- Kịch bản 2 được trình bày trong phạm vi rà quét NSE từ xa; bộ bằng chứng không chứa bước khai thác canonical hay artifact/kết quả RCE, reverse shell hoặc Meterpreter.
 - Hiệu chỉnh R2 cho `S2-C15`: Loại bỏ câu chữ mô tả hành vi gói tin nội bộ "không gửi mã khai thác tấn công". Thay thế bằng ranh giới cấp độ dự án:
   > *Không có bước khai thác canonical và không có artifact/kết quả RCE, reverse shell hoặc Meterpreter trong Kịch bản 2.*
 - Tuyệt đối không nhắc đến payload khai thác, khung Metasploit, hay việc chiếm quyền điều khiển hệ thống.
