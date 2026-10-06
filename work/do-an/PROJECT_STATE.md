@@ -956,3 +956,22 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Current gate:
   `X7A1_PASS_WAITING_FOR_USER_APPROVAL`.
 - X7B remains BLOCKED until user approval and integration of completed Section 3.1.
+
+
+## DEC-61 — Canonical handoff created for migration to a new ChatGPT chat
+
+- Ngày: 2026-10-06.
+- User requested migration of reviewer/QA responsibility to a fresh ChatGPT conversation because the current conversation is too long.
+- Canonical new-chat handoff:
+  `work/do-an/CHATGPT_CURRENT_HANDOFF_2026_10_06.md`.
+- `HANDOFF.md` now points new ChatGPT sessions to that artifact.
+- Current gate remains:
+  `X7A1_PASS_WAITING_FOR_USER_APPROVAL`.
+- Reviewer-final Section 3.1 branch HEAD:
+  `2d4690e8c40c870abd19019c0d51b31456a9229c`.
+- Final X7A1 review:
+  `work/do-an/X7A1_CH3_31_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score:
+  **99/100 — PASS / blockers 0**.
+- Important: this handoff does not constitute user approval of Section 3.1.
+- X7B remains BLOCKED until explicit user approval and integration of completed Section 3.1.
