@@ -1,0 +1,81 @@
+==================================================
+VIRTUALBOX HOST-ONLY INTERFACES (VBoxManage list hostonlyifs)
+==================================================
+Name:            VirtualBox Host-Only Ethernet Adapter
+GUID:            f89b382d-b7ae-43a1-8e18-2f8c54f842f6
+DHCP:            Disabled
+IPAddress:       192.168.56.1
+NetworkMask:     255.255.255.0
+IPV6Address:     fe80::facc:3ed6:512f:9fe9
+IPV6NetworkMaskPrefixLength: 64
+HardwareAddress: 0a:00:27:00:00:13
+MediumType:      Ethernet
+Wireless:        No
+Status:          Up
+VBoxNetworkName: HostInterfaceNetworking-VirtualBox Host-Only Ethernet Adapter
+
+
+==================================================
+VIRTUALBOX DHCP SERVERS (VBoxManage list dhcpservers)
+==================================================
+NetworkName:    HostInterfaceNetworking-VirtualBox Host-Only Ethernet Adapter
+Dhcpd IP:       192.168.56.100
+LowerIPAddress: 192.168.56.101
+UpperIPAddress: 192.168.56.254
+NetworkMask:    255.255.255.0
+Enabled:        No
+Global Configuration:
+    minLeaseTime:     default
+    defaultLeaseTime: default
+    maxLeaseTime:     default
+    Forced options:   None
+    Suppressed opts.: None
+        1/legacy: 255.255.255.0
+Groups:               None
+Individual Configs:   None
+
+NetworkName:    NatNetwork-Lab
+Dhcpd IP:       10.10.10.2
+LowerIPAddress: 10.10.10.3
+UpperIPAddress: 10.10.10.254
+NetworkMask:    255.255.255.0
+Enabled:        Yes
+Global Configuration:
+    minLeaseTime:     default
+    defaultLeaseTime: default
+    maxLeaseTime:     default
+    Forced options:   None
+    Suppressed opts.: None
+        1/legacy: 255.255.255.0
+        3/legacy: 10.10.10.1
+        6/legacy: 192.168.2.253
+Groups:               None
+Individual Configs:   None
+
+==================================================
+KALI-LINUX NIC CONFIGURATION
+==================================================
+hostonlyadapter1="VirtualBox Host-Only Ethernet Adapter"
+cableconnected1="on"
+nic1="hostonly"
+nic2="none"
+nic3="none"
+nic4="none"
+nic5="none"
+nic6="none"
+nic7="none"
+nic8="none"
+
+==================================================
+WINDOWS-SERVER-2012 NIC CONFIGURATION
+==================================================
+hostonlyadapter1="VirtualBox Host-Only Ethernet Adapter"
+cableconnected1="on"
+nic1="hostonly"
+nic2="none"
+nic3="none"
+nic4="none"
+nic5="none"
+nic6="none"
+nic7="none"
+nic8="none"

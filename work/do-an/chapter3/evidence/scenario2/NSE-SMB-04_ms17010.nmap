@@ -1,0 +1,9 @@
+# Nmap 7.99 scan initiated Sat Oct  3 22:10:40 2026 as: /usr/lib/nmap/nmap --privileged -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
+Nmap scan report for 192.168.56.20
+Host is up (0.00047s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+MAC Address: 08:00:27:55:71:CE (Oracle VirtualBox virtual NIC)
+
+# Nmap done at Sat Oct  3 22:10:42 2026 -- 1 IP address (1 host up) scanned in 1.35 seconds

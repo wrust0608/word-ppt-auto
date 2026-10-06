@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Sat Oct  3 21:49:52 2026 as: /usr/lib/nmap/nmap -sS -p 139,445 -T3 --max-retries 2 --reason -oA b4_smb_ports 192.168.56.20
+Host: 192.168.56.20 ()	Status: Up
+Host: 192.168.56.20 ()	Ports: 139/open/tcp//netbios-ssn///, 445/open/tcp//microsoft-ds///
+# Nmap done at Sat Oct  3 21:49:54 2026 -- 1 IP address (1 host up) scanned in 1.30 seconds

@@ -1,0 +1,81 @@
+================================================================================
+MS17-010 OFFICIAL MAPPING & LOCAL VERIFICATION REPORT
+================================================================================
+Date Accessed: 2026-10-04
+Target Hostname: WIN-IJK1OS26KJK
+Target OS: Windows Server 2012 R2 Standard Evaluation (x64, Build 9600)
+
+--------------------------------------------------------------------------------
+1. OFFICIAL MICROSOFT SOURCES & MAPPING
+--------------------------------------------------------------------------------
+Primary Source 1:
+- Title: Microsoft Security Bulletin MS17-010 - Critical (Security Update for Microsoft Windows SMB Server - 4013389)
+- Domain: learn.microsoft.com (formerly technet.microsoft.com)
+- Release Date: March 14, 2017
+- Target OS: Windows Server 2012 R2
+- Direct Security-Only Update: KB4012213
+- Direct Monthly Rollup Update: KB4012216
+
+Primary Source 2:
+- Title: How to verify that MS17-010 is installed
+- Article ID: 4023262
+- Domain: support.microsoft.com
+- Verification Method: %SystemRoot%\System32\drivers\srv.sys file version check
+- Target OS: Windows 8.1 and Windows Server 2012 R2
+- Official Minimum Patched srv.sys Version: 6.3.9600.18604
+- Verification Rule: 
+  * If srv.sys version >= 6.3.9600.18604 -> MS17-010 security update is present.
+  * If srv.sys version < 6.3.9600.18604 -> MS17-010 security update is NOT installed.
+
+Supersedence & Update Lineage Notes:
+- KB4012213 / KB4012216 are superseded by subsequent Windows Server 2012 R2 Monthly Rollups (e.g., KB4015550 April 2017, KB4019215 May 2017, and later cumulative rollups).
+- Any subsequent cumulative update containing the fix maintains srv.sys >= 6.3.9600.18604.
+
+--------------------------------------------------------------------------------
+2. OFFICIAL MICROSOFT FACT
+--------------------------------------------------------------------------------
+- OS: Windows Server 2012 R2 (Build 9600, 64-bit)
+- Required minimum patched srv.sys version: 6.3.9600.18604
+- Direct baseline updates: KB4012213 (Security Only) or KB4012216 (Monthly Rollup)
+
+--------------------------------------------------------------------------------
+3. LOCAL WINDOWS FACT
+--------------------------------------------------------------------------------
+- Actual OS: Microsoft Windows Server 2012 R2 Standard Evaluation (Build 9600, 64-bit)
+- Actual Installed Hotfixes (6 total):
+  * KB2919355 (Installed 3/21/2014)
+  * KB2919442 (Installed 3/21/2014)
+  * KB2937220 (Installed 3/21/2014)
+  * KB2938772 (Installed 3/21/2014)
+  * KB2939471 (Installed 3/21/2014)
+  * KB2949621 (Installed 3/21/2014)
+- Direct MS17-010 Updates (KB4012213 / KB4012216): NOT INSTALLED
+- Subsequent Cumulative Rollups (2017-present): NONE INSTALLED
+- Target Driver File: C:\Windows\System32\drivers\srv.sys
+- File Size: 454,656 bytes
+- Last Modified: 3/21/2014 11:48:54 AM
+- FileVersion String: 6.3.9600.16384 (winblue_rtm.130821-1623)
+- Actual Numeric Version: 6.3.9600.16421
+  (FileMajorPart=6, FileMinorPart=3, FileBuildPart=9600, FilePrivatePart=16421)
+
+--------------------------------------------------------------------------------
+4. COMPARISON
+--------------------------------------------------------------------------------
+- Microsoft Official Minimum Patched Version : 6.3.9600.18604
+- Local Windows Actual Numeric Version       : 6.3.9600.16421
+- Numeric Version Relation                   : 6.3.9600.16421 < 6.3.9600.18604 (Actual < Minimum)
+- Hotfix Cross-Check                         : No update containing or superseding MS17-010 exists on the system.
+
+--------------------------------------------------------------------------------
+5. CONCLUSION
+--------------------------------------------------------------------------------
+FINAL MS17-010 PATCH STATUS: UNPATCHED
+
+Factual Justification:
+The target machine is confirmed to be Windows Server 2012 R2 (Build 9600, 64-bit).
+The local driver C:\Windows\System32\drivers\srv.sys has a numeric version of 6.3.9600.16421,
+which is strictly lower than the Microsoft official minimum patched threshold of 6.3.9600.18604
+specified in Microsoft Support Article 4023262 and Security Bulletin MS17-010. Furthermore,
+the installed hotfix inventory confirms that neither KB4012213, KB4012216, nor any superseding
+cumulative rollup post-dating March 2014 has been installed on this host.
+================================================================================

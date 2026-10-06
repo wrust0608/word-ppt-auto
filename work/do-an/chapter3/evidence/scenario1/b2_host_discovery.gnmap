@@ -1,0 +1,6 @@
+# Nmap 7.99 scan initiated Sat Oct  3 21:47:30 2026 as: /usr/lib/nmap/nmap -sn -PR -T3 --max-retries 2 -oA b2_host_discovery 192.168.56.0/24
+Host: 192.168.56.1 ()	Status: Up
+Host: 192.168.56.20 ()	Status: Up
+Host: 192.168.56.100 ()	Status: Up
+Host: 192.168.56.10 ()	Status: Up
+# Nmap done at Sat Oct  3 21:47:32 2026 -- 256 IP addresses (4 hosts up) scanned in 1.91 seconds

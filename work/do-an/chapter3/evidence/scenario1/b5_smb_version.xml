@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sat Oct  3 21:50:57 2026 as: /usr/lib/nmap/nmap -sS -sV -&#45;version-intensity 5 -p 139,445 -T3 -&#45;max-retries 2 -oA b5_smb_version 192.168.56.20 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -sS -sV -&#45;version-intensity 5 -p 139,445 -T3 -&#45;max-retries 2 -oA b5_smb_version 192.168.56.20" start="1791078657" startstr="Sat Oct  3 21:50:57 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="139,445"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.20" addrtype="ipv4"/>
+<address addr="08:00:27:55:71:CE" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1791078657" endtime="1791078664"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.20" addrtype="ipv4"/>
+<address addr="08:00:27:55:71:CE" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" product="Microsoft Windows netbios-ssn" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Microsoft Windows Server 2008 R2 - 2012 microsoft-ds" ostype="Windows Server 2008 R2 - 2012" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+</ports>
+<times srtt="304" rttvar="2843" to="100000"/>
+</host>
+<runstats><finished time="1791078664" timestr="Sat Oct  3 21:51:04 2026" summary="Nmap done at Sat Oct  3 21:51:04 2026; 1 IP address (1 host up) scanned in 7.67 seconds" elapsed="7.67" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

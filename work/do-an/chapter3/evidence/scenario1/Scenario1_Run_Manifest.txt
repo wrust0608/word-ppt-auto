@@ -1,0 +1,58 @@
+==================================================
+SCENARIO 1 RUN MANIFEST
+Execution Date: 2026-10-04T08:54:00+07:00
+Target: 192.168.56.20 (Windows-Server-2012)
+Attacker: 192.168.56.10 (Kali-Linux)
+==================================================
+
+B1:
+STATUS: PASS
+COMMAND: ip addr show; ip route show
+SCREENSHOT: Scenario1_B1_IP_Route.png
+WHAT IT PROVES: Kali Linux sở hữu IP 192.168.56.10/24 trên interface eth0, kết nối mạng nội bộ 192.168.56.0/24 và hoàn toàn không có default route ra ngoài Internet.
+
+B2:
+STATUS: PASS
+COMMAND: sudo nmap -sn -PR 192.168.56.0/24 -T3 --max-retries 2 -oA b2_host_discovery
+RAW: b2_host_discovery.nmap, b2_host_discovery.xml, b2_host_discovery.gnmap
+SCREENSHOT: Scenario1_B2_Host_Discovery.png
+WHAT IT PROVES: Quét khám phá dải mạng 192.168.56.0/24 bằng ARP ping phát hiện 4 host đang hoạt động, trong đó máy chủ Windows mục tiêu 192.168.56.20 phản hồi trực tiếp với địa chỉ MAC 08:00:27:55:71:CE.
+
+B3:
+STATUS: PASS
+COMMAND: sudo nmap -sn -PR 192.168.56.20 -T3 --max-retries 2 -oA b3_target_alive
+RAW: b3_target_alive.nmap, b3_target_alive.xml, b3_target_alive.gnmap
+SCREENSHOT: Scenario1_B3_Target_Alive.png
+WHAT IT PROVES: Kiểm tra tính sẵn sàng riêng của mục tiêu 192.168.56.20 xác nhận máy chủ đang sống (Host is up) với độ trễ thấp (0.00034s).
+
+B4:
+STATUS: PASS
+COMMAND: sudo nmap -sS -p 139,445 192.168.56.20 -T3 --max-retries 2 --reason -oA b4_smb_ports
+RAW: b4_smb_ports.nmap, b4_smb_ports.xml, b4_smb_ports.gnmap
+SCREENSHOT: Scenario1_B4_SMB_Ports.png
+WHAT IT PROVES: Cả hai cổng SMB TCP 139 (netbios-ssn) và TCP 445 (microsoft-ds) đều ở trạng thái OPEN với lý do SYN-ACK (TTL=128), chứng minh Windows Firewall đã mở đúng ngoại lệ cho IP 192.168.56.10.
+
+B5:
+STATUS: PASS
+COMMAND: sudo nmap -sS -sV --version-intensity 5 -p 139,445 192.168.56.20 -T3 --max-retries 2 -oA b5_smb_version
+RAW: b5_smb_version.nmap, b5_smb_version.xml, b5_smb_version.gnmap
+SCREENSHOT: Scenario1_B5_SMB_Version.png
+WHAT IT PROVES: Quét nhận diện phiên bản dịch vụ xác định TCP 139 là "Microsoft Windows netbios-ssn" và TCP 445 là "Microsoft Windows Server 2008 R2 - 2012 microsoft-ds", khớp chính xác với hệ điều hành Windows Server 2012 R2.
+
+B6:
+STATUS: PASS
+COMMAND: sudo nmap -sS -p 139,445 --script smb-protocols,smb-os-discovery,smb2-security-mode,smb2-capabilities 192.168.56.20 -T3 --max-retries 2 -oA b6_smb_nse
+RAW: b6_smb_nse.nmap, b6_smb_nse.xml, b6_smb_nse.gnmap
+SCREENSHOT: Scenario1_B6_SMB_NSE_A.png
+WHAT IT PROVES: Lệnh đơn tích hợp 4 script NSE xác nhận: SMBv1 dialect NT LM 0.12 được bật (đánh dấu [dangerous, but default]), các dialect SMB 2.0.2 đến 3.0.2 được hỗ trợ đầy đủ kèm capabilities DFS/Leasing/Multi-credit, và message signing được kích hoạt nhưng không bắt buộc (enabled but not required).
+
+B7:
+STATUS: PASS
+COMMAND: pwd && ls -lh && echo -n 'Total raw artifacts: ' && ls -1 b*.* | wc -l
+RAW: Đầy đủ 15/15 files thuộc 5 lần quét B2->B6 (.nmap, .xml, .gnmap)
+SCREENSHOT: Scenario1_B7_Raw_Evidence.png
+WHAT IT PROVES: Toàn bộ 15 raw artifact được sinh ra đầy đủ, không bị thiếu hụt, không bị sửa đổi, lưu trữ tại /home/kali/evidence/scenario1.
+
+B8:
+STATUS: PASS
+CONCLUSION: Kịch bản 1 đã hoàn thành đầy đủ quy trình thu thập thông tin dịch vụ và cấu hình SMB qua mạng. Kết quả xác nhận máy chủ mở cổng 139/445 và hỗ trợ SMBv1. Tuy nhiên, căn cứ theo nguyên tắc học thuật, Scenario 1 KHÔNG khẳng định máy chủ dính lỗ hổng MS17-010. Kết luận về lỗ hổng MS17-010 sẽ được thực hiện chuyên biệt tại Scenario 2 thông qua script kiểm thử chuyên dụng.

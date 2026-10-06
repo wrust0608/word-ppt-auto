@@ -1,0 +1,44 @@
+==================================================
+SCENARIO 2 RUN MANIFEST
+Execution Date: 2026-10-04T09:14:00+07:00
+Target: 192.168.56.20 (Windows-Server-2012)
+Attacker: 192.168.56.10 (Kali-Linux)
+==================================================
+
+PRECHECK:
+STATUS: PASS
+WORKING DIRECTORY: /home/kali (relative target resolves to /home/kali/evidence/nse-smb)
+
+NSE-SMB-01:
+STATUS: PASS
+COMMAND: sudo nmap -sS -p 139,445 -n -T3 --max-retries 2 --reason -oA evidence/nse-smb/NSE-SMB-01_ports 192.168.56.20
+RAW: NSE-SMB-01_ports.nmap, NSE-SMB-01_ports.xml, NSE-SMB-01_ports.gnmap
+SCREENSHOT: Scenario2_NSE01_Ports.png
+WHAT IT PROVES: Xác nhận hai cổng TCP 139 và 445 đang mở (open, syn-ack ttl 128), kết nối mạng ổn định sẵn sàng cho việc kiểm tra script SMB.
+
+NSE-SMB-02:
+STATUS: PASS
+COMMAND: nmap -p 445 -n -T3 --max-retries 2 --script smb-protocols -oA evidence/nse-smb/NSE-SMB-02_protocols 192.168.56.20
+RAW: NSE-SMB-02_protocols.nmap, NSE-SMB-02_protocols.xml, NSE-SMB-02_protocols.gnmap
+SCREENSHOT: Scenario2_NSE02_Protocols.png
+WHAT IT PROVES: Giao thức SMBv1 (NT LM 0.12) được kích hoạt và cho phép kết nối song song với các dialect SMB2/SMB3 từ 2.0.2 đến 3.0.2.
+
+NSE-SMB-03:
+STATUS: PASS
+COMMAND: nmap -p 445 -n -T3 --max-retries 2 --script smb2-security-mode -oA evidence/nse-smb/NSE-SMB-03_signing 192.168.56.20
+RAW: NSE-SMB-03_signing.nmap, NSE-SMB-03_signing.xml, NSE-SMB-03_signing.gnmap
+SCREENSHOT: Scenario2_NSE03_Signing.png
+WHAT IT PROVES: Cấu hình ký số SMB2 (message signing) ở trạng thái "enabled but not required" trên dialect 3.0.2.
+
+NSE-SMB-04:
+STATUS: PASS
+COMMAND: nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20
+RAW: NSE-SMB-04_ms17010.nmap, NSE-SMB-04_ms17010.xml, NSE-SMB-04_ms17010.gnmap
+SCREENSHOT: Scenario2_NSE04_MS17010.png
+DETECTION RESULT: UNKNOWN (NO SCRIPT OUTPUT / NO USABLE RESULT)
+WHAT IT PROVES: Script thực thi nguyên văn mà không sinh lỗi; kết quả được phân loại trung thực là UNKNOWN theo interpretation lock; không khẳng định SAFE hoặc NOT VULNERABLE; đối chiếu ground truth hệ điều hành vẫn là UNPATCHED (srv.sys build 6.3.9600.16421).
+
+INTEGRITY:
+EXPECTED: 12
+ACTUAL: 12
+MISSING: 0

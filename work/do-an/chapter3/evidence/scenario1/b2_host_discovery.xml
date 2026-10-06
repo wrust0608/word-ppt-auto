@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Sat Oct  3 21:47:30 2026 as: /usr/lib/nmap/nmap -sn -PR -T3 -&#45;max-retries 2 -oA b2_host_discovery 192.168.56.0/24 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -sn -PR -T3 -&#45;max-retries 2 -oA b2_host_discovery 192.168.56.0/24" start="1791078450" startstr="Sat Oct  3 21:47:30 2026" version="7.99" xmloutputversion="1.05">
+<verbose level="0"/>
+<debugging level="0"/>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.1" addrtype="ipv4"/>
+<address addr="0A:00:27:00:00:13" addrtype="mac"/>
+<hostnames>
+</hostnames>
+<times srtt="398" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.20" addrtype="ipv4"/>
+<address addr="08:00:27:55:71:CE" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<times srtt="213" rttvar="3758" to="100000"/>
+</host>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.100" addrtype="ipv4"/>
+<address addr="08:00:27:13:44:71" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<times srtt="259" rttvar="1665" to="100000"/>
+</host>
+<host><status state="up" reason="localhost-response" reason_ttl="0"/>
+<address addr="192.168.56.10" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+</host>
+<runstats><finished time="1791078452" timestr="Sat Oct  3 21:47:32 2026" summary="Nmap done at Sat Oct  3 21:47:32 2026; 256 IP addresses (4 hosts up) scanned in 1.91 seconds" elapsed="1.91" exit="success"/><hosts up="4" down="252" total="256"/>
+</runstats>
+</nmaprun>
