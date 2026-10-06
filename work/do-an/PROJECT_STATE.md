@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7B1_R2_CORRECTION_REQUIRED`.
+- Current gate: `X7B1_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1173,4 +1173,31 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - R2 prompt:
   `work/do-an/prompts/X7B1_R2_CORRECT_CH3_32_SCENARIO1.md`.
 - X7C remains **BLOCKED**.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-69 — X7B1 Section 3.2 R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `407fadb7d8b6413be6b2c67c6c8991f04f4a186c`.
+- Final external review:
+  `work/do-an/X7B1_CH3_32_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- R1 blocking corrections all closed:
+  - B3/B4 narrowed to direct observations;
+  - generalized safety statement removed;
+  - local signing and remote signing kept independent;
+  - B5 and 3.3 transition bounded;
+  - stale X7B0 B5/B6 SHA metadata corrected;
+  - self-review claim mapping realigned to S1-C01..S1-C13.
+- Reviewer applied bounded editorial/terminology micro-fixes after R2 without changing claims, evidence, table, figures or numbering.
+- Locked Section 3.2 design remains:
+  - 1 H2 / 2 H3;
+  - Bảng 3.3;
+  - Hình 3.4–3.5.
+- Current gate:
+  `X7B1_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7C remains **BLOCKED** until explicit user approval and completed Section 3.2 integration.
 - Chapter 4 remains **BLOCKED**.
