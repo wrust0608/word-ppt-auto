@@ -669,3 +669,30 @@
 - Chapter 3 structure (7 H2) approved.
 - Chapter 3 prose authoring: **AUTHORIZED**.
 - Chapter 4 prose remains BLOCKED until Chapter 3 is externally reviewed.
+
+
+## DEC-49 — X7 Chapter 3 draft authoring opened under results-oriented constraints
+
+- Ngày: 2026-10-06.
+- User authorized preparation of a first Chapter 3 draft with embedded evidence images after X6 evidence preparation passed.
+- Reviewer researched experimental-results writing conventions and HUIT assessment emphasis before opening authoring.
+- New authoring standard:
+  `work/do-an/CHAPTER_3_AUTHORING_CONSTRAINTS.md`.
+- Change Request:
+  `work/do-an/CHANGE_REQUEST_CR-2026-10-06-X7-CHAPTER3-DRAFT.md`.
+- Executor prompt:
+  `work/do-an/prompts/X7_DRAFT_CHAPTER_3_WITH_EVIDENCE.md`.
+- Authoring branch:
+  `feature/x7-chapter-3-draft`
+  based on reviewer-final X6 branch head `0241c1f82b73ba40093ce891815d30b3f23d0274`.
+- Chapter 3 draft structure for X7 R1:
+  - 7 H2;
+  - 16 H3;
+  - 6 result tables;
+  - exactly 8 embedded direct-evidence images.
+- Public report logic:
+  `observed result -> selected evidence -> bounded direct interpretation -> comparison`.
+- Internal governance/evidence terms such as canonical, truth matrix, evidence layer, gate, ENV/S1/S2/CB/CC IDs and L1–L5 taxonomy are forbidden from student-facing Chapter 3 prose.
+- Negative results must be preserved, especially Scenario 2/Case B UNKNOWN and Case C filtered/no-response.
+- Chapter 4 remains reserved for CIA/risk/recommendations/residual risk and is not to be drafted in X7.
+- X7 output is Markdown draft only; no Chapter 3 final DOCX until external review and user approval.
