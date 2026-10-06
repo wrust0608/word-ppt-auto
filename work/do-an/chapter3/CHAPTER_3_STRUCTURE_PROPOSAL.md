@@ -61,7 +61,7 @@
   - **Hình 3.3:** Kết quả script smb-protocols trong Kịch bản 2 xác nhận máy chủ hỗ trợ phương ngữ SMBv1.
 - **Ranh giới với Chương 4 (Boundary with Ch4):**
   - *Thuộc Chương 3:* Dữ liệu đo đạc thực tế rằng script MS17-010 không sinh phán quyết (UNKNOWN / No usable output); sự độc lập giữa tín hiệu thăm dò từ xa và trạng thái bản vá máy chủ.
-  - *Thuộc Chương 4:* Phân tích nguyên nhân giới hạn của kỹ thuật quét black-box không xâm nhập; tác động an ninh khi kết quả quét an toàn giả (False Negative); cơ chế khai thác bộ nhớ nhân hệ điều hành của EternalBlue (chỉ phân tích lý thuyết/học thuật).
+  - *Thuộc Chương 4:* Phân tích giới hạn của kỹ thuật quét black-box không xâm nhập; nguy cơ diễn giải sai một kết quả `UNKNOWN`; cơ chế khai thác bộ nhớ nhân hệ điều hành của EternalBlue chỉ ở mức lý thuyết/học thuật.
 
 ---
 
@@ -101,7 +101,7 @@
 ---
 
 ### Mục 3.6. So sánh kết quả thực nghiệm
-- **Mục đích:** Xây dựng ma trận so sánh tổng hợp giữa trạng thái mốc chuẩn ban đầu và hai biện pháp phòng thủ Case B, Case C; làm rõ sự khác biệt của từng giải pháp dựa trên dữ liệu định lượng đã đo được.
+- **Mục đích:** Xây dựng ma trận so sánh tổng hợp giữa trạng thái mốc chuẩn ban đầu và hai biện pháp Case B, Case C; làm rõ các thay đổi quan sát được dựa trên dữ liệu đã đo.
 - **Bộ bằng chứng (Evidence Set):**
   - Tổng hợp dữ liệu đối chiếu chéo từ 83 tệp bằng chứng thực nghiệm của các mục 3.1 đến 3.5.
 - **Kế hoạch Bảng/Hình:**
@@ -113,7 +113,7 @@
 ---
 
 ### Mục 3.7. Tổng kết chương
-- **Mục đích:** Tóm lược các kết quả định lượng cốt lõi đã thu thập được từ thực nghiệm; khẳng định việc hoàn thành các mục tiêu khảo sát và tạo cầu nối dữ liệu vững chắc cho phần phân tích an ninh chuyên sâu tại Chương 4.
+- **Mục đích:** Tóm lược các kết quả thực nghiệm cốt lõi đã trình bày và chuyển sang phần đánh giá, rủi ro và khuyến nghị tại Chương 4.
 - **Bộ bằng chứng (Evidence Set):**
   - Không bổ sung dữ liệu mới; tổng kết trên cơ sở các phát hiện chính đã được chứng minh tại các mục 3.1 đến 3.6.
 - **Kế hoạch Bảng/Hình:**
