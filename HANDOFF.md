@@ -12,7 +12,7 @@
 > 5. `work/do-an/CHAPTER_3_NUMBERING_LEDGER.md`.
 > 6. Artifact/prompt của phase hiện hành.
 >
-> Chương 2 đã USER APPROVED và final DOCX đã PASS. X6 evidence-prep đã PASS. Chương 3 dùng sectioned workflow; prompt monolithic X7 cũ không được chạy. X7A đang/đã chờ G0 governance reconciliation theo DEC-51.
+> Chương 2 đã USER APPROVED và final DOCX đã PASS. X6 evidence-prep đã PASS. Chương 3 dùng sectioned workflow; prompt monolithic X7 cũ không được chạy. G0 governance reconciliation đã PASS theo DEC-52. Current phase = X7A0 baseline evidence/presentation plan; chưa được viết prose 3.1.
 >
 > Nếu nội dung phía dưới yêu cầu quay lại duyệt giọng, coi demo data chưa có, hoặc tiếp tục roadmap 2–6 như current work, đó là trạng thái lịch sử.
 
