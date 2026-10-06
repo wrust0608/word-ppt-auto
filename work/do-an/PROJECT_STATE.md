@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `WR1_DEMO1_WORD_REVIEW_BUILD`.
+- Current gate: `WR1_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1619,3 +1619,33 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Per DEC-81, **WR1 Demo 1 Word review now becomes the active gate**.
 - X7D1 Section 3.4 prose remains BLOCKED until WR1 and WR2 both pass independent Word review + user approval.
 - X7E / Case C and Chapter 4 remain BLOCKED.
+
+
+## DEC-86 — WR1 Demo 1 Word snapshot passes external review
+
+- Ngày: 2026-10-06.
+- Executor candidate:
+  `e6f11eeb7285af9cf57db220b85d71e9ab2e64d8`.
+- Reviewer-final WR1 branch:
+  `feature/wr1-demo1-word-review-v2@672cd4a528267e941cf21d9d8e4d55752b659667`.
+- Review DOCX:
+  `work/do-an/output/review/DEMO_1_CH2_CH3_31_32_REVIEW.docx`.
+- DOCX SHA-256 reported by executor:
+  `0affc468d7dd7fa31219da2d60fc4a1a0874fed2ca3e0b7f2f8da96c7230311b`.
+- Final external review:
+  `work/do-an/WR1_DEMO1_WORD_EXTERNAL_REVIEW_R1_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- Actual committed DOCX independently inspected at OOXML level:
+  - canonical headings correct;
+  - 7 numbered report tables;
+  - 7 numbered report figures;
+  - A4/margins correct;
+  - first-page-only review banner correct;
+  - Chapter 3 page-break-before present;
+  - no internal CITE-ANCHOR/raw Mermaid/raw Markdown image syntax.
+- Three stale Chapter 2 H2 labels in the QA Markdown were corrected reviewer-side; DOCX binary unchanged.
+- Current gate:
+  `WR1_PASS_WAITING_FOR_USER_APPROVAL`.
+- WR2 remains BLOCKED until explicit WR1 user approval.
+- X7D1 remains BLOCKED until both WR1 and WR2 are approved.
