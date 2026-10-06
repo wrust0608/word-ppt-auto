@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `RG1_R2_CORRECTION_REQUIRED`.
+- Current gate: `CH2_CH3_ARGUMENT_ENRICHMENT_PENDING_USER_SCOPE_LOCK`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1662,3 +1662,23 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - R2 is required for technical overclaim and source-provenance corrections.
 - WR1 remains a layout snapshot only and is not user-approved final editorial content.
 - RG2 / Chapter 2 enrichment remains BLOCKED until RG1 final external PASS + user approval.
+
+
+## DEC-89 — Cancel Chapter 1 enrichment; scope returns to Chapters 2–3
+
+- Ngày: 2026-10-06.
+- User clarified that opening Chapter 1 was outside the intended workflow.
+- The prior interpretation of "toàn bộ chương" as all report chapters was incorrect.
+- Therefore:
+  - `feature/report-wide-argument-enrichment-r0` is **ABANDONED / DO NOT INTEGRATE**;
+  - `feature/rg1-ch1-argument-realignment` is **ABANDONED / DO NOT INTEGRATE**;
+  - all RG1 Chapter 1 drafts/reviews/prompts remain historical scratch artifacts only;
+  - `CHAPTER_1.md` on `feature/ch3-integration` remains unchanged and authoritative for current scope;
+  - no RG2/RG3/RG4/RG5 workflow will be opened from the abandoned report-wide enrichment plan.
+- Correct intended enrichment scope:
+  1. improve logic, reasoning, design rationale and academic flow for **Chapter 2**;
+  2. improve logic, reasoning, evidence flow and bounded interpretation for **Chapter 3**;
+  3. preserve the already locked experimental facts and evidence;
+  4. regenerate/review Word snapshots after the Ch2/Ch3 enrichment is locked.
+- WR1 remains a useful layout snapshot but not the final editorial checkpoint after enrichment.
+- No new executor prompt should be sent until the corrected Ch2/Ch3 enrichment plan is created.
