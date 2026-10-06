@@ -1,6 +1,8 @@
 # CHAPTERS 2–4 EVIDENCE MAP — PROPOSED
 
-Trạng thái: `LOCKED_CANONICAL / USER_APPROVED_2026_10_05`
+Trạng thái: `HISTORICAL_SECTION_NUMBERING / SUPERSEDED_FOR_CH2_CH3_2026_10_06`
+
+> **CURRENT AUTHORITY:** Chương 2 đã được thay bằng bản user-approved tại `CHAPTER_2.md`. Ánh xạ Chương 3 hiện hành nằm tại `CHAPTER_3_SECTION_EVIDENCE_MAP.md`. Bảng phía dưới giữ để truy vết numbering cũ; không dùng để quyết định section number khi viết mới. Mapping Chương 4 sẽ được re-review tại X8 sau khi Chương 3 được khóa.
 
 | Section | Nhiệm vụ | Evidence/Source chính | Boundary |
 |---|---|---|---|
