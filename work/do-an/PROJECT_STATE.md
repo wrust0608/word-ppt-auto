@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7C0_SCENARIO2_EVIDENCE_PRESENTATION_PLAN`.
+- Current gate: `X7C0_R2_CORRECTION_REQUIRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1259,4 +1259,38 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - local signing and remote signing remain independent observations;
   - operator command and Nmap-recorded argv must not be conflated.
 - X7C1 prose remains **BLOCKED** until X7C0 passes independent external review + user approval.
+- X7D and Chapter 4 remain **BLOCKED**.
+
+
+## DEC-72 — X7C0 Scenario 2 plan R1 requires bounded correction
+
+- Ngày: 2026-10-06.
+- R1 candidate:
+  `4868942a5a6c86eb3feb03ce6110edfbcd2892e2`.
+- Independent external review:
+  `work/do-an/X7C0_SCENARIO2_PLAN_EXTERNAL_REVIEW_R1.md`.
+- Score: **90/100 — REVISE_MINOR_BLOCKING**.
+- Presentation geometry PASS:
+  - 2 H3;
+  - 1 Bảng 3.4;
+  - NSE01/02/03 images DROP;
+  - NSE04 image KEEP as tentative Hình 3.6;
+  - no second UNKNOWN-vs-UNPATCHED mini-table.
+- Core technical logic PASS:
+  - remote UNKNOWN remains indeterminate;
+  - `UNKNOWN != SAFE`;
+  - local UNPATCHED and remote UNKNOWN remain independent;
+  - local/remote signing remain independent.
+- Required bounded corrections:
+  1. remove invalid `Baseline Case A` wording;
+  2. fix Case B transition to selected retests, not all measurements;
+  3. narrow NSE01 to TCP OPEN/SYN-ACK only;
+  4. remove SMBv1 “necessary/prerequisite” theory;
+  5. separate direct NSE04 visible facts from UNKNOWN classification;
+  6. reuse exact approved Section 3.1 UNPATCHED wording;
+  7. correct provenance/terminology errors including Nmap 7.95->7.99, `--privileged` causality, measurement-label vs internal-ID classification, and unsupported exploit-payload wording.
+- Independent Scenario 2 image SHA-256 verification PASS.
+- R2 prompt:
+  `work/do-an/prompts/X7C0_R2_CORRECT_SCENARIO2_PLAN.md`.
+- X7C1 remains **BLOCKED**.
 - X7D and Chapter 4 remain **BLOCKED**.
