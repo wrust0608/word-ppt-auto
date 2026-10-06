@@ -806,3 +806,25 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   `33a490c6573dd7a140545fb5fb29b384e443fe88`.
 - X7A0 may now execute the evidence/presentation-plan task only.
 - Section 3.1 prose remains blocked until X7A0 plan passes external review.
+
+
+## DEC-54 — X7A0 baseline plan R1 requires blocking revision
+
+- Ngày: 2026-10-06.
+- R1 branch: `feature/x7a0-ch3-baseline-plan`.
+- Actual remote R1 HEAD: `9cf53d151896b0e7ff75f5e13a4b8e85b90efdb9`.
+- Agent handoff SHA `9cf53d10a402327732ad57f8976b32dc96f5b721` was incorrect.
+- External review: `work/do-an/X7A0_BASELINE_PLAN_EXTERNAL_REVIEW_R1.md`.
+- Score: **81/100 — REVISE_BLOCKING**.
+- PASS: complete 13-image inventory, no prose, no evidence byte change, sound patch-version distinction.
+- Blockers:
+  1. public table design is audit-like/too wide and exposes evidence filenames;
+  2. absolute network-isolation wording and ICMP-causality overreach;
+  3. other overclaims around service health, local protocol flags, firewall scope and hotfix completeness;
+  4. invented `BL-*` IDs instead of registered `ENV-CORE-*`;
+  5. figure set should be revised to 3 direct images after reviewer visual inspection;
+  6. out-of-scope modification of superseded monolithic prompt.
+- R2 prompt:
+  `work/do-an/prompts/X7A0_R2_CORRECT_BASELINE_PLAN.md`.
+- Section 3.1 prose remains BLOCKED.
+- X7A1 remains BLOCKED.
