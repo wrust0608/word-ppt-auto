@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7C1_CH3_33_SCENARIO2_DRAFT`.
+- Current gate: `X7C1_R2_CORRECTION_REQUIRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1388,4 +1388,37 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - Bảng 3.5;
   - Hình 3.7.
 - X7D / Case B remains **BLOCKED** until Section 3.3 prose passes independent external review + user approval.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-76 — X7C1 Section 3.3 R1 requires bounded correction
+
+- Ngày: 2026-10-06.
+- R1 candidate:
+  `f9c3d13d3036113a21dcb5221598426a6da3f7da`.
+- Independent external review:
+  `work/do-an/X7C1_CH3_33_EXTERNAL_REVIEW_R1.md`.
+- Score: **87/100 — REVISE_BLOCKING**.
+- Presentation implementation PASS:
+  - 1 H2 / 2 H3;
+  - Bảng 3.4;
+  - Hình 3.6;
+  - Hình 3.6 visually inspected and crop geometry accepted;
+  - no NSE01/02/03 screenshot duplication;
+  - Case B result not leaked.
+- Core classification architecture PASS:
+  - remote UNKNOWN remains indeterminate;
+  - `UNKNOWN != SAFE`;
+  - local UNPATCHED independent from remote UNKNOWN.
+- Required R2 corrections:
+  1. restore reviewer-final direct wording for NSE02 dialects and remove broader risk/support semantics;
+  2. narrow signing explanation to the direct remote result;
+  3. restore reviewer-final NSE04 observation/classification wording in prose/table/crop manifest;
+  4. simplify local UNPATCHED cross-reference and remove broader patch restatement;
+  5. simplify exploitation scope in student prose;
+  6. correct self-review QA contradictions and lightly tighten prose length.
+- Existing Hình 3.6 must not be regenerated in R2.
+- R2 prompt:
+  `work/do-an/prompts/X7C1_R2_CORRECT_CH3_33_SCENARIO2.md`.
+- X7D remains **BLOCKED**.
 - Chapter 4 remains **BLOCKED**.
