@@ -1,6 +1,6 @@
 # CURRENT ROADMAP — COMPLETE CHAPTER 3, THEN REVIEW CHAPTERS 2+3
 
-Status: `ACTIVE_CURRENT_AUTHORITY`  
+Status: `ACTIVE_CURRENT_AUTHORITY / EXECUTION_PAUSED_FOR_USER_CONFIRMATION`  
 Date: 2026-10-07
 
 ## 1. Product target
@@ -189,8 +189,8 @@ It passes only when:
 - prose is natural and not QA-like;
 - the phase improves the final Chapters 2+3 product.
 
-## 7. Current next action
+## 7. Next action after user confirmation
 
 `X7D1 — Section 3.4 Case B prose`
 
-Nothing else is authorized in parallel.
+Execution is paused until the user confirms this corrected roadmap. Nothing else is authorized in parallel.
