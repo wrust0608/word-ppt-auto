@@ -51,9 +51,9 @@
 ### 2.2. Chi tiết Heading 2 (9 mục)
 - **Chương 2 (7 mục):**
   1. `2.1. Phạm vi và mô hình thực nghiệm` (Trang 1)
-  2. `2.2. Chuẩn bị và xác nhận trạng thái ban đầu của hệ thống` (Trang 3)
-  3. `2.3. Kịch bản 1 — Khảo sát dịch vụ SMB bằng kỹ thuật thông thường` (Trang 5)
-  4. `2.4. Kịch bản 2 — Nhận diện dịch vụ SMB và kiểm tra dấu hiệu liên quan đến MS17-010 bằng Nmap NSE` (Trang 6)
+  2. `2.2. Chuẩn bị và xác nhận trạng thái ban đầu` (Trang 3)
+  3. `2.3. Kịch bản 1 — Khảo sát dịch vụ SMB bằng Nmap` (Trang 5)
+  4. `2.4. Kịch bản 2 — Kiểm tra dấu hiệu MS17-010 bằng NSE` (Trang 6)
   5. `2.5. Kiểm thử hai biện pháp giảm thiểu đã thực hiện` (Trang 8)
   6. `2.6. Dữ liệu thực nghiệm và nguyên tắc sử dụng` (Trang 10)
   7. `2.7. Tổng kết chương` (Trang 12)
