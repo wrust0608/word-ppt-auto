@@ -1,7 +1,7 @@
 # KẾ HOẠCH TRÌNH BÀY DỮ LIỆU MỤC 3.3 SCENARIO 2 (CH3_33_SCENARIO2_PRESENTATION_PLAN_R1)
 
-- **Trạng thái:** `R1_READY_FOR_EXTERNAL_REVIEW`
-- **Pha thực hiện:** `X7C0 — Scenario 2 Evidence & Presentation Plan Only`
+- **Trạng thái:** `R2_READY_FOR_FINAL_EXTERNAL_REVIEW`
+- **Pha thực hiện:** `X7C0 R2 — Correct Scenario 2 Evidence/Presentation Plan`
 - **Ràng buộc tuyệt đối:** **TUYỆT ĐỐI KHÔNG SOẠN VĂN XUÔI BÁO CÁO (ZERO REPORT PROSE)**. Tài liệu này chỉ thiết kế câu hỏi người đọc, cấu trúc tiểu mục H3, thiết kế bảng biểu báo cáo sinh viên theo hướng kết quả đo đạc (result-oriented), kế hoạch bố trí hình ảnh kèm khung cắt cúp dự kiến có thể tái lập, phương án trình bày kết quả âm tính/không xác định của NSE-SMB-04, phân định ranh giới độc lập giữa mốc chuẩn cục bộ và quan sát từ xa, và chuyển tiếp ý niệm sang Kịch bản tiếp theo (Case B).
 
 ---
@@ -12,7 +12,7 @@
 
 Câu hỏi này định hình Mục 3.3 thành một **phân tích thực nghiệm nghiêm ngặt về giới hạn của phép đo an toàn thông tin**:
 1. Thiết lập rõ các điều kiện tiền đề về tầng mạng và giao thức (cổng mở, phương ngữ hỗ trợ, cơ chế ký số) qua NSE-SMB-01 đến NSE-SMB-03.
-2. Trình bày trung thực kết quả thực thi kịch bản `smb-vuln-ms17-010` (NSE-SMB-04) khi công cụ quét không trả về phán quyết lỗ hổng.
+2. Trình bày trung thực kết quả thực thi kịch bản `smb-vuln-ms17-010` (NSE-SMB-04) khi công cụ quét không in ra phán quyết lỗ hổng.
 3. Làm rõ sự tồn tại độc lập giữa kết quả đo đạc từ xa (`UNKNOWN / NO USABLE SCRIPT RESULT`) và hiện trạng cấu hình cục bộ (`UNPATCHED`), giải thích vì sao kết quả từ xa không thể suy diễn thành "hệ thống an toàn" (`UNKNOWN != SAFE`) và mốc cục bộ không thể tự động biến kết quả quét từ xa thành "khẳng định có lỗ hổng".
 
 ---
@@ -34,14 +34,14 @@ Câu hỏi này định hình Mục 3.3 thành một **phân tích thực nghi�
     - Phân tích danh mục 5 phương ngữ SMB được hệ thống mục tiêu đàm phán và hỗ trợ, bao gồm phương ngữ kế thừa `NT LM 0.12 (SMBv1)` và các phương ngữ SMB2/3 (NSE-SMB-02).
     - Phân tích chính sách ký số gói tin SMB từ xa ghi nhận trên phương ngữ 3.0.2 là được hỗ trợ nhưng không bắt buộc (`Message signing enabled but not required`) (NSE-SMB-03).
   * *Phương thức thể hiện:* Sử dụng Bảng 3.4 (3 hàng đầu) để hệ thống hóa súc tích, mạch lạc; không sử dụng ảnh chụp màn hình riêng cho NSE-SMB-01, NSE-SMB-02, NSE-SMB-03 nhằm tránh dư thừa dữ liệu (vì đã được minh chứng một phần ở Mục 3.2).
-  * *Ranh giới kỹ thuật:* Nhấn mạnh trạng thái mở của cổng 445 chỉ là điều kiện cần về kết nối mạng chứ không đồng nghĩa với việc tồn tại lỗ hổng an ninh (`445 OPEN != vulnerable`); sự hiện diện của phương ngữ SMBv1 chỉ là điều kiện tiên quyết cho khả năng bị ảnh hưởng chứ không khẳng định sự tồn tại của lỗ hổng MS17-010 (`SMBv1 enabled != MS17-010 confirmed`).
+  * *Ranh giới kỹ thuật:* Nhấn mạnh trạng thái mở của cổng 445 chỉ phản ánh khả năng tiếp cận dịch vụ qua mạng chứ không đồng nghĩa với việc tồn tại lỗ hổng an ninh (`445 OPEN != vulnerable`); sự hiện diện của phương ngữ SMBv1 không đồng nghĩa với việc xác nhận hệ thống dính lỗ hổng MS17-010 (`SMBv1 enabled != MS17-010 confirmed`).
 
 - **`3.3.2. Đánh giá dấu hiệu lỗ hổng MS17-010 và đối chiếu trạng thái bản vá (NSE-SMB-04)`**
   * *Nội dung kỹ thuật:*
-    - Trình bày chi tiết tiến trình thực thi kịch bản chuyên dụng `smb-vuln-ms17-010` từ trạm Kali Linux: kịch bản được kích hoạt đúng cú pháp, mục tiêu trực tuyến, cổng 445 mở, phiên quét hoàn tất trọn vẹn trong 1.35 giây nhưng hoàn toàn vắng mặt khối kết quả `Host script results:` và không có phán quyết an ninh (NSE-SMB-04).
-    - Xác lập phân loại kỹ thuật chuẩn xác: `UNKNOWN / NO USABLE SCRIPT RESULT`.
-    - Phân tích ranh giới phương pháp luận: Khẳng định nguyên tắc bất định `UNKNOWN != SAFE` (không có bằng chứng xác nhận không đồng nghĩa với an toàn).
-    - Đối chiếu độc lập với hiện trạng bản vá cục bộ đã khóa tại Mục 3.1 (`UNPATCHED`): Giải thích tính độc lập giữa hai trục dữ liệu, bác bỏ các suy diễn sai lệch (không suy diễn mốc cục bộ biến kết quả từ xa thành có lỗ hổng, không dùng thuật ngữ "âm tính giả / false negative").
+    - Trình bày tiến trình thực thi kịch bản `smb-vuln-ms17-010` từ trạm Kali Linux: lệnh Nmap được thực thi với tùy chọn `--script smb-vuln-ms17-010`, mục tiêu trực tuyến, cổng 445 mở, phiên quét ghi nhận thông báo hoàn tất `Nmap done`, không xuất hiện khối kết quả `Host script results:`, và không có thông báo lỗi hiển thị trong đầu ra ghi nhận (NSE-SMB-04).
+    - Xác lập phân loại kỹ thuật giới hạn chuẩn xác: `UNKNOWN / NO USABLE SCRIPT RESULT` (lưu ý rõ UNKNOWN là phân loại phương pháp luận của đề án, không phải chuỗi ký tự nguyên văn do Nmap in ra).
+    - Phân tích ranh giới phương pháp luận: Khẳng định nguyên tắc bất định `UNKNOWN != SAFE` (việc không có phán quyết lỗ hổng không đồng nghĩa với việc hệ thống an toàn).
+    - Đối chiếu độc lập với hiện trạng bản vá cục bộ đã khóa tại Mục 3.1: *Mục 3.1 đã phân loại trạng thái bản vá cục bộ là UNPATCHED; dữ kiện này được giữ độc lập với kết quả NSE từ xa.* Giải thích tính độc lập giữa hai trục dữ liệu, bác bỏ các suy diễn sai lệch (không suy diễn mốc cục bộ biến kết quả từ xa thành có lỗ hổng, tuyệt đối không dùng thuật ngữ "âm tính giả / false negative").
   * *Phương thức thể hiện:* Bảng 3.4 (hàng thứ 4 tổng kết NSE-SMB-04); Hình 3.6 (minh chứng thị giác trực tiếp phiên quét hoàn tất không có phán quyết); phần luận bàn ranh giới bằng văn xuôi chặt chẽ (bounded prose).
 
 ---
@@ -58,15 +58,17 @@ Thiết kế **1 bảng tổng hợp duy nhất (Bảng 3.4)** theo định hư�
 
 | Phép đo | Mục tiêu kỹ thuật | Kết quả ghi nhận trực tiếp | Phân loại & Ranh giới kết luận |
 |---|---|---|---|
-| **NSE-SMB-01** | Kiểm tra trạng thái và phản hồi tầng giao vận của các cổng dịch vụ SMB | Cổng `139/tcp` và `445/tcp` ở trạng thái `OPEN`; phản hồi `syn-ack`, giá trị TTL bằng 128 | **Cổng dịch vụ mở (Open Ports)**<br>Hai cổng dịch vụ SMB sẵn sàng tiếp nhận kết nối qua mạng. Trạng thái cổng mở phản ánh khả năng tiếp cận dịch vụ, không đồng nghĩa với việc tồn tại lỗ hổng an ninh (`445 OPEN != vulnerable`). |
-| **NSE-SMB-02** | Khảo sát danh mục các phương ngữ SMB được hệ thống mục tiêu hỗ trợ đàm phán | Kịch bản `smb-protocols` ghi nhận 5 phương ngữ:<br>• `NT LM 0.12 (SMBv1)`<br>• `2.0.2`, `2.1`<br>• `3.0`, `3.0.2` | **Hỗ trợ đa phương ngữ (SMBv1 Enabled)**<br>Hệ thống duy trì hỗ trợ phương ngữ SMBv1 kế thừa cùng các phương ngữ SMB2/3. Sự hiện diện của SMBv1 là điều kiện cần về mặt giao thức nhưng không khẳng định máy chủ tồn tại lỗ hổng MS17-010 (`SMBv1 enabled != MS17-010 confirmed`). |
+| **NSE-SMB-01** | Kiểm tra trạng thái và phản hồi tầng giao vận của các cổng dịch vụ SMB | Cổng `139/tcp` và `445/tcp` ở trạng thái `OPEN`; phản hồi `syn-ack`, giá trị TTL bằng 128 | **Cổng dịch vụ mở (Open Ports)**<br>Từ trạm Kali, TCP 139 và 445 được ghi nhận ở trạng thái OPEN và phản hồi SYN-ACK. Trạng thái cổng mở phản ánh khả năng tiếp cận dịch vụ qua mạng, không đồng nghĩa với việc tồn tại lỗ hổng an ninh (`445 OPEN != vulnerable`). |
+| **NSE-SMB-02** | Khảo sát danh mục các phương ngữ SMB được hệ thống mục tiêu hỗ trợ đàm phán | Kịch bản `smb-protocols` ghi nhận 5 phương ngữ:<br>• `NT LM 0.12 (SMBv1)`<br>• `2.0.2`, `2.1`<br>• `3.0`, `3.0.2`<br>Chú thích `[dangerous, but default]` là đầu ra nguyên văn của công cụ | **Hỗ trợ đa phương ngữ (SMBv1 Enabled)**<br>Hệ thống duy trì hỗ trợ phương ngữ SMBv1 kế thừa cùng các phương ngữ SMB2/3. Sự hiện diện của phương ngữ SMBv1 không đồng nghĩa với việc xác nhận máy chủ tồn tại lỗ hổng MS17-010 (`SMBv1 enabled != MS17-010 confirmed`). |
 | **NSE-SMB-03** | Khảo sát cấu hình bảo mật và chính sách ký số gói tin SMB từ xa | Kịch bản `smb2-security-mode` (trên phương ngữ 3.0.2) ghi nhận:<br>• Ký số thông điệp: `enabled but not required` | **Ký số không bắt buộc (Signing Not Required)**<br>Chính sách ký số gói tin SMB từ xa ở trạng thái kích hoạt nhưng không bắt buộc đối với phương ngữ kiểm tra. Kết quả quan sát từ xa độc lập với các cờ cấu hình cục bộ và không khái quát hóa cho toàn bộ phương ngữ. |
-| **NSE-SMB-04** | Kiểm tra dấu hiệu lỗ hổng an ninh MS17-010 bằng kịch bản chuyên dụng | Kịch bản `smb-vuln-ms17-010` thực thi hoàn tất trong 1.35 giây; cổng 445 mở; **hoàn toàn không có khối kết quả Host script results** | **Không xác định (UNKNOWN / NO USABLE SCRIPT RESULT)**<br>Kịch bản quét không sinh ra phán quyết an ninh khả dụng. Kết quả không xác định này phản ánh giới hạn của phép đo từ xa, tuyệt đối không đồng nghĩa với việc hệ thống an toàn (`UNKNOWN != SAFE`). |
+| **NSE-SMB-04** | Kiểm tra dấu hiệu lỗ hổng an ninh MS17-010 bằng kịch bản chuyên dụng | Cổng 445/tcp mở; kết quả quét ghi nhận thông báo `Nmap done`; không xuất hiện khối kết quả `Host script results:`; không có thông báo lỗi hiển thị trong đầu ra ghi nhận | **Không xác định (UNKNOWN / NO USABLE SCRIPT RESULT)**<br>Kịch bản quét không sinh ra phán quyết an ninh khả dụng. Phân loại UNKNOWN là phân loại phương pháp luận của đề án, không phải chuỗi ký tự nguyên văn của Nmap. Kết quả này phản ánh giới hạn của phép đo từ xa, tuyệt đối không đồng nghĩa với việc hệ thống an toàn (`UNKNOWN != SAFE`). |
 
-### Các quy tắc dữ liệu loại khỏi Bảng 3.4:
+### Quy tắc sử dụng nhãn phép đo và dữ liệu loại khỏi Bảng 3.4:
+- **ĐƯỢC PHÉP:** `NSE-SMB-01` đến `NSE-SMB-04` là các nhãn phép đo (measurement labels) được phê chuẩn từ phương pháp thực nghiệm tại Chương 2, được phép xuất hiện trong Bảng 3.4 và văn bản báo cáo.
 - **CẤM:** Không đưa cú pháp dòng lệnh thô hoặc danh sách đối số argv của Nmap (`--max-retries 2`, `-T3`, `-oA evidence/...`).
-- **CẤM:** Không đưa mã định danh quản trị nội bộ như Evidence ID (`NSE-SMB-01`), Claim ID (`S2-C01`), hay đường dẫn tệp (`NSE-SMB-01_ports.nmap`).
+- **CẤM:** Không đưa mã định danh quản trị nội bộ như Stable Evidence ID (`S2-RAW-01`), Claim ID (`S2-C01`), hay đường dẫn tệp trong kho lưu trữ (`NSE-SMB-01_ports.nmap`).
 - **CẤM:** Không đưa các thuật ngữ ngoài phạm vi quan sát như `VULNERABLE`, `SAFE`, `NOT VULNERABLE`, `PATCHED`, `FALSE NEGATIVE`.
+- **CẤM:** Không nhấn mạnh chỉ số thời gian `1.35 seconds` trong bảng công khai vì không mang giá trị phân tích an ninh.
 
 ### Đánh giá phương án tạo bảng so sánh độc lập thứ hai:
 - Đã thẩm tra kỹ lưỡng đề xuất tạo thêm một bảng siêu nhỏ so sánh:
@@ -84,14 +86,15 @@ Theo kết quả thẩm tra tại `CH3_33_SCENARIO2_FIGURE_SELECTION_R1.md`, b�
 - **Câu văn dẫn nhập đề xuất:**
   *"Hình 3.6 thể hiện giao diện dòng lệnh và kết quả thực thi kịch bản smb-vuln-ms17-010 nhắm vào cổng 445 của máy chủ mục tiêu từ trạm kiểm thử Kali Linux."*
 - **Quan sát trực tiếp được phép diễn giải:**
-  1. Dòng lệnh thực thi kịch bản `smb-vuln-ms17-010` được chỉ định chính xác trên cổng 445 tới IP mục tiêu `192.168.56.20`.
-  2. Máy chủ mục tiêu trực tuyến (`Host is up`) với độ trễ thấp, cổng `445/tcp open microsoft-ds`, địa chỉ MAC xác nhận môi trường mạng nội bộ.
-  3. Tiến trình quét kết thúc trọn vẹn (`Nmap done: 1 IP address (1 host up) scanned in 1.35 seconds`) mà không gặp lỗi kết nối hay lỗi cú pháp.
-  4. Giữa dòng cổng 445 và thông báo kết thúc quét hoàn toàn không xuất hiện khối kết quả `Host script results:`, dấu nhắc shell trở lại bình thường.
+  1. Lệnh Nmap được thực thi với tùy chọn `--script smb-vuln-ms17-010` trên cổng 445 tới IP mục tiêu `192.168.56.20`.
+  2. Máy chủ mục tiêu trực tuyến (`Host is up`), cổng `445/tcp open microsoft-ds`, địa chỉ MAC xác nhận môi trường mạng nội bộ.
+  3. Tiến trình quét hoàn tất với thông báo `Nmap done: 1 IP address (1 host up) scanned`.
+  4. Giữa dòng cổng 445 và thông báo kết thúc quét không xuất hiện khối kết quả `Host script results:`, không có thông báo lỗi hiển thị trong đầu ra ghi nhận, và dấu nhắc shell trở lại bình thường.
 - **Ranh giới nghiêm ngặt — Điều hình ảnh TUYỆT ĐỐI KHÔNG chứng minh:**
   * **CẤM:** Không được diễn giải hình ảnh này chứng minh máy chủ mục tiêu an toàn hoặc đã được vá lỗi MS17-010.
-  * **CẤM:** Không được diễn giải hình ảnh này chứng minh kịch bản quét "thất bại" (failed) hay "bị tường lửa chặn" khi dòng lệnh và tiến trình quét hoàn tất sạch sẽ không báo lỗi.
+  * **CẤM:** Không được diễn giải hình ảnh này chứng minh kịch bản quét "thất bại" (failed) hay "bị tường lửa chặn" khi không có lỗi hiển thị trong đầu ra ghi nhận.
   * **CẤM:** Không được suy diễn bất kỳ mã lỗi nội bộ (NTSTATUS) nào từ giao diện dòng lệnh này.
+  * **CẤM:** Không tuyên bố hình ảnh tự nó "chứng minh UNKNOWN"; hình ảnh minh chứng quan sát trực tiếp về sự vắng mặt của khối kết quả kịch bản, còn UNKNOWN là phân loại phương pháp luận giới hạn của đề án.
 - **Khung cắt cúp đề xuất có thể tái lập:**
   * *Tệp nguồn:* `work/do-an/chapter3/evidence/scenario2/Scenario2_NSE04_MS17010.png` (Kích thước gốc $1280 \times 800\,\text{px}$, SHA-256: `c970e56481a920061416949ea7543dcb96f1f2f99635dbe201131073202e14ac`).
   * *Tọa độ đề xuất:* `x = 0, y = 24, width = 1280, height = 330` (tương ứng vùng `[left=0, top=24, right=1280, bottom=354]`).
@@ -104,12 +107,12 @@ Theo kết quả thẩm tra tại `CH3_33_SCENARIO2_FIGURE_SELECTION_R1.md`, b�
 
 Tiểu mục 3.3.2 phải được cấu trúc để người đọc luận văn nắm bắt trọn vẹn **7 điểm nhận thức phương pháp luận cốt lõi** đối với phép đo NSE-SMB-04:
 
-1. **Kịch bản thực sự được kích hoạt:** Bằng chứng dòng lệnh và tệp thực thi chứng minh kịch bản `smb-vuln-ms17-010` đã được nạp và thực thi cụ thể, không bị bỏ sót trong quá trình quét.
-2. **Phiên quét hoàn tất bình thường:** Nmap hoàn thành phiên quét trong 1.35 giây, duy trì kết nối tầng giao vận thành công với cổng 445 đang mở, không xuất hiện ngoại lệ lỗi hay gián đoạn mạng.
-3. **Vắng mặt tuyệt đối của phán quyết lỗ hổng:** Công cụ không in ra bất kỳ khối thông tin nào chứa từ khóa lỗ hổng, rủi ro, hay mô tả chi tiết của MS17-010.
-4. **Xác lập phân loại kỹ thuật chuẩn xác:** Kết quả của phép đo từ xa được phân loại chính xác là **`UNKNOWN / NO USABLE SCRIPT RESULT`** (Không xác định / Không có kết quả kịch bản khả dụng).
+1. **Lệnh Nmap được thực thi với kịch bản chỉ định:** Bằng chứng dòng lệnh và tệp thực thi ghi nhận lệnh Nmap được thực thi với tùy chọn `--script smb-vuln-ms17-010`.
+2. **Phiên quét hoàn tất bình thường:** Phiên quét kết thúc với dòng `Nmap done`, duy trì kết nối tầng giao vận với cổng 445 đang mở, không có thông báo lỗi hiển thị trong đầu ra ghi nhận.
+3. **Không xuất hiện phán quyết lỗ hổng:** Công cụ không in ra khối kết quả `Host script results:`, không có thông báo cảnh báo hay phán quyết lỗ hổng nào đối với MS17-010.
+4. **Xác lập phân loại kỹ thuật chuẩn xác:** Kết quả của phép đo từ xa được phân loại giới hạn là **`UNKNOWN / NO USABLE SCRIPT RESULT`** (Không xác định / Không có kết quả kịch bản khả dụng). Đây là phân loại phương pháp luận của đề án, không phải chuỗi ký tự nguyên văn do Nmap in ra.
 5. **Nguyên tắc bất định căn bản (`UNKNOWN != SAFE`):** Việc một kịch bản rà quét từ xa không đưa ra kết luận lỗ hổng hoàn toàn **không đồng nghĩa** với việc hệ thống mục tiêu an toàn, miễn nhiễm hoặc đã được áp dụng biện pháp phòng vệ trước lỗ hổng MS17-010.
-6. **Mốc chuẩn cục bộ không chuyển hóa kết quả từ xa:** Trạng thái thiếu bản vá xác nhận cục bộ tại Mục 3.1 (`UNPATCHED`) là một dữ kiện độc lập, không thể dùng để gán ghép hay biến kết quả đo đạc từ xa thành "khẳng định có lỗ hổng" (`VULNERABLE`).
+6. **Mốc chuẩn cục bộ không chuyển hóa kết quả từ xa:** *Mục 3.1 đã phân loại trạng thái bản vá cục bộ là UNPATCHED; dữ kiện này được giữ độc lập với kết quả NSE từ xa.* Trạng thái thiếu bản vá nội tại không thể dùng để gán ghép hay biến kết quả đo đạc từ xa thành "khẳng định có lỗ hổng" (`VULNERABLE`).
 7. **Không suy đoán nguyên nhân vắng mặt đầu ra:** Tuyệt đối không phỏng đoán các nguyên nhân không có trong dữ liệu quan sát trực tiếp (như suy đoán về cơ chế xử lý IPC$, mã phản hồi NTSTATUS, hay giả định kịch bản bị lỗi).
 
 > [!CAUTION]
@@ -124,9 +127,10 @@ Mục 3.3 phải duy trì sự phân định rạch ròi giữa hai trục quan 
 ```
 +-----------------------------------------------------------------------------------+
 | TRỤC 1: QUAN SÁT CỤC BỘ (LOCAL BASELINE - MỤC 3.1)                                 |
-| - Kiểm tra nội tại trên máy chủ Windows Server 2012 R2 qua PowerShell/WMI         |
-| - Kết quả: Không tìm thấy KB4012213, KB4012216 hay các bản Rollup thay thế        |
-| - Phân loại: UNPATCHED (Chưa cài bản vá)                                          |
+| - Mục 3.1 đã phân loại trạng thái bản vá cục bộ là UNPATCHED                     |
+| - Căn cứ: srv.sys = 6.3.9600.16421 thấp hơn ngưỡng tối thiểu 6.3.9600.18604       |
+| - Danh mục hotfix quan sát được không ghi nhận KB4012213, KB4012216 hoặc          |
+|   bản cập nhật thay thế đã được ánh xạ là chứa bản sửa lỗi MS17-010               |
 +-----------------------------------------------------------------------------------+
                                          |
                                          | KHÔNG HÒA GIẢI / KHÔNG SUY DIỄN CHÉO
@@ -134,7 +138,7 @@ Mục 3.3 phải duy trì sự phân định rạch ròi giữa hai trục quan 
 +-----------------------------------------------------------------------------------+
 | TRỤC 2: ĐO ĐẠC TỪ XA (REMOTE OBSERVATION - MỤC 3.3)                               |
 | - Thăm dò mạng từ trạm Kali Linux qua kịch bản smb-vuln-ms17-010                  |
-| - Kết quả: Scan hoàn tất, cổng 445 mở, không in Host script results               |
+| - Kết quả: Scan hoàn tất, cổng 445 mở, không xuất hiện Host script results        |
 | - Phân loại: UNKNOWN / NO USABLE SCRIPT RESULT (Không có kết quả khả dụng)       |
 +-----------------------------------------------------------------------------------+
 ```
@@ -152,14 +156,9 @@ Mục 3.3 phải duy trì sự phân định rạch ròi giữa hai trục quan 
 
 ## 7. Đoạn Chuyển Tiếp Ý Niệm Sang Kịch Bản Tiếp Theo (Conceptual Transition to Case B)
 
-Sau khi hoàn thành khảo sát cơ sở (Baseline Case A) bao gồm:
-- Thiết lập mốc chuẩn cấu hình và bản vá nội tại (Mục 3.1);
-- Khảo sát trạm mạng và dịch vụ SMB tầng giao thức (Mục 3.2 - Kịch bản 1);
-- Kiểm tra dấu hiệu lỗ hổng MS17-010 bằng NSE và ghi nhận giới hạn nhận diện từ xa (Mục 3.3 - Kịch bản 2);
-
-Nghiên cứu chuyển tiếp sang pha thực nghiệm can thiệp có kiểm soát (Case B).
+Sau khi hoàn tất trạng thái baseline và hai kịch bản đo đạc ban đầu (khảo sát bề mặt dịch vụ SMB tại Kịch bản 1 và kiểm tra dấu hiệu MS17-010 bằng NSE tại Kịch bản 2), nghiên cứu chuyển tiếp sang pha thực nghiệm can thiệp có kiểm soát (Case B).
 
 *Ý niệm chuyển tiếp:*
-> Để đánh giá hiệu quả thực tế của các giải pháp phòng thủ đối với dịch vụ chia sẻ tệp kế thừa, bước thực nghiệm tiếp theo thực hiện thay đổi một biến số duy nhất trong mô hình thử nghiệm: tiến hành vô hiệu hóa giao thức SMBv1 trực tiếp trên máy chủ Windows Server 2012 R2 theo đúng khuyến cáo kỹ thuật, sau đó thực hiện lặp lại toàn bộ các phép đo khảo sát và kiểm tra lỗ hổng để ghi nhận và đối chiếu sự biến đổi về diện mạo dịch vụ cũng như khả năng tiếp cận từ xa.
+> Bước thực nghiệm tiếp theo thực hiện thay đổi một biến số duy nhất trong mô hình thử nghiệm: tiến hành cấu hình vô hiệu hóa giao thức SMBv1 trên máy chủ Windows Server 2012 R2, sau đó thực hiện lặp lại các phép đo được chọn (bao gồm phép đo kiểm tra phương ngữ và phép đo kiểm tra kịch bản MS17-010) để đối chiếu sự thay đổi về danh mục phương ngữ và phản hồi từ xa từ góc nhìn trạm kiểm thử.
 
-*(Lưu ý: Không tiết lộ bất kỳ số liệu hay kết quả cụ thể nào của Case B tại thời điểm này).*
+*(Lưu ý: Không tiết lộ bất kỳ số liệu hay kết quả cụ thể nào của Case B tại thời điểm này; các phân tích đánh giá hiệu quả toàn diện thuộc về phạm vi Chương 4).*
