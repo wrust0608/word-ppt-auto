@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `WR1_PASS_WAITING_FOR_USER_APPROVAL`.
+- Current gate: `RG1_CHAPTER1_ARGUMENT_REALIGNMENT_IN_PROGRESS`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1649,3 +1649,30 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   `WR1_PASS_WAITING_FOR_USER_APPROVAL`.
 - WR2 remains BLOCKED until explicit WR1 user approval.
 - X7D1 remains BLOCKED until both WR1 and WR2 are approved.
+
+
+## DEC-87 — User opens report-wide argument enrichment
+
+- Ngày: 2026-10-06.
+- User directive: independently study reports/theses in the same vulnerability-assessment / SMB security domain, strengthen report logic, argumentation and design rationale, then complete the report using the existing framework across all chapters.
+- Change Request:
+  `work/do-an/CHANGE_REQUEST_CR-2026-10-06-REPORT-WIDE-ARGUMENT-ENRICHMENT.md`.
+- Manager research:
+  `work/do-an/REPORT_WIDE_ARGUMENT_ENRICHMENT_RESEARCH.md`.
+- Argument contract:
+  `work/do-an/REPORT_WIDE_ARGUMENT_CONTRACT.md`.
+- `ARGUMENT_MAP.md` was realigned to the current canonical experiment.
+- WR1 Demo 1 Word snapshot remains a technically valid layout baseline but is **not USER APPROVED** as final editorial content.
+- WR1 must not be integrated as a final report milestone before the report-wide argument enrichment is applied.
+- Critical reason for reopening Chapter 1:
+  - stale Windows 7 lab-target wording;
+  - stale Metasploit / exploit-as-canonical wording;
+  - old topology/client language;
+  - old four-level framework ending in exploit validation.
+- RG1 branch:
+  `feature/rg1-ch1-argument-realignment`.
+- RG1 prompt:
+  `work/do-an/prompts/RG1_REWRITE_CHAPTER1_ARGUMENT_ALIGNED.md`.
+- Current gate:
+  `RG1_CHAPTER1_ARGUMENT_REALIGNMENT_IN_PROGRESS`.
+- RG2, RG3, RG4, RG5 remain BLOCKED until the preceding report-wide gate is reviewed and user-approved.
