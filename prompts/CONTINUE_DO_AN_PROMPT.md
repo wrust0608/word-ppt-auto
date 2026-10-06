@@ -1,3 +1,26 @@
+# CURRENT OVERRIDE — 2026-10-06
+
+**Không thực hiện tuần tự roadmap bước 2–6 cũ như nhiệm vụ hiện hành.**
+
+Agent mới phải đọc trước:
+1. `work/do-an/PROJECT_STATE.md` — Current State Summary 2026-10-06;
+2. `work/do-an/CHAPTER_3_CONTRACT.md`;
+3. `work/do-an/CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`;
+4. `work/do-an/CHAPTER_3_SECTION_EVIDENCE_MAP.md`;
+5. `work/do-an/CHAPTER_3_NUMBERING_LEDGER.md`;
+6. prompt của phase hiện hành.
+
+Trạng thái hiện hành:
+- Chapter 2: USER APPROVED / LOCKED / final DOCX PASS.
+- X6 evidence prep: PASS.
+- Chapter 3: sectioned workflow.
+- Monolithic X7 prompt: SUPERSEDED.
+- Chapter 4: BLOCKED until Chapter 3 approval.
+
+Nội dung prompt lịch sử phía dưới chỉ dùng để truy vết các nguyên tắc còn tương thích; không được phép ghi đè các authority phía trên.
+
+---
+
 # Prompt tiếp quản chính xác dự án đồ án
 
 Sao chép nguyên khối prompt dưới đây vào agent mới khi cần tiếp tục dự án hiện tại.
