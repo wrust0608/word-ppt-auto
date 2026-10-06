@@ -725,3 +725,23 @@
 - There is no longer a global fixed 8-image/6-table quota for the whole chapter during drafting. Each section selects the minimum evidence needed for clarity.
 - The previous prompt `X7_DRAFT_CHAPTER_3_WITH_EVIDENCE.md` is superseded and must not be executed.
 - Chapter 4 remains blocked.
+
+
+## DEC-51 — X7A placed on hold pending roadmap/governance reconciliation
+
+- Ngày: 2026-10-06.
+- User requested a roadmap review before Chapter 3 section drafting begins.
+- Review artifact:
+  `work/do-an/ROADMAP_REVIEW_2026_10_06_PRE_X7A.md`.
+- Verdict: sectioned Chapter 3 workflow is directionally correct but **NOT READY TO EXECUTE**.
+- X7A status: `HOLD_FOR_ROADMAP_RECONCILIATION`.
+- Main blockers before prose:
+  1. `OUTLINE.md` still contains obsolete Chapter 2/3 structure;
+  2. `CHAPTERS_2_4_EVIDENCE_MAP.md` still maps old section numbering;
+  3. `CHAPTER_3_AUTHORING_CONSTRAINTS.md` still appears active with obsolete global 6-table/8-image quota;
+  4. `PROJECT_STATE.md` top summary/open issues are stale;
+  5. no explicit Chapter 3 integration-branch model;
+  6. per-section claim-to-evidence ledger not yet required;
+  7. figure/table numbering lock across isolated sections not yet defined.
+- Recommended next action: complete governance reconciliation G0, then re-open X7A.
+- No Chapter 3 prose should be drafted until G0 passes.
