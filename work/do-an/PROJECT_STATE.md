@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `CH2_CH3_ARGUMENT_ENRICHMENT_PENDING_USER_SCOPE_LOCK`.
+- Current gate: `X7D1_CH3_34_PROSE_NEXT`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1682,3 +1682,37 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   4. regenerate/review Word snapshots after the Ch2/Ch3 enrichment is locked.
 - WR1 remains a useful layout snapshot but not the final editorial checkpoint after enrichment.
 - No new executor prompt should be sent until the corrected Ch2/Ch3 enrichment plan is created.
+
+
+## DEC-90 — Restore original sequence: finish all Chapter 3 before Chapter 2+3 assembly
+
+- Ngày: 2026-10-07.
+- User clarified the original workflow unambiguously:
+  **Do not assemble Chapter 2 with Chapter 3 until the entirety of Chapter 3 is finished, externally reviewed, and user-approved.**
+- Current authoritative status:
+  - Chapter 2: **LOCKED**.
+  - Section 3.1: **USER APPROVED / LOCKED**.
+  - Section 3.2 (Scenario/Demo 1): **USER APPROVED / LOCKED**.
+  - Section 3.3 (Scenario/Demo 2): **USER APPROVED / LOCKED**.
+  - Section 3.4 (Case B): X7D0 presentation plan **USER APPROVED / LOCKED**; prose X7D1 not yet written.
+  - Section 3.5 (Case C): not yet completed.
+  - Sections 3.6–3.7: not yet completed.
+- Therefore Chapter 3 is **NOT COMPLETE**.
+- The prematurely created WR1 snapshot:
+  `feature/wr1-demo1-word-review-v2`
+  is reclassified as:
+  `PREMATURE_PREVIEW / DO_NOT_INTEGRATE / NOT_A_WORKFLOW_GATE`.
+- WR1/WR2 staged Word checkpoints are cancelled as active gates.
+- `work/do-an/DEMO_WORD_REVIEW_WORKFLOW.md` is superseded by DEC-90.
+- The abandoned Chapter-1/report-wide enrichment branches remain **DO NOT INTEGRATE**.
+- Correct execution order from this point:
+  1. X7D1 — write/review/approve Section 3.4 Case B;
+  2. X7E0/X7E1 — plan/write/review/approve Section 3.5 Case C;
+  3. complete/review/approve Sections 3.6–3.7;
+  4. perform whole-Chapter-3 external review;
+  5. user approval of complete Chapter 3;
+  6. only then assemble the locked Chapter 2 + complete approved Chapter 3 into one DOCX;
+  7. perform final document-level review for the user.
+- No Chapter 2 rewrite/enrichment is authorized before that final assembly unless the user explicitly reopens Chapter 2.
+- Current gate:
+  `X7D1_CH3_34_PROSE_NEXT`.
