@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7D1_CASEB_DRAFT_IN_PROGRESS`.
+- Current gate: `X7D1_R2_CORRECTION_REQUIRED`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1780,3 +1780,21 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - no Chapter 2 changes;
   - no Chapter 4.
 - Target prose length is intentionally concise because Sections 3.1–3.3 are already substantial.
+
+
+## DEC-94 — X7D1 Case B R1 requires bounded correction
+
+- Ngày: 2026-10-07.
+- Executor R1 candidate: `55c35e8e3ca2b1ef331c51f265d8e4712a3381c0`.
+- External review: `work/do-an/X7D1_CH3_34_EXTERNAL_REVIEW_R1.md`.
+- Verdict: **88/100 — REVISE_BLOCKING**.
+- Structure/crops/table remain accepted.
+- R2 is limited to:
+  - remove TCP 445 causal/generalized wording;
+  - narrow dialect retest causality;
+  - fix patch-state lineage overclaim;
+  - correct Hình 3.7 StartType manifest error;
+  - reduce repetition;
+  - revert out-of-scope `scripts/validate_project.py` modification.
+- Prompt: `work/do-an/prompts/X7D1_R2_CORRECT_CH3_34_CASEB.md`.
+- X7E remains BLOCKED.
