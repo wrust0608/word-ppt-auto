@@ -653,3 +653,19 @@
   - Case C conflates filtered with firewall causality in raw rows and overclaims complete isolation/vulnerability persistence;
   - result proposal reintroduces five-layer/L1-L5 jargon rejected from public report architecture.
 - Chapter 3 prose remains BLOCKED.
+
+
+## DEC-48 — X6 evidence preparation passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate: `e7fa307719e011689ad334cb848affc924c65116`.
+- Reviewer-final branch head after micro-integrity corrections: `0241c1f82b73ba40093ce891815d30b3f23d0274`.
+- Review: `work/do-an/X6_EVIDENCE_PREP_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **98/100 — PASS**.
+- Blockers: **0**.
+- Chapter 2 final DOCX: PASS; current fresh QA reports 12 rendered pages, exact 7 H2 / 20 H3 and no legacy-structure drift.
+- Evidence staging: 83 files, 0 SHA mismatch, 78 primary/direct + 5 secondary metadata/closure.
+- KB mapping, .56.100 identity, SMB signing, Case B workload boundary, Case C causality/rule-label boundary and public-structure jargon gates all PASS.
+- Chapter 3 structure (7 H2) approved.
+- Chapter 3 prose authoring: **AUTHORIZED**.
+- Chapter 4 prose remains BLOCKED until Chapter 3 is externally reviewed.
