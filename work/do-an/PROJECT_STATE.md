@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7E1_CASEC_PROSE_NEXT`.
+- Current gate: `X7E1_CASEC_DRAFT_IN_PROGRESS`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1848,3 +1848,20 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Only approved X7E0 plan/review/approval artifacts are integrated.
 - Next authorized work: X7E1 — create approved crops and write Section 3.5 prose.
 - No Sections 3.6–3.7, Chapter 3 assembly, Word, Chapter 2 rewrite, or Chapter 4 work yet.
+
+
+## DEC-101 — X7E1 Case C prose branch opened
+
+- Ngày: 2026-10-07.
+- Branch: `feature/x7e1-ch3-casec-draft`.
+- Base: `feature/ch3-integration@fa7ff8c269d1358c380beabbd2610fda37d3567a`.
+- Prompt: `work/do-an/prompts/X7E1_WRITE_CH3_35_CASEC.md`.
+- Scope:
+  - create the three approved Case C presentation crops;
+  - write Section 3.5 only;
+  - create crop manifest + self-review;
+  - no Section 3.6/3.7;
+  - no Chapter 3 assembly;
+  - no Word;
+  - no Chapter 2 changes;
+  - no Chapter 4.
