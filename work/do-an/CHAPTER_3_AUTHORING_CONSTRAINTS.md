@@ -1,8 +1,18 @@
 # CHAPTER 3 AUTHORING CONSTRAINTS — RESULTS-ORIENTED STUDENT REPORT
 
-Status: LOCKED_FOR_X7_DRAFT
+Status: SUPERSEDED_BY_SECTIONED_WORKFLOW_2026_10_06
 Date: 2026-10-06
 Role perspective: Lecturer / thesis-project reviewer in Information Security.
+
+> **DO NOT EXECUTE THIS FILE AS THE CURRENT CHAPTER 3 AUTHORING CONTRACT.**
+>
+> File này ghi lại thiết kế monolithic X7 trước khi người dùng yêu cầu cô lập từng demo. Các technical truth locks bên dưới có thể dùng để truy vết lịch sử, nhưng quota toàn chương như 16 H3 / 6 bảng / 8 ảnh đã bị supersede.
+>
+> Current authority:
+> - `CHAPTER_3_CONTRACT.md`
+> - `CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`
+> - `CHAPTER_3_SECTION_EVIDENCE_MAP.md`
+> - `CHAPTER_3_NUMBERING_LEDGER.md`
 
 ## 1. Purpose
 
