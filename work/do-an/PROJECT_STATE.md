@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7B0_AUTHORIZED_AFTER_X7A1_USER_APPROVAL`.
+- Current gate: `X7B1_AUTHORIZED_AFTER_X7B0_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1001,4 +1001,124 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - **Hình 3.4**.
 - X7B0 is authorized for **Scenario 1 Evidence & Presentation Plan ONLY**.
 - X7B1 prose remains BLOCKED until X7B0 passes external review + user approval.
+- Chapter 4 remains BLOCKED.
+
+
+## DEC-63 — X7B0 Scenario 1 evidence/presentation planning opened
+
+- Ngày: 2026-10-06.
+- Section 3.1 user-approved artifacts were explicitly integrated into:
+  `feature/ch3-integration@59ba232634046eba7d436607d09b3ec007f03a6f`.
+- Numbering remains locked through Section 3.1:
+  - Bảng 3.1–3.2;
+  - Hình 3.1–3.3.
+- Next available numbering:
+  - **Bảng 3.3**;
+  - **Hình 3.4**.
+- X7B0 branch created from the exact integration HEAD:
+  `feature/x7b0-ch3-scenario1-plan`.
+- X7B0 prompt:
+  `work/do-an/prompts/X7B0_SCENARIO1_EVIDENCE_PRESENTATION_PLAN.md`.
+- Scope: **Scenario 1 Evidence & Presentation Plan ONLY**.
+- Mandatory evidence sequence: B2 host discovery, B3 target alive, B4 139/445 ports, B5 service/version fingerprint, B6 SMB NSE.
+- Lecturer-review emphasis:
+  - decide presentation by information value rather than screenshot count;
+  - explicitly assess B2/B3 redundancy;
+  - preserve `.56.100 = UNKNOWN`;
+  - preserve B5 fingerprint range only;
+  - preserve B6 dialect/signing/capability limits;
+  - preserve `smb-os-discovery = no usable output`;
+  - Scenario 1 must not conclude MS17-010.
+- X7B1 prose remains **BLOCKED** until X7B0 passes independent external review + user approval.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-64 — X7B0 Scenario 1 plan R1 requires bounded correction
+
+- Ngày: 2026-10-06.
+- R1 candidate:
+  `4a9e40626a14b0ff60d9820df59037e0d5e237e7`.
+- Independent external review:
+  `work/do-an/X7B0_SCENARIO1_PLAN_EXTERNAL_REVIEW_R1.md`.
+- Score: **91/100 — REVISE_MINOR_BLOCKING**.
+- Overall academic geometry PASS:
+  - 2 H3;
+  - 1 compact Bảng 3.3;
+  - B4 image DROP;
+  - B5/B6 images KEEP;
+  - B2/B3 without dedicated screenshots.
+- Blocking corrections:
+  1. remove invented `-Pn` from B4/B5/B6 descriptions;
+  2. remove/correct wrong B4 MAC `08:00:27:1B:32:04` (direct evidence is `08:00:27:55:71:CE`);
+  3. make Bảng 3.3 more result-oriented and avoid duplicating Chapter 2 command syntax; omit B3 latency from public table by default.
+- R2 prompt:
+  `work/do-an/prompts/X7B0_R2_CORRECT_SCENARIO1_PLAN.md`.
+- X7B1 prose remains **BLOCKED**.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-65 — X7B0 Scenario 1 plan R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `952fbd6637c5161e9681f050024deb9e3809b53c`.
+- Final external review:
+  `work/do-an/X7B0_SCENARIO1_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **98/100 — PASS**.
+- Blockers: **0**.
+- Reviewer applied two bounded wording micro-fixes after R2:
+  1. B3 limited to the directly observed target-`up` state;
+  2. B4 limited to directly observed TCP 139/445 reachability/open + SYN-ACK from the Kali vantage point.
+- Recommended Scenario 1 design for user review:
+  - 2 H3;
+  - 1 Bảng 3.3;
+  - B4 screenshot DROP;
+  - B5 screenshot KEEP as tentative Hình 3.4;
+  - B6 screenshot KEEP as tentative Hình 3.5.
+- Technical locks all PASS:
+  - `.56.100 = UNKNOWN`;
+  - `445 OPEN != vulnerable`;
+  - B5 fingerprint range only;
+  - SMBv1 != MS17-010 verdict;
+  - `smb-os-discovery = no usable output`;
+  - Scenario 1 does not conclude MS17-010.
+- Current gate:
+  `X7B0_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7B1 prose remains **BLOCKED** until explicit user approval and plan integration.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-66 — User approves X7B0 Scenario 1 plan; numbering locked and X7B1 authorized
+
+- Ngày: 2026-10-06.
+- User decision on X7B0: **APPROVED / CHỐT**.
+- Reviewer-final X7B0 source:
+  `feature/x7b0-ch3-scenario1-plan@16ec564816a8bedbb1514ba0b8d3a57a63093d21`.
+- Final external review:
+  `work/do-an/X7B0_SCENARIO1_PLAN_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **98/100 — PASS**.
+- Blockers: **0**.
+- Scenario 1 presentation plan is now **USER APPROVED / LOCKED**.
+- Locked Section 3.2 structure:
+  - 3.2.1 Khảo sát trạm mạng và trạng thái mở cổng dịch vụ SMB;
+  - 3.2.2 Nhận diện phiên bản dịch vụ và đặc tính giao thức SMB.
+- Locked table:
+  - Bảng 3.3 Trình tự và kết quả khảo sát dịch vụ SMB từ trạm Kali Linux.
+- Locked figures:
+  - Hình 3.4 from Scenario1_B5_SMB_Version.png;
+  - Hình 3.5 from Scenario1_B6_SMB_NSE_A.png.
+- Locked figure decision:
+  - B4 screenshot DROP;
+  - B5 KEEP;
+  - B6 KEEP;
+  - no dedicated B2/B3 figures.
+- Next available numbering after Section 3.2:
+  - **Bảng 3.4**;
+  - **Hình 3.6**.
+- Approved X7B0 artifacts are to be explicitly integrated into `feature/ch3-integration`; do not merge unrelated branch history.
+- X7B1 is authorized to:
+  - create the approved B5/B6 derived presentation crops + crop manifest;
+  - write Section 3.2 prose only;
+  - produce self-review.
+- Scenario 2 remains BLOCKED until Section 3.2 prose passes external review + user approval.
 - Chapter 4 remains BLOCKED.
