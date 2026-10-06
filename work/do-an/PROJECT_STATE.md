@@ -901,3 +901,34 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7A1 prompt:
   `work/do-an/prompts/X7A1_DRAFT_CH3_31_BASELINE.md`.
 - X7B remains BLOCKED.
+
+
+## DEC-59 — X7A1 Section 3.1 R1 requires blocking prose revision
+
+- Ngày: 2026-10-06.
+- R1 branch: `feature/x7a1-ch3-baseline-draft`.
+- R1 remote HEAD: `9c180faab36738626976665059db507e06954725`.
+- External review:
+  `work/do-an/X7A1_CH3_31_EXTERNAL_REVIEW_R1.md`.
+- Score: **82/100 — REVISE_BLOCKING**.
+- PASS:
+  - clean scope;
+  - 1 H2 / 2 H3;
+  - 2 tables;
+  - 3 presentation figures;
+  - crop manifest and source hashes are valid;
+  - no later-section leakage.
+- Blocking corrections:
+  1. local SMB flags were converted into negotiation capability;
+  2. remote port state was incorrectly tied directly to a “middle firewall”;
+  3. firewall configuration was converted into proven traffic behavior/exclusion;
+  4. generalized FileVersion/RTM explanation exceeded approved claims;
+  5. “safe threshold”, absolute hotfix absence and snapshot reproducibility wording overreached;
+  6. current [4]/[5] citation mapping is wrong in the global Chapter 1 bibliography.
+- R2 citation strategy:
+  - visible prose names Microsoft sources naturally;
+  - internal non-rendering `CITE-ANCHOR: S005, S032`;
+  - final IEEE numbering deferred to global normalization gate.
+- R2 prompt:
+  `work/do-an/prompts/X7A1_R2_CORRECT_CH3_31_BASELINE.md`.
+- X7B remains BLOCKED.
