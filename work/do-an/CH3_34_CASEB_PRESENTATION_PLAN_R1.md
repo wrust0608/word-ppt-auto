@@ -1,20 +1,20 @@
-# KẾ HOẠCH TRÌNH BÀY DỮ LIỆU MỤC 3.4 CASE B (CH3_34_CASEB_PRESENTATION_PLAN_R1)
+# KẾ HOẠCH TRÌNH BÀY DỮ LIỆU MỤC 3.4 CASE B R2 (CH3_34_CASEB_PRESENTATION_PLAN_R1)
 
-- **Trạng thái:** `R1_READY_FOR_EXTERNAL_REVIEW`
-- **Pha thực hiện:** `X7D0 R1 — Case B Evidence & Presentation Plan`
+- **Trạng thái:** `R2_READY_FOR_FINAL_EXTERNAL_REVIEW`
+- **Pha thực hiện:** `X7D0 R2 — Correct Case B Evidence/Presentation Plan`
 - **Ràng buộc cốt lõi:** **TUYỆT ĐỐI KHÔNG SOẠN VĂN XUÔI BÁO CÁO (ZERO REPORT PROSE)**. Tài liệu này chỉ thiết kế câu hỏi người đọc, cấu trúc tiểu mục H3, thiết kế bảng biểu so sánh trước/sau theo định hướng kết quả (result-oriented), kế hoạch bố trí hình ảnh kèm ranh giới diễn giải và khung cắt cúp dự kiến có thể tái lập, phân định rạch ròi 4 tầng an ninh độc lập, và xác lập chuyển tiếp ý niệm sang Kịch bản tiếp theo (Case C).
 
 ---
 
 ## 1. Câu Hỏi Trọng Tâm Dành Cho Người Đọc Luận Văn (Reader Question)
 
-> *Khi biện pháp vô hiệu hóa giao thức SMBv1 được áp dụng trên máy chủ Windows Server 2012 R2 thông qua thay đổi cấu hình dịch vụ, những thuộc tính cấu hình và trạng thái nào của hệ thống thay đổi, những thành phần nào duy trì nguyên vẹn ở mức cục bộ, danh sách phương ngữ đàm phán ghi nhận từ xa qua mạng phản ánh sự biến đổi ra sao, và kết quả đo đạc lại bằng kịch bản kiểm tra MS17-010 xác lập được những giới hạn kỹ thuật gì mà không được đánh đồng với việc hệ thống đã được cập nhật bản vá hay trở nên an toàn?*
+> *Khi biện pháp vô hiệu hóa giao thức SMBv1 được áp dụng trên máy chủ Windows Server 2012 R2 thông qua thay đổi cấu hình dịch vụ, những thuộc tính cấu hình và trạng thái nào của hệ thống thay đổi, những thành phần nào duy trì nguyên vẹn ở mức cục bộ, danh sách phương ngữ ghi nhận từ xa qua mạng phản ánh sự biến đổi ra sao, và kết quả đo đạc lại bằng kịch bản kiểm tra MS17-010 xác lập được những giới hạn kỹ thuật gì mà không được đánh đồng với việc hệ thống đã được cập nhật bản vá hay trở nên an toàn?*
 
 Câu hỏi này định hình Mục 3.4 thành một **nghiên cứu thực nghiệm so sánh đối chứng có kiểm soát chặt chẽ (controlled comparative experiment)**:
 1. Làm rõ thao tác can thiệp: chỉ là thay đổi cấu hình máy chủ (`Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force`), không phải cập nhật bản vá (`patch`), không phải gỡ bỏ tính năng (`feature uninstall`), không phải nâng cấp driver hay hệ điều hành.
-2. Xác lập tính toàn vẹn của hiện trạng cục bộ sau can thiệp: `EnableSMB1Protocol` chuyển thành `False`, nhưng `EnableSMB2Protocol` giữ `True`, `FS-SMB1` vẫn `Installed`, `LanmanServer` tiếp tục `Running`, và tệp driver nhân `srv.sys` vẫn chưa vá (`UNPATCHED`).
-3. Khảo sát hiệu ứng mạng quan sát được từ xa: cổng 445 vẫn mở, phương ngữ cũ `NT LM 0.12 (SMBv1)` biến mất khỏi danh sách đàm phán, trong khi các phương ngữ SMB2/3 (`2.0.2`, `2.1`, `3.0`, `3.0.2`) vẫn tiếp tục được ghi nhận.
-4. Trình bày trung thực kết quả đo lại kịch bản `smb-vuln-ms17-010`: tiếp tục hoàn tất mà không có phán quyết kịch bản khả dụng (`UNKNOWN / NO USABLE SCRIPT RESULT`), duy trì nguyên tắc bất định `UNKNOWN != SAFE`, và giữ vững ranh giới độc lập giữa 4 tầng kỹ thuật.
+2. Xác lập tính toàn vẹn của hiện trạng cục bộ sau can thiệp: `EnableSMB1Protocol` chuyển thành `False`, thuộc tính `EnableSMB2Protocol` được ghi nhận `True`, tính năng `FS-SMB1` vẫn `Installed`, `LanmanServer` được ghi nhận ở trạng thái `Running` trước và sau can thiệp, và trạng thái bản vá hệ thống cục bộ duy trì `UNPATCHED`.
+3. Khảo sát hiệu ứng mạng quan sát được từ xa: cổng 445 ở trạng thái OPEN, kịch bản `smb-protocols` ghi nhận các phương ngữ `2.0.2`, `2.1`, `3.0`, `3.0.2`; phương ngữ cũ `NT LM 0.12 (SMBv1)` không xuất hiện trong danh sách phương ngữ của phép đo lại.
+4. Trình bày trung thực kết quả đo lại kịch bản `smb-vuln-ms17-010`: phép đo lại không cung cấp phán quyết lỗ hổng khả dụng (`UNKNOWN / NO USABLE SCRIPT RESULT`), duy trì nguyên tắc bất định `UNKNOWN != SAFE`, và giữ vững ranh giới độc lập giữa 4 tầng kỹ thuật.
 
 ---
 
@@ -31,24 +31,24 @@ Câu hỏi này định hình Mục 3.4 thành một **nghiên cứu thực nghi
 
 - **`3.4.1. Thao tác vô hiệu hóa SMBv1 và kiểm tra trạng thái máy chủ cục bộ`**
   * *Nội dung kỹ thuật:*
-    - Trình bày ngắn gọn mốc xuất phát cục bộ trước can thiệp: dịch vụ `LanmanServer` đang chạy, tính năng `FS-SMB1` đã cài đặt, cả hai cờ `EnableSMB1Protocol` và `EnableSMB2Protocol` đều ở trạng thái `True`.
-    - Trình bày thao tác can thiệp: thực thi lệnh PowerShell `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` nhằm vô hiệu hóa giao thức SMBv1 ở mức cấu hình máy chủ chia sẻ tệp.
-    - Trình bày kết quả kiểm tra cục bộ ngay sau can thiệp: `EnableSMB1Protocol` chuyển thành `False`; `EnableSMB2Protocol` duy trì `True`; tính năng `FS-SMB1` vẫn ở trạng thái `Installed`; dịch vụ `LanmanServer` tiếp tục `Running`.
+    - Trình bày ngắn gọn mốc xuất phát cục bộ trước can thiệp: dịch vụ `LanmanServer` ở trạng thái Running, tính năng `FS-SMB1` ở trạng thái Installed, cả hai cờ `EnableSMB1Protocol` và `EnableSMB2Protocol` đều ở trạng thái `True`.
+    - Trình bày thao tác can thiệp: thực thi lệnh PowerShell `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force` nhằm thay đổi thuộc tính cấu hình máy chủ chia sẻ tệp; dấu nhắc PowerShell xuất hiện trở lại; không có stdout hiển thị trong ảnh. Kết quả thay đổi cấu hình được xác nhận thông qua trạng thái kiểm tra sau can thiệp.
+    - Trình bày kết quả kiểm tra cục bộ ngay sau can thiệp: `EnableSMB1Protocol` chuyển thành `False`; thuộc tính `EnableSMB2Protocol` được ghi nhận `True` trước và sau can thiệp; tính năng `FS-SMB1` vẫn ở trạng thái `Installed`; `LanmanServer` được ghi nhận ở trạng thái `Running` trước và sau can thiệp.
     - Phân tích ranh giới kỹ thuật cục bộ:
       * Khẳng định việc tắt cấu hình SMBv1 hoàn toàn **không đồng nghĩa** với việc gỡ bỏ gói tính năng `FS-SMB1` khỏi Windows Server (`SMBv1 disabled != FS-SMB1 uninstalled`).
-      * Khẳng định việc thay đổi cấu hình máy chủ **không làm thay đổi tệp driver `srv.sys`**; trạng thái bản vá hệ thống cục bộ vẫn là **`UNPATCHED`** (`SMBv1 disabled != PATCHED`).
-      * Làm rõ rằng sự tiếp tục hoạt động của dịch vụ `LanmanServer` không tự nó chứng minh toàn bộ các ứng dụng nghiệp vụ hay tải chia sẻ tệp hiện đại đều tương thích hoàn hảo và không gián đoạn.
+      * Khẳng định việc thay đổi cấu hình máy chủ **không thay thế thao tác cập nhật bản vá**; trạng thái bản vá hệ thống cục bộ duy trì phân loại **`UNPATCHED`** (`SMBv1 disabled != PATCHED`).
+      * Làm rõ rằng hai quan sát cục bộ point-in-time ghi nhận `LanmanServer` ở trạng thái Running không cấu thành bằng chứng chứng minh tính liên tục không gián đoạn (zero downtime) hay chứng minh toàn bộ các ứng dụng nghiệp vụ hiện đại đều hoạt động tương thích hoàn hảo.
   * *Phương thức thể hiện:* Sử dụng Hình 3.7 (minh chứng trực quan console PowerShell sau can thiệp) và nửa phần trên của Bảng 3.5; kết hợp văn xuôi chặt chẽ (bounded prose).
 
 - **`3.4.2. Kết quả đo đạc lại từ xa và đối chiếu đa tầng`**
   * *Nội dung kỹ thuật:*
-    - Trình bày kết quả đo đạc lại phương ngữ từ xa (NSE-SMB-02 retest): trạm Kali Linux thực thi lệnh Nmap với kịch bản `smb-protocols` nhắm vào cổng 445 của máy chủ mục tiêu; ghi nhận cổng `445/tcp` tiếp tục ở trạng thái `open`; danh sách phương ngữ đàm phán thành công gồm `2.0.2`, `2.1`, `3.0`, `3.0.2`; phương ngữ cũ `NT LM 0.12 (SMBv1)` hoàn toàn không còn xuất hiện.
-    - Trình bày kết quả đo đạc lại kịch bản MS17-010 từ xa (NSE-SMB-04 retest): trạm Kali Linux thực thi lệnh Nmap với kịch bản `smb-vuln-ms17-010` nhắm vào cổng 445; phiên quét hoàn tất đạt đến dòng `Nmap done`, không xuất hiện khối kết quả `Host script results:`, và không có thông báo lỗi hiển thị trong đầu ra ghi nhận.
-    - Xác lập phân loại kỹ thuật từ xa: phán quyết đo đạc từ xa của kịch bản MS17-010 duy trì phân loại **`UNKNOWN / NO USABLE SCRIPT RESULT`**.
+    - Trình bày kết quả đo đạc lại phương ngữ từ xa (NSE-SMB-02 retest): trạm Kali Linux thực thi lệnh Nmap với kịch bản `smb-protocols` nhắm vào cổng 445 của máy chủ mục tiêu; ghi nhận từ trạm Kali, TCP 445 được ghi nhận ở trạng thái OPEN trong phép đo lại; kịch bản `smb-protocols` ghi nhận các phương ngữ `2.0.2`, `2.1`, `3.0`, `3.0.2`; phương ngữ cũ `NT LM 0.12 (SMBv1)` không xuất hiện trong danh sách phương ngữ của phép đo lại.
+    - Trình bày kết quả đo đạc lại kịch bản MS17-010 từ xa (NSE-SMB-04 retest): trạm Kali Linux thực thi lệnh Nmap với kịch bản `smb-vuln-ms17-010` nhắm vào cổng 445; phiên quét hoàn tất đạt đến dòng `Nmap done`, cổng 445 ở trạng thái OPEN, không xuất hiện khối kết quả `Host script results:`, và không có thông báo lỗi hiển thị trong đầu ra ghi nhận.
+    - Xác lập phân loại kỹ thuật từ xa: phép đo lại không cung cấp phán quyết lỗ hổng khả dụng; kết quả được phân loại **`UNKNOWN / NO USABLE SCRIPT RESULT`**. Nguyên nhân của việc không có đầu ra script khả dụng không được xác lập từ bộ bằng chứng hiện có.
     - Phân tích ranh giới phương pháp luận và đối chiếu 4 tầng:
-      * Khẳng định nguyên tắc bất định `UNKNOWN != SAFE`: việc kịch bản quét không in ra phán quyết lỗ hổng từ xa không đồng nghĩa với việc hệ thống mục tiêu đã an toàn hay đã miễn nhiễm.
-      * Bác bỏ cụm từ suy diễn nguyên nhân trong manifest ("SMBv1 probe silenced"): không sử dụng cụm từ này làm sự thật khoa học hay lời giải thích nhân quả.
-      * Phân định rạch ròi 4 tầng an ninh độc lập: (1) Cấu hình dịch vụ máy chủ; (2) Trạng thái cài đặt tính năng hệ thống; (3) Trạng thái bản vá mã nhị phân cục bộ; (4) Phán quyết kịch bản rà quét từ xa. Tuyệt đối không gộp 4 tầng này thành một "trạng thái an ninh" chung.
+      * Khẳng định nguyên tắc bất định `UNKNOWN != SAFE`: việc kịch bản quét không in ra phán quyết lỗ hổng từ xa không đồng nghĩa với việc hệ thống mục tiêu đã an toàn hay đã khắc phục lỗ hổng.
+      * Loại bỏ hoàn toàn nhận định suy diễn trong manifest về việc đầu dò bị làm câm (silenced probe): không coi nhận định này là sự thật khoa học hay lời giải thích nhân quả.
+      * Phân định rạch ròi 4 tầng kỹ thuật độc lập: (1) Cấu hình dịch vụ máy chủ; (2) Trạng thái cài đặt tính năng hệ thống; (3) Trạng thái bản vá mã nhị phân cục bộ; (4) Phán quyết kịch bản rà quét từ xa. Tuyệt đối không gộp 4 tầng này thành một "trạng thái an ninh" chung.
   * *Phương thức thể hiện:* Sử dụng Bảng 3.5 (bảng so sánh tổng hợp Trước/Sau); Hình 3.8 (minh chứng trực quan danh sách phương ngữ đo lại); phần lập luận ranh giới bằng văn xuôi nghiêm ngặt.
 
 ---
@@ -66,19 +66,19 @@ Thiết kế **1 bảng tổng hợp duy nhất (Bảng 3.5)** theo định hư�
 | Tầng kiểm tra / Tham số đo đạc | Trước can thiệp (Baseline) | Sau can thiệp (Case B) | Diễn giải trực tiếp & Giới hạn kết luận |
 |---|---|---|---|
 | **Cấu hình máy chủ SMBv1**<br>(`EnableSMB1Protocol`) | `True`<br>(Đang kích hoạt) | `False`<br>(Đã vô hiệu hóa) | **Cấu hình máy chủ đã thay đổi**<br>Giao thức SMBv1 đã chuyển từ trạng thái kích hoạt sang vô hiệu hóa ở mức cấu hình dịch vụ máy chủ thông qua lệnh can thiệp PowerShell. |
-| **Cấu hình máy chủ SMB2/3**<br>(`EnableSMB2Protocol`) | `True`<br>(Đang kích hoạt) | `True`<br>(Duy trì kích hoạt) | **Cấu hình SMB thế hệ mới giữ nguyên**<br>Cấu hình máy chủ tiếp tục cho phép đàm phán các phương ngữ SMB2 và SMB3 hiện đại; không bị tác động bởi lệnh tắt SMBv1. |
+| **Cấu hình máy chủ SMB2/3**<br>(`EnableSMB2Protocol`) | `True`<br>(Đang kích hoạt) | `True`<br>(Duy trì kích hoạt) | **Thuộc tính cấu hình SMB2/3 giữ nguyên**<br>Thuộc tính EnableSMB2Protocol được ghi nhận True trước và sau can thiệp. Dữ kiện cấu hình cục bộ này không dùng để thay thế kết quả đo đạc phương ngữ từ xa. |
 | **Tính năng hệ điều hành**<br>(`FS-SMB1`) | `Installed`<br>(Đã cài đặt) | `Installed`<br>(Vẫn duy trì cài đặt) | **Tính năng Windows không bị gỡ bỏ**<br>Gói tính năng `FS-SMB1` vẫn hiện diện trên hệ điều hành. Can thiệp cấu hình máy chủ không đồng nghĩa với việc gỡ bỏ tính năng (`SMBv1 disabled != FS-SMB1 uninstalled`). |
-| **Dịch vụ chia sẻ tệp**<br>(`LanmanServer`) | `Running`<br>(Đang hoạt động) | `Running`<br>(Tiếp tục hoạt động) | **Dịch vụ máy chủ không bị gián đoạn tiến trình**<br>Tiến trình dịch vụ `LanmanServer` tiếp tục duy trì trạng thái hoạt động. Dữ kiện này không chứng minh toàn bộ các ứng dụng nghiệp vụ hiện đại đều tương thích hoàn hảo. |
-| **Trạng thái cổng dịch vụ từ xa**<br>(Cổng TCP 445 từ Kali) | `OPEN`<br>(Phản hồi `syn-ack`) | `OPEN`<br>(Phản hồi `syn-ack`) | **Cổng dịch vụ tiếp tục tiếp cận được**<br>Cổng 445/tcp tiếp tục mở và tiếp nhận kết nối qua mạng từ trạm Kali. Trạng thái cổng mở không đồng nghĩa với tồn tại lỗ hổng (`445 OPEN != vulnerable`). |
-| **Phương ngữ SMB ghi nhận từ xa**<br>(Kịch bản `smb-protocols`) | 5 phương ngữ:<br>• `NT LM 0.12 (SMBv1)`<br>• `2.0.2`, `2.1`<br>• `3.0`, `3.0.2` | 4 phương ngữ:<br>• `2.0.2`, `2.1`<br>• `3.0`, `3.0.2`<br>(`NT LM 0.12` vắng mặt) | **SMBv1 không còn xuất hiện trong đàm phán**<br>Phương ngữ SMBv1 cũ không còn xuất hiện trong danh sách phương ngữ đàm phán được đo lại; các phương ngữ SMB2/3 vẫn được ghi nhận. Không suy diễn toàn bộ workload thực tế đã được kiểm chứng. |
-| **Phán quyết kiểm tra MS17-010**<br>(Kịch bản `smb-vuln-ms17-010`) | `UNKNOWN`<br>(Không có kết quả script) | `UNKNOWN`<br>(Không có kết quả script) | **Phán quyết từ xa duy trì không xác định**<br>Phiên quét hoàn tất đạt `Nmap done`, cổng 445 mở, không xuất hiện khối `Host script results:`. Phân loại từ xa là `UNKNOWN / NO USABLE SCRIPT RESULT`. `UNKNOWN != SAFE`. |
-| **Trạng thái bản vá hệ thống**<br>(Mã nhị phân driver `srv.sys`) | `UNPATCHED`<br>(Phiên bản `6.3.9600.16421`) | `UNPATCHED`<br>(Phiên bản `6.3.9600.16421`) | **Trạng thái bản vá không thay đổi**<br>Tệp driver nhân `srv.sys` giữ nguyên phiên bản chưa vá, danh mục hotfix không thay đổi. Vô hiệu hóa SMBv1 không đồng nghĩa với cập nhật bản vá (`SMBv1 disabled != PATCHED`). |
+| **Dịch vụ chia sẻ tệp**<br>(`LanmanServer`) | `Running`<br>(Đang hoạt động) | `Running`<br>(Tiếp tục ghi nhận) | **Dịch vụ máy chủ ghi nhận trạng thái Running**<br>LanmanServer được ghi nhận ở trạng thái Running trước và sau can thiệp. Hai snapshot point-in-time không chứng minh tính liên tục không gián đoạn (zero downtime) hay sự tương thích của toàn bộ ứng dụng nghiệp vụ. |
+| **Trạng thái cổng dịch vụ từ xa**<br>(Cổng TCP 445 từ trạm Kali) | `OPEN (Phản hồi syn-ack)`<br>(Theo Mục 3.2 / Mục 3.3) | `OPEN`<br>(Ghi nhận trong phép đo lại) | **Cổng dịch vụ tiếp tục ở trạng thái mở**<br>Từ trạm Kali, TCP 445 được ghi nhận ở trạng thái OPEN trong phép đo lại. Phép đo lại của Case B không bao gồm cờ `--reason` nên không có dữ liệu phản hồi syn-ack. Trạng thái cổng mở không đồng nghĩa với tồn tại lỗ hổng (`445 OPEN != vulnerable`). |
+| **Phương ngữ SMB ghi nhận từ xa**<br>(Kịch bản `smb-protocols`) | 5 phương ngữ:<br>• `NT LM 0.12 (SMBv1)`<br>• `2.0.2`, `2.1`<br>• `3.0`, `3.0.2` | 4 phương ngữ:<br>• `2.0.2`, `2.1`<br>• `3.0`, `3.0.2`<br>(`NT LM 0.12` không xuất hiện) | **SMBv1 không xuất hiện trong danh sách đo lại**<br>Kịch bản smb-protocols ghi nhận 2.0.2, 2.1, 3.0 và 3.0.2; NT LM 0.12 (SMBv1) không xuất hiện trong danh sách phương ngữ của phép đo lại. Việc các phương ngữ 2.0.2, 2.1, 3.0 và 3.0.2 được ghi nhận trong phép đo lại không chứng minh toàn bộ workload SMB2/3 đã được kiểm chứng. |
+| **Phán quyết kiểm tra MS17-010**<br>(Kịch bản `smb-vuln-ms17-010`) | `UNKNOWN`<br>(Theo Mục 3.3) | `UNKNOWN`<br>(Không có kết quả script) | **Phán quyết từ xa duy trì không xác định**<br>Phép đo lại không cung cấp phán quyết lỗ hổng khả dụng; kết quả được phân loại UNKNOWN / NO USABLE SCRIPT RESULT. Nguyên nhân của việc không có đầu ra script khả dụng không được xác lập từ bộ bằng chứng hiện có. `UNKNOWN != SAFE`. |
+| **Trạng thái bản vá hệ thống**<br>(Mã nhị phân driver `srv.sys`) | `UNPATCHED`<br>(Theo Mục 3.1) | `UNPATCHED`<br>(Case B không ghi nhận thao tác cài bản vá) | **Trạng thái bản vá không thay đổi**<br>Đây là trạng thái cục bộ được kế thừa từ mốc đã khóa tại Mục 3.1 và siêu dữ liệu tiến trình thực nghiệm; ảnh After Local không trực tiếp hiển thị srv.sys hay danh mục hotfix. Vô hiệu hóa SMBv1 không đồng nghĩa với cập nhật bản vá (`SMBv1 disabled != PATCHED`). |
 
 ### Quy tắc nghiêm ngặt đối với Bảng 3.5:
 - **ĐƯỢC PHÉP:** Sử dụng các nhãn tham số chuẩn hóa (`EnableSMB1Protocol`, `EnableSMB2Protocol`, `FS-SMB1`, `LanmanServer`, `smb-protocols`, `smb-vuln-ms17-010`, `srv.sys`).
 - **CẤM:** Không đưa cú pháp dòng lệnh thô hoặc chuỗi đối số argv của Nmap (`--privileged`, `-T3`, `--max-retries 2`, `-oA ...`).
 - **CẤM:** Không đưa mã định danh quản trị nội bộ như Stable Evidence ID (`B-LOCAL-*`, `B-RAW-*`, `CB-*`), Claim ID (`CB-C*`), hay đường dẫn tệp trong kho lưu trữ (`case_b/NSE-SMB-02_protocols.nmap`).
-- **CẤM:** Không gán nhãn "unchanged" (không thay đổi) cho các tham số không có bằng chứng trực tiếp hỗ trợ trong lần đo Case B.
+- **CẤM:** Không gán nhãn `syn-ack` cho kết quả cổng 445 của Case B sau can thiệp khi dữ liệu thô không ghi nhận.
 - **CẤM:** Không đưa các phán quyết ngoài phạm vi bằng chứng như `PATCHED`, `SAFE`, `NOT VULNERABLE`, `VULNERABILITY FIXED`, `RISK ELIMINATED`.
 
 ---
@@ -94,17 +94,17 @@ Theo kết quả thẩm tra tại `CH3_34_CASEB_FIGURE_SELECTION_R1.md`, bố tr
 - **Quan sát trực tiếp được phép diễn giải:**
   1. Lệnh `Get-SmbServerConfiguration` ghi nhận thuộc tính `EnableSMB1Protocol` hiển thị giá trị `False`, trong khi `EnableSMB2Protocol` hiển thị giá trị `True`.
   2. Lệnh `Get-WindowsFeature FS-SMB1` ghi nhận tính năng hỗ trợ chia sẻ tệp SMB 1.x (`SMB 1.x/CIFS File Sharing Support`) vẫn ở trạng thái cài đặt (`Installed`).
-  3. Lệnh `Get-Service LanmanServer` ghi nhận dịch vụ `Server` (`LanmanServer`) tiếp tục ở trạng thái đang hoạt động (`Status: Running`).
-  4. Dấu nhắc lệnh trở lại bình thường và không xuất hiện thông báo lỗi.
+  3. Lệnh `Get-Service LanmanServer` ghi nhận dịch vụ `Server` (`LanmanServer`) ở trạng thái hoạt động (`Status: Running`).
+  4. Dấu nhắc lệnh `PS C:\>` xuất hiện trở lại tại cuối phiên kiểm tra.
 - **Ranh giới nghiêm ngặt — Điều hình ảnh TUYỆT ĐỐI KHÔNG chứng minh:**
   * **CẤM:** Không được diễn giải hình ảnh này chứng minh tính năng SMBv1 đã bị gỡ bỏ khỏi hệ điều hành Windows (`SMBv1 disabled != FS-SMB1 uninstalled`).
-  * **CẤM:** Không được diễn giải hình ảnh này chứng minh hệ điều hành đã được cài đặt bản vá bảo mật MS17-010 (`SMBv1 disabled != PATCHED`).
-  * **CẤM:** Không được tuyên bố hình ảnh chứng minh dịch vụ chia sẻ tệp hoạt động bình thường cho mọi ứng dụng nghiệp vụ hay bảo đảm không có gián đoạn dịch vụ đối với người dùng cuối.
+  * **CẤM:** Không được diễn giải hình ảnh này chứng minh hệ điều hành đã được cài đặt bản vá bảo mật MS17-010 (`SMBv1 disabled != PATCHED`); bức ảnh không trực tiếp hiển thị tệp driver `srv.sys` hay danh mục hotfix.
+  * **CẤM:** Không được tuyên bố hình ảnh chứng minh dịch vụ không bị gián đoạn hay toàn bộ các ứng dụng nghiệp vụ hoạt động tương thích hoàn hảo.
 - **Khung cắt cúp đề xuất có thể tái lập:**
   * *Tệp nguồn:* `work/do-an/chapter3/evidence/case_b/SMBv1_Remediation_03_After_Local.png` ($1280 \times 800\,\text{px}$, SHA-256: `2f762508ec98da3b6ed75813c32ed5622cbe1c982e6e6e2907086152e9a6a6ad`).
-  * *Tọa độ đề xuất:* `x = 0, y = 30, width = 1280, height = 730` (vùng `[left=0, top=30, right=1280, bottom=760]`).
-  * *Vùng bảo toàn:* Toàn bộ các dòng lệnh và bảng dữ liệu trả về của 3 lệnh kiểm tra PowerShell.
-  * *Giao diện loại bỏ:* Thanh tiêu đề cửa sổ console ($y < 30$) và thanh tác vụ Windows Server ở đáy màn hình ($y > 760$).
+  * *Tọa độ đề xuất:* `x = 0, y = 30, width = 872, height = 310` (vùng `[left=0, top=30, right=872, bottom=340]`).
+  * *Vùng bảo toàn:* Toàn bộ khối nội dung console PowerShell hiển thị lệnh `Get-SmbServerConfiguration` dạng wrapped, bảng giá trị thuộc tính SMB1/SMB2, kết quả `Get-WindowsFeature FS-SMB1` (`Installed`), kết quả `Get-Service LanmanServer` (`Running`), và dấu nhắc lệnh `PS C:\>` kết thúc tại $y \approx 304$ kèm khoảng đệm an toàn.
+  * *Giao diện loại bỏ:* Thanh tiêu đề cửa sổ console ($y < 30$), vùng desktop và watermark Windows Server bên phải cửa sổ PowerShell ($x > 872$), thanh tác vụ Windows Server ở đáy màn hình ($y > 760$), và khoảng trống console màu đen lớn phía dưới dấu nhắc lệnh ($y > 340$).
 
 ### 4.2. Hình 3.8 (Tạm thời) — Kết quả đo đạc lại các phương ngữ SMB từ trạm Kali Linux sau khi vô hiệu hóa SMBv1
 - **Vị trí đề xuất:** Đặt trong Tiểu mục `3.4.2`, ngay sau đoạn mô tả phép đo đạc lại phương ngữ từ xa bằng kịch bản `smb-protocols`.
@@ -112,20 +112,20 @@ Theo kết quả thẩm tra tại `CH3_34_CASEB_FIGURE_SELECTION_R1.md`, bố tr
   *"Hình 3.8 thể hiện giao diện dòng lệnh và kết quả thực thi kịch bản smb-protocols nhắm vào cổng 445 của máy chủ mục tiêu từ trạm kiểm thử Kali Linux sau khi áp dụng biện pháp can thiệp Case B."*
 - **Quan sát trực tiếp được phép diễn giải:**
   1. Lệnh Nmap được thực thi với tùy chọn `--script smb-protocols` nhắm vào cổng 445 tới IP mục tiêu `192.168.56.20`.
-  2. Máy chủ mục tiêu trực tuyến (`Host is up`), cổng `445/tcp` tiếp tục ở trạng thái mở (`open microsoft-ds`).
+  2. Máy chủ mục tiêu trực tuyến (`Host is up`), cổng `445/tcp` ở trạng thái mở (`open microsoft-ds`).
   3. Khối kết quả `Host script results:` dưới kịch bản `smb-protocols` liệt kê đúng 4 phương ngữ: `2.0.2`, `2.1`, `3.0`, và `3.0.2`.
-  4. Phương ngữ cũ `NT LM 0.12 (SMBv1)` hoàn toàn không còn xuất hiện trong danh sách phương ngữ ghi nhận được.
-  5. Tiến trình quét hoàn tất với thông báo `Nmap done: 1 IP address (1 host up) scanned`.
+  4. Phương ngữ cũ `NT LM 0.12 (SMBv1)` không xuất hiện trong danh sách phương ngữ ghi nhận được.
+  5. Tiến trình quét hoàn tất với thông báo `Nmap done: 1 IP address (1 host up) scanned`, và dấu nhắc lệnh shell xuất hiện trở lại đầy đủ.
 - **Ranh giới nghiêm ngặt — Điều hình ảnh TUYỆT ĐỐI KHÔNG chứng minh:**
-  * **CẤM:** Không được diễn giải hình ảnh này chứng minh cổng 445 đã bị đóng hoặc dịch vụ SMB đã ngừng hoạt động qua mạng.
-  * **CẤM:** Không được tuyên bố hình ảnh chứng minh giao thức SMBv1 đã bị "xóa bỏ hoàn toàn khỏi hệ điều hành".
-  * **CẤM:** Không được tuyên bố toàn bộ các ứng dụng nghiệp vụ hiện đại sử dụng SMB2/3 đã được kiểm chứng hoạt động ổn định hay không xảy ra lỗi kết nối thực tế.
+  * **CẤM:** Không được diễn giải hình ảnh này chứng minh cổng 445 đã bị đóng.
+  * **CẤM:** Không được tuyên bố hình ảnh chứng minh giao thức SMBv1 đã bị gỡ bỏ khỏi hệ điều hành.
+  * **CẤM:** Không được tuyên bố toàn bộ các ứng dụng nghiệp vụ sử dụng SMB2/3 đã được kiểm chứng hoạt động ổn định hay không xảy ra lỗi kết nối thực tế.
   * **CẤM:** Không đưa ra phán quyết về lỗ hổng MS17-010 từ hình ảnh kiểm tra phương ngữ này.
 - **Khung cắt cúp đề xuất có thể tái lập:**
   * *Tệp nguồn:* `work/do-an/chapter3/evidence/case_b/SMBv1_Remediation_04_NSE02_Protocols.png` ($1280 \times 800\,\text{px}$, SHA-256: `21ed6473f4e7010841e9730620b159c272238cf7335eb80fcfaf4ad61f7a7b5a`).
-  * *Tọa độ đề xuất:* `x = 0, y = 24, width = 1280, height = 360` (vùng `[left=0, top=24, right=1280, bottom=384]`).
-  * *Vùng bảo toàn:* Dòng lệnh Nmap, trạng thái host/cổng, khối kết quả 4 phương ngữ SMB2/3, thông báo hoàn tất phiên quét `Nmap done`, và dấu nhắc lệnh tiếp theo.
-  * *Giao diện loại bỏ:* Thanh panel trên cùng của desktop Kali XFCE ($y < 24$) và vùng không gian terminal đen trống phía dưới ($y > 384$).
+  * *Tọa độ đề xuất:* `x = 0, y = 24, width = 1280, height = 400` (vùng `[left=0, top=24, right=1280, bottom=424]`).
+  * *Vùng bảo toàn:* Dòng lệnh Nmap, trạng thái host/cổng, khối kết quả 4 phương ngữ SMB2/3, thông báo hoàn tất phiên quét `Nmap done`, dấu nhắc shell `┌──(kali㉿10)-[~]` và dòng `└─$` kèm con trỏ tại $y \approx 385$ với khoảng đệm an toàn tới $y = 424$.
+  * *Giao diện loại bỏ:* Thanh panel trên cùng của desktop Kali XFCE ($y < 24$) và vùng không gian terminal đen trống phía dưới ($y > 424$).
 
 ---
 
@@ -136,22 +136,25 @@ Mục 3.4 là phần trình bày **kết quả thực nghiệm đối chứng**,
 ### 5.1. Khái niệm và cụm từ ĐƯỢC PHÉP sử dụng (Allowed wording concepts):
 - *"thay đổi cấu hình SMBv1 quan sát được trên máy chủ"*
 - *"cấu hình EnableSMB1Protocol chuyển từ True sang False"*
+- *"thuộc tính EnableSMB2Protocol được ghi nhận True trước và sau can thiệp"*
 - *"tính năng FS-SMB1 vẫn duy trì trạng thái Installed trên hệ thống"*
-- *"dịch vụ LanmanServer tiếp tục hoạt động"*
-- *"sau can thiệp, phương ngữ NT LM 0.12 (SMBv1) không còn xuất hiện trong danh sách phương ngữ đàm phán của phép đo lại"*
-- *"các phương ngữ SMB2/3 (2.0.2, 2.1, 3.0, 3.0.2) vẫn được ghi nhận từ trạm quét"*
-- *"cổng 445/tcp tiếp tục mở và phản hồi gói tin SYN-ACK"*
-- *"kết quả thực thi kịch bản smb-vuln-ms17-010 từ xa duy trì phân loại UNKNOWN / NO USABLE SCRIPT RESULT"*
-- *"trạng thái bản vá hệ thống cục bộ vẫn được phân loại UNPATCHED dựa trên mốc chuẩn tệp driver srv.sys"*.
+- *"LanmanServer được ghi nhận ở trạng thái Running trước và sau can thiệp"*
+- *"sau can thiệp, phương ngữ NT LM 0.12 (SMBv1) không xuất hiện trong danh sách phương ngữ của phép đo lại"*
+- *"kịch bản smb-protocols ghi nhận 2.0.2, 2.1, 3.0 và 3.0.2"*
+- *"từ trạm Kali, TCP 445 được ghi nhận ở trạng thái OPEN trong phép đo lại"*
+- *"phép đo lại không cung cấp phán quyết lỗ hổng khả dụng; kết quả được phân loại UNKNOWN / NO USABLE SCRIPT RESULT"*
+- *"nguyên nhân của việc không có đầu ra script khả dụng không được xác lập từ bộ bằng chứng hiện có"*
+- *"trạng thái bản vá hệ thống cục bộ duy trì phân loại UNPATCHED dựa trên mốc chuẩn đã khóa tại Mục 3.1 và siêu dữ liệu tiến trình; Case B không ghi nhận thao tác cài bản vá"*.
 
 ### 5.2. Khái niệm và tuyên bố BỊ NGHIÊM CẤM TUYỆT ĐỐI (Forbidden overclaims):
-- **CẤM:** Không được viết *"biện pháp can thiệp đã loại bỏ lỗ hổng MS17-010"* hoặc *"đã khắc phục lỗ hổng"*.
-- **CẤM:** Không được viết *"hệ thống đã trở nên an toàn"* (`system safe`) hoặc *"không còn nguy cơ tấn công"*.
-- **CẤM:** Không được gọi việc tắt SMBv1 là *"đã cập nhật bản vá"* (`patched`) hoặc *"đã gỡ bỏ tính năng SMBv1"* (`feature uninstalled`).
-- **CẤM:** Không sử dụng cụm từ trong manifest *"SMBv1 probe silenced"* làm sự thật khoa học hay lời giải thích nhân quả cho việc kịch bản NSE không có đầu ra.
-- **CẤM:** Không được phỏng đoán các nguyên nhân không có trong log thô như *"không thể đàm phán SMBv1"* (`Couldn't negotiate SMBv1`), mã lỗi `NTSTATUS`, hay lỗi truy cập chia sẻ `IPC$`.
-- **CẤM:** Không được tuyên bố *"toàn bộ các dịch vụ và ứng dụng phụ thuộc SMB2/3 đều hoạt động bình thường, không bị gián đoạn"* (`fully compatible`, `zero downtime`) khi chưa có kịch bản kiểm thử tải ứng dụng nghiệp vụ chuyên biệt.
-- **CẤM:** Không đưa ra các kết luận xếp hạng hiệu quả giảm thiểu hoặc đánh giá rủi ro (thuộc thẩm quyền Chương 4).
+- **CẤM:** Không sử dụng các từ ngữ khẳng định việc đàm phán hay bắt tay giao thức diễn ra thành công ngoài danh mục phương ngữ quan sát được.
+- **CẤM:** Không đưa ra các tuyên bố về tính liên tục của dịch vụ, không gián đoạn (zero downtime) hay tương thích hoàn toàn.
+- **CẤM:** Không gán nhãn `syn-ack` cho cổng 445 sau can thiệp của Case B.
+- **CẤM:** Không tự ý thêm diễn giải võ đoán về khả năng tiếp nhận lưu lượng mạng cho cổng 445 của Case B ngoài trạng thái OPEN.
+- **CẤM:** Không giải thích nguyên nhân vắng mặt kết quả của NSE04 (không gán cho giới hạn công cụ quét, không dùng cụm từ chèn ép probe từ manifest, không bịa đặt lỗi đàm phán hay mã lỗi NTSTATUS, IPC$).
+- **CẤM:** Không sử dụng các từ ngữ mang tính thuyết phục quá mức hay khẳng định tác động mạng diện rộng khi chưa có bằng chứng giới hạn.
+- **CẤM:** Không gọi việc tắt SMBv1 là `patched` hay `feature uninstalled`.
+- **CẤM:** Không tuyên bố hệ thống `safe`, `not vulnerable`, hay đưa ra kết luận xếp hạng hiệu quả giảm thiểu của Chương 4.
 
 ---
 
@@ -176,8 +179,8 @@ Mục 3.4 là phần trình bày **kết quả thực nghiệm đối chứng**,
                                            v
 +---------------------------------------------------------------------------------------+
 | TẦNG 3: TRẠNG THÁI BẢN VÁ MÃ NHỊ PHÂN CỤC BỘ (Local Binary Patch State)               |
-| - Thuộc tính: srv.sys = 6.3.9600.16421 < 6.3.9600.18604 -> UNPATCHED                  |
-| - Bản chất: Mã nhị phân driver nhân xử lý SMB chưa được cài đặt bản sửa lỗi MS17-010. |
+| - Thuộc tính: UNPATCHED (srv.sys = 6.3.9600.16421 < 6.3.9600.18604)                   |
+| - Bản chất: Kế thừa từ mốc khóa Mục 3.1 và metadata; Case B không có thao tác vá.     |
 +---------------------------------------------------------------------------------------+
                                            | ĐỘC LẬP (Không đồng nhất với phán quyết quét)
                                            v
@@ -190,7 +193,7 @@ Mục 3.4 là phần trình bày **kết quả thực nghiệm đối chứng**,
 
 ### Các nguyên tắc phân định bắt buộc:
 1. **Tầng 1 $\neq$ Tầng 2:** Tắt cờ cấu hình `EnableSMB1Protocol` không làm gỡ bỏ tính năng `FS-SMB1`.
-2. **Tầng 1 $\neq$ Tầng 3:** Tắt SMBv1 là biện pháp hạn chế bề mặt tiếp xúc (hardening), không phải là hành động cập nhật bản vá mã nguồn driver (`srv.sys` vẫn là UNPATCHED).
+2. **Tầng 1 $\neq$ Tầng 3:** Tắt SMBv1 là thay đổi cấu hình dịch vụ, không phải là hành động cập nhật bản vá mã nguồn driver (`srv.sys` duy trì phân loại UNPATCHED).
 3. **Tầng 3 $\neq$ Tầng 4:** Trạng thái thiếu bản vá nội tại (UNPATCHED) không tự động biến kết quả quét từ xa thành có lỗ hổng (VULNERABLE); và ngược lại, kết quả không xác định từ xa (UNKNOWN) không làm biến đổi máy chủ thành đã vá (PATCHED).
 4. **CẤM:** Tuyệt đối không gộp 4 tầng này thành một khái niệm mơ hồ như "trạng thái an toàn của máy chủ" (overall security state).
 
@@ -200,10 +203,9 @@ Mục 3.4 là phần trình bày **kết quả thực nghiệm đối chứng**,
 
 Phần kết của Mục 3.4 chỉ thực hiện một **chuyển tiếp ý niệm phương pháp luận (conceptual methodological transition)** sang Kịch bản giảm thiểu tiếp theo (Case C):
 
-- **Nội dung chuyển tiếp:**
-  * Case B đại diện cho nhóm giải pháp **can thiệp trực tiếp vào cấu hình dịch vụ nội tại của máy chủ mục tiêu** (host-level protocol configuration hardening).
-  * Trong thực tế vận hành mạng doanh nghiệp, quản trị viên có thể đối mặt với các tình huống không được phép thay đổi cấu hình máy chủ cục bộ (do yêu cầu duy trì ứng dụng cũ hoặc chính sách kiểm soát máy chủ nghiêm ngặt).
-  * Do đó, thực nghiệm tiếp tục khảo sát một lớp phòng thủ ở cấp độ khác biệt: **giải pháp kiểm soát và phân tách luồng dữ liệu trên đường truyền mạng** bằng tường lửa cầu nối trong suốt (Case C — pfSense Transparent Bridge).
+- **Nội dung chuyển tiếp chuẩn mực:**
+  * *"Case B thay đổi cấu hình giao thức ở máy chủ; Case C tiếp tục khảo sát một lớp kiểm soát khác trên đường truyền mạng bằng pfSense Transparent Bridge."*
 - **Ranh giới nghiêm ngặt:**
+  * **CẤM:** Không đưa ra các kịch bản suy đoán hoặc câu chuyện giả định về việc quản trị viên không thể chỉnh sửa máy chủ do ràng buộc ứng dụng cũ hay chính sách nội bộ.
   * **CẤM:** Tuyệt đối không tiết lộ trước kết quả đo đạc của Case C (như cổng filtered, rule log, v.v.).
   * **CẤM:** Tuyệt đối không so sánh hay đưa ra nhận định giải pháp nào "tốt hơn", "hiệu quả hơn" hay "toàn diện hơn" tại vị trí chuyển tiếp này.
