@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `ROADMAP_RESET_WAITING_FOR_USER_CONFIRMATION`.
+- Current gate: `X7D1_CH3_34_PROSE_ACTIVE`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1739,3 +1739,23 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7H includes explicit whole-chapter coherence/compression review so independently approved sections do not produce a repetitive QA-like chapter.
 - No DOCX work before complete Chapter 3 user approval.
 - Next execution after user confirmation: X7D1 only. No executor task is opened before that confirmation.
+
+
+## DEC-92 — User confirms corrected roadmap; X7D1 authorized
+
+- Ngày: 2026-10-07.
+- User explicitly approved ("chốt") the corrected roadmap in:
+  `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
+- The roadmap is now the sole active execution path for the current milestone.
+- Confirmed product sequence:
+  1. finish all Chapter 3 sections;
+  2. whole-Chapter-3 coherence/technical review;
+  3. user approval of complete Chapter 3;
+  4. only then assemble locked Chapter 2 + approved Chapter 3;
+  5. final combined-document review/user evaluation;
+  6. STOP.
+- Intermediate WR1/WR2 Word checkpoints remain cancelled.
+- Chapter 1/report-wide enrichment remains abandoned.
+- Chapter 4 remains dormant/backlog.
+- X7D1 — Section 3.4 Case B prose is now the only authorized next execution task.
+- No other task may run in parallel.
