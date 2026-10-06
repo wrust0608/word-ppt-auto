@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7A0_BASELINE_EVIDENCE_PRESENTATION_PLAN`.
+- Current gate: `X7A1_CH3_31_BASELINE_DRAFT`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -24,10 +24,10 @@
 
 ### Current immediate sequence
 
-1. Execute **X7A0 — 3.1 Baseline Evidence & Presentation Plan** only.
-2. External-review the plan before any 3.1 prose.
-3. After plan approval, open X7A1 prose drafting from the approved integration state.
-4. After 3.1 user approval, lock numbering and integrate before opening X7B0.
+1. Execute **X7A1 — draft Section 3.1 Baseline** only.
+2. External-review the 3.1 prose, tables and derived presentation images.
+3. After user approval of 3.1 prose, integrate the completed section into `feature/ch3-integration`.
+4. Only then open X7B0 for Scenario 1 evidence/presentation planning.
 
 ### Current read order for any new agent
 
@@ -858,3 +858,28 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - No Section 3.1 prose exists yet.
 - Current gate: `X7A0_PASS_WAITING_FOR_USER_APPROVAL`.
 - Do not integrate/lock numbering/open X7A1 until explicit user approval.
+
+
+## DEC-57 — User approves X7A0; numbering locked and X7A1 authorized
+
+- Ngày: 2026-10-06.
+- User decision on X7A0: **APPROVED / CHỐT**.
+- Approval lock:
+  `work/do-an/X7A0_BASELINE_PLAN_USER_APPROVAL_LOCK.md`.
+- Locked Section 3.1 H3:
+  - 3.1.1 Trạng thái mạng và dịch vụ SMB
+  - 3.1.2 Trạng thái bản vá và mốc phục hồi
+- Locked tables:
+  - Bảng 3.1 Trạng thái mạng, dịch vụ SMB và Windows Firewall trước đo đạc
+  - Bảng 3.2 Trạng thái bản vá và mốc phục hồi
+- Locked figures:
+  - Hình 3.1 Windows_PreDemo_01_Network_SMB.png
+  - Hình 3.2 Windows_PreDemo_02_Firewall.png
+  - Hình 3.3 Windows_MS17010_02_Hotfix.png
+- Next available table number: **Bảng 3.3**.
+- Next available figure number: **Hình 3.4**.
+- Approved X7A0 artifacts have been explicitly integrated into `feature/ch3-integration`.
+- X7A1 prompt:
+  `work/do-an/prompts/X7A1_DRAFT_CH3_31_BASELINE.md`.
+- X7A1 may create derived presentation crops with SHA/crop-manifest traceability but must not modify source evidence.
+- X7B remains BLOCKED until Section 3.1 prose passes external review + user approval.
