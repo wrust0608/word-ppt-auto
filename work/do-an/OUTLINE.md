@@ -1,6 +1,19 @@
 # Đề cương lập luận
 
-Trạng thái: `LOCKED_CANONICAL_2026_10_05`
+Trạng thái: `PARTIALLY_SUPERSEDED_2026_10_06`
+
+## CURRENT STRUCTURAL AUTHORITY — 2026-10-06
+
+Phần cấu trúc chi tiết Chương 2 và Chương 3 ở phía dưới được giữ **chỉ để truy vết lịch sử** và không còn là authority để agent thi công.
+
+Authority hiện hành:
+- Chương 2: `work/do-an/CHAPTER_2.md` — USER APPROVED / LOCKED.
+- Chương 3 contract: `work/do-an/CHAPTER_3_CONTRACT.md`.
+- Chương 3 workflow: `work/do-an/CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`.
+- Chương 3 evidence map hiện hành: `work/do-an/CHAPTER_3_SECTION_EVIDENCE_MAP.md`.
+- Chương 3 numbering: `work/do-an/CHAPTER_3_NUMBERING_LEDGER.md`.
+
+Không dùng các heading Chương 2 2.1–2.9 hoặc Chương 3 3.1–3.8 lịch sử bên dưới để tạo file mới.
 
 ## Ngân sách toàn văn
 
@@ -33,7 +46,7 @@ Trạng thái: `LOCKED_CANONICAL_2026_10_05`
 
 ---
 
-Trạng thái: `LOCKED_CANONICAL / USER_APPROVED_2026_10_05`
+Trạng thái lịch sử: `SUPERSEDED_STRUCTURAL_SNAPSHOT_2026_10_05`
 
 # CHƯƠNG 2. THIẾT KẾ VÀ TRIỂN KHAI MÔ HÌNH THỰC NGHIỆM
 
