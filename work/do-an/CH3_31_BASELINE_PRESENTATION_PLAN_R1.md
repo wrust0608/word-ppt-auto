@@ -69,7 +69,7 @@ Thay thế bảng kiểm toán nội bộ 16 hàng 5 cột cồng kềnh trướ
 ### 3.1. Hình 3.1 (Tạm thời) — Trạng thái mạng, dịch vụ SMB và các cổng lắng nghe
 - **Vị trí đề xuất:** Đặt trong Tiểu mục `3.1.1`, ngay sau Bảng 3.1.
 - **Câu văn dẫn nhập (Preceding Directive Sentence):**
-  *"Hình 3.1 trình bày kết quả kiểm toán tổng hợp cấu hình mạng, trạng thái hoạt động của dịch vụ chia sẻ tệp và các cổng lắng nghe trên máy chủ Windows Server 2012 R2 thông qua giao diện Windows PowerShell trước thực nghiệm."*
+  *"Hình 3.1 trình bày kết quả kiểm tra tổng hợp cấu hình mạng, trạng thái dịch vụ chia sẻ tệp và các cổng lắng nghe trên máy chủ Windows Server 2012 R2 thông qua giao diện Windows PowerShell trước thực nghiệm."*
 - **Quan sát trực tiếp được phép diễn giải (Direct Observations Allowed):**
   1. Giao diện PowerShell ghi nhận địa chỉ IP của giao diện Ethernet là `192.168.56.20/24`.
   2. Dịch vụ `LanmanServer` ở trạng thái `Running` với `StartType` là `Automatic`.
@@ -105,7 +105,7 @@ Thay thế bảng kiểm toán nội bộ 16 hàng 5 cột cồng kềnh trướ
 - **Quan sát trực tiếp được phép diễn giải (Direct Observations Allowed):**
   1. Câu lệnh trích xuất thuộc tính `FileVersion` cho chuỗi hiển thị `6.3.9600.16384 (winblue_rtm.130821-1623)`.
   2. Câu lệnh ghép nối 4 trường nhị phân (`FileMajorPart`, `FileMinorPart`, `FileBuildPart`, `FilePrivatePart`) xác nhận giá trị phiên bản số thực tế là `6.3.9600.16421`.
-  3. Lệnh `Get-HotFix` ghi nhận danh sách 6 bản vá hệ thống có ngày cài đặt 21/03/2014, hoàn toàn không xuất hiện gói cập nhật KB4012213 hoặc KB4012216.
+  3. Lệnh `Get-HotFix` ghi nhận danh sách 6 bản vá hệ thống có ngày cài đặt 21/03/2014; trong danh mục hiển thị không ghi nhận KB4012213 hoặc KB4012216.
 - **Ranh giới nghiêm ngặt — Điều TUYỆT ĐỐI KHÔNG ĐƯỢC suy diễn:**
   * **CẤM:** Tuyệt đối không đưa chữ "UNPATCHED" trực tiếp vào tiêu đề hình ảnh. Phán quyết `UNPATCHED` là kết luận tổng hợp khi đối chiếu phiên bản số nhị phân `6.3.9600.16421` thấp hơn ngưỡng tối thiểu `6.3.9600.18604` kết hợp danh mục hotfix vắng mặt bản cập nhật tương ứng theo tài liệu Microsoft Support (Article 4023262).
   * **CẤM:** Trạng thái chưa vá cục bộ của hệ điều hành độc lập với tín hiệu quét từ xa qua mạng và không đồng nghĩa với việc lỗ hổng chắc chắn bị khai thác thành công qua mạng.
