@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7D0_R2_CORRECTION_REQUIRED_WORD_REVIEW_DEFERRED`.
+- Current gate: `X7D0_PASS_WAITING_FOR_USER_APPROVAL_WORD_REVIEW_DEFERRED`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1551,3 +1551,38 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   `work/do-an/prompts/X7D0_R2_CORRECT_CASEB_PLAN.md`.
 - WR1 / WR2 remain deferred until X7D0 receives final external PASS + explicit user approval.
 - X7D1 remains blocked until WR1 + WR2 are later approved.
+
+
+## DEC-83 — X7D0 Case B plan R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `492b90fcdf7f31b1e4e10f04d3a818f69d0429ef`.
+- Final external review:
+  `work/do-an/X7D0_CASEB_PLAN_EXTERNAL_REVIEW_R2_FINAL.md` on the X7D0 branch.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- Accepted Case B geometry:
+  - 2 H3;
+  - Bảng 3.5;
+  - Hình 3.7 = After Local;
+  - Hình 3.8 = protocol retest;
+  - Before/Action DROP;
+  - combined NSE04 OPTIONAL / DROP.
+- Final crop proposals:
+  - Hình 3.7: `x=0, y=30, width=872, height=310`;
+  - Hình 3.8: `x=0, y=24, width=1280, height=400`.
+- Critical boundaries PASS:
+  - `SMBv1 disabled != FS-SMB1 uninstalled`;
+  - `SMBv1 disabled != PATCHED`;
+  - `445 OPEN != vulnerable`;
+  - remaining SMB2/3 dialect observations do not prove full workload continuity;
+  - `UNKNOWN / NO USABLE SCRIPT RESULT`;
+  - `UNKNOWN != SAFE`;
+  - local `UNPATCHED` independent from remote `UNKNOWN`;
+  - missing file 06 remains a metadata/staging discrepancy and is not evidence.
+- Current gate:
+  `X7D0_PASS_WAITING_FOR_USER_APPROVAL_WORD_REVIEW_DEFERRED`.
+- No X7D0 integration until explicit user approval.
+- WR1 / WR2 remain deferred until X7D0 user approval.
+- X7D1 remains blocked until WR1 + WR2 are approved.
