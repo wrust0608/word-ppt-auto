@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `WR1_DEMO1_WORD_REVIEW_BUILD`.
+- Current gate: `WR1_DEMO1_WORD_BUILD_IN_PROGRESS`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1618,4 +1618,25 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7D0 approved artifacts are explicitly integrated into `feature/ch3-integration`.
 - Per DEC-81, **WR1 Demo 1 Word review now becomes the active gate**.
 - X7D1 Section 3.4 prose remains BLOCKED until WR1 and WR2 both pass independent Word review + user approval.
+- X7E / Case C and Chapter 4 remain BLOCKED.
+
+
+## DEC-85 — WR1 Demo 1 Word review branch opened from approved X7D0 integration
+
+- Ngày: 2026-10-06.
+- X7D0 Case B plan was user-approved and explicitly integrated into:
+  `feature/ch3-integration@1512bbe03935d8e2b989694f01e90583b0b89319`.
+- A fresh WR1 branch was created from that exact integration HEAD:
+  `feature/wr1-demo1-word-review-v2`.
+- The previously prepared `feature/wr1-demo1-word-review` branch remains dormant and must not be used.
+- WR1 prompt:
+  `work/do-an/prompts/WR1_BUILD_DEMO1_WORD_REVIEW.md`.
+- WR1 output scope:
+  - full approved Chapter 2;
+  - Chapter 3 Sections 3.1–3.2 only;
+  - Bảng 3.1–3.3;
+  - Hình 3.1–3.5.
+- WR1 is a review snapshot, not a final submission artifact.
+- WR2 remains BLOCKED until WR1 passes independent Word review + user approval.
+- X7D1 remains BLOCKED until WR1 + WR2 are approved.
 - X7E / Case C and Chapter 4 remain BLOCKED.
