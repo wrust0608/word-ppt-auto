@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7D1_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
+- Current gate: `X7E0_CASEC_PLAN_NEXT`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1778,3 +1778,24 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Verdict: **99/100 — PASS**.
 - Section 3.4 is NOT integrated yet.
 - X7E / Case C remains BLOCKED until explicit user approval of Section 3.4.
+
+
+## DEC-96 — User approves Section 3.4 Case B; explicit integration authorized
+
+- Ngày: 2026-10-07.
+- User explicitly approved ("chốt") the final Section 3.4 Case B.
+- User approval lock:
+  `work/do-an/X7D1_CH3_34_USER_APPROVAL_LOCK.md`.
+- Final review:
+  `work/do-an/X7D1_CH3_34_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Section 3.4 is now **USER APPROVED / LOCKED**.
+- Locked numbering:
+  - Bảng 3.5;
+  - Hình 3.7–3.8.
+- Next numbering remains:
+  - Bảng 3.6;
+  - Hình 3.9.
+- Only the approved Section 3.4 artifacts/reviews/approval lock are integrated into `feature/ch3-integration`.
+- Next authorized work:
+  `X7E0 — Case C evidence/presentation plan`.
+- No Word assembly, Chapter 2 rewrite, or Chapter 4 work is authorized.

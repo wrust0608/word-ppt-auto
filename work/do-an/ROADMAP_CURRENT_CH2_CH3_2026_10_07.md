@@ -1,6 +1,6 @@
 # CURRENT ROADMAP — COMPLETE CHAPTER 3, THEN REVIEW CHAPTERS 2+3
 
-Status: `ACTIVE_CURRENT_AUTHORITY / EXECUTION_PAUSED_FOR_USER_CONFIRMATION`  
+Status: `ACTIVE_CURRENT_AUTHORITY`  
 Date: 2026-10-07
 
 ## 1. Product target
@@ -21,7 +21,7 @@ Locked:
 - 3.1 Baseline;
 - 3.2 Scenario 1;
 - 3.3 Scenario 2;
-- X7D0 Case B presentation plan;
+- 3.4 Case B;
 - Bảng 3.1–3.5;
 - Hình 3.1–3.8.
 
@@ -30,7 +30,6 @@ Next numbering:
 - Hình 3.9.
 
 Not complete:
-- 3.4 Case B prose;
 - 3.5 Case C plan/prose;
 - 3.6 comparison;
 - 3.7 chapter conclusion;
@@ -40,8 +39,8 @@ Not complete:
 
 ## 3. Execution sequence
 
-### STEP 1 — X7D1: Section 3.4 Case B prose
-Use the approved X7D0 plan.
+### STEP 1 — X7D1: Section 3.4 Case B prose — COMPLETE / USER APPROVED
+Completed from the approved X7D0 plan.
 
 Output:
 - approved derived crops/crop manifest;
@@ -189,8 +188,8 @@ It passes only when:
 - prose is natural and not QA-like;
 - the phase improves the final Chapters 2+3 product.
 
-## 7. Next action after user confirmation
+## 7. Current next action
 
-`X7D1 — Section 3.4 Case B prose`
+`X7E0 — Section 3.5 Case C evidence/presentation plan`
 
-Execution is paused until the user confirms this corrected roadmap. Nothing else is authorized in parallel.
+Nothing else is authorized in parallel.
