@@ -1,5 +1,10 @@
 # Roadmap xác nhận hệ thống từ NotebookLM tới DOCX
 
+- Trạng thái: `HISTORICAL_ROADMAP_2026_10_04`
+- **Không dùng file này làm current execution roadmap sau DEC-51.**
+- Current Chapter 3 execution authority: `CHAPTER_3_CONTRACT.md` + `CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`.
+- Publication-wide closing gates are recorded in `ROADMAP_REVIEW_2026_10_06_PRE_X7A.md`.
+
 - Phạm vi: dự án `do-an` về kiểm thử lỗ hổng SMB.
 - Ngày bắt đầu: 2026-10-04.
 - Nguyên tắc: thực hiện tuần tự; bước sau có thể được audit nhưng không được tuyên bố khóa nếu cổng trước còn cần tác giả phê duyệt.
