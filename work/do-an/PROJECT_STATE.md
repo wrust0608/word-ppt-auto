@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-06
 
-- Current gate: `X7B1_AUTHORIZED_AFTER_X7B0_USER_APPROVAL`.
+- Current gate: `X7C0_AUTHORIZED_AFTER_X7B1_USER_APPROVAL`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
@@ -1122,3 +1122,108 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - produce self-review.
 - Scenario 2 remains BLOCKED until Section 3.2 prose passes external review + user approval.
 - Chapter 4 remains BLOCKED.
+
+
+## DEC-67 — X7B1 Scenario 1 prose branch opened from approved integration state
+
+- Ngày: 2026-10-06.
+- Approved X7B0 plan integrated into:
+  `feature/ch3-integration@e56458a21f8caffe777113d1e073e083810d4af7`.
+- X7B1 branch created from that exact integration HEAD:
+  `feature/x7b1-ch3-scenario1-draft`.
+- X7B1 prompt:
+  `work/do-an/prompts/X7B1_DRAFT_CH3_32_SCENARIO1.md`.
+- X7B1 scope:
+  - write Section 3.2 only;
+  - use exactly 2 locked H3;
+  - create Bảng 3.3 only;
+  - create approved Hình 3.4–3.5 presentation crops;
+  - create crop manifest;
+  - create draft self-review.
+- Locked next numbering after Section 3.2:
+  - Bảng 3.4;
+  - Hình 3.6.
+- Scenario 2 / X7C remains **BLOCKED** until Section 3.2 prose passes independent external review + user approval.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-68 — X7B1 Section 3.2 R1 requires bounded correction
+
+- Ngày: 2026-10-06.
+- R1 candidate:
+  `2bff0dead870f838284a02eea148f4c468263584`.
+- Independent external review:
+  `work/do-an/X7B1_CH3_32_EXTERNAL_REVIEW_R1.md`.
+- Score: **88/100 — REVISE_BLOCKING**.
+- Presentation implementation PASS:
+  - 1 H2 / 2 H3;
+  - Bảng 3.3;
+  - Hình 3.4–3.5;
+  - crop rectangles and derived image hashes independently verified;
+  - no later-section outcome leakage.
+- Blocking corrections:
+  1. narrow B3/B4 prose to direct ARP/TCP observations;
+  2. remove generalized "safe if patched" statement;
+  3. keep local signing flags independent from remote `smb2-security-mode`;
+  4. narrow B5 absolute wording and Scenario 2 transition;
+  5. correct stale X7B0 source SHA metadata and rebuild self-review claim numbering from the approved claim map.
+- Actual source SHA-256 verified from repository bytes:
+  - B5: `05699e248fa66ab224adc6809fb057a282d86c29c3ce2851823e07bd874f6466`;
+  - B6: `b5b236cbe695b530b44e0af592f010f1f49bef9f5da427b9958fd9020bd651f8`.
+- R2 prompt:
+  `work/do-an/prompts/X7B1_R2_CORRECT_CH3_32_SCENARIO1.md`.
+- X7C remains **BLOCKED**.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-69 — X7B1 Section 3.2 R2 passes final external review
+
+- Ngày: 2026-10-06.
+- Executor R2 candidate:
+  `407fadb7d8b6413be6b2c67c6c8991f04f4a186c`.
+- Final external review:
+  `work/do-an/X7B1_CH3_32_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- R1 blocking corrections all closed:
+  - B3/B4 narrowed to direct observations;
+  - generalized safety statement removed;
+  - local signing and remote signing kept independent;
+  - B5 and 3.3 transition bounded;
+  - stale X7B0 B5/B6 SHA metadata corrected;
+  - self-review claim mapping realigned to S1-C01..S1-C13.
+- Reviewer applied bounded editorial/terminology micro-fixes after R2 without changing claims, evidence, table, figures or numbering.
+- Locked Section 3.2 design remains:
+  - 1 H2 / 2 H3;
+  - Bảng 3.3;
+  - Hình 3.4–3.5.
+- Current gate:
+  `X7B1_PASS_WAITING_FOR_USER_APPROVAL`.
+- X7C remains **BLOCKED** until explicit user approval and completed Section 3.2 integration.
+- Chapter 4 remains **BLOCKED**.
+
+
+## DEC-70 — User approves Section 3.2; X7B1 locked and X7C0 authorized
+
+- Ngày: 2026-10-06.
+- User decision on Section 3.2: **APPROVED / CHỐT**.
+- Reviewer-final Section 3.2 source:
+  `feature/x7b1-ch3-scenario1-draft@138eda7514e3d6b58aa8cf40297f40918c4c8f3f`.
+- Final external review:
+  `work/do-an/X7B1_CH3_32_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Score: **99/100 — PASS**.
+- Blockers: **0**.
+- Section 3.2 is now **USER APPROVED / LOCKED**.
+- Locked public structure:
+  - 3.2.1 Khảo sát trạm mạng và trạng thái mở cổng dịch vụ SMB;
+  - 3.2.2 Nhận diện phiên bản dịch vụ và đặc tính giao thức SMB.
+- Locked presentation:
+  - Bảng 3.3;
+  - Hình 3.4–3.5.
+- Completed Section 3.2 artifacts are to be explicitly integrated into `feature/ch3-integration`; do not merge unrelated branch history.
+- Next available numbering remains:
+  - **Bảng 3.4**;
+  - **Hình 3.6**.
+- X7C0 is authorized for **Scenario 2 Evidence & Presentation Plan ONLY**.
+- X7C1 prose remains **BLOCKED** until X7C0 passes independent external review + user approval.
+- Chapter 4 remains **BLOCKED**.

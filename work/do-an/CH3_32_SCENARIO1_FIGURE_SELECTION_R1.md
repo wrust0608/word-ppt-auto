@@ -49,7 +49,7 @@ Trong bộ bằng chứng đã stage tại `work/do-an/chapter3/evidence/scenari
 
 1. **Hình 3.4 (Tạm thời):**
    - **Tệp nguồn:** `work/do-an/chapter3/evidence/scenario1/Scenario1_B5_SMB_Version.png`
-   - **SHA-256 nguồn:** `18fbe98f79fbe44147cf75cf145377f0a8c2bdf14f24d62b9a1da87ec44ee789`
+   - **SHA-256 nguồn:** `05699e248fa66ab224adc6809fb057a282d86c29c3ce2851823e07bd874f6466`
    - **Kích thước gốc:** $1280 \times 800\,\text{px}$.
    - **Chú thích đề xuất:** *Hình 3.4. Kết quả thăm dò phiên bản dịch vụ SMB từ xa bằng công cụ Nmap*
    - **Vai trò chứng minh:** Minh chứng khách quan rằng công cụ quét từ xa nhận diện chuỗi dịch vụ cổng 139 là `Microsoft Windows netbios-ssn` và cổng 445 là `Microsoft Windows Server 2008 R2 - 2012 microsoft-ds`.
@@ -62,7 +62,7 @@ Trong bộ bằng chứng đã stage tại `work/do-an/chapter3/evidence/scenari
 
 2. **Hình 3.5 (Tạm thời):**
    - **Tệp nguồn:** `work/do-an/chapter3/evidence/scenario1/Scenario1_B6_SMB_NSE_A.png`
-   - **SHA-256 nguồn:** `63200a40f0d2c949c25bb3ca5dbe003ba732c48bf0a0be3b76a084eb87cf1aa2`
+   - **SHA-256 nguồn:** `b5b236cbe695b530b44e0af592f010f1f49bef9f5da427b9958fd9020bd651f8`
    - **Kích thước gốc:** $1280 \times 800\,\text{px}$.
    - **Chú thích đề xuất:** *Hình 3.5. Kết quả phân tích phương ngữ, tính năng và chính sách ký số SMB bằng tập kịch bản Nmap NSE*
    - **Vai trò chứng minh:** Minh chứng 5 phương ngữ SMB được hỗ trợ (đặc biệt là phương ngữ cũ NT LM 0.12 / SMBv1), chính sách ký số ở trạng thái `enabled but not required`, các khả năng kỹ thuật SMB2 (DFS, Leasing, Multi-credit) và sự vắng mặt thực tế của khối kết quả `smb-os-discovery`.
