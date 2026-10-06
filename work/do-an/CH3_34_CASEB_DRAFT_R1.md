@@ -1,0 +1,56 @@
+## 3.4. Kết quả Case B — Vô hiệu hóa SMBv1 và đo lại từ xa
+
+Sau khi xác lập hiện trạng hệ thống ở mốc ban đầu và hoàn thành hai kịch bản khảo sát diện mạo dịch vụ cũng như kiểm tra dấu hiệu MS17-010 (Mục 3.1 đến Mục 3.3), nghiên cứu tiến hành bước can thiệp có kiểm soát đầu tiên mang mã hiệu Case B. Biến số can thiệp duy nhất được điều chỉnh là cấu hình giao thức SMBv1 trên máy chủ chia sẻ tệp Windows Server 2012 R2. Case B nhằm đánh giá thực nghiệm các biến đổi cấu hình cục bộ, đồng thời đo đạc lại từ xa từ trạm Kali Linux để xác định sự thay đổi trong danh mục phương ngữ và kết quả kiểm tra lỗ hổng chuyên biệt so với đường cơ sở đã thiết lập.
+
+### 3.4.1. Thao tác vô hiệu hóa SMBv1 và kiểm tra trạng thái máy chủ cục bộ
+
+Trước can thiệp, máy chủ duy trì các giá trị xác lập tại Mục 3.1: EnableSMB1Protocol và EnableSMB2Protocol đều kích hoạt (`True`), gói tính năng `FS-SMB1` ở trạng thái `Installed`, và dịch vụ `LanmanServer` đang hoạt động (`Running`). Mốc xuất phát này cho phép máy chủ tiếp nhận cả SMBv1 lẫn SMB2/3. Thao tác can thiệp được thực hiện cục bộ qua PowerShell bằng lệnh `Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force`. Lệnh áp dụng thiết lập mà không yêu cầu xác nhận tương tác, dấu nhắc lệnh xuất hiện trở lại và không có đầu ra tiêu chuẩn nào hiển thị. Về bản chất, đây thuần túy là thay đổi cấu hình máy chủ chia sẻ tệp, không phải cài đặt bản vá an ninh, không gỡ bỏ tính năng hệ điều hành và không thay đổi mã nhị phân driver.
+
+Ngay sau can thiệp, trạng thái cục bộ được kiểm tra bằng ba lệnh PowerShell: `Get-SmbServerConfiguration`, `Get-WindowsFeature FS-SMB1` và `Get-Service LanmanServer`. Hình 3.7 ghi nhận giao diện bảng điều khiển PowerShell trên máy chủ Windows Server 2012 R2 thể hiện trạng thái cấu hình SMB, tính năng hệ thống và dịch vụ chia sẻ tệp sau khi vô hiệu hóa SMBv1.
+
+![Hình 3.7](chapter3/presentation/3_4/Hinh_3_7_After_Local.png)
+*Hình 3.7. Trạng thái cấu hình SMB, tính năng FS-SMB1 và dịch vụ LanmanServer sau khi vô hiệu hóa SMBv1*
+
+Quan sát Hình 3.7 cho thấy thuộc tính `EnableSMB1Protocol` đã chuyển sang `False`, trong khi `EnableSMB2Protocol` duy trì `True`. Lệnh `Get-WindowsFeature` xác nhận gói `FS-SMB1` vẫn ở trạng thái `Installed`. Đồng thời, lệnh `Get-Service` ghi nhận dịch vụ `LanmanServer` tiếp tục hiển thị trạng thái `Running`. Dấu nhắc lệnh kết thúc xác nhận phiên kiểm tra hoàn tất bình thường.
+
+Kết quả kiểm tra cục bộ đòi hỏi sự phân định chặt chẽ về ranh giới kỹ thuật. Việc tắt `EnableSMB1Protocol` chỉ thay đổi cờ tiếp nhận giao thức của máy chủ, hoàn toàn không đồng nghĩa với việc gói tính năng `FS-SMB1` đã được gỡ bỏ khỏi hệ điều hành (`SMBv1 disabled != FS-SMB1 uninstalled`). Khi tính năng chưa bị gỡ bỏ, thành phần phần mềm của SMBv1 vẫn hiện diện trên đĩa hệ thống. Thao tác cấu hình này cũng không thay thế việc cập nhật bản vá; trạng thái bản vá hệ thống cục bộ duy trì phân loại `UNPATCHED` theo mốc đã xác lập tại Mục 3.1 (`SMBv1 disabled != PATCHED`). Ngoài ra, việc dịch vụ `LanmanServer` được ghi nhận `Running` tại thời điểm kiểm tra không chứng minh cho tính liên tục tuyệt đối của dịch vụ trong suốt quá trình thay đổi cấu hình, cũng như không chứng minh mọi ứng dụng nghiệp vụ đều tương thích hoàn toàn.
+
+Bảng 3.5 tổng hợp so sánh các tham số kỹ thuật của máy chủ mục tiêu trước và sau can thiệp Case B, làm tiền đề đối chiếu với các phép đo từ xa.
+
+**Bảng 3.5. So sánh cấu hình và kết quả đo đạc trước và sau khi vô hiệu hóa SMBv1 (Case B)**
+
+| Tầng kiểm tra / Tham số đo đạc | Trước can thiệp (Baseline) | Sau can thiệp (Case B) | Diễn giải trực tiếp & Giới hạn kết luận |
+|---|---|---|---|
+| **Cấu hình máy chủ SMBv1**<br>(`EnableSMB1Protocol`) | `True`<br>(Đang kích hoạt) | `False`<br>(Đã vô hiệu hóa) | **Cấu hình máy chủ đã thay đổi**<br>Giao thức SMBv1 đã chuyển từ trạng thái kích hoạt sang vô hiệu hóa ở mức cấu hình dịch vụ máy chủ thông qua lệnh can thiệp PowerShell. |
+| **Cấu hình máy chủ SMB2/3**<br>(`EnableSMB2Protocol`) | `True`<br>(Đang kích hoạt) | `True`<br>(Duy trì kích hoạt) | **Thuộc tính cấu hình SMB2/3 giữ nguyên**<br>Thuộc tính EnableSMB2Protocol được ghi nhận True trước và sau can thiệp. Dữ kiện cấu hình cục bộ này không dùng để thay thế kết quả đo đạc phương ngữ từ xa. |
+| **Tính năng hệ điều hành**<br>(`FS-SMB1`) | `Installed`<br>(Đã cài đặt) | `Installed`<br>(Vẫn duy trì cài đặt) | **Tính năng Windows không bị gỡ bỏ**<br>Gói tính năng `FS-SMB1` vẫn hiện diện trên hệ điều hành. Can thiệp cấu hình máy chủ không đồng nghĩa với việc gỡ bỏ tính năng (`SMBv1 disabled != FS-SMB1 uninstalled`). |
+| **Dịch vụ chia sẻ tệp**<br>(`LanmanServer`) | `Running`<br>(Đang hoạt động) | `Running`<br>(Tiếp tục ghi nhận) | **Dịch vụ máy chủ ghi nhận trạng thái Running**<br>LanmanServer được ghi nhận ở trạng thái Running trước và sau can thiệp. Hai snapshot point-in-time không chứng minh tính liên tục của dịch vụ trong suốt quá trình thay đổi hay sự tương thích của toàn bộ ứng dụng nghiệp vụ. |
+| **Trạng thái cổng dịch vụ từ xa**<br>(Cổng TCP 445 từ trạm Kali) | `OPEN (Phản hồi syn-ack)`<br>(Theo Mục 3.2 / Mục 3.3) | `OPEN`<br>(Ghi nhận trong phép đo lại) | **Cổng dịch vụ tiếp tục ở trạng thái mở**<br>Từ trạm Kali, TCP 445 được ghi nhận ở trạng thái OPEN trong phép đo lại. Phép đo lại của Case B không bao gồm cờ `--reason` nên không có dữ liệu phản hồi syn-ack. Trạng thái cổng mở không đồng nghĩa với tồn tại lỗ hổng (`445 OPEN != vulnerable`). |
+| **Phương ngữ SMB ghi nhận từ xa**<br>(Kịch bản `smb-protocols`) | 5 phương ngữ:<br>• `NT LM 0.12 (SMBv1)`<br>• `2.0.2`, `2.1`<br>• `3.0`, `3.0.2` | 4 phương ngữ:<br>• `2.0.2`, `2.1`<br>• `3.0`, `3.0.2`<br>(`NT LM 0.12` không xuất hiện) | **SMBv1 không xuất hiện trong danh sách đo lại**<br>Kịch bản smb-protocols ghi nhận 2.0.2, 2.1, 3.0 và 3.0.2; NT LM 0.12 (SMBv1) không xuất hiện trong danh sách phương ngữ của phép đo lại. Việc các phương ngữ 2.0.2, 2.1, 3.0 và 3.0.2 được ghi nhận trong phép đo lại không chứng minh toàn bộ workload SMB2/3 đã được kiểm chứng. |
+| **Phán quyết kiểm tra MS17-010**<br>(Kịch bản `smb-vuln-ms17-010`) | `UNKNOWN`<br>(Theo Mục 3.3) | `UNKNOWN`<br>(Không có kết quả script) | **Phán quyết từ xa duy trì không xác định**<br>Phép đo lại không cung cấp phán quyết lỗ hổng khả dụng; kết quả được phân loại UNKNOWN / NO USABLE SCRIPT RESULT. Nguyên nhân của việc không có đầu ra script khả dụng không được xác lập từ bộ bằng chứng hiện có. `UNKNOWN != SAFE`. |
+| **Trạng thái bản vá hệ thống**<br>(Mã nhị phân driver `srv.sys`) | `UNPATCHED`<br>(Theo Mục 3.1) | `UNPATCHED`<br>(Case B không ghi nhận thao tác cài bản vá) | **Trạng thái bản vá không thay đổi**<br>Đây là trạng thái cục bộ được kế thừa từ mốc đã khóa tại Mục 3.1 và siêu dữ liệu tiến trình thực nghiệm; ảnh After Local không trực tiếp hiển thị srv.sys hay danh mục hotfix. Vô hiệu hóa SMBv1 không đồng nghĩa với cập nhật bản vá (`SMBv1 disabled != PATCHED`). |
+
+Dữ liệu Bảng 3.5 phản ánh tính chọn lọc của can thiệp: cấu hình `EnableSMB1Protocol` thay đổi sang `False`, trong khi gói tính năng `FS-SMB1`, tiến trình dịch vụ và hiện trạng bản vá nội tại không đổi. Để đánh giá tác động của thay đổi cấu hình máy chủ lên khả năng đáp ứng mạng, nghiên cứu tiến hành đo đạc lại từ xa từ trạm Kali Linux.
+
+### 3.4.2. Kết quả đo đạc lại từ xa và đối chiếu đa tầng
+
+Từ trạm Kali Linux, phép đo lại đầu tiên khảo sát khả năng tiếp cận cổng và danh sách phương ngữ phản hồi qua lệnh Nmap với tùy chọn `--script smb-protocols` nhắm vào cổng 445 của máy chủ `192.168.56.20`. Kết quả đo đạc xác nhận máy chủ trực tuyến và cổng 445/tcp tiếp tục ở trạng thái mở (`open microsoft-ds`) do dịch vụ `LanmanServer` vẫn đang chạy để phục vụ các phương ngữ SMB2 và SMB3. Hình 3.8 thể hiện kết quả thực thi kịch bản `smb-protocols` từ trạm kiểm thử Kali Linux sau khi vô hiệu hóa SMBv1 trên máy chủ mục tiêu.
+
+![Hình 3.8](chapter3/presentation/3_4/Hinh_3_8_SMB_Protocols_Retest.png)
+*Hình 3.8. Kết quả đo lại các phương ngữ SMB từ trạm Kali Linux sau khi vô hiệu hóa SMBv1*
+
+Quan sát Hình 3.8 cho thấy kịch bản `smb-protocols` ghi nhận 4 phương ngữ: `2.0.2`, `2.1`, `3.0` và `3.0.2`. Phương ngữ cũ `NT LM 0.12 (SMBv1)` không xuất hiện trong danh sách phương ngữ của phép đo lại. Phép đo này chứng minh rằng khi cờ `EnableSMB1Protocol` chuyển thành `False`, máy chủ không còn đưa SMBv1 vào danh sách phương ngữ phản hồi trong phiên thăm dò. Tuy nhiên, việc ghi nhận 4 phương ngữ SMB2/3 chỉ phản ánh mã định danh được công cụ quét ghi nhận từ xa, không chứng minh toàn bộ khối lượng công việc trao đổi tệp của ứng dụng nghiệp vụ đã được kiểm chứng đầy đủ.
+
+Tiếp theo, trạm Kali Linux đo đạc lại dấu hiệu lỗ hổng MS17-010 bằng kịch bản `smb-vuln-ms17-010` trên cổng 445. Phiên quét đạt đến thông báo hoàn tất `Nmap done`, cổng 445 mở, và không xuất hiện khối kết quả `Host script results:` hay thông báo lỗi. Kết quả này được phân loại là `UNKNOWN / NO USABLE SCRIPT RESULT`. Đề tài khẳng định nguyên nhân của việc không có đầu ra script khả dụng không được xác lập từ bộ bằng chứng hiện có, và người thực nghiệm không đưa ra suy diễn chủ quan về cơ chế xử lý gói tin.
+
+Từ kết quả trên, đề tài tái khẳng định nguyên tắc phương pháp luận: `UNKNOWN != SAFE`. Việc kịch bản quét không đưa ra cảnh báo lỗ hổng từ xa không đồng nghĩa với việc máy chủ đã an toàn hay đã loại bỏ được rủi ro. Cổng 445 vẫn mở, cho phép luồng dữ liệu tiếp cận dịch vụ chia sẻ tệp. Trạng thái cổng mở tự nó không đồng nghĩa với tồn tại lỗ hổng (`445 OPEN != vulnerable`), nhưng kết quả quét chưa xác định không cho phép kết luận hệ thống đã được bảo vệ.
+
+Bản chất kỹ thuật của Case B được làm sáng tỏ qua sự đối chiếu giữa bốn tầng độc lập:
+1. *Cấu hình máy chủ:* `EnableSMB1Protocol` chuyển thành `False`, ngừng tiếp nhận SMBv1 trong cấu hình dịch vụ chia sẻ tệp.
+2. *Tính năng hệ điều hành:* `FS-SMB1` vẫn duy trì `Installed` trên đĩa hệ thống.
+3. *Trạng thái bản vá nội bộ:* duy trì phân loại `UNPATCHED` kế thừa từ Mục 3.1 do Case B không có thao tác cài bản vá; driver `srv.sys` chưa từng được cập nhật.
+4. *Phán quyết quét từ xa:* kịch bản `smb-vuln-ms17-010` cho kết quả `UNKNOWN / NO USABLE SCRIPT RESULT` do không có đầu ra khả dụng.
+
+Sự phân tách này chỉ ra rằng can thiệp cấu hình dịch vụ có thể làm thay đổi diện mạo phản hồi mạng (loại bỏ phương ngữ SMBv1 khỏi danh sách đo lại), nhưng không làm thay đổi hiện trạng thiếu bản vá của hệ thống cục bộ (`SMBv1 disabled != PATCHED`). Trạng thái thiếu bản vá nội tại (`UNPATCHED`) không tự biến kết quả quét thành có lỗ hổng (`VULNERABLE`), và kết quả chưa xác định từ xa (`UNKNOWN`) không biến hệ thống thành đã vá.
+
+Tóm lại, Case B làm rõ các điểm thay đổi và không thay đổi: cấu hình SMBv1 đã tắt; phương ngữ `NT LM 0.12` không còn xuất hiện trong danh sách phương ngữ đo lại; cổng 445 tiếp tục mở; trạng thái bản vá duy trì `UNPATCHED`; và kết quả MS17-010 từ xa duy trì `UNKNOWN`. Can thiệp đã thu hẹp bề mặt phương ngữ nhưng cổng 445 vẫn mở đối với mạng nội bộ. Case B thay đổi cấu hình giao thức ở máy chủ; Case C tiếp tục khảo sát một lớp kiểm soát khác trên đường truyền mạng bằng pfSense Transparent Bridge.

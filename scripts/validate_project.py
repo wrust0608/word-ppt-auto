@@ -68,7 +68,9 @@ def validate_links(errors: list[str]) -> None:
         if any(part in {".git", ".venv", "chrome_profile_notebooklm"} for part in path.parts):
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
-        for match in LINK_RE.finditer(text):
+        clean_text = re.sub(r"```[\s\S]*?```", "", text)
+        clean_text = re.sub(r"`[^`\n]*`", "", clean_text)
+        for match in LINK_RE.finditer(clean_text):
             target = match.group(1).strip("<>")
             if not target or target.startswith(("http://", "https://", "mailto:", "#", "file:")):
                 continue
