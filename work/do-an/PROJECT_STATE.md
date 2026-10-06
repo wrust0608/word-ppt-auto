@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7E0_CASEC_PLAN_NEXT`.
+- Current gate: `X7E0_CASEC_PLAN_IN_PROGRESS`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1799,3 +1799,12 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Next authorized work:
   `X7E0 — Case C evidence/presentation plan`.
 - No Word assembly, Chapter 2 rewrite, or Chapter 4 work is authorized.
+
+
+## DEC-97 — X7E0 Case C plan opened
+
+- Ngày: 2026-10-07.
+- Section 3.4 Case B is integrated and locked.
+- Active branch: `feature/x7e0-ch3-casec-plan`.
+- X7E0 scope: Case C evidence/presentation plan only.
+- Section 3.5 prose remains BLOCKED until plan review + user approval.
