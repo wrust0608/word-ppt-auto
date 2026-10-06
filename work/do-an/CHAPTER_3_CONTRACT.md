@@ -47,8 +47,10 @@ Chương 3 được thực hiện theo từng phần:
 - X7D — 3.4 Case B
 - X7E — 3.5 Case C
 - X7F — 3.6 + 3.7
-- X7G — mechanical assembly
-- X7H — full Chapter 3 external/user review
+- X7G — mechanical Chapter 3 assembly
+- X7H — whole-Chapter-3 coherence/technical review + user approval
+- X7I — after X7H approval only: assemble locked Chapter 2 + approved Chapter 3 into one review DOCX
+- X7J — final combined Chapters 2+3 review + user evaluation, then STOP
 
 Mỗi section có hai bước nội dung:
 1. evidence/presentation plan;
@@ -155,7 +157,11 @@ Sau external review + user approval:
 - approved section artifacts được tích hợp vào integration branch;
 - terminology/numbering của section đó trở thành dependency cho section kế tiếp.
 
-Final assembly chỉ được phép ghép các section đã approved.
+Final Chapter 3 assembly chỉ được phép ghép các section đã approved.
+
+Section approval locks experimental facts, evidence allocation, figure/table numbering and technical meaning. During X7H, editorial compression, duplicate-sentence removal and transition cleanup are allowed when they do not change technical meaning. Any factual/technical meaning change requires explicit reopen of the affected section.
+
+No Chapter 2+3 DOCX may be assembled before X7H user approval.
 
 ## 12. Exclusions
 
@@ -171,4 +177,14 @@ Không dùng:
 
 Không khóa số từ theo section trước khi xem evidence.
 
-Target toàn Chương 3 vẫn có thể nằm khoảng 4.500–6.000 từ, nhưng chất lượng evidence và khả năng đọc quan trọng hơn việc đạt quota từ.
+Target toàn Chương 3 is not a quota. Sections 3.1–3.3 already contain substantial prose, so X7D–X7F must be concise and X7H must actively remove cross-section repetition. The final criterion is a coherent, defense-ready chapter, not the sum of independently maximized sections.
+
+
+## 14. Current product stop — DEC-91
+
+For the current milestone:
+- Chapter 4 is dormant;
+- no standalone final Chapter 3 DOCX is required;
+- after X7H user approval, X7I combines the locked Chapter 2 with the approved Chapter 3;
+- X7J reviews that combined Chapters 2+3 product with the user;
+- after X7J, STOP until explicit new user scope.
