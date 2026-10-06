@@ -1,11 +1,48 @@
 # Trạng thái dự án
 
-- Cổng hiện tại: `G4_CHAPTERS / EVIDENCE_RECONCILIATION_AND_AUTHOR_REVIEW` (audit ngày 2026-10-04 đã mở lại điều kiện nguồn của Chương 1 và điều kiện xuất bản DOCX; các điểm PASS cũ chỉ còn giá trị lịch sử cho tới khi tái kiểm định đạt)
-- Lần cập nhật: 2026-10-04
-- Người/agent cập nhật: Codex
-- Quyết định phê duyệt gần nhất: Tích hợp hệ thống giọng tác giả và kiểm soát văn phong mới nhưng bảo toàn toàn bộ quy định HUIT, dữ liệu và quyết định học thuật đã khóa; audit mới được phép mở lại trạng thái nguồn/DOCX khi bằng chứng thực tế mâu thuẫn với nhãn PASS cũ.
+## CURRENT STATE SUMMARY — 2026-10-06
 
-## Artifact hiện có
+- Current gate: `G0_CH3_GOVERNANCE_RECONCILIATION`.
+- Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
+- Chapter 1: còn source/publication closure trước final report; không phải current execution target.
+- Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
+- Chapter 2 approved Markdown: `work/do-an/CHAPTER_2.md`.
+- Chapter 2 final DOCX: `work/do-an/output/CHAPTER_2_FINAL.docx` trên X6 evidence branch/integration lineage.
+- X6 experimental evidence preparation: `PASS`.
+- Evidence staging: 83 files total; 78 primary/direct; 5 secondary metadata/closure; 0 SHA mismatch.
+- Chapter 3 authoring model: **SECTIONED WORKFLOW**.
+- Current Chapter 3 contract: `work/do-an/CHAPTER_3_CONTRACT.md`.
+- Current Chapter 3 workflow: `work/do-an/CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`.
+- Current Chapter 3 evidence map: `work/do-an/CHAPTER_3_SECTION_EVIDENCE_MAP.md`.
+- Current figure/table counter: `work/do-an/CHAPTER_3_NUMBERING_LEDGER.md`.
+- Per-section traceability template: `work/do-an/CHAPTER_3_SECTION_CLAIM_MAP_TEMPLATE.md`.
+- Monolithic X7 full-chapter prompt/constraints: `SUPERSEDED`.
+- Old `ROADMAP_2_6.md`: `HISTORICAL`.
+- Old detailed Ch2/Ch3 structures inside `OUTLINE.md`: `SUPERSEDED`.
+- Chapter 4: `BLOCKED` until full Chapter 3 passes external review + user approval.
+- Publication-wide final gates still required later: source closure, global IEEE numbering, cross-reference/figure-table consistency, final HUIT DOCX build and page-by-page visual QA.
+
+### Current immediate sequence
+
+1. Finish G0 governance reconciliation.
+2. Build `feature/ch3-integration` containing current governance + X6 staged evidence.
+3. Open **X7A0 — 3.1 Baseline Evidence & Presentation Plan**.
+4. Review X7A0 before any 3.1 prose.
+5. Only after plan approval open X7A1 prose drafting.
+
+### Current read order for any new agent
+
+1. `PROJECT_STATE.md` — this Current State Summary.
+2. `CHAPTER_3_CONTRACT.md`.
+3. `CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`.
+4. `CHAPTER_3_SECTION_EVIDENCE_MAP.md`.
+5. `CHAPTER_3_NUMBERING_LEDGER.md`.
+6. `EXPERIMENTAL_TRUTH_MATRIX.md` + R3 locks.
+7. Phase-specific prompt.
+
+Any earlier instruction that conflicts with this sequence is historical unless explicitly reopened.
+
+## Artifact snapshot lịch sử — 2026-10-04 (không dùng làm current status)
 
 | Artifact | Trạng thái | Đường dẫn | Ghi chú |
 |---|---|---|---|
@@ -64,7 +101,7 @@
 | S006 | VERIFIED/YES | Đã chuyển sang URL Microsoft Learn hiện hành. |
 | S002, S005, S007, S008, S010-S013, S015, S017, S018, S020-S026 | VERIFIED/YES | Nguồn khả dụng đã được nhập/đối soát; xem metadata chi tiết trong SOURCE_LEDGER.md. |
 
-## Vấn đề còn mở
+## Vấn đề còn mở trong snapshot lịch sử 2026-10-04
 
 | ID | Nhãn | Mô tả | Ảnh hưởng | Hành động tiếp theo |
 |---|---|---|---|---|
