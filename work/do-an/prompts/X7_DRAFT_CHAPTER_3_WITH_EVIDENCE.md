@@ -1,3 +1,11 @@
+# SUPERSEDED — DO NOT EXECUTE
+
+Status: `SUPERSEDED_BY_SECTIONED_WORKFLOW_2026_10_06`
+
+This monolithic X7 prompt is retained only for history. Current authority is `work/do-an/CHAPTER_3_CONTRACT.md` + `work/do-an/CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`. Do not run this prompt.
+
+---
+
 # X7 — DRAFT CHAPTER 3 WITH EMBEDDED EVIDENCE
 
 Status: READY_FOR_EXECUTOR
