@@ -93,8 +93,11 @@ A local PASS never skips explicit user approval.
 ### Active branch
 `feature/x7f-ch3-synthesis`
 
-Current branch HEAD at handoff:
-`4be01adf2001fd67571ee9290489d0d0083b9f20`
+Canonical handoff checkpoint commit:
+`dbf31a8bbf4525bb21cec13844b5a065ccd06a9d`
+
+The active branch may move forward only for handoff/state metadata after this checkpoint.  
+The next ChatGPT must verify that its current `feature/x7f-ch3-synthesis` HEAD **contains** commit `dbf31a8bbf4525bb21cec13844b5a065ccd06a9d` as an ancestor. Do not require HEAD equality.
 
 ### Approved integration branch
 `feature/ch3-integration`
@@ -621,3 +624,167 @@ Before every next action ask:
 - Does it improve the final Chapters 2+3 product?
 
 If uncertain, stop and verify repo state rather than guessing.
+
+
+---
+
+## 18. Communication contract with the user
+
+This is mandatory.
+
+### Language and tone
+- Communicate in Vietnamese by default.
+- Explain the human meaning first; internal codes/commit SHAs come second.
+- Do not speak as if the user is another AI agent.
+- Avoid dense governance/QA jargon in normal replies.
+- Be concise but sufficiently explicit for the user to make a decision.
+- Do not use patronizing phrases.
+
+### Working dynamic
+The user is the final approver and prompt relay.
+
+When the user sends an Antigravity response/log:
+1. independently verify the repository/evidence;
+2. do not accept the agent's PASS or self-review as truth;
+3. explain what actually passed/failed in ordinary Vietnamese;
+4. if revision is needed, create the precise repo review/prompt first;
+5. then give the user one exact copy-paste prompt for Antigravity.
+
+When the user says:
+- `chốt`: treat it as explicit approval of **the currently pending gate only**;
+- do not treat one `chốt` as approval of future phases;
+- do not skip the roadmap checkpoint.
+
+When the user says something brief such as `check`, `xem response`, `tiếp tục`:
+- infer the active project step from repo state;
+- verify it;
+- do not ask the user to reconstruct context that is already in the repo;
+- do not launch unrelated or future tasks.
+
+### Prompt style for Antigravity
+Every executor prompt should normally include:
+- exact branch;
+- expected ancestor/reviewer checkpoint;
+- exact prompt/review file path;
+- scope;
+- allowed files;
+- forbidden files/actions;
+- technical locks;
+- QA commands;
+- commit message;
+- push target;
+- final state;
+- explicit STOP conditions.
+
+The user prefers a ready-to-copy prompt rather than a vague list of instructions.
+
+### Status explanations
+Always tell the user plainly:
+- what is already finished/locked;
+- what is currently waiting for approval;
+- what is the one next permitted action;
+- what is still deliberately blocked.
+
+Do not force the user to interpret X7* codes to understand project status.
+
+---
+
+## 19. Source, evidence and authority hierarchy
+
+When sources disagree, use this priority:
+
+1. direct/raw/local/visual evidence;
+2. current user-approved/locked section artifacts;
+3. current authoritative roadmap/state/approval locks;
+4. metadata/manifest/lineage records;
+5. historical/supporting prose;
+6. old/superseded plans or abandoned branches.
+
+Original lecturer materials remain the highest technical source for project objectives/scope:
+- `ATTT_DACN_01_DeCuongChiTiet.docx`;
+- `KichBan-Nmap-SMB-139-445.docx`;
+- `kich-ban-nse-smb-ms17-010.docx`.
+
+The token/AI workflow guide controls working method only; it does not override the lecturer's technical scope.
+
+Do not silently reconcile evidence conflicts. Preserve and bound them.
+
+---
+
+## 20. Canonical laboratory environment reminder
+
+Core environment already established and must not drift:
+
+- Oracle VirtualBox only;
+- Kali Linux: `192.168.56.10/24`;
+- Windows Server 2012 R2: `192.168.56.20/24`;
+- Host-Only network: `192.168.56.0/24`;
+- tested VMs use one NIC according to the locked scenario;
+- no NAT/bridged/default-route dependence in the canonical baseline.
+
+Windows baseline:
+- LanmanServer Running/Automatic;
+- local 139/445 listening;
+- SMB1=True;
+- SMB2=True;
+- FS-SMB1=Installed;
+- Windows Firewall enabled;
+- custom inbound allow for 139/445 from Kali;
+- File and Printer Sharing group observed disabled;
+- local patch classification UNPATCHED.
+
+Network-discovery note:
+- `.56.100` identity remains UNKNOWN.
+
+No canonical exploitation phase exists:
+- no RCE;
+- no reverse shell;
+- no Meterpreter;
+- no completed Case A patch experiment.
+
+---
+
+## 21. Report-product style
+
+The final report must read like a Vietnamese Information Security student thesis/project, not like an AI audit log.
+
+Target qualities:
+- technically correct;
+- easy to understand;
+- directly focused on the experiment;
+- reader can immediately see what each demo/result established;
+- defensible in front of a lecturer/panel.
+
+Figures:
+- include only when they prove something important;
+- avoid screenshot albums;
+- captions should state what the reader should learn.
+
+Tables:
+- compress comparisons;
+- do not become raw-log dumps.
+
+Chapter 3:
+- empirical results and bounded interpretation only;
+- no risk ranking/recommendation architecture;
+- no Chapter 4 leakage.
+
+Natural Vietnamese academic phrasing is preferred over internal terms such as:
+- gate;
+- governance;
+- canonical;
+- claim ID;
+- evidence ID;
+unless those terms are confined to internal QA artifacts.
+
+---
+
+## 22. Exact immediate handoff instruction
+
+At the moment this handoff is given to the next ChatGPT:
+
+- X7F R2 has final external PASS 99/100.
+- The user has **not yet said `chốt` for X7F**.
+- Therefore the next ChatGPT must **not** integrate X7F or open X7G automatically.
+- It must first verify repo continuity and tell the user that the project is waiting for the user's approval of Sections 3.6–3.7.
+- If the user then says `chốt`, proceed with the valid X7F approval lock/integration workflow and only then open X7G.
