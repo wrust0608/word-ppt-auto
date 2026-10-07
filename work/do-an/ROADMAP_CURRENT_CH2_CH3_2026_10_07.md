@@ -19,7 +19,7 @@ Historical decisions remain binding unless the user explicitly changes them.
 
 The fixed product sequence is:
 
-`finish X7F -> X7G assemble complete Chapter 3 -> X7H whole-Chapter-3 review + user approval -> X7I assemble locked Chapter 2 + approved Chapter 3 into DOCX -> X7J final combined review/user evaluation -> STOP`
+`X7G assemble complete Chapter 3 -> X7H whole-Chapter-3 review + user approval -> X7I assemble locked Chapter 2 + approved Chapter 3 into DOCX -> X7J final combined review/user evaluation -> STOP`
 
 Still forbidden unless explicitly reopened by the user:
 - intermediate Demo Word snapshots;
@@ -50,16 +50,16 @@ Locked:
 - 3.3 Scenario 2;
 - 3.4 Case B;
 - 3.5 Case C;
-- Bảng 3.1–3.6;
+- 3.6 Comparison;
+- 3.7 Chapter conclusion;
+- Bảng 3.1–3.7;
 - Hình 3.1–3.11.
 
 Next numbering:
-- Bảng 3.7;
+- Bảng 3.8;
 - Hình 3.12.
 
 Not complete:
-- 3.6 comparison;
-- 3.7 chapter conclusion;
 - assembled Chapter 3;
 - whole-Chapter-3 review;
 - combined Chapter 2+3 Word review.
@@ -101,18 +101,12 @@ X7E1 — COMPLETE / USER APPROVED:
 - control path/configuration -> FILTERED/log -> Windows-local state presented with bounded interpretation;
 - final external PASS + user approval completed.
 
-### STEP 3 — X7F: Sections 3.6 + 3.7
-Use only approved outputs from 3.1–3.5.
-
-3.6 compares; it does not retell.
-3.7 closes the empirical chapter.
-
-No new raw evidence.
-No new screenshots by default.
-No risk ranking/recommendation.
-
-Gate:
-external review -> user approval -> integrate.
+### STEP 3 — X7F: Sections 3.6 + 3.7 — COMPLETE / USER APPROVED
+- Bảng 3.7 locked as a 4-column synthesis table;
+- Section 3.6 compares approved results only;
+- Section 3.7 closes the empirical chapter;
+- final external PASS + user approval completed;
+- no new evidence or figure introduced.
 
 ### STEP 4 — X7G: assemble complete Chapter 3
 Mechanically assemble approved sections.
@@ -214,6 +208,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7F — write Section 3.6 comparison and Section 3.7 Chapter 3 conclusion`
+`X7G — mechanically assemble the complete approved Chapter 3 (3.1–3.7), no DOCX`
 
 Nothing else is authorized in parallel.
