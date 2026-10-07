@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7F_CH3_36_37_IN_PROGRESS`.
+- Current gate: `X7F_R2_CORRECTION_REQUIRED`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1915,3 +1915,29 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - no Word;
   - no Chapter 2 changes;
   - no Chapter 4.
+
+
+## DEC-106 — X7F synthesis R1 requires bounded correction
+
+- Ngày: 2026-10-07.
+- Executor R1 candidate: `ba09295d24f4a76d726d0f980c630d546204cacc`.
+- External review: `work/do-an/X7F_CH3_36_37_EXTERNAL_REVIEW_R1.md`.
+- Verdict: **82/100 — REVISE_BLOCKING**.
+- Accepted:
+  - Section 3.6 + 3.7 structure;
+  - one Bảng 3.7;
+  - no new figure/evidence;
+  - no ranking/recommendation.
+- R2 required:
+  - remove incorrect Case B post-intervention `syn-ack`;
+  - remove negotiation/workload overclaims;
+  - remove causal explanation for Case B TCP445 OPEN;
+  - do not invent Case B local-listener comparison;
+  - bound point-in-time/local-state wording;
+  - remove binary-history/patch-causality claims;
+  - bound Case C cross-layer causality;
+  - remove causal explanations for UNKNOWN;
+  - rewrite 3.7 intervention wording as direct observations;
+  - simplify Bảng 3.7 from 5 to 4 columns for A4 readability.
+- Prompt: `work/do-an/prompts/X7F_R2_CORRECT_CH3_36_37.md`.
+- X7G assembly remains BLOCKED.
