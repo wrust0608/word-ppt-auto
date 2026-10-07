@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7I_R2_READY_FOR_INDEPENDENT_REVIEW`.
+- Current gate: `X7I_R2_REVISE_BLOCKING`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -2071,4 +2071,34 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   `work/do-an/prompts/X7I_R2_FIX_DOCX_STRUCTURE_AND_FULL_VISUAL_QA.md`.
 - X7J remains BLOCKED.
 - Chapter 2 and Chapter 3 content remain USER APPROVED / LOCKED and must not be rewritten.
+- Chapter 4 remains DORMANT / BACKLOG.
+
+
+## DEC-115 — X7I R2 rejected because final committed DOCX is not the inspected artifact
+
+- Ngày: 2026-10-07.
+- R2 executor candidate: `86d4766812d845ad011772cd05d2929893920934`.
+- Independent review:
+  `work/do-an/X7I_CH2_CH3_DOCX_EXTERNAL_REVIEW_R2.md`.
+- Verdict: **94/100 — REVISE_BLOCKING**.
+- R2 successfully fixed:
+  - true Word Heading 1/2/3 styles;
+  - corrected HUIT margin metadata;
+  - explicit visual opening of page 01 through page 44.
+- New blocker:
+  - the DOCX was rebuilt again after the 44-page inspection;
+  - therefore the committed DOCX is not proven to be the same artifact that was visually inspected.
+- QA report R2 SHA-256:
+  `9853347a66ed0d23a788f0f09f42edfac7cb9beb70d8864736f88b4e6d1145d2`.
+- Independent SHA-256 of the actual committed branch DOCX:
+  `c883320257d9625fd38671d7a7cc156d9f92c84706c4c61785ef919db028faca`.
+- Actual committed DOCX size: **761,414 bytes**.
+- Git blob:
+  `ee5b7968fae6f8439d549187159019566536287b`.
+- Source Markdown blobs remain locked and unchanged.
+- Current gate: `X7I_R2_REVISE_BLOCKING`.
+- Single authorized next action:
+  `work/do-an/prompts/X7I_R3_FREEZE_EXACT_INSPECTED_DOCX.md`.
+- X7J remains BLOCKED.
+- Chapter 2 and Chapter 3 content remain USER APPROVED / LOCKED.
 - Chapter 4 remains DORMANT / BACKLOG.
