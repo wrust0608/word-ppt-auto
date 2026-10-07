@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7J_FINAL_CH2_CH3_REVIEW_READY`.
+- Current gate: `X7J_R1_READY_FOR_INDEPENDENT_REVIEW`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -34,7 +34,7 @@
 4. X7G — COMPLETE / FINAL INDEPENDENT PASS; complete Chapter 3 assembled, no DOCX.
 5. X7H — COMPLETE / FINAL INDEPENDENT PASS / USER APPROVED; complete Chapter 3 is LOCKED.
 6. X7I — COMPLETE / FINAL INDEPENDENT PASS: exact inspected DOCX frozen and verified byte-for-byte with SHA-256 `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`.
-7. X7J — final combined Chapters 2+3 review and user evaluation.
+7. X7J — R1 READY FOR INDEPENDENT REVIEW: Comprehensive review completed across 6 quality dimensions; 0 blockers; verdict PASS (artifacts: `work/do-an/X7J_FINAL_CH2_CH3_REVIEW_R1.md`, `work/do-an/X7J_FINAL_CH2_CH3_EXECUTOR_HANDOFF_R1.md`).
 8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 
 ### Current read order for any new agent
