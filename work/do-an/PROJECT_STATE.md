@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7I_R3_READY_FOR_INDEPENDENT_REVIEW`.
+- Current gate: `X7J_FINAL_CH2_CH3_REVIEW_READY`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -33,7 +33,7 @@
 3. X7F — COMPLETE / USER APPROVED / LOCKED; Sections 3.6–3.7 integrated, Bảng 3.7 locked, no new figure.
 4. X7G — COMPLETE / FINAL INDEPENDENT PASS; complete Chapter 3 assembled, no DOCX.
 5. X7H — COMPLETE / FINAL INDEPENDENT PASS / USER APPROVED; complete Chapter 3 is LOCKED.
-6. X7I — R3 READY FOR INDEPENDENT REVIEW: Exact inspected DOCX frozen (SHA-256 3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2), true Word Heading 1/2/3 styles (outline levels 0, 1, 2) and margins (top 3.5cm, bottom 3.0cm, left 3.5cm, right 2.0cm) preserved, full 44-page sequential visual inspection passed, hash proof chain verified.
+6. X7I — COMPLETE / FINAL INDEPENDENT PASS: exact inspected DOCX frozen and verified byte-for-byte with SHA-256 `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`.
 7. X7J — final combined Chapters 2+3 review and user evaluation.
 8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 
@@ -2102,3 +2102,29 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7J remains BLOCKED.
 - Chapter 2 and Chapter 3 content remain USER APPROVED / LOCKED.
 - Chapter 4 remains DORMANT / BACKLOG.
+
+
+## DEC-116 — X7I R3 final independent PASS; X7J authorized
+
+- Ngày: 2026-10-07.
+- X7I R3 candidate: `906e7ffa9f088f04741a35248a9ecd3336aa7e9d`.
+- Final independent review:
+  `work/do-an/X7I_CH2_CH3_DOCX_EXTERNAL_REVIEW_R3_FINAL.md`.
+- Verdict: **99/100 — PASS**.
+- Blockers: **0**.
+- Final frozen DOCX:
+  `work/do-an/output/CHAPTER_2_3_REVIEW.docx`.
+- Final size: **761,414 bytes**.
+- Final Git blob:
+  `276278b1fb3e2f74acd11f6cb42b66df8c9b0ca9`.
+- Final SHA-256:
+  `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`.
+- Independent reviewer recomputed the SHA-256 from the committed branch binary and confirmed an exact match.
+- The execution trace shows page 01 through page 44 were explicitly opened after rendering the exact frozen DOCX.
+- No DOCX rebuild occurred after the successful final visual inspection.
+- Chapter 2 and Chapter 3 source blobs remain USER APPROVED / LOCKED and unchanged.
+- Current gate: `X7J_FINAL_CH2_CH3_REVIEW_READY`.
+- Single authorized next action: X7J final combined Chapters 2+3 product review and user evaluation.
+- X7J may review only; it must not rewrite locked Chapter 2/3 content.
+- After X7J reviewer PASS and user evaluation: STOP.
+- Chapter 1 enrichment, Chapter 4, publication, slides, Q&A, defense package and demo rehearsal remain outside the current milestone.
