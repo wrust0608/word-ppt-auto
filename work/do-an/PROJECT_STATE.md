@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7E1_CASEC_DRAFT_IN_PROGRESS`.
+- Current gate: `X7E1_R2_CORRECTION_REQUIRED`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1865,3 +1865,27 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - no Word;
   - no Chapter 2 changes;
   - no Chapter 4.
+
+
+## DEC-102 — X7E1 Case C R1 requires bounded correction
+
+- Ngày: 2026-10-07.
+- Executor R1 candidate: `7ab6b9ad20f8a91b3d137a1f36b3af8c70a0d66d`.
+- External review: `work/do-an/X7E1_CH3_35_EXTERNAL_REVIEW_R1.md`.
+- Verdict: **86/100 — REVISE_BLOCKING**.
+- Accepted:
+  - 1 H2 / 2 H3;
+  - Bảng 3.6;
+  - Hình 3.9–3.11;
+  - rule-label disclosure;
+  - FILTERED/UNKNOWN/UNPATCHED distinction.
+- R2 required:
+  - remove residual NSE04 causal wording;
+  - narrow Windows/binary continuity claims;
+  - honestly handle Hình 3.11 crop without column headers;
+  - simplify rule-order theory;
+  - fix ARP/path wording;
+  - remove internal QA jargon from student-facing prose;
+  - compress Bảng 3.6 and section prose for A4 readability.
+- Prompt: `work/do-an/prompts/X7E1_R2_CORRECT_CH3_35_CASEC.md`.
+- X7F remains BLOCKED.
