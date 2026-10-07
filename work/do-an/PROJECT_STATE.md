@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7H_CH3_WHOLE_EDIT_REQUIRED`.
+- Current gate: `X7F_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1899,112 +1899,56 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - No Chapter 3 assembly, Word, Chapter 2 rewrite, or Chapter 4 work is authorized yet.
 
 
-## DEC-105 — X7F Sections 3.6–3.7 active
+## DEC-105 — X7F Sections 3.6–3.7 synthesis opened
 
 - Ngày: 2026-10-07.
-- Sections 3.1–3.5 are user-approved and integrated.
 - Active branch: `feature/x7f-ch3-synthesis`.
-- X7F scope: Bảng 3.7 + Sections 3.6 and 3.7 only.
-- X7G Chapter 3 assembly remains BLOCKED until X7F final external PASS + user approval.
+- Base approved integration boundary: `26fbf8b36857e7c0149207ae694e25bfd2110b0c`.
+- Scope: Section 3.6 comparison + Section 3.7 conclusion + Bảng 3.7 only.
+- No new figure/evidence/Word/Chapter 4 work.
 
+## DEC-106 — X7F R1 required correction
 
-## DEC-106 — X7F synthesis R1 requires correction
-
-- Ngày: 2026-10-07.
-- Candidate: `ba09295d24f4a76d726d0f980c630d546204cacc`.
+- R1 candidate: `ba09295d24f4a76d726d0f980c630d546204cacc`.
 - Verdict: **82/100 — REVISE_BLOCKING**.
-- Review and R2 prompt live on `feature/x7f-ch3-synthesis`.
-- X7G Chapter 3 assembly remains BLOCKED until X7F final external PASS + user approval.
-
+- Main corrections: Case B 445 reason overclaim, dialect/negotiation overclaim, local-state continuity, UNKNOWN causality, A4 table compression.
 
 ## DEC-107 — Mandatory global project checkpoint before every review/task
 
-- Ngày: 2026-10-07.
-- User explicitly requires project management to preserve the full roadmap and historical decisions, not only the latest active task.
-- Before reviewing any executor result or opening any new prompt, the manager must re-check:
-  1. `ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`;
-  2. current `PROJECT_STATE.md`;
-  3. locked/user-approved sections and numbering;
-  4. abandoned/superseded branches and cancelled workflows;
-  5. deferred work that must occur later;
+- User explicitly requires every review and next-step decision to re-check the project as a whole.
+- Mandatory pre-flight:
+  1. current roadmap;
+  2. current project state;
+  3. approved/locked sections and numbering;
+  4. abandoned/superseded/cancelled workflows;
+  5. deferred milestones;
   6. current gate and exactly one authorized next action;
-  7. whether the proposed next step preserves the product sequence.
+  7. full product sequence.
 - Historical work must never be silently forgotten or reopened.
-- A locally successful executor result cannot by itself authorize the next phase.
-- Current fixed sequence remains:
-  X7F approval -> X7G complete Chapter 3 assembly -> X7H whole-Chapter-3 review/user approval -> X7I locked Chapter 2 + approved Chapter 3 DOCX -> X7J final combined review/user evaluation -> STOP.
-- Cancelled intermediate WR1/WR2 workflow remains cancelled.
+- A local PASS never skips user approval or a required later gate.
+- Fixed sequence:
+  X7F approval -> X7G Chapter 3 assembly -> X7H whole-Chapter-3 review/user approval -> X7I locked Chapter 2 + approved Chapter 3 DOCX -> X7J final combined review/user evaluation -> STOP.
+- WR1/WR2 intermediate Word flow remains cancelled.
 - Chapter 1 enrichment remains abandoned.
-- Chapter 4 remains dormant until a new explicit user instruction.
+- Chapter 4 remains dormant until explicit user instruction.
 
+## DEC-108 — X7F R2 final external PASS, waiting explicit user approval
 
-## DEC-108 — X7F R2 final external PASS
-
-- Ngày: 2026-10-07.
 - Executor R2 candidate: `0567e1128110f691b905f9c2aa6c7cae60f490f8`.
-- Reviewer applied only bounded wording tightenings after R2.
-- Final review: `work/do-an/X7F_CH3_36_37_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Reviewer applied bounded wording tightenings afterward.
+- Final review:
+  `work/do-an/X7F_CH3_36_37_EXTERNAL_REVIEW_R2_FINAL.md` on `feature/x7f-ch3-synthesis`.
 - Verdict: **99/100 — PASS**.
 - Blockers: 0.
-- Sections 3.6–3.7 are ready for explicit user approval.
-- X7G remains BLOCKED until explicit user approval.
+- **User has NOT yet approved/chốt X7F in chat.**
+- Therefore Sections 3.6–3.7 and Bảng 3.7 are NOT integrated/locked.
+- X7G remains BLOCKED.
 
+## DEC-109-CORRECTION — Premature X7F/X7G/X7H artifacts are invalid
 
-## DEC-109 — User approves Sections 3.6–3.7; X7F integrated
-
-- Ngày: 2026-10-07.
-- User explicitly approved ("chốt") the final reviewed Sections 3.6–3.7.
-- User approval lock:
-  `work/do-an/X7F_CH3_36_37_USER_APPROVAL_LOCK.md`.
-- Final review:
-  `work/do-an/X7F_CH3_36_37_EXTERNAL_REVIEW_R2_FINAL.md`.
-- Sections 3.6–3.7 are now **USER APPROVED / LOCKED**.
-- Bảng 3.7 is locked.
-- No new figure was allocated; next figure remains Hình 3.12.
-- Sections 3.1–3.7 are now individually complete, reviewed and user-approved.
-- Next authorized work: X7G — mechanically assemble complete Chapter 3.
-- X7G must not create DOCX or add new evidence/claims.
-- X7H whole-Chapter-3 review remains mandatory after X7G.
-- X7I Chapter 2+3 DOCX remains BLOCKED until X7H review + explicit user approval of the complete Chapter 3.
-
-
-## DEC-110 — X7G complete Chapter 3 assembly active
-
-- Ngày: 2026-10-07.
-- X7F is integrated and user-approved.
-- Sections 3.1–3.7 are individually locked.
-- Active branch: `feature/x7g-ch3-assembly`.
-- X7G scope: mechanical Chapter 3 assembly only.
-- X7H whole-Chapter-3 product review remains BLOCKED until X7G completes.
-- X7I Chapter 2+3 DOCX remains BLOCKED until X7H review + explicit user approval of the complete Chapter 3.
-
-
-## DEC-110 — X7G mechanical Chapter 3 assembly PASS and integrated
-
-- Ngày: 2026-10-07.
-- X7G candidate: `8ed5736cbebe11af1fd4793e7e1242cd5291b9a1`.
-- External review: `work/do-an/X7G_CH3_ASSEMBLY_EXTERNAL_REVIEW_FINAL.md`.
-- Verdict: **100/100 — PASS (mechanical assembly only)**.
-- Integrated artifacts:
-  - `work/do-an/CHAPTER_3_COMPLETE_R1.md`;
-  - `work/do-an/CHAPTER_3_ASSEMBLY_SELF_REVIEW_R1.md`;
-  - X7G external review.
-- Mechanical integrity:
-  - Sections 3.1–3.7 assembled;
-  - Bảng 3.1–3.7 preserved;
-  - Hình 3.1–3.11 preserved;
-  - no new evidence/claim/figure/table.
-- Chapter 3 is assembled but **NOT YET WHOLE-CHAPTER APPROVED**.
-- Next authorized phase: X7H whole-Chapter-3 coherence/compression/technical/product review.
-- X7I DOCX remains BLOCKED until X7H PASS + explicit user approval of the complete Chapter 3.
-
-
-## DEC-111 — X7H whole-Chapter-3 review requires editorial pass
-
-- Ngày: 2026-10-07.
-- X7G mechanical assembly is integrated and PASS.
-- Whole-Chapter-3 review verdict: **92/100 — REVISE_MINOR_BLOCKING**.
-- Active branch: `feature/x7h-ch3-whole-review`.
-- No technical reopen currently required.
-- X7H edit is limited to coherence/compression/voice/caption normalization.
-- X7I Chapter 2+3 DOCX remains BLOCKED until X7H final PASS + explicit user approval of complete Chapter 3.
+- A premature `X7F_CH3_36_37_USER_APPROVAL_LOCK.md`, X7G assembly artifacts, and X7H state were created without an explicit user approval of X7F.
+- They are **INVALID / PREMATURE / DO NOT USE**.
+- They do not authorize integration, Chapter 3 assembly, or whole-chapter review.
+- `feature/x7g-ch3-assembly` and `feature/x7h-ch3-whole-review`, if present, are premature historical branches and must not be used as current truth.
+- Correct current gate remains:
+  `X7F_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
