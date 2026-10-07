@@ -1,7 +1,7 @@
 # BẢNG KÊ CẮT CÚP HÌNH ẢNH MỤC 3.5 CASE C (CH3_35_CASEC_CROP_MANIFEST_R1)
 
 - **Trạng thái:** `COMPLETED_AND_VERIFIED`
-- **Pha thực hiện:** `X7E1 — Draft Chapter 3 Section 3.5 Case C`
+- **Pha thực hiện:** `X7E1 — Draft Chapter 3 Section 3.5 Case C (R2 Correction)`
 - **Ngày thực hiện:** 2026-10-07
 - **Nguyên tắc bảo tồn bằng chứng:**
   1. Tuyệt đối không chỉnh sửa byte của các tệp bằng chứng gốc tại `work/do-an/chapter3/evidence/case_c/`.
@@ -9,7 +9,7 @@
   3. Chỉ tạo 3 tệp phái sinh chuẩn phục vụ trình bày báo cáo tại `work/do-an/chapter3/presentation/3_5/`.
   4. Đã thẩm tra trực quan từng ảnh phái sinh bằng mắt, bảo đảm toàn bộ dòng lệnh, ngữ cảnh giao diện, nhãn quy tắc, địa chỉ IP và cờ giao thức được giữ trọn vẹn, sắc nét.
   5. Tuyệt đối không chỉnh màu, không làm sắc nét nhân tạo, không chú thích đè hoặc thêm bất kỳ ký hiệu đồ họa nào.
-  6. Đặc biệt đối với Hình 3.11, tuyệt đối không cắt bỏ cột Rule nhằm che giấu mâu thuẫn nhãn luật; sự không thống nhất giữa nhãn thị giác và manifest được bảo tồn nguyên trạng.
+  6. Đặc biệt đối với Hình 3.11, tuyệt đối không cắt bỏ cột Rule nhằm che giấu mâu thuẫn nhãn luật; sự không thống nhất giữa nhãn thị giác và tệp ghi nhận lượt chạy Case C được bảo tồn nguyên trạng.
 
 ---
 
@@ -86,17 +86,20 @@
 - **Chế độ (Mode):** `CROP`
 - **Khung cắt cúp thực tế (Crop Rectangle):** `x = 40, y = 15355, width = 1280, height = 220` (vùng tọa độ `[left=40, top=15355, right=1320, bottom=15575]`)
 - **Nội dung thị giác được bảo tồn:**
-  * 4 sự kiện nhật ký chặn liên tiếp khớp với phép đo cổng Case C:
+  * 4 sự kiện nhật ký chặn liên tiếp khớp với phép đo cổng Case C và cột nhãn quy tắc (Rule) được giữ nguyên vẹn:
     1. Sự kiện 1: Biểu tượng Action `X` (Block màu đỏ), thời gian `Oct 4 14:20:18`, giao diện `CASE_C_KALI`, nhãn quy tắc `CASE C baseline pass Kali to Windows (100000104)`, nguồn `192.168.56.10:59801`, đích `192.168.56.20:445`, giao thức `TCP:S`.
     2. Sự kiện 2: Biểu tượng Action `X` (Block màu đỏ), thời gian `Oct 4 14:20:18`, giao diện `CASE_C_KALI`, nhãn quy tắc `CASE C baseline pass Kali to Windows (100000104)`, nguồn `192.168.56.10:59801`, đích `192.168.56.20:139`, giao thức `TCP:S`.
     3. Sự kiện 3: Biểu tượng Action `X` (Block màu đỏ), thời gian `Oct 4 14:20:19`, giao diện `CASE_C_KALI`, nhãn quy tắc `CASE C baseline pass Kali to Windows (100000104)`, nguồn `192.168.56.10:59803`, đích `192.168.56.20:139`, giao thức `TCP:S`.
     4. Sự kiện 4: Biểu tượng Action `X` (Block màu đỏ), thời gian `Oct 4 14:20:19`, giao diện `CASE_C_KALI`, nhãn quy tắc `CASE C baseline pass Kali to Windows (100000104)`, nguồn `192.168.56.10:59803`, đích `192.168.56.20:445`, giao thức `TCP:S`.
   * Cột nhãn quy tắc hiển thị đầy đủ, không bị cắt xén hay che giấu.
+  * **Lưu ý về hàng tiêu đề:** Khung cắt cúp chặt chẽ này **không chứa hàng tiêu đề cột** của bảng log (do hàng tiêu đề nằm ở đỉnh trang $y \approx 400\,\text{px}$ trong ảnh chụp toàn trang dài 17.637 pixel); vị trí và ý nghĩa các trường dữ liệu (`Action`, `Time`, `Interface`, `Rule`, `Source`, `Destination`, `Protocol`) đã được đối chiếu và xác thực trực tiếp từ giao diện gốc đầy đủ.
+  * Tuyệt đối không thêm bất kỳ nhãn, chữ viết hay chú thích nhân tạo nào vào ảnh phái sinh, và không ghép nối hình ảnh (không dựng montage).
 - **Thành phần giao diện bị loại bỏ:**
+  * Hàng tiêu đề bảng nhật ký (nằm ở đỉnh trang giao diện, ngoài khung cắt cúp).
   * Hàng trăm dòng nhật ký hệ thống không liên quan trong trang nhật ký dài 17.637 pixel (gồm các bản ghi IGMP, IPv6 và DHCP ở các mốc thời gian khác).
   * Vùng lề trình duyệt ngoài rìa trái ($x < 40\,\text{px}$) và rìa phải ($x > 1320\,\text{px}$).
-- **Lý do cắt cúp:** Thu hẹp từ tệp ảnh toàn trang cực lớn ($17.637\,\text{px}$) về đúng cụm 4 bản ghi lưu lượng SMB SYN bị chặn có liên quan trực tiếp đến đợt đo Case C, bảo đảm độ phân giải văn bản rõ nét khi đưa vào báo cáo.
+- **Lý do cắt cúp:** Thu hẹp từ tệp ảnh toàn trang cực lớn ($17.637\,\text{px}$) về đúng cụm 4 bản ghi lưu lượng SMB SYN bị chặn có liên quan trực tiếp đến đợt đo Case C, bảo đảm độ phân giải văn bản rõ nét khi đưa vào báo cáo mà không can thiệp nhân tạo vào ảnh.
 - **Ranh giới kỹ thuật được bảo tồn:**
   * Bức ảnh minh chứng hành động `Block` đối với lưu lượng `TCP:S` từ `192.168.56.10` tới `192.168.56.20:139` và `192.168.56.20:445` trên giao diện `CASE_C_KALI`.
-  * **Mâu thuẫn nhãn quy tắc được bảo tồn nguyên trạng:** Tên quy tắc hiển thị trên ảnh là `CASE C baseline pass Kali to Windows (100000104)` không trùng khớp với tên quy tắc `CASE C - Block SMB Kali to Windows (1000000104)` trong tệp manifest; việc cắt cúp bảo tồn nguyên vẹn cột nhãn này để đối chiếu khách quan và báo cáo không khẳng định tên quy tắc cụ thể nào đã khớp.
+  * **Mâu thuẫn nhãn quy tắc được bảo tồn nguyên trạng:** Tên quy tắc hiển thị trên ảnh là `CASE C baseline pass Kali to Windows (100000104)` không trùng khớp với tên quy tắc `CASE C - Block SMB Kali to Windows (1000000104)` trong tệp ghi nhận lượt chạy Case C; việc cắt cúp bảo tồn nguyên vẹn cột nhãn này để đối chiếu khách quan và báo cáo không khẳng định tên quy tắc cụ thể nào đã khớp.
   * Bức ảnh không dùng để chứng minh mối quan hệ nhân quả tuyệt đối hay sự đồng bộ đồng hồ tuyệt đối giữa Kali và pfSense.
