@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7H_WHOLE_CH3_REVIEW_NEXT`.
+- Current gate: `X7H_CH3_WHOLE_EDIT_REQUIRED`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1997,3 +1997,23 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Chapter 3 is assembled but **NOT YET WHOLE-CHAPTER APPROVED**.
 - Next authorized phase: X7H whole-Chapter-3 coherence/compression/technical/product review.
 - X7I DOCX remains BLOCKED until X7H PASS + explicit user approval of the complete Chapter 3.
+
+
+## DEC-111 — X7H whole-Chapter-3 product review R1
+
+- Ngày: 2026-10-07.
+- Source product: `work/do-an/CHAPTER_3_COMPLETE_R1.md`.
+- Review: `work/do-an/X7H_CH3_WHOLE_PRODUCT_REVIEW_R1.md`.
+- Verdict: **92/100 — REVISE_MINOR_BLOCKING**.
+- Technical experiment facts remain valid; no technical reopen is currently required.
+- Required X7H edit is editorial/coherence only:
+  - compress 3.2/3.3 repetition;
+  - consolidate repeated UNKNOWN explanation;
+  - remove duplicate transitions;
+  - normalize stricter evidence wording;
+  - clean QA/internal vocabulary;
+  - normalize figure-caption presentation;
+  - add short chapter opening;
+  - close Chapter 3 cleanly without opening Chapter 4.
+- Prompt: `work/do-an/prompts/X7H_EDIT_COMPLETE_CHAPTER_3_R2.md`.
+- X7I DOCX remains BLOCKED.
