@@ -32,4 +32,4 @@ Mục đích: khóa số Hình/Bảng giữa các section được viết độc
 
 | 3.4 Case B | Bảng 3.5 | Hình 3.7–3.8 | X7D0 plan approval + X7D1 99/100 final external PASS + user approval 2026-10-07 | 3.6 | 3.9 |
 
-| 3.5 Case C | Bảng 3.6 | Hình 3.9–3.11 | X7E0 99/100 final external PASS + user approval 2026-10-07; prose pending X7E1 | 3.7 | 3.12 |
+| 3.5 Case C | Bảng 3.6 | Hình 3.9–3.11 | X7E0 plan approval + X7E1 99/100 final external PASS + user approval 2026-10-07 | 3.7 | 3.12 |

@@ -22,6 +22,7 @@ Locked:
 - 3.2 Scenario 1;
 - 3.3 Scenario 2;
 - 3.4 Case B;
+- 3.5 Case C;
 - Bảng 3.1–3.6;
 - Hình 3.1–3.11.
 
@@ -30,7 +31,6 @@ Next numbering:
 - Hình 3.12.
 
 Not complete:
-- 3.5 Case C prose;
 - 3.6 comparison;
 - 3.7 chapter conclusion;
 - assembled Chapter 3;
@@ -68,14 +68,11 @@ X7E0 — COMPLETE / USER APPROVED:
 - rule-label conflict explicitly bounded;
 - plan externally reviewed and user-approved.
 
-X7E1:
-- write the result section from the approved plan;
-- show control path/configuration -> observed filtering/log -> unchanged local state;
-- `FILTERED != PATCHED`;
-- no exact named-rule attribution when evidence conflicts.
-
-Gate:
-external review -> user approval -> integrate.
+X7E1 — COMPLETE / USER APPROVED:
+- Section 3.5 written from the approved plan;
+- Hình 3.9–3.11 crops created and reviewed;
+- control path/configuration -> FILTERED/log -> Windows-local state presented with bounded interpretation;
+- final external PASS + user approval completed.
 
 ### STEP 3 — X7F: Sections 3.6 + 3.7
 Use only approved outputs from 3.1–3.5.
@@ -190,6 +187,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7E1 — create final Case C crops and write Section 3.5 prose`
+`X7F — write Section 3.6 comparison and Section 3.7 Chapter 3 conclusion`
 
 Nothing else is authorized in parallel.
