@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7E1_R2_CORRECTION_REQUIRED`.
+- Current gate: `X7E1_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1889,3 +1889,14 @@ Any earlier instruction that conflicts with this sequence is historical unless e
   - compress Bảng 3.6 and section prose for A4 readability.
 - Prompt: `work/do-an/prompts/X7E1_R2_CORRECT_CH3_35_CASEC.md`.
 - X7F remains BLOCKED.
+
+
+## DEC-103 — X7E1 Case C R2 final external PASS
+
+- Ngày: 2026-10-07.
+- Executor R2 candidate: `00c6936eabd096af11c71db91f78a97f19a348b8`.
+- Final review: `work/do-an/X7E1_CH3_35_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Verdict: **99/100 — PASS**.
+- Blockers: 0.
+- Section 3.5 is ready for explicit user approval.
+- Do not integrate and do not open Sections 3.6–3.7 before user approval.
