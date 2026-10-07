@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7G_CH3_ASSEMBLY_NEXT`.
+- Current gate: `X7G_CH3_ASSEMBLY_IN_PROGRESS`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1966,3 +1966,15 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7G must not create DOCX or add new evidence/claims.
 - X7H whole-Chapter-3 review remains mandatory after X7G.
 - X7I Chapter 2+3 DOCX remains BLOCKED until X7H review + explicit user approval of the complete Chapter 3.
+
+
+## DEC-110 — X7G complete Chapter 3 assembly opened
+
+- Ngày: 2026-10-07.
+- Sections 3.1–3.7 are individually USER APPROVED / LOCKED.
+- Active branch: `feature/x7g-ch3-assembly`.
+- Base: `feature/ch3-integration@14123b8736d34ffb51b9190701c6c0c191da8fd7`.
+- Prompt: `work/do-an/prompts/X7G_ASSEMBLE_COMPLETE_CHAPTER_3.md`.
+- Scope: mechanical assembly of approved Sections 3.1–3.7 into one Markdown Chapter 3.
+- No content rewrite, new evidence, new figure/table, DOCX/PDF, Chapter 2 change, or Chapter 4 work.
+- X7H whole-Chapter-3 review remains the mandatory next gate after X7G.
