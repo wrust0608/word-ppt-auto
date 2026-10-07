@@ -146,7 +146,7 @@ Any factual/technical change requires explicit reopen.
 Gate:
 external review -> user reads complete Chapter 3 -> explicit user approval.
 
-### STEP 6 — X7I: assemble locked Chapter 2 + approved Chapter 3
+### STEP 6 — X7I: assemble locked Chapter 2 + approved Chapter 3 — COMPLETE / FINAL PASS
 Only after X7H user approval.
 
 Build one review DOCX containing Chapter 2 followed by Chapter 3.
@@ -211,6 +211,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7I — assemble locked Chapter 2 + USER APPROVED / LOCKED Chapter 3 into one review DOCX and perform full visual QA`
+`X7J — final combined Chapters 2+3 review and user evaluation`
 
-The complete Chapter 3 is USER APPROVED / LOCKED after X7H final PASS. X7I is now the single authorized next action. X7J remains blocked until the combined DOCX passes X7I review.
+X7I has final independent PASS (99/100, 0 blockers) on the exact frozen 44-page DOCX. X7J is now the single authorized next action. After X7J and user evaluation: STOP.
