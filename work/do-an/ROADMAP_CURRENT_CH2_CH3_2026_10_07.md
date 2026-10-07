@@ -51,15 +51,14 @@ Locked:
 - Bảng 3.1–3.7;
 - Hình 3.1–3.11;
 - 3.6 comparison — USER APPROVED / LOCKED;
-- 3.7 chapter conclusion — USER APPROVED / LOCKED.
+- 3.7 chapter conclusion — USER APPROVED / LOCKED;
+- complete Chapter 3 — USER APPROVED / LOCKED.
 
 Next numbering:
 - Bảng 3.8;
 - Hình 3.12.
 
 Not complete:
-- assembled Chapter 3;
-- whole-Chapter-3 review;
 - combined Chapter 2+3 Word review.
 
 ## 3. Execution sequence
@@ -129,7 +128,7 @@ Forbidden:
 
 No DOCX yet.
 
-### STEP 5 — X7H: whole-Chapter-3 product review
+### STEP 5 — X7H: whole-Chapter-3 product review — COMPLETE / USER APPROVED
 Review Chapter 3 as one thesis chapter.
 
 Mandatory:
@@ -212,6 +211,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7G — mechanically assemble the complete approved Chapter 3 (Sections 3.1–3.7); no DOCX`
+`X7I — assemble locked Chapter 2 + USER APPROVED / LOCKED Chapter 3 into one review DOCX and perform full visual QA`
 
-X7F is USER APPROVED / LOCKED and integrated. X7G is the single authorized next action. X7H remains blocked until X7G output is independently reviewed.
+The complete Chapter 3 is USER APPROVED / LOCKED after X7H final PASS. X7I is now the single authorized next action. X7J remains blocked until the combined DOCX passes X7I review.
