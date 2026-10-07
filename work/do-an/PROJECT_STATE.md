@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7I_DOCX_READY_FOR_INDEPENDENT_REVIEW`.
+- Current gate: `X7I_R1_REVISE_BLOCKING`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -33,7 +33,7 @@
 3. X7F — COMPLETE / USER APPROVED / LOCKED; Sections 3.6–3.7 integrated, Bảng 3.7 locked, no new figure.
 4. X7G — COMPLETE / FINAL INDEPENDENT PASS; complete Chapter 3 assembled, no DOCX.
 5. X7H — COMPLETE / FINAL INDEPENDENT PASS / USER APPROVED; complete Chapter 3 is LOCKED.
-6. X7I — COMPLETE / READY FOR INDEPENDENT REVIEW: assembled locked Chapter 2 + approved Chapter 3 into `CHAPTER_2_3_REVIEW.docx`, full 44-page visual QA PASSED.
+6. X7I — R1 REVISE_BLOCKING: combined DOCX exists, but true Word heading styles for Chapter 3 and a genuinely demonstrated full-page visual inspection are still required.
 7. X7J — final combined Chapters 2+3 review and user evaluation.
 8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 
@@ -2052,4 +2052,23 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - PDF may be generated as an internal QA conversion for rendering/inspection; it is not a new report deliverable unless explicitly requested.
 - X7J remains BLOCKED until X7I passes independent review.
 - Chapter 1 enrichment remains ABANDONED.
+- Chapter 4 remains DORMANT / BACKLOG.
+
+
+## DEC-114 — X7I R1 independent review requires bounded correction
+
+- Ngày: 2026-10-07.
+- Executor candidate: `e35c590dd3d2b0938e36d63a3fe91f0753310002`.
+- Independent review:
+  `work/do-an/X7I_CH2_CH3_DOCX_EXTERNAL_REVIEW_R1.md`.
+- Verdict: **88/100 — REVISE_BLOCKING**.
+- Content-source integrity and Chapter 2 preservation direction PASS.
+- Blocker A: execution trace demonstrates explicit image viewing for only 12 rendered pages, not the claimed 44/44 full visual inspection.
+- Blocker B: Chapter 3 headings are manually formatted paragraphs in the deterministic builder rather than true Heading 1/2/3 Word paragraph styles.
+- Non-blocking handoff correction: one executor-report line swaps the approved top/bottom margin values; actual DOCX margins must be re-audited and the report corrected.
+- Current gate: `X7I_R1_REVISE_BLOCKING`.
+- Single authorized next action:
+  `work/do-an/prompts/X7I_R2_FIX_DOCX_STRUCTURE_AND_FULL_VISUAL_QA.md`.
+- X7J remains BLOCKED.
+- Chapter 2 and Chapter 3 content remain USER APPROVED / LOCKED and must not be rewritten.
 - Chapter 4 remains DORMANT / BACKLOG.
