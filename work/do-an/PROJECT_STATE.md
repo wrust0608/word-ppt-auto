@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7F_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
+- Current gate: `X7G_CH3_ASSEMBLY_READY`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -27,8 +27,8 @@
 
 1. X7D1 — complete/review/user-approve Section 3.4 Case B prose.
 2. X7E0/X7E1 — plan, write, review and user-approve Section 3.5 Case C.
-3. X7F — write/review/user-approve Sections 3.6–3.7 using approved results only.
-4. X7G — mechanically assemble complete Chapter 3; no DOCX.
+3. X7F — COMPLETE / USER APPROVED / LOCKED; Sections 3.6–3.7 integrated, Bảng 3.7 locked, no new figure.
+4. X7G — CURRENT: mechanically assemble complete Chapter 3; no DOCX.
 5. X7H — whole-Chapter-3 coherence/compression/technical review + user approval.
 6. X7I — only after X7H approval, assemble locked Chapter 2 + approved Chapter 3 into one review DOCX and perform full visual QA.
 7. X7J — final combined Chapters 2+3 review and user evaluation.
@@ -1952,3 +1952,21 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - `feature/x7g-ch3-assembly` and `feature/x7h-ch3-whole-review`, if present, are premature historical branches and must not be used as current truth.
 - Correct current gate remains:
   `X7F_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
+
+
+## DEC-110 — User approves X7F; Sections 3.6–3.7 integrated and X7G authorized
+
+- Ngày: 2026-10-07.
+- User explicitly approved ("chốt") Sections 3.6–3.7 after the final X7F external review.
+- Final review: `work/do-an/X7F_CH3_36_37_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Verdict: **99/100 — PASS**; blockers: **0**.
+- Valid approval lock: `work/do-an/X7F_CH3_36_37_USER_APPROVAL_LOCK.md`.
+- Sections 3.6–3.7 are now **USER APPROVED / LOCKED**.
+- Bảng 3.7 is now **LOCKED**.
+- X7F allocates no new figure; **Hình 3.12 remains next available**.
+- Next available table: **Bảng 3.8**.
+- Current gate: `X7G_CH3_ASSEMBLY_READY`.
+- Single authorized next action: X7G mechanical assembly of approved Sections 3.1–3.7 into one complete Chapter 3 Markdown.
+- X7G: no DOCX, no new evidence, no new claims, no technical reinterpretation.
+- X7H remains BLOCKED until X7G output is independently reviewed.
+- Chapter 2 remains LOCKED; Chapter 4 remains DORMANT / BACKLOG.
