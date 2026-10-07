@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7I_CH2_CH3_DOCX_ASSEMBLY_READY`.
+- Current gate: `X7I_DOCX_READY_FOR_INDEPENDENT_REVIEW`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -11,6 +11,7 @@
 - Chapter 2 final DOCX: `work/do-an/output/CHAPTER_2_FINAL.docx` trên X6 evidence branch/integration lineage.
 - Chapter 3: `USER_APPROVED / CONTENT_LOCKED / X7H_FINAL_PASS`.
 - Chapter 3 approved Markdown: `work/do-an/CHAPTER_3_DRAFT_R2.md`.
+- Combined Chapter 2+3 Review DOCX: `work/do-an/output/CHAPTER_2_3_REVIEW.docx` (44 trang, SHA-256 `d612273f5a3ca7ac33b306469bfc59b3a4ed1caafe7690c59ee68590c5d986e1`).
 - X6 experimental evidence preparation: `PASS`.
 - Evidence staging: 83 files total; 78 primary/direct; 5 secondary metadata/closure; 0 SHA mismatch.
 - Chapter 3 authoring model: **SECTIONED WORKFLOW**.
@@ -32,7 +33,7 @@
 3. X7F — COMPLETE / USER APPROVED / LOCKED; Sections 3.6–3.7 integrated, Bảng 3.7 locked, no new figure.
 4. X7G — COMPLETE / FINAL INDEPENDENT PASS; complete Chapter 3 assembled, no DOCX.
 5. X7H — COMPLETE / FINAL INDEPENDENT PASS / USER APPROVED; complete Chapter 3 is LOCKED.
-6. X7I — CURRENT: assemble locked Chapter 2 + approved Chapter 3 into one review DOCX and perform full visual QA.
+6. X7I — COMPLETE / READY FOR INDEPENDENT REVIEW: assembled locked Chapter 2 + approved Chapter 3 into `CHAPTER_2_3_REVIEW.docx`, full 44-page visual QA PASSED.
 7. X7J — final combined Chapters 2+3 review and user evaluation.
 8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 
