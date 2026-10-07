@@ -48,16 +48,16 @@ Locked:
 - 3.3 Scenario 2;
 - 3.4 Case B;
 - 3.5 Case C;
-- Bảng 3.1–3.6;
-- Hình 3.1–3.11.
+- Bảng 3.1–3.7;
+- Hình 3.1–3.11;
+- 3.6 comparison — USER APPROVED / LOCKED;
+- 3.7 chapter conclusion — USER APPROVED / LOCKED.
 
 Next numbering:
-- Bảng 3.7;
+- Bảng 3.8;
 - Hình 3.12.
 
-Not complete / not yet user-approved:
-- 3.6 comparison — final external PASS 99/100, waiting user approval;
-- 3.7 chapter conclusion — final external PASS 99/100, waiting user approval;
+Not complete:
 - assembled Chapter 3;
 - whole-Chapter-3 review;
 - combined Chapter 2+3 Word review.
@@ -212,6 +212,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7F — WAIT FOR EXPLICIT USER APPROVAL of Sections 3.6–3.7`
+`X7G — mechanically assemble the complete approved Chapter 3 (Sections 3.1–3.7); no DOCX`
 
-No executor task is authorized until the user explicitly approves X7F. X7G remains blocked.
+X7F is USER APPROVED / LOCKED and integrated. X7G is the single authorized next action. X7H remains blocked until X7G output is independently reviewed.
