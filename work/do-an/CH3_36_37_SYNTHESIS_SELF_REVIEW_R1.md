@@ -62,7 +62,7 @@
 
 ### 2.6. Chuẩn hóa diễn đạt trạng thái bản vá / nhị phân
 - **Đã loại bỏ:** `không can thiệp tệp nhị phân`, `không làm thay đổi phân loại bản vá nhị phân`, `mã nguồn`.
-- **Thực tế áp dụng:** *“Trạng thái bản vá vẫn được phân loại UNPATCHED do Case B/Case C không ghi nhận thao tác cài bản vá.”* Bảo toàn các bất đẳng thức: `SMBv1 disabled != PATCHED`, `FILTERED != PATCHED`.
+- **Thực tế áp dụng:** *“Trạng thái bản vá tiếp tục được phân loại UNPATCHED; Case B/Case C không ghi nhận thao tác cài bản vá.”* Bảo toàn các bất đẳng thức: `SMBv1 disabled != PATCHED`, `FILTERED != PATCHED`.
 
 ### 2.7. Chuẩn hóa so sánh Case C trên đường mạng
 - **Thực tế áp dụng:** *“Trong Case C, từ trạm Kali, TCP 139/445 được ghi nhận FILTERED/no-response; đồng thời pfSense ghi nhận lưu lượng SMB SYN tương ứng bị Block trên đường thử nghiệm.”* Không khẳng định tường lửa là nguyên nhân tuyệt đối cho mọi tuyến đường mạng; không khơi lại tranh luận nhãn luật.
