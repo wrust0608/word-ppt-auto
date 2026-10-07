@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7H_WHOLE_CH3_REVIEW_NEXT`.
+- Current gate: `X7H_CH3_WHOLE_EDIT_REQUIRED`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1997,3 +1997,14 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Chapter 3 is assembled but **NOT YET WHOLE-CHAPTER APPROVED**.
 - Next authorized phase: X7H whole-Chapter-3 coherence/compression/technical/product review.
 - X7I DOCX remains BLOCKED until X7H PASS + explicit user approval of the complete Chapter 3.
+
+
+## DEC-111 — X7H whole-Chapter-3 review requires editorial pass
+
+- Ngày: 2026-10-07.
+- X7G mechanical assembly is integrated and PASS.
+- Whole-Chapter-3 review verdict: **92/100 — REVISE_MINOR_BLOCKING**.
+- Active branch: `feature/x7h-ch3-whole-review`.
+- No technical reopen currently required.
+- X7H edit is limited to coherence/compression/voice/caption normalization.
+- X7I Chapter 2+3 DOCX remains BLOCKED until X7H final PASS + explicit user approval of complete Chapter 3.
