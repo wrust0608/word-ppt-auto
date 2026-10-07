@@ -49,8 +49,6 @@ Hình 3.2 xác nhận quy tắc tùy biến được cấu hình cho TCP 139/445
 
 Để thu được giá trị phiên bản số nhị phân, quy trình kiểm tra thực hiện ghép nối bốn trường FileMajorPart, FileMinorPart, FileBuildPart và FilePrivatePart từ tiêu đề tệp driver, xác định phiên bản số thực tế của tệp srv.sys là 6.3.9600.16421. Theo Microsoft Security Bulletin MS17-010 và tài liệu hỗ trợ “How to verify that MS17-010 is installed”, ngưỡng phiên bản đã cập nhật tối thiểu của srv.sys đối với nền tảng Windows Server 2012 R2 là 6.3.9600.18604, tương ứng với việc cài đặt gói cập nhật KB4012213 hoặc KB4012216. Phép so sánh số học cho thấy giá trị phiên bản số của máy chủ mục tiêu thấp hơn ngưỡng phiên bản đã cập nhật tương ứng (6.3.9600.16421 < 6.3.9600.18604).
 
-<!-- CITE-ANCHOR: S005, S032; final IEEE numbering deferred to global normalization gate -->
-
 Song song với việc đối chiếu phiên bản driver, danh mục cập nhật hệ thống được kiểm tra qua lệnh Get-HotFix. Danh mục Get-HotFix quan sát được gồm sáu mục (KB2919355, KB2919442, KB2937220, KB2938772, KB2939471 và KB2949621) có ngày cài đặt 21/03/2014; trong danh mục này không ghi nhận KB4012213, KB4012216 hoặc bản cập nhật thay thế đã được ánh xạ là chứa bản sửa lỗi MS17-010.
 
 Dựa trên phiên bản số nhị phân thấp hơn ngưỡng cập nhật tối thiểu và danh mục hotfix quan sát được, trạng thái bản vá của máy chủ được phân loại là UNPATCHED đối với MS17-010. UNPATCHED là phân loại trạng thái bản vá cục bộ và không tự tạo ra một phán quyết lỗ hổng từ phép đo từ xa.
@@ -127,7 +125,7 @@ Thứ ba, một quan sát thực nghiệm đáng chú ý là kịch bản `smb-o
 
 Tổng kết lại, các phép đo trong Kịch bản 1 đã xác lập rõ ràng bề mặt tiếp xúc của dịch vụ SMB trên máy chủ mục tiêu. Hai cổng TCP 139 và 445 ở trạng thái mở, dấu vết phiên bản hệ điều hành nằm trong khoảng Windows Server 2008 R2–2012, hệ thống chấp nhận phương ngữ SMBv1 song song với SMB 2.x/3.x và không bắt buộc ký số gói tin. Tuy nhiên, toàn bộ các quan sát này chỉ phản ánh các thuộc tính giao thức thông thường và chưa đủ căn cứ để đưa ra phán quyết về lỗ hổng an ninh MS17-010. Trên cơ sở đó, Mục 3.3 tiếp tục sử dụng các phép đo NSE chuyên biệt để kiểm tra dấu hiệu liên quan đến MS17-010.
 
-## 3.3. Kết quả Kịch bản 2 — Kiểm tra dấu hiệu MS17-010 bằng NSE
+## 3.3. Kết quả Kịch bản 2 — Kiểm tra dấu hiệu MS17-010
 
 Sau khi hoàn tất quá trình rà quét khám phá mạng và dịch vụ SMB trong Kịch bản 1, Kịch bản 2 tập trung khảo sát các thuộc tính kỹ thuật và thăm dò dấu hiệu liên quan đến lỗ hổng an ninh MS17-010. Tiến trình thực nghiệm được triển khai từ trạm kiểm thử Kali Linux nhắm vào máy chủ mục tiêu Windows Server 2012 R2 qua tập kịch bản chuyên dụng thuộc Nmap Scripting Engine (NSE). Quy trình đo đạc được thiết kế tuần tự nhằm xác định trạng thái tiếp cận cổng, các phương ngữ SMB được ghi nhận, chính sách ký số gói tin, và ghi nhận phản hồi thực tế của kịch bản kiểm tra lỗ hổng chuyên biệt.
 
@@ -172,7 +170,7 @@ Về ranh giới phạm vi, Kịch bản 2 dừng ở phạm vi rà quét NSE; k
 
 Sau khi hoàn tất trạng thái baseline cùng hai kịch bản đo đạc ban đầu (khảo sát bề mặt dịch vụ SMB tại Kịch bản 1 và kiểm tra dấu hiệu MS17-010 bằng NSE tại Kịch bản 2), nghiên cứu chuyển tiếp sang pha thực nghiệm can thiệp có kiểm soát (Case B). Bước thực nghiệm tiếp theo thay đổi một biến số duy nhất: cấu hình vô hiệu hóa giao thức SMBv1 trên máy chủ Windows Server 2012 R2. Sau đó, các phép đo được chọn (gồm phép đo kiểm tra phương ngữ và phép đo kiểm tra kịch bản MS17-010) được lặp lại nhằm đối chiếu sự thay đổi về danh mục phương ngữ và phản hồi từ xa từ góc nhìn trạm kiểm thử.
 
-## 3.4. Kết quả Case B — Vô hiệu hóa SMBv1 và đo lại từ xa
+## 3.4. Kết quả Case B — Vô hiệu hóa SMBv1
 
 Sau khi xác lập hiện trạng hệ thống ở mốc ban đầu và hoàn thành hai kịch bản khảo sát diện mạo dịch vụ cũng như kiểm tra dấu hiệu MS17-010 (Mục 3.1 đến Mục 3.3), nghiên cứu tiến hành bước can thiệp có kiểm soát đầu tiên mang mã hiệu Case B. Biến số can thiệp duy nhất được điều chỉnh là cấu hình giao thức SMBv1 trên máy chủ chia sẻ tệp Windows Server 2012 R2. Case B nhằm đánh giá thực nghiệm các biến đổi cấu hình cục bộ, đồng thời đo đạc lại từ xa từ trạm Kali Linux để xác định sự thay đổi trong danh mục phương ngữ và kết quả kiểm tra lỗ hổng chuyên biệt so với đường cơ sở.
 
