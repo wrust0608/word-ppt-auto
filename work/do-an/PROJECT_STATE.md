@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7J_R1_READY_FOR_INDEPENDENT_REVIEW`.
+- Current gate: `X7J_R1_REVISE_MINOR_BLOCKING`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -34,7 +34,7 @@
 4. X7G — COMPLETE / FINAL INDEPENDENT PASS; complete Chapter 3 assembled, no DOCX.
 5. X7H — COMPLETE / FINAL INDEPENDENT PASS / USER APPROVED; complete Chapter 3 is LOCKED.
 6. X7I — COMPLETE / FINAL INDEPENDENT PASS: exact inspected DOCX frozen and verified byte-for-byte with SHA-256 `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`.
-7. X7J — R1 READY FOR INDEPENDENT REVIEW: Comprehensive review completed across 6 quality dimensions; 0 blockers; verdict PASS (artifacts: `work/do-an/X7J_FINAL_CH2_CH3_REVIEW_R1.md`, `work/do-an/X7J_FINAL_CH2_CH3_EXECUTOR_HANDOFF_R1.md`).
+7. X7J — R1 REVISE_MINOR_BLOCKING: the locked Chapters 2+3 product itself passes consistency review, but X7J's own defense-readiness/reviewer wording contains unsupported or over-absolute claims that must be corrected before final reviewer PASS.
 8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 
 ### Current read order for any new agent
@@ -2128,3 +2128,36 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7J may review only; it must not rewrite locked Chapter 2/3 content.
 - After X7J reviewer PASS and user evaluation: STOP.
 - Chapter 1 enrichment, Chapter 4, publication, slides, Q&A, defense package and demo rehearsal remain outside the current milestone.
+
+
+## DEC-117 — X7J R1 product is sound but reviewer/defense wording requires bounded correction
+
+- Ngày: 2026-10-07.
+- X7J R1 candidate: `fbe8cb7422ed59088effc7bdc857e4653837dd62`.
+- Independent review:
+  `work/do-an/X7J_FINAL_CH2_CH3_EXTERNAL_REVIEW_R1.md`.
+- Verdict: **95/100 — REVISE_MINOR_BLOCKING**.
+- The frozen Chapters 2+3 product itself does **not** require reopening:
+  - Chapter 2 remains USER APPROVED / LOCKED;
+  - Chapter 3 remains USER APPROVED / LOCKED;
+  - DOCX remains X7I FINAL PASS and must not be regenerated.
+- Independent product review confirms:
+  - major Chapter 2 method ↔ Chapter 3 result mapping is coherent;
+  - B1–B6 coverage is present, including `smb2-capabilities`;
+  - the committed X7J method/result table uses the correct NSE-SMB-01..04 mapping;
+  - core technical locks remain intact in the product.
+- Blocking corrections are confined to X7J reviewer/defense language:
+  - remove absolute Host-Only/reproducibility claims;
+  - avoid unsupported srv.sys port-path rationale;
+  - keep patch/protocol observations separate without global `safe` language;
+  - keep NSE-SMB-04 UNKNOWN cause-agnostic;
+  - remove Case B negotiation/attack-path claims;
+  - remove speculative Case C bypass-risk scenario;
+  - state non-exploitation as experimental scope, not an invented crash rationale;
+  - tone down promotional/absolute defense-readiness wording.
+- The executor's user-facing R1 execution summary also contained an incorrect NSE-SMB-01/02/03 label mapping; R2 must not repeat it.
+- Current gate: `X7J_R1_REVISE_MINOR_BLOCKING`.
+- Single authorized next action:
+  `work/do-an/prompts/X7J_R2_BOUND_DEFENSE_READINESS_TO_LOCKED_EVIDENCE.md`.
+- After R2, independent review is still required before the user receives the final combined Word for milestone evaluation.
+- Chapter 1 and Chapter 4 remain outside the current milestone.
