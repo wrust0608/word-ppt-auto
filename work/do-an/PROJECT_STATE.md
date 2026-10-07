@@ -1,5 +1,21 @@
 # Trạng thái dự án
 
+## CURRENT OVERRIDE — 2026-10-08 — Chapter 3 redesign R3-0 (Revision R2)
+
+- Authority: handoff trực tiếp của người dùng ngày 07/10/2026 và `ROADMAP_CH3_REDESIGN_EVIDENCE_FIRST_2026_10_07.md` tại commit `170aa24293b2cf8e579abb1ecf60920bca418bd9`.
+- Summary X7J ở dưới và chỉ dẫn X7A1 trong HANDOFF.md là lịch sử khi mâu thuẫn với override này. Không xóa lịch sử DEC/approval cũ.
+- Branch hiện có: `feature/ch3-redesign-evidence-first-r1`; candidate executor R3-0 R1: `4f9d3f059f96d8b44ef6c83e0c2b20301245ce3e`; hiện đang ở đợt hiệu chỉnh Revision R2.
+- Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`; blob `55ffb13acb3398c7ab29d6d5abbb369e5d26f3d0` vẫn giữ nguyên.
+- Chapter 3: **architecture explicitly reopened by user**; kiến trúc 3.1–3.8 và roadmap redesign đã được người dùng chốt theo handoff. Bản cũ giữ vai trò nguồn kỹ thuật/lịch sử, không còn là sản phẩm final của kiến trúc mới. Technical truth và evidence locks không được mở lại.
+- Current gate: `R3_0_REVISE_BLOCKING / PENDING_R2_INDEPENDENT_REVIEW` (Hoàn tất hiệu chỉnh R2 cho ba artifact R3-0; chờ ChatGPT thẩm định độc lập R2; chưa mở R3-1).
+- Ba artifact R3-0 đã cập nhật Revision R2: `CH3_REDESIGN_EVIDENCE_VISUAL_BLUEPRINT_R1.md`, `CH3_REDESIGN_TABLE_FIGURE_LEDGER_R1.md`, `CH3_REDESIGN_CONTENT_MIGRATION_MAP_R1.md`. Đã xử lý triệt để toàn bộ 9 điểm tồn tại F01–F09 từ review R1.
+- Báo cáo thực thi R2: `work/do-an/R3_0_R2_FIX_EXECUTION_REPORT.md` (chứa bảng ma trận F01–F09, kết quả kiểm toán 83 tệp checksum, kiểm tra git blobs và biên bản kiểm tra lint/tests). Báo cáo review R1 `R3_0_EVIDENCE_VISUAL_BLUEPRINT_EXTERNAL_REVIEW_R1.md` được giữ nguyên vẹn để truy vết.
+- Numbering mới: **PROPOSED / WAITING EXTERNAL REVIEW** (7 bảng / 14 hình gồm 7 Evidence, 4 Comparison, 3 Explanatory); tuyệt đối chưa LOCKED_NUMBERING.
+- Kiểm tra toàn vẹn kỹ thuật: 83/83 staging checksum khớp 100% `CHAPTER_3_EVIDENCE_SHA256.csv` (78 primary/direct, 5 secondary metadata/closure); blob Chương 2 (`55ffb13acb3398c7ab29d6d5abbb369e5d26f3d0`), blob Chương 3 cũ (`40d2a895bc970f88d7260b3138b8a701f5eb0a8c`), blob DOCX cũ (`276278b1fb3e2f74acd11f6cb42b66df8c9b0ca9`, SHA-256 `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`) giữ nguyên vẹn 100%.
+- Unresolved canonical: CF-11 exact named-rule attribution; cross-system timebase chưa chuẩn hóa; local/remote signing giữ riêng; NSE04 nguyên nhân không có usable verdict chưa xác lập; `.56.100` chưa xác định danh tính. Không giải quyết bằng suy đoán.
+- Single authorized next action: Bàn giao để ChatGPT thẩm định độc lập R2 (`R3-0 R2 Independent Review`). Sau reviewer PASS, người dùng chốt R3-0 mới được khóa số hiệu và mở R3-1. Tuyệt đối STOP tại R3-0 R2.
+- Tuyệt đối chưa viết văn xuôi Chương 3 mới, không sửa Chương 2, không tạo file crop/panel mới, không dựng Word DOCX, không chạy demo thực nghiệm, không tạo ca thực nghiệm "Case A". Chương 4 vẫn `DORMANT / BACKLOG`.
+
 ## CURRENT STATE SUMMARY — 2026-10-07
 
 - Current gate: `X7J_FINAL_PASS_WAITING_FOR_USER_EVALUATION`.
