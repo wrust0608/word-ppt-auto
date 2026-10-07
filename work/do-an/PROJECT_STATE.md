@@ -2,13 +2,15 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7G_CH3_ASSEMBLY_READY`.
+- Current gate: `X7I_CH2_CH3_DOCX_ASSEMBLY_READY`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`.
 - Chapter 2 approved Markdown: `work/do-an/CHAPTER_2.md`.
 - Chapter 2 final DOCX: `work/do-an/output/CHAPTER_2_FINAL.docx` trên X6 evidence branch/integration lineage.
+- Chapter 3: `USER_APPROVED / CONTENT_LOCKED / X7H_FINAL_PASS`.
+- Chapter 3 approved Markdown: `work/do-an/CHAPTER_3_DRAFT_R2.md`.
 - X6 experimental evidence preparation: `PASS`.
 - Evidence staging: 83 files total; 78 primary/direct; 5 secondary metadata/closure; 0 SHA mismatch.
 - Chapter 3 authoring model: **SECTIONED WORKFLOW**.
@@ -28,9 +30,9 @@
 1. X7D1 — complete/review/user-approve Section 3.4 Case B prose.
 2. X7E0/X7E1 — plan, write, review and user-approve Section 3.5 Case C.
 3. X7F — COMPLETE / USER APPROVED / LOCKED; Sections 3.6–3.7 integrated, Bảng 3.7 locked, no new figure.
-4. X7G — CURRENT: mechanically assemble complete Chapter 3; no DOCX.
-5. X7H — whole-Chapter-3 coherence/compression/technical review + user approval.
-6. X7I — only after X7H approval, assemble locked Chapter 2 + approved Chapter 3 into one review DOCX and perform full visual QA.
+4. X7G — COMPLETE / FINAL INDEPENDENT PASS; complete Chapter 3 assembled, no DOCX.
+5. X7H — COMPLETE / FINAL INDEPENDENT PASS / USER APPROVED; complete Chapter 3 is LOCKED.
+6. X7I — CURRENT: assemble locked Chapter 2 + approved Chapter 3 into one review DOCX and perform full visual QA.
 7. X7J — final combined Chapters 2+3 review and user evaluation.
 8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 
@@ -1970,3 +1972,83 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7G: no DOCX, no new evidence, no new claims, no technical reinterpretation.
 - X7H remains BLOCKED until X7G output is independently reviewed.
 - Chapter 2 remains LOCKED; Chapter 4 remains DORMANT / BACKLOG.
+
+
+## DEC-111 — X7G final independent PASS; X7H authorized
+
+- Ngày: 2026-10-07.
+- X7G R2 candidate: `8392621eeb0b9c72d048feb7f9b33c4ad67772eb`.
+- Final independent review:
+  `work/do-an/X7G_CH3_ASSEMBLY_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Verdict: **99/100 — PASS**.
+- Blockers: **0**.
+- Reviewer independently verified that the committed R2 chapter equals the R1 chapter plus exactly the three authorized assembly corrections and no hidden content changes.
+- The six USER APPROVED / LOCKED source-section blobs remain unchanged.
+- Complete assembled Chapter 3:
+  `work/do-an/CHAPTER_3_DRAFT_R1.md`.
+- X7G is complete.
+- Current gate: `X7H_CH3_WHOLE_REVIEW_READY`.
+- Single authorized next action: X7H whole-Chapter-3 product review.
+- X7H must review progression, redundancy/compression, section balance, table/figure flow, natural Vietnamese academic voice, all technical locks, and Chapter 4 leakage.
+- X7H may perform editorial trimming/reordering only when technical meaning is unchanged.
+- Any factual/technical change requires explicit reopen of the affected approved section.
+- No DOCX is authorized in X7H.
+- X7I remains BLOCKED until X7H passes independent review and the user explicitly approves the complete Chapter 3.
+- Chapter 2 remains LOCKED.
+- Chapter 1 enrichment remains ABANDONED.
+- Chapter 4 remains DORMANT / BACKLOG.
+
+
+## DEC-112 — X7H whole-Chapter-3 final PASS; waiting explicit user approval
+
+- Ngày: 2026-10-07.
+- X7H R2 candidate: `0d63f51d0d77888c32433510187d9654f8c7a8af`.
+- Final independent review:
+  `work/do-an/X7H_CH3_WHOLE_REVIEW_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Verdict: **99/100 — PASS**.
+- Blockers: **0**.
+- Independent comparison confirms the R2 candidate differs from X7H R1 at exactly the four authorized technical/evidence-boundary corrections.
+- The six approved source-section blobs remain unchanged.
+- Final whole-Chapter-3 candidate:
+  `work/do-an/CHAPTER_3_DRAFT_R2.md`.
+- The chapter is ready for user reading/evaluation but is **NOT yet USER APPROVED / LOCKED as a complete chapter**.
+- Current gate: `X7H_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
+- Single authorized next action: wait for explicit user approval/chốt of the complete Chapter 3.
+- X7I remains BLOCKED until that explicit approval.
+- No Chapter 2+3 DOCX may be created yet.
+- Chapter 2 remains LOCKED.
+- Chapter 1 enrichment remains ABANDONED.
+- Chapter 4 remains DORMANT / BACKLOG.
+
+
+## DEC-113 — User approves complete Chapter 3; X7I authorized
+
+- Ngày: 2026-10-07.
+- The user explicitly approved ("chốt") the complete Chapter 3 after X7H final independent review.
+- Approved whole-chapter candidate:
+  `work/do-an/CHAPTER_3_DRAFT_R2.md`.
+- Candidate commit before approval:
+  `0d63f51d0d77888c32433510187d9654f8c7a8af`.
+- Final review:
+  `work/do-an/X7H_CH3_WHOLE_REVIEW_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Verdict: **99/100 — PASS**.
+- Blockers: **0**.
+- Valid whole-Chapter-3 user approval lock:
+  `work/do-an/X7H_CH3_WHOLE_USER_APPROVAL_LOCK.md`.
+- Complete Chapter 3 is now **USER APPROVED / CONTENT_LOCKED**.
+- Locked numbering remains:
+  - Bảng 3.1–3.7;
+  - Hình 3.1–3.11.
+- Next unused numbering remains:
+  - Bảng 3.8;
+  - Hình 3.12.
+- Approved X7G/X7H whole-chapter artifacts and the approval lock are integrated into `feature/ch3-integration`.
+- Chapter 2 remains **USER APPROVED / CONTENT_LOCKED**.
+- Current gate: `X7I_CH2_CH3_DOCX_ASSEMBLY_READY`.
+- Single authorized next action: assemble locked Chapter 2 + locked Chapter 3 into one review DOCX and perform full document/layout QA.
+- X7I is assembly/layout only: no Chapter 2 or Chapter 3 content rewrite.
+- Required visual QA: render the DOCX to page images and inspect **every page**; the DOCX must not be considered complete from text/XML validation alone.
+- PDF may be generated as an internal QA conversion for rendering/inspection; it is not a new report deliverable unless explicitly requested.
+- X7J remains BLOCKED until X7I passes independent review.
+- Chapter 1 enrichment remains ABANDONED.
+- Chapter 4 remains DORMANT / BACKLOG.
