@@ -1,14 +1,16 @@
 # BÁO CÁO TỰ ĐÁNH GIÁ BIÊN TẬP TOÀN BỘ CHƯƠNG 3 (X7H_CH3_WHOLE_REVIEW_SELF_REVIEW_R1)
 
-- **Trạng thái:** `X7H_R1_READY_FOR_INDEPENDENT_REVIEW`
-- **Pha thực hiện:** `X7H — Whole-Chapter-3 Product Review`
+- **Trạng thái:** `X7H_R2_READY_FOR_INDEPENDENT_REVIEW`
+- **Pha thực hiện:** `X7H — Whole-Chapter-3 Product Review (Vòng hiệu chỉnh R2)`
 - **Ngày thực hiện:** 2026-10-07
 - **Nhánh làm việc:** `feature/x7h-ch3-whole-review-approved-r1`
 - **Base Reviewed X7G State:** `d348b713802593ff82bbab5b460e5eb7e6973b3d`
+- **R1 Candidate Commit:** `01cc66de9845395777ced08801d5816ab1f938fe`
 - **Tập tin kết quả chính:** [CHAPTER_3_DRAFT_R2.md](file:///e:/word_ppt-auto/work/do-an/CHAPTER_3_DRAFT_R2.md)
 - **Tập tin cơ sở kỹ thuật:** [CHAPTER_3_DRAFT_R1.md](file:///e:/word_ppt-auto/work/do-an/CHAPTER_3_DRAFT_R1.md)
+- **Báo cáo thẩm định độc lập R1:** [X7H_CH3_WHOLE_REVIEW_EXTERNAL_REVIEW_R1.md](file:///e:/word_ppt-auto/work/do-an/X7H_CH3_WHOLE_REVIEW_EXTERNAL_REVIEW_R1.md)
+- **Chỉ thị hiệu chỉnh R2:** [X7H_R2_CORRECT_WHOLE_CHAPTER_REVIEW.md](file:///e:/word_ppt-auto/work/do-an/prompts/X7H_R2_CORRECT_WHOLE_CHAPTER_REVIEW.md)
 - **Tài liệu tham chiếu:**
-  * [X7H_REVIEW_COMPLETE_CHAPTER_3.md](file:///e:/word_ppt-auto/work/do-an/prompts/X7H_REVIEW_COMPLETE_CHAPTER_3.md)
   * [ROADMAP_CURRENT_CH2_CH3_2026_10_07.md](file:///e:/word_ppt-auto/work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md)
   * [PROJECT_STATE.md](file:///e:/word_ppt-auto/work/do-an/PROJECT_STATE.md)
   * [CHAPTER_3_CONTRACT.md](file:///e:/word_ppt-auto/work/do-an/CHAPTER_3_CONTRACT.md)
@@ -16,23 +18,27 @@
 
 ---
 
-## 1. Mục Tiêu & Phạm Vi Biên Tập X7H
+## 1. Mục Tiêu & Phạm Vi Biên Tập X7H (Bao Gồm Vòng Hiệu Chỉnh R2)
 
-Pha X7H thẩm định và biên tập Chương 3 như một chương luận văn hoàn chỉnh, chuyển hóa bản thảo ráp cơ học (R1) thành một văn bản học thuật mạch lạc (R2). Quá trình biên tập tập trung giải quyết:
-- Hiện tượng lặp khuôn mẫu chuyển đoạn và mở đầu mục;
-- Loại bỏ các câu văn giải thích trùng lặp giữa các mục độc lập;
-- Tối ưu hóa độ dài câu và nhịp điệu diễn đạt học thuật tiếng Việt;
-- Bảo toàn tuyệt đối 100% dữ kiện kỹ thuật, số hiệu bảng biểu, hình ảnh và các ranh giới phương pháp luận đã khóa.
+Pha X7H thẩm định và biên tập Chương 3 như một chương luận văn hoàn chỉnh, chuyển hóa bản thảo ráp cơ học (R1) thành một văn bản học thuật mạch lạc (R2).
+- **Vòng R1:** Tập trung giải quyết hiện tượng lặp khuôn mẫu chuyển đoạn và mở đầu mục, loại bỏ các câu văn giải thích trùng lặp giữa các mục độc lập, tối ưu hóa độ dài câu và nhịp điệu tiếng Việt học thuật, giữ nguyên 100% dữ kiện kỹ thuật và số hiệu bảng biểu, hình ảnh.
+- **Vòng R2:** Tiếp thu kết quả thẩm định độc lập tại [X7H_CH3_WHOLE_REVIEW_EXTERNAL_REVIEW_R1.md](file:///e:/word_ppt-auto/work/do-an/X7H_CH3_WHOLE_REVIEW_EXTERNAL_REVIEW_R1.md), thực hiện hiệu chỉnh giới hạn (bounded correction) đúng 4 điểm lệch ranh giới kỹ thuật và bằng chứng, bảo toàn toàn bộ cải tiến văn phong hợp lệ của R1:
+  1. *Correction 1 (Mục 3.5):* Bỏ cách viết "định tuyến qua" đối với pfSense Transparent Bridge Layer 2; dùng diễn đạt đúng bản chất Layer 2: "được bố trí đi qua".
+  2. *Correction 2 (Mục 3.1.1):* Bỏ nhận định quy kết độc quyền firewall "bảo đảm chỉ mở cho trạm kiểm thử chỉ định"; quay về diễn đạt mô tả phạm vi cấu hình và tách riêng việc kiểm chứng tiếp cận bằng đo đạc từ xa.
+  3. *Correction 3 (Mục 3.1.2):* Bỏ nhận định toàn tri về lịch sử cập nhật "danh sách cập nhật dừng ở năm 2014"; neo chặt vào bằng chứng quan sát được: "sáu mục Get-HotFix quan sát được đều có ngày cài đặt trong năm 2014" kết hợp đối chiếu số hiệu `srv.sys`.
+  4. *Correction 4 (Mục 3.2.2):* Giới hạn nhận định Nmap fingerprint vào đúng "trong lần đo này", không khái quát hóa năng lực của công cụ; khẳng định căn cứ xác định phiên bản dựa trên dữ liệu cấu hình cục bộ đã kiểm chứng độc lập tại Mục 3.1.
+
+Không sửa bất kỳ tập tin source-section đã USER APPROVED / LOCKED nào (`CH3_31`–`CH3_36_37`). Candidate R2 khác candidate R1 chỉ tại đúng 4 đoạn được phép sửa.
 
 ---
 
-## 2. So Sánh Định Lượng R1 và R2 (Word-Count Comparison)
+## 2. So Sánh Định Lượng R1 và R2 (Word-Count Comparison Sau Hiệu Chỉnh R2)
 
 ### 2.1. Toàn bộ chương
-| Chỉ số | R1 Assembled | R2 Reviewed | Chênh lệch (Diff) | Nhận xét |
+| Chỉ số | R1 Assembled | R2 Reviewed (Sau R2) | Chênh lệch (Diff) | Nhận xét |
 |---|:---:|:---:|:---:|---|
-| **Tổng số từ (Total words)** | 11.101 | **10.886** | -215 từ | Tinh gọn các đoạn lặp thừa |
-| **Số từ văn xuôi (Prose words)** | 9.444 | **9.229** | -215 từ | Loại bỏ câu trùng, tối ưu chuyển tiếp |
+| **Tổng số từ (Total words)** | 11.101 | **10.924** | -177 từ | Tinh gọn lặp thừa, bảo toàn 4 hiệu chỉnh R2 (+38 từ so với R1 draft) |
+| **Số từ văn xuôi (Prose words)** | 9.444 | **9.268** | -176 từ | Loại bỏ câu trùng, câu từ chính xác ranh giới |
 | **Số tiêu đề H1** | 1 | 1 | 0 | Giữ nguyên |
 | **Số tiêu đề H2** | 7 | 7 | 0 | Giữ nguyên danh mục canonical |
 | **Số tiêu đề H3** | 10 | 10 | 0 | Giữ nguyên cấu trúc tiểu mục |
@@ -42,35 +48,35 @@ Pha X7H thẩm định và biên tập Chương 3 như một chương luận vă
 ### 2.2. So sánh chi tiết theo từng mục (Per-Section Breakdown)
 | Mục nội dung | Từ văn xuôi R1 | Từ văn xuôi R2 | Chênh lệch | Đánh giá độ cân bằng |
 |---|:---:|:---:|:---:|---|
-| **Mục 3.1 — Trạng thái baseline** | 1.383 | **1.359** | -24 | Cân đối, cô đọng cơ sở thực nghiệm |
-| **Mục 3.2 — Kịch bản 1 (Khảo sát SMB)** | 1.666 | **1.557** | -109 | Tinh gọn đoạn phân tích dải phiên bản OS |
+| **Mục 3.1 — Trạng thái baseline** | 1.383 | **1.369** | -14 | Cân đối, chuẩn xác ranh giới firewall và hotfix |
+| **Mục 3.2 — Kịch bản 1 (Khảo sát SMB)** | 1.666 | **1.585** | -81 | Tinh gọn, Nmap fingerprint giới hạn trong lần đo |
 | **Mục 3.3 — Kịch bản 2 (Dấu hiệu MS17-010)** | 1.684 | **1.609** | -75 | Rút gọn phần chuyển tiếp lặp lại sang Case B |
 | **Mục 3.4 — Case B (Vô hiệu hóa SMBv1)** | 1.772 | **1.735** | -37 | Tinh gọn câu mở đầu, tránh lặp lại recap Mục 3.3 |
-| **Mục 3.5 — Case C (Kiểm soát pfSense)** | 1.755 | **1.763** | +8 | Cải thiện câu mở đầu, bổ sung tính liên kết |
+| **Mục 3.5 — Case C (Kiểm soát pfSense)** | 1.755 | **1.764** | +9 | Cải thiện câu mở đầu, chuẩn xác Layer 2 Transparent Bridge |
 | **Mục 3.6 — So sánh kết quả thực nghiệm** | 863 | **885** | +22 | Mở rộng tính tổng hợp và đối chiếu hệ thống |
 | **Mục 3.7 — Tổng kết chương** | 321 | **321** | 0 | Kết luận chương súc tích, chuẩn mực |
 
-**Nhận xét:** Trọng tâm thực nghiệm cốt lõi (Mục 3.2 đến 3.5) đạt độ cân đối lý tưởng, dao động từ 1.550 đến 1.760 từ văn xuôi mỗi mục. Mục 3.1 xác lập baseline vững chắc (1.359 từ), Mục 3.6 tổng hợp cô đọng (885 từ) và Mục 3.7 kết luận súc tích (321 từ).
+**Nhận xét:** Trọng tâm thực nghiệm cốt lõi (Mục 3.2 đến 3.5) đạt độ cân đối cao, dao động từ 1.585 đến 1.764 từ văn xuôi mỗi mục. Mục 3.1 xác lập baseline vững chắc (1.369 từ), Mục 3.6 tổng hợp cô đọng (885 từ) và Mục 3.7 kết luận súc tích (321 từ).
 
 ---
 
-## 3. Nhật Ký Chi Tiết Các Thay Đổi Biên Tập (Editorial Edits Log)
+## 3. Nhật Ký Chi Tiết Các Thay Đổi Biên Tập (Bao Gồm 4 Điểm Hiệu Chỉnh R2)
 
-Toàn bộ 11 điểm điều chỉnh câu từ và chuyển đoạn được thực hiện có kiểm soát:
+Toàn bộ 11 điểm điều chỉnh câu từ và chuyển đoạn trong bản thảo R2:
 
 ### 3.1. Mục 3.1 — Trạng thái baseline trước đo đạc
 1. **Câu mở đầu chương (Dòng 6):**
    - *R1:* `Việc xác định và ghi nhận trạng thái ban đầu (baseline) của hệ thống máy chủ mục tiêu trước khi thực hiện các kịch bản thực nghiệm nhằm tạo mốc tham chiếu nhất quán để đối chiếu các phép đo tiếp theo. Mốc xuất phát này ghi nhận các thông số định lượng cụ thể...`
    - *R2:* `Trước khi triển khai các kịch bản thực nghiệm, trạng thái ban đầu (baseline) của hệ thống máy chủ mục tiêu được ghi nhận nhằm xác lập mốc tham chiếu nhất quán cho toàn bộ quá trình đo đạc. Mốc xuất phát này bao gồm các thông số định lượng...`
    - *Tác dụng:* Chuyển từ cấu trúc danh từ hóa thụ động sang lối hành văn chủ động, tự nhiên trong văn phong học thuật.
-2. **Đoạn dẫn giải Hình 3.2 (Dòng 44):**
-   - *R1:* `Hình 3.2 xác nhận quy tắc tùy biến được cấu hình cho TCP 139/445 với phạm vi địa chỉ nguồn 192.168.56.10, đồng thời nhóm File and Printer Sharing mặc định được ghi nhận ở trạng thái tắt...` (lặp lại nguyên văn đoạn 38).
-   - *R2:* `Hình 3.2 xác nhận quy tắc cho phép lưu lượng TCP 139/445 hướng tới máy chủ chỉ áp dụng riêng cho địa chỉ nguồn 192.168.56.10, trong khi các quy tắc mặc định đều tắt. Thiết lập này bảo đảm bề mặt dịch vụ tại baseline chỉ mở cho trạm kiểm thử chỉ định; khả năng tiếp cận thực tế từ xa sẽ được kiểm chứng bằng các phép đo mạng tiếp theo.`
-   - *Tác dụng:* Nâng cao giá trị diễn giải, tránh lặp lại cơ học các trường quy tắc đã nêu ở văn bản phía trên.
-3. **Đoạn dẫn giải Hình 3.3 (Dòng 76):**
-   - *R1:* `Hình 3.3 thể hiện chuỗi phiên bản hiển thị 6.3.9600.16384, kết quả tính toán phiên bản số 6.3.9600.16421 qua các trường nhị phân và danh sách 6 bản cập nhật hệ thống từ năm 2014...`
-   - *R2:* `Hình 3.3 trực quan hóa hai căn cứ kỹ thuật trên: phiên bản nhị phân 6.3.9600.16421 thấp hơn mốc yêu cầu và danh sách cập nhật dừng ở năm 2014, xác nhận đầy đủ cơ sở phân loại trạng thái bản vá cục bộ là UNPATCHED.`
-   - *Tác dụng:* Cô đọng ý nghĩa chứng minh của hình ảnh, không lặp lại danh sách số liệu.
+2. **Đoạn dẫn giải Hình 3.2 (Dòng 44) — [R2 CORRECTION 2]:**
+   - *R1 draft ban đầu:* `Hình 3.2 xác nhận quy tắc cho phép lưu lượng TCP 139/445 hướng tới máy chủ chỉ áp dụng riêng cho địa chỉ nguồn 192.168.56.10, trong khi các quy tắc mặc định đều tắt. Thiết lập này bảo đảm bề mặt dịch vụ tại baseline chỉ mở cho trạm kiểm thử chỉ định; khả năng tiếp cận thực tế từ xa sẽ được kiểm chứng bằng các phép đo mạng tiếp theo.`
+   - *R2 hiệu chỉnh:* `Hình 3.2 xác nhận quy tắc tùy biến được cấu hình cho phép lưu lượng TCP 139/445 với phạm vi địa chỉ nguồn 192.168.56.10, đồng thời nhóm File and Printer Sharing mặc định được ghi nhận ở trạng thái tắt. Đây là trạng thái cấu hình tại baseline; khả năng tiếp cận dịch vụ từ trạm Kali được kiểm tra riêng bằng các phép đo mạng ở phần tiếp theo.`
+   - *Tác dụng:* Bỏ claim độc quyền firewall ("bảo đảm chỉ mở cho trạm kiểm thử chỉ định"), khôi phục diễn đạt thuần túy mô tả phạm vi cấu hình và khẳng định tiếp cận thực tế được kiểm chứng riêng bằng phép đo mạng.
+3. **Đoạn dẫn giải Hình 3.3 (Dòng 76) — [R2 CORRECTION 3]:**
+   - *R1 draft ban đầu:* `Hình 3.3 trực quan hóa hai căn cứ kỹ thuật trên: phiên bản nhị phân 6.3.9600.16421 thấp hơn mốc yêu cầu và danh sách cập nhật dừng ở năm 2014, xác nhận đầy đủ cơ sở phân loại trạng thái bản vá cục bộ là UNPATCHED.`
+   - *R2 hiệu chỉnh:* `Hình 3.3 trực quan hóa hai căn cứ kỹ thuật trên: phiên bản số nhị phân 6.3.9600.16421 thấp hơn ngưỡng yêu cầu và sáu mục Get-HotFix quan sát được đều có ngày cài đặt trong năm 2014, xác nhận đầy đủ cơ sở phân loại trạng thái bản vá cục bộ là UNPATCHED.`
+   - *Tác dụng:* Bỏ nhận định toàn tri về lịch sử cập nhật ("danh sách cập nhật dừng ở năm 2014"), neo chặt vào 6 mục Get-HotFix thực tế quan sát được trong năm 2014 và đối chiếu phiên bản nhị phân `srv.sys` thấp hơn ngưỡng Microsoft.
 
 ### 3.2. Mục 3.2 — Kịch bản 1 — Khảo sát dịch vụ SMB
 4. **Mở đầu Mục 3.2 (Dòng 82) — Giải quyết cảnh báo VI012:**
@@ -81,10 +87,10 @@ Toàn bộ 11 điểm điều chỉnh câu từ và chuyển đoạn được th
    - *R1:* `Sau khi xác định hai cổng TCP 139 và 445 mở, trạm kiểm thử tiếp tục thực hiện thăm dò ở tầng ứng dụng...`
    - *R2:* `Với trạng thái mở của hai cổng TCP 139 và 445, trạm kiểm thử tiếp tục thăm dò tầng ứng dụng nhằm nhận diện dịch vụ và dấu vết phiên bản hệ điều hành.`
    - *Tác dụng:* Đa dạng hóa từ ngữ mở đoạn, tránh cấu trúc "Sau khi xác định...".
-6. **Diễn giải dải phiên bản Nmap (Dòng 110):**
-   - *R1:* `Kết quả hiển thị trên Hình 3.4 ghi nhận cổng TCP 139 gắn liền với dịch vụ Microsoft Windows netbios-ssn... Kết quả này phản ánh đặc tính nhận diện dấu vết từ xa của công cụ quét mạng: Kết quả Nmap trong lần đo này chỉ khu biệt mục tiêu trong một khoảng dấu vết phiên bản (fingerprint range). Các phản hồi từ xa này chưa đủ căn cứ để định danh chính xác duy nhất phiên bản Windows Server 2012 R2...`
-   - *R2:* `Dữ liệu trên Hình 3.4 ghi nhận cổng TCP 139 tương ứng với dịch vụ Microsoft Windows netbios-ssn, còn cổng TCP 445 phản hồi chuỗi dịch vụ Microsoft Windows Server 2008 R2 - 2012 microsoft-ds. Thông tin hệ điều hành suy đoán (Service Info) ước lượng mục tiêu trong khoảng Windows Server 2008 R2 – 2012. Kết quả này phản ánh đặc tính nhận diện dấu vết từ xa của công cụ quét mạng. Nmap chỉ khu biệt hệ thống trong một dải phiên bản (fingerprint range) chứ không thể tự định danh chính xác phiên bản Windows Server 2012 R2 nếu thiếu dữ liệu xác thực cục bộ tại Mục 3.1. Đồng thời, thông tin nhận diện dịch vụ này chỉ phản ánh họ hệ điều hành, không cấu thành bằng chứng về việc máy chủ có tồn tại lỗ hổng an ninh hay không.`
-   - *Tác dụng:* Tinh gọn đoạn văn, tách câu phức, làm nổi bật ranh giới giữa quan sát từ xa và xác thực cục bộ.
+6. **Diễn giải dải phiên bản Nmap (Dòng 110) — [R2 CORRECTION 4]:**
+   - *R1 draft ban đầu:* `Dữ liệu trên Hình 3.4 ghi nhận cổng TCP 139 tương ứng với dịch vụ Microsoft Windows netbios-ssn, còn cổng TCP 445 phản hồi chuỗi dịch vụ Microsoft Windows Server 2008 R2 - 2012 microsoft-ds. Thông tin hệ điều hành suy đoán (Service Info) ước lượng mục tiêu trong khoảng Windows Server 2008 R2 – 2012. Kết quả này phản ánh đặc tính nhận diện dấu vết từ xa của công cụ quét mạng. Nmap chỉ khu biệt hệ thống trong một dải phiên bản (fingerprint range) chứ không thể tự định danh chính xác phiên bản Windows Server 2012 R2 nếu thiếu dữ liệu xác thực cục bộ tại Mục 3.1. Đồng thời, thông tin nhận diện dịch vụ này chỉ phản ánh họ hệ điều hành, không cấu thành bằng chứng về việc máy chủ có tồn tại lỗ hổng an ninh hay không.`
+   - *R2 hiệu chỉnh:* `Dữ liệu trên Hình 3.4 ghi nhận cổng TCP 139 tương ứng với dịch vụ Microsoft Windows netbios-ssn, còn cổng TCP 445 phản hồi chuỗi dịch vụ Microsoft Windows Server 2008 R2 - 2012 microsoft-ds. Thông tin hệ điều hành suy đoán (Service Info) ước lượng mục tiêu trong khoảng Windows Server 2008 R2 – 2012. Kết quả này phản ánh đặc tính nhận diện dấu vết từ xa trong lần đo này: Nmap chỉ khu biệt hệ thống trong dải dấu vết phiên bản (fingerprint range) Windows Server 2008 R2 – 2012. Các phản hồi từ xa ghi nhận được chưa đủ căn cứ để định danh duy nhất phiên bản Windows Server 2012 R2; việc xác định chính xác phiên bản máy chủ mục tiêu dựa trên dữ liệu cấu hình cục bộ đã được kiểm chứng độc lập tại Mục 3.1. Đồng thời, thông tin nhận diện dịch vụ này chỉ phản ánh họ hệ điều hành, không cấu thành bằng chứng về việc máy chủ có tồn tại lỗ hổng an ninh hay không.`
+   - *Tác dụng:* Giới hạn nhận định chặt chẽ vào "trong lần đo này", xóa bỏ nhận định khái quát hóa năng lực của công cụ Nmap, khẳng định căn cứ xác định phiên bản dựa trên dữ liệu cấu hình cục bộ mốc baseline.
 
 ### 3.3. Mục 3.3 — Kịch bản 2 — Kiểm tra dấu hiệu MS17-010
 7. **Mở đầu Mục 3.3 (Dòng 130):**
@@ -103,10 +109,10 @@ Toàn bộ 11 điểm điều chỉnh câu từ và chuyển đoạn được th
    - *Tác dụng:* Đi thẳng vào trọng tâm đơn biến số của Case B, xóa bỏ hoàn toàn đoạn recap trùng lặp và loại bỏ mẫu "Sau khi xác...".
 
 ### 3.5. Mục 3.5 — Case C — Kiểm soát SMB bằng pfSense
-10. **Mở đầu Mục 3.5 (Dòng 226) — Giải quyết cảnh báo VI012:**
-    - *R1:* `Sau khi xác lập đường cơ sở và đánh giá can thiệp vô hiệu hóa SMBv1 ở mức máy chủ (Case B), nghiên cứu triển khai kịch bản can thiệp Case C nhắm vào lớp kiểm soát mạng...`
-    - *R2:* `Kịch bản can thiệp Case C khảo sát lớp kiểm soát an ninh trên đường truyền mạng thay vì tác động trực tiếp vào cấu hình máy chủ. Trong mô hình Case C, đường thử nghiệm giữa trạm Kali và máy chủ Windows được định tuyến qua tường lửa pfSense hoạt động ở chế độ Transparent Bridge (Layer 2) nhằm thực thi chính sách lọc gói tin đối với các cổng dịch vụ SMB. Trọng tâm của kịch bản là đo đạc diện mạo dịch vụ từ xa từ trạm Kali, đối chiếu các bản ghi nhật ký tường lửa với kết quả rà quét mạng, và kiểm chứng tính độc lập của trạng thái cấu hình nội bộ trên máy chủ mục tiêu.`
-    - *Tác dụng:* Khẳng định ngay tính độc lập và bản chất Layer 2 của Case C, xóa bỏ mẫu "Sau khi xác...".
+10. **Mở đầu Mục 3.5 (Dòng 226) — [R2 CORRECTION 1]:**
+    - *R1 draft ban đầu:* `Kịch bản can thiệp Case C khảo sát lớp kiểm soát an ninh trên đường truyền mạng thay vì tác động trực tiếp vào cấu hình máy chủ. Trong mô hình Case C, đường thử nghiệm giữa trạm Kali và máy chủ Windows được định tuyến qua tường lửa pfSense hoạt động ở chế độ Transparent Bridge (Layer 2) nhằm thực thi chính sách lọc gói tin đối với các cổng dịch vụ SMB. Trọng tâm của kịch bản là đo đạc diện mạo dịch vụ từ xa từ trạm Kali, đối chiếu các bản ghi nhật ký tường lửa với kết quả rà quét mạng, và kiểm chứng tính độc lập của trạng thái cấu hình nội bộ trên máy chủ mục tiêu.`
+    - *R2 hiệu chỉnh:* `Kịch bản can thiệp Case C khảo sát lớp kiểm soát an ninh trên đường truyền mạng thay vì tác động trực tiếp vào cấu hình máy chủ. Trong mô hình Case C, đường thử nghiệm giữa trạm Kali và máy chủ Windows được bố trí đi qua tường lửa pfSense hoạt động ở chế độ Transparent Bridge (Layer 2) nhằm thực thi chính sách lọc gói tin đối với các cổng dịch vụ SMB. Trọng tâm của kịch bản là đo đạc diện mạo dịch vụ từ xa từ trạm Kali, đối chiếu các bản ghi nhật ký tường lửa với kết quả rà quét mạng, và kiểm chứng tính độc lập của trạng thái cấu hình nội bộ trên máy chủ mục tiêu.`
+    - *Tác dụng:* Bỏ cách viết "định tuyến qua", bảo toàn đúng bản chất cầu nối Layer 2 (Transparent Bridge) trên dải mạng phẳng `192.168.56.0/24`.
 
 ### 3.6. Mục 3.6 — So sánh kết quả thực nghiệm
 11. **Mở đầu Mục 3.6 (Dòng 286) — Giải quyết cảnh báo VI012:**
@@ -124,7 +130,7 @@ Toàn bộ 11 điểm điều chỉnh câu từ và chuyển đoạn được th
 
 ---
 
-## 5. Rà Soát Khóa Kỹ Thuật & Phòng Tránh Rò Rỉ Nội Dung
+## 5. Rà Soát Khóa Kỹ Thuật & Hiệu Chỉnh R2
 
 1. **Bảo toàn 5 bất đẳng thức phương pháp luận:**
    - `445 OPEN != vulnerable`: Có mặt đầy đủ tại Mục 3.2.1, 3.3.1, 3.4.1, 3.4.2, 3.6.
@@ -143,6 +149,11 @@ Toàn bộ 11 điểm điều chỉnh câu từ và chuyển đoạn được th
    - Không có thẻ chú thích HTML (`<!-- ... -->`) (0).
    - Không có chuỗi `CITE-ANCHOR` (0).
    - Không có giọng điệu biên bản kiểm toán nội bộ (QA-like memo).
+4. **Tuân thủ tuyệt đối 4 hiệu chỉnh ranh giới kỹ thuật X7H R2:**
+   - Không có cách viết "định tuyến qua" đối với pfSense Transparent Bridge Layer 2;
+   - Không có tuyên bố độc quyền firewall "bảo đảm chỉ mở cho trạm kiểm thử chỉ định";
+   - Không có tuyên bố toàn tri lịch sử cập nhật "danh sách cập nhật dừng ở năm 2014";
+   - Nhận diện dấu vết Nmap được giới hạn chặt chẽ trong "trong lần đo này", không khái quát hóa công cụ.
 
 ---
 
@@ -151,7 +162,6 @@ Toàn bộ 11 điểm điều chỉnh câu từ và chuyển đoạn được th
 - **Linter học thuật tiếng Việt:**
   `uv run python .agents/skills/thesis-research-and-writing/scripts/lint_vi_academic.py work/do-an/CHAPTER_3_DRAFT_R2.md`
   * Kết quả: `Không phát hiện mẫu văn phong cần xem xét.` (error=0, warning=0, info=0).
-  * Cảnh báo `VI012` về lặp cấu trúc mở đoạn đã được xử lý triệt để.
 - **Bộ kiểm thử tự động (Unit Tests):**
   `uv run python -m unittest discover -s tests -p "test_*.py"`
   * Kết quả: `Ran 7 tests in 0.003s. OK`.
@@ -165,4 +175,4 @@ Toàn bộ 11 điểm điều chỉnh câu từ và chuyển đoạn được th
 ---
 
 ## 7. Trạng Thái Hoàn Thành
-`X7H_R1_READY_FOR_INDEPENDENT_REVIEW`
+`X7H_R2_READY_FOR_INDEPENDENT_REVIEW`

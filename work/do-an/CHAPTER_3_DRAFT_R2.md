@@ -41,7 +41,7 @@ Thuộc tính cấu hình của quy tắc tường lửa tùy biến ATTT Lab SM
 
 ![Hình 3.2. Cấu hình Windows Firewall giới hạn nguồn truy cập TCP 139/445 từ trạm Kali Linux](chapter3/presentation/3_1/Hinh_3_2_Firewall.png)
 
-Hình 3.2 xác nhận quy tắc cho phép lưu lượng TCP 139/445 hướng tới máy chủ chỉ áp dụng riêng cho địa chỉ nguồn 192.168.56.10, trong khi các quy tắc mặc định đều tắt. Thiết lập này bảo đảm bề mặt dịch vụ tại baseline chỉ mở cho trạm kiểm thử chỉ định; khả năng tiếp cận thực tế từ xa sẽ được kiểm chứng bằng các phép đo mạng tiếp theo.
+Hình 3.2 xác nhận quy tắc tùy biến được cấu hình cho phép lưu lượng TCP 139/445 với phạm vi địa chỉ nguồn 192.168.56.10, đồng thời nhóm File and Printer Sharing mặc định được ghi nhận ở trạng thái tắt. Đây là trạng thái cấu hình tại baseline; khả năng tiếp cận dịch vụ từ trạm Kali được kiểm tra riêng bằng các phép đo mạng ở phần tiếp theo.
 
 ### 3.1.2. Trạng thái bản vá và mốc phục hồi
 
@@ -73,7 +73,7 @@ Kết quả kiểm tra thuộc tính phiên bản của driver nhân srv.sys k�
 
 ![Hình 3.3. Phiên bản srv.sys và danh mục hotfix ghi nhận trên Windows Server 2012 R2](chapter3/presentation/3_1/Hinh_3_3_SrvSys_Hotfix.png)
 
-Hình 3.3 trực quan hóa hai căn cứ kỹ thuật trên: phiên bản nhị phân 6.3.9600.16421 thấp hơn mốc yêu cầu và danh sách cập nhật dừng ở năm 2014, xác nhận đầy đủ cơ sở phân loại trạng thái bản vá cục bộ là UNPATCHED.
+Hình 3.3 trực quan hóa hai căn cứ kỹ thuật trên: phiên bản số nhị phân 6.3.9600.16421 thấp hơn ngưỡng yêu cầu và sáu mục Get-HotFix quan sát được đều có ngày cài đặt trong năm 2014, xác nhận đầy đủ cơ sở phân loại trạng thái bản vá cục bộ là UNPATCHED.
 
 Trên cơ sở trạng thái baseline này, Mục 3.2 trình bày các kết quả khảo sát SMB từ trạm Kali Linux.
 
@@ -107,7 +107,7 @@ Hình 3.4 thể hiện kết quả nhận diện dịch vụ và dấu vết phi
 
 ![Hình 3.4. Kết quả thăm dò phiên bản dịch vụ SMB từ xa bằng công cụ Nmap](chapter3/presentation/3_2/Hinh_3_4_SMB_Version.png)
 
-Dữ liệu trên Hình 3.4 ghi nhận cổng TCP 139 tương ứng với dịch vụ Microsoft Windows netbios-ssn, còn cổng TCP 445 phản hồi chuỗi dịch vụ Microsoft Windows Server 2008 R2 - 2012 microsoft-ds. Thông tin hệ điều hành suy đoán (Service Info) ước lượng mục tiêu trong khoảng Windows Server 2008 R2 – 2012. Kết quả này phản ánh đặc tính nhận diện dấu vết từ xa của công cụ quét mạng. Nmap chỉ khu biệt hệ thống trong một dải phiên bản (fingerprint range) chứ không thể tự định danh chính xác phiên bản Windows Server 2012 R2 nếu thiếu dữ liệu xác thực cục bộ tại Mục 3.1. Đồng thời, thông tin nhận diện dịch vụ này chỉ phản ánh họ hệ điều hành, không cấu thành bằng chứng về việc máy chủ có tồn tại lỗ hổng an ninh hay không.
+Dữ liệu trên Hình 3.4 ghi nhận cổng TCP 139 tương ứng với dịch vụ Microsoft Windows netbios-ssn, còn cổng TCP 445 phản hồi chuỗi dịch vụ Microsoft Windows Server 2008 R2 - 2012 microsoft-ds. Thông tin hệ điều hành suy đoán (Service Info) ước lượng mục tiêu trong khoảng Windows Server 2008 R2 – 2012. Kết quả này phản ánh đặc tính nhận diện dấu vết từ xa trong lần đo này: Nmap chỉ khu biệt hệ thống trong dải dấu vết phiên bản (fingerprint range) Windows Server 2008 R2 – 2012. Các phản hồi từ xa ghi nhận được chưa đủ căn cứ để định danh duy nhất phiên bản Windows Server 2012 R2; việc xác định chính xác phiên bản máy chủ mục tiêu dựa trên dữ liệu cấu hình cục bộ đã được kiểm chứng độc lập tại Mục 3.1. Đồng thời, thông tin nhận diện dịch vụ này chỉ phản ánh họ hệ điều hành, không cấu thành bằng chứng về việc máy chủ có tồn tại lỗ hổng an ninh hay không.
 
 Để đi sâu phân tích cấu hình giao thức SMB ở mức chi tiết hơn, trạm kiểm thử thực thi bốn kịch bản Nmap NSE chuyên dụng nhắm vào hai cổng dịch vụ gồm `smb-protocols`, `smb2-capabilities`, `smb2-security-mode` và `smb-os-discovery`. Phép đo này nhằm làm rõ các phương ngữ được máy chủ chấp nhận, các khả năng kỹ thuật của ngăn xếp SMB2/SMB3, chính sách ký số gói tin và khả năng thu thập thông tin định danh hệ thống qua giao thức SMB.
 
@@ -223,7 +223,7 @@ Tóm lại, Case B làm rõ các điểm thay đổi và không thay đổi: sau
 
 ## 3.5. Kết quả Case C — Kiểm soát SMB bằng pfSense
 
-Kịch bản can thiệp Case C khảo sát lớp kiểm soát an ninh trên đường truyền mạng thay vì tác động trực tiếp vào cấu hình máy chủ. Trong mô hình Case C, đường thử nghiệm giữa trạm Kali và máy chủ Windows được định tuyến qua tường lửa pfSense hoạt động ở chế độ Transparent Bridge (Layer 2) nhằm thực thi chính sách lọc gói tin đối với các cổng dịch vụ SMB. Trọng tâm của kịch bản là đo đạc diện mạo dịch vụ từ xa từ trạm Kali, đối chiếu các bản ghi nhật ký tường lửa với kết quả rà quét mạng, và kiểm chứng tính độc lập của trạng thái cấu hình nội bộ trên máy chủ mục tiêu.
+Kịch bản can thiệp Case C khảo sát lớp kiểm soát an ninh trên đường truyền mạng thay vì tác động trực tiếp vào cấu hình máy chủ. Trong mô hình Case C, đường thử nghiệm giữa trạm Kali và máy chủ Windows được bố trí đi qua tường lửa pfSense hoạt động ở chế độ Transparent Bridge (Layer 2) nhằm thực thi chính sách lọc gói tin đối với các cổng dịch vụ SMB. Trọng tâm của kịch bản là đo đạc diện mạo dịch vụ từ xa từ trạm Kali, đối chiếu các bản ghi nhật ký tường lửa với kết quả rà quét mạng, và kiểm chứng tính độc lập của trạng thái cấu hình nội bộ trên máy chủ mục tiêu.
 
 ### 3.5.1. Thiết lập cầu nối pfSense và chính sách kiểm soát lưu lượng SMB
 
