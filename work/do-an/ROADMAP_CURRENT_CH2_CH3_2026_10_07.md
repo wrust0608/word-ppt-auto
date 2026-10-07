@@ -163,7 +163,7 @@ Check:
 - citations appropriate to the two-chapter review;
 - DOCX -> PDF -> render every page -> inspect 100%.
 
-### STEP 7 — X7J: final Chapters 2+3 review + user evaluation
+### STEP 7 — X7J: final Chapters 2+3 review — COMPLETE / FINAL PASS; awaiting user evaluation
 Review the combined product:
 - Chapter 2 method ↔ Chapter 3 result consistency;
 - no result without method basis;
@@ -211,6 +211,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7J — final combined Chapters 2+3 review and user evaluation`
+`USER EVALUATION — read/review the frozen combined Chapters 2+3 Word document`
 
-X7I has final independent PASS (99/100, 0 blockers) on the exact frozen 44-page DOCX. X7J is now the single authorized next action. After X7J and user evaluation: STOP.
+X7J has final independent PASS (99/100, 0 blockers). The frozen combined Word document is ready for user evaluation. After the user evaluates/approves this Chapters 2+3 product: STOP this milestone.
