@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7J_R2_READY_FOR_INDEPENDENT_REVIEW`.
+- Current gate: `X7J_FINAL_PASS_WAITING_FOR_USER_EVALUATION`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -34,7 +34,7 @@
 4. X7G — COMPLETE / FINAL INDEPENDENT PASS; complete Chapter 3 assembled, no DOCX.
 5. X7H — COMPLETE / FINAL INDEPENDENT PASS / USER APPROVED; complete Chapter 3 is LOCKED.
 6. X7I — COMPLETE / FINAL INDEPENDENT PASS: exact inspected DOCX frozen and verified byte-for-byte with SHA-256 `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`.
-7. X7J — R2 READY FOR INDEPENDENT REVIEW: Bounded corrections complete under DEC-117 (removed absolute claims, aligned defense readiness strictly to locked evidence, preserved correct NSE-SMB mapping, product and frozen DOCX unmodified; verdict PASS ready for independent review).
+7. X7J — FINAL INDEPENDENT PASS: combined Chapters 2+3 product passed final method↔result, terminology, technical-boundary, flow and defense-readiness review; waiting for user evaluation of the frozen DOCX.
 8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 
 ### Current read order for any new agent
@@ -2159,3 +2159,37 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Single authorized next action: Independent review of X7J R2 deliverables (`work/do-an/X7J_FINAL_CH2_CH3_REVIEW_R1.md`, `work/do-an/X7J_FINAL_CH2_CH3_EXECUTOR_HANDOFF_R1.md`).
 - After independent reviewer sign-off, user evaluation of the frozen DOCX can proceed.
 - Chapter 1 and Chapter 4 remain outside the current milestone.
+
+
+## DEC-118 — X7J final independent PASS; waiting user evaluation
+
+- Ngày: 2026-10-07.
+- X7J executor R2 candidate:
+  `ec18cc3a092dd05257a9f4ef348e4c9b62403222`.
+- Reviewer bounded cleanup commits:
+  - `255a6b0085d5dc2417941afb2c367cf45a999c76`;
+  - `85a2026984627f82d55622d8efc266ce70daff0d`.
+- Final independent review:
+  `work/do-an/X7J_FINAL_CH2_CH3_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Verdict: **99/100 — PASS**.
+- Blockers: **0**.
+- Product integrity remains unchanged:
+  - Chapter 2 blob: `55ffb13acb3398c7ab29d6d5abbb369e5d26f3d0`;
+  - Chapter 3 blob: `40d2a895bc970f88d7260b3138b8a701f5eb0a8c`;
+  - DOCX blob: `276278b1fb3e2f74acd11f6cb42b66df8c9b0ca9`;
+  - DOCX SHA-256: `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`;
+  - DOCX size: **761,414 bytes**;
+  - page count: **44**.
+- X7J confirms:
+  - method ↔ result consistency;
+  - correct NSE-SMB-01..04 mapping;
+  - terminology consistency;
+  - technical truth locks;
+  - no material orphan methods/results;
+  - no severe duplication;
+  - evidence-bounded defense readiness within Chapters 2–3.
+- Current gate:
+  `X7J_FINAL_PASS_WAITING_FOR_USER_EVALUATION`.
+- Single authorized next action: provide the frozen combined DOCX to the user for final evaluation.
+- After user evaluation/approval: **STOP this milestone**.
+- Chapter 1, Chapter 4, front matter, publication, slides, Q&A, defense package and demo rehearsal remain outside the current milestone unless the user explicitly reopens them.
