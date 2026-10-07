@@ -5,23 +5,21 @@ Date: 2026-10-07
 
 ## 0. Mandatory global checkpoint before every review/task
 
-Before evaluating any executor result or opening the next task, re-check the project as a whole:
+Before evaluating any executor result or opening the next task:
 
-1. read the current roadmap and current project state;
-2. confirm all user-approved/locked sections and current table/figure numbering;
-3. confirm abandoned, superseded or cancelled workflows are not being revived;
-4. confirm deferred milestones that must still happen later;
-5. verify the current gate and the single authorized next action;
-6. compare the proposed action against the full product sequence, not only the latest branch;
-7. do not let a locally successful task skip a required review/user-approval gate.
+1. read this roadmap and current `PROJECT_STATE.md`;
+2. confirm all user-approved/locked sections and numbering;
+3. confirm abandoned/superseded/cancelled workflows are not being revived;
+4. confirm deferred milestones that still must happen later;
+5. verify the current gate and exactly one authorized next action;
+6. compare that action with the full product sequence;
+7. never let a local PASS skip a user-approval gate.
 
-Historical decisions remain binding unless the user explicitly changes them.
+Fixed sequence:
 
-The fixed product sequence is:
+`X7F user approval -> X7G assemble complete Chapter 3 -> X7H whole-Chapter-3 review + user approval -> X7I assemble locked Chapter 2 + approved Chapter 3 into DOCX -> X7J final combined review/user evaluation -> STOP`
 
-`X7H whole-Chapter-3 review + user approval -> X7I assemble locked Chapter 2 + approved Chapter 3 into DOCX -> X7J final combined review/user evaluation -> STOP`
-
-Still forbidden unless explicitly reopened by the user:
+Still forbidden unless explicitly reopened:
 - intermediate Demo Word snapshots;
 - Chapter 1 enrichment;
 - Chapter 2 rewrite;
@@ -50,19 +48,17 @@ Locked:
 - 3.3 Scenario 2;
 - 3.4 Case B;
 - 3.5 Case C;
-- 3.6 Comparison;
-- 3.7 Chapter conclusion;
-- Bảng 3.1–3.7;
+- Bảng 3.1–3.6;
 - Hình 3.1–3.11.
 
 Next numbering:
-- Bảng 3.8;
+- Bảng 3.7;
 - Hình 3.12.
 
-Complete:
-- assembled Chapter 3 R1 (mechanical, X7G PASS).
-
-Not complete:
+Not complete / not yet user-approved:
+- 3.6 comparison — final external PASS 99/100, waiting user approval;
+- 3.7 chapter conclusion — final external PASS 99/100, waiting user approval;
+- assembled Chapter 3;
 - whole-Chapter-3 review;
 - combined Chapter 2+3 Word review.
 
@@ -103,19 +99,35 @@ X7E1 — COMPLETE / USER APPROVED:
 - control path/configuration -> FILTERED/log -> Windows-local state presented with bounded interpretation;
 - final external PASS + user approval completed.
 
-### STEP 3 — X7F: Sections 3.6 + 3.7 — COMPLETE / USER APPROVED
-- Bảng 3.7 locked as a 4-column synthesis table;
-- Section 3.6 compares approved results only;
-- Section 3.7 closes the empirical chapter;
-- final external PASS + user approval completed;
-- no new evidence or figure introduced.
+### STEP 3 — X7F: Sections 3.6 + 3.7
+Use only approved outputs from 3.1–3.5.
 
-### STEP 4 — X7G: assemble complete Chapter 3 — COMPLETE / PASS
-- approved Sections 3.1–3.7 assembled into `CHAPTER_3_COMPLETE_R1.md`;
-- Bảng 3.1–3.7 and Hình 3.1–3.11 preserved;
-- no new evidence or technical reinterpretation;
-- mechanical assembly external review PASS;
-- no DOCX created.
+3.6 compares; it does not retell.
+3.7 closes the empirical chapter.
+
+No new raw evidence.
+No new screenshots by default.
+No risk ranking/recommendation.
+
+Gate:
+external review -> user approval -> integrate.
+
+### STEP 4 — X7G: assemble complete Chapter 3
+Mechanically assemble approved sections.
+
+Allowed:
+- heading/cross-reference normalization;
+- transition cleanup;
+- duplicate-sentence removal;
+- terminology consistency;
+- figure/table placement consistency.
+
+Forbidden:
+- new evidence;
+- new result claims;
+- technical reinterpretation.
+
+No DOCX yet.
 
 ### STEP 5 — X7H: whole-Chapter-3 product review
 Review Chapter 3 as one thesis chapter.
@@ -200,6 +212,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7H — review and editorially refine the complete Chapter 3 as one coherent thesis chapter, then obtain explicit user approval; no DOCX`
+`X7F — WAIT FOR EXPLICIT USER APPROVAL of Sections 3.6–3.7`
 
-Nothing else is authorized in parallel.
+No executor task is authorized until the user explicitly approves X7F. X7G remains blocked.
