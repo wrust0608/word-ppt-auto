@@ -65,7 +65,7 @@ Các hiệu chỉnh đã được thực hiện trực tiếp trong `work/do-an/
    - Nêu đúng các sự kiện quan sát được: `EnableSMB1Protocol=False`, danh mục phương ngữ đo lại không còn `NT LM 0.12`, cổng 445 vẫn OPEN, kết quả MS17-010 từ xa duy trì UNKNOWN, trạng thái bản vá nội bộ vẫn là UNPATCHED (`SMBv1 disabled != PATCHED`).
    - Loại bỏ các nhận định chưa đo: “máy chủ từ chối đàm phán”, “ngăn chặn đường tấn công qua SMBv1”.
 6. **Câu hỏi 6 (Hiệu quả Case C):**
-   - Nêu đúng dữ kiện đo đạc: Kali ghi nhận cổng FILTERED (no-response), pfSense ghi nhận nhật ký chặn TCP SYN, máy chủ phía sau vẫn giữ nguyên cấu hình và bản vá UNPATCHED (`FILTERED != PATCHED`).
+   - Nêu đúng dữ kiện đo đạc: Kali ghi nhận cổng FILTERED (no-response), pfSense ghi nhận nhật ký chặn TCP SYN, máy chủ phía sau không ghi nhận thao tác thay đổi cấu hình dịch vụ và trạng thái bản vá nội bộ vẫn là UNPATCHED (`FILTERED != PATCHED`).
    - Loại bỏ kịch bản giả định về kẻ tấn công đi đường vòng hoặc cùng phân đoạn chưa đo đạc.
 7. **Câu hỏi 7 (Lý do không chạy exploit RCE):**
    - Khẳng định: Đo đạc bề mặt tấn công phi xâm nhập là phạm vi thực nghiệm đã được phê duyệt; việc khai thác xâm nhập nằm ngoài phạm vi thực nghiệm đã phê duyệt của đồ án.
