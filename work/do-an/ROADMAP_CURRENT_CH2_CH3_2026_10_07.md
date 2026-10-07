@@ -3,6 +3,33 @@
 Status: `ACTIVE_CURRENT_AUTHORITY`  
 Date: 2026-10-07
 
+## 0. Mandatory global checkpoint before every review/task
+
+Before evaluating any executor result or opening the next task, re-check the project as a whole:
+
+1. read the current roadmap and current project state;
+2. confirm all user-approved/locked sections and current table/figure numbering;
+3. confirm abandoned, superseded or cancelled workflows are not being revived;
+4. confirm deferred milestones that must still happen later;
+5. verify the current gate and the single authorized next action;
+6. compare the proposed action against the full product sequence, not only the latest branch;
+7. do not let a locally successful task skip a required review/user-approval gate.
+
+Historical decisions remain binding unless the user explicitly changes them.
+
+The fixed product sequence is:
+
+`finish X7F -> X7G assemble complete Chapter 3 -> X7H whole-Chapter-3 review + user approval -> X7I assemble locked Chapter 2 + approved Chapter 3 into DOCX -> X7J final combined review/user evaluation -> STOP`
+
+Still forbidden unless explicitly reopened by the user:
+- intermediate Demo Word snapshots;
+- Chapter 1 enrichment;
+- Chapter 2 rewrite;
+- Chapter 4 drafting;
+- full-report expansion;
+- slides/defense package.
+
+
 ## 1. Product target
 
 Deliver one coherent report product containing:
