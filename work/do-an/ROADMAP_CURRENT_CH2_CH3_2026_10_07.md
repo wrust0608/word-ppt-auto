@@ -59,7 +59,7 @@ Next numbering:
 
 Not complete:
 - assembled Chapter 3 — COMPLETE / X7G FINAL PASS;
-- whole-Chapter-3 review — CURRENT NEXT STEP;
+- whole-Chapter-3 review — COMPLETE / FINAL PASS; waiting user approval;
 - combined Chapter 2+3 Word review.
 
 ## 3. Execution sequence
@@ -212,6 +212,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7H — whole-Chapter-3 coherence/compression/technical product review; no DOCX`
+`X7H — FINAL PASS; WAIT FOR EXPLICIT USER APPROVAL of the complete Chapter 3`
 
-X7G has final independent PASS (99/100, 0 blockers). X7H is now the single authorized next action. X7I remains blocked until X7H passes independent review and the user explicitly approves the complete Chapter 3.
+X7H whole-Chapter-3 review has final independent PASS (99/100, 0 blockers). The complete Chapter 3 is not yet USER APPROVED / LOCKED. X7I remains blocked until the user explicitly approves/chốt the complete Chapter 3.
