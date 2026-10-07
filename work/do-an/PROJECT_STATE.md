@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7F_R2_CORRECTION_REQUIRED`.
+- Current gate: `X7F_FINAL_PASS_WAITING_FOR_USER_APPROVAL`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1915,3 +1915,36 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Verdict: **82/100 — REVISE_BLOCKING**.
 - Review and R2 prompt live on `feature/x7f-ch3-synthesis`.
 - X7G Chapter 3 assembly remains BLOCKED until X7F final external PASS + user approval.
+
+
+## DEC-107 — Mandatory global project checkpoint before every review/task
+
+- Ngày: 2026-10-07.
+- User explicitly requires project management to preserve the full roadmap and historical decisions, not only the latest active task.
+- Before reviewing any executor result or opening any new prompt, the manager must re-check:
+  1. `ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`;
+  2. current `PROJECT_STATE.md`;
+  3. locked/user-approved sections and numbering;
+  4. abandoned/superseded branches and cancelled workflows;
+  5. deferred work that must occur later;
+  6. current gate and exactly one authorized next action;
+  7. whether the proposed next step preserves the product sequence.
+- Historical work must never be silently forgotten or reopened.
+- A locally successful executor result cannot by itself authorize the next phase.
+- Current fixed sequence remains:
+  X7F approval -> X7G complete Chapter 3 assembly -> X7H whole-Chapter-3 review/user approval -> X7I locked Chapter 2 + approved Chapter 3 DOCX -> X7J final combined review/user evaluation -> STOP.
+- Cancelled intermediate WR1/WR2 workflow remains cancelled.
+- Chapter 1 enrichment remains abandoned.
+- Chapter 4 remains dormant until a new explicit user instruction.
+
+
+## DEC-108 — X7F R2 final external PASS
+
+- Ngày: 2026-10-07.
+- Executor R2 candidate: `0567e1128110f691b905f9c2aa6c7cae60f490f8`.
+- Reviewer applied only bounded wording tightenings after R2.
+- Final review: `work/do-an/X7F_CH3_36_37_EXTERNAL_REVIEW_R2_FINAL.md`.
+- Verdict: **99/100 — PASS**.
+- Blockers: 0.
+- Sections 3.6–3.7 are ready for explicit user approval.
+- X7G remains BLOCKED until explicit user approval.
