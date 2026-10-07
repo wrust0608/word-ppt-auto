@@ -1,7 +1,11 @@
 # BÁO CÁO THỰC THI HIỆU CHỈNH R3-0 R3 — SỬA LỆNH VÀ TRUY VẾT LUẬN ĐIỂM
 (CH3 REDESIGN R3-0 R3 FIX EXECUTION REPORT)
 
-- **Trạng thái thực thi:** `COMPLETED_BY_EXECUTOR / PENDING_R3_INDEPENDENT_REVIEW` (Executor Antigravity hoàn tất; chuyển giao reviewer độc lập thẩm định, không tự ý tuyên bố PASS thay reviewer).
+> [!WARNING]
+> **TÀI LIỆU LỊCH SỬ — ĐÃ BỊ THAY THẾ (SUPERSEDED):**
+> Báo cáo thực thi R3 này đã bị **SUPERSEDED** bởi Báo cáo thực thi R4: [`work/do-an/R3_0_R4_FIX_EXECUTION_REPORT.md`](file:///E:/word_ppt-auto/work/do-an/R3_0_R4_FIX_EXECUTION_REPORT.md). Các số liệu kiểm kê nguồn cũ (44 hàng bảng / 73 mục) trong tài liệu này là số liệu lịch sử bị lỗi, đã được thay thế bằng số liệu trích xuất tự động chuẩn hóa tại R4 (53 hàng bảng thực tế + 26 khối văn bản = 79 mục kiểm kê nguồn).
+
+- **Trạng thái thực thi:** `SUPERSEDED / HISTORICAL RECORD` (Đã được thay thế bởi R4).
 - **Ngày thực thi:** 2026-10-08
 - **Tác nhân thực hiện:** Antigravity Executor
 - **Candidate R2 nguồn:** `94e82c0d5ff40726d4a2f7cdd5b4278f78972977`

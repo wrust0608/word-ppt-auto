@@ -1,5 +1,7 @@
 # Bàn giao dự án luận văn
 
+> **Writing policy update — 2026-10-08:** Khi soạn/sửa/giao việc/review báo cáo, đọc `WRITING_POLICY.md` tại repository root và `work/do-an/WRITING_RULES_AUDIT_AND_SOURCES_2026_10_08.md`. Yêu cầu trực tiếp mới của người dùng: lập luận từng đề mục có căn cứ, suy nghĩ tác giả được xác nhận, ngôn ngữ dễ hiểu và kiểm mạch thực tế bằng tóm ý từng đoạn. Giữ giọng DEC-22/23; không dùng detector làm thước đo. Gate hiện hành lấy CURRENT OVERRIDE trong PROJECT_STATE.md; cập nhật policy không tự mở chương hay đổi technical locks.
+
 > **CURRENT OVERRIDE — 2026-10-06**
 >
 > Mọi hướng dẫn bàn giao 2026-10-04 ở phần dưới là lịch sử nếu mâu thuẫn với trạng thái mới.

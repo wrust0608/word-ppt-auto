@@ -1,0 +1,13 @@
+# Antigravity — R3-0 R4, sửa inventory và schema
+
+Áp dụng `E:/word_ppt-auto/WRITING_POLICY.md` và hồ sơ AUTHOR_VOICE đã xác nhận. R4 vẫn chỉ sửa đặc tả/truy vết, chưa viết prose; khi lập bảng, ưu tiên quan hệ dữ kiện → nhận định → giới hạn, không dùng số mục hoặc lời tự đánh giá thay kiểm chứng. Các prompt drafting về sau cũng phải đọc policy này.
+
+Đọc CURRENT OVERRIDE, chuẩn ACADEMIC_REVIEW_LEAD_STANDARD_2026_10_08.md và review R3. Candidate baafb388b632ac03d50cf799c18918ad30e4540c. Giữ các phần R3 đã đạt. Không thiết kế lại chương hoặc viết prose.
+
+1. Trích xuất hàng bảng từ CHAPTER_3_DRAFT_R2.md bằng công cụ, loại header/separator và caption. Lưu danh sách line + exact row label làm căn cứ kiểm kê. Bảng cũ thực tế 11/7/5/4/8/10/8 = 53 hàng. Đừng điền inventory từ schema dự kiến hay trí nhớ. Mỗi hàng có source key, action, claim/destination hoặc retire có lý do. Nếu gộp vào bản mới, chỉ rõ many-to-one. Không cố giữ denominator 44/73; tính lại sau inventory. Narrative khối có nghĩa, không bắt giữ mọi chi tiết trong main text.
+2. Giữ đúng schema Bảng 3.5 Case B: SMB1, SMB2/3, FS-SMB1, LanmanServer, TCP445, dialect, verdict, patch. TCP139 not remeasured ghi rõ ở ghi chú/phần phép đo. Bảng 3.7 có schema riêng 8 tiêu chí; không ép hai schema giống nhau. Đồng bộ blueprint/ledger/migration.
+3. Audit tất cả locator và ID↔tệp theo register/map. C-RULE-02=ảnh07 config, C-RULE-03=ảnh08 order; ETM-C-02 là ID thật. B3 là ARP đơn điểm (-sn -PR), không Ping/L3. Sửa các locator cụ thể trong review cùng phần còn lại; raw có line/block, ảnh có vùng/khối. Source root có thể khai báo chung rõ ràng, không dùng basename mơ hồ giữa case. Loại snapshot khỏi nguồn hotfix, derived interpretation trỏ dữ kiện và authority thực sự.
+4. Xóa fragment |r=1. ở ledger Hình3.14; kiểm cấu trúc từng bảng. Kiểm excerpt linter đúng. Báo cáo R4 liệt kê kết quả kiểm thực tế, không tự tuyên bố 100% từ số mục. Sửa mọi claim 44/73 đã lỗi trong trạng thái và báo cáo mới; giữ báo cáo R3 lịch sử, đánh dấu superseded bằng báo cáo R4.
+5. Trước commit, kiểm đường dẫn tồn tại, ID định nghĩa và line có nội dung hỗ trợ. Lưu kết quả kiểm tra có sample exact source/explanation cho audit. Chạy lint sau nội dung và disposition từng finding; validator, 7 unit tests, diff check, hashes83/blobs khóa. Không coi test PASS là nguồn đúng.
+
+Scope: ba artifact _R1 (Revision R4), báo cáo R4, PROJECT_STATE và tệp kiểm tra truy vết nhỏ nếu cần. Không sửa evidence, Ch2/Ch3 cũ/DOCX/review R1–R3. Không crop/panel/Word/demo/Ch4/R3-1. Commit/push theo quyền executor hiện có; báo exact commit, diff scope, rồi STOP PENDING_R4_INDEPENDENT_REVIEW. Reviewer PASS vẫn cần user chốt R3-0.

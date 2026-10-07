@@ -1,5 +1,7 @@
 # Hồ sơ giọng tác giả
 
+> **Bổ sung theo yêu cầu trực tiếp 2026-10-08:** Áp dụng `E:/word_ppt-auto/WRITING_POLICY.md` cho logic, dấu ấn tác giả và khả năng đọc hiểu. Giữ lựa chọn DEC-22/23 đã khóa; bổ sung cơ chế kiểm từng mục và mạch thực tế, không thay giọng bằng mẫu câu mới. Lý do lựa chọn/nhận định cá nhân phải có xác nhận; không tự dựng trải nghiệm. Audit quy tắc và ledger nguồn: `WRITING_RULES_AUDIT_AND_SOURCES_2026_10_08.md`.
+
 - Trạng thái: `LOCKED`
 - Ngày hiệu chỉnh theo hệ thống văn phong mới: 2026-10-04
 - **Roadmap note 2026-10-07:** Các ví dụ kỹ thuật/lựa chọn lịch sử ở phần dưới chỉ dùng hiệu chỉnh giọng, không phải nguồn truth hay roadmap. Khi xung đột, `EXPERIMENTAL_TRUTH_MATRIX.md`, Chapter 3 locks và `ROADMAP_CURRENT_CH2_CH3_2026_10_07.md` có ưu tiên cao hơn.

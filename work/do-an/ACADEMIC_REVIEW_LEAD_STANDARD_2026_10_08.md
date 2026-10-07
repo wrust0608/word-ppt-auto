@@ -1,5 +1,7 @@
 # Chuẩn làm việc của leader và phản biện học thuật
 
+> Bổ sung từ yêu cầu trực tiếp tiếp theo ngày 2026-10-08: đọc `E:/word_ppt-auto/WRITING_POLICY.md` và `WRITING_RULES_AUDIT_AND_SOURCES_2026_10_08.md`. Policy cụ thể hóa cách thiết kế mục, kiểm mạch từng đoạn, xác nhận quyết định cá nhân và giải thích cho người ngoài ngành; dùng cùng chuẩn phản biện dưới đây.
+
 Authority: yêu cầu trực tiếp của người dùng ngày 2026-10-08. Mục tiêu là lãnh đạo agent viết báo cáo có logic, lập luận, chiều sâu và một giọng tác giả nhất quán. Đây là chuẩn review bổ sung; không thay quy định HUIT, technical truth locks hay gate hiện hành. Không mở R3-1 hoặc Chương 4.
 
 ## 1. Cơ sở tham khảo và giới hạn tiếp cận

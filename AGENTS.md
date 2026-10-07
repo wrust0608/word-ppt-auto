@@ -5,6 +5,7 @@
 1. Read `HANDOFF.md`.
 2. Read the target project's `PROJECT_STATE.md` and artifacts it links.
 3. Read `.agents/skills/thesis-research-and-writing/SKILL.md` and only the references routed for the current task.
+4. For academic report writing, editing, delegation prompts or review, read `WRITING_POLICY.md` and the project's confirmed `AUTHOR_VOICE.md`. Apply the policy on argument logic, author decisions and accessibility; do not rely only on style lint or claim counts. Pass the policy path to any executor handoff.
 
 ## Precedence
 
