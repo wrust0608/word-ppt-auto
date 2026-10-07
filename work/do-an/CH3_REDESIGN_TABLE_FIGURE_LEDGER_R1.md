@@ -1,8 +1,8 @@
-# BẢNG TỔNG MỤC HÌNH ẢNH VÀ BẢNG BIỂU CHƯƠNG 3 (CH3 REDESIGN TABLE & FIGURE LEDGER R4)
+# BẢNG TỔNG MỤC HÌNH ẢNH VÀ BẢNG BIỂU CHƯƠNG 3 (CH3 REDESIGN TABLE & FIGURE LEDGER R5)
 
 - **Cổng trạng thái đề xuất:** `PROPOSED / WAITING EXTERNAL REVIEW` (Chưa khóa chính thức; tuyệt đối không gắn nhãn `LOCKED` hay `USER APPROVED`).
-- **Phiên bản tài liệu:** `Revision R4` (Hiệu chỉnh toàn diện theo yêu cầu R3-0 R4, chuẩn hóa độc lập schema Bảng 3.5, loại bỏ fragment/trùng lặp Hình 3.14, đồng bộ audit ID/locator từ Báo cáo thẩm định độc lập R3 tại `work/do-an/R3_0_EVIDENCE_VISUAL_BLUEPRINT_EXTERNAL_REVIEW_R3.md`).
-- **Candidate R3 nguồn:** `baafb388b632ac03d50cf799c18918ad30e4540c`.
+- **Phiên bản tài liệu:** `Revision R5` (Hiệu chỉnh dữ kiện và kiểm nguồn theo Review R4; khôi phục snapshot Before Demo; chuẩn hóa nguồn hotfix và driver Bảng 3.2; bảo toàn schema độc lập Bảng 3.5 và Bảng 3.7; bảo toàn 14 hình ảnh và 7 bảng biểu).
+- **Candidate R4 nguồn:** `ac53515e766efa8ef4eba550183df13589d61997`.
 - **Tài liệu căn cứ lộ trình:** `work/do-an/ROADMAP_CH3_REDESIGN_EVIDENCE_FIRST_2026_10_07.md`.
 - **Tài liệu kiến trúc cơ sở:** `work/do-an/CH3_REDESIGN_EVIDENCE_VISUAL_BLUEPRINT_R1.md` (Revision R4).
 - **Nhánh làm việc canonical:** `feature/ch3-redesign-evidence-first-r1`.
@@ -103,7 +103,7 @@ Bảo đảm tính kiểm toán và truy vết 100% của cấu trúc mới vớ
 | **Bảng 3.1** | 3.2.1 | Table | `work/do-an/chapter3/evidence/baseline/Final_PreDemo_Audit.txt` | PowerShell Audit Script | Cấu hình IP, dịch vụ LanmanServer, FS-SMB1, cổng lắng nghe và Windows Firewall tại mốc xuất phát. |
 | **Hình 3.1** | 3.1.2 | Figure | Sơ đồ vector do báo cáo dựng dựa trên `work/do-an/CHAPTER_2.md` và `ROADMAP_CH3_REDESIGN_EVIDENCE_FIRST_2026_10_07.md` | Flowchart thiết kế thực nghiệm | Luồng hai nhánh thực nghiệm độc lập (Host Case B vs Network Case C) và các điểm hoàn nguyên snapshot Before Demo. |
 | **Hình 3.2** | 3.2.1 | Figure | `work/do-an/chapter3/evidence/baseline/Windows_PreDemo_01_Network_SMB.png` | `Get-NetIPAddress`, `Get-Service`, `Get-NetTCPConnection` | Bằng chứng trực tiếp máy chủ đang chạy dịch vụ và mở socket lắng nghe cổng 139, 445 qua lệnh PowerShell Get-NetTCPConnection (không phải netstat). |
-| **Bảng 3.2** | 3.2.2 | Table | `work/do-an/chapter3/evidence/baseline/Before_Demo_Snapshots.txt`, tài liệu Microsoft S032 / S005 | Microsoft Support Bulletin MS17-010 | Đối chiếu phiên bản số srv.sys 6.3.9600.16421 < 6.3.9600.18604 và danh mục 6 hotfix năm 2014 $\to$ UNPATCHED (derived interpretation). |
+| **Bảng 3.2** | 3.2.2 | Table | `work/do-an/chapter3/evidence/baseline/Windows_MS17010_01_SrvSysVersion.png`, `Windows_MS17010_02_Hotfix.png`, `MS17-010_Official_Mapping.txt`, `Before_Demo_Snapshots.txt`, tài liệu Microsoft S032 / S005 | Microsoft Support Bulletin MS17-010 | Đối chiếu phiên bản số srv.sys 6.3.9600.16421 < 6.3.9600.18604 và danh mục 6 hotfix năm 2014 $\to$ UNPATCHED (derived interpretation). |
 | **Hình 3.3** | 3.2.2 | Figure | `work/do-an/chapter3/evidence/baseline/Windows_MS17010_01_SrvSysVersion.png` + `Windows_MS17010_02_Hotfix.png` | Cửa sổ PowerShell: FileVersion + `Get-HotFix` | Minh chứng thị giác tệp driver hiển thị `6.3.9600.16384`, ghép 4 trường số ra `6.3.9600.16421` và danh mục hotfix không có bản vá MS17-010. |
 | **Hình 3.4** | 3.3.1 | Figure | `work/do-an/chapter3/evidence/scenario1/Scenario1_B4_SMB_Ports.png` | `nmap -p 139,445 --reason` | Minh chứng trực tiếp cổng 139 và 445 mở, phản hồi syn-ack TTL 128 từ góc nhìn trạm Kali. |
 | **Hình 3.5** | 3.3.2 | Figure | `work/do-an/chapter3/evidence/scenario1/Scenario1_B5_SMB_Version.png` + `Scenario1_B6_SMB_NSE_A.png` | `nmap -sV` + `nmap --script smb-protocols` | Minh chứng dải fingerprint dịch vụ, 5 dialect SMB quan sát được từ xa, tính năng (DFS, Leasing, Multi-credit) và signing policy. |
@@ -169,7 +169,7 @@ Bảo đảm mọi tệp ảnh canonical trong 5 thư mục đều có trạng t
 
 ## 6. TỔNG KẾT VÀ CHỈ SỐ PHÂN BỔ THỊ GIÁC (RECONCILED AUDIT)
 
-- **Tổng số bảng biểu đề xuất:** **7 bảng** (Bảng 3.1 đến Bảng 3.7; trong đó cả Bảng 3.5 và Bảng 3.7 đều đồng bộ 8 hàng dữ liệu chuẩn hóa của đề tài).
+- **Tổng số bảng biểu đề xuất:** **7 bảng** (Bảng 3.1 đến Bảng 3.7; trong đó Bảng 3.5 giữ đúng schema đặc thù 8 thuộc tính kỹ thuật của Case B kèm ghi chú TCP 139 not remeasured, và Bảng 3.7 giữ schema riêng 8 tiêu chí tổng hợp 3 trạng thái thực nghiệm).
 - **Tổng số hình ảnh đề xuất:** **14 hình** (Hình 3.1 đến Hình 3.14):
   - *Hình bằng chứng đơn lẻ (Evidence Figures):* **7 hình** (Hình 3.2, Hình 3.4, Hình 3.6, Hình 3.9, Hình 3.11, Hình 3.12, Hình 3.13).
   - *Hình so sánh / ghép panel (Comparison Figures):* **4 hình** (Hình 3.3 ghép 2 panel, Hình 3.5 ghép 2 panel, Hình 3.7 ghép đối chiếu chéo, Hình 3.8 ghép chuỗi 3 panel).

@@ -40,7 +40,7 @@ for fpath in files:
     # Check for |r=1. fragment
     fragment_found = False
     for idx, line in enumerate(lines, 1):
-        if '|r=1.' in line or 'r=1.' in line:
+        if '|r=1.' in line:
             print(f'  [FRAGMENT] L{idx}: {line.strip()}')
             fragment_found = True
     if not fragment_found:

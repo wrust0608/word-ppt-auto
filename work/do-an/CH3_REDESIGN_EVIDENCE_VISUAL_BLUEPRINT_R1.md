@@ -1,8 +1,8 @@
-# CHƯƠNG 3 REDESIGN — EVIDENCE & VISUAL BLUEPRINT (R4)
+# CHƯƠNG 3 REDESIGN — EVIDENCE & VISUAL BLUEPRINT (R5)
 
-- **Cổng trạng thái đề xuất:** `R3_0_REVISE_BLOCKING / PENDING_R4_INDEPENDENT_REVIEW` (Chờ thẩm định độc lập R4; chưa chuyển sang R3-1).
-- **Phiên bản tài liệu:** `Revision R4` (Hiệu chỉnh toàn diện theo yêu cầu R3-0 R4, chuẩn hóa độc lập schema Bảng 3.5, loại bỏ fragment/trùng lặp Hình 3.14, đồng bộ audit ID/locator và ETM-C-02 theo Báo cáo thẩm định độc lập R3 tại `work/do-an/R3_0_EVIDENCE_VISUAL_BLUEPRINT_EXTERNAL_REVIEW_R3.md`).
-- **Candidate R3 nguồn:** `baafb388b632ac03d50cf799c18918ad30e4540c`.
+- **Cổng trạng thái đề xuất:** `R3_0_REVISE_BLOCKING / PENDING_R5_INDEPENDENT_REVIEW` (Chờ thẩm định độc lập R5; chưa chuyển sang R3-1).
+- **Phiên bản tài liệu:** `Revision R5` (Hiệu chỉnh dữ kiện và kiểm nguồn theo Review R4; khôi phục tên snapshot Before Demo; chuẩn hóa nguồn hotfix và mốc phục hồi; lược bỏ chi tiết độ trễ runtime khỏi main text; bảo toàn 14 hình ảnh và 7 bảng biểu).
+- **Candidate R4 nguồn:** `ac53515e766efa8ef4eba550183df13589d61997`.
 - **Tài liệu căn cứ lộ trình:** `work/do-an/ROADMAP_CH3_REDESIGN_EVIDENCE_FIRST_2026_10_07.md`.
 - **Nhánh làm việc canonical:** `feature/ch3-redesign-evidence-first-r1`.
 - **Mục tiêu tài liệu:** Thiết kế chi tiết từng đề mục của Chương 3 theo kiến trúc mới (3.1 đến 3.8), xác định câu hỏi dẫn dắt, thông điệp cốt lõi, bảng biểu, hệ thống 14 hình ảnh đề xuất (Evidence, Comparison, Explanatory), hướng dẫn cắt cúp chuẩn xác theo ảnh thật, ghép panel, ranh giới caption và các tuyên bố bị cấm.
@@ -190,7 +190,7 @@
 #### 3.3.1. Phát hiện máy chủ và khả năng tiếp cận SMB
 1. **Đề mục:** `3.3.1. Phát hiện máy chủ và khả năng tiếp cận SMB`
 2. **Câu hỏi người đọc:** *Từ trạm kiểm thử Kali Linux, máy chủ mục tiêu có hiện diện trên mạng không và các cổng dịch vụ SMB có tiếp cận được không?*
-3. **Thông điệp chính:** Trạm Kali Linux xác nhận sự hiện diện trực tuyến của máy chủ `192.168.56.20` qua giao thức ARP (độ trễ $0.00040\,\text{s}$); quét cổng xác nhận cả hai cổng TCP 139 (`netbios-ssn`) và TCP 445 (`microsoft-ds`) đều ở trạng thái `open`, tiếp nhận kết nối TCP và phản hồi cờ `syn-ack` với giá trị TTL 128.
+3. **Thông điệp chính:** Trạm Kali Linux xác nhận sự hiện diện trực tuyến của máy chủ `192.168.56.20` qua giao thức ARP đơn điểm (lược bỏ chi tiết độ trễ runtime 0.00034s khỏi bảng hiển thị); quét cổng xác nhận cả hai cổng TCP 139 (`netbios-ssn`) và TCP 445 (`microsoft-ds`) đều ở trạng thái `open`, tiếp nhận kết nối TCP và phản hồi cờ `syn-ack` với giá trị TTL 128.
 4. **Technical facts được phép dùng:**
    - Quét khám phá dải mạng B2 (`b2_host_discovery.nmap`): phát hiện 4 IP (.1, .10, .20, .100). Host `.56.100` mang nhãn bắt buộc là `UNKNOWN identity`.
    - Kiểm tra trực tuyến B3 (`b3_target_alive.nmap`): `192.168.56.20` phản hồi trực tuyến (`Host is up`).
