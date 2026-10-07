@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7F_CH3_36_37_NEXT`.
+- Current gate: `X7F_CH3_36_37_IN_PROGRESS`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1897,3 +1897,12 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - Next authorized work:
   `X7F — Section 3.6 comparison + Section 3.7 Chapter 3 conclusion`.
 - No Chapter 3 assembly, Word, Chapter 2 rewrite, or Chapter 4 work is authorized yet.
+
+
+## DEC-105 — X7F Sections 3.6–3.7 active
+
+- Ngày: 2026-10-07.
+- Sections 3.1–3.5 are user-approved and integrated.
+- Active branch: `feature/x7f-ch3-synthesis`.
+- X7F scope: Bảng 3.7 + Sections 3.6 and 3.7 only.
+- X7G Chapter 3 assembly remains BLOCKED until X7F final external PASS + user approval.
