@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7G_CH3_ASSEMBLY_IN_PROGRESS`.
+- Current gate: `X7H_WHOLE_CH3_REVIEW_NEXT`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -1977,3 +1977,23 @@ Any earlier instruction that conflicts with this sequence is historical unless e
 - X7G scope: mechanical Chapter 3 assembly only.
 - X7H whole-Chapter-3 product review remains BLOCKED until X7G completes.
 - X7I Chapter 2+3 DOCX remains BLOCKED until X7H review + explicit user approval of the complete Chapter 3.
+
+
+## DEC-110 — X7G mechanical Chapter 3 assembly PASS and integrated
+
+- Ngày: 2026-10-07.
+- X7G candidate: `8ed5736cbebe11af1fd4793e7e1242cd5291b9a1`.
+- External review: `work/do-an/X7G_CH3_ASSEMBLY_EXTERNAL_REVIEW_FINAL.md`.
+- Verdict: **100/100 — PASS (mechanical assembly only)**.
+- Integrated artifacts:
+  - `work/do-an/CHAPTER_3_COMPLETE_R1.md`;
+  - `work/do-an/CHAPTER_3_ASSEMBLY_SELF_REVIEW_R1.md`;
+  - X7G external review.
+- Mechanical integrity:
+  - Sections 3.1–3.7 assembled;
+  - Bảng 3.1–3.7 preserved;
+  - Hình 3.1–3.11 preserved;
+  - no new evidence/claim/figure/table.
+- Chapter 3 is assembled but **NOT YET WHOLE-CHAPTER APPROVED**.
+- Next authorized phase: X7H whole-Chapter-3 coherence/compression/technical/product review.
+- X7I DOCX remains BLOCKED until X7H PASS + explicit user approval of the complete Chapter 3.

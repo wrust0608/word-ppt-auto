@@ -19,7 +19,7 @@ Historical decisions remain binding unless the user explicitly changes them.
 
 The fixed product sequence is:
 
-`X7G assemble complete Chapter 3 -> X7H whole-Chapter-3 review + user approval -> X7I assemble locked Chapter 2 + approved Chapter 3 into DOCX -> X7J final combined review/user evaluation -> STOP`
+`X7H whole-Chapter-3 review + user approval -> X7I assemble locked Chapter 2 + approved Chapter 3 into DOCX -> X7J final combined review/user evaluation -> STOP`
 
 Still forbidden unless explicitly reopened by the user:
 - intermediate Demo Word snapshots;
@@ -59,8 +59,10 @@ Next numbering:
 - Bảng 3.8;
 - Hình 3.12.
 
+Complete:
+- assembled Chapter 3 R1 (mechanical, X7G PASS).
+
 Not complete:
-- assembled Chapter 3;
 - whole-Chapter-3 review;
 - combined Chapter 2+3 Word review.
 
@@ -108,22 +110,12 @@ X7E1 — COMPLETE / USER APPROVED:
 - final external PASS + user approval completed;
 - no new evidence or figure introduced.
 
-### STEP 4 — X7G: assemble complete Chapter 3
-Mechanically assemble approved sections.
-
-Allowed:
-- heading/cross-reference normalization;
-- transition cleanup;
-- duplicate-sentence removal;
-- terminology consistency;
-- figure/table placement consistency.
-
-Forbidden:
-- new evidence;
-- new result claims;
-- technical reinterpretation.
-
-No DOCX yet.
+### STEP 4 — X7G: assemble complete Chapter 3 — COMPLETE / PASS
+- approved Sections 3.1–3.7 assembled into `CHAPTER_3_COMPLETE_R1.md`;
+- Bảng 3.1–3.7 and Hình 3.1–3.11 preserved;
+- no new evidence or technical reinterpretation;
+- mechanical assembly external review PASS;
+- no DOCX created.
 
 ### STEP 5 — X7H: whole-Chapter-3 product review
 Review Chapter 3 as one thesis chapter.
@@ -208,6 +200,6 @@ It passes only when:
 
 ## 7. Current next action
 
-`X7G — mechanically assemble the complete approved Chapter 3 (3.1–3.7), no DOCX`
+`X7H — review and editorially refine the complete Chapter 3 as one coherent thesis chapter, then obtain explicit user approval; no DOCX`
 
 Nothing else is authorized in parallel.
