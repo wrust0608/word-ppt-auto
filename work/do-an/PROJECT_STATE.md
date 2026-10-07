@@ -1,19 +1,26 @@
 # Trạng thái dự án
 
-## CURRENT OVERRIDE — 2026-10-08 — Chapter 3 redesign R3-0 (Revision R2)
+## CURRENT OVERRIDE — 2026-10-08 — Chapter 3 redesign R3-0 (Revision R3)
 
 - Authority: handoff trực tiếp của người dùng ngày 07/10/2026 và `ROADMAP_CH3_REDESIGN_EVIDENCE_FIRST_2026_10_07.md` tại commit `170aa24293b2cf8e579abb1ecf60920bca418bd9`.
 - Summary X7J ở dưới và chỉ dẫn X7A1 trong HANDOFF.md là lịch sử khi mâu thuẫn với override này. Không xóa lịch sử DEC/approval cũ.
-- Branch hiện có: `feature/ch3-redesign-evidence-first-r1`; candidate executor R3-0 R1: `4f9d3f059f96d8b44ef6c83e0c2b20301245ce3e`; hiện đang ở đợt hiệu chỉnh Revision R2.
+- Branch hiện có: `feature/ch3-redesign-evidence-first-r1`; candidate executor R3-0 R2: `94e82c0d5ff40726d4a2f7cdd5b4278f78972977`; hiện đã hoàn thành các sửa đổi đợt hiệu chỉnh Revision R3.
 - Chapter 2: `USER_APPROVED / CONTENT_LOCKED / FINAL_DOCX_PASS`; blob `55ffb13acb3398c7ab29d6d5abbb369e5d26f3d0` vẫn giữ nguyên.
 - Chapter 3: **architecture explicitly reopened by user**; kiến trúc 3.1–3.8 và roadmap redesign đã được người dùng chốt theo handoff. Bản cũ giữ vai trò nguồn kỹ thuật/lịch sử, không còn là sản phẩm final của kiến trúc mới. Technical truth và evidence locks không được mở lại.
-- Current gate: `R3_0_REVISE_BLOCKING / PENDING_R2_INDEPENDENT_REVIEW` (Hoàn tất hiệu chỉnh R2 cho ba artifact R3-0; chờ ChatGPT thẩm định độc lập R2; chưa mở R3-1).
-- Ba artifact R3-0 đã cập nhật Revision R2: `CH3_REDESIGN_EVIDENCE_VISUAL_BLUEPRINT_R1.md`, `CH3_REDESIGN_TABLE_FIGURE_LEDGER_R1.md`, `CH3_REDESIGN_CONTENT_MIGRATION_MAP_R1.md`. Đã xử lý triệt để toàn bộ 9 điểm tồn tại F01–F09 từ review R1.
-- Báo cáo thực thi R2: `work/do-an/R3_0_R2_FIX_EXECUTION_REPORT.md` (chứa bảng ma trận F01–F09, kết quả kiểm toán 83 tệp checksum, kiểm tra git blobs và biên bản kiểm tra lint/tests). Báo cáo review R1 `R3_0_EVIDENCE_VISUAL_BLUEPRINT_EXTERNAL_REVIEW_R1.md` được giữ nguyên vẹn để truy vết.
+- Current gate: `R3_0_REVISE_BLOCKING / PENDING_R3_INDEPENDENT_REVIEW` (Executor R3 hoàn tất sửa đổi R2-F01 đến R2-F05; đang chờ thẩm định độc lập R3; không tuyên bố resolved trước kiểm tra; chưa mở R3-1).
+- Candidate R2: `94e82c0d5ff40726d4a2f7cdd5b4278f78972977`. Candidate R3 chuẩn bị commit gồm 3 artifact blueprint/ledger/migration (giữ đuôi `_R1` với Revision R3 bên trong) và báo cáo thực thi `work/do-an/R3_0_R3_FIX_EXECUTION_REPORT.md`.
+- Các sửa đổi chính trong đợt R3:
+  - R2-F01: Lệnh operator chép chuẩn xác từ ảnh/manifest (`nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20` không sudo, không unsafe=0); recorded argv raw ghi nhận rõ `/usr/lib/nmap/nmap --privileged ...`; sửa câu lệnh trong ảnh baseline `Windows_PreDemo_01_Network_SMB.png` thành `Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -in 139,445 }`.
+  - R2-F02: Audit toàn bộ locator sang đường dẫn tương đối thực sự (không wildcard, không tên rút gọn mơ hồ); ảnh có vùng/khối rõ ràng; toàn bộ 41 claims đều gán Stable Evidence IDs từ `EVIDENCE_REGISTER.md`; bổ sung Mục 3 Source Inventory chi tiết 73 mục dữ kiện nguồn (44 hàng dữ liệu của 7 bảng cũ + 29 khối fact văn bản từ dòng 1 đến 318 của `CHAPTER_3_DRAFT_R2.md`), xác lập rõ mẫu số denominator (72 mục REUSE/MOVE, 1 mục RETIRE có lý do về thời lượng 0.51s dòng 278, ghi nhận `arp-response` Case C dòng 262).
+  - R2-F03: Phân định rành mạch Section 21 `RUN4_PAUSE_STATE_REPORT.txt` (dòng 376–384) chỉ đo trạng thái SMB1/2, socket 139/445 và driver srv.sys; trạng thái `LanmanServer: Running` là canonical truth lock kế thừa (`ETM-C02` từ baseline và Section 8 dòng 162). Ghi nhận minh bạch việc Section 21 thiếu phép đo trực tiếp dịch vụ ở trạng thái cuối.
+  - R2-F04: Giới hạn local `Get-HotFix` inventory chỉ là bằng chứng hỗ trợ việc thiếu KB4012213/KB4012216 đã biết; phân loại `UNPATCHED` là derived interpretation dựa trên đối chiếu phiên bản nhị phân; đồng bộ Bảng 3.5 và Bảng 3.7 đều đủ 8 hàng dữ liệu chuẩn hóa.
+  - R2-F05: Chạy linter tiếng Việt học thuật sau substantive review, lập bảng disposition chi tiết cho 17 findings (1 FALSE_POSITIVE, 16 KEEP_WITH_REASON, 0 FIX style làm đổi chứng cứ).
+- Independent review R2: `work/do-an/R3_0_EVIDENCE_VISUAL_BLUEPRINT_EXTERNAL_REVIEW_R2.md` (giữ nguyên không sửa).
+- Báo cáo thực thi R3: `work/do-an/R3_0_R3_FIX_EXECUTION_REPORT.md` (trình bày chi tiết before/after, locator, audit denominator 73 mục, bảng disposition linter và các giới hạn còn mở).
 - Numbering mới: **PROPOSED / WAITING EXTERNAL REVIEW** (7 bảng / 14 hình gồm 7 Evidence, 4 Comparison, 3 Explanatory); tuyệt đối chưa LOCKED_NUMBERING.
 - Kiểm tra toàn vẹn kỹ thuật: 83/83 staging checksum khớp 100% `CHAPTER_3_EVIDENCE_SHA256.csv` (78 primary/direct, 5 secondary metadata/closure); blob Chương 2 (`55ffb13acb3398c7ab29d6d5abbb369e5d26f3d0`), blob Chương 3 cũ (`40d2a895bc970f88d7260b3138b8a701f5eb0a8c`), blob DOCX cũ (`276278b1fb3e2f74acd11f6cb42b66df8c9b0ca9`, SHA-256 `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`) giữ nguyên vẹn 100%.
 - Unresolved canonical: CF-11 exact named-rule attribution; cross-system timebase chưa chuẩn hóa; local/remote signing giữ riêng; NSE04 nguyên nhân không có usable verdict chưa xác lập; `.56.100` chưa xác định danh tính. Không giải quyết bằng suy đoán.
-- Single authorized next action: Bàn giao để ChatGPT thẩm định độc lập R2 (`R3-0 R2 Independent Review`). Sau reviewer PASS, người dùng chốt R3-0 mới được khóa số hiệu và mở R3-1. Tuyệt đối STOP tại R3-0 R2.
+- Single authorized next action: Chờ reviewer độc lập thẩm định R3. Sau reviewer PASS, người dùng chốt R3-0 mới được khóa số hiệu và mở R3-1. Không tự ý tuyên bố PASS hay mở R3-1.
 - Tuyệt đối chưa viết văn xuôi Chương 3 mới, không sửa Chương 2, không tạo file crop/panel mới, không dựng Word DOCX, không chạy demo thực nghiệm, không tạo ca thực nghiệm "Case A". Chương 4 vẫn `DORMANT / BACKLOG`.
 
 ## CURRENT STATE SUMMARY — 2026-10-07

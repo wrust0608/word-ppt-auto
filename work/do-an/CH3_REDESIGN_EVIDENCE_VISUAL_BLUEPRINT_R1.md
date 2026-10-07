@@ -1,8 +1,8 @@
-# CHƯƠNG 3 REDESIGN — EVIDENCE & VISUAL BLUEPRINT (R2)
+# CHƯƠNG 3 REDESIGN — EVIDENCE & VISUAL BLUEPRINT (R3)
 
-- **Cổng trạng thái đề xuất:** `R3_0_REVISE_BLOCKING / PENDING_R2_INDEPENDENT_REVIEW` (Chờ thẩm định độc lập R2; chưa chuyển sang R3-1).
-- **Phiên bản tài liệu:** `Revision R2` (Hiệu chỉnh toàn diện khắc phục các điểm tồn tại F01–F09 theo Báo cáo thẩm định độc lập R1 tại `work/do-an/R3_0_EVIDENCE_VISUAL_BLUEPRINT_EXTERNAL_REVIEW_R1.md`).
-- **Candidate R1 nguồn:** `4f9d3f059f96d8b44ef6c83e0c2b20301245ce3e`.
+- **Cổng trạng thái đề xuất:** `R3_0_REVISE_BLOCKING / PENDING_R3_INDEPENDENT_REVIEW` (Chờ thẩm định độc lập R3; chưa chuyển sang R3-1).
+- **Phiên bản tài liệu:** `Revision R3` (Hiệu chỉnh toàn diện khắc phục các điểm tồn tại R2-F01–R2-F05 theo Báo cáo thẩm định độc lập R2 tại `work/do-an/R3_0_EVIDENCE_VISUAL_BLUEPRINT_EXTERNAL_REVIEW_R2.md`).
+- **Candidate R2 nguồn:** `94e82c0d5ff40726d4a2f7cdd5b4278f78972977`.
 - **Tài liệu căn cứ lộ trình:** `work/do-an/ROADMAP_CH3_REDESIGN_EVIDENCE_FIRST_2026_10_07.md`.
 - **Nhánh làm việc canonical:** `feature/ch3-redesign-evidence-first-r1`.
 - **Mục tiêu tài liệu:** Thiết kế chi tiết từng đề mục của Chương 3 theo kiến trúc mới (3.1 đến 3.8), xác định câu hỏi dẫn dắt, thông điệp cốt lõi, bảng biểu, hệ thống 14 hình ảnh đề xuất (Evidence, Comparison, Explanatory), hướng dẫn cắt cúp chuẩn xác theo ảnh thật, ghép panel, ranh giới caption và các tuyên bố bị cấm.
@@ -128,7 +128,7 @@
 9. **Loại hình:** **Evidence Figure** (Ảnh bằng chứng trực tiếp từ PowerShell cục bộ).
 10. **Hướng dẫn crop:**
     - Tệp nguồn canonical: `work/do-an/chapter3/evidence/baseline/Windows_PreDemo_01_Network_SMB.png` (đã có bản trình bày chuẩn hóa tại `chapter3/presentation/3_1/Hinh_3_1_Network_SMB.png`).
-    - Khu vực giữ: Giao diện PowerShell hiển thị `Get-NetIPAddress` (.56.20/24), `Get-Service LanmanServer` (Running), `Get-WindowsFeature FS-SMB1` (Installed), và `netstat -ano` (cổng 139, 445 Listen).
+    - Khu vực giữ: Giao diện PowerShell hiển thị `Get-NetIPAddress` (.56.20/24), `Get-Service LanmanServer` (Running), `Get-WindowsFeature FS-SMB1` (Installed), và `Get-NetTCPConnection` (cổng 139, 445 Listen).
     - Không được che: Địa chỉ IP 192.168.56.20, trạng thái Running của dịch vụ, cổng lắng nghe 445 và 139.
 11. **Ghép panel:** Không ghép; dùng độc lập làm minh chứng cho cấu hình dịch vụ nội bộ. Ảnh `Windows_PreDemo_02_Firewall.png` chuyển thành supporting visual do Bảng 3.1 đã phản ánh đầy đủ thông số tường lửa.
 12. **Caption dự kiến:** `Hình 3.2. Trạng thái cấu hình mạng, dịch vụ LanmanServer và các cổng lắng nghe trên Windows Server 2012 R2 trước thực nghiệm`
@@ -152,8 +152,8 @@
    - Giá trị phiên bản số nhị phân: ghép 4 trường số `FileMajorPart` (6), `FileMinorPart` (3), `FileBuildPart` (9600), `FilePrivatePart` (16421) $\to$ `6.3.9600.16421`.
    - Ngưỡng bản vá Microsoft MS17-010 cho Windows Server 2012 R2: tối thiểu `6.3.9600.18604` (căn cứ tài liệu hỗ trợ chính thức Microsoft Support Article 4023262, mã nguồn `S032` trong `SOURCE_LEDGER.md`, thuộc bản tin bảo mật MS17-010 `S005`, ứng với gói cập nhật KB4012213 Security Only hoặc KB4012216 Monthly Rollup).
    - So sánh số học: $6.3.9600.16421 < 6.3.9600.18604$.
-   - Danh mục `Get-HotFix` có 6 bản cập nhật năm 2014 (KB2919355, KB2919442, KB2937220, KB2938772, KB2939471, KB2949621); hoàn toàn thiếu bản vá MS17-010.
-   - Phân loại cục bộ: **UNPATCHED**.
+   - Danh mục `Get-HotFix` có 6 bản cập nhật năm 2014 (KB2919355, KB2919442, KB2937220, KB2938772, KB2939471, KB2949621); không ghi nhận KB4012213 hoặc KB4012216 trong danh mục `Get-HotFix` cục bộ đã thu thập. Danh mục này đóng vai trò bổ trợ, không đại diện cho toàn bộ lịch sử cập nhật của hệ thống.
+   - Phân loại cục bộ: **UNPATCHED** đối với MS17-010 dựa trên phiên bản số của driver `srv.sys` (`6.3.9600.16421 < 6.3.9600.18604`) và ngưỡng tài liệu chính thức Microsoft (S032). Đây là phân loại tổng hợp có nguồn (Derived Interpretation / ALLOWED_INTERPRETATION), không coi chính nó là một quan sát sơ cấp (primary observation) độc lập.
    - Mốc phục hồi: Snapshot `Before Demo` chụp trên cả 2 VM ở trạng thái tắt máy.
 5. **Direct evidence tương ứng:**
    - `work/do-an/chapter3/evidence/baseline/Windows_MS17010_01_SrvSysVersion.png` (PRIMARY_VISUAL — hiển thị cửa sổ PowerShell với chuỗi FileVersion và lệnh ghép 4 trường số nhị phân).
@@ -294,11 +294,11 @@
      * `NSE-SMB-02`: `smb-protocols` (5 phương ngữ).
      * `NSE-SMB-03`: `smb2-security-mode` (signing enabled but not required).
      * `NSE-SMB-04`: `smb-vuln-ms17-010` (cổng 445 open, Nmap hoàn tất, không có khối `Host script results:`).
-   - Câu lệnh thực nghiệm:
-     * Lệnh thao tác của kiểm thử viên (operator command): `sudo nmap -p 445 --script smb-vuln-ms17-010 192.168.56.20`.
-     * Tham số ghi nhận trong log Nmap (recorded argv): `nmap -p 445 --script smb-vuln-ms17-010 --privileged 192.168.56.20`.
-     * Khi viết dạng rút gọn `nmap -p 445 --script smb-vuln-ms17-010 192.168.56.20`, phải ghi rõ là dạng chuẩn hóa/rút gọn, không gọi là literal command đã ghi nhận trong log.
-     * **TUYỆT ĐỐI KHÔNG CÓ THAM SỐ `unsafe=0`** trong câu lệnh thực nghiệm.
+   - Câu lệnh thực nghiệm (R2-F01, R2-F02):
+     * Lệnh thao tác của kiểm thử viên (operator command, ghi nhận chính xác trong `Scenario2_NSE04_MS17010.png` và `work/do-an/chapter3/evidence/scenario2/Scenario2_Run_Manifest.txt`): `nmap -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20` (tuyệt đối không thêm `sudo`, không có `unsafe=0`).
+     * Tham số ghi nhận trong log Nmap (recorded argv, ghi nhận tại dòng 1 của `work/do-an/chapter3/evidence/scenario2/NSE-SMB-04_ms17010.nmap`): `/usr/lib/nmap/nmap --privileged -p 445 -n -T3 --max-retries 2 --script smb-vuln-ms17-010 -oA evidence/nse-smb/NSE-SMB-04_ms17010 192.168.56.20`.
+     * Khi viết dạng rút gọn `nmap -p 445 --script smb-vuln-ms17-010 192.168.56.20` trong văn bản thuyết minh, phải đánh dấu rõ ràng là bản rút gọn/tóm lược, không gọi là câu lệnh nguyên văn (literal command) đã ghi nhận trong log.
+     * **TUYỆT ĐỐI KHÔNG CÓ THAM SỐ `unsafe=0`** và **KHÔNG THÊM `sudo`** vào câu lệnh thao tác của kiểm thử viên.
    - Phân loại dự án: **`UNKNOWN / NO USABLE SCRIPT RESULT`**.
    - Nguyên nhân của việc thiếu vắng kết luận script **chưa được xác lập** từ bộ dữ liệu thực nghiệm hiện có.
    - Tiên đề: `UNKNOWN != SAFE`. Không tự gán thông báo VULNERABLE, SAFE, hay NOT VULNERABLE.
@@ -440,9 +440,9 @@
 #### 3.5.3. Tổng hợp sự thay đổi quan sát được
 1. **Đề mục:** `3.5.3. Tổng hợp sự thay đổi quan sát được`
 2. **Câu hỏi người đọc:** *Biện pháp Case B có ưu điểm và giới hạn kỹ thuật cốt lõi nào khi đặt các dữ kiện cạnh nhau?*
-3. **Thông điệp chính:** Hệ thống hóa sự so sánh Before vs. After của Case B trên 7 tiêu chí kỹ thuật: cấu hình `EnableSMB1Protocol`, cấu hình `EnableSMB2Protocol`, tính năng `FS-SMB1`, trạng thái dịch vụ `LanmanServer`, cổng TCP 445, phương ngữ SMB từ xa, phán quyết MS17-010, và trạng thái bản vá `srv.sys`. Biện pháp tắt SMBv1 thành công trong việc loại bỏ phương ngữ cũ trên bề mặt mạng mà dịch vụ LanmanServer vẫn duy trì Running tại thời điểm kiểm tra; nhưng giới hạn cốt lõi là không sửa đổi mã nhị phân driver nhân `srv.sys` (kế thừa phân loại `UNPATCHED`), và cổng TCP 445 vẫn tiếp tục mở ra mạng ngoài.
-4. **Technical facts được phép dùng (F03, F08):**
-   - Bảng đối chiếu Before vs. After gồm 7 hàng dữ liệu kỹ thuật đầy đủ:
+3. **Thông điệp chính:** Hệ thống hóa sự so sánh Before vs. After của Case B trên 8 tiêu chí kỹ thuật: cấu hình `EnableSMB1Protocol`, cấu hình `EnableSMB2Protocol`, tính năng `FS-SMB1`, trạng thái dịch vụ `LanmanServer`, cổng TCP 445, phương ngữ SMB từ xa, phán quyết MS17-010, và trạng thái bản vá `srv.sys`. Biện pháp tắt SMBv1 thành công trong việc loại bỏ phương ngữ cũ trên bề mặt mạng mà dịch vụ LanmanServer vẫn duy trì Running tại thời điểm kiểm tra; nhưng giới hạn cốt lõi là không sửa đổi mã nhị phân driver nhân `srv.sys` (kế thừa phân loại `UNPATCHED`), và cổng TCP 445 vẫn tiếp tục mở ra mạng ngoài.
+4. **Technical facts được phép dùng (F03, F08, R2-F04):**
+   - Bảng đối chiếu Before vs. After gồm 8 hàng dữ liệu kỹ thuật đầy đủ:
      1) Cấu hình SMBv1 (`EnableSMB1Protocol : True` $\to$ `False`).
      2) Cấu hình SMB2/3 (`EnableSMB2Protocol : True` $\to$ `True`).
      3) Tính năng Windows (`FS-SMB1 : Installed` $\to$ `Installed`).
@@ -560,7 +560,7 @@
    - Kali: 139/445 filtered do no-response.
    - pfSense Block Log: biểu tượng Block đỏ, Interface `CASE_C_KALI`, Source `192.168.56.10`, Destination `192.168.56.20:139` và `:445`, giao thức TCP, cờ SYN.
    - **Xung đột nhãn quy tắc đã khóa (CF-11):** Ảnh chụp nhật ký hiển thị nhãn `CASE C baseline pass Kali to Windows (100000104)` trong khi manifest/closure ghi `CASE C - Block SMB Kali to Windows (1000000104)`. Được phép kết luận: các gói tin TCP SYN phù hợp đã bị chặn trên đường truyền pfSense trong phiên quét canonical; TUYỆT ĐỐI CẤM quy thuộc đích danh named rule ID hoặc tuyên bố screenshot chứng minh chính xác named rule Block đã khớp. Tuyệt đối không crop ảnh để che conflict này.
-   - **Căn cứ nguồn Windows cuối lượt (F05):** Máy chủ Windows phía sau không can thiệp trực tiếp; trạng thái cuối lượt được ghi nhận từ **Section 21 của `case_c/RUN4_PAUSE_STATE_REPORT.txt`** (SECONDARY_META_CLOSURE) và manifest: `EnableSMB1Protocol : True`, `EnableSMB2Protocol : True`, `LanmanServer : Running`, listener 139/445 hiện diện, driver `srv.sys` unpatched (`6.3.9600.16421`). Phân định rõ: đây là nguồn thứ cấp, không dùng baseline để giả làm direct screenshot proof.
+   - **Căn cứ nguồn Windows cuối lượt (F05, R2-F03):** Máy chủ Windows phía sau không can thiệp trực tiếp; dữ kiện cấu hình và bản vá cuối lượt được ghi nhận từ **Section 21 của `work/do-an/chapter3/evidence/case_c/RUN4_PAUSE_STATE_REPORT.txt`** (SECONDARY_META_CLOSURE, dòng 376–384) gồm: `EnableSMB1Protocol : True`, `EnableSMB2Protocol : True`, listener TCP 139/445 Listen, chuỗi driver `srv.sys` `6.3.9600.16384`, phiên bản số `6.3.9600.16421`, và trạng thái bản vá `UNPATCHED`. Trạng thái dịch vụ `LanmanServer : Running` được duy trì theo technical truth lock `ETM-C02` trong `EXPERIMENTAL_TRUTH_MATRIX.md` (kế thừa từ baseline `Final_PreDemo_Audit.txt` và lineage trung gian Section 8 dòng 162 của `RUN4_PAUSE_STATE_REPORT.txt`); ghi nhận rõ giới hạn kỹ thuật là Section 21 không chứa phép đo dịch vụ trực tiếp cuối lượt (`Get-Service LanmanServer`) tại thời điểm đóng lượt hoàn tất. Phân định rõ: đây là nguồn thứ cấp, không dùng baseline để giả làm direct screenshot proof.
    - **Giới hạn đối chiếu thời gian (F05):** Đối chiếu giữa Kali Nmap và pfSense log dựa trên run lineage và bộ tuple `(Nguồn: 192.168.56.10, Đích: 192.168.56.20, Cổng: 139/445, Giao thức: TCP, Cờ: SYN)`. Không so sánh xâu thời gian như thể cùng một wall clock và không suy đoán múi giờ đồng bộ chéo hệ thống.
    - Tiên đề: `FILTERED != PATCHED`.
 5. **Direct evidence tương ứng:**
