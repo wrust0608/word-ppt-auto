@@ -2,7 +2,7 @@
 
 ## CURRENT STATE SUMMARY — 2026-10-07
 
-- Current gate: `X7I_R2_REVISE_BLOCKING`.
+- Current gate: `X7I_R3_READY_FOR_INDEPENDENT_REVIEW`.
 - Current roadmap authority: `work/do-an/ROADMAP_CURRENT_CH2_CH3_2026_10_07.md`.
 - Current execution rule: **không dùng snapshot trạng thái 2026-10-04 phía dưới để quyết định việc đang làm**; dùng summary này + các DEC mới nhất.
 - Chapter 1: còn source/publication closure trước final report; không phải current execution target.
@@ -11,7 +11,7 @@
 - Chapter 2 final DOCX: `work/do-an/output/CHAPTER_2_FINAL.docx` trên X6 evidence branch/integration lineage.
 - Chapter 3: `USER_APPROVED / CONTENT_LOCKED / X7H_FINAL_PASS`.
 - Chapter 3 approved Markdown: `work/do-an/CHAPTER_3_DRAFT_R2.md`.
-- Combined Chapter 2+3 Review DOCX: `work/do-an/output/CHAPTER_2_3_REVIEW.docx` (44 trang, SHA-256 `9853347a66ed0d23a788f0f09f42edfac7cb9beb70d8864736f88b4e6d1145d2`, true Word Heading 1/2/3 styles, 44/44 pages visually inspected).
+- Combined Chapter 2+3 Review DOCX: `work/do-an/output/CHAPTER_2_3_REVIEW.docx` (44 trang, 761.414 bytes, SHA-256 `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`, true Word Heading 1/2/3 styles, 44/44 pages visually inspected, immutable hash chain verified).
 - X6 experimental evidence preparation: `PASS`.
 - Evidence staging: 83 files total; 78 primary/direct; 5 secondary metadata/closure; 0 SHA mismatch.
 - Chapter 3 authoring model: **SECTIONED WORKFLOW**.
@@ -33,7 +33,7 @@
 3. X7F — COMPLETE / USER APPROVED / LOCKED; Sections 3.6–3.7 integrated, Bảng 3.7 locked, no new figure.
 4. X7G — COMPLETE / FINAL INDEPENDENT PASS; complete Chapter 3 assembled, no DOCX.
 5. X7H — COMPLETE / FINAL INDEPENDENT PASS / USER APPROVED; complete Chapter 3 is LOCKED.
-6. X7I — R2 READY FOR INDEPENDENT REVIEW: Chapter 3 headings upgraded to true Word Heading 1/2/3 styles (outline levels 0, 1, 2); full 44-page sequential visual inspection completed; margins verified top 3.5cm, bottom 3.0cm, left 3.5cm, right 2.0cm.
+6. X7I — R3 READY FOR INDEPENDENT REVIEW: Exact inspected DOCX frozen (SHA-256 3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2), true Word Heading 1/2/3 styles (outline levels 0, 1, 2) and margins (top 3.5cm, bottom 3.0cm, left 3.5cm, right 2.0cm) preserved, full 44-page sequential visual inspection passed, hash proof chain verified.
 7. X7J — final combined Chapters 2+3 review and user evaluation.
 8. STOP. No Chapter 4 or broader thesis work without a new explicit user instruction.
 

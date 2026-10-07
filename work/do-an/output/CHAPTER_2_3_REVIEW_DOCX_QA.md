@@ -1,9 +1,10 @@
-# BÁO CÁO KIỂM ĐỊNH CHẤT LƯỢNG ĐỊNH DẠNG DOCX CHƯƠNG 2 + CHƯƠNG 3 (X7I R2 QA REPORT)
+# BÁO CÁO KIỂM ĐỊNH CHẤT LƯỢNG ĐỊNH DẠNG DOCX CHƯƠNG 2 + CHƯƠNG 3 (X7I R3 QA REPORT)
 
 - **Tệp DOCX đánh giá:** `work/do-an/output/CHAPTER_2_3_REVIEW.docx`
 - **Kích thước tệp:** 761.414 bytes
-- **Mã băm SHA-256 DOCX:** `9853347a66ed0d23a788f0f09f42edfac7cb9beb70d8864736f88b4e6d1145d2`
-- **Thời gian lập báo cáo:** 2026-10-07T14:45:00+07:00
+- **Mã băm SHA-256 DOCX (FINAL_DOCX_SHA256):** `3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`
+- **Chuỗi bằng chứng bất biến (Hash Proof Chain):** `hash file đã render = hash ghi trong QA = hash file đã commit = 3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`
+- **Thời gian lập báo cáo:** 2026-10-07T15:15:00+07:00
 - **Tổng số trang:** 44 trang (A4 portrait, in một mặt)
 - **Phương pháp kết xuất (Render method):** Microsoft Word 16 COM Automation (`ExportAsFixedFormat(wdExportFormatPDF=17)`) trên Windows 11 với máy in mặc định `Microsoft Print to PDF`, kết hợp PyMuPDF render ảnh PNG 150 DPI từng trang độc lập (`scratch/review_pages/page_01.png` đến `page_44.png`).
 - **Tệp nguồn canonical:**
@@ -12,7 +13,7 @@
 - **Tệp mẫu đối chứng Chương 2 (Reference DOCX):** `work/do-an/output/CHAPTER_2_FINAL.docx` (SHA-256: `03adb6c44bc7c336b8c1be99f4e87c2ad93d0f11fe7d16603d5eb8dc102a7042`)
 - **Cấu trúc đề mục Word:** Đúng 2 tiêu đề `Heading 1` (outline level 0), đúng 14 tiêu đề `Heading 2` (outline level 1), đúng 30 tiêu đề `Heading 3` (outline level 2).
 - **Hệ thống bảng biểu và hình ảnh:** Đúng 11 bảng (Bảng 2.1–2.4, Bảng 3.1–3.7) và đúng 13 hình (Hình 2.1–2.2, Hình 3.1–3.11).
-- **Trạng thái kiểm định:** **PASS (100% TUÂN THỦ QUY CHUẨN HUIT, ZERO REGRESSION CHƯƠNG 2, HEADING STYLES WORD CHUẨN XÁC, TOÀN BỘ 44/44 TRANG ĐÃ MỞ VÀ KIỂM TRA TRỰC QUAN TUẦN TỰ)**
+- **Trạng thái kiểm định:** **PASS (100% TUÂN THỦ QUY CHUẨN HUIT, ZERO REGRESSION CHƯƠNG 2, HEADING STYLES WORD CHUẨN XÁC, TOÀN BỘ 44/44 TRANG ĐÃ MỞ VÀ KIỂM TRA TRỰC QUAN TUẦN TỰ, CHUỖI MÃ BĂM ĐỒNG NHẤT BẢO TOÀN HOÀN TOÀN)**
 
 ---
 
@@ -224,9 +225,12 @@ Dưới đây là biên bản kiểm định chi tiết cho từng trang:
 
 Tệp `work/do-an/output/CHAPTER_2_3_REVIEW.docx` được ráp hoàn toàn từ nguồn canonical đã phê duyệt của Chương 2 (`work/do-an/CHAPTER_2.md`) và Chương 3 (`work/do-an/CHAPTER_3_DRAFT_R2.md`), đạt độ chính xác 100% về mặt nội dung, không có bất kỳ sửa đổi hay tái diễn giải kỹ thuật nào.
 
-Trong vòng sửa đổi R2:
-1. Hệ thống tiêu đề đã được nâng cấp đồng bộ thành các kiểu dáng gốc chuẩn mực của Microsoft Word (`Heading 1`, `Heading 2`, `Heading 3`) với các cấp độ phác thảo tương ứng (Outline Level 0, 1, 2) nhưng bảo toàn nguyên vẹn 100% hình thức hiển thị đã được phê duyệt.
-2. Toàn bộ 44/44 trang đã được kết xuất và thực sự mở kiểm định trực quan tuần tự trong luồng thực thi, xác nhận sạch sẽ mọi lỗi bố cục.
-3. Thông số lề văn bản đã được kiểm toán lập trình xác nhận đạt chuẩn HUIT 2024: Trên 3.5 cm, Dưới 3.0 cm, Trái 3.5 cm, Phải 2.0 cm.
+Trong vòng hoàn thiện R3 (Freeze Exact Inspected DOCX):
+1. **Một lần dựng duy nhất (Single Deterministic Build):** Tệp Word được tạo chính xác một lần, ngay lập tức tính mã băm SHA-256 (`FINAL_DOCX_SHA256 = 3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`), kích thước 761.414 bytes.
+2. **Kết xuất và kiểm tra trực quan toàn bộ:** Chính tệp vừa băm đã được kết xuất sang PDF và 44 tệp PNG 150 DPI. Toàn bộ 44/44 trang từ trang 01 đến 44 đã được mở và kiểm tra trực quan tuần tự trong luồng thực thi, xác nhận sạch sẽ 100% mọi lỗi bố cục.
+3. **Bất biến sau kiểm tra (Frozen Binary):** Sau khi hoàn tất kiểm tra trực quan, builder không bao giờ được chạy lại để tránh tạo tệp mới. Mọi kiểm toán đều thực thi ở chế độ chỉ đọc (`--audit-only`).
+4. **Bảo toàn cấu trúc và thông số:** Hệ thống tiêu đề gốc Microsoft Word (`Heading 1`, `Heading 2`, `Heading 3`, outline levels 0, 1, 2) và thông số lề chuẩn HUIT (Trên 3.5 cm, Dưới 3.0 cm, Trái 3.5 cm, Phải 2.0 cm) được bảo toàn nguyên vẹn.
+5. **Chứng thực chuỗi mã băm bất biến (Immutable Hash Proof Chain):**
+   `hash file đã render == hash ghi trong QA == hash file đã commit == 3c9ac6b6bfa1d259f92856a6c6b48ec398178e927f9beb06f5c0c37749dd3db2`.
 
-Tài liệu hoàn toàn sẵn sàng cho vòng thẩm định độc lập tiếp theo.
+Tài liệu hoàn toàn sẵn sàng cho vòng thẩm định độc lập tiếp theo ở trạng thái `X7I_R3_READY_FOR_INDEPENDENT_REVIEW`.

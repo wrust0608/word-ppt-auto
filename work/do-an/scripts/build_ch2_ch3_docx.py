@@ -510,7 +510,11 @@ def build_combined_document():
     # Audit structure
     audit_document(doc)
 
-def audit_document(doc):
+def audit_document(doc_or_path):
+    if isinstance(doc_or_path, str):
+        doc = Document(doc_or_path)
+    else:
+        doc = doc_or_path
     print("\n--- STRUCTURAL AUDIT ---")
     h1_list = []
     h2_list = []
@@ -612,4 +616,7 @@ def audit_document(doc):
     print("\nALL STRUCTURAL, STYLE, MARGIN & TRUTH AUDIT ASSERTIONS PASSED!")
 
 if __name__ == '__main__':
-    build_combined_document()
+    if '--audit-only' in sys.argv:
+        audit_document(OUTPUT_DOCX_PATH)
+    else:
+        build_combined_document()
