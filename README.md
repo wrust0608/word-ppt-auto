@@ -46,6 +46,7 @@ Các tài liệu nguồn, bản trích xuất và render kiểm tra đã dùng t
 - [Cài đặt Antigravity và NotebookLM](docs/SETUP.md)
 - [Hướng dẫn vận hành](docs/OPERATING_GUIDE.md)
 - [Hệ thống chất lượng văn phong](docs/STYLE_SYSTEM.md)
+- [Quy tắc biên tập văn phong học thuật tiếng Việt](docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md) — phải đọc trước mỗi lượt sửa đề mục hoặc đoạn văn.
 - [Tiêu chuẩn chất lượng bản Word](docs/WORD_QUALITY_STANDARD.md)
 - [Các dự án tham khảo và phạm vi sử dụng](docs/REFERENCES.md)
 - [Bộ kiểm thử nghiệm thu](tests/ACCEPTANCE.md)
