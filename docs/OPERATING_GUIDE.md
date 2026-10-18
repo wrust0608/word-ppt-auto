@@ -37,6 +37,10 @@ CHƯA PHÊ DUYỆT G<n>.
 Hãy sửa các điểm sau: <danh sách cụ thể>.
 ```
 
+## Quy tắc bắt buộc khi biên tập văn phong tiếng Việt
+
+Trước mỗi yêu cầu sửa câu, đoạn hoặc đề mục — kể cả yêu cầu rất ngắn — agent phải đọc lại [`QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md`](QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md). Không chỉ dẫn đường dẫn hoặc dựa vào trí nhớ thay cho việc đọc. Đây là hợp đồng biên tập dùng chung cho luận văn, đồ án, đề án và báo cáo kỹ thuật; các quyết định thuật ngữ/ngữ nghĩa đã được tác giả chốt phải được giữ nguyên, trừ khi có yêu cầu thay đổi hoặc bằng chứng kỹ thuật cho thấy cần xem xét lại.
+
 ## Kiểm soát chất lượng chương
 
 Chỉ duyệt một chương khi:
