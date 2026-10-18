@@ -5,6 +5,8 @@ description: Nghiên cứu, lập luận, soạn và kiểm tra luận văn ho�
 
 # Thesis Research and Writing
 
+**Mandatory for every Vietnamese wording edit, including short headings:** read [`docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md`](../../../docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md) before making changes. The same rule applies when continuing a draft in an existing project. Preserve confirmed user terminology and editing decisions unless the user revises them or evidence/context reveals a substantive correctness issue.
+
 Tạo một công trình có lập luận và khả năng truy vết, không chỉ tạo văn bản trôi chảy. Quy định của người dùng và hồ sơ cơ sở đào tạo luôn có ưu tiên cao hơn mặc định của skill.
 
 ## Bắt đầu
@@ -18,7 +20,7 @@ Tạo một công trình có lập luận và khả năng truy vết, không ch�
 
 - Cần xác định vấn đề, câu hỏi, mục tiêu hoặc đề cương: đọc [reasoning-and-writing.md](references/reasoning-and-writing.md).
 - Cần tìm, nhập, hỏi hoặc kiểm tra nguồn: đọc [notebooklm-evidence.md](references/notebooklm-evidence.md).
-- Cần viết hoặc sửa một chương: đọc hai tài liệu trên, hợp đồng chương hiện tại và [academic-register-and-author-voice.md](references/academic-register-and-author-voice.md).
+- Cần viết hoặc sửa một chương: đọc hai tài liệu trên, hợp đồng chương hiện tại, [academic-register-and-author-voice.md](references/academic-register-and-author-voice.md) và `docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md`.
 - Cần rà văn phong khuôn mẫu hoặc chuẩn bị duyệt chương: đọc [style-lint-and-review.md](references/style-lint-and-review.md) và chạy linter theo hướng dẫn.
 - Cần kiểm tra trích dẫn, đạo văn, số liệu hoặc tính trung thực: đọc [citations-and-integrity.md](references/citations-and-integrity.md).
 - Cần tiếp tục sau một phiên làm việc hoặc bàn giao cho agent khác: đọc [project-memory.md](references/project-memory.md).
