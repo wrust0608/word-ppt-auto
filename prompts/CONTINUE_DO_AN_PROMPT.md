@@ -3,12 +3,13 @@
 **Không thực hiện tuần tự roadmap bước 2–6 cũ như nhiệm vụ hiện hành.**
 
 Agent mới phải đọc trước:
-1. `work/do-an/PROJECT_STATE.md` — Current State Summary 2026-10-06;
-2. `work/do-an/CHAPTER_3_CONTRACT.md`;
-3. `work/do-an/CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`;
-4. `work/do-an/CHAPTER_3_SECTION_EVIDENCE_MAP.md`;
-5. `work/do-an/CHAPTER_3_NUMBERING_LEDGER.md`;
-6. prompt của phase hiện hành.
+1. `AGENTS.md` và `docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md` — quy tắc bắt buộc trước mọi lượt biên tập văn phong tiếng Việt, kể cả một đề mục;
+2. `work/do-an/PROJECT_STATE.md` — Current State Summary 2026-10-06;
+3. `work/do-an/CHAPTER_3_CONTRACT.md`;
+4. `work/do-an/CHAPTER_3_SECTIONED_AUTHORING_PLAN.md`;
+5. `work/do-an/CHAPTER_3_SECTION_EVIDENCE_MAP.md`;
+6. `work/do-an/CHAPTER_3_NUMBERING_LEDGER.md`;
+7. prompt của phase hiện hành.
 
 Trạng thái hiện hành:
 - Chapter 2: USER APPROVED / LOCKED / final DOCX PASS.
@@ -39,7 +40,7 @@ Tiếp tục tuần tự roadmap bước 2–6 của hệ thống soạn luận 
 
 ## Khởi động bắt buộc
 
-1. Đọc `AGENTS.md` và `HANDOFF.md` toàn bộ.
+1. Đọc `AGENTS.md`, `HANDOFF.md` và `docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md` toàn bộ. Quy tắc biên tập phải được đọc lại trước từng yêu cầu sửa đề mục/đoạn văn, không chỉ ở lúc khởi động.
 2. Đọc `.agents/skills/thesis-research-and-writing/SKILL.md` và reference được cây quyết định chỉ tới; với bàn giao đọc thêm `references/project-memory.md`.
 3. Đọc `work/do-an/PROJECT_STATE.md` rồi đối chiếu với:
    - `ROADMAP_2_6.md`;
