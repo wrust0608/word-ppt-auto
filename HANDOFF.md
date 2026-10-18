@@ -41,11 +41,12 @@ Tiếp tục hoàn thiện hệ thống và dự án luận văn tiếng Việt 
 ## 2. Thứ tự đọc bắt buộc
 
 1. `AGENTS.md`.
-2. `.agents/skills/thesis-research-and-writing/SKILL.md`.
-3. `.agents/skills/thesis-research-and-writing/references/project-memory.md`.
-4. `work/do-an/PROJECT_STATE.md` — nguồn trạng thái chuẩn.
-5. `work/do-an/ROADMAP_2_6.md`.
-6. Artifact của bước đang làm:
+2. `docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md` — phải đọc trước mọi lượt biên tập văn phong tiếng Việt và đọc lại mỗi lần có yêu cầu sửa; không dựa vào trí nhớ hoặc chỉ đọc một lần lúc khởi động.
+3. `.agents/skills/thesis-research-and-writing/SKILL.md`.
+4. `.agents/skills/thesis-research-and-writing/references/project-memory.md`.
+5. `work/do-an/PROJECT_STATE.md` — nguồn trạng thái chuẩn.
+6. `work/do-an/ROADMAP_2_6.md`.
+7. Artifact của bước đang làm:
    - nguồn: `SOURCE_LEDGER.md`, `CLAIM_MATRIX.md`;
    - giọng: `AUTHOR_VOICE.md`, `AUTHOR_VOICE_CALIBRATION.md`;
    - chương mẫu: `CHAPTER_1.md`, `PILOT_CHAPTER_REVIEW.md`;
