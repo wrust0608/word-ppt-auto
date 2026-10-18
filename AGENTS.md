@@ -5,6 +5,7 @@
 1. Read `HANDOFF.md`.
 2. Read the target project's `PROJECT_STATE.md` and artifacts it links.
 3. Read `.agents/skills/thesis-research-and-writing/SKILL.md` and only the references routed for the current task.
+4. Before every Vietnamese academic wording edit—including a single heading, sentence, or paragraph—read `docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md`. Do not skip this for short requests.
 
 ## Precedence
 
@@ -14,6 +15,7 @@ Never let a style rule alter evidence, numbers, citations, claim boundaries, app
 
 ## Writing workflow
 
+- Treat `docs/QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md` as the mandatory editing contract for Vietnamese academic/technical prose. Re-read it at the start of each wording-edit task; preserve user-approved terminology and wording decisions unless the user changes them or new context demonstrates a technical issue.
 - Keep Markdown canonical; generate DOCX only from approved Markdown.
 - Do not draft a chapter before its chapter contract and claim matrix are ready.
 - Review evidence and logic before editing style.
