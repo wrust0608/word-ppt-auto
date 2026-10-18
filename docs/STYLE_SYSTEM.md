@@ -20,6 +20,10 @@ Whole-document review → DOCX render QA
 
 Nếu một cảnh báo phong cách xung đột với quy định trường, nguồn, số liệu hoặc nghĩa của luận điểm, giữ nội dung đúng và ghi `KEEP_WITH_REASON`.
 
+## Quy tắc biên tập cụ thể
+
+`QUY_TAC_BIEN_TAP_VAN_PHONG_HOC_THUAT.md` là quy tắc bắt buộc khi sửa đề mục hoặc đoạn văn tiếng Việt cho luận văn, đồ án, đề án và báo cáo kỹ thuật. Trước mỗi lượt sửa, đọc lại tài liệu này; ưu tiên một phương án tốt nhất, chẩn đoán đúng vấn đề trước khi viết lại, giữ nguyên thuật ngữ và quyết định đã được tác giả xác nhận. Quy tắc này không được ghi đè quy định trường, bằng chứng, dữ liệu hoặc độ chính xác chuyên môn.
+
 ## Ba thành phần
 
 ### Ngữ vực theo chức năng
